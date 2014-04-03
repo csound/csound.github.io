@@ -8,3 +8,6 @@ The [Csound FLOSS Manual](http://www.flossmanuals.net/csound/index/) is an onlin
 
 The official [Csound Reference Manual](http://www.csounds.com/manual/html/index.html) is online as well as included in the frontends. It contains all information about the usage of the 1500+ opcodes and much more.
 
+# Wiki
+
+There is also a Wiki available at [https://github.com/csound/csound/wiki](https://github.com/csound/csound/wiki). 
