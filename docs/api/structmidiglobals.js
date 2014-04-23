@@ -1,0 +1,26 @@
+var structmidiglobals =
+[
+    [ "bufp", "structmidiglobals.html#a0d35f6e5852cffcc170d1da39edb9283", null ],
+    [ "datcnt", "structmidiglobals.html#ad7fa5ebcd100ecf46bb65cecbfbc8b23", null ],
+    [ "datreq", "structmidiglobals.html#a2d62e84bc46f7a149716f77ddd45dd4e", null ],
+    [ "endatp", "structmidiglobals.html#a73cc92cfadd4e67dafba668775d4debb", null ],
+    [ "mbuf", "structmidiglobals.html#a7c554fe408ee916865158fba3b05470c", null ],
+    [ "Midevtblk", "structmidiglobals.html#a2e265a384f9c4c062193e4c573320a8c", null ],
+    [ "MidiErrorStringCallback", "structmidiglobals.html#a038b6a9b7dd95ddfe2a4e18dfc5c96e9", null ],
+    [ "midiFileData", "structmidiglobals.html#a579bb35624df621da116019a4f69c7bd", null ],
+    [ "MIDIINbuffer2", "structmidiglobals.html#afe7c97ddf0290a374e78391331393ca9", null ],
+    [ "MIDIINbufIndex", "structmidiglobals.html#a3d72a5b500c3c560f6bbdc6699b2de5d", null ],
+    [ "MidiInCloseCallback", "structmidiglobals.html#a4c965541acfb484d7895174299ab7dee", null ],
+    [ "MidiInOpenCallback", "structmidiglobals.html#a8f8bb44dda407730b910528eabaaa414", null ],
+    [ "midiInUserData", "structmidiglobals.html#a9cfaf49cc3e01d49285f9338e1cfe08b", null ],
+    [ "MidiOutCloseCallback", "structmidiglobals.html#ae297dba4a900c33fc32cee7391c3283f", null ],
+    [ "MIDIoutDONE", "structmidiglobals.html#a0b0fe3e173fad83e9a82335a0a42cd33", null ],
+    [ "midiOutFileData", "structmidiglobals.html#a32945a62319b28c63a449b7750cd70dd", null ],
+    [ "MidiOutOpenCallback", "structmidiglobals.html#a856ebc2f0a2c50c79eb9b0b8a52aaef1", null ],
+    [ "midiOutUserData", "structmidiglobals.html#ac751bfc38ffd74e07576425534ff4e85", null ],
+    [ "MidiReadCallback", "structmidiglobals.html#a5474e2c4a1ccc7f62ae8c27b50b726c4", null ],
+    [ "MidiWriteCallback", "structmidiglobals.html#ab22015bc1ac809110b8e77cdd5eeca16", null ],
+    [ "muteTrackList", "structmidiglobals.html#a963ec6de3f6d45a86df958f34aa961db", null ],
+    [ "rawControllerMode", "structmidiglobals.html#aa66bf342b8c82746a720999e586a3468", null ],
+    [ "sexp", "structmidiglobals.html#ae155d4ad57f454ba7cdd17484446a8ae", null ]
+];

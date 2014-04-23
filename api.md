@@ -6,7 +6,7 @@ title: About
 
 The Csound API allows users to call the Csound engine from a host language, and to communicate with Csound during the performance in many ways. The Csound API is written in C, but there are wrappers for other programming languages, like C++, Python, Java and others.
 
-The API Documentation is on [csound.sourceforge.net/doc/html/index.html](http://csound.sourceforge.net/doc/html/index.html).
+The API Documentation is available online [here](docs/api/index.html).
 
 There is a description of Francois Pinot about how to use the API in the Csound FLOSS Manual: [flossmanuals.net/csound/the-csound-api](http://flossmanuals.net/csound/the-csound-api).
 
