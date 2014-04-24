@@ -6,7 +6,7 @@ title: Frontends
 
 Csound is a library, which can be accessed through different **frontends**. The classic one is the terminal command *csound*, which is present in all desktop installations of Csound. If you want to use Csound via a Graphic UI, various frontends are available from third-party developers. Among these, the most popular are:
 
-[**CsoundQt**](http://sourceforge.net/projects/qutecsound/) is most probably already included in the Mac and Windows installer. It has nice tools for editing Csound files, comes with easy editable widgets and a huge example collection.
+[**CsoundQt**](http://qutecsound.sourceforge.net/) is most probably already included in the Mac and Windows installer. It has nice tools for editing Csound files, comes with easy editable widgets and a huge example collection.
 
 [**Cabbage**](http://www.thecabbagefoundation.org) is originally designed to create VST plugins from Csound instruments, but it can also be used to run and edit Csound files, as well as creating standalone applications.
 
