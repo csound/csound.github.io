@@ -6,10 +6,7 @@ title: Download
 
 You will find the current version of Csound in [http://sourceforge.net/projects/csound/files/csound6/](http://sourceforge.net/projects/csound/files/csound6/). In the folder with the most recent version number you will find different files:
 
-* For **Apple** Macintosh, disk image files (.dmg). Choose the version which fits to your OSX version. If there is none, choose the closest one, or ask the mailing list for recommendations. You can also get Csound using Homebrew with:
-
-        brew install csound --HEAD
-
+* For **Apple** Macintosh, disk image files (.dmg). Choose the version which fits to your OSX version. If there is none, choose the closest one, or ask the mailing list for recommendations. You can also get Csound using Homebrew. See instructions [here](https://github.com/kunstmusik/homebrew-csound).
 * For **Windows**, choose the file ending in .exe.
 * For **Linux**, use the sources as .zip or .tar.gz . You can also get Csound from the repository of your distribution, but probably you will not find there the most recent version. If you have some experience in building from source, you should consider this (see below for instructions).
 * For **Android**, use the .apk file for a Csound executable. The csound-android.zip contains the sources - you only need it when you develop own Android Csound applications.
