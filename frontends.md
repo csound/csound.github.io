@@ -12,7 +12,7 @@ Csound is a library, which can be accessed through different **frontends**. The 
 
 [**Blue**](http://blue.kunstmusik.com) is an amazingly comprehensive composition tool for working with Csound.
 
-[**WinXound**](winxound.codeplex.com) is a simple but solid frontend for Csound, particularly on the Windows platform.
+[**WinXound**](http://winxound.codeplex.com) is a simple but solid frontend for Csound, particularly on the Windows platform.
 
-[**RIBCsound**](rorywalsh.github.io/RIBCsound) is an online (Chrome only) interface builder for generating Csound enabled web-pages. Csound channels can be set up between widgets and instruments so that end-users can control the Csound instruments in real-time in the browser.
+[**RIBCsound**](http://rorywalsh.github.io/RIBCsound) is an online (Chrome only) interface builder for generating Csound enabled web-pages. Csound channels can be set up between widgets and instruments so that end-users can control the Csound instruments in real-time in the browser.
 
