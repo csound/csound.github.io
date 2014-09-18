@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "csound-expression-4 for Haskell"
-date:   2014-08-09 13:30:00
-categories: site news android 
+title:  "CsSpectral for iOS"
+date:   2014-09-18 13:30:00
+categories: site news iOS
 ---
 
 Dr. B has announced the long-anticipated launch of CsSpectral for iOS:
