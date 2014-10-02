@@ -18,7 +18,7 @@ Both have archives on nabble:
 * [Csound-Dev](http://csound.1045644.n5.nabble.com/Csound-Dev-f1123218.html)
 
 
-Although questions about the main frontends are frequently discussed on the Csound-users list, there are seperate lists for them, too:
+Although questions about the main frontends are frequently discussed on the Csound-users list, there are separate lists for them, too:
 
 * [Cabbage](http://thecabbagefoundation.org/ucp.php?mode=register)
 
