@@ -5,7 +5,7 @@ date:   2014-11-10 22:30:00
 categories: site news 
 ---
 
-Aurelius Prochazka has announced the lauch of AudioKit:
+Aurelius Prochazka has announced the launch of AudioKit:
 
 "Hi everyone,
 
