@@ -13,7 +13,7 @@ I'm happy to announce that the Csound project that I've been working on for the 
 
 [http://audiokit.io/] (http://audiokit.io/)
 
-If it looks like your cup of tea, give it a shot and let me know if you have any issues.  I'm making myself personally accessible to Csounders who want to try out AudioKit for help with implementation, bugs,  and any feature requests at this early stage.  
+If it looks like your cup of tea, give it a shot and let me know if you have any issues.  I'm making myself personally accessible to Csounders who want to try out AudioKit for help with implementation, bugs,  and any feature requests at this early stage. 
 
 Thanks,
 Aure"
