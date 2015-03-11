@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>ATSadd</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="atonex.html" title="atonex" />
@@ -25,7 +25,7 @@
       </table>
       <hr />
     </div>
-    <div class="refentry" title="ATSadd">
+    <div class="refentry">
       <a id="ATSadd"></a>
       <div class="titlepage"></div>
       <a id="IndexATSadd" class="indexterm"></a>
@@ -36,21 +36,21 @@
         <p>ATSadd —  uses the data from an ATS analysis file to perform additive synthesis.
         </p>
       </div>
-      <div class="refsect1" title="Description">
-        <a id="idp26672272"></a>
+      <div class="refsect1">
+        <a id="idm10840576752"></a>
         <h2>Description</h2>
         <p>
             <span class="emphasis"><em>ATSadd</em></span> reads from an ATS analysis file and uses the data to perform additive synthesis using an internal array of interpolating oscillators.
         </p>
       </div>
-      <div class="refsect1" title="Syntax">
-        <a id="idp26677104"></a>
+      <div class="refsect1">
+        <a id="idm10840575040"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">ar <span class="command"><strong>ATSadd</strong></span> ktimepnt, kfmod, iatsfile, ifn, ipartials[, ipartialoffset, \
         ipartialincr, igatefn]</pre>
       </div>
-      <div class="refsect1" title="Initialization">
-        <a id="idp26679360"></a>
+      <div class="refsect1">
+        <a id="idm10840572896"></a>
         <h2>Initialization</h2>
         <p>
             <span class="emphasis"><em>iatsfile</em></span> – the ATS number (n in ats.n) or the name in quotes of the analysis file made using <a class="ulink" href="http://www-ccrma.stanford.edu/~juan/ATS.html" target="_top"><em class="citetitle">ATS</em></a>.
@@ -67,8 +67,8 @@
         <p><span class="emphasis"><em>igatefn</em></span> (optional) – is the number of a stored function which will be applied to the amplitudes of the analysis bins before resynthesis takes place. If <span class="emphasis"><em>igatefn</em></span> is greater than 0 the amplitudes of each bin will be scaled by <span class="emphasis"><em>igatefn</em></span> through a simple mapping process. First, the amplitudes of all of the bins in all of the frames in the entire analysis file are compared to determine the maximum amplitude value. This value is then used to create normalized amplitudes as indices into the stored function <span class="emphasis"><em>igatefn</em></span>. The maximum amplitude will map to the last point in the function. An amplitude of 0 will map to the first point in the function. Values between 0 and 1 will map accordingly to points along the function table. See the examples below.
         </p>
       </div>
-      <div class="refsect1" title="Performance">
-        <a id="idp26760544"></a>
+      <div class="refsect1">
+        <a id="idm10840562288"></a>
         <h2>Performance</h2>
         <p><span class="emphasis"><em>ktimepnt</em></span> – The time pointer in seconds used to index the ATS file. Used for <span class="emphasis"><em>ATSadd</em></span> exactly the same as for <a class="link" href="pvoc.html" title="pvoc"><em class="citetitle">pvoc</em></a>.</p>
         <p><span class="emphasis"><em>ATSadd</em></span> and <a class="link" href="ATSaddnz.html" title="ATSaddnz"><em class="citetitle">ATSaddnz</em></a> are based on <a class="link" href="pvadd.html" title="pvadd"><em class="citetitle">pvadd</em></a> by Richard Karpen and use files created by Juan Pampin's ATS (<a class="ulink" href="http://www-ccrma.stanford.edu/~juan/ATS.html" target="_top"><em class="citetitle">Analysis - Transformation - Synthesis</em></a>).
@@ -78,8 +78,8 @@
         <p><span class="emphasis"><em>ATSadd</em></span> reads from an ATS analysis file and uses the data to perform additive synthesis using an internal array of interpolating oscillators. The user supplies the wave table (usually one period of a sine wave), and can choose which analysis partials will be used in the re-synthesis.
         </p>
       </div>
-      <div class="refsect1" title="Examples">
-        <a id="idp26770512"></a>
+      <div class="refsect1">
+        <a id="idm10840552864"></a>
         <h2>Examples</h2>
         <pre class="programlisting">  ktime <span class="opc">line</span>   0, p3, 2.5
   asig  <span class="opc">ATSadd</span> ktime, 1, "clarinet.ats", 1, 20, 2
@@ -87,15 +87,15 @@
         <p>In the example above, <span class="emphasis"><em>ipartials</em></span> is 20 and <span class="emphasis"><em>ipartialoffset</em></span> is 2. This will synthesize the 3rd thru 22nd partials in the "clarinet.ats" analysis file. <span class="emphasis"><em>kfmod</em></span> is 1 so there will be no pitch transformation. Since the <span class="emphasis"><em>ktimepnt</em></span> envelope moves from 0 to 2.5 over the duration of the note, the analysis file will be read from 0 to 2.5 seconds of the original duration of the analysis over the duration of the csound note, this way we can change the duration independent of the pitch.
         </p>
       </div>
-      <div class="refsect1" title="Examples">
-        <a id="idp26776032"></a>
+      <div class="refsect1">
+        <a id="idm10840547648"></a>
         <h2>Examples</h2>
         <p>
       Here is a complete example of the ATSadd opcode. It uses the file <a class="ulink" href="examples/ATSadd.csd" target="_top"><em class="citetitle">ATSadd.csd</em></a>.
 
       </p>
         <div class="example">
-          <a id="idp26777904"></a>
+          <a id="idm10840545856"></a>
           <p class="title">
             <strong>Example 59. Example of the ATSadd opcode.</strong>
           </p>
@@ -146,7 +146,7 @@ asig	<span class="opc">ATSadd</span>	ktime, 1,  "beats.ats", 1, 20, 0, 2
       Here is another example of the ATSadd opcode. It uses the file <a class="ulink" href="examples/ATSadd-2.csd" target="_top"><em class="citetitle">ATSadd-2.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idp26782352"></a>
+          <a id="idm10840541648"></a>
           <p class="title">
             <strong>Example 60. Example 2 of the ATSadd opcode.</strong>
           </p>
@@ -212,8 +212,8 @@ asig      <span class="opc">ATSadd</span>    ktime, 1, Sfile, giSine, 10, iOffse
         <p><br class="example-break" />
     </p>
       </div>
-      <div class="refsect1" title="See also">
-        <a id="idp26784272"></a>
+      <div class="refsect1">
+        <a id="idm10840539984"></a>
         <h2>See also</h2>
         <p><a class="link" href="ATSread.html" title="ATSread"><em class="citetitle">ATSread</em></a>, 
             <a class="link" href="ATSreadnz.html" title="ATSreadnz"><em class="citetitle">ATSreadnz</em></a>, 
@@ -225,8 +225,8 @@ asig      <span class="opc">ATSadd</span>    ktime, 1, Sfile, giSine, 10, iOffse
             <a class="link" href="ATSaddnz.html" title="ATSaddnz"><em class="citetitle">ATSaddnz</em></a>, 
             <a class="link" href="ATSsinnoi.html" title="ATSsinnoi"><em class="citetitle">ATSsinnoi</em></a></p>
       </div>
-      <div class="refsect1" title="Credits">
-        <a id="idp26793744"></a>
+      <div class="refsect1">
+        <a id="idm10840531168"></a>
         <h2>Credits</h2>
         <p>
             </p>

@@ -5,10 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Real-Time Audio</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="Using.html" title="Using Csound" />
-    <link rel="prev" href="UsingDesign.html" title="How Csound5 works" />
+    <link rel="prev" href="UsingDesign.html" title="How Csound works" />
     <link rel="next" href="RealTimeWindows.html" title="Windows" />
   </head>
   <body>
@@ -25,7 +25,7 @@
       </table>
       <hr />
     </div>
-    <div class="section" title="Real-Time Audio">
+    <div class="section">
       <div class="titlepage">
         <div>
           <div>
@@ -45,7 +45,7 @@
       <p>
       You can see a list of available devices by giving a device number which is out of range, for instance <code class="literal">-o dac99</code>. This will also reveal if you have ASIO available if you are using PortAudio.
     </p>
-      <h3><a id="idp13542816"></a>
+      <h3><a id="idm10852994784"></a>
       Period &amp; Buffer Sizes</h3>
       <p>Period and buffer sizes will vary greatly from one machine to
       another. Lower buffer sizes will result in lower latency, but might 
@@ -60,7 +60,7 @@
       <p>Currently, with <code class="literal"><a class="link" href="CommandFlagsCategory.html#FlagsCatMinusUpperB"><em class="citetitle">-B</em></a></code> set to 512, audio output latency
       is about 12 milliseconds, fast enough for reasonably responsive
       keyboad playing. Even shorter latencies, are feasible on some systems.</p>
-      <h3><a id="idp13551632"></a>Control Rate</h3>
+      <h3><a id="idm10852986192"></a>Control Rate</h3>
       <p>
       Low values for ksmps will in general give a higher quality of
       synthesis, but will consume more system resources. There is no hard
@@ -79,7 +79,7 @@
       <p>
       Some settings differ according to platform. See further below for information for each platform.
     </p>
-      <div class="section" title="Realtime I/O on Linux">
+      <div class="section">
         <div class="titlepage">
           <div>
             <div>
@@ -97,7 +97,7 @@
   </p>
         <p><a class="ulink" href="http://jackaudio.org/faq" target="_top">http://jackaudio.org/faq</a>
   </p>
-        <h4><a id="idp13558208"></a>Using ALSA</h4>
+        <h4><a id="idm10856250752"></a>Using ALSA</h4>
         <p>
     The highest level of control and the lowest possible level of latency
     are to be achieved using the ALSA plugins in combination with the <a class="link" href="CommandFlagsCategory.html#IndexCatMinusSched"><em class="citetitle">--sched</em></a>
@@ -115,7 +115,7 @@
         <p>
           <a class="ulink" href="ftp://ftp.alsa-project.org/pub/utils/" target="_top">ftp://ftp.alsa-project.org/pub/utils/</a>
         </p>
-        <h4><a id="idp13606288"></a>Audio Output</h4>
+        <h4><a id="idm10856246144"></a>Audio Output</h4>
         <p>Running the following command:</p>
         <pre class="screen">
           aplay -l</pre>
@@ -139,7 +139,7 @@ card 0: A5451 [ALI 5451], device 0: ALI 5451 [ALI 5451]<br />
     </p>
         <pre class="screen">
           -+rtaudio=alsa -o dac</pre>
-        <h4><a id="idp13611344"></a>Output with dmix</h4>
+        <h4><a id="idm10856241296"></a>Output with dmix</h4>
         <p>
     If you would like to use Csound with dmix and your soundcard does not
     support hardware mixing of audio streams, special care is needed in setting
@@ -202,7 +202,7 @@ pcm.!default {
     ( (16000/48000) * 1536 = 512, (16000/48000) * 12288 = 4096 ).
 
   </p>
-        <div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
           <table border="0" summary="Note: Note">
             <tr>
               <td rowspan="2" align="center" valign="top" width="25">
@@ -220,7 +220,7 @@ pcm.!default {
             </tr>
           </table>
         </div>
-        <h4><a id="idp13619344"></a>Audio Input</h4>
+        <h4><a id="idm10856233440"></a>Audio Input</h4>
         <p>
       Typically the same card will be used for both input and output, so to
       continue using the foregoing example, the flag:
@@ -252,7 +252,7 @@ pcm.!default {
     </p>
         <pre class="screen">
           -+rtaudio=alsa -i adc:hw:0,0 -o dac:hw:1,1</pre>
-        <h4><a id="idp13626208"></a>MIDI Input</h4>
+        <h4><a id="idm10856226784"></a>MIDI Input</h4>
         <p>Csound does not automatically create its own ALSA sequencer port. It creates
       an ALSA raw midi port each time it runs. In order to enable your orchestra to receive MIDI input you can use VirMIDI or MIDIThru, whichever you prefer. Setting up these
       virtual MIDI ports is a topic that has been covered extensively
@@ -343,14 +343,14 @@ client 24: 'PCR' [type=kernel]<br />
         <pre class="screen">
           aconnect 24:1 20:0</pre>
         <p>Remember that Csound acts as a raw MIDI device and is not an ALSA sequencer client. This means that Csound will not appear in MIDI device listings and will not be available for use directly with <span class="emphasis"><em>aconnect</em></span>, so you must connect to a virtual device (like 'virtual raw MIDI' or 'MIDI through') for persistent connections, or conect directly to the destination using command line flags.</p>
-        <h4><a id="idp13640624"></a>MIDI Output</h4>
+        <h4><a id="idm10852971664"></a>MIDI Output</h4>
         <p>Csound can be connected to any device which shows up on the ALSA
       sequencer list of output ports, obtained by "amidi -l" as above. In
       order to connect a Csound synthesizer to the MIDI out port of the
       keyboard listed above, the following flag would be used:</p>
         <pre class="screen">
           -Qhw:2,0,0</pre>
-        <h4><a id="idp13642400"></a>Scheduling</h4>
+        <h4><a id="idm10852969936"></a>Scheduling</h4>
         <p>If you are able to run Csound as the root user, using the "--sched"
       flag will dramatically improve realtime performance, when using ALSA,
       however you may hang your system if you do something stupid. DO NOT
@@ -359,7 +359,7 @@ client 24: 'PCR' [type=kernel]<br />
       to run at the highest possible priority. If the "--sched" flag is
       used, Csound and JACK will be competing rather than cooperating,
       resulting in extremely poor performance. </p>
-        <h4><a id="idp13643776"></a>Using JACK</h4>
+        <h4><a id="idm10852968592"></a>Using JACK</h4>
         <p>The simplest way to use the JACK plugin enabling input and output is as follows:
         </p>
         <pre class="screen">
@@ -367,11 +367,11 @@ client 24: 'PCR' [type=kernel]<br />
         <p>
         Additionally, there are some command line options specific to JACK:
         </p>
-        <div class="variablelist" title="JACK Command-line Flags">
+        <div class="variablelist">
           <p class="title">
             <strong>JACK Command-line Flags</strong>
           </p>
-          <dl>
+          <dl class="variablelist">
             <dt>
               <span class="term">-+jack_client=[client_name]</span>
             </dt>
@@ -416,7 +416,7 @@ csound5:output2             (playback right)</pre>
         </div>
         <p>
       </p>
-        <h4><a id="idp13652752"></a>Connecting Csound to other JACK clients</h4>
+        <h4><a id="idm10852959776"></a>Connecting Csound to other JACK clients</h4>
         <p>
         By default, no connections are made (you need to use jack_connect,
         qjackctl, or a similar utility); however, the plugin can connect to
@@ -425,7 +425,7 @@ csound5:output2             (playback right)</pre>
         a port without a channel number, such as 'alsa_pcm:capture_' (for
         -i adc), or 'alsa_pcm:playback_' (for -o dac).
       </p>
-        <h4><a id="idp13654000"></a>Notes on buffer sizes</h4>
+        <h4><a id="idm10852958528"></a>Notes on buffer sizes</h4>
         <p>
         Audio data is received from and sent to the JACK server by Csound
         using a ring buffer that is controlled by the -b and -B flags.
@@ -458,7 +458,7 @@ csound5:output2             (playback right)</pre>
 	The sample rate of the orchestra must be the same as that of the
 	JACK server.
       </p>
-        <h4><a id="idp13658768"></a>Using Pulseaudio</h4>
+        <h4><a id="idm10852953888"></a>Using Pulseaudio</h4>
         <p>Support for <a class="ulink" href="http://www.pulseaudio.org/" target="_top">Pulseaudio</a> was added in Csound 5.09. You can specify the following settings:</p>
         <div class="orderedlist">
           <ol class="orderedlist" type="1">
@@ -493,7 +493,7 @@ csound5:output2             (playback right)</pre>
           <td width="40%" align="right"> <a accesskey="n" href="RealTimeWindows.html">Next</a></td>
         </tr>
         <tr>
-          <td width="40%" align="left" valign="top">How Csound5 works </td>
+          <td width="40%" align="left" valign="top">How Csound works </td>
           <td width="20%" align="center">
             <a accesskey="h" href="index.html">Home</a>
           </td>

@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>spat3d</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="space.html" title="space" />
@@ -25,7 +25,7 @@
       </table>
       <hr />
     </div>
-    <div class="refentry" title="spat3d">
+    <div class="refentry">
       <a id="spat3d"></a>
       <div class="titlepage"></div>
       <a id="IndexSpat3d" class="indexterm"></a>
@@ -37,20 +37,20 @@
       Positions the input sound in a 3D space and allows moving the sound at k-rate.
           </p>
       </div>
-      <div class="refsect1" title="Description">
-        <a id="idp85629264"></a>
+      <div class="refsect1">
+        <a id="idm10784327392"></a>
         <h2>Description</h2>
         <p>
       This opcode positions the input sound in a 3D space, with optional simulation of room acoustics, in various output formats. <span class="emphasis"><em>spat3d</em></span> allows moving the sound at k-rate (this movement is interpolated internally to eliminate "zipper noise" if sr not equal to kr).
     </p>
       </div>
-      <div class="refsect1" title="Syntax">
-        <a id="idp85631264"></a>
+      <div class="refsect1">
+        <a id="idm10784325264"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">aW, aX, aY, aZ <span class="command"><strong>spat3d</strong></span> ain, kX, kY, kZ, idist, ift, imode, imdel, iovr [, istor]</pre>
       </div>
-      <div class="refsect1" title="Initialization">
-        <a id="idp85633472"></a>
+      <div class="refsect1">
+        <a id="idm10784323200"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>idist</em></span> -- For modes 0 to 3, <span class="emphasis"><em>idist</em></span> is the unit circle distance in meters. For mode 4, <span class="emphasis"><em>idist</em></span> is the distance between microphones. 
@@ -79,7 +79,7 @@ delay = distance / 340 (in seconds)<br />
       </p>
         <div class="literallayout">
           <p><br />
-distance = sqrt(iX^2 + iY^2 + iZ^2)<br />
+distance = sqrt(iXˆ2 + iYˆ2 + iZˆ2)<br />
       </p>
         </div>
         <p>
@@ -89,8 +89,8 @@ distance = sqrt(iX^2 + iY^2 + iZ^2)<br />
       </p>
         <div class="literallayout">
           <p><br />
-distance from left mic = sqrt((iX + idist/2)^2 + iY^2 + iZ^2)<br />
-distance from right mic = sqrt((iX - idist/2)^2 + iY^2 + iZ^2)<br />
+distance from left mic = sqrt((iX + idist/2)ˆ2 + iYˆ2 + iZˆ2)<br />
+distance from right mic = sqrt((iX - idist/2)ˆ2 + iYˆ2 + iZˆ2)<br />
       </p>
         </div>
         <p>
@@ -187,7 +187,7 @@ distance from right mic = sqrt((iX - idist/2)^2 + iY^2 + iZ^2)<br />
       <span class="emphasis"><em>imode</em></span> -- Output mode
       </p>
         <div class="itemizedlist">
-          <ul class="itemizedlist" type="disc">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
             <li class="listitem">
               <p>0: B format with W output only (mono)
 </p>
@@ -282,8 +282,8 @@ imdel = (R + 1) * sqrt(W*W + H*H + D*D) / 340.0<br />
       <span class="emphasis"><em>istor</em></span> (optional, default=0) -- Skip initialization if non-zero (default: 0).
     </p>
       </div>
-      <div class="refsect1" title="Performance">
-        <a id="idp85687104"></a>
+      <div class="refsect1">
+        <a id="idm10784271520"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>aW, aX, aY, aZ</em></span> -- Output signals
@@ -357,7 +357,7 @@ imdel = (R + 1) * sqrt(W*W + H*H + D*D) / 340.0<br />
       If you encounter very slow performance (up to 100 times slower), it may be caused by denormals (this is also true of many other IIR opcodes, including <a class="link" href="butterlp.html" title="butterlp"><em class="citetitle">butterlp</em></a>, <a class="link" href="pareq.html" title="pareq"><em class="citetitle">pareq</em></a>, <a class="link" href="hilbert.html" title="hilbert"><em class="citetitle">hilbert</em></a>, and many others). Underflows can be avoided by:
       </p>
         <div class="itemizedlist">
-          <ul class="itemizedlist" type="disc">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
             <li class="listitem">
               <p>Using the <a class="link" href="denorm.html" title="denorm"><em class="citetitle">denorm</em></a> opcode on <span class="emphasis"><em>ain</em></span> before <span class="emphasis"><em>spat3d</em></span>.</p>
             </li>
@@ -383,17 +383,17 @@ imdel = (R + 1) * sqrt(W*W + H*H + D*D) / 340.0<br />
         <p>
     </p>
       </div>
-      <div class="refsect1" title="Examples">
-        <a id="idp85719136"></a>
+      <div class="refsect1">
+        <a id="idm10784240816"></a>
         <h2>Examples</h2>
         <p>
       Here is a example of the spat3d opcode that outputs a stereo file. It uses the file <a class="ulink" href="examples/spat3d_stereo.csd" target="_top"><em class="citetitle">spat3d_stereo.csd</em></a>.
 
       </p>
         <div class="example">
-          <a id="idp85721040"></a>
+          <a id="idm10784238960"></a>
           <p class="title">
-            <strong>Example 813. Stereo example of the spat3d opcode.</strong>
+            <strong>Example 828. Stereo example of the spat3d opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
@@ -505,9 +505,9 @@ aR     <span class="op">=</span>  aW <span class="op">-</span> aY              <
 
       </p>
         <div class="example">
-          <a id="idp85726416"></a>
+          <a id="idm10784233872"></a>
           <p class="title">
-            <strong>Example 814. UHJ example of the spat3d opcode.</strong>
+            <strong>Example 829. UHJ example of the spat3d opcode.</strong>
           </p>
           <div class="example-contents">
             <pre class="programlisting">
@@ -604,9 +604,9 @@ aR	<span class="op">=</span>  aWXre <span class="op">-</span> aWXim <span class=
 
       </p>
         <div class="example">
-          <a id="idp85729440"></a>
+          <a id="idm10784231104"></a>
           <p class="title">
-            <strong>Example 815. Quadrophonic example of the spat3d opcode.</strong>
+            <strong>Example 830. Quadrophonic example of the spat3d opcode.</strong>
           </p>
           <div class="example-contents">
             <pre class="programlisting">
@@ -714,16 +714,16 @@ aRR     <span class="op">=</span>  aW <span class="op">-</span> aX <span class="
         <p><br class="example-break" />
     </p>
       </div>
-      <div class="refsect1" title="See Also">
-        <a id="idp85731312"></a>
+      <div class="refsect1">
+        <a id="idm10784229392"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="spat3di.html" title="spat3di"><em class="citetitle">spat3di</em></a>,
       <a class="link" href="spat3dt.html" title="spat3dt"><em class="citetitle">spat3dt</em></a>
     </p>
       </div>
-      <div class="refsect1" title="Credits">
-        <a id="idp85734384"></a>
+      <div class="refsect1">
+        <a id="idm10784226448"></a>
         <h2>Credits</h2>
         <p>
       </p>

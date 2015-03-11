@@ -5,11 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>diskgrain</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="diff.html" title="diff" />
-    <link rel="next" href="diskin2.html" title="diskin2" />
+    <link rel="next" href="diskin.html" title="diskin" />
   </head>
   <body>
     <div class="navheader">
@@ -20,12 +20,12 @@
         <tr>
           <td width="20%" align="left"><a accesskey="p" href="diff.html">Prev</a> </td>
           <th width="60%" align="center">Orchestra Opcodes and Operators</th>
-          <td width="20%" align="right"> <a accesskey="n" href="diskin2.html">Next</a></td>
+          <td width="20%" align="right"> <a accesskey="n" href="diskin.html">Next</a></td>
         </tr>
       </table>
       <hr />
     </div>
-    <div class="refentry" title="diskgrain">
+    <div class="refentry">
       <a id="diskgrain"></a>
       <div class="titlepage"></div>
       <a id="Indexdiskgrain" class="indexterm"></a>
@@ -37,21 +37,21 @@
       Synchronous granular synthesis, using a soundfile as source.
     </p>
       </div>
-      <div class="refsect1" title="Description">
-        <a id="idp35404400"></a>
+      <div class="refsect1">
+        <a id="idm10832156624"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>diskgrain</em></span> implements synchronous granular synthesis. The source sound for the grains is obtained by reading a soundfile containing the samples of the source waveform. 
     </p>
       </div>
-      <div class="refsect1" title="Syntax">
-        <a id="idp35409200"></a>
+      <div class="refsect1">
+        <a id="idm10832154560"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">asig <span class="command"><strong>diskgrain</strong></span> Sfname, kamp, kfreq, kpitch, kgrsize, kprate, \
       ifun, iolaps [,imaxgrsize , ioffset]</pre>
       </div>
-      <div class="refsect1" title="Initialization">
-        <a id="idp35411600"></a>
+      <div class="refsect1">
+        <a id="idm10832152432"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>Sfilename</em></span> -- source soundfile.
@@ -71,8 +71,8 @@
       <span class="emphasis"><em>ioffset</em></span> -- start offset in secs from beginning of file (default: 0).	
     </p>
       </div>
-      <div class="refsect1" title="Performance">
-        <a id="idp35476080"></a>
+      <div class="refsect1">
+        <a id="idm10832146960"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>kamp</em></span> -- amplitude scaling
@@ -87,53 +87,84 @@
       <span class="emphasis"><em>kgrsize</em></span> -- grain size in secs.
     </p>
         <p>
-      <span class="emphasis"><em>kprate</em></span> -- readout pointer rate, in grains. The value of 1 will advance 
-      the reading pointer 1 grain ahead in the source table. Larger values 
-      will time-compress and smaller values will time-expand the source signal. 
-      Negative values will cause the pointer to run backwards and zero will 
+      <span class="emphasis"><em>kprate</em></span> -- readout pointer rate, in
+      grains. The value of 1 will advance the reading pointer 1 grain
+      ahead in the source table. Larger values will time-compress and
+      smaller values will time-expand the source signal.  Negative
+      values will cause the pointer to run backwards and zero will
       freeze it.
     </p>
         <p>
-      The grain generator has full control of frequency (grains/sec), overall amplitude, 
-      grain pitch (a sampling increment) and grain size (in secs), 
-      both as fixed or time-varying (signal) parameters. 
-      An extra parameter is the grain pointer speed (or rate), 
-      which controls which position the generator will start reading samples 
-      in the file for each successive grain. It is measured in fractions of grain size, 
-      so a value of 1 (the default) will make each successive grain read from where the 
-      previous grain should finish. A value of 0.5 will make the next grain start at the midway position 
-      from the previous grain start and finish, etc.. A value of 0 will make the generator read 
-      always from a fixed position  (wherever the pointer was last at).
-      A negative value will decrement pointer positions. This control gives extra flexibility for creating 
-      timescale modifications in the resynthesis.
+      The grain generator has full control of frequency (grains/sec),
+      overall amplitude, grain pitch (a sampling increment) and grain
+      size (in secs), both as fixed or time-varying (signal)
+      parameters.  An extra parameter is the grain pointer speed (or
+      rate), which controls which position the generator will start
+      reading samples in the file for each successive grain. It is
+      measured in fractions of grain size, so a value of 1 (the
+      default) will make each successive grain read from where the
+      previous grain should finish. A value of 0.5 will make the next
+      grain start at the midway position from the previous grain start
+      and finish, etc.. A value of 0 will make the generator read
+      always from a fixed position (wherever the pointer was last at).
+      A negative value will decrement pointer positions. This control
+      gives extra flexibility for creating timescale modifications in
+      the resynthesis.
     </p>
         <p>
-      <span class="emphasis"><em>Diskgrain</em></span> will generate any number of parallel grain streams (which will depend on grain density/frequency), 
-      up to the olaps value (default 100). The number of streams (overlapped grains) is 
-      determined by grainsize*grain_freq. More grain overlaps will demand more calculations and 
-      the synthesis might not run in realtime (depending on processor power).
+      <span class="emphasis"><em>Diskgrain</em></span> will generate any number of
+      parallel grain streams (which will depend on grain
+      density/frequency), up to the olaps value (default 100). The
+      number of streams (overlapped grains) is determined by
+      grainsize*grain_freq. More grain overlaps will demand more
+      calculations and the synthesis might not run in realtime
+      (depending on processor power).
     </p>
         <p>
-      <span class="emphasis"><em>Diskgrain</em></span> can simulate FOF-like formant synthesis, provided that a suitable shape is used 
-      as grain envelope and a sinewave as the grain wave. For this use, grain sizes of around 
-      0.04 secs can be used. The formant centre frequency is determined by the grain pitch. 
-      Since this is a sampling increment, in order to use a frequency in Hz, that value has to be 
-      scaled by tablesize/sr. Grain frequency will determine the fundamental.
+      <span class="emphasis"><em>Diskgrain</em></span> can simulate FOF-like formant
+      synthesis, provided that a suitable shape is used as grain
+      envelope and a sinewave as the grain wave. For this use, grain
+      sizes of around 0.04 secs can be used. The formant centre
+      frequency is determined by the grain pitch.  Since this is a
+      sampling increment, in order to use a frequency in Hz, that
+      value has to be scaled by tablesize/sr. Grain frequency will
+      determine the fundamental.
     </p>
         <p>
-      This opcode is a variation on the <a class="link" href="syncgrain.html" title="syncgrain"><em class="citetitle">syncgrain</em></a> opcode.
+      This opcode is a variation on the <a class="link" href="syncgrain.html" title="syncgrain"><em class="citetitle">syncgrain</em></a>
+      opcode.
+    </p>
+        <p>
+      </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">diskgrain does not do any resanmpling, so if the
+      sample rate of the source filename is not the same as csound's sr
+      value there will be pitch shifts
+      </td>
+            </tr>
+          </table>
+        </div>
+        <p>
     </p>
       </div>
-      <div class="refsect1" title="Examples">
-        <a id="idp35488576"></a>
+      <div class="refsect1">
+        <a id="idm10832135904"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the diskgrain opcode. It uses the file <a class="ulink" href="examples/diskgrain.csd" target="_top"><em class="citetitle">diskgrain.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idp35490352"></a>
+          <a id="idm10832134096"></a>
           <p class="title">
-            <strong>Example 191. Example of the diskgrain opcode.</strong>
+            <strong>Example 194. Example of the diskgrain opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
@@ -188,8 +219,8 @@ a1 <span class="opc">diskgrain</span> "mary.wav", 1, ifreq, ipitch, igrsize, ips
         <p><br class="example-break" />
     </p>
       </div>
-      <div class="refsect1" title="Credits">
-        <a id="idp35494640"></a>
+      <div class="refsect1">
+        <a id="idm10832130160"></a>
         <h2>Credits</h2>
         <p>
       </p>
@@ -214,14 +245,14 @@ a1 <span class="opc">diskgrain</span> "mary.wav", 1, ifreq, ipitch, igrsize, ips
           <td width="20%" align="center">
             <a accesskey="u" href="OpcodesTop.html">Up</a>
           </td>
-          <td width="40%" align="right"> <a accesskey="n" href="diskin2.html">Next</a></td>
+          <td width="40%" align="right"> <a accesskey="n" href="diskin.html">Next</a></td>
         </tr>
         <tr>
           <td width="40%" align="left" valign="top">diff </td>
           <td width="20%" align="center">
             <a accesskey="h" href="index.html">Home</a>
           </td>
-          <td width="40%" align="right" valign="top"> diskin2</td>
+          <td width="40%" align="right" valign="top"> diskin</td>
         </tr>
       </table>
     </div>

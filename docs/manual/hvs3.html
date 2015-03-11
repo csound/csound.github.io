@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>hvs3</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.76.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="hvs2.html" title="hvs2" />
@@ -25,7 +25,7 @@
       </table>
       <hr />
     </div>
-    <div class="refentry" title="hvs3">
+    <div class="refentry">
       <a id="hvs3"></a>
       <div class="titlepage"></div>
       <a id="IndexHvs3" class="indexterm"></a>
@@ -37,20 +37,20 @@
       Allows three-dimensional Hyper Vectorial Synthesis (HVS) controlled by externally-updated k-variables.
     </p>
       </div>
-      <div class="refsect1" title="Description">
-        <a id="idp51088800"></a>
+      <div class="refsect1">
+        <a id="idm10816707776"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>hvs3</em></span> allows three-dimensional Hyper Vectorial Synthesis (HVS) controlled by externally-updated k-variables.
     </p>
       </div>
-      <div class="refsect1" title="Syntax">
-        <a id="idp51090528"></a>
+      <div class="refsect1">
+        <a id="idm10816706096"></a>
         <h2>Syntax</h2>
         <pre class="synopsis"><span class="command"><strong>hvs3</strong></span> kx, ky, kz, inumParms, inumPointsX, inumPointsY, inumPointsZ, iOutTab, iPositionsTab, iSnapTab [, iConfigTab]</pre>
       </div>
-      <div class="refsect1" title="Initialization">
-        <a id="idp51092672"></a>
+      <div class="refsect1">
+        <a id="idm10816704064"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>inumParms</em></span> - number of parameters controlled by the HVS. Each HVS snapshot is made up of <span class="emphasis"><em>inumParms</em></span> elements.
@@ -71,8 +71,8 @@
       <span class="emphasis"><em>iConfigTab</em></span> – (optional) a table containing the behavior of the HVS for each parameter. If the value of <span class="emphasis"><em>iConfigTab</em></span> is zero (default), this argument is ignored, meaning that each parameter is treated with linear interpolation by the HVS. If <span class="emphasis"><em>iConfigTab</em></span> is different than zero, then it must refer to an existing table whose contents are in its turn referring to a particolar kind of interpolation. In this table, a value of -1 indicates that corresponding parameter is leaved unchanged (ignored) by the HVS; a value of zero indicates that corresponding parameter is treated with linear-interpolation; each other values must be integer numbers indicating an existing table filled with a shape which will determine the kind of special interpolation to be used (table-based interpolation).
     </p>
       </div>
-      <div class="refsect1" title="Performance">
-        <a id="idp51103888"></a>
+      <div class="refsect1">
+        <a id="idm10816693264"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>kx, ky, kz</em></span> -  these are externally-modified variables which controls the motion of the pointer in the HVS matrix cube (or square or line in case of HVS matrices made up of less than 3 dimensions). The range of these input arguments must be 0 to 1.
@@ -93,7 +93,7 @@
       Snapshot order, as stored into the <span class="emphasis"><em>iSnapTab</em></span>, can or cannot follow the order of the pivot-points numbers. In fact it is possible to alter this order by means the <span class="emphasis"><em>iPositionsTab</em></span>, a table that remaps the position of each snapshot in relation to the pivot points. The <span class="emphasis"><em>iPositionsTab</em></span> is made up of the positions of the snapshots (contained in the <span class="emphasis"><em>iSnapTab</em></span>) in the two-dimensional grid. Each subsequent element is actually a pointer representing the position in the <span class="emphasis"><em>iSnapTab</em></span>. For example, in a 2-dimensional HVS matrix such as the following (in this case having <span class="emphasis"><em>inumPointsX</em></span> = 3 and <span class="emphasis"><em>inumPointsY</em></span> = 5:
     </p>
         <div class="table">
-          <a id="idp51115792"></a>
+          <a id="idm10816681520"></a>
           <p class="title">
             <strong>Table 11. </strong>
           </p>
@@ -142,7 +142,7 @@
       Output values of the HVS are influenced by the motion pointer, a point whose position, in the HVS cube (or square or segment) is determined by the <span class="emphasis"><em>kx</em></span>, <span class="emphasis"><em>ky</em></span> and <span class="emphasis"><em>kz</em></span> arguments. The values of these arguments, which must be in the 0 to 1 range, are externally set by the user. The output values, whose amount is equal to the <span class="emphasis"><em>inumParms</em></span> argument, are stored in the <span class="emphasis"><em>iOutTab</em></span>, a table that must be already allocated by the user, and must be at least <span class="emphasis"><em>inumParms</em></span> size. In what way the motion pointer influences the output? Well, when the motion pointer falls in a determinate cubed zone, delimited, for instance, by 8 vertices (or pivot points), we assume that each vertex has associated a different snapshot (i.e. a set of <span class="emphasis"><em>inumParms</em></span> values), well, the output will be the weighted average value of the 8 vertices, calculated according on the distance of the motion pointer from each of the 8 vertices. In the case of a default behavior, when the <span class="emphasis"><em>iConfigTab</em></span> argument is not set, the exact output is calculated by using linear interpolation which is applied to each different parameter of the HVS. Anyway, it is possible to influence this behavior by setting the <span class="emphasis"><em>iConfigTab</em></span> argument to a number of a table whose contents can affect one or more HVS parameters. The <span class="emphasis"><em>iConfigTab</em></span> table elements are associated to each HVS parameter and their values affect the HVS output in the following way:
       </p>
         <div class="itemizedlist">
-          <ul class="itemizedlist" type="disc">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
             <li class="listitem">
               <p>
             If <span class="emphasis"><em>iConfigTab</em></span> is equal to -1, corresponding output is skipped, i.e. the element is not calculated, leaving corresponding element value in the <span class="emphasis"><em>iOutTab</em></span> unchanged;
@@ -163,8 +163,8 @@
         <p>
     </p>
       </div>
-      <div class="refsect1" title="See Also">
-        <a id="idp51138320"></a>
+      <div class="refsect1">
+        <a id="idm10816659552"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="hvs1.html" title="hvs1"><em class="citetitle">hvs1</em></a>,
@@ -172,8 +172,8 @@
       <a class="link" href="vphaseseg.html" title="vphaseseg"><em class="citetitle">vphaseseg</em></a>
     </p>
       </div>
-      <div class="refsect1" title="Credits">
-        <a id="idp51143136"></a>
+      <div class="refsect1">
+        <a id="idm10816655104"></a>
         <h2>Credits</h2>
         <p>Author: Gabriel Maldonado</p>
         <p>New in version 5.06</p>
