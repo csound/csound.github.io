@@ -7,7 +7,7 @@ categories: site news
 
 The Csound Journal - Issue 20 is now available!
 
-[http://csounds.com/journal/](http://csounds.com/journal/)
+[http://csoundjournal.com/](http://csoundjournal.com/)
 
 Many thanks to the authors and happy Csounding!
 
