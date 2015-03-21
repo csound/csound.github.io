@@ -107,11 +107,12 @@ $(document).ready(function () {
 	});
 
 
+
 	// Google Map //
 	$('#map_canvas').gmap({
 		'scrollwheel': false,
-		'center': new google.maps.LatLng(59.905, 30.48985),
-		'zoom': 15,
+		'center': new google.maps.LatLng(59.9323463, 30.3767723),
+		'zoom': 12,
 		'mapTypeControl': false,
 		'navigationControl': false,
 		'streetViewControl': false,
@@ -131,27 +132,29 @@ $(document).ready(function () {
 			}]
 		}]
 	});
-	var image = {
-		url: 'images/marker.png', // Define the map marker file here
-		// This marker is 51 pixels wide by 63 pixels tall.
-		size: new google.maps.Size(51, 63),
-		// The origin for this image is 0,0.
-		origin: new google.maps.Point(0, 0),
-		// The anchor for this image is the base of the flagpole at 26,63.
-		anchor: new google.maps.Point(26, 63)
-	};
+
+    var conferenceVenues = [
+        ['<strong>The A.S. Popov Central Museum of Telecommunications</strong><br/>' +
+                '<p>4 Potchtamskiy lane, St. Petersburg, Russia </p>'
+            , 59.933333, 30.301929],
+        ['<h4>SPbSUT</h4><p><strong>University of Telecommunications</strong>' +
+                '<br>22 Bolshevikov Ave. St.Petersburg, Russia </p>'
+            , 59.905, 30.48985]
+    ];
 	$('#map_canvas').gmap().bind('init', function () {
-		$('#map_canvas').gmap('addMarker', {
-			'id': 'marker-1',
-			'position': '59.903292, 30.489923',
-			'bounds': false
-			// 'icon': image
-		}).click(function () {
-			$('#map_canvas').gmap('openInfoWindow', {
-				'content': '<h4>SPbSUT</h4><p><strong>University of Telecommunications</strong><br>22 Bolshevikov Ave. St.Petersburg, Russia </p>'
-			}, this);
-		});
+        conferenceVenues.forEach(function (e, index, array) {
+            $('#map_canvas').gmap('addMarker', {
+                'id': 'marker-' + index,
+                'position': new google.maps.LatLng(e[1], e[2]),
+                'bounds': false
+            }).click(function () {
+                $('#map_canvas').gmap('openInfoWindow', {
+                    'content': e[0]
+                }, this);
+            });
+        });
 	});
 
+
 	// end
-})
+});
