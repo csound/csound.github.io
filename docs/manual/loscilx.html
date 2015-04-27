@@ -34,31 +34,201 @@
           <span class="refentrytitle">loscilx</span>
         </h2>
         <p>loscilx — 
-      Loop oscillator.
+        Read multi-channel sampled sound from a table.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm10811095712"></a>
+        <a id="idm52726736352"></a>
         <h2>Description</h2>
         <p>
-      This file is currently a stub, but the syntax should be correct.
+      Read sampled sound (up to 16 channels) from a table, with
+      optional sustain and release looping. 
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm10811094464"></a>
+        <a id="idm52726735056"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">ar1 [, ar2, ar3, ar4, ar5, ar6, ar7, ar8, ar9, ar10, ar11, ar12, ar13, ar14, \
       ar15, ar16] <span class="command"><strong>loscilx</strong></span> xamp, kcps, ifn \
-      [, iwsize, ibas, istrt, imod1, ibeg1, iend1]</pre>
+      [, iwsize, ibas, istrt, imod, ibeg, iend]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm10811091824"></a>
-        <h2>See Also</h2>
+        <a id="idm52726732816"></a>
+        <h2>Initialization</h2>
         <p>
-          <a class="link" href="sndload.html" title="sndload">
-            <em class="citetitle">sndload</em>
-          </a>
-        </p>
+      <span class="emphasis"><em>ifn</em></span> -- function table number, typically
+      denoting an sampled sound segment with prescribed looping points
+      loaded using <a class="link" href="GEN01.html" title="GEN01"><em class="citetitle">GEN01</em></a>. The source
+      file may have up to 16 channels.
+    </p>
+        <p>
+      <span class="emphasis"><em>iwsize</em></span> (optiomal) -- window size used in interpolation.
+    </p>
+        <p>
+      <span class="emphasis"><em>ibas</em></span> (optional) -- base frequency in
+      <span class="emphasis"><em>Hz</em></span> of the recorded sound. This optionally
+      overrides the frequency given in the audio file, but is required
+      if the file did not contain one. The default value is 261.626
+      Hz, i.e. middle C. (New in Csound 4.03). If this value is not
+      known or not present, use 1 here and in
+      <span class="emphasis"><em>kcps</em></span>.
+    </p>
+        <p><span class="emphasis"><em>istrt</em></span> (optional, default 0) -- Frame to
+    start reading the data.  If this is not an integer the the data is
+    interpolated (see <span class="emphasis"><em>iwsize</em></span>).
+    </p>
+        <p><span class="emphasis"><em>imod</em></span> (optional, default -1) --  play mode
+    for the sustain and release loops. A value of 1 denotes normal
+    looping, 2 denotes forward &amp; backward looping, 0 denotes no
+    looping. The default value (-1) will defer to the mode and the
+    looping points given in the source file. Make sure you select an
+    appropriate mode if the file does not contain this information.
+    </p>
+        <p><span class="emphasis"><em>ibeg, iend</em></span> (optional, depending on
+    <span class="emphasis"><em>imod</em></span>) -- begin and end points of the sustain
+    and release loops. These are measured in <span class="emphasis"><em>sample
+    frames</em></span> from the beginning of the file. If no loop
+    points are specified, and a looping mode
+    (<span class="emphasis"><em>imod</em></span> is given, the file will be looped for
+    the whole length.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm52726723232"></a>
+        <h2>Performance</h2>
+        <p>
+      <span class="emphasis"><em>ar1, ar2, ...</em></span> -- the output at audio-rate.
+      The number of outputs must match the number of channels in the
+      sample file.
+    </p>
+        <p>
+      <span class="emphasis"><em>xamp</em></span> -- the amplitude of the output signal.
+    </p>
+        <p>
+      <span class="emphasis"><em>kcps</em></span> -- the factor to read the file.  For
+      example, a value of 1 has no pitch change, 1.5 is up a fifth and
+      2 an octave.
+    </p>
+        <p>
+      <span class="emphasis"><em>loscilx</em></span> samples the ftable audio at a rate
+      determined by <span class="emphasis"><em>kcps</em></span>, then multiplies the
+      result by <span class="emphasis"><em>xamp</em></span>. The sampling increment for
+      <span class="emphasis"><em>kcps</em></span> is dependent on the table's base-note
+      frequency <span class="emphasis"><em>ibas</em></span>, and is automatically
+      adjusted if the orchestra <span class="emphasis"><em>sr</em></span> value differs
+      from that at which the source was recorded. In this unit, ftable
+      is always sampled with interpolation.
+    </p>
+        <p>
+      If sampling reaches the <span class="emphasis"><em>sustain loop</em></span>
+      endpoint and looping is in effect, the point of sampling will be
+      modified and <span class="emphasis"><em>loscil</em></span> will continue reading
+      from within that loop segment. Once the instrument has received
+      a <span class="emphasis"><em>turnoff</em></span> signal (from the score or from a
+      MIDI noteoff event), the next sustain endpoint encountered will
+      be ignored and sampling will continue towards the
+      <span class="emphasis"><em>release loop</em></span> end-point, or towards the last
+      sample (henceforth to zeros).
+    </p>
+        <p>
+      If you want to loop the whole file, specify a looping mode in
+      <span class="emphasis"><em>imod</em></span> and do not enter any values for
+      <span class="emphasis"><em>ibeg</em></span> and <span class="emphasis"><em>iend</em></span>. 
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm52726712496"></a>
+        <h2>Examples</h2>
+        <p>
+      Here is an example of the loscilx opcode. It uses the files
+      <a class="ulink" href="examples/loscil.csd" target="_top"><em class="citetitle">loscil.csd</em></a>
+      and <a class="ulink" href="examples/kickroll.wav" target="_top"><em class="citetitle">kickroll.wav</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm52726709904"></a>
+          <p class="title">
+            <strong>Example 446. Example of the loscilx opcode.</strong>
+          </p>
+          <div class="example-contents">
+            <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time
+        Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line
+        Flags</em></a> for more information on using command
+        line flags.</p>
+            <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac     <span class="comment">;;;realtime audio out</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o loscil.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">kr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 1
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span> <span class="op">=</span> 1.0
+
+gS_loop <span class="op">=</span> "kickroll.wav"
+gisr <span class="opc">filesr</span> gS_loop
+gilength <span class="opc">filelen</span> gS_loop
+gibeats <span class="op">=</span> 16 
+gi_sampleleft <span class="ohdr">ftgen</span> 1, 0, 0, 1, gS_loop, 0, 4, 0
+
+<span class="oblock">instr</span> 1
+    idur <span class="op">=</span> p3
+    iamp <span class="op">=</span> p4
+    ibeat <span class="op">=</span> p5
+    itune <span class="op">=</span> p6
+    ipos <span class="op">=</span> ibeat <span class="op">/</span> gibeats <span class="op">*</span> gilength <span class="op">*</span> gisr
+
+    aenv <span class="opc">linseg</span> iamp, idur <span class="op">-</span> 0.01, iamp, 0.01, 0
+    a1, a2 <span class="opc">loscilx</span> aenv, itune, 1, 0, 1, ipos, 0
+    <span class="opc">outs</span> a1, a2
+<span class="oblock">endin</span>
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+<span class="stamnt">t</span> 0 170
+
+<span class="comment">; Measure 1</span>
+<span class="stamnt">i</span> 1 0.0 0.5 0.707 0 1
+<span class="stamnt">i</span> 1 1.0 0.5 0.707 1 1
+<span class="stamnt">i</span> 1 2.5 0.5 0.707 0 1
+<span class="stamnt">i</span> 1 3.0 0.5 0.707 1 1
+
+<span class="comment">; Measure 2</span>
+<span class="stamnt">i</span> 1 4.0 0.5 0.707 0 1
+<span class="stamnt">i</span> 1 5.0 0.5 0.707 1 1
+<span class="stamnt">i</span> 1 6.5 0.5 0.707 0 1
+<span class="stamnt">i</span> 1 7.0 0.5 0.707 1 1
+
+<span class="comment">; Measure 3</span>
+<span class="stamnt">i</span> 1 8.0  0.5 0.707 0 1
+<span class="stamnt">i</span> 1 9.0  0.5 0.707 1 1
+<span class="stamnt">i</span> 1 10.5 0.5 0.707 0 1
+<span class="stamnt">i</span> 1 11.0 0.5 0.707 1 1
+
+<span class="comment">; Measure 4</span>
+<span class="stamnt">i</span> 1 12.0 0.5 0.707 0 1
+<span class="stamnt">i</span> 1 13.0 0.5 0.707 1 1
+<span class="stamnt">i</span> 1 14.5 0.5 0.707 0 1
+<span class="stamnt">i</span> 1 15.0 0.5 0.707 1 1
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm52726705872"></a>
+        <h2>See Also</h2>
         <p>
           <a class="link" href="loscil.html" title="loscil">
             <em class="citetitle">loscil</em>
@@ -66,7 +236,7 @@
         </p>
       </div>
       <div class="refsect1">
-        <a id="idm10811089104"></a>
+        <a id="idm52726704096"></a>
         <h2>Credits</h2>
         <p>Written by Istvan Varga.</p>
         <p>2006</p>

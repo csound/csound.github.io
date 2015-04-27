@@ -34,20 +34,104 @@
           <span class="refentrytitle">ephasor</span>
         </h2>
         <p>ephasor — 
+    produces two outputs: a periodic phase signal and a periodic exponential decaying signal.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm10834107728"></a>
+        <a id="idm52743070832"></a>
+        <h2>Description</h2>
+        <p>
+    This opcode produces two outputs: a periodic phase signal (like the phasor
+    opcode), and a periodic exponential decaying signal. The latter is
+    synchronised to the former, starting at 1 and then decreasing at
+    the same time as the phase signal increases from 0 to 1. The rate
+    of exponential decay can be controlled by the second parameter.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm52743068784"></a>
+        <h2>Syntax</h2>
+        <pre class="synopsis">aexp,aph <span class="command"><strong>ephasor</strong></span> kfreq, kR</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm52743066816"></a>
         <h2>Performance</h2>
         <p>
-      Ephasor has been added to Csound 5.10, but its behavior will change for 5.11. Stay tuned...
+      <span class="emphasis"><em>kfreq</em></span> - the rate at which the phase and
+      exponential signals are generated
     </p>
         <p>
-
+      <span class="emphasis"><em>kR</em></span> - a parameter controlling the decay rate
+      of the exponential signal, 0 &lt; kR &lt; 1. Lower values
+      produce faster decays.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm10834104272"></a>
+        <a id="idm52743064112"></a>
+        <h2>Examples</h2>
+        <p>
+      Here is an example of the ephasor opcode. It uses the file <a class="ulink" href="examples/ephasor.csd" target="_top"><em class="citetitle">ephasor.csd</em></a>.
+    </p>
+        <div class="example">
+          <a id="idm52743062224"></a>
+          <p class="title">
+            <strong>Example 225. Example of the ephasor opcode.</strong>
+          </p>
+          <div class="example-contents">
+            <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time
+	Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line">
+	<em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
+            <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span><span class="op">=</span>44100
+<span class="ohdr">ksmps</span><span class="op">=</span>64
+<span class="ohdr">nchnls</span><span class="op">=</span>2
+<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+
+<span class="oblock">instr</span> 1
+
+iamp <span class="op">=</span> p4
+ifr <span class="op">=</span> p5
+kfr <span class="opc">expon</span> ifr,p3,2<span class="op">*</span>ifr
+
+kfc <span class="opc">expon</span> 2000,p3, 4000
+kq <span class="op">=</span> 10
+kbw <span class="op">=</span> kfc<span class="op">/</span>kq
+kR <span class="op">=</span> 1 <span class="op">-</span> $M_PI<span class="op">*</span>(kbw<span class="op">/</span>sr)
+
+k1 <span class="op">=</span> kfc<span class="op">/</span>kfr
+kn <span class="op">=</span> <span class="opc">int</span>(k1)
+k1 <span class="op">=</span> k1 <span class="op">-</span> kn
+
+amod,aph <span class="opc">ephasor</span> kfr,kR
+aosc1 <span class="opc">table</span> aph<span class="op">*</span>kn,<span class="op">-</span>1,1,0,1
+aosc2 <span class="opc">table</span> aph<span class="op">*</span>(kn<span class="op">+</span>1),<span class="op">-</span>1,1,0,1
+
+asig <span class="op">=</span> iamp<span class="op">*</span>(aosc1<span class="op">*</span>(1 <span class="op">-</span> k1) <span class="op">+</span> aosc2<span class="op">*</span>k1)<span class="op">*</span>amod
+  <span class="opc">outs</span> asig, asig
+  
+<span class="oblock">endin</span>
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+<span class="stamnt">i</span>1 0 10 0.5 220
+
+<span class="stamnt">e</span>
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+          </div>
+        </div>
+        <br class="example-break" />
+      </div>
+      <div class="refsect1">
+        <a id="idm52743058224"></a>
         <h2>Credits</h2>
         <p>
       </p>
