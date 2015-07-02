@@ -2,7 +2,7 @@
 layout: post
 title: "Soundpipe: a lightweight Music DSP library"
 date:  2015-07-02 18:45:50
-categories: uncategorized
+categories: site news
 ---
 
 [Soundpipe](http://www.github.com/PaulBatchelor/Soundpipe.git) is an embeddable 
