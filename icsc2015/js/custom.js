@@ -134,9 +134,6 @@ $(document).ready(function () {
 	});
 
     var conferenceVenues = [
-        ['<strong>The A.S. Popov Central Museum of Communications</strong><br/>' +
-                '<p>4 Potchtamskiy lane, St. Petersburg, Russia</p>'
-            , 59.933333, 30.301929],
         ['<h4>SPbSUT</h4><p><strong>University of Telecommunications</strong>' +
                 '<br>22 Bolshevikov Ave. St.Petersburg, Russia</p>'
             , 59.905, 30.48985],
