@@ -1,6 +1,6 @@
 ---
 layout: default
-title: About
+title: Community 
 ---
 # Community
 
@@ -30,6 +30,9 @@ Chat is available at IRC on freenode, using channel #csound. This is available t
 
 * [Freenode Webchat](http://webchat.freenode.net/?channels=#csound)
 
+Users may also post questions on Stackoverflow, using the "csound" tag.  You can view questions here:
 
-The Csound Journal collects a huge number of articles on interesting subjects regarding Csound: [http://www.csoundjournal.com](http://www.csoundjournal.com/)
+* [Stack Overflow](http://stackoverflow.com/questions/tagged/csound)
+
+The Csound Journal collects a huge number of articles on interesting subjects regarding Csound: [http://www.csoundjournal.com](http:///)
 
