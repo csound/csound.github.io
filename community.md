@@ -31,5 +31,5 @@ Chat is available at IRC on freenode, using channel #csound. This is available t
 * [Freenode Webchat](http://webchat.freenode.net/?channels=#csound)
 
 
-The Csound Journal collects a huge number of articles on interesting subjects regarding Csound: [http://www.csounds.com/journal/](http://www.csounds.com/journal/)
+The Csound Journal collects a huge number of articles on interesting subjects regarding Csound: [http://www.csoundjournal.com](http://www.csoundjournal.com/)
 
