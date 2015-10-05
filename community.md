@@ -26,6 +26,10 @@ Although questions about the main frontends are frequently discussed on the Csou
 
 * [Blue](https://lists.sourceforge.net/lists/listinfo/bluemusic-users)
 
+Chat is available at IRC on freenode, using channel #csound. This is available through web chat (no registration required) at:
+
+* [Freenode Webchat](http://webchat.freenode.net/?channels=#csound)
+
 
 The Csound Journal collects a huge number of articles on interesting subjects regarding Csound: [http://www.csounds.com/journal/](http://www.csounds.com/journal/)
 
