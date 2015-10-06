@@ -6,7 +6,7 @@ title: Community
 
 The main discussion forums for Csound are the user list and the developer list. To join these lists, go to these sites:
 
-* [Csound Users](https://lists.sourceforge.net/lists/listinfo/csound-users)
+* [Csound Users](https://listserv.heanet.ie/cgi-bin/wa?A0=CSOUND)
 
 * [Csound Developers](https://lists.sourceforge.net/lists/listinfo/csound-devel)
 
