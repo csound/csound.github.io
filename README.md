@@ -16,7 +16,7 @@ may be performed directly by members of the site maintainers team, or
 indirectly via pull request by third parties. 
 
 Users who would like to contribute, but who are not comfortable with the
-technical details to make a direct contribution, are encouragedto either file
+technical details to make a direct contribution, are encouraged to either file
 an issue on the [issue tracker](http://github.com/csound/csound.github.io/issues) 
 describing the news entry or requested change, or contact one of the site
 maintainers who will work to evaluate and integrate any changes. 
@@ -42,7 +42,7 @@ modifying one of the templates in the \_templates or \_includes folder.
 New pages can be made by copying one of the existing pages and updating it for
 the new content.  Existing pages may be modified locally and pushed to the
 repository, or submitted as a change via pull request.  Pages may also be
-modified directly through the github project site, which allows modifying the
+modified directly through the GitHub project site, which allows modifying the
 page within the browser. Users can navigate to the file in the project, select
 the edit button, then finish the edit. 
 
@@ -56,7 +56,7 @@ files.
 ## Modifying the site theme 
 
 The theme of the site is controlled via the HTML structure of the content and
-Cascasding Style Sheets (CSS). Javascript is also used to help modify the feel
+Cascading Style Sheets (CSS). Javascript is also used to help modify the feel
 and function of the site. The CSS and Javascript files used for the site are
 found in the css and js folders, respectively.  These files are included into
 the site through the template files.  
