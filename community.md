@@ -8,10 +8,10 @@ The main discussion forums for Csound are the user list and the developer list. 
 
 * [Csound Users](https://listserv.heanet.ie/cgi-bin/wa?A0=CSOUND)
 
-* [Csound Developers](https://lists.sourceforge.net/lists/listinfo/csound-devel)
+* [Csound Developers](https://listserv.heanet.ie/cgi-bin/wa?A0=CSOUND-DEV)
 
-
-Both have archives on nabble:
+List archives starting from 6-10-2015 can also be found in the links above.
+Alternatively, older archives are also found on nabble:
 
 * [Csound-General](http://csound.1045644.n5.nabble.com/Csound-General-f1093014.html)
 
