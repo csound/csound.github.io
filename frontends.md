@@ -8,7 +8,7 @@ Csound is a library, which can be accessed through different **frontends**. The 
 
 [**CsoundQt**](http://qutecsound.sourceforge.net/) is most probably already included in the Mac and Windows installer. It has nice tools for editing Csound files, comes with easy editable widgets and a huge example collection.
 
-[**Cabbage**](http://www.thecabbagefoundation.org) is originally designed to create VST plugins from Csound instruments, but it can also be used to run and edit Csound files, as well as creating standalone applications.
+[**Cabbage**](http://cabbageaudio.com/) is originally designed to create VST plugins from Csound instruments, but it can also be used to run and edit Csound files, as well as creating standalone applications.
 
 [**Blue**](http://blue.kunstmusik.com) is an amazingly comprehensive composition tool for working with Csound.
 
