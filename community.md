@@ -44,7 +44,7 @@ The Csound Journal collects a huge number of articles on interesting subjects re
 
 * [You Tube Channel](http://www.youtube.com/user/csconf2011)
 
-* [Papers and Program] (http://www.incontri.hmtm-hannover.de/de/elektronisches-studio/csound-conference/)
+* [Papers and Program](http://www.incontri.hmtm-hannover.de/de/fmsbw/csound-conference/)
 
 2013, October 25 - 27, Boston, USA
 
