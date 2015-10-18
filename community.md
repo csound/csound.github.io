@@ -50,3 +50,7 @@ The Csound Journal collects a huge number of articles on interesting subjects re
 
 2015, October 2 - 4, St. Petersburg, Russia
 
+* [You Tube Channel](http://www.youtube.com/channel/UCVI8hmelNnKGP-wnf9FqNYQ)
+
+* [Photos](https://www.flickr.com/photos/icsc2015/)
+
