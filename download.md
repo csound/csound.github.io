@@ -1,8 +1,9 @@
 ---
-layout: default
+layout: sidebar_links
 title: Download
 ---
-# Download
+
+`TODO: Reorganize downloads to reflect the fact, that Csound has a core and a set of frontends for different uses, etc.`
 
 You will find the current version of Csound in [http://sourceforge.net/projects/csound/files/csound6/](http://sourceforge.net/projects/csound/files/csound6/). In the folder with the most recent version number you will find different files:
 

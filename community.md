@@ -1,8 +1,8 @@
 ---
-layout: default
+layout: sidebar_links
 title: Community 
 ---
-# Community
+`TODO: Better text about how the community is organized.`
 
 The main discussion forums for Csound are the user list and the developer list. To join these lists, go to these sites:
 

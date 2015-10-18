@@ -1,8 +1,8 @@
 ---
-layout: default
+layout: sidebar_links
 title: Frontends
 ---
-# Frontends
+
 
 Csound is a library, which can be accessed through different **frontends**. The classic one is the terminal command *csound*, which is present in all desktop installations of Csound. If you want to use Csound via a Graphic UI, various frontends are available from third-party developers. Among these, the most popular are:
 

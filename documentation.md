@@ -1,8 +1,8 @@
 ---
-layout: default
+layout: sidebar_links
 title: Documentation 
 ---
-# Documentation
+`TODO: This page should describe how to get started with Csound, probably there should be simple tutorials, etc.`
 
 The [Csound FLOSS Manual](http://www.flossmanuals.net/csound/index/) is an online textbook for understanding and using Csound.
 

@@ -1,8 +1,8 @@
 ---
-layout: default
-title: About
+layout: sidebar_links
+title: API
 ---
-# API
+`TODO: Tutorials how to make simple apps / to get started with Csound for different platforms (iOS, Android, Java, etc.)`
 
 The Csound API allows users to call the Csound engine from a host language, and to communicate with Csound during the performance in many ways. The Csound API is written in C, but there are wrappers for other programming languages, like C++, Python, Java and others.
 

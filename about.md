@@ -1,8 +1,10 @@
 ---
-layout: default
+layout: sidebar_links
 title: About
 ---
-# About
+```
+TODO: This page should also describe, what is Csound, how it can be used, describe how to proceed with learning.
+```
 
 Csound is a sound and music computing system which was originally developed by Barry Vercoe in 1985 at MIT Media Lab. Since the 90s, it has been developed by a group of core developers, and a wider community of volunteers which contribute examples, documentation, articles, and takes part of the Csound development with bug reports, feature requests and discussions with the core development team.      
 
