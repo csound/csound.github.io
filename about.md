@@ -1,14 +1,9 @@
 ---
 layout: sidebar_links
-title: About
+title: What is Csound
 ---
-```
-TODO: This page should also describe, what is Csound, how it can be used, describe how to proceed with learning.
-```
 
-Csound is a sound and music computing system which was originally developed by Barry Vercoe in 1985 at MIT Media Lab. Since the 90s, it has been developed by a group of core developers, and a wider community of volunteers which contribute examples, documentation, articles, and takes part of the Csound development with bug reports, feature requests and discussions with the core development team.      
 
-Although Csound has a strong tradition as a tool for composing electro-acoustic pieces, it is used by composers and musicians for any kind of music that can be made with the help of the computer. Csound can also be used in real-time and interactive contexts, on mobile devices or in combination with other programming languages.
+Csound can most accurately be described as a compiler. What is a compiler? A compiler is a software that takes textual instructions in the form of source code and converts them into object code. This object code then gets converted into some kind of executable binary in the form of a computer program. Csound works in more or less the same way, only its object code is a stream of numbers representing audio. In order for us to hear that audio we must play it back through a Digital to Analogue Converter. The DAC converts each of the sequenced numbers to a voltage that causes our speakers to move and vibrate, thus creating sound.
 
-One of the main principles in Csound development is to guarantee backwards compatibility. You can still render a Csound source file from 1986 on the latest Csound release, and you should be able to render a file written today with the latest Csound in 2036.
-
+[TODO] Add graphic..  
