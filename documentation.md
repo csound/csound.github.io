@@ -15,7 +15,7 @@ sidebar_toc:
   - url: '#where_to_now'
     name: 'Where to now?'
 ---
-##Csound Editors[](#editors)
+<h2 id="editors">Csound Editors</h2>
 Csound text can be written using any source code editor. Csound ships with an editor called CsoundQT which provide syntax highlighting of text, as well as a vast array of useful functions. While CsoundQT is the default editor for Csound it is not the only Csound-based editor available to users. The following is a list of editors and extensions written specifically for editing Csound source files.
 
 * <a href="http://csound.github.io/winxound.codeplex.com" target="_blank">WinXound</a>
@@ -24,7 +24,7 @@ Csound text can be written using any source code editor. Csound ships with an ed
 * <a href="http://cabbageaudio.com/" target="_blank">Cabbage</a>
 
 
-##Csound syntax[](#syntax)
+<h2 id="syntax">Csound syntax</h2>
 All Csound source code is made up of several sections which are defined in XML type tags. The most important sections are the **CsInstruments** and **CsScore** sections. These sections defined how our instruments will sound, and when they start. All Csound code is case sensitive. That means upper-case letters are not the same as lower-case letters. Presented below is the typical document structures for a single unified Csound file. 
 
 <pre><code data-language="csound">
@@ -124,7 +124,7 @@ kVal2 = kVal1*100
 ###Comments
 Single line comments can be added using **;** or **//**. Multi-line comments are be added using **/*** to start the comment, and ***/** to end it. 
 
-##Your first synthesiser[](#first_instrument)
+<h2 id="first_instrument">Your first synthesiser</h2>
 
 Now that the basics of the Csound language have been outlined, it's time to look at creating a simple instrument. The opcodes used in this simple instrument are [vco2](vco2.html), [madsr](madsr.html), [moogladder](moog.html) and [out](out.html).
 
@@ -317,7 +317,7 @@ f0 3600
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
 
-##Your first effect[](#first_effect)
+<h2 id="first_effect">Your first effect</h2>
 Two things are required in order to create an audio affect in Csound. First, audio must be sent from the analogue digital converter to Csound, and second, that audio needs to be accessed within an instrument block. Csound can be instructed to open the ADC using the **-iadc** command line option in the &lt;CsOptions&gt; section of the source code. 
 
 <pre><code data-language="csound">
@@ -357,7 +357,7 @@ i1 0 1000
 &lt;/CsoundSynthesizer&gt; 
 </code></pre>
 
-##Common Errors[](#common_errors)
+<h2 id="common_errors">Common Errors</h2>
 Csound will inform you of any errors contained in your source file. Understanding syntax errors is key to making the most out of Csound. The most common error is the 'used before defined' error. This occurs whenever a variable is accessed before it has been defined. For instance, in the following code kAmp is passed as an input argument to **oscili** before it is declared.
 
 <pre><code data-language="csound">
@@ -387,7 +387,7 @@ endin
 
 Another common error is 'unexpected T_IDENT'. The most common reason for this error is a typo. The typo can be caused by calling an opcode by an incorrect name, or from spelling an opcode with capital letters. Remember that Csound is case sensitive; oscil is not the same as Oscil! 
 
-##Where to now?[](#where_to_now)
+<h2 id="where_to_now">Where to now?</h2>
 
 There are lots of great resources available to those wishing to learn more about Csound. The [Csound FLOSS Manual](http://www.flossmanuals.net/csound/index/) is a comprehensive online textbook for learning and using Csound. It covers all aspects of the language and provide detailed code examples for you to follow. 
 
