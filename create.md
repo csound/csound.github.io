@@ -38,6 +38,12 @@ Cabbage is a framework for developing audio plugins that use Csound as their pro
 ![Csound4Live](/images/csound4live.jpg)
 Csound For Live is a suite of audio plugins that combines the real time performance capabilities of Ableton Live, the stable and customizable interface design of Max/MSP (through Max For Live), and the synthesis power of Csound. More information can be found [here](http://csoundforlive.com/). Note: users must have Max4Live. 
 
+At the core of Csound4Live is the Max/MSP csound~ object which is distributed free with the OSX and Windows installers of Csound. Although not as extensive as the above mentioned csound4Live packages, it does provide a set of simple examples to get you started. You can read more about it [here](http://floss.booktype.pro/csound/b-csound-in-maxmsp/)  
+
+####csLADSPA
+<img src="/images/csLADSPA.jpg" alt="Cabbage" style="width: 400px;"/>
+csLADSPA is a simple interface that lets users run Csound as a LADSPA plugin. csLADSPA come pre-built with Csound and can be used with any software that can load LADSPA plugins. Note that it does not offer any real-time control of processes.  
+
 ####Jack
 [Jack](http://www.jackaudio.org/) is an API that enables complex routing of audio signals across applications. It can be used to route out of Csound and into any number of digital audio workstations. Jack runs on Linux, OSX and Windows. More information on using Csound and Jack can be found [here](http://csound.github.io/docs/manual/JackoOpcodes.html) 
 
@@ -46,7 +52,31 @@ Csound For Live is a suite of audio plugins that combines the real time performa
 
 <h2 id="realtime_works">Realtime Works</h2>
 
+Realtime works with Csound can be created in many different ways. The most straightforward is to use a MIDI controller to manipulate sounds during a performance. Basic information about how to work with MIDI controlers and Csound can be found in the Csound Reference Manual [here](http://csound.github.io/docs/manual/MidiTop.html). Composer and Csounder Art Hunkin's has also written a review of some of his favourite MIDI controllers to use with Csound in this [article](http://www.csounds.com/journal/issue10/MIDI_Controller.html)
+
+Csound can also be controlled in real-time using a language wrapper that lets you host the Csound library in another language. Francois Pinot presents one such approach in his article [Real-time Coding Using the Python API](http://www.csounds.com/journal/issue14/realtimeCsoundPython.html)
+
+Another approach is to use the Pure Data csoundapi~ tilde object that ships with Csound. THis lets you harness the power of the Csound library within Pd. You can read more about this approach [here](http://floss.booktype.pro/csound/a-csound-in-pd/) 
+
+For a more customised approach, users can build hardware with tools such as an [Arduino](https://www.arduino.cc/) electronic prototyping system. THis hardware can then be used to send messages to Csound in realtime. More information on using an Arduino with Csound can be found [here](http://floss.booktype.pro/csound/b-csound-and-arduino/). 
+
+Don't forget that Csound can send and receive OSC(Open Sound Control) messages. This opens a plethora of further options for realtime control. Read more about OSC and Csound [here](http://floss.booktype.pro/csound/a-open-sound-control/)
+
 <h2 id="desktop_apps">Desktop Applications</h2>
+
+Desktop applications can be created using the Csound host API. The Csound API is a programming application interface that provides access to most of Csound's library functions. In order to develop standalone desktop applications with Csound you will need to have some experience with programming, or be willing to learn. Here are some useful links and resources. 
+
+[Csound API reference manual](https://csound.github.io/docs/api/index.html) The first port of call for most developers. Although presented in C, the same functions and methods are accessible in the 
+various different language wrappers.  
+
+[Introduction to using the Csound host API](http://www.csounds.com/articles/RoryWalsh_CsoundAPI.pdf). In this article Rory Walsh outlines basic usage of the C-language version of the Csound API. Although written with C in mind, the approaches outlined in this article still apply to other languages.
+
+[Developing standalone applications using the Csound API and wxWidgets](http://csoundjournal.com/2006summer/wxCsound.html) In this article Rory Walsh shows how the wxWidgetys GUI framework can be used to create standalone graphical front-ends for Csounds instrument using C++. 
+
+[Csound API Examples](https://github.com/csound/csoundAPI_examples)
+
+[The Csound API](http://booki.flossmanuals.net/csound/the-csound-api/) This chapters from the Csound FLOSS manual provides a great overview of the API. 
+
 
 <h2 id="android_apps">Android Applications</h2>
 
@@ -61,14 +91,28 @@ Link 4: This could be you!
 
 <h2 id="ios_apps">iOS Applications</h2>
 
-Csound has been used successfully on a host different iOS software. Keep reading for more details. 
+Csound has been used successfully on a host different iOS software. You can check out examples of these apps in the [Projects](projects.html) page. See the links below for details on how best to start creating apps. 
 
 ####AudioKit
+The quickest entry to Csound on iOS is through AudioKit, an open-source audio synthesis, processing, and analysis platform developed with Csound at its core. Users don't need to know Csound in order to start developing with AudioKit. It ships with a host of tools to aid in the creation of iOS based audio software. Check out their website for more details and great demos. [AudioKit](http://audiokit.io/)
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/oJkGgQKUCmM/0.jpg)](https://youtu.be/oJkGgQKUCmM "Video Title")
 
- The quickest entry to Csound on iOS is through AudioKit, an open-source audio synthesis, processing, and analysis platform developed with Csound at its core. Users don't need to know Csound in order to start developing with AudioKit. It ships with a host of tools to aid in the creation of iOS based audio software. Check out their website for more details and great demos. [AudioKit](http://audiokit.io/)
- [![IMAGE ALT TEXT](http://img.youtube.com/vi/oJkGgQKUCmM/0.jpg)](https://youtu.be/oJkGgQKUCmM "Video Title")
+
+<h2 id="raspberry_pi">Embedded Applications with Raspberry Pi/BeagleBone and Csound</h2>
+
+Pocket sizes computers are becoming more and more popular. Because most of them run some flavour of Linux, Csound can easily be installed. Below are some resources to get you started. 
+
+[An Introductory Guide to Csound on the BeagleBone and the Raspberry Pi, as well other Linux-powered tinyware](http://www.csounds.com/journal/issue18/beagle_pi.html) In this article Paul Batchelor and Trev Wignall show how to get Csound up and running on a host of different micro devices.
+
+[Building an FM oscillator in the Eurorack format using Csound, a Raspberry Pi, and an Arduino Uno](http://www.csounds.com/journal/issue18/eurorack.html) Andrew Ikenberry and Jason Lim, whom you can read more about in the [Projects](projects.html) page, present a comprehensive overview of how a Raspberry PI, an Arduino and Csound can all be pulled together to create a standard Eurorack module.
+
+[Csound GUI for a Headless Raspberry Pi](http://csoundjournal.com/issue21/csound_gui.html) This article by Ricahrd van Bemmelen, otherwise known as Zappfinger, describes how a web server can be set up to take control of an instance of Csound running on a Raspberry PI.  
 
 
-<h2 id="raspberry_pi">Embedded Applications with Raspberry Pi and Csound</h2>
+<h2 id="games">Music for Games</h2>
 
-<h2 id="python">Do Scientific Computing with Python and Csound</h2>
+Csound can obviously be used to create game music, but it's also possible to link games directly to Csound. One approach is to use OSC to send information back and forth between the game and Csound. Examples of how to do this are outlined in Marte E. Roel Lesur's article [Interfacing Csound and Unity](http://csoundjournal.com/issue19/InterfacingCsoundUnity.html)
+
+If you wish to embed Csound directly into the Unity game engine you can use [CsoundUnity](http://rorywalsh.github.io/CsoundUnity/). CsoundUnity provides a Unity C# interface to the Csound library meaning Unity can call Csound function directly without having to use a communication protocol such as OSC. 
+
+<h2 id="python">Scientific Computing with Python and Csound</h2>
