@@ -24,7 +24,11 @@ Csound has developed a lot since its early days. It's now being used in a host o
 
 <h2 id="music_with_timelines">Music with Timelines</h2>
 
-Many musicians and producers work with DAWs that present timelines of their tracks. Blue is Csound frontend that provides a timeline based approach to developing and composing music...Steven???
+<img src="/images/blue_score.png" alt="Blue - Score" style="width: 400px;"/>
+<img src="/images/blue_orc.png" alt="Blue - Orchestra" style="width: 400px;"/>
+
+Many musicians and producers work with DAWs that present timelines of their tracks. Blue is a Csound-based integrated music environment that provides a timeline based approach to developing and composing music, as well as tools for realtime music performance and exploration. Blue provides high-level tools for coordinating and developing musical ideas, built-in scripting language support, a mixer system with user-definable graphical instruments and effects, and more. Users can choose the best tool for their work, whether that's a purely graphical tool or coding directly in Csound code. More information about Blue cn be found [here](http://blue.kunstmusik.com). 
+
 
 <h2 id="music_in_daw">Music Using Csound in a DAW</h2>
 
