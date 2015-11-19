@@ -34,5 +34,23 @@ Users may also post questions on Stackoverflow, using the "csound" tag.  You can
 
 * [Stack Overflow](http://stackoverflow.com/questions/tagged/csound)
 
-The Csound Journal collects a huge number of articles on interesting subjects regarding Csound: [http://www.csoundjournal.com](http:///)
+The Csound Journal collects a huge number of articles on interesting subjects regarding Csound:
+
+* [Csound Journal](http://www.csoundjournal.com)
+
+## International Csound Conferences
+
+2011, September 30 - October 2, Hannover, Germany
+
+* [You Tube Channel](http://www.youtube.com/user/csconf2011)
+
+* [Papers and Program](http://www.incontri.hmtm-hannover.de/de/fmsbw/csound-conference/)
+
+2013, October 25 - 27, Boston, USA
+
+2015, October 2 - 4, St. Petersburg, Russia
+
+* [You Tube Channel](http://www.youtube.com/channel/UCVI8hmelNnKGP-wnf9FqNYQ)
+
+* [Photos](https://www.flickr.com/photos/icsc2015/)
 
