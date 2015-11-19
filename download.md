@@ -1,7 +1,70 @@
 ---
-layout: sidebar_links
+layout: sidebar_toc
 title: Download
 ---
+
+You will find the current version of Csound in [http://sourceforge.net/projects/csound/files/csound6/](http://sourceforge.net/projects/csound/files/csound6/). In the folder with the most recent version number you will find different files:
+
+<table width="100%">
+  <tr><td><strong>PLATFORM</strong></td><td><strong>LINK</strong></td></th>
+
+  <tr><td colspan=2>&nbsp;</td></tr>
+  <tr><td colspan=2><strong>Desktop</strong></td></tr>
+  <tr><td>Windows</td><td></td></tr>
+  <tr><td>OSX</td><td></td></tr>
+  <tr><td>Linux</td><td></td></tr>
+
+  <tr><td colspan=2>&nbsp;</td></tr>
+  <tr><td colspan=2><strong>Mobile</strong></td></tr>
+  <tr><td>Android</td><td></td></tr>
+  <tr><td>iOS</td><td></td></tr>
+
+  <tr><td colspan=2>&nbsp;</td></tr>
+  <tr><td colspan=2><strong>Web</strong></td></tr>
+  <tr><td>Emscripten</td><td></td></tr>
+  <tr><td>Portable Native Client (PNaCl)</td><td></td></tr>
+
+  <tr><td colspan=2>&nbsp;</td></tr>
+  <tr><td colspan=2><strong>Other</strong></td></tr>
+  <tr><td>csound~</td><td></td></tr>
+
+  <tr><td colspan=2>&nbsp;</td></tr>
+  <tr><td colspan=2><strong>Source</strong></td></tr>
+  <tr><td>Source Code</td><td></td></tr>
+
+  <tr><td colspan=2>&nbsp;</td></tr>
+  <tr><td colspan=2><strong>Manual</strong></td></tr>
+
+</table>
+
+<h3 id="desktop">Desktop</h3>
+
+<!--* Windows-->
+
+<!--* OSX - For **Apple** Macintosh, disk image files (.dmg). Choose the version which fits to your OSX version. If there is none, choose the closest one, or ask the mailing list for recommendations. You can also get Csound using Homebrew. See instructions [here](https://github.com/kunstmusik/homebrew-csound).-->
+
+<!--* Linux-->
+
+<!--<h3 id="desktop">Mobile</h3>-->
+
+<!--* For **Android**, use the .apk file for a Csound executable. The csound-android.zip contains the sources - you only need it when you develop own Android Csound applications.-->
+
+<!--* For **iOS** development, use csound-iOS.zip.-->
+
+<!--<h3 id="desktop">Web</h3>-->
+
+
+<!--* For **iOS** development, use csound-iOS.zip.-->
+
+<!--* For execution within browsers, you will find **Portable Native client (PNaCl)** (currently only supported in Chrome) and **Emscripten** (pure javascript, so more widely supported, but slower).-->
+
+<!--<h3 id="desktop">Other</h3>-->
+
+<!--* For using Csound inside **Max**, you will find the csound~ external as .zip or .pkg.-->
+
+<!--<h3 id="source">Source</h3>-->
+
+<!--* For using Csound inside **Max**, you will find the csound~ external as .zip or .pkg.-->
 
 `TODO: Reorganize downloads to reflect the fact, that Csound has a core and a set of frontends for different uses, etc.`
 
@@ -18,6 +81,6 @@ You will find the current version of Csound in [http://sourceforge.net/projects/
 
 Some more detailed download instructions can be found in the [Csound FLOSS Manual](http://en.flossmanuals.net/csound/a-make-csound-run/).
 
-## Building from source
+<h2 id="source">Build from source</h2> 
 Building Csound from source or from the git develop branch is not very difficult on Linux, and can also be done on Mac and Windows. How-to descriptions can be found in the BUILD.md file included with the Csound sources, also available online [here](https://github.com/csound/csound/blob/develop/BUILD.md).
 
