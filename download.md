@@ -10,34 +10,49 @@ You will find the current version of Csound in [http://sourceforge.net/projects/
 
   <tr><td colspan=2>&nbsp;</td></tr>
   <tr><td colspan=2><strong>Desktop</strong></td></tr>
-  <tr><td>Windows</td><td></td></tr>
-  <tr><td>OSX</td><td></td></tr>
-  <tr><td>Linux</td><td></td></tr>
+  <tr><td>Windows</td><td><a href="http://sourceforge.net/projects/csound/files/csound6/Csound6.06/CsoundApplication-release.apk/download">6.07.0 beta</a></td></tr>
+  <tr><td>OSX</td><td><a href="http://sourceforge.net/projects/csound/files/csound6/Csound6.06/csound6.06-OSX-universal.dmg/download">6.06.0</a> </td></tr>
+  <tr><td>Linux</td><td>(use source link below)</td></tr>
 
   <tr><td colspan=2>&nbsp;</td></tr>
   <tr><td colspan=2><strong>Mobile</strong></td></tr>
-  <tr><td>Android</td><td></td></tr>
-  <tr><td>iOS</td><td></td></tr>
+  <tr><td>Android</td><td>
+  <a href="http://sourceforge.net/projects/csound/files/csound6/Csound6.06/CsoundApplication-release.apk/download">Android Application</a><br/>
+  <a href="http://sourceforge.net/projects/csound/files/csound6/Csound6.06/csound-android-6.06.0.zip/download">Csound for Android SDK - 6.06.0</a>
+  </td></tr>
+  <tr><td>iOS</td><td>
+  <a href="http://sourceforge.net/projects/csound/files/csound6/Csound6.05/csound-iOS-6.05.0.zip/download">Csound for iOS SDK - 6.05.0</a>
+  </td></tr>
 
   <tr><td colspan=2>&nbsp;</td></tr>
   <tr><td colspan=2><strong>Web</strong></td></tr>
-  <tr><td>Emscripten</td><td></td></tr>
-  <tr><td>Portable Native Client (PNaCl)</td><td></td></tr>
+  <tr><td>Emscripten</td><td>
+  <a href="http://sourceforge.net/projects/csound/files/csound6/Csound6.06/csound-emscripten-6.06.0.zip/download">6.06.0</a>
+  </td></tr>
+  <tr><td>Portable Native Client (PNaCl)</td><td>
+  <a href="http://sourceforge.net/projects/csound/files/csound6/Csound6.06/csound6.06-pnacl.tar.gz/download">6.06.0</a>
+  </td></tr>
 
   <tr><td colspan=2>&nbsp;</td></tr>
   <tr><td colspan=2><strong>Other</strong></td></tr>
-  <tr><td>csound~</td><td></td></tr>
+  <tr><td>csound~ for Max</td><td>
+  <a href="http://sourceforge.net/projects/csound/files/csound6/Csound6.05/csound~-_1.1.3.exe/download">1.1.3 (Windows)</a><br/>
+  <a href="http://sourceforge.net/projects/csound/files/csound6/Csound6.05/csound~_v1.1.3.pkg/download">1.1.3 (OSX)</a>
+  </td></tr>
 
   <tr><td colspan=2>&nbsp;</td></tr>
   <tr><td colspan=2><strong>Source</strong></td></tr>
-  <tr><td>Source Code</td><td></td></tr>
+  <tr><td>Source Code</td><td>
+  <a href="http://sourceforge.net/projects/csound/files/csound6/Csound6.06/Csound6.06.zip/download">6.06.0 (.zip)</a><br/>
+  <a href="http://sourceforge.net/projects/csound/files/csound6/Csound6.06/Csound6.06.tar.gz/download">6.06.0 (.tar.gz)</a>
+  </td></tr>
 
   <tr><td colspan=2>&nbsp;</td></tr>
   <tr><td colspan=2><strong>Manual</strong></td></tr>
 
 </table>
 
-<h3 id="desktop">Desktop</h3>
+<!--<h3 id="desktop">Desktop</h3>-->
 
 <!--* Windows-->
 
