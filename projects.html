@@ -3,4 +3,28 @@ title: Projects Using Csound
 layout: sidebar_links
 ---
 
-TOOD: List of projects that use Csound.
+<p style="padding-left: 0.8em">This is a list of all projects submitted to the website. If you want to spread the word about a project you made with Csound, please, <a href="/contribute.html">send us</a> some info about it, we will be glad to publish it here!</p>
+
+<ul id="news-roll" class="job-list full">
+{% for post in site.posts %}
+  {% if post.categories contains 'showcase' %}
+  <li>
+    <a href="{{ post.url }}">
+      <div class="job-list-content">
+        <div class="job-icons">
+            {% if post.tags %}
+            <span><i class="fa fa-tag"></i>
+                {% for tag in post.tags %}
+                    {{ tag }}{% if forloop.last == false %}, {% endif %}
+                {% endfor %}
+            </span>
+            {% endif %}
+            <span style="position: absolute; right: 0"><i class="fa fa-calendar-o"></i> {{ post.date | date_to_string }}</span>
+        </div>
+        <h4>{{ post.title }}</h4>
+      </div>
+    </a>
+  </li>
+  {% endif %}
+{% endfor %}
+</ul>
