@@ -17,6 +17,14 @@ You will find the current version of Csound in [http://sourceforge.net/projects/
 
 Some more detailed download instructions can be found in the [Csound FLOSS Manual](http://en.flossmanuals.net/csound/a-make-csound-run/).
 
+## Linux Distribution-provided packages
+
+You can check below the versions of packages provided for your distribution:
+
+* [Debian](https://packages.debian.org/search?keywords=csound&searchon=names&suite=all&section=all)
+* [Ubuntu](http://packages.ubuntu.com/search?suite=all&searchon=names&keywords=csound)
+* [Fedora](https://apps.fedoraproject.org/packages/csound)
+
 ## Building from source
 Building Csound from source or from the git develop branch is not very difficult on Linux, and can also be done on Mac and Windows. How-to descriptions can be found in the BUILD.md file included with the Csound sources, also available online [here](https://github.com/csound/csound/blob/develop/BUILD.md).
 
