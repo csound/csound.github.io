@@ -33,13 +33,13 @@
                 speedOut:    50                                 // out animation speed
             });
         }
-        if( winWidth < 1272 ) {
+        /*if( winWidth < 1200 ) {
             $('header').addClass('alternative').removeClass('full-width');
         } else {
             if($('header').data('alt') === "yes" ) {} else {
                 $('header').removeClass('alternative');
             }
-        }
+        }*/
     }
 
     $(window).resize(function (){
