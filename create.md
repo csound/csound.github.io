@@ -29,6 +29,7 @@ Csound has developed a lot since its early days. It's now being used in a host o
 <img src="/images/blue_score.png" alt="Blue - Score" style="width: 400px;"/>
 <img src="/images/blue_orc.png" alt="Blue - Orchestra" style="width: 400px;"/>
 
+
 Many musicians and producers work with DAWs that present timelines of their tracks. Blue is a Csound-based integrated music environment that provides a timeline based approach to developing and composing music, as well as tools for realtime music performance and exploration. Blue provides high-level tools for coordinating and developing musical ideas, built-in scripting language support, a mixer system with user-definable graphical instruments and effects, and more. Users can choose the best tool for their work, whether that's a purely graphical tool or coding directly in Csound code. More information about Blue cn be found [here](http://blue.kunstmusik.com). 
 
 <br>
@@ -117,11 +118,26 @@ The quickest entry to Csound on iOS is through AudioKit, an open-source audio sy
 
 Pocket sizes computers are becoming more and more popular. Because most of them run some flavour of Linux, Csound can easily be installed. Below are some resources to get you started. 
 
-[An Introductory Guide to Csound on the BeagleBone and the Raspberry Pi, as well other Linux-powered tinyware](http://www.csounds.com/journal/issue18/beagle_pi.html) In this article Paul Batchelor and Trev Wignall show how to get Csound up and running on a host of different micro devices.
+[An Introductory Guide to Csound on the BeagleBone and the Raspberry Pi, as well other Linux-powered tinyware](http://www.csounds.com/journal/issue18/beagle_pi.html) 
 
-[Building an FM oscillator in the Eurorack format using Csound, a Raspberry Pi, and an Arduino Uno](http://www.csounds.com/journal/issue18/eurorack.html) Andrew Ikenberry and Jason Lim, whom you can read more about in the [Projects](projects.html) page, present a comprehensive overview of how a Raspberry PI, an Arduino and Csound can all be pulled together to create a standard Eurorack module.
+In this article Paul Batchelor and Trev Wignall show how to get Csound up and running on a host of different micro devices.
 
-[Csound GUI for a Headless Raspberry Pi](http://csoundjournal.com/issue21/csound_gui.html) This article by Ricahrd van Bemmelen, otherwise known as Zappfinger, describes how a web server can be set up to take control of an instance of Csound running on a Raspberry PI.  
+[Building an FM oscillator in the Eurorack format using Csound, a Raspberry Pi, and an Arduino Uno](http://www.csounds.com/journal/issue18/eurorack.html) 
+
+Andrew Ikenberry and Jason Lim, whom you can read more about in the [Projects](projects.html) page, present a comprehensive overview of how a Raspberry PI, an Arduino and Csound can all be pulled together to create a standard Eurorack module.
+
+[Csound GUI for a Headless Raspberry Pi](http://csoundjournal.com/issue21/csound_gui.html)
+
+This article by Ricahrd van Bemmelen, otherwise known as Zappfinger, describes how a web server can be set up to take control of an instance of Csound running on a Raspberry PI.  
+
+
+[The COSMO Project (Csound On Stage Music Operator](http://cosmoproject.github.io/) 
+
+<img src="/images/COSMO-box-small.png" alt="a COSMO Box" style="width: 400px;"/>
+
+The COSMO Project web page gives you instructions on how you can run Csound on a Raspberry Pi to create a standalone musical device specifically designed for live performance. You can read more about this project by Alex Hofmann, Bernt Isak Wærstad and Kristoffer Koch on the [Projects](projects.html) page
+
+
 
 <br>
 <br>
