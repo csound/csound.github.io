@@ -491,3 +491,12 @@
 })(this.jQuery);
 
   
+function performSearch() {
+  var f = document.forms['searchForm'];
+  var URL_BASE = "https://www.google.com/#q=";
+  var QUERY_BASE = "site:http://csound.github.io"
+  var query = encodeURIComponent(QUERY_BASE + f['target'].value + ' ' + f['searchTerms'].value);
+  var url = URL_BASE + query;
+  window.location.assign(url); 
+  return false;
+}
