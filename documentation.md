@@ -173,7 +173,6 @@ i1 0 1 100
 i1 1 1 200
 i1 2 1 300
 &lt;/CsScore&gt;
-;;[TODO] add sound file of output
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
 
@@ -196,13 +195,12 @@ i1 0 1 100 1
 i1 1 1 200 .2
 i1 2 1 300 .7
 &lt;/CsScore&gt;
-;[TODO] add sound file of output
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
 
 Another issue in the instrument presented above is that the notes will click each time they sound. To avoid this, an amplitude envelope should be applied to the output signal. The most common envelope used in synthesisers is the ubiquitous ADSR envelope. ADSR stands for Attack, Decay, Sustain and Release. The attack, decay and sustain sections are given in seconds as they relate to time values. The sustain value describes the sustain level which kicks in after the attack and decay have passed. The note's amplitude will rest at this sustain level until it is released. 
 
-;[TODO] Add graphic....
+<!-- ;[TODO] Add graphic.... -->
 
 Csound offers several ADSR envelopes. The one used here is **madsr** which is a MIDI ready ADSR. Its syntax is given as:
 
@@ -234,7 +232,6 @@ i1 0 1 100 1
 i1 1 1 200 .2
 i1 2 1 300 .7
 &lt;/CsScore&gt;
-;[TODO] add sound file of output
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
 
@@ -271,7 +268,6 @@ i1 0 1 100 1
 i1 1 1 200 .2
 i1 2 1 300 .7
 &lt;/CsScore&gt;
-;[TODO] add sound file of output
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
 
@@ -313,7 +309,6 @@ endin
 &lt;CsScore&gt;
 f0 3600
 &lt;/CsScore&gt;
-;[TODO] add sound file of output
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
 
@@ -353,7 +348,6 @@ endin
 &lt;CsScore&gt;
 i1 0 1000
 &lt;/CsScore&gt;
-;[TODO] add sound file of output
 &lt;/CsoundSynthesizer&gt; 
 </code></pre>
 

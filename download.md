@@ -1,5 +1,5 @@
 ---
-layout: sidebar_toc
+layout: sidebar_links
 title: Download
 ---
 
