@@ -18,8 +18,8 @@ sidebar_toc:
     name: 'Game music'
   - url: '#raspberry_pi'
     name: 'Embedded Applications with Raspberry Pi and Csound'
-  - url: '#python'
-    name: 'Do Scientific Computing with Python and Csound'
+#  - url: '#python'
+#    name: 'Do Scientific Computing with Python and Csound'
 ---
 
 Csound has developed a lot since its early days. It's now being used in a host of different applications. From desktop audio software to hand held synthesisers, Csound can run on just about anything, or in anything these days. This page attempts to provide a snapshot of the various different ways Csound can be used.  
@@ -159,4 +159,4 @@ You can find out more about both of these interfaces in a paper presented at the
 
 <br>
 <br>
-<h2 id="python">Scientific Computing with Python and Csound</h2>
+<!-- <h2 id="python">Scientific Computing with Python and Csound</h2> -->
