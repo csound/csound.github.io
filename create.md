@@ -159,4 +159,3 @@ You can find out more about both of these interfaces in a paper presented at the
 
 <br>
 <br>
-<!-- <h2 id="python">Scientific Computing with Python and Csound</h2> -->
