@@ -18,7 +18,7 @@ Learning to use Csound from the command line can be a bit daunting for most begi
 
 ###Cabbage
 <img src="https://github.com/rorywalsh/cabbage/blob/master/Images/CabbageStudioScreen.png?raw=true" alt="Cabbage" style="width: 400px;"/>
-[Cabbage](http://wwwcabbageaudio.com/) is an IDE for developing audio plugins and standalone software with Csound. The IDE includes a full patching environment for testing and prototyping instruments, and provides an extensive array of GUI widgets to help users to create unique and professional looking audio software. It also ships with over 100 ready to use plugins. The Cabbage installers include Csound, so there is no need for a separate Csound install.  
+[Cabbage](http://www.cabbageaudio.com/) is an IDE for developing audio plugins and standalone software with Csound. The IDE includes a full patching environment for testing and prototyping instruments, and provides an extensive array of GUI widgets to help users to create unique and professional looking audio software. It also ships with over 100 ready to use plugins. The Cabbage installers include Csound, so there is no need for a separate Csound install.  
 
 ###WinXound
 <img src="http://floss.booktype.pro/csound/winxound/static/WinXound_linux.jpg" alt="WinXound" style="width: 400px;"/>
