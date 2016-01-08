@@ -185,7 +185,7 @@ i-statements may contain a huge number of p-fields and each one can be accessed 
 instr 1
 iFreq = p4
 iAmp = p5
-aOut vco2 iFreq, iAmp
+aOut vco2 iAmp, iFreq
 out aOut
 endin
 
@@ -223,7 +223,7 @@ iDec = 0.4
 iSus = 0.6
 iRel = 0.7
 kEnv madsr iAtt, iDec, iSus, iRel 
-aOut vco2 iFreq, iAmp
+aOut vco2 iAmp, iFreq
 out aOut*kEnv
 endin
 
@@ -258,7 +258,7 @@ iRel = 0.7
 iCutoff = 5000
 iRes = .4
 kEnv madsr iAtt, iDec, iSus, iRel 
-aVco vco2 iFreq, iAmp
+aVco vco2 iAmp, iFreq
 aLp moogladder aVco, iCutoff*kEnv, iRes
 out aLp*kEnv
 endin
@@ -301,7 +301,7 @@ iRel = 0.7
 iCutoff = 5000
 iRes = .4
 kEnv madsr iAtt, iDec, iSus, iRel 
-aVco vco2 iFreq, iAmp
+aVco vco2 iAmp, iFreq
 aLp moogladder aVco, iCutoff*kEnv, iRes
 out aLp*kEnv
 endin
