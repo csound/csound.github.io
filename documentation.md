@@ -31,7 +31,7 @@ All Csound source code is made up of several sections which are defined in XML t
 &lt;CsoundSynthesizer&gt;
 ;all code relating to Csound should be encapsulated between 
 ;&lt;CsoundSynthesizer&gt; and &lt;/CsoundSynthesizer&gt;
-;&lt;CsOptions&gt;
+&lt;CsOptions&gt;
 ;this sections tell Csound how to interact with various devices and hardware
 &lt;/CsOptions&gt;
 &lt;CsInstruments&gt;
