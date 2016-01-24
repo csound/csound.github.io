@@ -122,7 +122,7 @@ kVal2 = kVal1*100
 </code></pre>
 
 ###Comments
-Single line comments can be added using **;** or **//**. Multi-line comments are be added using **/*** to start the comment, and ***/** to end it. 
+Single line comments can be added using **;** or **//**. Multi-line comments are be added using **/*** to start the comment, and **\*/** to end it. 
 
 <h2 id="first_instrument">Your first synthesiser</h2>
 
