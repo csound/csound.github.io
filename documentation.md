@@ -107,7 +107,7 @@ Lines of opcodes can be connected to create a signal graph which described the f
 instr 1
 a1 myOpcode1 
 a2 myOpcode2 a1
-a3 myOpcode3 a3
+a3 myOpcode3 a2
 endin
 </code></pre>
 
