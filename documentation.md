@@ -31,7 +31,7 @@ All Csound source code is made up of several sections which are defined in XML t
 &lt;CsoundSynthesizer&gt;
 ;all code relating to Csound should be encapsulated between 
 ;&lt;CsoundSynthesizer&gt; and &lt;/CsoundSynthesizer&gt;
-;&lt;CsOptions&gt;
+&lt;CsOptions&gt;
 ;this sections tell Csound how to interact with various devices and hardware
 &lt;/CsOptions&gt;
 &lt;CsInstruments&gt;
@@ -107,7 +107,7 @@ Lines of opcodes can be connected to create a signal graph which described the f
 instr 1
 a1 myOpcode1 
 a2 myOpcode2 a1
-a3 myOpcode3 a3
+a3 myOpcode3 a2
 endin
 </code></pre>
 
@@ -122,7 +122,7 @@ kVal2 = kVal1*100
 </code></pre>
 
 ###Comments
-Single line comments can be added using **;** or **//**. Multi-line comments are be added using **/*** to start the comment, and ***/** to end it. 
+Single line comments can be added using **;** or **//**. Multi-line comments are be added using **/*** to start the comment, and **\*/** to end it. 
 
 <h2 id="first_instrument">Your first synthesiser</h2>
 
