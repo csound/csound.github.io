@@ -10,7 +10,7 @@ You will find the current version of Csound in [http://sourceforge.net/projects/
 
   <tr><td colspan=2>&nbsp;</td></tr>
   <tr><td colspan=2><strong>Desktop</strong></td></tr>
-  <tr><td>Windows</td><td><a href="http://sourceforge.net/projects/csound/files/csound6/Csound6.06/CsoundApplication-release.apk/download">6.07.0 beta</a></td></tr>
+  <tr><td>Windows</td><td><a href="https://sourceforge.net/projects/csound/files/csound6/Csound6.06/Setup_Csound6_6.07.0beta2.exe/download">6.07.0 beta</a></td></tr>
   <tr><td>OSX</td><td><a href="http://sourceforge.net/projects/csound/files/csound6/Csound6.06/csound6.06-OSX-universal.dmg/download">6.06.0</a> </td></tr>
   <tr><td>Linux</td>
   <td>
