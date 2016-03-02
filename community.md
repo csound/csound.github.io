@@ -8,7 +8,7 @@ The main discussion forums for Csound are the user list and the developer list. 
 * [Csound Users](https://listserv.heanet.ie/cgi-bin/wa?A0=CSOUND)
 * [Csound Developers](https://listserv.heanet.ie/cgi-bin/wa?A0=CSOUND-DEV)
 
-The two lists mentioned above are mailing lists in the strictest sense of the word. If you prefer to use an online forum, the Csound frontend Cabbage provides a dedicated forum for Csound beginners [here].(http://forum.cabbageaudio.com/c/csound-for-beginners).  
+The two lists mentioned above are mailing lists in the strictest sense of the word. If you prefer to use an online forum, the Csound frontend Cabbage provides a dedicated forum for Csound beginners [here](http://forum.cabbageaudio.com/c/csound-for-beginners).  
 
 List archives starting from 6-10-2015 can also be found in the links above.
 Alternatively, older archives are also found on nabble:
