@@ -13,6 +13,7 @@ This is the main Csound user group. This group deals with all questions relating
  
 This group is used primarily for developers, but end-users are also welcome. This was once the main resource for filing bug reports and sharing development patches. More recently, users have been using the Github 'issues' system. Both resources are valid places for sharing development suggestions, problems, or issues found with Csound.    
 
+
 The two lists mentioned above are mailing lists in the strictest sense of the word. If you prefer to use an online forum, the Csound frontend Cabbage provides a dedicated online forum for Csound beginners [here](http://forum.cabbageaudio.com/c/csound-for-beginners).  
 
 List archives starting from 6-10-2015 can also be found in the links above.
