@@ -5,11 +5,9 @@ title: Community
 
 The main discussion forums for Csound are the user list and the developer list. To join these lists, go to these sites:
 
-* [Csound Users](https://listserv.heanet.ie/cgi-bin/wa?A0=CSOUND)
-This is the main Csound user group. This group deals with all questions relating to installing, running, and using Csound. This group welcome mails from new and experienced users alike. 
+* [Csound Users](https://listserv.heanet.ie/cgi-bin/wa?A0=CSOUND) This is the main Csound user group. This group deals with all questions relating to installing, running, and using Csound. This group welcome mails from new and experienced users alike. 
 
-* [Csound Developers](https://listserv.heanet.ie/cgi-bin/wa?A0=CSOUND-DEV)
-This group is used primarily for developers, but end-users are also welcome. This was once the main resource for filing bug reports and sharing development patches. More recently, users have been using the Github 'issues' system. Both resources are valid places for sharing development suggestions, problems, or issues found with Csound.    
+* [Csound Developers](https://listserv.heanet.ie/cgi-bin/wa?A0=CSOUND-DEV) This group is used primarily for developers, but end-users are also welcome. This was once the main resource for filing bug reports and sharing development patches. More recently, users have been using the Github 'issues' system. Both resources are valid places for sharing development suggestions, problems, or issues found with Csound.    
 
 The two lists mentioned above are mailing lists in the strictest sense of the word. If you prefer to use an online forum, the Csound frontend Cabbage provides a dedicated online forum for Csound beginners [here](http://forum.cabbageaudio.com/c/csound-for-beginners).  
 
