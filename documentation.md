@@ -12,6 +12,8 @@ sidebar_toc:
     name: 'Your first effect'
   - url: '#common_errors'
     name: 'Common errors'
+  - url: '#writing_to_disk'
+    name: 'Writing sounds to disk'
   - url: '#where_to_now'
     name: 'Where to now?'
 ---
@@ -351,6 +353,21 @@ i1 0 1000
 &lt;/CsScore&gt;
 &lt;/CsoundSynthesizer&gt; 
 </code></pre>
+
+<h2 id="writing_to_disk">Writing sounds to disk</h2>
+
+There may be times when you will want to record the sounds your instrument's make in realtime. The easiest way to do this is using a combination of the **fout** and **monitor**. **fout** allows one to write an audio vector to file, while **monitor** grabs the contents of Csound's audio outut buffer. Every sound that Csound produces is passed to its output buffer, so it's the go-to place when we need to record audio output. Presented below is a simple instrument taht will record all sounds to a file called
+
+<pre><code data-language="csound">
+instr 100;read the stereo csound output buffer and write to disk
+allL, allR monitor
+;write the output of csound to
+;to a wav file: 16 bits with header
+fout "fout_all.wav", 14, allL, allR
+endin
+</code></pre>
+
+Instruments responsible for recording output should be on for the duration of a performance. Also note that each time this instrument runs, it will overwrite the previous sound file. To avoid this, users should move the output soundfile between each run, rename the file in your Csound code before each run, or automatically construct a new file on each run using the system date and **sprintf** opcodes.  
 
 <h2 id="common_errors">Common Errors</h2>
 Csound will inform you of any errors contained in your source file. Understanding syntax errors is key to making the most out of Csound. The most common error is the 'used before defined' error. This occurs whenever a variable is accessed before it has been defined. For instance, in the following code kAmp is passed as an input argument to **oscili** before it is declared.
