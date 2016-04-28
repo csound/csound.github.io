@@ -48,7 +48,7 @@ All Csound source code is made up of several sections which are defined in XML t
 
 Csound code can be described in terms of its syntax and grammar. Each section uses a slightly different syntax. For instance, the syntax used to define an instrument is not the same as the simplified syntax used in the CsScore section. While the score section is made up of so-called i and f statements, the CsInstruments syntax is made up of 6 different components: keywords, variables, constants, opcodes, operators and comments. 
 
-###Keywords
+<h3>Keywords</h3>
 
 Keywords are special reserved words that have a unique function and meaning. The two most commonly used keywords in the Csound language are **instr** and **endin**. These two keywords define an instrument block which contain instructions on how an instrument functions. Each instrument must be given a unique name or number which follows the **instr** keyword.
 
@@ -74,7 +74,7 @@ instr 1
 endin
 </code></pre>
 
-###Constants and variables.
+<h3>Constants and variables.</h3>
 
 Constants are easy to spot in Csound code. They appear as fixed numbers. Their values cannot change at any stage during performance, or between performances. Variables on the other hand are temporary memory slots that can be used to store data. The three simplest and most common types of variables in Csound are **i**, **k** and **a**-rate variables. These types of variables are very easy to spot in Csound because they will always begin with an i, k or a. 
 
@@ -92,7 +92,7 @@ When Csound starts it begins looping very quickly through the code of each of it
 
 **a**-rate variables are updated each time Csound runs through the instrument code. **k-rate** variables are updated less often, and **i**-rate variables are only updated once just as an instrument starts. Why the different update rates? Performance. Each and every update to a variable forces the PC to compute something. And each time it does it use some of its CPU. By limiting the update rate of different variables users can improve the performance of their instruments and avoid unwanted audio dropouts.     
 
-###Opcodes
+<h3>Opcodes</h3>
 Opcodes do things. They are the brains of each and every Csound instrument. What they do is usually described by their name. **reverb** for example applies a reverb to an audio signal while **random** generates random numbers. Opcodes, like variables can be **a**, **k**, or **i**-rate. 
 
 In their most common form, opcodes are given input arguments and output a result. The rate at which an opcode operates is determined by the output variable name. Outputs always appear to the left of an opcode name, while inputs always appear to the right of the opcode name. The typical syntax for most opcodes in Csound is give as 
@@ -115,7 +115,7 @@ endin
 
 Csound features almost 1500 opcodes, making it one of the world's most extensive audio programming languages. 
 
-###Operators 
+<h3>Operators</h3> 
 Mathematical operators are essential to all programming languages. Csound is no different. Any **a**, **k** or **i** rate variable can be operated on using the standard set of mathematical operators, *, /, +, -, etc. Note that multiplying a variable by 20 does not alter the variable's value. It simply returns a new value. This new value can then be assigned for use later.
 
 <pre><code data-language="csound">
@@ -123,7 +123,7 @@ kVal1 = 100
 kVal2 = kVal1*100
 </code></pre>
 
-###Comments
+<h3>Comments</h3>
 Single line comments can be added using **;** or **//**. Multi-line comments are be added using **/*** to start the comment, and **\*/** to end it. 
 
 <h2 id="first_instrument">Your first synthesiser</h2>
@@ -274,7 +274,7 @@ i1 2 1 300 .7
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
 
-### Controlling your instrument with MIDI
+<h3>Controlling your instrument with MIDI<h3>
 While the score section offers lots of versatility when it comes to writing and composing music with Csound, it can be a little restrictive when it comes to performing live. Many musicians will prefer to use a MIDI keyboard to trigger notes. Csound offers a very simple way of accessing values from the MIDI keyboard. But first Csound must be instructed to listen to messages from a MIDI keyboard. This can be done in the &lt;CsOptions&gt; section of the source code. The &lt;CsOptions&gt; section is populated with unique flags that tell Csound how to interact with different devices. A **-Ma** will tell Csound to listen for MIDI messages from all available devices. A **-odac** can also be added. This will instruct Csound to output audio to the computer's sound card. In order to pass MIDI note and amplitude data to an instrument, so-called MIDI-interop command line flags can be used. Consider the following example:
 
 <pre><code data-language="csound">
