@@ -274,7 +274,7 @@ i1 2 1 300 .7
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
 
-<h3>Controlling your instrument with MIDI<h3>
+<h3>Controlling your instrument with MIDI</h3>
 While the score section offers lots of versatility when it comes to writing and composing music with Csound, it can be a little restrictive when it comes to performing live. Many musicians will prefer to use a MIDI keyboard to trigger notes. Csound offers a very simple way of accessing values from the MIDI keyboard. But first Csound must be instructed to listen to messages from a MIDI keyboard. This can be done in the &lt;CsOptions&gt; section of the source code. The &lt;CsOptions&gt; section is populated with unique flags that tell Csound how to interact with different devices. A **-Ma** will tell Csound to listen for MIDI messages from all available devices. A **-odac** can also be added. This will instruct Csound to output audio to the computer's sound card. In order to pass MIDI note and amplitude data to an instrument, so-called MIDI-interop command line flags can be used. Consider the following example:
 
 <pre><code data-language="csound">
