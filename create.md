@@ -38,24 +38,24 @@ Many musicians and producers work with DAWs that present timelines of their trac
 
 There are several different ways of using Csound in a DAW. 
 
-####Cabbage
+#### Cabbage
 <img src="/images/cabbage.png" alt="Cabbage" style="width: 400px;"/>
 Cabbage is a framework for developing audio plugins that use Csound as their processing engine. All the power of Csound can be wrapped into a VST plugin that can then be loaded in a variety of different host software. Cabbage provides users with a fully integrated IDE that allows drag and drop editing of GUI interfaces, real-time compilation, Csound debugger. Cabbage also ships with over 100 ready made audio effects and synthesisers. More information about Cabbage can be found [here](http://cabbageaudio.com) 
 
-####Csound for Live
+#### Csound for Live
 ![Csound4Live](/images/csound4live.jpg)
 Csound For Live is a suite of audio plugins that combines the real time performance capabilities of Ableton Live, the stable and customizable interface design of Max/MSP (through Max For Live), and the synthesis power of Csound. More information can be found [here](http://csoundforlive.com/). Note: users must have Max4Live. 
 
 At the core of Csound4Live is the Max/MSP csound~ object which is distributed free with the OSX and Windows installers of Csound. Although not as extensive as the above mentioned csound4Live packages, it does provide a set of simple examples to get you started. You can read more about it [here](http://floss.booktype.pro/csound/b-csound-in-maxmsp/)  
 
-####csLADSPA
+#### csLADSPA
 <img src="/images/csLADSPA.jpg" alt="Cabbage" style="width: 400px;"/>
 csLADSPA is a simple interface that lets users run Csound as a LADSPA plugin. csLADSPA come pre-built with Csound and can be used with any software that can load LADSPA plugins. Note that it does not offer any real-time control of processes.  
 
-####Jack
+#### Jack
 [Jack](http://www.jackaudio.org/) is an API that enables complex routing of audio signals across applications. It can be used to route out of Csound and into any number of digital audio workstations. Jack runs on Linux, OSX and Windows. More information on using Csound and Jack can be found [here](http://csound.github.io/docs/manual/JackoOpcodes.html) 
 
-####Csound and Logic
+#### Csound and Logic
 [Routing audio and MIDI between Csound and a DAW](http://www.csoundjournal.com/issue16/audiorouting.html) In this article Andreas Russo outlines the steps need in order to route Csound signals around your OSX desktop and into Logic using OSX's IAC driver and Soundflower.
 
 <br>
