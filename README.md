@@ -88,10 +88,10 @@ This installed the github-pages gem.
 
 To view the site locally with `jekyll`, run:
 
-    bundle exec jekyll serve --watch
+    bundle exec jekyll serve -I
 
 This will start up a jekyll server. You can view the pages as they are rendered by Jekyll in your browser at:
 
     http://localhost:4000
     
-Also, with the --watch command, anytime you change a page, you can view the updates by refreshing the browser.
+Also, with the -I flag, anytime you change a page, you can view the updates by refreshing the browser.
