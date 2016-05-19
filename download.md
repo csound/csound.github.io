@@ -11,18 +11,14 @@ You will find the current version of Csound in [https://github.com/csound/csound
 |**PLATFORM**|**LINK**|
 |
 |**Desktop**
-|Windows| [6.07.0](https://github.com/csound/csound/releases/download/6.07.0/Setup_Csound6_x64_6.07.0.exe)
+|Windows|[6.07.0](https://github.com/csound/csound/releases/download/6.07.0/Setup_Csound6_x64_6.07.0.exe)
 |OSX|[6.07.0](https://github.com/csound/csound/releases/download/6.07.0/csound6.07-OSX-universal.dmg)
 |Linux|[Debian](https://packages.debian.org/search?keywords=csound&searchon=names&suite=all&section=all)
-|<br/>
-[Ubuntu](http://packages.ubuntu.com/search?suite=all&searchon=names&keywords=csound)
-|<br/>
-[Fedora](https://apps.fedoraproject.org/packages/csound) <br/>  Other (use source link below)
+|<br/>[Ubuntu](http://packages.ubuntu.com/search?suite=all&searchon=names&keywords=csound)
+|<br/>[Fedora](https://apps.fedoraproject.org/packages/csound) <br/>  Other (use source link below)
 |
 |**Mobile**
-|Android|[Android Application](https://play.google.com/store/apps/details?id=com.csounds.Csound6&hl=en)
-|<br/>
-[Csound for Android SDK - 6.07.0](https://github.com/csound/csound/releases/download/6.07.0/csound-android-6.07.0.zip)
+|Android|[Android Application](https://play.google.com/store/apps/details?id=com.csounds.Csound6&hl=en)|<br/> [Csound for Android SDK - 6.07.0](https://github.com/csound/csound/releases/download/6.07.0/csound-android-6.07.0.zip)
 |iOS|[Csound for iOS SDK - 6.07.0](https://github.com/csound/csound/releases/download/6.07.0/csound-iOS-6.07.0.zip)
 |
 |**Web**
@@ -38,8 +34,7 @@ You will find the current version of Csound in [https://github.com/csound/csound
 |**Source**
 |Source
 |Code|[6.07.0 (.zip)](https://github.com/csound/csound/archive/6.07.0.zip)
-|<br/>
-[6.07.0 (.tar.gz)](https://github.com/csound/csound/archive/6.07.0.tar.gz)
+|<br/>[6.07.0 (.tar.gz)](https://github.com/csound/csound/archive/6.07.0.tar.gz)
 |
 
 ## Building from source
