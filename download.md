@@ -12,7 +12,7 @@ You will find the current version of Csound in [https://github.com/csound/csound
 |
 |**Desktop**
 |Windows| [6.07.0](https://github.com/csound/csound/releases/download/6.07.0/Setup_Csound6_x64_6.07.0.exe)
-|OSX|[6.07.0 Beta](https://sourceforge.net/projects/csound/files/csound6/Csound6.07/csound6.07beta-OSX-universal.dmg/download)
+|OSX| [6.07.0](https://github.com/csound/csound/releases/download/6.07.0/csound6.07-OSX-universal.dmgd
 |Linux|[Debian](https://packages.debian.org/search?keywords=csound&searchon=names&suite=all&section=all) <br/> [Ubuntu](http://packages.ubuntu.com/search?suite=all&searchon=names&keywords=csound) <br/> [Fedora](https://apps.fedoraproject.org/packages/csound) <br/>  Other (use source link below)
 |
 |**Mobile**
