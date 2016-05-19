@@ -6,6 +6,7 @@ html_to_native: true
 
 You will find the current version of Csound in
 [https://github.com/csound/csound/releases/latest/](https://github.com/csound/csound/releases/latest/).
+
 The latest versions for each platform are listed below:
 
 
