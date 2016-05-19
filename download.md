@@ -4,7 +4,9 @@ title: Download
 html_to_native: true
 ---
 
-You will find the current version of Csound in [https://github.com/csound/csound/releases/latest/](https://github.com/csound/csound/releases/latest/). In the folder with the most recent version number you will find different files:
+You will find the current version of Csound in
+[https://github.com/csound/csound/releases/latest/](https://github.com/csound/csound/releases/latest/).
+The latest versions for each platform are listed below:
 
 
 |----------
@@ -16,8 +18,8 @@ You will find the current version of Csound in [https://github.com/csound/csound
 |Linux|[Debian](https://packages.debian.org/search?keywords=csound&searchon=names&suite=all&section=all) <br/> [Ubuntu](http://packages.ubuntu.com/search?suite=all&searchon=names&keywords=csound) <br/> [Fedora](https://apps.fedoraproject.org/packages/csound) <br/>  Other (use source link below)
 |
 |**Mobile**
-|Android|[Android Application](https://play.google.com/store/apps/details?id=com.csounds.Csound6&hl=en) <br/>  [Csound for Android SDK - 6.06.0](https://github.com/csound/csound/releases/download/6.07.0/csound-android-6.07.0.zip)
-|iOS|[Csound for iOS SDK - 6.05.0](https://github.com/csound/csound/releases/download/6.07.0/csound-iOS-6.07.0.zip)
+|Android|[Android Application](https://play.google.com/store/apps/details?id=com.csounds.Csound6&hl=en) <br/>  [Csound for Android SDK - 6.07.0](https://github.com/csound/csound/releases/download/6.07.0/csound-android-6.07.0.zip)
+|iOS|[Csound for iOS SDK - 6.07.0](https://github.com/csound/csound/releases/download/6.07.0/csound-iOS-6.07.0.zip)
 |
 |**Web**
 |Emscripten|[6.06.0](http://sourceforge.net/projects/csound/files/csound6/Csound6.06/csound-emscripten-6.06.0.zip/download)
