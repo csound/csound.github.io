@@ -22,14 +22,14 @@ The latest versions for each platform are listed below:
 |iOS|[Csound for iOS SDK - 6.07.0](https://github.com/csound/csound/releases/download/6.07.0/csound-iOS-6.07.0.zip)
 |
 |**Web**
-|Emscripten|[6.06.0](http://sourceforge.net/projects/csound/files/csound6/Csound6.06/csound-emscripten-6.06.0.zip/download)
-|Portable Native Client (PNaCl)|[6.06.0](http://sourceforge.net/projects/csound/files/csound6/Csound6.06/csound6.06-pnacl.tar.gz/download)
+|Emscripten|[6.07.0](https://github.com/csound/csound/releases/download/6.07.0/csound-emscripten-6.07.0.zip)
+|Portable Native Client (PNaCl)|[6.07.0](https://github.com/csound/csound/releases/download/6.07.0/csound6.07-pnacl.tar.gz)
 |
 |**Other**
 |csound~ for Max|[1.1.3 (Windows)](http://sourceforge.net/projects/csound/files/csound6/Csound6.05/csound~-_1.1.3.exe/download) <br/> [1.1.3 (OSX)](http://sourceforge.net/projects/csound/files/csound6/Csound6.05/csound~_v1.1.3.pkg/download)
 |
 |**Source**
-|Source Code|[6.06.0 (.zip)](http://sourceforge.net/projects/csound/files/csound6/Csound6.06/Csound6.06.zip/download) <br/> [6.06.0 (.tar.gz)](http://sourceforge.net/projects/csound/files/csound6/Csound6.06/Csound6.06.tar.gz/download)
+|Source Code|[6.07.0 (.zip)](https://github.com/csound/csound/archive/6.07.0.zip) <br/> [6.07.0 (.tar.gz)](https://github.com/csound/csound/archive/6.07.0.tar.gz)
 |
 
 ## Building from source
