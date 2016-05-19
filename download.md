@@ -4,7 +4,7 @@ title: Download
 html_to_native: true
 ---
 
-You will find the current version of Csound in [http://sourceforge.net/projects/csound/files/csound6/](http://sourceforge.net/projects/csound/files/csound6/). In the folder with the most recent version number you will find different files:
+You will find the current version of Csound in [https://github.com/csound/csound/releases/latest/](https://github.com/csound/csound/releases/latest/). In the folder with the most recent version number you will find different files:
 
 
 |----------
