@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>OSCsend</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="OSClisten.html" title="OSClisten" />
@@ -38,19 +38,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52714604480"></a>
+        <a id="idm46930235986240"></a>
         <h2>Description</h2>
         <p>
       Uses the OSC protocol to send message to other OSC listening processes.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52714603216"></a>
+        <a id="idm46930235942352"></a>
         <h2>Syntax</h2>
-        <pre class="synopsis"><span class="command"><strong>OSCsend</strong></span> kwhen, ihost, iport, idestination, itype [, kdata1, kdata2, ...]</pre>
+        <pre class="synopsis"><span class="command"><strong>OSCsend</strong></span> kwhen, ihost, iport, idestination, itype [, xdata1, xdata2, ...]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm52714601216"></a>
+        <a id="idm46930235940256"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>ihost</em></span>
@@ -71,26 +71,27 @@
       <span class="emphasis"><em>itype</em></span>
       -- a string that indicates the types of the optional arguments
       that are read at k-rate.  The string can contain the characters
-      "bcdfilmst" which stand for Boolean, character, double, float,
-      32-bit integer, 64-bit integer, MIDI, string and timestamp.
+      "abcdfilmstAG" which stand for audio, Boolean, character, double, float,
+      32-bit integer, 64-bit integer, MIDI, string, timestamp, k-rate
+      array and ftable.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52714596576"></a>
+        <a id="idm46930235935456"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>kwhen</em></span> -- a message is sent whenever this
     value changes.  A message will always be sent on the first call.
     </p>
         <p>
-      The data is taken from the k-values that follow the format
+      The data is taken from the k-values or a-value that follow the format
     string.   In a similar way to a printf format, the characters in
     order determine how the argument is interpreted.  Note that a time
     stamp takes two arguments.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52714594256"></a>
+        <a id="idm46930235933072"></a>
         <h2>Example</h2>
         <p>
       The example shows a simple instrument, which when called, sends a group of 3 messages to a computer called "xenakis", on port 7770, to be read by a process that recognises /foo/bar as its address.
@@ -102,11 +103,12 @@
       <span class="oblock">endin</span></pre>
         </div>
         <p>
-      See the entry for <a class="link" href="OSClisten.html" title="OSClisten"><em class="citetitle">OSClisten</em></a>, for an example of send/recieve usage using OSC.
+      See the entry for <a class="link" href="OSClisten.html" title="OSClisten"><em class="citetitle">OSClisten</em></a>, for
+      an example of send/ receive usage using OSC.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52714588624"></a>
+        <a id="idm46930235927152"></a>
         <h2>See Also</h2>
         <p>
         <a class="link" href="OSClisten.html" title="OSClisten"><em class="citetitle">OSClisten</em></a>,
@@ -115,7 +117,7 @@
         <p> More information on this opcode: <a class="ulink" href="http://www.youtube.com/watch?v=JX1C3TqP_9Y" target="_top"><em class="citetitle">http://www.youtube.com/watch?v=JX1C3TqP_9Y</em></a>  , made by Andrés Cabrera </p>
       </div>
       <div class="refsect1">
-        <a id="idm52714584352"></a>
+        <a id="idm46930235922688"></a>
         <h2>Credits</h2>
         <p>
       </p>
@@ -129,6 +131,9 @@
         </table>
         <p>
     </p>
+        <p>Data types a, A and G were added in 6.07; they send data via
+    blobs and are only really useful to other Csound instances or
+    custom listeners.</p>
       </div>
     </div>
     <div class="navfooter">

@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>GENpadsynth</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="ScoregensTop.html" title="Score Statements and GEN Routines" />
     <link rel="prev" href="GENwave.html" title="GENwave" />
@@ -38,59 +38,105 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52632064768"></a>
+        <a id="idm46930148287920"></a>
         <h2>Description</h2>
         <p>
-      Creates an ftable for use in an oscillator with values creared
-      by the padsynth algorithm.
-    </p>
+Paul Octavian Nasca's "padsynth algorithm" adds bandwidth to each partial of a
+periodic weaveform. This bandwidth is heard as color, movement, and additional
+richness of sound.
+   </p>
+        <p>
+First, the waveform is defined by the user as a series of harmonic partials.
+Then, bandwidth is added by independently spreading each partial of the
+original waveform from a single frequency across neighboring frequencies,
+according to a "profile" function: a Gaussian curve, a square, or a rising
+and then falling expontential.
+   </p>
+        <p>
+The partials of the original waveform may be considered to be samples in a
+discrete Fourier transform of the waveform. Normally there is not an exact
+one-to-one correspondence between the frequencies of the samples (frequency
+bins) of the discrete Fourier transform with the frequencies of the partials
+of the original waveform, because any frequency in the inverse of the discrete
+Fourier transform might be synthesized by interference between any number of
+bins. However, the padsynth algorithm uses a simple trick to create this
+correspondence. The discrete Fourier transform is simply made so large that
+the frequency of any partial of the original waveform will be very close to
+the frequency of the corresponding bin in the Fourier transform. Once this
+correspondence has been created, the bandwidth profile can be applied by
+centering it over the frequency bin of the original partial, scaling the
+profile by the bandwidth, and simply multiplying the original partial by each
+sample of the profile and adding the product to the corresponding bin of the
+Fourier transform.
+   </p>
+        <p>
+As the frequencies of the partials increase, their bandwidth may optionally
+become wider or (less often) narrower.
+   </p>
+        <p>
+Once each partial has been spread out in this way, the discrete Fourier
+transform may be given random phases, and is then simply inverted to
+synthesize the desired waveform, which may be used as the wavetable for
+a digital oscillator.
+   </p>
+        <p>
+N.B.: The size of the function table does NOT necessarily reflect one periodic
+cycle of the waveform that it contains. The fundamental frequency must be used
+to generate the desired pitch from an oscillator using the function table, e.g.
+   </p>
+        <code class="code">
+    oscillator_hz = desired_hz * (sr / padsynth_size / fundamental_hz)
+    </code>
       </div>
       <div class="refsect1">
-        <a id="idm52632063488"></a>
-        <h2>DRAFT Syntax</h2>
-        <pre class="synopsis"><span class="command"><strong>f</strong></span> # time size "padsynth" fundamentalFrq
-    partialBW partial_Scale harmonicStretch hampl1, hampl2, ...</pre>
+        <a id="idm46930148216896"></a>
+        <h2>Syntax</h2>
+        <pre class="synopsis"><span class="command"><strong>f</strong></span> # score_time table_size "padsynth" fundamental_frequency
+    partial_bandwidth partial_scale harmonic_stretch profile_shape profile_shape_parameter
+    partial1_amplitude [partial2_amplitude ...]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm52632061472"></a>
-        <h2>DRAFT Initialization</h2>
+        <a id="idm46930148214704"></a>
+        <h2>Initialization</h2>
         <p>
-      <span class="emphasis"><em>size</em></span> -- number of points in the table. Must
-      be a power of 2 or power-of-2 plus 1 (see <a class="link" href="f.html" title="f Statement (or Function Table Statement)"><em class="citetitle">f statement</em></a>).
+      <span class="emphasis"><em>table_size</em></span> -- Function table size. Should be large,
+            e.g. 2^18 == 262144. Must be a power of 2 or power-of-2 plus 1 (see <a class="link" href="f.html" title="f Statement (or Function Table Statement)"><em class="citetitle">f statement</em></a>).
     </p>
         <p>
-      <span class="emphasis"><em>fundamentalFrq</em></span> -- fundamental frequency for
+      <span class="emphasis"><em>fundamental_frequency</em></span> -- Fundamental frequency for
       the generated table.
     </p>
         <p>
-      <span class="emphasis"><em>partialBW</em></span> -- bandwidth of each partial in cents.
+      <span class="emphasis"><em>partial_bandwidth</em></span> -- Bandwidth of each partial in cents.
     </p>
         <p>
-      <span class="emphasis"><em>partialScale</em></span> -- ration that bandwidth
-      inccreases with harmonic number.
+      <span class="emphasis"><em>partial_scale</em></span> -- Scaling factor for bandwidth of each partial (log of increase/decrease
+            with partial frequency, 0 is no stretch or shrink).
     </p>
         <p>
-      <span class="emphasis"><em>harmonicStretchScale</em></span> -- ratio of stretch of
-      thre overtoes.
+      <span class="emphasis"><em>harmonic_stretch</em></span> -- Harmonic stretch/shrink for all partials (1 is harmonic).
     </p>
         <p>
-      <span class="emphasis"><em>hamp1, hamp2, ...</em></span> -- relative amplitudes of
-      the partials
+      <span class="emphasis"><em>profile_shape</em></span> -- Number specifying the shape of the bandwidth profile:
+      1 = Gaussian, 2 = square, and 3 = exponential
     </p>
         <p>
-      The table is filled with a sample that can be used in an oscillator
+      <span class="emphasis"><em>profile_shape_parameter</em></span> -- Parameter passed to the function generating the profile shape, e.g. exponent.
+    </p>
+        <p>
+      <span class="emphasis"><em>partial1_amplitude, partial2_amplitude, ...</em></span> -- Amplitudes for each partial (may be zero).
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52632054224"></a>
+        <a id="idm46930148205728"></a>
         <h2>Examples</h2>
         <p>
 	    Here is an example of the GENpadsynth routine. It uses the files <a class="ulink" href="examples/padsynth_gen.csd" target="_top"><em class="citetitle">padsynth_gen.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm52632052416"></a>
+          <a id="idm46930148203856"></a>
           <p class="title">
-            <strong>Example 1133. An example of the GENpadsynth routine.</strong>
+            <strong>Example 1165. An example of the GENpadsynth routine.</strong>
           </p>
           <div class="example-contents">
             <pre class="programlisting">
@@ -225,12 +271,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52632050640"></a>
+        <a id="idm46930148201936"></a>
         <h2>See Also</h2>
         <p> More information on Padsynth: <a class="ulink" href="www.paulnasca.com/algorithms-created-by-me" target="_top"><em class="citetitle">www.paulnasca.com/algorithms-created-by-me</em></a></p>
       </div>
       <div class="refsect1">
-        <a id="idm52632048736"></a>
+        <a id="idm46930148199984"></a>
         <h2>Credits</h2>
         <p>Written by Michael Gogins</p>
         <p>New in version 6.05</p>

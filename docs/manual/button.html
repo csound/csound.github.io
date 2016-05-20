@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>button</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="butterlp.html" title="butterlp" />
@@ -38,19 +38,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52753410320"></a>
+        <a id="idm46930274081072"></a>
         <h2>Description</h2>
         <p>
       Sense on-screen controls. Requires Winsound or TCL/TK.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52753409072"></a>
+        <a id="idm46930274079888"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">kres <span class="command"><strong>button</strong></span> knum</pre>
       </div>
       <div class="refsect1">
-        <a id="idm52753406992"></a>
+        <a id="idm46930274077680"></a>
         <h2>Performance</h2>
         <p>
       Note that this opcode is not available on Windows due to the implimentation of pipes on that system 
@@ -63,14 +63,71 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52753403872"></a>
+        <a id="idm46930274005536"></a>
+        <h2>Examples</h2>
+        <p>
+      Here is a simple example of the checkbox opcode. It uses the file <a class="ulink" href="examples/checkbox.csd" target="_top"><em class="citetitle">checkbox.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm46930274003696"></a>
+          <p class="title">
+            <strong>Example 100. Simple example of the checkbox opcode.</strong>
+          </p>
+          <div class="example-contents">
+            <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
+            <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in</span>
+-odac           -iadc       <span class="comment">;;;RT audio I/O</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o checkbox.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 10
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+ 
+<span class="oblock">instr</span> 1
+  <span class="comment">; Get the value from the checkbox.</span>
+  k1 checkbox 1
+
+  <span class="comment">; If the checkbox is selected then k2=440, otherwise k2=880.</span>
+  k2 <span class="op">=</span> (k1 <span class="op">==</span> 0 <span class="op">?</span> 440 <span class="op">:</span> 880)
+
+  a1 <span class="opc">oscil</span> 10000, k2, 1
+  <span class="opc">outs</span> a1, a1
+<span class="oblock">endin</span>
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+<span class="comment">; sine wave.</span>
+<span class="stamnt">f</span> 1 0 32768 10 1
+
+<span class="stamnt">i</span> 1 0 10 
+<span class="stamnt">e</span>
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm46930273999408"></a>
         <h2>See Also</h2>
         <p>
         <a class="link" href="checkbox.html" title="checkbox"><em class="citetitle">checkbox</em></a>
       </p>
       </div>
       <div class="refsect1">
-        <a id="idm52754940064"></a>
+        <a id="idm46930273997360"></a>
         <h2>Credits</h2>
         <p>
       </p>

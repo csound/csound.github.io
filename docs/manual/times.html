@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>times</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="timek.html" title="timek" />
@@ -38,20 +38,20 @@
           </p>
       </div>
       <div class="refsect1">
-        <a id="idm52687335248"></a>
+        <a id="idm46930207010272"></a>
         <h2>Description</h2>
         <p>
       Read absolute time, in seconds, since the start of the performance.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52687333840"></a>
+        <a id="idm46930207008912"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">ires <span class="command"><strong>times</strong></span></pre>
         <pre class="synopsis">kres <span class="command"><strong>times</strong></span></pre>
       </div>
       <div class="refsect1">
-        <a id="idm52687330752"></a>
+        <a id="idm46930207005552"></a>
         <h2>Performance</h2>
         <p>
       Time in seconds is available with <span class="emphasis"><em>times</em></span>. This would return 0.5 after half a second. 
@@ -64,16 +64,16 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52687326272"></a>
+        <a id="idm46930207000912"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the times opcode. It uses the file <a class="ulink" href="examples/times_complex.csd" target="_top"><em class="citetitle">times_complex.csd</em></a>.
 
       </p>
         <div class="example">
-          <a id="idm52687324512"></a>
+          <a id="idm46930206999168"></a>
           <p class="title">
-            <strong>Example 930. Example of the times opcode.</strong>
+            <strong>Example 960. Example of the times opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
@@ -99,13 +99,13 @@ giWave   <span class="ohdr">ftgen</span>      0, 0, 1024, 10, 1, .5, .25
 
 <span class="oblock">instr</span> again 
 
-<span class="opc">instance</span> <span class="op">=</span>          p4 
+instance <span class="op">=</span>          p4 
  <span class="comment">;reset the duration of this instance </span>
 iDur     <span class="opc">rnd31</span>      5, 3				<span class="comment">;shorter values are more probable </span>
 iDur     <span class="op">=</span>          <span class="opc">abs</span>(iDur) <span class="op">+</span> 0.2 
 p3       <span class="op">=</span>          iDur 
  <span class="comment">;trigger the effect instrument of this instance </span>
-         <span class="opc">event_i</span>    "i", "fx_processor", 0, iDur, <span class="opc">instance</span> 
+         <span class="opc">event_i</span>    "i", "fx_processor", 0, iDur, instance 
  <span class="comment">;print the status quo </span>
 kTime    <span class="opc">times</span> 
          <span class="opc">prints</span>     "instance <span class="op">=</span> <span class="op">%</span>d, start <span class="op">=</span> <span class="op">%</span>f, duration <span class="op">=</span> <span class="op">%</span>f\n", instance, <span class="opc">i</span>(kTime), iDur 
@@ -115,11 +115,11 @@ iOct     <span class="opc">random</span>     5, 10				<span class="comment">;fin
 aEnv     <span class="opc">transeg</span>    0, 0.02, 0, 1<span class="op">/</span>iamp, p3<span class="op">-</span>0.02, <span class="op">-</span>6, 0	<span class="comment">;output envelope </span>
 aSend    <span class="opc">poscil</span>     aEnv, <span class="opc">cpsoct</span>(iOct), giWave		<span class="comment">;audio signal </span>
  <span class="comment">;send signal to effect instrument </span>
-Sbus     <span class="opc">sprintf</span>    "audio_<span class="op">%</span>d", <span class="opc">instance</span>		<span class="comment">;create unique software bus </span>
+Sbus     <span class="opc">sprintf</span>    "audio_<span class="op">%</span>d", instance		<span class="comment">;create unique software bus </span>
          <span class="opc">chnset</span>     aSend<span class="op">/</span>2, Sbus			<span class="comment">;send audio on this bus </span>
  <span class="comment">;get the last k-cycle of this instance and trigger the successor in it </span>
 kLast    <span class="opc">release</span> 
-         <span class="opc">schedkwhen</span> kLast, 0, 0, "again", 0, 1, <span class="opc">instance</span><span class="op">+</span>1 
+         <span class="opc">schedkwhen</span> kLast, 0, 0, "again", 0, 1, instance<span class="op">+</span>1 
 <span class="oblock">endin</span> 
 
 <span class="oblock">instr</span> fx_processor 
@@ -172,14 +172,14 @@ instance = 5, start = 1.835828, duration = 1.777097
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52687318704"></a>
+        <a id="idm46930206993264"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="timeinstk.html" title="timeinstk"><em class="citetitle">timeinstk</em></a>, <a class="link" href="timeinsts.html" title="timeinsts"><em class="citetitle">timeinsts</em></a>, <a class="link" href="timek.html" title="timek"><em class="citetitle">timek</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52687315152"></a>
+        <a id="idm46930206989264"></a>
         <h2>Credits</h2>
         <p>
       </p>

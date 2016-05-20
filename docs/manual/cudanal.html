@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>cudanal</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="ExperimentalTop.html" title="Experimental Orchestra Opcodes and GEN Routines" />
     <link rel="prev" href="ExperimentalTop.html" title="Experimental Orchestra Opcodes and GEN Routines" />
@@ -35,23 +35,24 @@
         </h2>
         <p>cudanal — 
       Generate an fsig from a mono audio source ain, using phase
-      vocoder overlap-add analysis and GPU hardware. 
+      vocoder overlap-add analysis and GPU hardware. Experimental and
+      only available as source code at the moment.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52629407040"></a>
+        <a id="idm46930145881568"></a>
         <h2>Description</h2>
         <p>
       Generate an fsig from a mono audio source ain, using phase vocoder overlap-add analysis and GPU hardware.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52629405744"></a>
+        <a id="idm46930145880288"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">fsig <span class="command"><strong>cudanal</strong></span> ain, ifftsize, ioverlap, iwinsize, iwintype [, iformat] [, iinit]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm52629403600"></a>
+        <a id="idm46930145878144"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>ifftsize</em></span> -- The FFT size in samples. Need not be a power of two (though these are especially efficient), but must be even. Odd numbers are rounded up internally. <span class="emphasis"><em>ifftsize</em></span> determines the number of analysis bins in <span class="emphasis"><em>fsig</em></span>, as <span class="emphasis"><em>ifftsize/2 + 1</em></span>. For example, where <span class="emphasis"><em>ifftsize</em></span> = 1024, <span class="emphasis"><em>fsig</em></span> will contain 513 analysis bins, ordered linearly from the fundamental to Nyquist. The fundamental of analysis (which in principle gives the lowest resolvable frequency) is determined as <span class="emphasis"><em>sr/ifftsize</em></span>. Thus, for the example just given and assuming <span class="emphasis"><em>sr</em></span> = 44100, the fundamental of analysis is 43.07Hz. In practice, due to the phase-preserving nature of the phase vocoder, the frequency of any bin can deviate bilaterally, so that DC components are recorded. Given a strongly pitched signal, frequencies in adjacent bins can bunch very closely together, around partials in the source, and the lowest bins may even have negative frequencies.
@@ -142,15 +143,15 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm52629373824"></a>
+        <a id="idm46930145847392"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the cudanal opcode. It uses the file <a class="ulink" href="examples/cudanal.csd" target="_top"><em class="citetitle">cudanal.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm52629372032"></a>
+          <a id="idm46930145845536"></a>
           <p class="title">
-            <strong>Example 1134. Example of the cudanal opcode.</strong>
+            <strong>Example 1166. Example of the cudanal opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
@@ -178,9 +179,9 @@ iwinsize  <span class="op">=</span> ifftsize
 iwinshape <span class="op">=</span> 1							<span class="comment">;von-Hann window</span>
 Sfile     <span class="op">=</span> "fox.wav"
 ain       <span class="opc">soundin</span> Sfile
-fftin     <span class="opc">cudanal</span> ain, ifftsize, ioverlap, iwinsize, iwinshape	<span class="comment">;fft-analysis of the audio-signal</span>
+fftin     cudanal ain, ifftsize, ioverlap, iwinsize, iwinshape	<span class="comment">;fft-analysis of the audio-signal</span>
 fftblur   <span class="opc">pvscale</span> fftin, p5					<span class="comment">;scale</span>
-aout      <span class="opc">cudasynth</span> fftblur					<span class="comment">;resynthesis</span>
+aout      cudasynth fftblur					<span class="comment">;resynthesis</span>
           <span class="opc">outs</span>	  aout, aout
 <span class="oblock">endin</span>
 
@@ -206,7 +207,7 @@ aout      <span class="opc">cudasynth</span> fftblur					<span class="comment">;
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52629368048"></a>
+        <a id="idm46930145841248"></a>
         <h2>Credits</h2>
         <p>
       </p>

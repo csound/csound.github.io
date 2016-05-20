@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>svfilter</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="sumarray.html" title="sumarray" />
@@ -38,32 +38,44 @@
           </p>
       </div>
       <div class="refsect1">
-        <a id="idm52696958288"></a>
+        <a id="idm46930211222656"></a>
         <h2>Description</h2>
         <p>
       Implementation of a resonant second order filter, with simultaneous lowpass, highpass and bandpass outputs.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52696956880"></a>
+        <a id="idm46930211221344"></a>
         <h2>Syntax</h2>
-        <pre class="synopsis">alow, ahigh, aband <span class="command"><strong>svfilter</strong></span>  asig, kcf, kq [, iscl]</pre>
+        <pre class="synopsis">alow, ahigh, aband <span class="command"><strong>svfilter</strong></span>  asig, kcf, kq [, iscl] [, iskip]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm52696954848"></a>
+        <a id="idm46930211153728"></a>
         <h2>Initialization</h2>
         <p>
-      <span class="emphasis"><em>iscl</em></span> -- coded scaling factor, similar to that in <a class="link" href="reson.html" title="reson"><em class="citetitle">reson</em></a>. A non-zero value signifies a peak response factor of 1, i.e. all frequencies other than <span class="emphasis"><em>kcf</em></span> are attenuated in accordance with the (normalized) response curve. A zero value signifies no scaling of the signal, leaving that to some later adjustment (see <a class="link" href="balance.html" title="balance"><em class="citetitle">balance</em></a>). The default value is 0.
+      <span class="emphasis"><em>iscl</em></span> -- coded scaling factor, similar to
+      that in <a class="link" href="reson.html" title="reson"><em class="citetitle">reson</em></a>. A non-zero
+      value signifies a peak response factor of 1, i.e. all
+      frequencies other than <span class="emphasis"><em>kcf</em></span> are attenuated
+      in accordance with the (normalized) response curve. A zero value
+      signifies no scaling of the signal, leaving that to some later
+      adjustment (see <a class="link" href="balance.html" title="balance"><em class="citetitle">balance</em></a>). The
+      default value is 0.
+    </p>
+        <p>
+      <span class="emphasis"><em>iskip</em></span> (optional, default=0) -- initial
+      disposition of internal data space. Since filtering incorporates
+      a feedback loop of previous output, the initial status of the
+      storage space used is significant. A zero value will clear the
+      space; a non-zero value will allow previous information to
+      remain. The default value is 0.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52696950736"></a>
+        <a id="idm46930211148304"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>svfilter</em></span> is a second order state-variable filter, with k-rate controls for cutoff frequency and Q.  As Q is increased, a resonant peak forms around the cutoff frequency. <span class="emphasis"><em>svfilter</em></span> has simultaneous lowpass, highpass, and bandpass filter outputs; by mixing the outputs together, a variety of frequency responses can be generated. The state-variable filter, or "multimode" filter was a common feature in early analog synthesizers, due to the wide variety of sounds available from the interaction between cutoff, resonance, and output mix ratios. <span class="emphasis"><em>svfilter</em></span> is well suited to the emulation of "analog" sounds, as well as other applications where resonant filters are called for.
-    </p>
-        <p>
-      <span class="emphasis"><em>asig</em></span> -- Input signal to be filtered.
     </p>
         <p>
       <span class="emphasis"><em>kcf</em></span> -- Cutoff or resonant frequency of the filter, measured in Hz.
@@ -76,16 +88,16 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52696940400"></a>
+        <a id="idm46930211137712"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the svfilter opcode. It uses the file <a class="ulink" href="examples/svfilter.csd" target="_top"><em class="citetitle">svfilter.csd</em></a>.
 
       </p>
         <div class="example">
-          <a id="idm52696938608"></a>
+          <a id="idm46930211135856"></a>
           <p class="title">
-            <strong>Example 887. Example of the svfilter opcode.</strong>
+            <strong>Example 916. Example of the svfilter opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
@@ -159,7 +171,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52696934592"></a>
+        <a id="idm46930211131568"></a>
         <h2>Credits</h2>
         <p>
       </p>
@@ -177,6 +189,7 @@
         <p>
     </p>
         <p>New in Csound version 3.55</p>
+        <p>iskip new in version 6.06</p>
       </div>
     </div>
     <div class="navfooter">

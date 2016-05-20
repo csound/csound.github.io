@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>active</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="abs.html" title="abs" />
@@ -38,21 +38,22 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52756721872"></a>
+        <a id="idm46930277731392"></a>
         <h2>Description</h2>
         <p>
-      Returns the number of active instances of an instrument.
+      Returns the number of active instances of an instrument with
+      options to ignore releasing instances.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52756720544"></a>
+        <a id="idm46930277729936"></a>
         <h2>Syntax</h2>
-        <pre class="synopsis">ir <span class="command"><strong>active</strong></span> insnum [,iopt]</pre>
-        <pre class="synopsis">ir <span class="command"><strong>active</strong></span> Sinsname [,iopt]</pre>
-        <pre class="synopsis">kres <span class="command"><strong>active</strong></span> kinsnum [,iopt]</pre>
+        <pre class="synopsis">ir <span class="command"><strong>active</strong></span> insnum [,iopt [,inorel]]</pre>
+        <pre class="synopsis">ir <span class="command"><strong>active</strong></span> Sinsname [,iopt [,inorel]]</pre>
+        <pre class="synopsis">kres <span class="command"><strong>active</strong></span> kinsnum [,iopt [,inorel]]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm52756715824"></a>
+        <a id="idm46930277658576"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>insnum</em></span> -- number or string name of the instrument to be reported
@@ -64,9 +65,13 @@
       <span class="emphasis"><em>iopt</em></span> -- select currently active (zero, default),
       or all every active (non zero)
     </p>
+        <p>
+      <span class="emphasis"><em>inorel</em></span> -- if non-zero ignore instruments in
+      release phase (zero, default), only valid if iopts is zero.
+    </p>
       </div>
       <div class="refsect1">
-        <a id="idm52756712304"></a>
+        <a id="idm46930277653936"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>kinsnum</em></span> -- number or string name of the instrument to be reported
@@ -85,7 +90,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52756707888"></a>
+        <a id="idm46930277649440"></a>
         <h2>Examples</h2>
         <p>
       Here is a simple example of the active opcode. It uses the file
@@ -93,9 +98,9 @@
 
       </p>
         <div class="example">
-          <a id="idm52756706032"></a>
+          <a id="idm46930277647456"></a>
           <p class="title">
-            <strong>Example 40. Simple example of the active opcode.</strong>
+            <strong>Example 41. Simple example of the active opcode.</strong>
           </p>
           <div class="example-contents">
             <p>
@@ -179,9 +184,9 @@ instr 2:  icount = 2.000
 
       </p>
         <div class="example">
-          <a id="idm52756699984"></a>
+          <a id="idm46930277641040"></a>
           <p class="title">
-            <strong>Example 41. Example of the active opcode at k-rate.</strong>
+            <strong>Example 42. Example of the active opcode at k-rate.</strong>
           </p>
           <div class="example-contents">
             <pre class="programlisting">
@@ -258,9 +263,9 @@ instr 2:  icount = 2.000
       Here is another example of the active opcode, using the number of instances to calculate gain. It uses the file <a class="ulink" href="examples/active_scale.csd" target="_top"><em class="citetitle">active_scale.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm52756696432"></a>
+          <a id="idm46930277637232"></a>
           <p class="title">
-            <strong>Example 42. Example of the active opcode at k-rate.</strong>
+            <strong>Example 43. Example of the active opcode at k-rate.</strong>
           </p>
           <div class="example-contents">
             <pre class="programlisting">
@@ -308,7 +313,7 @@ kenv <span class="opc">linseg</span> 0, 0.1,1,p3<span class="op">-</span>0.2,1,0
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52756694736"></a>
+        <a id="idm46930277635408"></a>
         <h2>Credits</h2>
         <p>
       </p>
@@ -332,6 +337,7 @@ kenv <span class="opc">linseg</span> 0, 0.1,1,p3<span class="op">-</span>0.2,1,0
         <p>New in Csound version 3.57; named instruments added version 5.13</p>
         <p>Option for all ever active new in 5.13</p>
         <p>Count of all instruments new in 5.17</p>
+        <p>No release option new in 5.19</p>
       </div>
     </div>
     <div class="navfooter">

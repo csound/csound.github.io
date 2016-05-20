@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>envlpx</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="endop.html" title="endop" />
@@ -38,7 +38,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52743242992"></a>
+        <a id="idm46930265653712"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>envlpx</em></span> -- apply an envelope consisting of 3 segments:
@@ -60,13 +60,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52743238048"></a>
+        <a id="idm46930265574976"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">ares <span class="command"><strong>envlpx</strong></span> xamp, irise, idur, idec, ifn, iatss, iatdec [, ixmod]</pre>
         <pre class="synopsis">kres <span class="command"><strong>envlpx</strong></span> kamp, irise, idur, idec, ifn, iatss, iatdec [, ixmod]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm52743234544"></a>
+        <a id="idm46930265571232"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>irise</em></span> -- rise time in seconds. A zero or negative value signifies no rise modification.
@@ -81,36 +81,67 @@
       <span class="emphasis"><em>ifn</em></span> -- function table number of stored rise shape with extended guard point.
     </p>
         <p>
-      <span class="emphasis"><em>iatss</em></span> -- attenuation factor, by which the last value of the <span class="emphasis"><em>envlpx</em></span> rise is modified during the note's pseudo steady state. A factor greater than 1 causes an exponential growth and a factor less than 1 creates an exponential decay. A factor of 1 will maintain a true steady state at the last rise value. Note that this attenuation is not by fixed rate (as in a piano), but is sensitive to a note's duration. However, if <span class="emphasis"><em>iatss</em></span> is negative (or if steady state &lt; 4 k-periods) a fixed attenuation rate of <span class="emphasis"><em>abs</em></span>(<span class="emphasis"><em>iatss</em></span>) per second will be used. 0 is illegal.
+      <span class="emphasis"><em>iatss</em></span> -- attenuation factor, by which the
+      last value of the <span class="emphasis"><em>envlpx</em></span> rise is modified
+      during the note's pseudo steady state. A factor greater than 1
+      causes an exponential growth and a factor less than 1 creates an
+      exponential decay. A factor of 1 will maintain a true steady
+      state at the last rise value. Note that this attenuation is not
+      by fixed rate (as in a piano), but is sensitive to a note's
+      duration. However, if <span class="emphasis"><em>iatss</em></span> is negative (or
+      if steady state &lt; 4 k-periods) a fixed attenuation rate of
+      <span class="emphasis"><em>abs</em></span>(<span class="emphasis"><em>iatss</em></span>) per second
+      will be used. 0 is illegal. 
     </p>
         <p>
-      <span class="emphasis"><em>iatdec</em></span> -- attenuation factor by which the closing steady state value is reduced exponentially over the decay period. This value must be positive and is normally of the order of .01. A large or excessively small value is apt to produce a cutoff which is audible. A zero or negative value is illegal.
+      <span class="emphasis"><em>iatdec</em></span> -- attenuation factor by which the
+      closing steady state value is reduced exponentially over the
+      decay period. This value must be positive and is normally of the
+      order of .01. A large or excessively small value is apt to
+      produce a cutoff which is audible. A zero or negative value is
+      illegal.
     </p>
         <p>
-      <span class="emphasis"><em>ixmod</em></span> (optional, between +- .9 or so) -- exponential curve modifier, influencing the steepness of the exponential trajectory during the steady state. Values less than zero will cause an accelerated growth or decay towards the target (e.g. <span class="emphasis"><em>subito piano</em></span>). Values greater than zero will cause a retarded growth or decay. The default value is zero (unmodified exponential).
+      <span class="emphasis"><em>ixmod</em></span> (optional, between +- .9 or so) --
+      exponential curve modifier, influencing the steepness of the
+      exponential trajectory during the steady state. Values less than
+      zero will cause an accelerated growth or decay towards the
+      target (e.g. <span class="emphasis"><em>subito piano</em></span>). Values greater
+      than zero will cause a retarded growth or decay. The default
+      value is zero (unmodified exponential).
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52743222720"></a>
+        <a id="idm46930265558672"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>kamp, xamp</em></span> -- input amplitude signal.
     </p>
         <p>
-      Rise modifications are applied for the first <span class="emphasis"><em>irise</em></span> seconds, and decay from time <span class="emphasis"><em>idur - idec</em></span>. If these periods are separated in time there will be a steady state during which <span class="emphasis"><em>amp</em></span> will be modified by the first exponential pattern. If rise and decay periods overlap then both modifications will be in effect for that time. If the overall duration <span class="emphasis"><em>idur</em></span> is exceeded in performance, the final decay will continue on in the same direction, tending asymptotically to zero.
+      Rise modifications are applied for the first
+      <span class="emphasis"><em>irise</em></span> seconds, and decay from time
+      <span class="emphasis"><em>idur - idec</em></span>. If these periods are separated
+      in time there will be a steady state during which
+      <span class="emphasis"><em>amp</em></span> will be modified by the first
+      exponential pattern.
+      
+      
+      If the overall duration <span class="emphasis"><em>idur</em></span> is exceeded in performance,
+      the final decay will continue on in the same direction, tending
+      asymptotically to zero. 
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52743218560"></a>
+        <a id="idm46930265553376"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the envlpx opcode. It uses the file <a class="ulink" href="examples/envlpx.csd" target="_top"><em class="citetitle">envlpx.csd</em></a>.
 
       </p>
         <div class="example">
-          <a id="idm52743216736"></a>
+          <a id="idm46930265551600"></a>
           <p class="title">
-            <strong>Example 223. Example of the envlpx opcode.</strong>
+            <strong>Example 234. Example of the envlpx opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
@@ -168,7 +199,7 @@ asig <span class="opc">moogvcf</span> asig, kcps <span class="op">+</span> (kenv
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52743212752"></a>
+        <a id="idm46930265547376"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="envlpxr.html" title="envlpxr"><em class="citetitle">envlpxr</em></a>, 
@@ -177,7 +208,7 @@ asig <span class="opc">moogvcf</span> asig, kcps <span class="op">+</span> (kenv
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52743208912"></a>
+        <a id="idm46930265543344"></a>
         <h2>Credits</h2>
         <p>Thanks goes to Luis Jure for pointing out a mistake with <span class="emphasis"><em>iatss</em></span>.</p>
       </div>

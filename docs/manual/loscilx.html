@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>loscilx</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="loscil3.html" title="loscil3" />
@@ -38,7 +38,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52726736352"></a>
+        <a id="idm46930245451696"></a>
         <h2>Description</h2>
         <p>
       Read sampled sound (up to 16 channels) from a table, with
@@ -46,14 +46,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52726735056"></a>
+        <a id="idm46930245407696"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">ar1 [, ar2, ar3, ar4, ar5, ar6, ar7, ar8, ar9, ar10, ar11, ar12, ar13, ar14, \
       ar15, ar16] <span class="command"><strong>loscilx</strong></span> xamp, kcps, ifn \
       [, iwsize, ibas, istrt, imod, ibeg, iend]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm52726732816"></a>
+        <a id="idm46930245405360"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>ifn</em></span> -- function table number, typically
@@ -62,7 +62,28 @@
       file may have up to 16 channels.
     </p>
         <p>
-      <span class="emphasis"><em>iwsize</em></span> (optiomal) -- window size used in interpolation.
+      <span class="emphasis"><em>iwsize</em></span> (optional) -- window size used in interpolation.
+      iwsize (optional, defaults to zero) -- interpolation window size, in samples. Can be one of the following:
+   	</p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>1: round to nearest sample (no interpolation, for <span class="emphasis"><em>kpitch</em></span>=1)</p>
+            </li>
+            <li class="listitem">
+              <p>2: linear interpolation</p>
+            </li>
+            <li class="listitem">
+              <p>4: cubic interpolation</p>
+            </li>
+            <li class="listitem">
+              <p>&gt;= 8: <span class="emphasis"><em>iwsize</em></span> point sinc interpolation with anti-aliasing (slow)</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+
+	Zero or negative values select the default, which is cubic interpolation.
     </p>
         <p>
       <span class="emphasis"><em>ibas</em></span> (optional) -- base frequency in
@@ -94,7 +115,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52726723232"></a>
+        <a id="idm46930245389824"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>ar1, ar2, ...</em></span> -- the output at audio-rate.
@@ -137,7 +158,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52726712496"></a>
+        <a id="idm46930245378544"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the loscilx opcode. It uses the files
@@ -145,9 +166,9 @@
       and <a class="ulink" href="examples/kickroll.wav" target="_top"><em class="citetitle">kickroll.wav</em></a>.
       </p>
         <div class="example">
-          <a id="idm52726709904"></a>
+          <a id="idm46930245375824"></a>
           <p class="title">
-            <strong>Example 446. Example of the loscilx opcode.</strong>
+            <strong>Example 464. Example of the loscilx opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time
@@ -227,7 +248,7 @@ gi_sampleleft <span class="ohdr">ftgen</span> 1, 0, 0, 1, gS_loop, 0, 4, 0
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52726705872"></a>
+        <a id="idm46930245371456"></a>
         <h2>See Also</h2>
         <p>
           <a class="link" href="loscil.html" title="loscil">
@@ -236,7 +257,7 @@ gi_sampleleft <span class="ohdr">ftgen</span> 1, 0, 0, 1, gS_loop, 0, 4, 0
         </p>
       </div>
       <div class="refsect1">
-        <a id="idm52726704096"></a>
+        <a id="idm46930245369664"></a>
         <h2>Credits</h2>
         <p>Written by Istvan Varga.</p>
         <p>2006</p>

@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>pvsanal</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="pvsadsyn.html" title="pvsadsyn" />
@@ -38,19 +38,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52717237216"></a>
+        <a id="idm46930228235152"></a>
         <h2>Description</h2>
         <p>
       Generate an fsig from a mono audio source ain, using phase vocoder overlap-add analysis.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52717235936"></a>
+        <a id="idm46930228223632"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">fsig <span class="command"><strong>pvsanal</strong></span> ain, ifftsize, ioverlap, iwinsize, iwintype [, iformat] [, iinit]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm52717233792"></a>
+        <a id="idm46930228221456"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>ifftsize</em></span> -- The FFT size in samples. Need not be a power of two (though these are especially efficient), but must be even. Odd numbers are rounded up internally. <span class="emphasis"><em>ifftsize</em></span> determines the number of analysis bins in <span class="emphasis"><em>fsig</em></span>, as <span class="emphasis"><em>ifftsize/2 + 1</em></span>. For example, where <span class="emphasis"><em>ifftsize</em></span> = 1024, <span class="emphasis"><em>fsig</em></span> will contain 513 analysis bins, ordered linearly from the fundamental to Nyquist. The fundamental of analysis (which in principle gives the lowest resolvable frequency) is determined as <span class="emphasis"><em>sr/ifftsize</em></span>. Thus, for the example just given and assuming <span class="emphasis"><em>sr</em></span> = 44100, the fundamental of analysis is 43.07Hz. In practice, due to the phase-preserving nature of the phase vocoder, the frequency of any bin can deviate bilaterally, so that DC components are recorded. Given a strongly pitched signal, frequencies in adjacent bins can bunch very closely together, around partials in the source, and the lowest bins may even have negative frequencies.
@@ -68,7 +68,8 @@
       <span class="emphasis"><em>iwinsize</em></span> -- The size in samples of the analysis window filter (as set by <span class="emphasis"><em>iwintype</em></span>). This must be at least <span class="emphasis"><em>ifftsize</em></span>, and can usefully be larger. Though other proportions are permitted, it is recommended that <span class="emphasis"><em>iwinsize</em></span> always be an integral multiple of <span class="emphasis"><em>ifftsize</em></span>, e.g. 2048 for the example above. Internally, the analysis window (Hamming, von Hann) is multiplied by a sinc function, so that amplitudes are zero at the boundaries between frames. The larger analysis window size has been found to be especially important for oscillator bank resynthesis (e.g. using <span class="emphasis"><em>pvsadsyn</em></span>), as it has the effect of increasing the frequency resolution of the analysis, and hence the accuracy of the resynthesis. As noted above, <span class="emphasis"><em>iwinsize</em></span> determines the overall latency of the analysis/resynthesis system. In many cases, and especially in the absence of pitch modifications, it will be found that setting <span class="emphasis"><em>iwinsize=ifftsize</em></span> works very well, and offers the lowest latency.
     </p>
         <p>
-      <span class="emphasis"><em>iwintype</em></span> -- The shape of the analysis window. Currently only two choices are implemented:
+      <span class="emphasis"><em>iwintype</em></span> -- The shape of the analysis
+      window. Currently three choices computed windows implemented:
       </p>
         <div class="itemizedlist">
           <ul class="itemizedlist" style="list-style-type: disc; ">
@@ -78,12 +79,24 @@
             <li class="listitem">
               <p>1 = von Hann window</p>
             </li>
+            <li class="listitem">
+              <p>3 = Kaiser window (not in sliding form)</p>
+            </li>
           </ul>
         </div>
         <p>
     </p>
         <p>
-      Both are also supported by the PVOC-EX file format.  The window type is stored as an internal attribute of the fsig, together with the other parameters (see <a class="link" href="pvsinfo.html" title="pvsinfo"><em class="citetitle">pvsinfo</em></a>). Other types may be implemented later on (e.g. the Kaiser window, also supported by PVOC-EX), though an obvious alternative is to enable windows to be defined via a function table. The main issue here is the constraint of f-tables to power-of-two sizes, so this method does not offer a complete solution.  Most users will find the Hamming window meets all normal needs, and can be regarded as the default choice.
+      These are also supported by the PVOC-EX file format.  The window
+      type is stored as an internal attribute of the fsig, together
+      with the other parameters (see <a class="link" href="pvsinfo.html" title="pvsinfo"><em class="citetitle">pvsinfo</em></a>). Other
+      types may be implemented later on; if the value of wintype is
+      strictly negative then the absolute value is used as the number of
+      an f-table which must pre-exist. A significant issue here is the
+      common constraint of f-tables to power-of-two sizes, so this
+      method does not offer a complete solution.  Most users will find
+      the Hamming window meets all normal needs, and can be regarded
+      as the default choice. 
     </p>
         <p>
       <span class="emphasis"><em>iformat</em></span> -- (optional) The analysis format. Currently only one format is implemented by this opcode:
@@ -141,15 +154,15 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm52717204016"></a>
+        <a id="idm46930228116528"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the pvsanal opcode. It uses the file <a class="ulink" href="examples/pvsanal.csd" target="_top"><em class="citetitle">pvsanal.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm52717202224"></a>
+          <a id="idm46930228114672"></a>
           <p class="title">
-            <strong>Example 670. Example of the pvsanal opcode.</strong>
+            <strong>Example 697. Example of the pvsanal opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
@@ -205,7 +218,7 @@ aout      <span class="opc">pvsynth</span> fftblur					<span class="comment">;re
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm52717198240"></a>
+        <a id="idm46930228110384"></a>
         <h2>Credits</h2>
         <p>
       </p>

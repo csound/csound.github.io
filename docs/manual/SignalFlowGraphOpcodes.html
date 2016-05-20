@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Signal Flow Graph Opcodes</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.78.0" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="PartOpcodesOverview.html" title="Part II. Opcodes Overview" />
     <link rel="prev" href="MixerOpcodes.html" title="Mixer Opcodes" />
@@ -38,64 +38,70 @@
         </div>
       </div>
       <p>
-    These opcodes enable the use of signal flow graphs 
-    (AKA asynchronous data flow graphs) in Csound orchestras. 
+    These opcodes enable the use of signal flow graphs
+    (AKA asynchronous data flow graphs) in Csound orchestras.
     Signals flow from the outlets of source instruments
-    and are summed in the inlets of sink instruments. 
-    Signals may be krate, arate, or frate.
-    Any number of outlets may be connected to any number of inlets. 
-    When a new instance of an instrument is instantiated during performance, 
+    and are summed in the inlets of sink instruments.
+    Signals may be krate, arate, frate, or arate arrays.
+    Any number of outlets may be connected to any number of inlets.
+    When a new instance of an instrument is instantiated during performance,
     the declared connections also are automatically instantiated.
   </p>
-      <p>  
-    Signal flow graphs simplify the construction of complex mixers, 
-    signal processing chains, and the like. They also simplify the re-use 
-    of "plug and play" instrument definitions and even entire sub-orchestras, 
+      <p>
+    Signal flow graphs simplify the construction of complex mixers,
+    signal processing chains, and the like. They also simplify the re-use
+    of "plug and play" instrument definitions and even entire sub-orchestras,
     which can simply be #included and then "plugged in" to existing orchestras.
   </p>
       <p>
-    Note that inlets and outlets are defined in instruments without reference 
-    to how they are connected. Connections are defined in the orchestra header. 
+    Note that inlets and outlets are defined in instruments without reference
+    to how they are connected. Connections are defined in the orchestra header.
     It is this separation that enables plug-in instruments.
   </p>
       <p>
-    Inlets must be named. Instruments may be named or numbered, but in 
-    either case each source instrument must be defined 
-    in the orchestra before any of its sinks. Naming instruments makes 
-    it easier to connect outlets and inlets in any higher-level orchestra 
-    to inlets and outlets in any lower-level #included orchestra. 
+    Inlets must be named. Instruments may be named or numbered, but in
+    either case each source instrument must be defined
+    in the orchestra before any of its sinks. Naming instruments makes
+    it easier to connect outlets and inlets in any higher-level orchestra
+    to inlets and outlets in any lower-level #included orchestra.
   </p>
       <p>
-    The signal flow graph opcodes include: 
-    
+    The signal flow graph opcodes include:
+
     <a class="link" href="outleta.html" title="outleta"><em class="citetitle">outleta</em></a>, for
     sending an arate signal from any instrument out a named port.
-    
+
     <a class="link" href="outletk.html" title="outletk"><em class="citetitle">outletk</em></a>, for
     sending a krate signal from any instrument out a named port.
-    
-    <a class="link" href="outletkid.html" title="outletkid"><em class="citetitle">outletkid</em></a>, 
+
+    <a class="link" href="outletkid.html" title="outletkid"><em class="citetitle">outletkid</em></a>,
     similar to outletk, but receiving a krate signal only from an identified instance of a port.
-    
+
     <a class="link" href="outletf.html" title="outletf"><em class="citetitle">outletf</em></a>, for
     sending an frate signal from any instrument out a named port.
-    
+
+    <a class="link" href="outletv.html" title="outletv"><em class="citetitle">outletv</em></a>, for
+    sending an arate array signal from any instrument out a named port.
+
     <a class="link" href="inleta.html" title="inleta"><em class="citetitle">inleta</em></a>, for
     receiving an arate signal through a named port.
-    
+
     <a class="link" href="inletk.html" title="inletk"><em class="citetitle">inletk</em></a>, for
     receiving a krate signal through a named port.
-    
-    <a class="link" href="inletkid.html" title="inletkid"><em class="citetitle">inletkid</em></a>, 
-    similiar to inletk, but transmitting a signal only between inlet and outlet opcodes 
+
+    <a class="link" href="inletkid.html" title="inletkid"><em class="citetitle">inletkid</em></a>,
+    similiar to inletk, but transmitting a signal only between inlet and outlet opcodes
     .
     <a class="link" href="inletf.html" title="inletf"><em class="citetitle">inletf</em></a>, for
     receiving an frate signal through a named port.
-    
+
+    <a class="link" href="inletv.html" title="inletv"><em class="citetitle">inletv</em></a>, for
+    receiving an arate array signal through a named port.
+
     <a class="link" href="connect.html" title="connect"><em class="citetitle">connect</em></a>, for
-    routing the signal from a named outlet in a source instrument 
+    routing the signal from a named outlet in a source instrument
     to a named inlet in a sink instrument.
-    
+
     <a class="link" href="alwayson.html" title="alwayson"><em class="citetitle">alwayson</em></a> for
     permanently activating an instrument from the orchestra header,
     without need of a score statement, e.g. for use as an effect processor
@@ -107,24 +113,24 @@
   </p>
       <p>
     A typical scenario for the use of these opcodes would be something like this.
-    A set of instruments would be defined, each in its own orchestra file, and 
-    each instrument would define inlet ports, outlet ports, and function tables within itself. Such 
-    instruments are completely self-contained. Then, a set of effects processors, such 
-    as equalizers, reverbs, compressors, and so on, would also be defined, each in its 
-    own file. Then, a customized master orchestra would #include the instruments 
+    A set of instruments would be defined, each in its own orchestra file, and
+    each instrument would define inlet ports, outlet ports, and function tables within itself. Such
+    instruments are completely self-contained. Then, a set of effects processors, such
+    as equalizers, reverbs, compressors, and so on, would also be defined, each in its
+    own file. Then, a customized master orchestra would #include the instruments
     and effects to be used, route the outputs of some instruments into one equalizer
     and the outputs of other effects into another equalizer, then route the outputs of
-    both equalizers into a reverb, the output of the reverb into a compressor, and 
+    both equalizers into a reverb, the output of the reverb into a compressor, and
     the output of the compressor into a stereo output soundfile.
   </p>
       <div class="refsect1">
-        <a id="idm52766021232"></a>
+        <a id="idm46930280068192"></a>
         <h2>Example</h2>
         <p>
       Here is an example of the signal flow graph opcodes. It uses the file <a class="ulink" href="examples/signalflowgraph.csd" target="_top"><em class="citetitle">signalflowgraph.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm52766018448"></a>
+          <a id="idm46930280065760"></a>
           <p class="title">
             <strong>Example 10. Example of the signal flow graph opcodes.</strong>
           </p>
