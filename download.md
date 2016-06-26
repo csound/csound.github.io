@@ -27,11 +27,15 @@ The latest versions for each platform are listed below:
 |Portable Native Client (PNaCl)|[6.07.0](https://github.com/csound/csound/releases/download/6.07.0/csound6.07-pnacl.tar.gz)
 |
 |**Other**
-|csound~ for Max|[1.1.3 (Windows 64Bit)](https://github.com/csound/csound/releases/download/6.07.0/Csound_tilde.6.07-win64.zip) <br/> [1.1.3 (OSX)](http://sourceforge.net/projects/csound/files/csound6/Csound6.05/csound~_v1.1.3.pkg/download)
+|csound~ for Max|[1.1.3 (Windows 64Bit)](https://github.com/csound/csound/releases/download/6.07.0/Csound_tilde.6.07-win64.zip) <br/> [1.1.3 (OSX)](https://github.com/csound/csound/releases/download/6.07.0/Csound_tilde.6.07-OSX.zip)
 |
 |**Source**
 |Source Code|[6.07.0 (.zip)](https://github.com/csound/csound/archive/6.07.0.zip) <br/> [6.07.0 (.tar.gz)](https://github.com/csound/csound/archive/6.07.0.tar.gz)
 |
+|**Older versions**
+|Archives|[various](http://http://dream.cs.bath.ac.uk/Csound-archive/OldReleases)
+|
+
 
 ## Building from source
 
