@@ -33,7 +33,7 @@ The latest versions for each platform are listed below:
 |Source Code|[6.07.0 (.zip)](https://github.com/csound/csound/archive/6.07.0.zip) <br/> [6.07.0 (.tar.gz)](https://github.com/csound/csound/archive/6.07.0.tar.gz)
 |
 |**Older versions**
-|Archives|[various](http://http://dream.cs.bath.ac.uk/Csound-archive/OldReleases)
+|Archives|[various](http://dream.cs.bath.ac.uk/Csound-archive/OldReleases)
 |
 
 
