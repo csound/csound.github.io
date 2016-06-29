@@ -8,7 +8,7 @@ categories: site news
 A new international collaboration project, based at the NTNU in
 Trondheim, Norway, and funded by the Norwegian Academy of Sciences,
 has been launched: "Cross adaptive processing as musical intervention:
-Exploring radically new modes of musical interaction in live performance."
+exploring radically new modes of musical interaction in live performance."
 
 The project explores cross-adaptive processing as a drastic
 intervention in the modes of communication between performing
