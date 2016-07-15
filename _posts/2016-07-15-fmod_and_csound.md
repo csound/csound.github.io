@@ -22,7 +22,7 @@ http://forum.cabbageaudio.com/t/latest-beta-packages-available-here-new-release/
 sliders so they can be adequately controlled and automated in fmod.
 
 - when you export your fmod Cabbage plugin, make sure to point fmod to the plugin folder, otherwise it won't be seen.
-- 
+
 - When using your plugins in Unity, make sure to add the exported plugin .dll/.dylib to your Unity project folder. They should 
 be copied to *Assets\Plugins\x86_64* It is important both the .csd files and the libraries are copied to the same location. 
 
