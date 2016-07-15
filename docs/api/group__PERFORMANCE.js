@@ -4,6 +4,7 @@ var group__PERFORMANCE =
     [ "csoundCompile", "group__PERFORMANCE.html#ga04a8791e99d2e82609fc48d04d8008c7", null ],
     [ "csoundCompileArgs", "group__PERFORMANCE.html#ga8986de27b0a1053c8fe31a507566bd5a", null ],
     [ "csoundCompileCsd", "group__PERFORMANCE.html#gafb7f524c0ba48d5a3435c81dc17bec24", null ],
+    [ "csoundCompileCsdText", "group__PERFORMANCE.html#ga900a86a46bd4696958da6b9671d317fe", null ],
     [ "csoundCompileOrc", "group__PERFORMANCE.html#ga00fc1c4745b51f3c42819cc77024e39d", null ],
     [ "csoundCompileTree", "group__PERFORMANCE.html#ga22a3fa663f2124479a0733dae0c6542e", null ],
     [ "csoundDeleteTree", "group__PERFORMANCE.html#gadac36c1f003babab78eeee8ae25bb999", null ],

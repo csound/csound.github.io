@@ -10,7 +10,7 @@ var group__MESSAGES =
     [ "csoundMessageS", "group__MESSAGES.html#ga5f83191e7c516e5155e7ba496a172257", null ],
     [ "csoundMessageV", "group__MESSAGES.html#ga91c7aeda335666d257f412a674246c5d", null ],
     [ "csoundPopFirstMessage", "group__MESSAGES.html#ga9875508c467601f58b2dc002f78ffc33", null ],
-    [ "csoundSetDefaultMessageCallback", "group__MESSAGES.html#gae6de43c17e614ca311f0965ea87f119e", null ],
-    [ "csoundSetMessageCallback", "group__MESSAGES.html#ga45c8cd03e278274966232a12a0297313", null ],
+    [ "csoundSetDefaultMessageCallback", "group__MESSAGES.html#gad3e764795d1ce333cbe13dfe057e3290", null ],
+    [ "csoundSetMessageCallback", "group__MESSAGES.html#gaa4b991c253365c5fbf583f4f8ee85381", null ],
     [ "csoundSetMessageLevel", "group__MESSAGES.html#gac683ad293e19394ef8d184d41ae81f91", null ]
 ];

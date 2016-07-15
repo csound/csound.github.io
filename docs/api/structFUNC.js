@@ -1,5 +1,7 @@
 var structFUNC =
 [
+    [ "argcnt", "structFUNC.html#a8233d117326556533a5c23b8870448bb", null ],
+    [ "args", "structFUNC.html#a908cd108de5ef12c23e6126afa1570ff", null ],
     [ "begin1", "structFUNC.html#a4a05cbc234157c40939c6dcff1422d0c", null ],
     [ "begin2", "structFUNC.html#a3d755ccaa7a8ce30be968dc94ca281ea", null ],
     [ "cpscvt", "structFUNC.html#a557bd23529daf5cdb8335998c43b0bea", null ],

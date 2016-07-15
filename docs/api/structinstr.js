@@ -11,6 +11,7 @@ var structinstr =
     [ "maxalloc", "structinstr.html#a41b4ab00bf239ebd1d2e0a8aecd9c4c4", null ],
     [ "mdepends", "structinstr.html#ab92dc198d6364d1a73989e86fe726452", null ],
     [ "muted", "structinstr.html#a548da9827163f1cfc0fe334ed73a9dc4", null ],
+    [ "nocheckpcnt", "structinstr.html#a40fa348e4228ba164f190e27074a3332", null ],
     [ "nxtinstxt", "structinstr.html#ae0e76ce28c0caef1113a8b9cea4db6d4", null ],
     [ "nxtop", "structinstr.html#ac5e2412b9d61f333ed1adf054bd1aeb4", null ],
     [ "opcode_info", "structinstr.html#a5acc4ea7924c7669d1057924d4862b1f", null ],

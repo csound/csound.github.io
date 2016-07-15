@@ -10,9 +10,5 @@ var structtext =
     [ "outArgCount", "structtext.html#ac2996abd7959aa9c5ae6ab6c08c2f08e", null ],
     [ "outArgs", "structtext.html#a03a3fe0c41e089e7e0f332092b93fc61", null ],
     [ "outlist", "structtext.html#a8ecbf80d766c1005df18ab0c4ea422e4", null ],
-    [ "pftype", "structtext.html#afae0fc83e87b7ed6410a4e80a05ee2ff", null ],
-    [ "xincod", "structtext.html#ac575d36bbdfa85910d085bf30a764c58", null ],
-    [ "xincod_str", "structtext.html#ae63c2457932b19600bc7fdeef2d25b4b", null ],
-    [ "xoutcod", "structtext.html#a56d3d31ce15bb9b5d70a8f39eb8cd538", null ],
-    [ "xoutcod_str", "structtext.html#adfdd48ed692a58a03c810b3499f9c40e", null ]
+    [ "pftype", "structtext.html#afae0fc83e87b7ed6410a4e80a05ee2ff", null ]
 ];

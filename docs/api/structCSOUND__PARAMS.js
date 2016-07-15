@@ -12,6 +12,7 @@ var structCSOUND__PARAMS =
     [ "e0dbfs_override", "structCSOUND__PARAMS.html#abaa437aa05bb3353f3a608b3d44a1ae0", null ],
     [ "hardware_buffer_frames", "structCSOUND__PARAMS.html#a8b7bf07065b816c1e5ed96ae88a82e33", null ],
     [ "heartbeat", "structCSOUND__PARAMS.html#ae83cbf74035ac1251308fb6984d8ccfd", null ],
+    [ "ksmps_override", "structCSOUND__PARAMS.html#af92eb7194fc7d6c3458cd12ea3a0e70c", null ],
     [ "message_level", "structCSOUND__PARAMS.html#af0054c8f58b5e81abc7c028e94c1d81c", null ],
     [ "midi_key", "structCSOUND__PARAMS.html#a148a2ebeff69334126764301cda81895", null ],
     [ "midi_key_cps", "structCSOUND__PARAMS.html#a585439b9f933532ef761fc0844ab4959", null ],

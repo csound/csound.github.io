@@ -14,10 +14,10 @@ var group__RTAUDIOIO =
     [ "csoundGetSpoutSample", "group__RTAUDIOIO.html#gabb0270eec324bdc5e9ffea5a1745b196", null ],
     [ "csoundSetAudioDeviceListCallback", "group__RTAUDIOIO.html#gaeb706b7ce8db543070f6c99e898a7081", null ],
     [ "csoundSetHostImplementedAudioIO", "group__RTAUDIOIO.html#gaa1effc584dd5ae786843606e91a6d181", null ],
-    [ "csoundSetPlayopenCallback", "group__RTAUDIOIO.html#ga95b19e14b6da8a5b788bfec0fe94332e", null ],
-    [ "csoundSetRecopenCallback", "group__RTAUDIOIO.html#ga2fa242e5c3b966c4ed5b4c64d3bfcd2e", null ],
+    [ "csoundSetPlayopenCallback", "group__RTAUDIOIO.html#gad1ab11388448f2eabc801f4e229dac5d", null ],
+    [ "csoundSetRecopenCallback", "group__RTAUDIOIO.html#ga00ab2a7b7d03ef703b92a7c8dd0b0411", null ],
     [ "csoundSetRTAudioModule", "group__RTAUDIOIO.html#gafe9b930d1df945c403293b0c9ebe4c1d", null ],
     [ "csoundSetRtcloseCallback", "group__RTAUDIOIO.html#ga20692d27cd0ad279779fbf19986992ff", null ],
-    [ "csoundSetRtplayCallback", "group__RTAUDIOIO.html#ga7506b62a62c00a8ca6e7fee298de0106", null ],
-    [ "csoundSetRtrecordCallback", "group__RTAUDIOIO.html#ga254026c1fbeb6ef754a895746b95cf2e", null ]
+    [ "csoundSetRtplayCallback", "group__RTAUDIOIO.html#ga6639ab9eef5b3532ca6072b05ac8f6db", null ],
+    [ "csoundSetRtrecordCallback", "group__RTAUDIOIO.html#gabc5988e87d68ad41254ef240c5d857e0", null ]
 ];

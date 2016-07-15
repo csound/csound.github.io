@@ -13,7 +13,7 @@ var group__CONTROLEVENTS =
     [ "csoundKeyPress", "group__CONTROLEVENTS.html#gaf7f77a8741d9735ab7411e704ec01bb0", null ],
     [ "csoundKillInstance", "group__CONTROLEVENTS.html#ga7b2e8b37dd0498a66f891932e22f5595", null ],
     [ "csoundListChannels", "group__CONTROLEVENTS.html#ga5fa6839d0f6bae9a3c5a0e82e4d83a5f", null ],
-    [ "csoundRegisterKeyboardCallback", "group__CONTROLEVENTS.html#ga455ba5e416d5d8b0a31232ff9948eb40", null ],
+    [ "csoundRegisterKeyboardCallback", "group__CONTROLEVENTS.html#gaa8f1c46049f474d4034c6637c1cc0fbb", null ],
     [ "csoundRegisterSenseEventCallback", "group__CONTROLEVENTS.html#ga28e0e3e048d265218f343a1b34741986", null ],
     [ "csoundRemoveKeyboardCallback", "group__CONTROLEVENTS.html#gaf76c15ea689f203251fc379c5c73486b", null ],
     [ "csoundScoreEvent", "group__CONTROLEVENTS.html#ga73c824af3b5c774c4d4de3c652dbce70", null ],

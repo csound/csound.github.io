@@ -1,9 +1,9 @@
 var csdl_8h =
 [
     [ "FLINKAGE", "csdl_8h.html#a21d69c1767c237bc1fe7c136273d2cea", null ],
-    [ "FLINKAGE_BUILTIN", "csdl_8h.html#a8ac71ae3711f60b4164f339677c74ce0", null ],
+    [ "FLINKAGE_BUILTIN", "csdl_8h.html#aad5f74931094623628aa4d71b05bf1d8", null ],
     [ "LINKAGE", "csdl_8h.html#ac81000045b9ef2369406deadc84add97", null ],
-    [ "LINKAGE_BUILTIN", "csdl_8h.html#abb7ea530af23cb6940acfac233341d4a", null ],
+    [ "LINKAGE_BUILTIN", "csdl_8h.html#a3994af6e3319adfe33acd5c5f4a423fa", null ],
     [ "Str", "csdl_8h.html#a8bbe979a5cb850a7644f2c7938835afb", null ],
     [ "csound_fgen_init", "csdl_8h.html#a23619cd26c6ca0738803bc41f8493e26", null ],
     [ "csound_opcode_init", "csdl_8h.html#a5c3464f37fc7adc78951a0ad5c097ac1", null ],
