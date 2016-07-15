@@ -15,6 +15,7 @@ This is only supported with the latest beta release of Cabbage. OSX and Windows 
 A short video showing the simplest of examples can be viewed [here](https://www.youtube.com/watch?v=iw35eeq1yMw&feature=youtu.be). 
 
 **Usage Notes:**
+
 - available for Windows 64 and OSX. Just grab the latest release of Cabbage from:
 http://forum.cabbageaudio.com/t/latest-beta-packages-available-here-new-release/114
 
