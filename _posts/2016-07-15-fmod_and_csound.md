@@ -6,12 +6,12 @@ categories: site news
 ---
 
 [FMOD Studio](http://www.fmod.org/products/), the popular audio middleware for sound designers and composers of interactive music can 
-now host Csound instruments through a new feature available in the latest version of Cabbage. Users can design procedural instruments 
-in Csound, and export them from Cabbage as "FMOD Plugin Sound" plugins. Once exported they can picked up by FMOD Studio and used to
-generate procedural audio for games. Having access to a low-level synthesis engine within FMOD makes it all the more inviting for 
-sound designers looking for a little more from their audio middleware. 
+now host Csound instruments through a new feature available in the latest version of [Cabbage](http://cabbageaudio.com). 
+Users can design procedural instruments in Csound, and export them from Cabbage as "FMOD Plugin Sound" plugins. Once exported 
+they can picked up by FMOD Studio and used to generate procedural audio for games. Having access to a low-level synthesis engine within FMOD makes it all the more inviting for sound designers looking for a little more from their audio middleware. 
 
 This is only supported with the latest beta release of Cabbage. OSX and Windows users can download the latest packages from [here](http://www.fmod.org/products/). 
+
 A short video showing the simplest of examples can be viewed [here](https://www.youtube.com/watch?v=iw35eeq1yMw&feature=youtu.be). 
 
 ### Usage Notes:
@@ -34,4 +34,4 @@ copied to *Plugins\FMODStudio\Binaries\Win64*. Once again, it is vital both the 
 
 - With FMOD in place you will need to add the plugin names (without the file extension) to the FMOD settings. Failure to do so will cause FMOD to complain about missing plugins. 
 
-Questions can be directed to the [Cabbage forum](http://forum.cabbageaudio.com/) or through the project's github page shown below. Note that this beta software and results may vary. Source code is available [here](https://github.com/rorywalsh/csoundfmod), along with some very simple sample instruments. All instruments were written with simplicity in mind. The electricity example comes courtesy of Iain McCurdy.  
+Questions can be directed to the [Cabbage forum](http://forum.cabbageaudio.com/) or through the project's github page shown below. Note that this is beta software and results may vary. Source code is available [here](https://github.com/rorywalsh/csoundfmod), along with some very simple sample instruments. All instruments were written with simplicity in mind and the electricity example comes courtesy of Iain McCurdy. Many thanks go to the FMOD deveopment team who were more than helpful in answering all questions put to them about their plugin API.    
