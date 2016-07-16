@@ -12,7 +12,7 @@ they can picked up by FMOD Studio and used to generate procedural audio for game
 
 This is only supported with the latest beta release of Cabbage. OSX and Windows users can download the latest packages from [here](http://www.fmod.org/products/). 
 
-A short video showing the simplest of examples can be viewed [here](https://www.youtube.com/watch?v=iw35eeq1yMw&feature=youtu.be). 
+Short videos showing the simplest of examples can be viewed [here](https://www.youtube.com/watch?v=iw35eeq1yMw&list=PLwHZ0_jITkgmHtByy0miQApe6BVckYDdk). 
 
 ### Usage Notes:
 
