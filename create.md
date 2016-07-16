@@ -147,6 +147,8 @@ Csound can obviously be used to create game music, but it's also possible to lin
 
 If you wish to embed Csound directly into the Unity game engine you can use [CsoundUnity](http://rorywalsh.github.io/CsoundUnity/). CsoundUnity provides a Unity C# interface to the Csound library meaning Unity can call Csound function directly without having to use a communication protocol such as OSC. 
 
+If you wish to use an audio middlware like FMOD, you can use Cabbage to export Csound based FMOD plugins that can then be used in FMOD, and in a host of different game engine. More details about this approach can be found [here](http://csound.github.io/site/news/2016/07/15/fmod_and_csound)
+
 <br>
 <br>
 <h2 id="webapps">Web Applications</h2>
