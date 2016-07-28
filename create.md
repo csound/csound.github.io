@@ -8,6 +8,8 @@ sidebar_toc:
     name: 'Music Using Csound in a DAW'
   - url: '#realtime_works'
     name: 'Realtime Works'
+  - url: '#realtime_audio_visual '
+    name: 'Realtime Audio Visual Works'
   - url: '#desktop_apps'
     name: 'Desktop Applications'
   - url: '#android_apps'
@@ -66,11 +68,21 @@ Realtime works with Csound can be created in many different ways. The most strai
 
 Csound can also be controlled in real-time using a language wrapper that lets you host the Csound library in another language. Francois Pinot presents one such approach in his article [Real-time Coding Using the Python API](http://www.csounds.com/journal/issue14/realtimeCsoundPython.html)
 
-Another approach is to use the Pure Data csoundapi~ tilde object that ships with Csound. THis lets you harness the power of the Csound library within Pd. You can read more about this approach [here](http://floss.booktype.pro/csound/a-csound-in-pd/) 
+Another approach is to use the Pure Data csoundapi~ tilde object that ships with Csound. This lets you harness the power of the Csound library within Pd. You can read more about this approach [here](http://floss.booktype.pro/csound/a-csound-in-pd/) 
 
 For a more customised approach, users can build hardware with tools such as an [Arduino](https://www.arduino.cc/) electronic prototyping system. THis hardware can then be used to send messages to Csound in realtime. More information on using an Arduino with Csound can be found [here](http://floss.booktype.pro/csound/b-csound-and-arduino/). 
 
 Don't forget that Csound can send and receive OSC(Open Sound Control) messages. This opens a plethora of further options for realtime control. Read more about OSC and Csound [here](http://floss.booktype.pro/csound/a-open-sound-control/)
+
+<br>
+<br>
+<h2 id="realtime_audio_visual">Realtime Audio-Visual Works</h2>
+
+Jean-Pierre Lemoine's AVSynthesis combines the graphics processing power of OpenGL with the audio synthesis and processing capabilities of Csound to create fantastic audio/visual animations. Long time Csound user and Linux guru Dave Philips presents a guide to the system in the following [article](http://csoundjournal.com/issue10/avs-cs-composition.html) 
+
+Another option is to use the ever popular processing framework for developing visual art. Csound can be used directly within processing using the [Csoundo library](https://github.com/rorywalsh/csoundo). This package comes with several examples that should help you in creating complex and visually interesting works and has recently been updated to work with the latest version of Processing.   
+
+Another approach is to use the GEM library within Pure Data through the csoundapi~ tilde object that ships with Csound. And don't that Csound can send and receive OSC(Open Sound Control) messages. This opens a pandora's box of options for realtime adio visual exploration with Csound. Read more about OSC and Csound [here](http://floss.booktype.pro/csound/a-open-sound-control/)
 
 <br>
 <br>
