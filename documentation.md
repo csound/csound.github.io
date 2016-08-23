@@ -24,6 +24,7 @@ Csound text can be written using any source code editor. Csound ships with an ed
 * <a href="http://www.zogotounga.net/comp/csoundx.html" target="_blank">Csound for Emacs
 * <a href="http://blue.kunstmusik.com" target="_blank">Blue</a>
 * <a href="http://cabbageaudio.com/" target="_blank">Cabbage</a>
+* <a href="https://appsto.re/us/9GV8db.i">RunloopSound</a>
 
 
 <h2 id="syntax">Csound syntax</h2>

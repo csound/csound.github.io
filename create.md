@@ -124,6 +124,11 @@ Csound has been used successfully on a host different iOS software. You can chec
 The quickest entry to Csound on iOS is through AudioKit, an open-source audio synthesis, processing, and analysis platform developed with Csound at its core. Users don't need to know Csound in order to start developing with AudioKit. It ships with a host of tools to aid in the creation of iOS based audio software. Check out their website for more details and great demos. [AudioKit](http://audiokit.io/)
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/oJkGgQKUCmM/0.jpg)](https://youtu.be/oJkGgQKUCmM "Video Title")
 
+####RunloopSound
+<img src="/images/RunloopSound-icon.svg" alt="" style="width: 400px;"/>
+RunloopSound is a Csound frontend for iOS devices. It supports most cloud providers, runs on iPads and iPhones alike, and features audio in, MIDI support, as well as syntax highlighting and line numbers.
+<a href="https://appsto.re/us/9GV8db.i"><img src="/images/App-Store-135x40.svg" alt="" /></a>
+
 <br>
 <br>
 <h2 id="raspberry_pi">Embedded Applications with Raspberry Pi/BeagleBone and Csound</h2>

@@ -28,3 +28,7 @@ Learning to use Csound from the command line can be a bit daunting for most begi
 <img src="http://www.zogotounga.net/comp/snapshot.gif" alt="Csound-x" style="width: 400px;"/>
 [Csound-x](http://www.zogotounga.net/comp/csoundx.html) is a set of editing modes and libraries intended to compose music for Csound using the legendary Emacs environment. 
 
+####RunloopSound
+<img src="/images/RunloopSound-icon.svg" alt="" style="width: 400px;"/>
+RunloopSound is a Csound frontend for iOS devices. It supports most cloud providers, runs on iPads and iPhones alike, and features audio in, MIDI support, as well as syntax highlighting and line numbers.
+<a href="https://appsto.re/us/9GV8db.i"><img src="/images/App-Store-135x40.svg" alt="" /></a>
