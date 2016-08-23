@@ -124,6 +124,27 @@ Csound has been used successfully on a host different iOS software. You can chec
 The quickest entry to Csound on iOS is through AudioKit, an open-source audio synthesis, processing, and analysis platform developed with Csound at its core. Users don't need to know Csound in order to start developing with AudioKit. It ships with a host of tools to aid in the creation of iOS based audio software. Check out their website for more details and great demos. [AudioKit](http://audiokit.io/)
 [![IMAGE ALT TEXT](http://img.youtube.com/vi/oJkGgQKUCmM/0.jpg)](https://youtu.be/oJkGgQKUCmM "Video Title")
 
+####RunloopSound
+RunloopSound brings the world of Csound to iOS devices. With a gorgeous user interface and complete integration with all major cloud providers, RunloopSound allows you to keep designing incredible sounds wherever you go.
+
+<img src="/images/RunloopSound-icon.svg" alt="" style="width: 400px;"/>
+
+Let your musical creativity run limitlessly with the power and versatility of Csound, one of the most advanced music production platforms ever created. Access hundreds of audio signal processing algorithms designed by some of the best names in the industry to shape your sounds in ways unimaginable.
+
+#####Features
+
+- Connect microphones and record audio
+- Connect MIDI devices and play from your own synthesizers, samplers and SoundFont libraries
+- Run Csound in real time as an instrument or as an effects module
+- Export your creations as audio files
+- Work on Csound with beautiful syntax highlighting and line numbers
+- Preview audio and video files
+- Instant in-app access to the Csound documentation
+- Native Dropbox support allows you to work from the cloud
+- Import your samples and programs from iCloud, Dropbox, OneDrive, Google Drive and more
+
+<a href="https://appsto.re/us/9GV8db.i"><img src="/images/App-Store-135x40.svg" alt="" /></a>
+
 <br>
 <br>
 <h2 id="raspberry_pi">Embedded Applications with Raspberry Pi/BeagleBone and Csound</h2>
