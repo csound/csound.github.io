@@ -4,12 +4,13 @@ title: Download
 ---
 
 This page provides links to the most current pre-compiled versions
-of Csound for different platforms. You can also find them GitHub:
+of Csound for different platforms. You can also find them on GitHub:
 [https://github.com/csound/csound/releases/latest/](https://github.com/csound/csound/releases/latest/)
 
 <!--
 If you want to update the links to Csound distributions on this page,
-please, do it in the 'download.yaml' file located in '_data' directory'.
+please, do it in the 'download.yaml' file located in '_data' directory':
+https://github.com/csound/csound.github.io/blob/master/_data/
 -->
 
 
