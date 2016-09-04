@@ -3,8 +3,8 @@ layout: sidebar_links
 title: Download
 ---
 
-This page provides links to the most current pre-compiled versions
-of Csound for different platforms. You can also find them on GitHub:
+This page provides download links to the current version of Csound compiled for
+different platforms. You can also find them on GitHub:
 [https://github.com/csound/csound/releases/latest/](https://github.com/csound/csound/releases/latest/)
 
 <!--
@@ -96,7 +96,7 @@ https://github.com/csound/csound.github.io/blob/master/_data/
     <h2 name="building-from-source">Building from source</h2>
     <p>
 	Building Csound from source or from the git develop branch is not very difficult on Linux,
-	and cavn also be done on Mac and Windows. How-to descriptions can be found in the BUILD.md
+	and can also be done on Mac and Windows. How-to descriptions can be found in the BUILD.md
 	file included with the Csound sources, also available online:
 	<a href="https://github.com/csound/csound/blob/develop/BUILD.md">https://github.com/csound/csound/blob/develop/BUILD.md</a>.	
     </p>
