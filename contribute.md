@@ -3,17 +3,17 @@ layout: sidebar_toc
 title: Contribute 
 sidebar_toc:
  - url: '#development'
-  name: 'Core Development'
+   name: 'Core Development'
  - url: '#plugins'
-  name: 'Plugins'
+   name: 'Plugins'
  - url: '#udos'
-  name: 'User-defined Opcodes'
+   name: 'User-defined Opcodes'
  - url: '#documentation'
-  name: 'Documentation'
+   name: 'Documentation'
  - url: '#website'
-  name: 'Website'
+   name: 'Website'
  - url: '#community'
-  name: 'Community'
+   name: 'Community'
 ---
 <h2 id="development">Core Development</h2>
 
