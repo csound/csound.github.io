@@ -35,7 +35,7 @@ title: Home
 
 
 <div class="container">
-  
+    
   <div class="nine columns">
   <div class="padding-right">
    <p>Csound is a sound and music computing system which was originally developed by Barry Vercoe in 1985 at MIT Media Lab. Since the 90s, it has been developed by a group of core developers. A wider community of volunteers contribute examples, documentation, articles, and takes part in the Csound development with bug reports, feature requests and discussions with the core development team. </p>    
@@ -53,10 +53,20 @@ title: Home
   </div>
 
   <div id="main-page-news" class="seven columns links-sidebar">
+    {% assign news_limit = 20 %}
+    {% if site.data.cms.main_page_side_banner.published == 1 %}
+      {% assign news_limit = 10 %}
+      <div id="main-page-side-banner">
+        <h3>{{ site.data.cms.main_page_side_banner.title }}</h3>
+        <p>{{ site.data.cms.main_page_side_banner.text | markdownify }}</p>
+        <img alt="{{ site.data.cms.main_page_side_banner.img_alt }}"
+             src="{{ site.data.cms.main_page_side_banner.img_url }}"/>
+      </div> 
+    {% endif %}
     <h3>Latest News</h3>
     <p>
       <ul>
-        {% for post in site.categories.news sort: date limit:20%}
+        {% for post in site.categories.news sort: date limit:news_limit%}
           <li>{{ post.date | date_to_string }} »&nbsp;<a href="{{ post.url }}">{{ post.title }}</a></li>
         {% endfor %}
       </ul>
