@@ -8,25 +8,39 @@ title: Home
 <div class="fullwidthbanner-container">
   <div class="fullwidthbanner">
     <ul>
+      {% for banner in site.data.cms.main_big_banner %}
+        <li data-fstransition="fade"
+            data-transition="fade"
+            data-slotamount="10"
+            data-masterspeed="300">
 
-      <!-- Slide 1 -->
-      <li data-fstransition="fade" data-transition="fade" data-slotamount="10" data-masterspeed="300">
+          <img src="{{ banner.img_url }}" alt="{{ banner.img_alt }}">
 
-        <img src="images/banner-01.jpg" alt="">
+          <div class="caption title sfb"
+               data-x="center"
+               data-y="165"
+               data-speed="200"
+               data-start="200"
+               data-easing="easeOutExpo">
+            <h2>{{ banner.title }}</h2>
+          </div>
 
-        <div class="caption title sfb" data-x="center" data-y="165" data-speed="200" data-start="200"  data-easing="easeOutExpo">
-          <h2>Csound</h2>
-        </div>
-
-        <div class="caption text sfb" data-x="center" data-y="240" data-speed="200" data-start="400" data-easing="easeOutExpo">
-          <p>A sound and music computing system</p>
+          <div class="caption text sfb"
+               data-x="center"
+               data-y="240"
+               data-speed="200"
+               data-start="400"
+               data-easing="easeOutExpo">
+          {{ banner.text | markdownify }}
         </div>
 
         <div class="caption sfb" data-x="center" data-y="370" data-speed="200" data-start="600" data-easing="easeOutExpo">
-          <a href="/documentation.html" class="slider-button">Get Started</a>
-          <a href="/download.html" class="slider-button">Download</a>
+          {% for b in banner.buttons %}
+            <a href="{{ b.link }}" class="slider-button">{{ b.text }}</a>
+          {% endfor %}
         </div>
       </li>
+      {% endfor  %}
 
     </ul>
   </div>
