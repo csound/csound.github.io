@@ -18,9 +18,9 @@ sidebar_toc:
     name: 'Where to now?'
 ---
 <h2 id="editors">Csound Editors</h2>
-Csound text can be written using any source code editor. Csound ships with an editor called CsoundQT which provide syntax highlighting of text, as well as a vast array of useful functions. While CsoundQT is the default editor for Csound it is not the only Csound-based editor available to users. The following is a list of editors and extensions written specifically for editing Csound source files.
+Csound text can be written using any source code editor. Csound ships with an editor called CsoundQT which provides syntax highlighting of text, as well as a vast array of useful functions. While CsoundQT is the default editor for Csound it is not the only Csound-based editor available to users. The following is a list of editors and extensions written specifically for editing Csound source files.
 
-* <a href="http://csound.github.io/winxound.codeplex.com" target="_blank">WinXound</a>
+* <a href="http://winxound.codeplex.com/" target="_blank">WinXound</a>
 * <a href="http://www.zogotounga.net/comp/csoundx.html" target="_blank">Csound for Emacs
 * <a href="http://blue.kunstmusik.com" target="_blank">Blue</a>
 * <a href="http://cabbageaudio.com/" target="_blank">Cabbage</a>
@@ -28,14 +28,14 @@ Csound text can be written using any source code editor. Csound ships with an ed
 
 
 <h2 id="syntax">Csound syntax</h2>
-All Csound source code is made up of several sections which are defined in XML type tags. The most important sections are the **CsInstruments** and **CsScore** sections. These sections defined how our instruments will sound, and when they start. All Csound code is case sensitive. That means upper-case letters are not the same as lower-case letters. Presented below is the typical document structures for a single unified Csound file. 
+All Csound source code is made up of several sections which are defined in XML type tags. The most important sections are the **CsInstruments** and **CsScore** sections. These sections define how our instruments will sound, and when they start. All Csound code is case sensitive. That means upper-case letters are not the same as lower-case letters. Presented below is the typical document structures for a single unified Csound file. 
 
 <pre><code data-language="csound">
 &lt;CsoundSynthesizer&gt;
 ;all code relating to Csound should be encapsulated between 
 ;&lt;CsoundSynthesizer&gt; and &lt;/CsoundSynthesizer&gt;
 &lt;CsOptions&gt;
-;this sections tell Csound how to interact with various devices and hardware
+;this section tells Csound how to interact with various devices and hardware
 &lt;/CsOptions&gt;
 &lt;CsInstruments&gt;
 ;this section contains instrument definitions
@@ -51,11 +51,11 @@ Csound code can be described in terms of its syntax and grammar. Each section us
 
 <h3>Keywords</h3>
 
-Keywords are special reserved words that have a unique function and meaning. The two most commonly used keywords in the Csound language are **instr** and **endin**. These two keywords define an instrument block which contain instructions on how an instrument functions. Each instrument must be given a unique name or number which follows the **instr** keyword.
+Keywords are special reserved words that have a unique function and meaning. The two most commonly used keywords in the Csound language are **instr** and **endin**. These two keywords define an instrument block which contains instructions on how an instrument functions. Each instrument must be given a unique name or number which follows the **instr** keyword.
 
 <pre><code data-language="csound">
 instr 1
-;to stuff
+;do stuff
 endin
 
 instr DoStuff
@@ -91,12 +91,12 @@ Variables can be given any name so long as they start with an i, k or a. So what
 
 When Csound starts it begins looping very quickly through the code of each of its instruments. For the sake of simplicity we can say that it does this sampling rate times a second. So by default, it will read and process each instrument's code 44100 times a second. Each time it runs through the instrument code it will update its variables. How quickly it updates each of its variables is determined by the variable type. 
 
-**a**-rate variables are updated each time Csound runs through the instrument code. **k-rate** variables are updated less often, and **i**-rate variables are only updated once just as an instrument starts. Why the different update rates? Performance. Each and every update to a variable forces the PC to compute something. And each time it does it use some of its CPU. By limiting the update rate of different variables users can improve the performance of their instruments and avoid unwanted audio dropouts.     
+**a**-rate variables are updated each time Csound runs through the instrument code. **k-rate** variables are updated less often, and **i**-rate variables are only updated once just as an instrument starts. Why the different update rates? Performance. Each and every update to a variable forces the PC to compute something. And each time it does it uses some of its CPU. By limiting the update rate of different variables users can improve the performance of their instruments and avoid unwanted audio dropouts.     
 
 <h3>Opcodes</h3>
 Opcodes do things. They are the brains of each and every Csound instrument. What they do is usually described by their name. **reverb** for example applies a reverb to an audio signal while **random** generates random numbers. Opcodes, like variables can be **a**, **k**, or **i**-rate. 
 
-In their most common form, opcodes are given input arguments and output a result. The rate at which an opcode operates is determined by the output variable name. Outputs always appear to the left of an opcode name, while inputs always appear to the right of the opcode name. The typical syntax for most opcodes in Csound is give as 
+In their most common form, opcodes are given input arguments and output a result. The rate at which an opcode operates is determined by the output variable name. Outputs always appear to the left of an opcode name, while inputs always appear to the right of the opcode name. The typical syntax for most opcodes in Csound is given as 
 
 <pre><code data-language="csound">
 aOutput opcode input1, input2, input3, ...
@@ -104,7 +104,7 @@ aOutput opcode input1, input2, input3, ...
 
 While most opcodes in Csound have outputs as well as inputs, some opcodes only have inputs, while others only have outputs. It should also be noted that not every opcode can operate at a, k and i rate. The simplest way to see what rates are supported by what opcode is by looking at the Csound reference manual. 
 
-Lines of opcodes can be connected to create a signal graph which described the flow of the signal from one place to another. We can see in the next code example how the signal generated by myOcopde1 is being fed into the input of myOpcode2, which is in turn send to the inputs of myOpode3. Remember that the result of each opcode's calculations are passed to its output parameter, which is located to the left of the opcode. These variables can then be used anywhere else in the instrument block.  
+Lines of opcodes can be connected to create a signal graph which describes the flow of the signal from one place to another. We can see in the next code example how the signal generated by myOpcode1 is being fed into the input of myOpcode2, which is in turn sent to the inputs of myOpode3. Remember that the result of each opcode's calculations are passed to its output parameter, which is located to the left of the opcode. These variables can then be used anywhere else in the instrument block.  
 
 <pre><code data-language="csound">
 instr 1
@@ -137,7 +137,7 @@ The vco2 opcode models a voltage controlled oscillator. It provides users with a
 ares vco2 kamp, kcps [, imode] [, kpw] [, kphs] [, inyx]
 </code></pre>
 
-It outputs an a-rate signal and accepts several different input argument. An x before an input argument indicates that i, k or a-rate variables can be used. Square brackets around an input argument means that argument is optional and can be left out. **kamp** determines the amplitude of the signal, while **kcps** set the frequency of the signal. The default type of waveform created by a **vco2** is a sawtooth waveform. The simplest instrument that can be written to use a **vco2** is given below. The **out** opcode is used to output an a-rate signal as audio.  
+It outputs an a-rate signal and accepts several different input arguments. An x before an input argument indicates that i, k or a-rate variables can be used. Square brackets around an input argument means that argument is optional and can be left out. **kamp** determines the amplitude of the signal, while **kcps** sets the frequency of the signal. The default type of waveform created by a **vco2** is a sawtooth waveform. The simplest instrument that can be written to use a **vco2** is given below. The **out** opcode is used to output an a-rate signal as audio.  
 
 <pre><code data-language="csound">
 instr 1
@@ -147,7 +147,7 @@ endin
 </code></pre>
 
 
-In order to start the above instrument, an i-statement will need to be added to the Csound score section. A Csound score isn't all that different to a traditional musical score. In a traditional score, dots are used to provide information to the musician. In Csound the dots are replaced with i-statements, or instrument statements. Each i-statement must contain at least 3 so-called p-fields. The first 3 p-fields have a fixed meaning. The always give the instrument name or number, its start time in seconds, and its duration in seconds. The following i-statement instructs instrument 1 to start playing after 0 seconds and continue playing for 100 second. 
+In order to start the above instrument, an i-statement will need to be added to the Csound score section. A Csound score isn't all that different to a traditional musical score. In a traditional score, dots are used to provide information to the musician. In Csound the dots are replaced with i-statements, or instrument statements. Each i-statement must contain at least 3 so-called p-fields. The first 3 p-fields have a fixed meaning. They always give the instrument name or number, its start time in seconds, and its duration in seconds. The following i-statement instructs instrument 1 to start playing after 0 seconds and continue playing for 100 second. 
 
 <pre><code data-language="csound">
 i1 0 100
@@ -204,9 +204,9 @@ i1 2 1 300 .7
 Another issue in the instrument presented above is that the notes will click each time they sound. To avoid this, an amplitude envelope should be applied to the output signal. The most common envelope used in synthesisers is the ubiquitous ADSR envelope. ADSR stands for Attack, Decay, Sustain and Release. The attack, decay and sustain sections are given in seconds as they relate to time values. The sustain value describes the sustain level which kicks in after the attack and decay have passed. The note's amplitude will rest at this sustain level until it is released. 
 
 
-![ADSR] (/images/ADSR.png "ADSR")
+![ADSR](/images/ADSR.png)
 
-Csound offers several ADSR envelopes. The one used here is **madsr** which is a MIDI ready ADSR. Its syntax is given as:
+Csound offers several ADSR envelopes. The one used here is **madsr**, which is a MIDI ready ADSR. Its syntax is given as:
 
 <pre><code data-language="csound">
 kres madsr iatt, idec, islev, irel
@@ -239,13 +239,13 @@ i1 2 1 300 .7
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
 
-ADSR envelope are often used to control the cut-off frequency of low-pass filters. A low-pass filter blocks high frequency components of a sound, while letting lower frequencies pass. A popular low-pass filter found in Csound is the moogladder filter which is modeled on the famous filters found in Moog synthesisers. Its syntax is given as:
+ADSR envelopes are often used to control the cut-off frequency of low-pass filters. A low-pass filter blocks high frequency components of a sound, while letting lower frequencies pass. A popular low-pass filter found in Csound is the moogladder filter which is modeled on the famous filters found in Moog synthesisers. Its syntax is given as:
 
 <pre><code data-language="csound">
 asig moogladder ain, kcf, kres
 </code></pre>
 
-Its first input argument is an a-rate variable. The next two arguments set the filter cut-off frequency and the amount of resonance to be added to the signal. Both of these can be k-rate variables, thus allowing them to be changed during the note. using the output from the **madsr** to control the filter's cut-off is trivial and can be seen in the next example. 
+Its first input argument is an a-rate variable. The next two arguments set the filter cut-off frequency and the amount of resonance to be added to the signal. Both of these can be k-rate variables, thus allowing them to be changed during the note. Using the output from the **madsr** to control the filter's cut-off frequency is trivial and can be seen in the next example. 
 
 <pre><code data-language="csound">
 &lt;CsoundSynthesizer&gt;
@@ -284,7 +284,7 @@ While the score section offers lots of versatility when it comes to writing and 
 &lt;/CsOptions&gt;
 </code></pre>
 
-Csound will open any available MIDI device. Every time a note is pressed, the note's frequency will be passed to p4, while the note's amplitude will be passed to p5. The previous i-statements used to trigger the instrument can now be removed from the score section and replaced with a single **f0 3600** statement. This is a special statement that instructs Csound to wait and respond to incoming events for 3600 seconds. 3600 was chosen arbitrarily. Just remember that whatever value is used should be long enough to account for a full performance. The last thing you want is Csound stopping half way through your final solo in front of 100,000 adoring fans! Below is the code for a fully functioning MIDI synth. A second, slightly out of tune vco2 has been added
+Csound will open any available MIDI device. Every time a note is pressed, the note's frequency will be passed to p4, while the note's amplitude will be passed to p5. The previous i-statements used to trigger the instrument can now be removed from the score section and replaced with a single **f0 3600** statement. This is a special statement that instructs Csound to wait and respond to incoming events for 3600 seconds. 3600 was chosen arbitrarily. Just remember that whatever value is used should be long enough to account for a full performance. The last thing you want is Csound stopping halfway through your final solo in front of 100,000 adoring fans! Below is the code for a fully functioning MIDI synth. A second, slightly out of tune vco2 has been added
 to provide a little warmth to the overall sound. 
 
 <pre><code data-language="csound">
@@ -357,7 +357,7 @@ i1 0 1000
 
 <h2 id="writing_to_disk">Writing sounds to disk</h2>
 
-There may be times when you will want to record the sounds your instrument's make in realtime. The easiest way to do this is using a combination of the **fout** and **monitor**. **fout** allows one to write an audio vector to file, while **monitor** grabs the contents of Csound's audio outut buffer. Every sound that Csound produces is passed to its output buffer, so it's the go-to place when we need to record audio output. Presented below is a simple instrument taht will record all sounds to a file called
+There may be times when you will want to record the sounds your instrument's make in realtime. The easiest way to do this is using a combination of the **fout** and **monitor**. **fout** allows one to write an audio vector to file, while **monitor** grabs the contents of Csound's audio outut buffer. Every sound that Csound produces is passed to its output buffer, so it's the go-to place when we need to record audio output. Presented below is a simple instrument that will record all sounds to a file called "fout_all.wav"
 
 <pre><code data-language="csound">
 instr 100;read the stereo csound output buffer and write to disk
@@ -402,7 +402,7 @@ Another common error is 'unexpected T_IDENT'. The most common reason for this er
 
 <h2 id="where_to_now">Where to now?</h2>
 
-There are lots of great resources available to those wishing to learn more about Csound. The [Csound FLOSS Manual](http://www.flossmanuals.net/csound/index/) is a comprehensive online textbook for learning and using Csound. It covers all aspects of the language and provide detailed code examples for you to follow. 
+There are lots of great resources available to those wishing to learn more about Csound. The [Csound FLOSS Manual](http://www.flossmanuals.net/csound/index/) is a comprehensive online textbook for learning and using Csound. It covers all aspects of the language and provides detailed code examples for you to follow. 
 
 The official [Csound Reference Manual](docs/manual/index.html) is available online as well as included with most Csound editors and frontends. It contains all information about the usage of the 1500+ opcodes and includes an example of each one in use. That's more than 1500 Csound instruments ready to play straight away!
 
