@@ -564,10 +564,4 @@ included with most Csound editors and frontends. It contains all information abo
 ready to play straight away!
 
 There are also a number of excellent printed books available through a variety of different
-publishers.
-
-[The Csound Book](https://mitpress.mit.edu/books/csound-book)
-[Virtual Sound](http://www.amazon.com/Virtual-Sound-Synthesis-Processing-Practice/dp/8890026146)<br>
-[Csound Power](http://www.amazon.com/Csound-Power-Jim-Aikin/dp/1435460049)<br>
-[Inside Csound](http://www.ibs.it/code/9788888849904/zucco-giorgio/inside-csound-ediz.html)<br>
-[The Audio Programming Book](https://mitpress.mit.edu/books/audio-programming-book)<br>
+publishers. You can check out the [Books](/books.html) section to find more information.
