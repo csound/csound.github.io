@@ -38,19 +38,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46930225640944"></a>
+        <a id="idm47161598973872"></a>
         <h2>Description</h2>
         <p>
       Warp the spectral envelope of a PVS signal by means of shifting and scaling.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46930225639648"></a>
+        <a id="idm47161598972576"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">fsig <span class="command"><strong>pvswarp</strong></span> fsigin, kscal, kshift[, klowest, kmeth, kgain, kcoefs]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm46930225597520"></a>
+        <a id="idm47161598930448"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>fsig</em></span> -- output pv stream
@@ -62,7 +62,7 @@
       <span class="emphasis"><em>kscal</em></span> -- spectral envelope scaling ratio. Values &gt; 1 stretch the envelope and &lt; 1 compress it.
     </p>
         <p>
-      <span class="emphasis"><em>kshift</em></span> -- spectral envelope shift, values &gt; 0 shift the envelope linearly upwards and values &lt; 0 shift it downwards.
+      <span class="emphasis"><em>kshift</em></span> -- spectral envelope shift (in Hz), values &gt; 0 shift the envelope linearly upwards and values &lt; 0 shift it downwards.
     </p>
         <p>
       <span class="emphasis"><em>klowest</em></span> -- lowest frequency shifted (affects only kshift, defaults to 0).
@@ -97,19 +97,21 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm46930225588512"></a>
+        <a id="idm47161598921424"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the pvswarp opcode. It uses the file <a class="ulink" href="examples/pvswarp.csd" target="_top"><em class="citetitle">pvswarp.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm46930225586656"></a>
+          <a id="idm47161598919568"></a>
           <p class="title">
-            <strong>Example 744. Example of the pvswarp opcode.</strong>
+            <strong>Example 748. Example of the pvswarp opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
-            <pre class="programlisting">
+            <div class="refsect1">
+              <a id="idm47161468480736"></a>
+              <pre class="programlisting">
 <span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
 <span class="csdtag">&lt;CsOptions&gt;</span>
 <span class="comment">; Select audio/midi flags here according to platform</span>
@@ -128,24 +130,31 @@
 <span class="oblock">instr</span> 1
 
 kscal <span class="op">=</span> p4
+kshift <span class="op">=</span> p5
 asig  <span class="opc">soundin</span> "fox.wav"			<span class="comment">; get the signal in</span>
 fsig  <span class="opc">pvsanal</span> asig, 1024, 256, 1024, 1	<span class="comment">; analyse it</span>
-ftps  <span class="opc">pvswarp</span> fsig, kscal, 0		<span class="comment">; warp it</span>
+ftps  <span class="opc">pvswarp</span> fsig, kscal, kshift		<span class="comment">; warp it</span>
 atps  <span class="opc">pvsynth</span> ftps			<span class="comment">; synthesise it                      </span>
-      <span class="opc">outs</span> atps, atps
+      <span class="opc">outs</span> atps<span class="op">/</span>2, atps<span class="op">/</span>2
 
 <span class="oblock">endin</span>
 <span class="csdtag">&lt;/CsInstruments&gt;</span>
 <span class="csdtag">&lt;CsScore&gt;</span>
-
+ <span class="comment">;change scale</span>
 <span class="stamnt">i</span> 1 0 3 1
-<span class="stamnt">i</span> 1 + 3 1.5
-<span class="stamnt">i</span> 1 + 3 3
-<span class="stamnt">i</span> 1 + 3 .25
+<span class="stamnt">i</span> 1 + . 1.5
+<span class="stamnt">i</span> 1 + . 3
+<span class="stamnt">i</span> 1 + . .25
+ <span class="comment">;change shift</span>
+<span class="stamnt">i</span> 1 + . 1 0
+<span class="stamnt">i</span> 1 + . . 300
+<span class="stamnt">i</span> 1 + . . 0
+<span class="stamnt">i</span> 1 + . . -300
 <span class="stamnt">e</span>
 <span class="csdtag">&lt;/CsScore&gt;</span>
 <span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
+            </div>
           </div>
         </div>
         <p><br class="example-break" />
@@ -153,7 +162,7 @@ atps  <span class="opc">pvsynth</span> ftps			<span class="comment">; synthesise
         <p>Used with vocal sounds, it will shift the formants and result in a changed vowel timbre, similar to the effect of a singer inhaling helium (the 'donald duck' effect).</p>
       </div>
       <div class="refsect1">
-        <a id="idm46930225581808"></a>
+        <a id="idm47161598914720"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>,
@@ -162,7 +171,7 @@ atps  <span class="opc">pvsynth</span> ftps			<span class="comment">; synthesise
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46930225577840"></a>
+        <a id="idm47161598910752"></a>
         <h2>Credits</h2>
         <p>
       </p>

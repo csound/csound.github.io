@@ -38,53 +38,52 @@
           </p>
       </div>
       <div class="refsect1">
-        <a id="idm46930268466336"></a>
+        <a id="idm47161641897152"></a>
         <h2>Description</h2>
         <p>
       Delays an input signal by one sample.
    </p>
       </div>
       <div class="refsect1">
-        <a id="idm46930268406848"></a>
+        <a id="idm47161641896000"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">ares <span class="command"><strong>delay1</strong></span> asig [, iskip]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm46930268404832"></a>
+        <a id="idm47161641893856"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>iskip</em></span> (optional, default=0) -- initial disposition of delay-loop data space (see <a class="link" href="reson.html" title="reson"><em class="citetitle">reson</em></a>). The default value is 0.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46930268402544"></a>
+        <a id="idm47161641891184"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>delay1</em></span> is a special form of delay that serves to delay the audio signal <span class="emphasis"><em>asig</em></span> by just one sample. It is thus functionally equivalent to the <a class="link" href="delay.html" title="delay"><em class="citetitle">delay</em></a> opcode but is more efficient in both time and space. This unit is particularly useful in the fabrication of generalized non-recursive filters.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46930268399712"></a>
+        <a id="idm47161641888000"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the delay and delay1 opcodes. It uses the file <a class="ulink" href="examples/delay1.csd" target="_top"><em class="citetitle">delay1.csd</em></a>.
 
       </p>
         <div class="example">
-          <a id="idm46930268397968"></a>
+          <a id="idm47161641886128"></a>
           <p class="title">
-            <strong>Example 186. Example of the delay1 opcode.</strong>
+            <strong>Example 188. Example of the delay1 opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
-            <pre class="programlisting">
+            <div class="refsect1">
+              <a id="idm47161490081120"></a>
+              <pre class="programlisting">
 <span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
 <span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
 <span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o delay.wav -W ;;; for file output any platform</span>
+-o delay.wav -W <span class="comment">;;; for file output any platform</span>
 <span class="csdtag">&lt;/CsOptions&gt;</span>
 <span class="csdtag">&lt;CsInstruments&gt;</span>
 
@@ -93,31 +92,25 @@
 <span class="ohdr">kr</span> <span class="op">=</span> 4410
 <span class="ohdr">ksmps</span> <span class="op">=</span> 10
 <span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
 
-<span class="comment">; Instrument #1 -- Silence on one channel</span>
 <span class="oblock">instr</span> 1
-  <span class="comment">; Make a basic sound.</span>
-  abeep <span class="opc">vco</span>    20000, 440, 1
+  <span class="comment">; Make white noise.</span>
+  a0    <span class="opc">random</span> <span class="op">-</span>1, 1
 
-  <span class="comment">; Delay the beep by 1 sample.</span>
-  idlt  <span class="op">=</span>      1<span class="op">/</span><span class="ohdr">sr</span>
-  adel  <span class="opc">delay</span>  abeep, idlt
-  adel1 <span class="opc">delay1</span> abeep 
+  <span class="comment">; Simple Lowpass filter</span>
+  a1    <span class="opc">delay1</span>  a0
+  aout  <span class="op">=</span>       (a0<span class="op">+</span>0.99<span class="op">*</span>a1)<span class="op">/</span>2
 
-  <span class="comment">; Send the beep to the left speaker and</span>
-  <span class="comment">; the difference in the delayes to the right speaker.</span>
-        <span class="opc">outs</span>   abeep, adel<span class="op">-</span>adel1
+  <span class="comment">; output white and filtered</span>
+        <span class="opc">outs</span>    aout, a0
 <span class="oblock">endin</span>
 
 
 <span class="csdtag">&lt;/CsInstruments&gt;</span>
 <span class="csdtag">&lt;CsScore&gt;</span>
-
-<span class="comment">; Table #1, a sine wave.</span>
-<span class="stamnt">f</span> 1 0 16384 10 1
-
 <span class="comment">; Play Instrument #1.</span>
-<span class="stamnt">i</span> 1 0.0 1
+<span class="stamnt">i</span> 1 0.0 3
 
 <span class="stamnt">e</span>
 
@@ -125,13 +118,14 @@
 <span class="csdtag">&lt;/CsScore&gt;</span>
 <span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
+            </div>
           </div>
         </div>
         <p><br class="example-break" />
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46930268394464"></a>
+        <a id="idm47161641881840"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="delay.html" title="delay"><em class="citetitle">delay</em></a>,
@@ -140,7 +134,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46930268391056"></a>
+        <a id="idm47161641877872"></a>
         <h2>Credits</h2>
         <p>Author: Barry Vercoe</p>
         <p>Example written by John ffitch.</p>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>mfb</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
+    <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
+    <link rel="prev" href="metro.html" title="metro" />
+    <link rel="next" href="midglobal.html" title="midglobal" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">mfb</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="metro.html">Prev</a> </td>
+          <th width="60%" align="center">Orchestra Opcodes and Operators</th>
+          <td width="20%" align="right"> <a accesskey="n" href="midglobal.html">Next</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="mfb"></a>
+      <div class="titlepage"></div>
+      <a id="IndexMfb" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">mfb</span>
+        </h2>
+        <p>mfb — 
+     Mel scale filterbank for spectral magnitudes.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47161616188032"></a>
+        <h2>Description</h2>
+        <p>
+       Applies a Mel scale filterbank to an array containing a series of magnitude bins. 
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47161616123776"></a>
+        <h2>Syntax</h2>
+        <pre class="synopsis">kout[] <span class="command"><strong>mfb</strong></span> kin[],klow,khigh,ibands</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47161616121648"></a>
+        <h2>Initialization</h2>
+        <p>
+      <span class="emphasis"><em>ibands</em></span> -- number of bands in the Mel filter bank. Determines the size of
+      the output array.
+         </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47161616119936"></a>
+        <h2>Performance</h2>
+        <p>
+      <span class="emphasis"><em>kout[]</em></span> -- output array containing the MFB with ibands bands. It will be created if it does not exist.
+         </p>
+        <p>
+      <span class="emphasis"><em>kin[]</em></span> -- input array containing the input magnitude bins.
+       </p>
+        <p>
+      <span class="emphasis"><em>klow</em></span> -- lowest frequency (rounded to the nearest bin centre frequency).
+	      </p>
+        <p>
+      <span class="emphasis"><em>khigh</em></span> -- highest lowest frequency (rounded to the nearest bin centre frequency). 
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47161616115536"></a>
+        <h2>Examples</h2>
+        <p>
+      Here is an example of the mfb opcode. It uses the file <a class="ulink" href="examples/mfb.csd" target="_top"><em class="citetitle">mfb.csd</em></a>.</p>
+        <div class="example">
+          <a id="idm47161616113584"></a>
+          <p class="title">
+            <strong>Example 508. Example of the mfb opcode.</strong>
+          </p>
+          <div class="example-contents">
+            <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
+            <div class="refsect1">
+              <a id="idm47161477303680"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="ohdr">ksmps</span> <span class="op">=</span> 64
+<span class="oblock">instr</span> 1
+
+ ifftsize <span class="opc">init</span> 1024
+ ibins <span class="opc">init</span> ifftsize<span class="op">/</span>2
+ kIn[] <span class="opc">init</span> ifftsize
+ kcnt <span class="opc">init</span> 0
+ p3 <span class="op">=</span> <span class="opc">filelen</span>("fox.wav")
+ asig <span class="opc">diskin</span> "fox.wav"
+ kIn <span class="opc">shiftin</span> asig
+ kcnt <span class="op">+</span><span class="op">=</span> <span class="ohdr">ksmps</span>
+ <span class="octrl">if</span> kcnt <span class="op">==</span> ifftsize then
+  kFFT[] <span class="op">=</span> <span class="opc">rfft</span>(kIn)
+  kPows[] <span class="op">=</span> <span class="opc">pows</span>(kFFT)
+  kMFB[] <span class="op">=</span> <span class="opc">log</span>(<span class="opc">mfb</span>(kPows,300,8000,32))
+  kmfcc[] <span class="op">=</span> <span class="opc">dct</span>(kMFB)
+  kcnt <span class="op">=</span> 0
+  kfb <span class="op">=</span> 0
+  while kfb <span class="op">&lt;</span> 32 do
+   <span class="opc">printf</span>("mfcc[<span class="op">%</span>d] <span class="op">=</span> <span class="op">%</span>.3f \n", kfb<span class="op">+</span>1, kfb, kmfcc[kfb])
+   kfb <span class="op">+</span><span class="op">=</span> 1
+  od
+ <span class="octrl">endif</span>
+               
+<span class="oblock">endin</span>
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="stamnt">i</span>1  0 1
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <br class="example-break" />
+      </div>
+      <div class="refsect1">
+        <a id="idm47161616109424"></a>
+        <h2>See Also</h2>
+        <p>
+      <a class="link" href="vectorial.html" title="Vectorial Opcodes"><em class="citetitle"></em>Vectorial opcodes</a>,
+      <a class="link" href="arrayOpcodes.html" title="Array Opcodes"><em class="citetitle"></em>array opcodes</a>,
+      <a class="link" href="dct.html" title="dct"><em class="citetitle">dct</em></a>
+</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47161616105488"></a>
+        <h2>Credits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Author: Victor Lazzarini</td>
+          </tr>
+          <tr>
+            <td>NUI Maynooth</td>
+          </tr>
+          <tr>
+            <td>2016</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>New in version 6.08</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="metro.html">Prev</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Up</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="midglobal.html">Next</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">metro </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Home</a>
+          </td>
+          <td width="40%" align="right" valign="top"> midglobal</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
