@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>spat3d</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="space.html" title="space" />
+    <link rel="next" href="spat3di.html" title="spat3di" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">spat3d</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="space.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="spat3di.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="spat3d"></a>
+      <div class="titlepage"></div>
+      <a id="IndexSpat3d" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">spat3d</span>
+        </h2>
+        <p>spat3d — 
+      Positionne le son d'entrée dans un espace 3D et permet de déplacer le son
+      au taux-k.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887631608896"></a>
+        <h2>Description</h2>
+        <p>
+      Cet opcode positionne le son d'entrée dans un espace 3D, avec simulation
+      facultative d'un espace acoustique, dans différents formats de sortie.
+      <span class="emphasis"><em>spat3d</em></span> permet de déplacer le son au taux-k (ce
+      mouvement est interpolé en interne pour éliminer le bruit de transition
+      (<span class="quote">« <span class="quote">zipper noise</span> »</span>) si <span class="emphasis"><em>sr</em></span> n'est pas égal à
+      <span class="emphasis"><em>kr</em></span>).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887631605392"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">aW, aX, aY, aZ <span class="command"><strong>spat3d</strong></span> ain, kX, kY, kZ, idist, ift, imode, imdel, iovr [, istor]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887631603216"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>idist</em></span> -- Pour les modes 0 à 3, <span class="emphasis"><em>idist</em></span>
+      est la distance du cercle unité en mètres. Pour le mode 4,
+      <span class="emphasis"><em>idist</em></span> est la distance entre les microphones.
+    </p>
+        <p>
+      Les formules suivantes décrivent l'amplitude et le retard comme une fonction
+      de la distance entre la source sonore et le(s) microphone(s) :
+      </p>
+        <div class="literallayout">
+          <p><br />
+amplitude = 1 / (0.1 + distance)</p>
+        </div>
+        <p>
+
+      </p>
+        <div class="literallayout">
+          <p><br />
+delai = distance / 340 (en secondes)</p>
+        </div>
+        <p>
+    </p>
+        <p>
+      La distance peut être calculée par :
+
+      </p>
+        <div class="literallayout">
+          <p><br />
+distance = sqrt(iX^2 + iY^2 + iZ^2)</p>
+        </div>
+        <p>
+
+      Dans le mode 4, la distance est calculée par :
+
+      </p>
+        <div class="literallayout">
+          <p><br />
+distance au micro de gauche = sqrt((iX + idist/2)^2 + iY^2 + iZ^2)<br />
+distance au micro de droite = sqrt((iX - idist/2)^2 + iY^2 + iZ^2)</p>
+        </div>
+        <p>
+    </p>
+        <p>
+      Avec <span class="emphasis"><em>spat3d</em></span> la distance entre la source sonore et un
+      microphone doit valoir au moins (340 * 18) / <span class="emphasis"><em>sr</em></span> mètres.
+      Les distances inférieures fonctionneront mais pourront produire des
+      artefacts dans certains cas. Cette limitation n'existe pas pour
+      <span class="emphasis"><em>spat3di</em></span> et <span class="emphasis"><em>spat3dt</em></span>.
+    </p>
+        <p>
+      Les changements brusques et les discontinuités dans le positionnement de
+      la source sonore peuvent donner des pops ou des clics. Un mouvement très
+      rapide peut aussi dégrader la qualité.
+    </p>
+        <p>
+      <span class="emphasis"><em>ift</em></span> -- Table de fonction contenant les paramètres
+      spatiaux (pour une spatialisation en milieu ouvert, mettre zéro ou
+      une valeur négative). La taille de la table est 54. Les valeurs dans la
+      table sont :
+
+      </p>
+        <div class="informaltable">
+          <table border="1">
+            <colgroup>
+              <col />
+              <col />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Paramètre Spatial</th>
+                <th>Fonction</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0</td>
+                <td>Profondeur de récursion des premières réflexions (0 est la
+              source sonore, 1 est la première réflexion, etc.) pour
+              <span class="emphasis"><em>spat3d</em></span> et <span class="emphasis"><em>spat3di</em></span>. Le
+              nombre d'échos pour quatre murs (avant, arrière, droit, gauche) est :
+              N = (2*R + 2) * R. Si les six murs sont pris en compte :
+              N = (((4*R + 6)*R + 8)*R) / 3</td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Profondeur de récursion des réflexions secondaires (utilisé
+              seulement par <span class="emphasis"><em>spat3dt</em></span>). <span class="emphasis"><em>spat3dt</em></span>
+              passe les premières réflexions et restitue des échos jusqu'à ce
+              niveau. Si la profondeur des premières réflexions est négative,
+              <span class="emphasis"><em>spat3d</em></span> et <span class="emphasis"><em>spat3di</em></span> donneront
+              zéro en sortie, tandis que <span class="emphasis"><em>spat3dt</em></span> commencera
+              sa restitution depuis la source sonore.</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><span class="emphasis"><em>imdel</em></span> pour <span class="emphasis"><em>spat3d</em></span>.
+              Remplace le paramètre de l'opcode s'il est non négatif.</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><span class="emphasis"><em>irlen</em></span> pour <span class="emphasis"><em>spat3dt</em></span>.
+              Remplace le paramètre de l'opcode s'il est non négatif.</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>valeur de <span class="emphasis"><em>idist</em></span>. Remplace le paramètre
+              de l'opcode si elle est &gt;= 0.</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Graine aléatoire (0 - 65535). -1 fait prendre le temps
+              courant comme graine.</td>
+              </tr>
+              <tr>
+                <td>6 - 53</td>
+                <td>paramètre de mur (w = 6 : plafond, w = 14 : plancher,
+              w = 22 : avant, w = 30 : arrière, w = 38 : droite,
+              w = 46 : gauche)</td>
+              </tr>
+              <tr>
+                <td>w + 0</td>
+                <td>Active les réflexions depuis ce mur (0 : non, 1 : oui)</td>
+              </tr>
+              <tr>
+                <td>w + 1</td>
+                <td>Distance entre le mur et l'auditeur (en mètres)</td>
+              </tr>
+              <tr>
+                <td>w + 2</td>
+                <td>Variation aléatoire de la distance du mur (0 à 1) (en unités
+              de 1 / (distance du mur))</td>
+              </tr>
+              <tr>
+                <td>w + 3</td>
+                <td>Niveau de réflexion level (-1 à 1)</td>
+              </tr>
+              <tr>
+                <td>w + 4</td>
+                <td>Fréquence de l'égaliseur paramétrique en Hz.</td>
+              </tr>
+              <tr>
+                <td>w + 5</td>
+                <td>Niveau de l'égaliseur paramétrique (1.0 : pas de filtrage)</td>
+              </tr>
+              <tr>
+                <td>w + 6</td>
+                <td>Q de l'égaliseur paramétrique (0.7071 : pas de résonnance)</td>
+              </tr>
+              <tr>
+                <td>w + 7</td>
+                <td>Mode de l'égaliseur paramétrique (0 : peak EQ, 1 : low shelf, 2 : high shelf)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+    </p>
+        <p>
+      <span class="emphasis"><em>imode</em></span> -- Mode de sortie.
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>0 : format B avec sortie W seulement (mono)
+</p>
+              <div class="literallayout">
+                <p><br />
+aout    =  aW</p>
+              </div>
+              <p>
+        </p>
+            </li>
+            <li class="listitem">
+              <p>1 : format B avec sorties W et Y (stéréo)
+</p>
+              <div class="literallayout">
+                <p><br />
+aleft   =  aW + 0.7071*aY<br />
+aright  =  aW - 0.7071*aY</p>
+              </div>
+              <p>
+        </p>
+            </li>
+            <li class="listitem">
+              <p>2 : format B avec sorties W, X et Y (2D). Peut être
+        converti au format UHJ :
+</p>
+              <div class="literallayout">
+                <p><br />
+aWre, aWim      hilbert aW<br />
+aXre, aXim      hilbert aX<br />
+aYre, aYim      hilbert aY<br />
+aWXr    =  0.0928*aXre + 0.4699*aWre<br />
+aWXiYr  =  0.2550*aXim - 0.1710*aWim + 0.3277*aYre<br />
+aleft   =  aWXr + aWXiYr<br />
+aright  =  aWXr - aWXiYr</p>
+              </div>
+              <p>
+        </p>
+            </li>
+            <li class="listitem">
+              <p>3 : format B avec toutes les sorties (3D)</p>
+            </li>
+            <li class="listitem">
+              <p>4 : Simule une paire de microphones (sortie stéréo)
+</p>
+              <div class="literallayout">
+                <p><br />
+aW      butterlp aW, ifreq      ; les valeurs recommendées pour ifreq<br />
+aY      butterlp aY, ifreq      ; se situent autour de 1000 Hz<br />
+aleft   =  aW + aX<br />
+aright  =  aY + aZ</p>
+              </div>
+              <p>
+        </p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+        <p>
+      Le mode 0 est le moins couteux en capacité de calcul, tandis que le mode 4
+      est le plus gourmand.
+    </p>
+        <p>
+      Dans le mode 4, les filtres passe-bas facultatifs peuvent changer la réponse
+      en fréquence en fonction de la direction. Par exemple, si la source sonore
+      se situe à gauche de l'auditeur, les fréquences élevées sont atténuées dans
+      le canal droit et légèrement augmentées dans le canal gauche. Si l'on
+      utilise pas de filtre, cet effet n'a pas lieu. On peut expérimenter avec
+      d'autres filtres (<span class="emphasis"><em>tone</em></span>, etc.) pour un meilleur effet.
+    </p>
+        <p>
+      Noter que le mode 4 est plutôt destiné à une écoute au casque et qu'il est
+      aussi plus coûteux en calcul que les modes du format B (0 à 3). Dans ce cas,
+      le paramètre <span class="emphasis"><em>idist</em></span> fixe la distance entre les
+      microphones gauche et droit ; pour le casque, des valeurs comprises
+      entre 0.2 et 0.25 sont recommandées, bien que l'on puisse utiliser des
+      valeurs plus grandes, jusqu'à 0.4, pour des effets stéréo larges.
+    </p>
+        <p>
+      On peut trouver plus d'information sur le format B ici :
+      <a class="ulink" href="http://www.york.ac.uk/inst/mustech/3d_audio/ambis2.htm" target="_top"><em class="citetitle">http://www.york.ac.uk/inst/mustech/3d_audio/ambis2.htm</em></a>
+    </p>
+        <p>
+      <span class="emphasis"><em>imdel</em></span> -- Retard maximum pour <span class="emphasis"><em>spat3d</em></span>
+      en secondes. Doit être plus long que le retard de la dernière réflexion
+      (qui dépend des dimensions de la pièce, de la distance à la source et
+      de la profondeur de récursion) ; la formule suivante donne une valeur sûre
+      (bien que parfois surestimée) :
+
+       </p>
+        <div class="literallayout">
+          <p><br />
+imdel = (R + 1) * sqrt(W*W + H*H + D*D) / 340.0</p>
+        </div>
+        <p>
+
+      où R est la profondeur de récursion, W, H et D sont respectivement la
+      largeur, la hauteur et la profondeur de la pièce).
+    </p>
+        <p>
+      <span class="emphasis"><em>iovr</em></span> -- Facteur de suréchantillonnage pour
+      <span class="emphasis"><em>spat3d</em></span> (1 à 8). Les valeurs supérieurs augmentent la
+      qualité au prix d'une consommation plus importante de la mémoire et du
+      processeur. La valeur recommendée est 2.
+    </p>
+        <p>
+      <span class="emphasis"><em>istor</em></span> (facultatif, 0 par défaut) -- S'il est différent
+      de zéro, la phase d'initialisation est ignorée.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887631540752"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>aW, aX, aY, aZ</em></span> -- Signaux de sortie.
+
+      </p>
+        <div class="informaltable">
+          <table border="1">
+            <colgroup>
+              <col />
+              <col />
+              <col />
+              <col />
+              <col />
+              <col />
+            </colgroup>
+            <thead>
+              <tr>
+                <th> </th>
+                <th>mode 0</th>
+                <th>mode 1</th>
+                <th>mode 2</th>
+                <th>mode 3</th>
+                <th>mode 4</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>aW</td>
+                <td>sortie W</td>
+                <td>sortie W</td>
+                <td>sortie W</td>
+                <td>sortie W</td>
+                <td>canal gauche / basses fréq.</td>
+              </tr>
+              <tr>
+                <td>aX</td>
+                <td>0</td>
+                <td>0</td>
+                <td>sortie X</td>
+                <td>sortie X</td>
+                <td>canal gauche / hautes fréq.</td>
+              </tr>
+              <tr>
+                <td>aY</td>
+                <td>0</td>
+                <td>sortie Y</td>
+                <td>sortie Y</td>
+                <td>sortie Y</td>
+                <td>canal droit / basses fréq.</td>
+              </tr>
+              <tr>
+                <td>aZ</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>sortie Z</td>
+                <td>canal droit / hautes fréq.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+    </p>
+        <p>
+      <span class="emphasis"><em>ain</em></span> -- Signal d'entrée.
+    </p>
+        <p>
+      <span class="emphasis"><em>kX, kY, kZ</em></span> -- Coordonnées de la source sonore en (mètres).
+    </p>
+        <p>
+      Si l'on constate un fort ralentissement (jusqu'à 100 fois plus lent), la
+      cause peut venir des nombres dénormalisés (nombres de magnitude trop faible).
+      Ceci vaut aussi pour d'autres opcodes RII comme
+      <a class="link" href="butterlp.html" title="butterlp"><em class="citetitle">butterlp</em></a>,
+      <a class="link" href="pareq.html" title="pareq"><em class="citetitle">pareq</em></a>,
+      <a class="link" href="hilbert.html" title="hilbert"><em class="citetitle">hilbert</em></a>, et bien
+      d'autres. Ces déficits de capacité peuvent être évités en :
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>utilisant l'opcode
+          <a class="link" href="denorm.html" title="denorm"><em class="citetitle">denorm</em></a> sur
+          <span class="emphasis"><em>ain</em></span> avant <span class="emphasis"><em>spat3d</em></span>.</p>
+            </li>
+            <li class="listitem">
+              <p>ajoutant au signal d'entrée une composante continue de
+          faible niveau ou du bruit, par exemple
+          </p>
+              <div class="literallayout">
+                <p>atmp rnd31 1/1e24, 0, 0</p>
+              </div>
+              <p>
+          </p>
+              <div class="literallayout">
+                <p>aW, aX, aY, aZ spa3di ain + atmp, ...</p>
+              </div>
+              <p> ou
+          </p>
+              <div class="literallayout">
+                <p>aW, aX, aY, aZ spa3di ain + 1/1e24, ...</p>
+              </div>
+            </li>
+            <li class="listitem">
+              <p>réduisant <span class="emphasis"><em>irlen</em></span> dans le cas de
+        <span class="emphasis"><em>spat3dt</em></span> (qui n'a pas de signal en entrée). Une valeur
+        de 0.005 convient à la plupart des cas, bien que cela dépende aussi des
+        réglages EQ. Si l'on utilise pas l'égaliseur, <span class="quote">« <span class="quote">irlen</span> »</span> peut
+        rester être mis à 0.</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887631507904"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode spat3d qui produit une sortie stéréo.
+      Il utilise le fichier
+      <a class="ulink" href="examples/spat3d_stereo.csd" target="_top"><em class="citetitle">spat3d_stereo.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887631505872"></a>
+          <p class="title">
+            <strong>Exemple 864. Exemple stéréo de l'opcode spat3d.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887503229216"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o spat3d_stereo.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="op">/</span><span class="op">*</span> Written by Istvan Varga <span class="op">*</span><span class="op">/</span>
+<span class="ohdr">sr</span>      <span class="op">=</span>  48000
+<span class="ohdr">kr</span>      <span class="op">=</span>  1000
+<span class="ohdr">ksmps</span>   <span class="op">=</span>  48
+<span class="ohdr">nchnls</span>  <span class="op">=</span>  2
+
+<span class="op">/</span><span class="op">*</span> room parameters <span class="op">*</span><span class="op">/</span>
+
+idep    <span class="op">=</span>  3    <span class="op">/</span><span class="op">*</span> early reflection depth       <span class="op">*</span><span class="op">/</span>
+
+itmp    <span class="ohdr">ftgen</span>   1, 0, 64, <span class="op">-</span>2,                                           \
+		<span class="op">/</span><span class="op">*</span> depth1, depth2, <span class="opc">max</span> delay, IR length, idist, <span class="ohdr">seed</span> <span class="op">*</span><span class="op">/</span> \
+		idep, 48, <span class="op">-</span>1, 0.01, 0.25, 123,                          \
+		1, 21.982, 0.05, 0.87, 4000.0, 0.6, 0.7, 2, <span class="op">/</span><span class="op">*</span> <span class="opc">ceil</span>  <span class="op">*</span><span class="op">/</span> \
+		1,  1.753, 0.05, 0.87, 3500.0, 0.5, 0.7, 2, <span class="op">/</span><span class="op">*</span> <span class="opc">floor</span> <span class="op">*</span><span class="op">/</span> \
+		1, 15.220, 0.05, 0.87, 5000.0, 0.8, 0.7, 2, <span class="op">/</span><span class="op">*</span> front <span class="op">*</span><span class="op">/</span> \
+		1,  9.317, 0.05, 0.87, 5000.0, 0.8, 0.7, 2, <span class="op">/</span><span class="op">*</span> back  <span class="op">*</span><span class="op">/</span> \
+		1, 17.545, 0.05, 0.87, 5000.0, 0.8, 0.7, 2, <span class="op">/</span><span class="op">*</span> right <span class="op">*</span><span class="op">/</span> \
+		1, 12.156, 0.05, 0.87, 5000.0, 0.8, 0.7, 2  <span class="op">/</span><span class="op">*</span> left  <span class="op">*</span><span class="op">/</span>
+
+	<span class="oblock">instr</span> 1
+
+<span class="op">/</span><span class="op">*</span> some source signal <span class="op">*</span><span class="op">/</span>
+
+a1      <span class="opc">phasor</span> 150              <span class="comment">; oscillator</span>
+a1      <span class="opc">butterbp</span> a1, 500, 200   <span class="comment">; filter</span>
+a1      <span class="op">=</span>  <span class="opc">taninv</span>(a1 <span class="op">*</span> 100)
+a2      <span class="opc">phasor</span> 3                <span class="comment">; envelope</span>
+a2      mirror 40<span class="op">*</span>a2, <span class="op">-</span>100, 5
+a2      limit a2, 0, 1
+a1      <span class="op">=</span>  a1 <span class="op">*</span> a2 <span class="op">*</span> 9000
+
+kazim   <span class="opc">line</span> 0, 2.5, 360        <span class="comment">; move sound source around</span>
+kdist   <span class="opc">line</span> 1, 10, 4           <span class="comment">; distance</span>
+
+<span class="comment">; convert polar coordinates</span>
+kX      <span class="op">=</span>  <span class="opc">sin</span>(kazim <span class="op">*</span> 3.14159 <span class="op">/</span> 180) <span class="op">*</span> kdist
+kY      <span class="op">=</span>  <span class="opc">cos</span>(kazim <span class="op">*</span> 3.14159 <span class="op">/</span> 180) <span class="op">*</span> kdist
+kZ      <span class="op">=</span>  0
+
+a1      <span class="op">=</span>  a1 <span class="op">+</span> 0.000001 <span class="op">*</span> 0.000001     <span class="comment">; avoid underflows</span>
+
+imode   <span class="op">=</span>  1    <span class="comment">; change this to 3 for 8 spk in a cube,</span>
+		<span class="comment">; or 1 for simple stereo</span>
+
+aW, aX, aY, aZ  <span class="opc">spat3d</span> a1, kX, kY, kZ, 1.0, 1, imode, 2, 2
+
+aW      <span class="op">=</span>  aW <span class="op">*</span> 1.4142
+
+<span class="comment">; stereo</span>
+<span class="comment">;</span>
+aL     <span class="op">=</span>  aW <span class="op">+</span> aY              <span class="op">/</span><span class="op">*</span> left                 <span class="op">*</span><span class="op">/</span>
+aR     <span class="op">=</span>  aW <span class="op">-</span> aY              <span class="op">/</span><span class="op">*</span> right                <span class="op">*</span><span class="op">/</span>
+
+<span class="comment">; quad (square)</span>
+<span class="comment">;</span>
+<span class="comment">;aFL     =  aW + aX + aY         /* front left           */</span>
+<span class="comment">;aFR     =  aW + aX - aY         /* front right          */</span>
+<span class="comment">;aRL     =  aW - aX + aY         /* rear left            */</span>
+<span class="comment">;aRR     =  aW - aX - aY         /* rear right           */</span>
+
+<span class="comment">; eight channels (cube)</span>
+<span class="comment">;</span>
+<span class="comment">;aUFL   =  aW + aX + aY + aZ    /* upper front left     */</span>
+<span class="comment">;aUFR   =  aW + aX - aY + aZ    /* upper front right    */</span>
+<span class="comment">;aURL   =  aW - aX + aY + aZ    /* upper rear left      */</span>
+<span class="comment">;aURR   =  aW - aX - aY + aZ    /* upper rear right     */</span>
+<span class="comment">;aLFL   =  aW + aX + aY - aZ    /* lower front left     */</span>
+<span class="comment">;aLFR   =  aW + aX - aY - aZ    /* lower front right    */</span>
+<span class="comment">;aLRL   =  aW - aX + aY - aZ    /* lower rear left      */</span>
+<span class="comment">;aLRR   =  aW - aX - aY - aZ    /* lower rear right     */</span>
+
+	<span class="opc">outs</span> aL, aR
+
+	<span class="oblock">endin</span>
+
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+/* Written by Istvan Varga */
+<span class="stamnt">i</span> 1 0 10
+<span class="stamnt">e</span>
+
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+        <p>
+      Voici un exemple de l'opcode spat3d qui produit une sortie UHJ.
+      Il utilise le fichier
+      <a class="ulink" href="examples/spat3d_UHJ.csd" target="_top"><em class="citetitle">spat3d_UHJ.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887631500416"></a>
+          <p class="title">
+            <strong>Exemple 865. Exemple UHJ de l'opcode spat3d.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm47887503229984"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o spat3d_UHJ.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="op">/</span><span class="op">*</span> Written by Istvan Varga <span class="op">*</span><span class="op">/</span>
+<span class="ohdr">sr</span>	<span class="op">=</span>  48000
+<span class="ohdr">kr</span>	<span class="op">=</span>  750
+<span class="ohdr">ksmps</span>	<span class="op">=</span>  64
+<span class="ohdr">nchnls</span>	<span class="op">=</span>  2
+
+itmp    <span class="ohdr">ftgen</span>   1, 0, 64, <span class="op">-</span>2,                                           \
+		<span class="op">/</span><span class="op">*</span> depth1, depth2, <span class="opc">max</span> delay, IR length, idist, <span class="ohdr">seed</span> <span class="op">*</span><span class="op">/</span> \
+		3, 48, <span class="op">-</span>1, 0.01, 0.25, 123,				\
+		1, 21.982, 0.05, 0.87, 4000.0, 0.6, 0.7, 2, <span class="op">/</span><span class="op">*</span> <span class="opc">ceil</span>  <span class="op">*</span><span class="op">/</span> \
+		1,  1.753, 0.05, 0.87, 3500.0, 0.5, 0.7, 2, <span class="op">/</span><span class="op">*</span> <span class="opc">floor</span> <span class="op">*</span><span class="op">/</span> \
+		1, 15.220, 0.05, 0.87, 5000.0, 0.8, 0.7, 2, <span class="op">/</span><span class="op">*</span> front <span class="op">*</span><span class="op">/</span> \
+		1,  9.317, 0.05, 0.87, 5000.0, 0.8, 0.7, 2, <span class="op">/</span><span class="op">*</span> back  <span class="op">*</span><span class="op">/</span> \
+		1, 17.545, 0.05, 0.87, 5000.0, 0.8, 0.7, 2, <span class="op">/</span><span class="op">*</span> right <span class="op">*</span><span class="op">/</span> \
+		1, 12.156, 0.05, 0.87, 5000.0, 0.8, 0.7, 2  <span class="op">/</span><span class="op">*</span> left  <span class="op">*</span><span class="op">/</span>
+
+	<span class="oblock">instr</span> 1
+
+p3	<span class="op">=</span>  p3 <span class="op">+</span> 1.0
+
+kazim	<span class="opc">line</span> 0.0, 4.0, 360.0		<span class="comment">; azimuth</span>
+kelev	<span class="opc">line</span> 40, p3 <span class="op">-</span> 1.0, <span class="op">-</span>20		<span class="comment">; elevation</span>
+kdist	<span class="op">=</span>  2.0				<span class="comment">; distance</span>
+<span class="comment">; convert coordinates</span>
+kX	<span class="op">=</span>  kdist <span class="op">*</span> <span class="opc">cos</span>(kelev <span class="op">*</span> 0.01745329) <span class="op">*</span> <span class="opc">sin</span>(kazim <span class="op">*</span> 0.01745329)
+kY	<span class="op">=</span>  kdist <span class="op">*</span> <span class="opc">cos</span>(kelev <span class="op">*</span> 0.01745329) <span class="op">*</span> <span class="opc">cos</span>(kazim <span class="op">*</span> 0.01745329)
+kZ	<span class="op">=</span>  kdist <span class="op">*</span> <span class="opc">sin</span>(kelev <span class="op">*</span> 0.01745329)
+
+<span class="comment">; source signal</span>
+a1	<span class="opc">phasor</span> 160.0
+a2	<span class="opc">delay1</span> a1
+a1	<span class="op">=</span>  a1 <span class="op">-</span> a2
+kffrq1	<span class="opc">port</span> 200.0, 0.8, 12000.0
+affrq	<span class="opc">upsamp</span> kffrq1
+affrq	<span class="opc">pareq</span> affrq, 5.0, 0.0, 1.0, 2
+kffrq	<span class="opc">downsamp</span> affrq
+aenv4	<span class="opc">phasor</span> 3.0
+aenv4	limit 2.0 <span class="op">-</span> aenv4 <span class="op">*</span> 8.0, 0.0, 1.0
+a1	<span class="opc">butterbp</span> a1 <span class="op">*</span> aenv4, kffrq, 160.0
+aenv	<span class="opc">linseg</span> 1.0, p3 <span class="op">-</span> 1.0, 1.0, 0.04, 0.0, 1.0, 0.0
+a_	<span class="op">=</span>  4000000 <span class="op">*</span> a1 <span class="op">*</span> aenv <span class="op">+</span> 0.00000001
+
+<span class="comment">; spatialize</span>
+a_W, a_X, a_Y, a_Z	<span class="opc">spat3d</span> a_, kX, kY, kZ, 1.0, 1, 2, 2.0, 2
+
+<span class="comment">; convert to UHJ format (stereo)</span>
+aWre, aWim	<span class="opc">hilbert</span> a_W
+aXre, aXim	<span class="opc">hilbert</span> a_X
+aYre, aYim	<span class="opc">hilbert</span> a_Y
+
+aWXre	<span class="op">=</span>  0.0928<span class="op">*</span>aXre <span class="op">+</span> 0.4699<span class="op">*</span>aWre
+aWXim	<span class="op">=</span>  0.2550<span class="op">*</span>aXim <span class="op">-</span> 0.1710<span class="op">*</span>aWim
+
+aL	<span class="op">=</span>  aWXre <span class="op">+</span> aWXim <span class="op">+</span> 0.3277<span class="op">*</span>aYre
+aR	<span class="op">=</span>  aWXre <span class="op">-</span> aWXim <span class="op">-</span> 0.3277<span class="op">*</span>aYre
+
+	<span class="opc">outs</span> aL, aR
+
+	<span class="oblock">endin</span>
+
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+/* Written by Istvan Varga */
+<span class="stamnt">t</span> 0 60
+
+<span class="stamnt">i</span> 1 0.0 8.0
+<span class="stamnt">e</span>
+
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+        <p>
+      Voici un exemple de l'opcode spat3d qui produit une sortie quadraphonique.
+      Il utilise le fichier
+      <a class="ulink" href="examples/spat3d_quad.csd" target="_top"><em class="citetitle">spat3d_quad.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm47887631497440"></a>
+          <p class="title">
+            <strong>Exemple 866. Exemple quadraphonique de l'opcode spat3d.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm47887503499600"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o spat3d_quad.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="op">/</span><span class="op">*</span> Written by Istvan Varga <span class="op">*</span><span class="op">/</span>
+<span class="ohdr">sr</span>      <span class="op">=</span>  48000
+<span class="ohdr">kr</span>      <span class="op">=</span>  1000
+<span class="ohdr">ksmps</span>   <span class="op">=</span>  48
+<span class="ohdr">nchnls</span>  <span class="op">=</span>  4
+
+<span class="op">/</span><span class="op">*</span> room parameters <span class="op">*</span><span class="op">/</span>
+
+idep    <span class="op">=</span>  3    <span class="op">/</span><span class="op">*</span> early reflection depth       <span class="op">*</span><span class="op">/</span>
+
+itmp    <span class="ohdr">ftgen</span>   1, 0, 64, <span class="op">-</span>2,                                           \
+		<span class="op">/</span><span class="op">*</span> depth1, depth2, <span class="opc">max</span> delay, IR length, idist, <span class="ohdr">seed</span> <span class="op">*</span><span class="op">/</span> \
+		idep, 48, <span class="op">-</span>1, 0.01, 0.25, 123,                          \
+		1, 21.982, 0.05, 0.87, 4000.0, 0.6, 0.7, 2, <span class="op">/</span><span class="op">*</span> <span class="opc">ceil</span>  <span class="op">*</span><span class="op">/</span> \
+		1,  1.753, 0.05, 0.87, 3500.0, 0.5, 0.7, 2, <span class="op">/</span><span class="op">*</span> <span class="opc">floor</span> <span class="op">*</span><span class="op">/</span> \
+		1, 15.220, 0.05, 0.87, 5000.0, 0.8, 0.7, 2, <span class="op">/</span><span class="op">*</span> front <span class="op">*</span><span class="op">/</span> \
+		1,  9.317, 0.05, 0.87, 5000.0, 0.8, 0.7, 2, <span class="op">/</span><span class="op">*</span> back  <span class="op">*</span><span class="op">/</span> \
+		1, 17.545, 0.05, 0.87, 5000.0, 0.8, 0.7, 2, <span class="op">/</span><span class="op">*</span> right <span class="op">*</span><span class="op">/</span> \
+		1, 12.156, 0.05, 0.87, 5000.0, 0.8, 0.7, 2  <span class="op">/</span><span class="op">*</span> left  <span class="op">*</span><span class="op">/</span>
+
+	<span class="oblock">instr</span> 1
+
+<span class="op">/</span><span class="op">*</span> some source signal <span class="op">*</span><span class="op">/</span>
+
+a1      <span class="opc">phasor</span> 150              <span class="comment">; oscillator</span>
+a1      <span class="opc">butterbp</span> a1, 500, 200   <span class="comment">; filter</span>
+a1      <span class="op">=</span>  <span class="opc">taninv</span>(a1 <span class="op">*</span> 100)
+a2      <span class="opc">phasor</span> 3                <span class="comment">; envelope</span>
+a2      mirror 40<span class="op">*</span>a2, <span class="op">-</span>100, 5
+a2      limit a2, 0, 1
+a1      <span class="op">=</span>  a1 <span class="op">*</span> a2 <span class="op">*</span> 9000
+
+kazim   <span class="opc">line</span> 0, 2.5, 360        <span class="comment">; move sound source around</span>
+kdist   <span class="opc">line</span> 1, 10, 4           <span class="comment">; distance</span>
+
+<span class="comment">; convert polar coordinates</span>
+kX      <span class="op">=</span>  <span class="opc">sin</span>(kazim <span class="op">*</span> 3.14159 <span class="op">/</span> 180) <span class="op">*</span> kdist
+kY      <span class="op">=</span>  <span class="opc">cos</span>(kazim <span class="op">*</span> 3.14159 <span class="op">/</span> 180) <span class="op">*</span> kdist
+kZ      <span class="op">=</span>  0
+
+a1      <span class="op">=</span>  a1 <span class="op">+</span> 0.000001 <span class="op">*</span> 0.000001     <span class="comment">; avoid underflows</span>
+
+imode   <span class="op">=</span>  2    <span class="comment">; change this to 3 for 8 spk in a cube,</span>
+		<span class="comment">; or 1 for simple stereo</span>
+
+aW, aX, aY, aZ  <span class="opc">spat3d</span> a1, kX, kY, kZ, 1.0, 1, imode, 2, 2
+
+aW      <span class="op">=</span>  aW <span class="op">*</span> 1.4142
+
+<span class="comment">; stereo</span>
+<span class="comment">;</span>
+<span class="comment">;aL     =  aW + aY              /* left                 */</span>
+<span class="comment">;aR     =  aW - aY              /* right                */</span>
+
+<span class="comment">; quad (square)</span>
+<span class="comment">;</span>
+aFL     <span class="op">=</span>  aW <span class="op">+</span> aX <span class="op">+</span> aY         <span class="op">/</span><span class="op">*</span> front left           <span class="op">*</span><span class="op">/</span>
+aFR     <span class="op">=</span>  aW <span class="op">+</span> aX <span class="op">-</span> aY         <span class="op">/</span><span class="op">*</span> front right          <span class="op">*</span><span class="op">/</span>
+aRL     <span class="op">=</span>  aW <span class="op">-</span> aX <span class="op">+</span> aY         <span class="op">/</span><span class="op">*</span> rear left            <span class="op">*</span><span class="op">/</span>
+aRR     <span class="op">=</span>  aW <span class="op">-</span> aX <span class="op">-</span> aY         <span class="op">/</span><span class="op">*</span> rear right           <span class="op">*</span><span class="op">/</span>
+
+<span class="comment">; eight channels (cube)</span>
+<span class="comment">;</span>
+<span class="comment">;aUFL   =  aW + aX + aY + aZ    /* upper front left     */</span>
+<span class="comment">;aUFR   =  aW + aX - aY + aZ    /* upper front right    */</span>
+<span class="comment">;aURL   =  aW - aX + aY + aZ    /* upper rear left      */</span>
+<span class="comment">;aURR   =  aW - aX - aY + aZ    /* upper rear right     */</span>
+<span class="comment">;aLFL   =  aW + aX + aY - aZ    /* lower front left     */</span>
+<span class="comment">;aLFR   =  aW + aX - aY - aZ    /* lower front right    */</span>
+<span class="comment">;aLRL   =  aW - aX + aY - aZ    /* lower rear left      */</span>
+<span class="comment">;aLRR   =  aW - aX - aY - aZ    /* lower rear right     */</span>
+
+	<span class="opc">outq</span> aFL, aFR, aRL, aRR
+
+	<span class="oblock">endin</span>
+
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+/* Written by Istvan Varga */
+<span class="stamnt">t</span> 0 60
+<span class="stamnt">i</span> 1 0 10
+<span class="stamnt">e</span>
+
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887631495600"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="spat3di.html" title="spat3di"><em class="citetitle">spat3di</em></a>,
+      <a class="link" href="spat3dt.html" title="spat3dt"><em class="citetitle">spat3dt</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887631492592"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Istvan Varga</td>
+          </tr>
+          <tr>
+            <td>2001</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 4.12</p>
+        <p>Mis à jour en avril 2002 par Istvan Varga</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="space.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="spat3di.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">space </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> spat3di</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

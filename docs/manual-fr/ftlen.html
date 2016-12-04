@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ftlen</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="ftgentmp.html" title="ftgentmp" />
+    <link rel="next" href="ftload.html" title="ftload" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ftlen</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ftgentmp.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ftload.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="ftlen"></a>
+      <div class="titlepage"></div>
+      <a id="IndexFtlen" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">ftlen</span>
+        </h2>
+        <p>ftlen — 
+      Retourne la taille d'une table de fonction en mémoire.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887672772000"></a>
+        <h2>Description</h2>
+        <p>
+      Retourne la taille d'une table de fonction en mémoire.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887672770672"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>ftlen</strong></span>(x) (arg de taux-i seulement)</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887672768608"></a>
+        <h2>Exécution</h2>
+        <p>
+      Retourne la taille (nombre de points, en excluant le point de garde) de la
+      table de fonction numéro <span class="emphasis"><em>x</em></span>. Bien que la plupart des
+      unités faisant référence à une table en mémoire prennent automatiquement
+      en compte sa taille (ce qui permet d'avoir des tables de longueur
+      arbitraire), cette fonction retourne la taille actuelle en cas de besoin.
+      Noter que <span class="emphasis"><em>ftlen</em></span> retourne toujours une puissance de
+      deux, ce qui veut dire que le point de garde de la table de fonction (voir
+      <a class="link" href="f.html" title="Instruction f (ou instruction de table de fonction)"><em class="citetitle">Instruction f</em></a>) n'est pas
+      compris. A partir de Csound 3.53, <span class="emphasis"><em>ftlen</em></span> travaille
+      avec les tables de fonction différées (voir
+      <a class="link" href="GEN01.html" title="GEN01"><em class="citetitle">GEN01</em></a>).
+    </p>
+        <p>
+      <span class="emphasis"><em>ftlen</em></span> diffère de <span class="emphasis"><em>nsamp</em></span> en ce sens
+      que <span class="emphasis"><em>nsamp</em></span> donne le nombre de trames d'échantillon
+      chargées, tandis que <span class="emphasis"><em>ftlen</em></span> donne le nombre total
+      d'échantillons sans le point de garde. Par exemple, avec un fichier son
+      stéréo de 10000 échantillons, <span class="emphasis"><em>ftlen()</em></span> retournera
+      19999 (c'est-à-dire un total de 20000 échantillons mono, en excluant le
+      point de garde), mais <span class="emphasis"><em>nsamp()</em></span> retournera 10000.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887672697696"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode ftlen. Il utilise les fichiers
+      <a class="ulink" href="examples/ftlen.csd" target="_top"><em class="citetitle">ftlen.csd</em></a>,
+      <a class="ulink" href="examples/fox.wav" target="_top"><em class="citetitle">fox.wav</em></a> et
+      <a class="ulink" href="examples/beats.wav" target="_top"><em class="citetitle">beats.wav</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm47887672694128"></a>
+          <p class="title">
+            <strong>Exemple 352. Exemple de l'opcode ftlen.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887522150896"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac     <span class="comment">;;;realtime audio out</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o ftlen.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span>   <span class="op">=</span>1
+
+<span class="oblock">instr</span> 1
+
+ift  <span class="op">=</span> <span class="opc">ftlen</span>(p4)
+     <span class="opc">print</span> ift
+aout <span class="opc">loscil3</span> .8, 4, p4
+     <span class="opc">outs</span> aout, aout
+
+<span class="oblock">endin</span> 
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+ 
+<span class="stamnt">f</span> 1 0 0 1 "<span class="stamnt">f</span>ox.wav" 0 0 0 <span class="comment">;Csound computes tablesize</span>
+<span class="stamnt">f</span> 2 0 0 1 "beats.wav" 0 0 0 <span class="comment">;Csound computes tablesize</span>
+
+<span class="stamnt">i</span> 1 0 3 1 <span class="comment">;"fox.wav"</span>
+<span class="stamnt">i</span> 1 3 3 2 <span class="comment">;"beats.wav"</span>
+
+<span class="stamnt">e</span>
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+
+      Le fichier audio <span class="quote">« <span class="quote">fox.wav</span> »</span> contient 121569 échantillons,
+      <span class="quote">« <span class="quote">beats.wav</span> »</span> contient 88200 échantillons.
+      L'opcode <span class="emphasis"><em>ftlen</em></span> retourne des tailles de 121568 et 88199
+      échantillons car il réserve un point pour le point de garde. Sa sortie
+      comprendra des lignes comme celles-ci :
+      </p>
+        <pre class="screen">
+instr 1:  ift = 121568.000
+instr 1:  ift = 88199.000</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887672687232"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="ftchnls.html" title="ftchnls"><em class="citetitle">ftchnls</em></a>, 
+      <a class="link" href="ftlptim.html" title="ftlptim"><em class="citetitle">ftlptim</em></a>, 
+      <a class="link" href="ftsr.html" title="ftsr"><em class="citetitle">ftsr</em></a>, 
+      <a class="link" href="nsamp.html" title="nsamp"><em class="citetitle">nsamp</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887672682240"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Barry L. Vercoe</td>
+          </tr>
+          <tr>
+            <td>MIT</td>
+          </tr>
+          <tr>
+            <td>Cambridge, Massachussetts</td>
+          </tr>
+          <tr>
+            <td>1997</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ftgentmp.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ftload.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ftgentmp </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> ftload</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>setctrl</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="seqtime.html" title="seqtime" />
+    <link rel="next" href="setksmps.html" title="setksmps" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">setctrl</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="seqtime.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="setksmps.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="setctrl"></a>
+      <div class="titlepage"></div>
+      <a id="IndexSetctrl" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">setctrl</span>
+        </h2>
+        <p>setctrl — 
+      Contrôleurs réglettes configurables pour une utilisation en temps réel.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887636194048"></a>
+        <h2>Description</h2>
+        <p>
+      Contrôleurs réglettes configurables pour une utilisation en temps réel.
+      Nécessite Winsound ou TCL/TK. <span class="emphasis"><em>setctrl</em></span> donne à une
+      réglette une valeur spécifique ou bien fixe sa valeur minimale ou
+      maximale.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887636192016"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>setctrl</strong></span> inum, ival, itype</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887636189968"></a>
+        <h2>Initialisation</h2>
+        <p>
+      Noter que cet opcode n'est pas disponible sous Windows à cause de
+      l'implémentation des tuyaux sur ce système.
+    </p>
+        <p>
+      <span class="emphasis"><em>inum</em></span> -- numéro de la réglette à changer
+    </p>
+        <p>
+      <span class="emphasis"><em>ival</em></span> -- valeur à envoyer à la réglette
+    </p>
+        <p>
+      <span class="emphasis"><em>itype</em></span> -- type de la valeur envoyée à la réglette, comme suit :
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>1 -- fixe la valeur courante. La valeur initiale est 0.</p>
+            </li>
+            <li class="listitem">
+              <p>2 -- fixe la valeur minimale. 0 par défaut.</p>
+            </li>
+            <li class="listitem">
+              <p>3 -- fixe la valeur maximale. 127 par défaut.</p>
+            </li>
+            <li class="listitem">
+              <p>4 -- fixe l'étiquette. (Nouveau dans la version 4.09 de Csound)</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887636182912"></a>
+        <h2>Exécution</h2>
+        <p>
+      L'appel de <span class="emphasis"><em>setctrl</em></span> va créer une nouvelle réglette à
+      l'écran. Il n'y a pas de limite théorique au nombre de réglettes. Winsound
+      et TCL/TK n'utilisent que des entiers pour les valeurs de réglette, si bien
+      qu'il peut être nécessaire de re-échelonner les valeurs. Parce que les interfaces
+      graphiques passent habituellement leurs valeurs à une fréquence assez lente,
+      il peut être sage de traiter la sortie du contrôleur avec
+      <span class="emphasis"><em>port</em></span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887636180208"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode setctrl. Il utilise le fichier
+      <a class="ulink" href="examples/setctrl.csd" target="_top"><em class="citetitle">setctrl.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm47887636178336"></a>
+          <p class="title">
+            <strong>Exemple 833. Exemple de l'opcode setctrl.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887504322944"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o setctrl.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="comment">; Initialize the global variables.</span>
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">kr</span> <span class="op">=</span> 4410
+<span class="ohdr">ksmps</span> <span class="op">=</span> 10
+<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+
+<span class="comment">; Instrument #1.</span>
+<span class="oblock">instr</span> 1
+  <span class="comment">; Display the label "Volume" on Slider #1.</span>
+  setctrl 1, "Volume", 4
+  <span class="comment">; Set Slider #1's initial value to 20.</span>
+  setctrl 1, 20, 1
+  
+  <span class="comment">; Capture and display the values for Slider #1.</span>
+  k1 control 1
+  <span class="opc">printk2</span> k1
+
+  <span class="comment">; Play a simple oscillator.</span>
+  <span class="comment">; Use the values from Slider #1 for amplitude.</span>
+  kamp <span class="op">=</span> k1 <span class="op">*</span> 128
+  a1 <span class="opc">oscil</span> kamp, 440, 1
+  <span class="opc">out</span> a1
+<span class="oblock">endin</span>
+
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+<span class="comment">; Table #1, a sine wave.</span>
+<span class="stamnt">f</span> 1 0 16384 10 1
+
+<span class="comment">; Play Instrument #1 for thirty seconds.</span>
+<span class="stamnt">i</span> 1 0 30
+<span class="stamnt">e</span>
+
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+
+      Sa sortie contiendra des lignes comme celles-ci :
+      </p>
+        <pre class="screen">
+ i1    38.00000
+ i1    40.00000
+ i1    43.00000</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887636173376"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="control.html" title="control"><em class="citetitle">control</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887636171296"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : John ffitch</td>
+          </tr>
+          <tr>
+            <td>Université de Bath, Codemist. Ltd.</td>
+          </tr>
+          <tr>
+            <td>Bath, UK</td>
+          </tr>
+          <tr>
+            <td>Mai 2000</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Exemple écrit par Kevin Conder.</p>
+        <p>Nouveau dans la version 4.06 de Csound.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="seqtime.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="setksmps.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">seqtime </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> setksmps</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>midinoteonkey</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="midinoteoncps.html" title="midinoteoncps" />
+    <link rel="next" href="midinoteonoct.html" title="midinoteonoct" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">midinoteonkey</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="midinoteoncps.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="midinoteonoct.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="midinoteonkey"></a>
+      <div class="titlepage"></div>
+      <a id="IndexMidinoteonkey" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">midinoteonkey</span>
+        </h2>
+        <p>midinoteonkey — 
+      Retourne un numéro de note MIDI.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887659154496"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>midinoteonkey</em></span> est conçu pour simplifier
+      l'écriture d'instruments que l'on peut utiliser de manière interchangeable
+      avec une partition ou depuis l'entrée MIDI, et pour faciliter l'adaptation
+      d'instruments écrits à l'origine pour une partition au fonctionnement à
+      partir d'une entrée MIDI.
+    </p>
+        <p>
+      En général, il doit être possible d'écrire des définitions d'instrument
+      qui fonctionnent de la même manière avec une partition et avec le MIDI, que
+      ce soit un fichier MIDI ou une entrée MIDI en , sans utiliser
+      d'instructions conditionnelles supplémentaires, et qui tirent pleinement
+      avantage des messages de voix MIDI.
+    </p>
+        <p>
+      Noter que la liaison entre des intruments de Csound et les numéros de
+      canal MIDI se fait en utilisant l'opcode
+      <a class="link" href="massign.html" title="massign"><em class="citetitle">massign</em></a> lors d'une
+      exécution en . Pour les exécutions de fichier MIDI, les numéros
+      d'instruments sont liés par défaut au canal MIDI + 1, mais ces valeurs par
+      défaut peuvent être modifiées par tout message de changement de programme
+      dans le fichier.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887659149312"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>midinoteonkey</strong></span> xkey, xvelocity</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887659147328"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>xkey</em></span> -- retourne une touche MIDI durant
+      l'activation MIDI, et reste inchangé dans les autres cas.
+    </p>
+        <p>
+      <span class="emphasis"><em>xvelocity</em></span> -- retourne une vélocité MIDI durant
+      l'activation MIDI, et reste inchangé dans les autres cas.
+    </p>
+        <p>
+      Si l'instrument a été activé par une entrée MIDI, l'opcode remplace les
+      valeurs de <span class="emphasis"><em>xkey</em></span> et de <span class="emphasis"><em>xvelocity</em></span>
+      par les valeurs correspondantes venant de l'entrée MIDI. Si l'instrument
+      n'a <span class="emphasis"><em>PAS</em></span> été activé par une entrée MIDI, les valeurs
+      de <span class="emphasis"><em>xkey</em></span> et de <span class="emphasis"><em>xvelocity</em></span>
+      restent inchangées.
+    </p>
+        <p>
+      Grâce à cela, les p-champs de la partition peuvent recevoir leur valeur
+      de données MIDI en entrée durant l'activation MIDI, et de la partition
+      dans les autres cas.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note: Adaptation d'un instrument de Csound activé par partition.">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Adaptation d'un instrument de Csound activé par partition.</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Voir la section <a class="link" href="MidiInterop.html" title="Opcodes pour l'interopérabilité MIDI/partition"><em class="citetitle">Opcodes pour
+        l'Interopérabilité MIDI/Partition</em></a> pour plus de détails
+        sur l'adaptation d'instruments pilotés par partition au MIDI et vice-versa.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887659137936"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode midinoteonkey. Il utilise le fichier
+      <a class="ulink" href="examples/midinoteonkey.csd" target="_top"><em class="citetitle">midinoteonkey.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm47887659136080"></a>
+          <p class="title">
+            <strong>Exemple 519. Exaemple de l'opcode midinoteonkey.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887515225424"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac    -M1 -Q1  <span class="comment">;;;realtime audio out and midi in and midi out</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o midinoteonkey.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+
+<span class="oblock">instr</span> 1	<span class="comment">;uses external midi device</span>
+
+kkey <span class="opc">init</span> 0						<span class="comment">;initialize key number</span>
+kvel <span class="opc">init</span> 0						<span class="comment">;initialize velocity</span>
+<span class="opc">midinoteonkey</span> kkey, kvel				<span class="comment">;MIDI note number value </span>
+<span class="opc">printk2</span>	kkey						<span class="comment">;display the key value when it changes and when key is pressed </span>
+<span class="opc">midion</span> 1, kkey, kvel					<span class="comment">;sent note to external device</span>
+
+<span class="oblock">endin</span>
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="stamnt">f</span> 0 30	<span class="comment">;runs for 30 seconds	</span>
+
+<span class="stamnt">i</span> 1 0 2 62	<span class="comment">; play these notes from score as well</span>
+<span class="stamnt">i</span> 1 + 2 65
+<span class="stamnt">e</span>
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+
+      Sa sortie contiendra des lignes comme celles-ci :
+      </p>
+        <pre class="screen">
+ i1    60.00000
+ i1    69.00000</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887659131040"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="midichannelaftertouch.html" title="midichannelaftertouch"><em class="citetitle">midichannelaftertouch</em></a>, 
+      <a class="link" href="midicontrolchange.html" title="midicontrolchange"><em class="citetitle">midicontrolchange</em></a>, 
+      <a class="link" href="mididefault.html" title="mididefault"><em class="citetitle">mididefault</em></a>, 
+      <a class="link" href="midinoteoff.html" title="midinoteoff"><em class="citetitle">midinoteoff</em></a>, 
+      <a class="link" href="midinoteoncps.html" title="midinoteoncps"><em class="citetitle">midinoteoncps</em></a>, 
+      <a class="link" href="midinoteonoct.html" title="midinoteonoct"><em class="citetitle">midinoteonoct</em></a>, 
+      <a class="link" href="midinoteonpch.html" title="midinoteonpch"><em class="citetitle">midinoteonpch</em></a>, 
+      <a class="link" href="midipitchbend.html" title="midipitchbend"><em class="citetitle">midipitchbend</em></a>, 
+      <a class="link" href="midipolyaftertouch.html" title="midipolyaftertouch"><em class="citetitle">midipolyaftertouch</em></a>, 
+      <a class="link" href="midiprogramchange.html" title="midiprogramchange"><em class="citetitle">midiprogramchange</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887659120320"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Michael Gogins</p>
+        <p>Nouveau dans la version 4.20</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="midinoteoncps.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="midinoteonoct.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">midinoteoncps </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> midinoteonoct</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

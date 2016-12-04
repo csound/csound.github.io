@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>lpshold</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="lpreson.html" title="lpreson" />
+    <link rel="next" href="lpsholdp.html" title="lpsholdp" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">lpshold</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="lpreson.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="lpsholdp.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="lpshold"></a>
+      <div class="titlepage"></div>
+      <a id="IndexLpshold" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">lpshold</span>
+        </h2>
+        <p>lpshold — 
+      Génère un signal de contrôle constitué de segments tenus.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887661841328"></a>
+        <h2>Description</h2>
+        <p>
+      Génère un signal de contrôle constitué de segments tenus délimités par deux ou plus
+      points spécifiés. L'enveloppe entière est parcourue en boucle au taux
+      <span class="emphasis"><em>kfreq</em></span>. Chaque paramètre peut varier au taux-k.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887661839296"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ksig <span class="command"><strong>lpshold</strong></span> kfreq, ktrig, iphase, ktime0, kvalue0  [, kvalue1] [, ktime1] [, kvalue2] [, ktime2] [...]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887661837040"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ksig</em></span> -- Signal de sortie.
+    </p>
+        <p>
+      <span class="emphasis"><em>kfreq</em></span> -- Taux de répétition en Hz ou en fraction de Hz.
+    </p>
+        <p>
+      <span class="emphasis"><em>ktrig</em></span> -- S'il est non nul, redéclanche l'enveloppe depuis le début
+      (voir l'opcode <a class="link" href="trigger.html" title="trigger"><em class="citetitle">trigger</em></a>), avant que
+      le cycle de l'enveloppe ne soit complet.
+    </p>
+        <p>
+      <span class="emphasis"><em>kphase</em></span> -- point de la séquence lue, exprimé comme
+      une fraction d'un cycle (entre 0 et 1).
+    </p>
+        <p>
+      <span class="emphasis"><em>kvalue0...kvalueN</em></span> -- Valeurs des points.
+    </p>
+        <p>
+      <span class="emphasis"><em>ktime0...ktimeN</em></span> -- Durées entre les points ; exprimées
+      en fraction d'une période (voir ci-dessous). La dernière durée indique une
+      ligne entre la valeur finale et la première valeur.
+    </p>
+        <p>
+      <span class="emphasis"><em>lpshold</em></span> est semblable à
+      <a class="link" href="loopseg.html" title="loopseg"><em class="citetitle">loopseg</em></a>, mais il ne peut générer
+      que des segments horizontaux, car il maintient une valeur constante pendant chaque
+      intervalle de temps placé entre <span class="emphasis"><em>ktimeN</em></span> et
+      <span class="emphasis"><em>ktimeN+1</em></span>. Il est utile, entre autres, pour un contrôle mélodique
+      comme celui des vieux séquenceurs analogiques.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887661826288"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode lpshold. Il utilise le fichier
+      <a class="ulink" href="examples/lpshold.csd" target="_top"><em class="citetitle">lpshold.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm47887661824416"></a>
+          <p class="title">
+            <strong>Exemple 482. Exemple de l'opcode lpshold.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887516999184"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac      <span class="comment">;;;realtime audio out</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o lpshold.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+
+<span class="oblock">instr</span> 1
+kfrq  <span class="opc">init</span>    p4  <span class="comment">; frequency of the loop </span>
+ifrac <span class="op">=</span>       p5  <span class="comment">; fraction of frequency at which to force retrigger</span>
+ipan  <span class="op">=</span>       p6  <span class="comment">; pan position</span>
+ktrig <span class="opc">metro</span>   kfrq <span class="op">*</span> ifrac  <span class="comment">; trigger to force restart the loop</span>
+iphs  <span class="op">=</span>       0   <span class="comment">; initial phase of the loop</span>
+<span class="comment">; a loop of midi note numbers:   note duration etc...</span>
+knote <span class="opc">lpshold</span> kfrq, ktrig, iphs, 61,  0.0625,  60, 0.9375,   61, 1, 58, 1, \
+63, 2, 65, 3
+aenv  <span class="opc">linseg</span> 0,0.01,1,p3<span class="op">-</span>0.11,1,0.1,0   <span class="comment">; amplitude envelope</span>
+krnd  <span class="opc">rspline</span> <span class="op">-</span>0.05,0.05,0.5,1 <span class="comment">; random detune</span>
+asig  <span class="opc">gbuzz</span>   0.2<span class="op">*</span>aenv, <span class="opc">cpsmidinn</span>(knote<span class="op">+</span>krnd), 30, 1, 0.5, 1 
+      <span class="opc">outs</span>    asig<span class="op">*</span>ipan, asig<span class="op">*</span>(1<span class="op">-</span>ipan)
+<span class="oblock">endin</span>
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="comment">; cosine wave.</span>
+<span class="stamnt">f</span> 1 0 16384 11 1
+
+<span class="comment">; 3 layers of the loop are played, each at a different speed, </span>
+<span class="comment">; - with different retriggering rate, and pan location.</span>
+<span class="stamnt">i</span> 1 0 60 0.5   [8/10] 0.5
+<span class="stamnt">i</span> 1 0 60 0.375 [8/11] 0.1
+<span class="stamnt">i</span> 1 0 60 0.25  [8/13] 0.9
+<span class="stamnt">e</span>
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887661820112"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="loopseg.html" title="loopseg"><em class="citetitle">loopseg</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887661818000"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Gabriel Maldonado</p>
+        <p>Nouveau dans la Version 4.13</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="lpreson.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="lpsholdp.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">lpreson </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> lpsholdp</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

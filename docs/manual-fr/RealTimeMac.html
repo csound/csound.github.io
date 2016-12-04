@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Mac OSX</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="Using.html" title="Utiliser Csound" />
+    <link rel="prev" href="RealTimeLinux.html" title="Entrées/sorties en temps réel sous Linux" />
+    <link rel="next" href="RealTimeWindows.html" title="Windows" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Mac OSX</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="RealTimeLinux.html">Précédent</a> </td>
+          <th width="60%" align="center">Utiliser Csound</th>
+          <td width="20%" align="right"> <a accesskey="n" href="RealTimeWindows.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="section">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="RealTimeMac"></a>Mac OSX</h2>
+          </div>
+        </div>
+      </div>
+      <h3><a id="idm47887709676144"></a>Real-time Audio</h3>
+      <p>
+    Sur OSX on peut utiliser <span class="emphasis"><em>PortAudio</em></span> (par défaut), 
+    <span class="emphasis"><em>auhal</em></span> (ou coreaudio) ou bien les modules audio temps
+    réel de <span class="emphasis"><em>Jack</em></span>. Le module auhal est un module natif d'OSX
+    avec un faible délai de latence, mais il peut ne pas fonctionner avec
+    certains équipements externes. Le module de Jack peut être interconnecté
+    avec d'autres applications, mais il nécessite l'installation de JackOSX
+    pour fonctionner. Pour activer un module temps réel, on peut utiliser l'option
+    <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusPlusRtaudio"><em class="citetitle">-+rtaudio</em></a>
+    avec la valeur <span class="emphasis"><em>portaudio</em></span>, <span class="emphasis"><em>auhal</em></span>,
+    ou <span class="emphasis"><em>jack</em></span>. La valeur <span class="emphasis"><em>portaudio</em></span> est
+    activée par défaut si l'on indique pas de valeur.
+  </p>
+      <p>
+    Il faut aussi indiquer le périphérique son que l'on veut utiliser et
+    spécifier que l'on veut générer une sortie audio en temps réel au lieu d'une
+    sortie disque. Pour ce faire on doit utiliser l'option
+    <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusLowerOdac"><em class="citetitle">-odac</em></a>
+    ou <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusLowerOdac"><em class="citetitle">-o
+    dac</em></a> qui dit à Csound d'envoyer sa sortie vers les
+    convertisseurs numériques analogiques plutôt que dans un fichier. En ajoutant
+    un nombre après l'option (par exemple -odac2), on peut choisir le numéro du
+    périphérique que l'on veut utiliser. Pour trouver les périphériques du
+    système disponibles, on utilise un grand nombre hors limites (par exemple
+    -odac99), et Csound rapportera une erreur ainsi que la liste des périphériques
+    disponibles. Cette convention de numérotation fonctionne avec portaudio et
+    auhal, mais pour Jack, on doit passer le nom de la sortie désirée précédée
+    de deux points (par exemple -odac:system:playback_).
+  </p>
+      <p>
+    L'entrée audio en temps réel est activée par
+    <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusLowerIadc"><em class="citetitle">-iadc</em></a>.
+    Csound écoute alors sur les entrées audio en temps réel. On peut à nouveau
+    sélectionner le périphérique par son numéro (ou son nom), et tester les
+    périphériques disponibles en utilisant un nombre hors limites. Noter que
+    pour les entrées on utilise 'adc' au lieu de 'dac'. Il faut s'assurer que
+    l'entrée correspondante est sélectionnée dans le panneau de contrôle de la
+    carte son.
+  </p>
+      <h3><a id="idm47887709621600"></a>MIDI en temps réel</h3>
+      <p>
+    Pour activer le MIDI en temps réel sur OSX, on utilise l'option
+    <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusUpperM"><em class="citetitle">-M</em></a> pour
+    l'entrée MIDI et l'option <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusUpperQ"><em class="citetitle">-Q</em></a> pour la sortie
+    MIDI. Il peut être nécessaire d'indiquer un numéro de périphérique après
+    l'option (par exemple -M2), et là encore, on peut trouver les périphériques
+    disponibles en donnant un nombre hors limites.
+  </p>
+      <p>
+    Csound utilise par défaut le module PortMidi, mais il y a aussi un module
+    coremidi natif que l'on peut activer avec l'option :
+  </p>
+      <div class="literallayout">
+        <p><br />
+    -+rtmidi=cmidi<br />
+  </p>
+      </div>
+      <p>
+    Le module coremidi ne supporte actuellement que l'entrée MIDI.
+  </p>
+      <p>
+    Un ensemble d'options typique pour activer les entrée-sorties audio et MIDI
+    en temps réel ressemble à ceci :
+  </p>
+      <div class="literallayout">
+        <p><br />
+    -+rtmidi=cmidi -M1 -+rtaudio=auhal-odac3 -iadc3<br />
+  </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="RealTimeLinux.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Using.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="RealTimeWindows.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Entrées/sorties en temps réel sous Linux </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Windows</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

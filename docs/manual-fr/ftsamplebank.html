@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ftsamplebank</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="ftmorf.html" title="ftmorf" />
+    <link rel="next" href="ftsave.html" title="ftsave" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ftsamplebank</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ftmorf.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ftsave.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="ftsamplebank"></a>
+      <div class="titlepage"></div>
+      <a id="Indexftsamplebank" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">ftsamplebank</span>
+        </h2>
+        <p>ftsamplebank — 
+      Lit les fichiers son d'un répertoire.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887672491184"></a>
+        <h2>Description</h2>
+        <p>
+      Lit les fichiers son d'un répertoire et les charge dans une série de
+      table de fonction GEN01. 
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887672416096"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">iNumberOfFile <span class="command"><strong>ftsamplebank</strong></span> SDirectory, iFirstTableNumber, iTrigger, iSkipTime, iFormat, iChannel,</pre>
+        <pre class="synopsis">kNumberOfFile <span class="command"><strong>ftsamplebank</strong></span> SDirectory, kFirstTableNumber, kTrigger, kSkipTime, kFormat, kChannel,</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887672412656"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>SDirectory</em></span> -- une chaîne de caractères identifiant
+      le répertoire à parcourir.
+    </p>
+        <p>
+      <span class="emphasis"><em>FirstTableNumber</em></span> -- fixe le numéro de la première
+      table dans laquelle un fichier son sera chargé.
+    </p>
+        <p>
+      <span class="emphasis"><em>Trigger</em></span> -- les tables sont mises à jour lorsqu'il
+      vaut 1.
+    </p>
+        <p>
+      <span class="emphasis"><em>SkipTime</em></span> -- la lecture commence à
+      <span class="emphasis"><em>skiptime</em></span> secondes dans le fichier.
+    </p>
+        <p>
+      <span class="emphasis"><em>Format</em></span> -- indique le format des données du fichier
+      audio :
+        </p>
+        <div class="literallayout">
+          <p><br />
+1 - caractères signés sur 8 bit       4 - entiers courts sur 16 bit<br />
+2 - octets A-law                      5 - entiers longs sur 32 bit <br />
+3 - octets U-law                      6 - flottants sur 32 bit<br />
+        </p>
+        </div>
+        <p>
+    </p>
+        <p>
+      <span class="emphasis"><em>Channel</em></span> -- numéro du canal à lire. 0 signifie tous
+      les canaux.
+    </p>
+        <p>
+      Si <span class="emphasis"><em>Format</em></span> = 0 le format des échantillons est déduit
+      de l'en-tête du fichier ou, par défaut, de l'option de ligne de commande
+      <a class="link" href="CommandFlags.html#FlagsMinusLowerO"><em class="citetitle">-o</em></a> de
+      Csound.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887672402304"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>iNumberOfFile</em></span> -- le nombre de tables créées.
+    </p>
+        <p>
+      <span class="emphasis"><em>kNumberOfFile</em></span> -- le nombre de tables créées.
+    </p>
+      </div>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note: Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.png" />
+            </td>
+            <th align="left">Note</th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>
+        Le chargement au taux-k d'un grand nombre de fichiers dans des tables
+        de fonction peut causer des interruptions dans le flux audio.   
+      </p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887672398352"></a>
+        <h2>Exemple</h2>
+        <p>
+      Cet exemple montre ftsamplebank cherchant des échantillons à un endroit
+      donné. Il charge tous les échantillons qu'il trouve dans des tables de
+      fonction GEN01 et les joue ensuite en séquence, un par seconde. Il utilise
+      le fichier
+      <a class="ulink" href="examples/ftsamplebank.csd" target="_top"><em class="citetitle">ftsamplebank.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887672396016"></a>
+          <p class="title">
+            <strong>Exemple 355. Exemple de l'opcode ftsamplebank.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm47887522326688"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac<span class="comment">;;RT audio out</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o diskin.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+
+<span class="comment">;load all samples in a given directory into function tables and play them using instrument 1000</span>
+<span class="oblock">instr</span> 1
+   iFirstTableNumber <span class="op">=</span> 60<span class="comment">;</span>
+   iFileCount <span class="opc">init</span> 0
+   iTrig <span class="op">=</span> 1
+   iNumberOfFiles <span class="opc">ftsamplebank</span> ".<span class="op">/</span>examples<span class="op">/</span>", iFirstTableNumber, iTrig, 0, 4, 1
+
+   until iFileCount<span class="op">&gt;=</span>iNumberOfFiles do
+	<span class="opc">event_i</span> "i", 1000, iFileCount, 1, iFirstTableNumber<span class="op">+</span>iFileCount
+	iFileCount <span class="op">=</span> iFileCount<span class="op">+</span>1
+   enduntil
+
+<span class="oblock">endin</span>
+
+<span class="oblock">instr</span> 1000
+   iTable <span class="op">=</span> p4
+   aOut <span class="opc">loscil3</span> 1, 1, iTable, 1, 0<span class="comment">;</span>
+   <span class="opc">outs</span> aOut, aOut
+<span class="oblock">endin</span> 
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="stamnt">i</span>1 0 100
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887672394096"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Rory Walsh</td>
+          </tr>
+          <tr>
+            <td>2015</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ftmorf.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ftsave.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ftmorf </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> ftsave</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ATSsinnoi</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="ATSpartialtap.html" title="ATSpartialtap" />
+    <link rel="next" href="babo.html" title="babo" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ATSsinnoi</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ATSpartialtap.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="babo.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="ATSsinnoi"></a>
+      <div class="titlepage"></div>
+      <a id="IndexATSsinnoi" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">ATSsinnoi</span>
+        </h2>
+        <p>ATSsinnoi — 
+      Utilise les données d'un fichier d'analyse ATS pour réaliser une
+      resynthèse.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887694696704"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>ATSsinnoi</em></span> lit les données d'un fichier ATS et
+      utilise cette information pour synthétiser à la fois des sinusoïdes et
+      du bruit.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887694694880"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ar <span class="command"><strong>ATSsinnoi</strong></span> ktimepnt, ksinlev, knzlev, kfmod, iatsfile, ipartials \
+          [, ipartialoffset, ipartialincr]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887694692656"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>iatsfile</em></span> – le numéro ATS (n dans ats.n) ou le nom
+      entre guillemets du fichier d'analyse créé avec
+      <a class="ulink" href="http://www-ccrma.stanford.edu/~juan/ATS.html" target="_top"><em class="citetitle">ATS</em></a>.
+    </p>
+        <p>
+      <span class="emphasis"><em>ipartials</em></span> – nombre de partiels qui seront utilisés
+      dans la resynthèse (le bruit a un maximum de 25 bandes).
+    </p>
+        <p>
+      <span class="emphasis"><em>ipartialoffset</em></span> (optional) – (facultatif) – le premier
+      partiel utilisé (0 par défaut).
+    </p>
+        <p>
+      <span class="emphasis"><em>ipartialincr</em></span> (optional) – (facultatif) – fixe le pas
+      d'incrémentation que ces opcodes de synthèse utilisent pour compter les
+      composants bins à partir de <span class="emphasis"><em>ipartialoffset</em></span> dans la
+      resynthèse (1 par défaut).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887694686288"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ktimepnt</em></span> – Le pointeur de temps en secondes utilisé
+      comme indice sur le fichier ATS. Est utilisé pour
+      <span class="emphasis"><em>ATSsinnoi</em></span> exactement de la même manière que pour
+      <a class="link" href="pvoc.html" title="pvoc"><em class="citetitle">pvoc</em></a>.
+    </p>
+        <p>
+      <span class="emphasis"><em>ksinlev</em></span> - contrôle le niveau des sinus dans le générateur
+      unitaire <span class="emphasis"><em>ATSsinnoi</em></span>. Une valeur de 1 donne des ondes sinus
+      à plein volume.
+    </p>
+        <p>
+      <span class="emphasis"><em>knzlev</em></span> - contrôle le niveau des composants du bruit dans
+      le générateur unitaire <span class="emphasis"><em>ATSsinnoi</em></span>. Une valeur de 1 donne
+      du bruit à plein volume.
+    </p>
+        <p>
+      <span class="emphasis"><em>kfmod</em></span> – une entrée pour faire une transpositon de
+      hauteur ou une modulation de fréquence sur tous les partiels synthétisés ;
+      si aucune modulation de fréquence ou aucun changement de hauteur ne sont
+      désirés, il faut utiliser 1 pour cette valeur.
+    </p>
+        <p>
+      <span class="emphasis"><em>ATSsinnoi</em></span> lit les données d'un fichier ATS et
+      utilise cette information pour synthétiser à la fois des sinusoïdes et
+      du bruit. L'énergie du bruit pour chaque bande est distribuée également
+      entre les partiels qui tombent dans cette bande. Chaque partiel est ensuite
+      synthétisé, avec sa composante de bruit. Chaque composante de bruit est
+      ensuite modulée par le partiel correspondant pour être placée au bon endroit
+      dans le spectre de fréquence. Les niveaux du bruit et des partiels sont
+      contrôlables individuellement. Voir la page web
+      <a class="ulink" href="http://www-ccrma.stanford.edu/~juan/ATS.html" target="_top"><em class="citetitle">ATS</em></a>
+      pour plus d'information sur la synthèse sinnoi. Une analyse ATS diffère
+      d'une analyse pvanal du fait qu'ATS trace les partiels et calcule l'énergie
+      du bruit dans le son étant analysé. Pour plus d'information sur l'analyse ATS,
+      lire la description de Juan Pampin sur la page web
+      <a class="ulink" href="http://www-ccrma.stanford.edu/~juan/ATS.html" target="_top"><em class="citetitle">ATS</em></a>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887694674848"></a>
+        <h2>Exemples</h2>
+        <pre class="programlisting">
+  ktime   <span class="opc">line</span>       0, p3, 2.5
+  asig    <span class="opc">ATSsinnoi</span>  ktime, 1, 1, 1, "beats.ats", 42</pre>
+        <p>
+      Nous synthétisons ici à la fois le bruit et les ondes sinus (les 42 partiels)
+      contenus dans "beats.ats". Les volumes relatifs du bruit et des
+      partiels sont inchangés (chacun est fixé à 1).
+    </p>
+        <p>
+      Voici un autre exemple de l'opcode ATSsinnoi. Il utilise le fichier
+      <a class="ulink" href="examples/ATSsinnoi.csd" target="_top"><em class="citetitle">ATSsinnoi.csd</em></a>.
+    </p>
+        <div class="example">
+          <a id="idm47887694669856"></a>
+          <p class="title">
+            <strong>Exemple 73. Exemple de l'opcode ATSsinnoi.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm47887532770768"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac     <span class="comment">;;;RT audio out</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o ATSsinnoi.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+
+<span class="oblock">instr</span> 1	<span class="comment">; "beats.ats" is created by atsa</span>
+
+ktime	<span class="opc">line</span>	0,  p3, 2
+knzfade	<span class="opc">expon</span>	0.001, p3, 2
+aout	<span class="opc">ATSsinnoi</span> 	ktime, 1, knzfade, 1, "beats.ats", 150
+	<span class="opc">outs</span>	aout<span class="op">*</span>2, aout<span class="op">*</span>2		<span class="comment">;amplify some more</span>
+<span class="oblock">endin</span>
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+<span class="stamnt">i</span> 1 0 2 
+<span class="stamnt">e</span>
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <br class="example-break" />
+        <p>
+      Cet exemple reprend le précédent mais en utilisant une enveloppe pour
+      contrôler <span class="emphasis"><em>knzlev</em></span> (le niveau de bruit). Cela donne
+      le son de "beats.wav" dont la composante de bruit apparaît progressivement
+      durant la durée de la note.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887694666768"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="ATSread.html" title="ATSread"><em class="citetitle">ATSread</em></a>, 
+      <a class="link" href="ATSreadnz.html" title="ATSreadnz"><em class="citetitle">ATSreadnz</em></a>, 
+      <a class="link" href="ATSinfo.html" title="ATSinfo"><em class="citetitle">ATSinfo</em></a>, 
+      <a class="link" href="ATSbufread.html" title="ATSbufread"><em class="citetitle">ATSbufread</em></a>, 
+      <a class="link" href="ATScross.html" title="ATScross"><em class="citetitle">ATScross</em></a>, 
+      <a class="link" href="ATSinterpread.html" title="ATSinterpread"><em class="citetitle">ATSinterpread</em></a>, 
+      <a class="link" href="ATSpartialtap.html" title="ATSpartialtap"><em class="citetitle">ATSpartialtap</em></a>, 
+      <a class="link" href="ATSadd.html" title="ATSadd"><em class="citetitle">ATSadd</em></a>, 
+      <a class="link" href="ATSaddnz.html" title="ATSaddnz"><em class="citetitle">ATSaddnz</em></a>
+    </p>
+        <p>
+      Voici un autre exemple de l'opcode ATSsinnoi. Il utilise le fichier
+      <a class="ulink" href="examples/ATSsinnoi-2.csd" target="_top"><em class="citetitle">ATSsinnoi-2.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887694655920"></a>
+          <p class="title">
+            <strong>Exemple 74. Exemple 2 de l'opcode ATSsinnoi.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm47887532747088"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+-odac -d -m128
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="comment">;example by joachim heintz</span>
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+
+giSine    <span class="ohdr">ftgen</span>     0, 0, 1024, 10, 1
+gSfile    <span class="op">=</span>         "fox.ats"
+giNumParts <span class="opc">ATSinfo</span>  gSfile, 3 <span class="comment">;overall number of partials</span>
+giDur     <span class="opc">ATSinfo</span>   gSfile, 7 <span class="comment">;duration </span>
+          <span class="ohdr">seed</span>      0
+          
+
+  <span class="oblock">instr</span> PlayList
+<span class="opc">event_i</span> "i", "PlayAll", 0, 1, 1, 0, .5 <span class="comment">;sine only, half speed</span>
+<span class="opc">event_i</span> "i", "PlayAll", giDur<span class="op">*</span>2<span class="op">+</span>1, 1, 0, 1, .5 <span class="comment">;noise only</span>
+<span class="opc">event_i</span> "i", "PlayAll", giDur<span class="op">*</span>4<span class="op">+</span>2, 1, .5, .5, .5 <span class="comment">;half sine, half noise</span>
+  <span class="oblock">endin</span>
+
+  <span class="oblock">instr</span> PlayAll
+iSinAmnt  <span class="op">=</span>         p4 <span class="comment">;sinee amount (0-1)</span>
+iNzAmnt   <span class="op">=</span>         p5 <span class="comment">;noise amount (0-1)</span>
+iSpeed    <span class="op">=</span>         p6 <span class="comment">;speed</span>
+p3        <span class="op">=</span>         giDur<span class="op">/</span>iSpeed
+ktime     <span class="opc">line</span>      0, giDur<span class="op">/</span>iSpeed, giDur
+          <span class="opc">prints</span>    "Resynthesizing all <span class="opc">partials</span> with <span class="opc">tone</span> <span class="op">=</span> <span class="op">%</span>.1f and <span class="opc">noise</span> <span class="op">=</span> <span class="op">%</span>.1f.\n", iSinAmnt, iNzAmnt
+aOut      <span class="opc">ATSsinnoi</span> ktime, iSinAmnt, iNzAmnt, 1, gSfile, giNumParts
+          <span class="opc">outs</span>      aOut, aOut
+  <span class="oblock">endin</span>
+
+  <span class="oblock">instr</span> PlayBand
+iOffset   <span class="op">=</span>         p4 <span class="comment">;offset in partials</span>
+iSpeed    <span class="op">=</span>         p5 <span class="comment">;speed</span>
+p3        <span class="op">=</span>         giDur<span class="op">/</span>iSpeed
+ktime     <span class="opc">line</span>      0, giDur<span class="op">/</span>iSpeed, giDur
+          <span class="opc">prints</span>    "Resynthesizing <span class="opc">partials</span> <span class="op">%</span>d to <span class="op">%</span>d with related noise.\n", iOffset<span class="op">+</span>1, iOffset<span class="op">+</span>10
+aOut      <span class="opc">ATSsinnoi</span> ktime, 1, 1, 1, gSfile, 10, iOffset, 1
+          <span class="opc">outs</span>      aOut, aOut
+<span class="comment">;call itself again</span>
+ <span class="octrl">if</span> iOffset <span class="op">&lt;</span> giNumParts <span class="op">-</span> 20 then
+          <span class="opc">event_i</span>   "i", "PlayBand", giDur<span class="op">/</span>iSpeed<span class="op">+</span>1, 1, iOffset<span class="op">+</span>10, iSpeed
+ <span class="octrl">endif</span>
+  <span class="oblock">endin</span>
+
+  <span class="oblock">instr</span> PlayWeighted
+  <span class="comment">;sine amount, noise amount and speeed are varying</span>
+kSinAmnt  <span class="opc">randomi</span>   0, 1, 1, 3
+kNzAmnt   <span class="op">=</span>         1<span class="op">-</span>kSinAmnt
+kSpeed    <span class="opc">randomi</span>   .01, .3, 1, 3
+async     <span class="opc">init</span>      0
+atime, aEnd <span class="opc">syncphasor</span> kSpeed<span class="op">/</span>giDur, async
+kTrig     <span class="opc">metro</span>     100
+kEnd      <span class="opc">max_k</span>     aEnd, kTrig, 1 <span class="comment">;1 if phasor signal crosses zero</span>
+ktime     <span class="opc">downsamp</span>  atime
+aOut      <span class="opc">ATSsinnoi</span> ktime<span class="op">*</span>giDur, kSinAmnt, kNzAmnt, 1, gSfile, giNumParts
+          <span class="opc">outs</span>      aOut, aOut
+  <span class="comment">;exit if file is at the end </span>
+  <span class="octrl">if</span> kEnd <span class="op">==</span> 1 then
+          <span class="opc">event</span>     "i", "End", 0, 1
+  <span class="octrl">endif</span>
+  <span class="oblock">endin</span>
+
+  <span class="oblock">instr</span> End
+          <span class="opc">exitnow</span>
+  <span class="oblock">endin</span>
+
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="stamnt">i</span> "PlayL<span class="stamnt">i</span>st" 0 1
+<span class="stamnt">i</span> "PlayBand" 20 1 0 .5
+<span class="stamnt">i</span> "PlayWe<span class="stamnt">i</span>ghted" 110 100
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887694654128"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Alex Norman</td>
+          </tr>
+          <tr>
+            <td>Seattle,Washington</td>
+          </tr>
+          <tr>
+            <td>2004</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ATSpartialtap.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="babo.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ATSpartialtap </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> babo</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

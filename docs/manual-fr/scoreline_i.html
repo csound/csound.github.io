@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>scoreline_i</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="scoreline.html" title="scoreline" />
+    <link rel="next" href="seed.html" title="seed" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">scoreline_i</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="scoreline.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="seed.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="scoreline_i"></a>
+      <div class="titlepage"></div>
+      <a id="Indexscoreline_i" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">scoreline_i</span>
+        </h2>
+        <p>scoreline_i — 
+      Délivre un ou plusieurs évènements de ligne de partition depuis un instrument
+      pendant la phase d'initialisation.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887637082448"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>scoreline_i</em></span> délivre des évènements de partition au cours
+      de la phase d'initialisation. Il peut gérer les chaînes de caractères dans les
+      mêmes conditions que dans la partition standard. Les chaînes de caractères sur
+      plusieurs lignes sont acceptées, en utilisant {{  }} pour encadrer la chaîne
+      de caractères.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887637080288"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>scoreline_i</strong></span> Sin</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887637078240"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em><span class="quote">« <span class="quote">Sin</span> »</span></em></span> -- une chaîne de caractères (entre
+      guillemets ou encadrée par {{ }}), contenant un ou plusieurs évènements de
+      partition.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887637076240"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici en exemple de l'opcode scoreline_i. Il utilise le fichier
+      <a class="ulink" href="examples/scoreline_i.csd" target="_top"><em class="citetitle">scoreline_i.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887637074352"></a>
+          <p class="title">
+            <strong>Exemple 821. Exemple de l'opcode scoreline_i.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887504796336"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac --old-parser   <span class="comment">;;;realtime audio out</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o scoreline.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+
+<span class="oblock">instr</span> 1
+
+<span class="opc">scoreline_i</span> {{
+            <span class="opc">i</span> 2  0  3  "flute.aiff"
+            <span class="opc">i</span> 2  1  3  "beats.wav"
+            }}
+        
+<span class="oblock">endin</span>
+
+<span class="oblock">instr</span> 2
+
+asig <span class="opc">soundin</span> p4
+     <span class="opc">outs</span> asig<span class="op">*</span>.8, asig<span class="op">*</span>.8
+
+<span class="oblock">endin</span>
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+<span class="stamnt">i</span>1 0 1
+<span class="stamnt">e</span>
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887637069984"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="event.html" title="event"><em class="citetitle">event</em></a>,
+      <a class="link" href="event_i.html" title="event_i"><em class="citetitle">event_i</em></a>,
+      <a class="link" href="schedule.html" title="schedule"><em class="citetitle">schedule</em></a>,
+      <a class="link" href="schedwhen.html" title="schedwhen"><em class="citetitle">schedwhen</em></a>,
+      <a class="link" href="schedkwhen.html" title="schedkwhen"><em class="citetitle">schedkwhen</em></a>,
+      <a class="link" href="schedkwhennamed.html" title="schedkwhennamed"><em class="citetitle">schedkwhennamed</em></a>,
+      <a class="link" href="scoreline.html" title="scoreline"><em class="citetitle">scoreline</em></a>
+      </p>
+        <p>
+        Pour plus d'information sur cet opcode :
+        <a class="ulink" href="http://www.csoundjournal.com/issue15/phrase_loops.html" target="_top">
+        <em class="citetitle">http://www.csoundjournal.com/issue15/phrase_loops.html</em>
+        </a>, écrit par Jim Aikin.
+      </p>
+        <p>
+      </p>
+        <p>
+        Egalement dans les Floss Manuals :
+        <a class="ulink" href="http://en.flossmanuals.net/csound/ch020_e-triggering-instrument-events/" target="_top">
+        <em class="citetitle">http://en.flossmanuals.net/csound/ch020_e-triggering-instrument-events/</em>
+        </a>.
+      </p>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887637058928"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Victor Lazzarini, 2007 </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="scoreline.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="seed.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">scoreline </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> seed</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

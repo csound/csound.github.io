@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>strsub</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="strset.html" title="strset" />
+    <link rel="next" href="strsubk.html" title="strsubk" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">strsub</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="strset.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="strsubk.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="strsub"></a>
+      <div class="titlepage"></div>
+      <a id="Indexstrsub" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">strsub</span>
+        </h2>
+        <p>strsub — 
+      Extrait une sous-chaîne de caractères.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887627284624"></a>
+        <h2>Description</h2>
+        <p>
+      Retourne une sous-chaîne d'une chaîne source. <span class="emphasis"><em>strsub</em></span>
+      ne s'exécute que pendant l'initialisation.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887627220176"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">Sdst <span class="command"><strong>strsub</strong></span> Ssrc[, istart[, iend]]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887627217968"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>istart</em></span> (facultatif, 0 par défaut) -- position du
+      début dans <span class="emphasis"><em>Ssrc</em></span>, comptée à partir de 0. Une valeur
+      négative signifie à partir de la fin de la chaîne.
+    </p>
+        <p>
+      <span class="emphasis"><em>iend</em></span> (facultatif, 1 par défaut) -- position de la
+      fin dans <span class="emphasis"><em>Ssrc</em></span>, comptée à partir de 0. Une valeur
+      négative signifie à partir de la fin de la chaîne. Si <span class="emphasis"><em>iend</em></span>
+      est inférieure à <span class="emphasis"><em>istart</em></span>, la sortie est inversée.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887627213024"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode strsub. Il utilise le fichier
+      <a class="ulink" href="examples/strsub.csd" target="_top"><em class="citetitle">strsub.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887627211152"></a>
+          <p class="title">
+            <strong>Exemple 915. Exemple de l'opcode strsub.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887501365552"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in    No messages</span>
+-odac           -iadc     <span class="comment">;;;-d     RT audio I/O</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o strsub.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="comment">; By: Jonathan Murphy 2007</span>
+
+<span class="oblock">instr</span> 1
+    Smember <span class="opc">strget</span> p4
+
+    <span class="comment">; Parse Smember</span>
+    istrlen    <span class="opc">strlen</span>   Smember
+    idelimiter <span class="opc">strindex</span> Smember, "<span class="op">:</span>"
+
+    S1    <span class="opc">strsub</span> Smember, 0, idelimiter  <span class="comment">; "String1"</span>
+    S2    <span class="opc">strsub</span> Smember, idelimiter <span class="op">+</span> 1, istrlen  <span class="comment">; "String2"</span>
+
+    <span class="opc">printf</span> "First string<span class="op">:</span> <span class="op">%</span>s\nSecond string<span class="op">:</span> <span class="op">%</span>s\n", 1, S1, S2
+
+<span class="oblock">endin</span>
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="stamnt">i</span> 1 0 1 "Str<span class="stamnt">i</span>ng1:Str<span class="stamnt">i</span>ng2"
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887627206784"></a>
+        <h2>Voir aussi</h2>
+        <p>
+          <a class="link" href="strsubk.html" title="strsubk">
+            <em class="citetitle">strsubk</em>
+          </a>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887627204992"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Istvan Varga</td>
+          </tr>
+          <tr>
+            <td>2006</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="strset.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="strsubk.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">strset </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> strsubk</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

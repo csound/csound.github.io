@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Cscore</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="PartReference.html" title="Partie III. Référence" />
+    <link rel="prev" href="UtilityOther.html" title="Autres utilitaires de Csound (CS, CSB64ENC, ENVEXT, EXTRACTOR, MAKECSD, MIXER, SCALE, MKDB)" />
+    <link rel="next" href="CscoreMain.html" title="Ecrire un programme de contrôle Cscore" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Cscore</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="UtilityOther.html">Précédent</a> </td>
+          <th width="60%" align="center">Partie III. Référence</th>
+          <td width="20%" align="right"> <a accesskey="n" href="CscoreMain.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="chapter">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="CscoreTop"></a>Cscore</h2>
+          </div>
+        </div>
+      </div>
+      <p>
+    <a id="IndexCscore" class="indexterm"></a>
+    <span class="emphasis"><em>Cscore</em></span> est une API (interface de programmation d'application) pour générer
+    et manipuler des fichiers de partition numérique. Elle fait partie de l'API plus grande de Csound
+    et elle comprend un certain nombre de fonctions appelables depuis un programme écrit par l'utilisateur
+    en langage C. <span class="emphasis"><em>Cscore</em></span> peut étre invoquée comme un préprocesseur de partition
+    autonome ou comme élément d'une exécution de Csound en incluant
+    l'<a class="link" href="CommandFlags.html#FlagsMinusUpperC">option -C</a> dans ses arguments :
+  </p>
+      <p>
+    </p>
+      <div class="cmdsynopsis">
+        <p><code class="command">cscore</code>  [<em class="replaceable"><code>fichier_partition_entree</code></em>] [<em class="replaceable"><code>&gt; fichier_partition_sortie</code></em>]</p>
+      </div>
+      <p>
+  </p>
+      <p>(où <span class="emphasis"><em>cscore</em></span> est le nom du programme que vous avez écrit), ou</p>
+      <p>
+    </p>
+      <div class="cmdsynopsis">
+        <p><code class="command">csound</code>  [-C] [<code class="option">autresoptions</code>] [<em class="replaceable"><code>nomorch</code></em>] [<em class="replaceable"><code>nompartition</code></em>]</p>
+      </div>
+      <p>
+  </p>
+      <p>
+    Les fonctions de l'API disponibles augmentent la bibliothèque de fonctions du langage C ;
+    elles peuvent lire des fichiers de partition numérique standard ou pré-triée, modifier et étendre
+    les données de différentes manières, et ensuite les rendre disponibles pour une exécution par un
+    orchestre de Csound.
+  </p>
+      <p>
+    Le programme écrit par l'utilisateur dans le langage C est compilé et lié à la bibliothèque de
+    Csound (ou au programme de ligne de commande csound) par l'utilisateur. Il n'est pas indispensable
+    de bien connaître le langage C pour écrire ce programme, car les appels de fonction ont une syntaxe
+    simple, et sont suffisamment puissants pour faire la plus grande partie du travail compliqué. C
+    pourra apporter plus de puissance par la suite selon les besoins.
+  </p>
+      <p>
+    Les sections suivantes expliquent toutes les étapes de l'utilisation de <span class="emphasis"><em>Cscore</em></span> :
+  </p>
+      <div class="itemizedlist">
+        <ul class="itemizedlist" style="list-style-type: disc; ">
+          <li class="listitem"><a class="link" href="CscoreTop.html#CscoreEvents" title="Evénements, listes et opérations"><em class="citetitle">Evènements, Listes et Opérations</em></a> -
+          Explique la syntaxe des fonctions de <span class="emphasis"><em>Cscore</em></span> et les structures de données.</li>
+          <li class="listitem"><a class="link" href="CscoreMain.html" title="Ecrire un programme de contrôle Cscore"><em class="citetitle">Ecrire un Programme de Contrôle Cscore</em></a> -
+          Montre par l'exemple comment écrire votre propre programme de contrôle.</li>
+          <li class="listitem"><a class="link" href="CscoreCompile.html" title="Compiler un programme Cscore"><em class="citetitle">Compiler un Programme Cscore</em></a> -
+          Décrit les étapes de la compilation et de l'édition des liens avec la bibliothèque de Csound.</li>
+          <li class="listitem"><a class="link" href="CscoreAdvancd.html" title="Exemples plus avancés"><em class="citetitle">Exemples Plus Avancés</em></a> -
+          Traite de questions avancées comme plusieurs partitions en entrée et les détails de l'exécution de
+          <span class="emphasis"><em>Cscore</em></span> au sein d'une exécution de Csound.</li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="CscoreEvents"></a>Evénements, listes et opérations</h2>
+            </div>
+          </div>
+        </div>
+        <p>
+    Un évènement dans <span class="emphasis"><em>Cscore</em></span> est équivalent à une instruction d'une
+    <span class="emphasis"><em>partition numérique standard</em></span> ou d'une partition résolue en temps (le format
+    dans lequel Csound écrit une partition triée -- consultez n'importe quel fichier
+    <span class="emphasis"><em>score.srt</em></span>), et il est stocké en interne en format de temps résolu. Il est
+    important de noter que lorsque <span class="emphasis"><em>Cscore</em></span> est utilisé en mode autonome, il est
+    incapable de comprendre les <span class="quote">« <span class="quote">commodités</span> »</span> non numériques que Csound permet
+    dans le format de partition en entrée. C'est pourquoi, les partitions utilisant des fonctionnalités
+    telles que le report (carry), les rampes, les expressions et autres devront être triées au préalable
+    avec l'utilitaire <span class="emphasis"><em>scsort</em></span> ou bien utilisées avec un exécutable
+    <span class="emphasis"><em>Csound</em></span> modifié contenant le programme <span class="emphasis"><em>Cscore</em></span> de
+    l'utilisateur. Les opcodes de partition avec des argument macros (r, m, n, and {}) ne sont pas
+    interprétés.
+  </p>
+        <p>
+    Les évènements de partition sont lus à partir d'un fichier de partition existant et stockés chacun
+    dans une structure C. Les principaux composants de ces structures sont un opcode et un tableau de
+    valeurs de p-champs. <span class="emphasis"><em>Cscore</em></span> gère la lecture des évènements et leur mise en
+    mémoire pour vous. Le format de la structure commence comme suit :
+  </p>
+        <p>
+    </p>
+        <div class="informalexample">
+          <pre class="programlisting">
+typedef struct {
+     CSHDR h;        /* en-tête pour la gestion de l'espace */
+     char  *strarg;  /* adresse d'un argument chaîne faculatif */
+     char  op;       /* opcode-t, w, f, i, a, s ou e */
+     short pcnt;
+     MYFLT p2orig;   /* p2, p3 non résolus */
+     MYFLT p3orig;
+     MYFLT p[1];     /* tableau des p-champs p0, p1, p2 ... */
+} EVENT;</pre>
+        </div>
+        <p>
+  </p>
+        <p>
+    MYFLT est l'un des types C <span class="emphasis"><em>float</em></span> ou <span class="emphasis"><em>double</em></span> selon la manière
+    dont votre copie de la bibliothèque de Csound a été compilée. Vous avez juste à déclarer les variables
+    en virgule flottante de votre programme avec le type MYFLT pour être compatible.
+  </p>
+        <p>
+    Toute fonction de <span class="emphasis"><em>Cscore</em></span> qui crée, lit ou copie un évènement retournera un pointeur
+    sur la structure dans laquelle les données de l'évènement sont stockées. Ce pointeur d'évènement peut
+    être utilisé pour accéder aux composants de la structure, de la forme <span class="emphasis"><em>e-&gt;op</em></span> ou
+    <span class="emphasis"><em>e-&gt;p[n]</em></span>. Chaque évènement nouvellement stocké provoquera la création d'un
+    nouveau pointeur, et une séquence de nouveaux évènements générera une séquence de pointeurs distincts
+    qu'il faudra stocker. Les groupes de pointeurs d'évènement sont stockés dans une liste d'évènements qui
+    a sa propre structure :
+  </p>
+        <p>
+    </p>
+        <div class="informalexample">
+          <pre class="programlisting">
+typedef struct {
+     CSHDR  h;
+     int nslots;    /* nombre maximal d'évènements dans cette liste */
+     int nevents;   /* nombre d'évènements présents */
+     EVENT *e[1];   /* tableau de pointeurs d'évènement e0, e1, e2.. */
+} EVLIST;</pre>
+        </div>
+        <p>
+  </p>
+        <p>
+    Toute fonction qui crée ou modifie une liste retournera un pointeur sur la nouvelle liste. Ce
+    pointeur de liste peut être utilisé pour accéder à ses composants pointeurs d'évènement, de la forme 
+    <span class="emphasis"><em>a-&gt;e[n]</em></span>. Les pointeurs d'évènement et les pointeurs de liste sont ainsi les
+    outils de base pour manipuler les données d'un fichier de partition. Les pointeurs et les listes de
+    pointeurs peuvent être copiés et réordonnés sans modifier les valeurs des données auxquelles ils
+    font référence. Cela signifie que l'on peut copier et manipuler les notes et les phrases depuis un
+    niveau de contrôle élevé. Alternativement, les données d'un évènement ou d'un groupe d'évènements
+    peuvent être modifiées sans changer les pointeurs d'évènement ou de liste. Les fonctions de l'API
+    <span class="emphasis"><em>Cscore</em></span> permettent de créer et de manipuler des partitions de cette manière.
+  </p>
+        <p>
+    Avec Csound 5, les noms de toutes les fonctions de l'API <span class="emphasis"><em>Cscore</em></span> ont été changés
+    pour être plus explicites. De plus, chaque fonction nécessite maintenant un pointeur sur un objet
+    CSOUND en premier argument. La structure de l'objet CSOUND n'a pas d'importance (en fait il ne
+    peut pas être modifié dans un programme utilisateur). Le moyen d'obtenir ce pointeur sur un objet
+    CSOUND sera montré dans la section suivante. Les fonctions de <span class="emphasis"><em>Cscore</em></span> et ses
+    structures de données sont déclarées dans le fichier d'en-tête <code class="filename">cscore.h</code> que vous
+    devez inclure dans le code de votre programme avant leur utilisation.
+  </p>
+        <p>
+    Les noms des fonctions de <span class="emphasis"><em>Cscore</em></span> spécifient si elles opèrent sur des évènements
+    ou sur des listes d'évènements. Dans le sommaire suivant des appels de fonction disponibles, on
+    utilise quelques conventions de nommage :
+  </p>
+        <p>
+    </p>
+        <div class="informalexample">
+          <pre class="programlisting">
+Le symbole cs est un pointeur vers un objet CSOUND (CSOUND *);
+Les symboles e, f sont des pointeurs sur des évènements (notes);
+Les symboles a, b sont des pointeurs sur des listes (arrays) de tels évènements;
+Le symbole n est un paramètre entier de type int;
+"..." indique un paramètre chaîne (soit une constante soit une variable de type char *);
+Le symbole fp est un pointeur sur un fichier (FILE *) en flot d'entrée de partition;
+  
+syntaxe d'appel                                 description
+---------------                                 -----------
+/* Fonctions pour travailler avec des évènements */
+e = cscoreCreateEvent(cs, n);                   crée un évènement vide avec n pchamps
+e = cscoreDefineEvent(cs, "...");               définit un évènement par la chaîne de caractères ...
+e = cscoreCopyEvent(cs, f);                     fait une nouvelle copie de l'évènement f
+e = cscoreGetEvent(cs);                         lit l'évènement suivant dans le fichier de partition en entrée
+    cscorePutEvent(cs, e);                      écrit l'évènement e dans le fichier de partition en sortie
+    cscorePutString(cs, "...");                 écrit l'évènement défini par la chaîne dans la partition
+                                                  en sortie
+  
+/* Fonctions pour travailler avec des listes d'évènements */
+a = cscoreListCreate(cs, n);                    crée une liste d'évènements vide avec n emplacements
+a = cscoreListAppendEvent(cs, a, e);            ajoute l'évènement e à la fin de la liste a
+a = cscoreListAppendStringEvent(cs, a, "...");  ajoute l'évènement défini par la chaîne à la liste a
+a = cscoreListCopy(cs, b);                      copie la liste b (mais pas les évènements)
+a = cscoreListCopyEvents(cs, b);                copie les évènements de b, en créant une nouvelle liste
+a = cscoreListGetSection(cs);                   lit tous les évènements de la partition en entrée, jusqu'au
+                                                  prochain s ou e
+a = cscoreListGetNext(cs, nbeats);              lit les prochaines nbeats pulsations de la partition en entrée
+                                                  (nbeats est un MYFLT)
+a = cscoreListGetUntil(cs, beatno);             lit tous les évènements de la partition en entrée jusqu'à la
+                                                  pulsation beatno (MYFLT) 
+a = cscoreListSeparateF(cs, b);                 sépare les instructions f de la liste b vers la liste a
+a = cscoreListSeparateTWF(cs, b);               sépare les instructions t,w &amp; f de la liste b vers la liste a
+a = cscoreListAppendList(cs, a, b);             ajoute la liste b à la liste a
+a = cscoreListConcatenate(cs, a, b);            concaténation des listes a et b (identique au précédent)
+    cscoreListSort(cs, a);                      trie la liste a en ordre chronologique selon p[2]
+n = cscoreListCount(cs, a);                     retourne le nombre d'évènements dans la liste a
+a = cscoreListExtractInstruments(cs, b, "..."); extrait les notes des instruments ... (pas de nouveaux
+                                                  évènements)
+a = cscoreListExtractTime(cs, b, from, to);     extrait les notes d'une période de temps, en créant de
+                                                  nouveaux évènements (from et to sont des MYFLT)
+    cscoreListPut(cs, a);                       écrit les évènements de la liste a dans le fichier de partition en
+                                                  sortie
+    cscoreListPlay(cs, a);                      envoie les évènements de la liste a vers l'orchestre de Csound pour
+                                                une exécution immédiate (ou les imprime s'il n'y a pas d'orchestre)
+
+/* Fonctions pour réclamer de la mémoire */
+    cscoreFreeEvent(cs, e);                     libère l'espace de l'évènement e
+    cscoreListFree(cs, a);                      libère l'espace de la liste a (mais pas les évènements)
+    cscoreListFreeEvents(cs, a);                libère les évènements de la liste a, et l'espace de la liste
+  
+/* Fonctions pour travailler avec plusieurs fichiers de partition en entrée */
+fp = cscoreFileGetCurrent(cs);                  récupère le pointeur du fichier de partition en entrée actuellement
+                                                  actif (au départ trouve le pointeur du fichier de partition en
+                                                  entrée de la ligne de commande)
+fp = cscoreFileOpen(cs, "filename");            ouvre un autre fichier de partition en entrée (5 au maximum)
+     cscoreFileSetCurrent(cs, fp);              fait de fp le pointeur sur le fichier de partition
+                                                  actuellement actif
+     cscoreFileClose(cs, fp);                   ferme le fichier de partition en relation avec FILE *fp</pre>
+        </div>
+        <p>
+  </p>
+        <p>
+    Sous Csound 4, les noms des fonctions et leurs paramètres étaient les suivants :
+  </p>
+        <p>
+    </p>
+        <div class="informalexample">
+          <pre class="programlisting">
+  syntaxe d'appel                          description
+  ---------------                          -----------
+  e = createv(n);          crée un évènement vide avec n pchamps
+  e = defev("...");        définit un évènement par la chaîne de caractères ...
+  e = copyev(f);           fait une nouvelle copie de l'évènement f
+  e = getev();             lit l'évènement suivant dans le fichier de partition en entrée
+  putev(e);                écrit l'évènement e dans le fichier de partition en sortie
+  putstr("...");           écrit l'évènement défini par la chaîne dans la partition en sortie
+  a = lcreat(n);           crée une liste d'évènements vide avec n emplacements
+       int  n;
+  a = lappev(a,e);         ajoute l'évènement e à la fin de la liste a
+  a = lappstrev(a,"...");  ajoute l'évènement défini par la chaîne à la liste a
+  a = lcopy(b);            copie la liste b (mais pas les évènements)
+  a = lcopyev(b);          copie les évènements de b, en créant une nouvelle liste
+  a = lget();              lit tous les évènements de la partition en entrée, jusqu'au
+                             prochain s ou e
+  a = lgetnext(nbeats);    lit les prochaines nbeats pulsations de la partition en entrée
+       float  nbeats;
+  a = lgetuntil(beatno);   lit tous les évènements de la partition en entrée jusqu'à la
+                             pulsation beatno
+       float  beatno;
+  a = lsepf(b);            sépare les instructions f de la liste b vers la liste a
+  a = lseptwf(b);          sépare les instructions t,w &amp; f de la liste b vers la liste a
+  a = lcat(a,b);           concaténation (ajout) de la liste b à la liste a
+  lsort(a);                trie la liste a en ordre chronologique selon p[2]
+  a = lxins(b,"...");      extrait les notes des instruments ... (pas de nouveaux évènements)
+  a = lxtimev(b,from,to);  extrait les notes d'une période de temps, en créant de nouveaux
+       float  from, to;      évènements
+  lput(a);                 écrit les évènements de la liste a dans le fichier de partition en sortie
+  lplay(a);                envoie les évènements de la liste a vers l'orchestre de Csound pour
+                           une exécution immédiate (ou les imprime s'il n'y a pas d'orchestre)
+  relev(e);                libère l'espace de l'évènement e
+  lrel(a);                 libère l'espace de la liste a (mais pas les évènements)
+  lrelev(a);               libère les évènements de la liste a, et l'espace de la liste
+  fp = getcurfp();         récupère le pointeur du fichier de partition en entrée actuellement
+                           actif (au départ trouve le pointeur du fichier de partition en entrée
+                           de la ligne de commande)
+  fp = filopen("filename"); ouvre un autre fichier de partition en entrée (5 au maximum)
+  setcurfp(fp);            fait de fp le pointeur sur le fichier de partition actuellement actif
+  filclose(fp);            ferme le fichier de partition en relation avec FILE *fp</pre>
+        </div>
+        <p>
+  </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="UtilityOther.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="PartReference.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="CscoreMain.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Autres utilitaires de Csound (CS, CSB64ENC, ENVEXT, EXTRACTOR, MAKECSD,
+  MIXER, SCALE, MKDB) </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Ecrire un programme de contrôle Cscore</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

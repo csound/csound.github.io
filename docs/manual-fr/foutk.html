@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>foutk</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="foutir.html" title="foutir" />
+    <link rel="next" href="fprintks.html" title="fprintks" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">foutk</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="foutir.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="fprintks.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="foutk"></a>
+      <div class="titlepage"></div>
+      <a id="IndexFoutk" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">foutk</span>
+        </h2>
+        <p>foutk — 
+      Envoie des signaux de taux-k vers un nombre arbitraire de canaux dans un
+      fichier externe, en format brut (sans en-tête).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887673595504"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>foutk</em></span> envoie <span class="emphasis"><em>N</em></span> signaux de taux-k
+      vers un fichier spécifié à <span class="emphasis"><em>N</em></span> canaux.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887673592976"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>foutk</strong></span> ifilename, iformat, kout1 [, kout2, kout3,....,koutN]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887673590896"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ifilename</em></span> -- le nom du fichier de sortie (entre guillements)
+    </p>
+        <p>
+      <span class="emphasis"><em>iformat</em></span> -- un indicateur pour choisir le format du fichier
+      de sortie (note : il se peut que les versions de Csound antérieures à la 5.0
+      ne supportent que les formats 0 et 1) :
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>0 - échantillons en flottants sur 32 bit sans en-tête (fichier PCM
+          binaire multicanaux)</p>
+            </li>
+            <li class="listitem">
+              <p>1 - entiers sur 16 bit sans en-tête (fichier PCM binaire multicanaux)</p>
+            </li>
+            <li class="listitem">
+              <p>2 - entiers sur 16 bit sans en-tête (fichier PCM binaire multicanaux)</p>
+            </li>
+            <li class="listitem">
+              <p>3 - échantillons u-law sans en-tête</p>
+            </li>
+            <li class="listitem">
+              <p>4 - entiers sur 16 bit sans en-tête</p>
+            </li>
+            <li class="listitem">
+              <p>5 - entiers sur 32 bit sans en-tête</p>
+            </li>
+            <li class="listitem">
+              <p>6 - flottants sur 32 bit sans en-tête</p>
+            </li>
+            <li class="listitem">
+              <p>7 - entiers non signés sur 8 bit sans en-tête</p>
+            </li>
+            <li class="listitem">
+              <p>8 - entiers sur 24 bit sans en-tête</p>
+            </li>
+            <li class="listitem">
+              <p>9 - flottants sur 64 bit sans en-tête</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887673578816"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kout1,...koutN</em></span> -- signaux au taux de contrôle à écrire dans
+      le fichier. L'étendue de l'amplitude des signaux est déterminée par le format
+      d'échantillon choisi.
+    </p>
+        <p>
+      <span class="emphasis"><em>foutk</em></span> opère de la même maniière que
+      <a class="link" href="fout.html" title="fout"><em class="citetitle">fout</em></a>, mais avec des signaux
+      de taux-k. <span class="emphasis"><em>iformat</em></span> peut prendre une valeur entre 0 et 9,
+      ou 0 et 1 avec une ancienne version de Csound.
+    </p>
+        <p>
+      Noter que <a class="link" href="fout.html" title="fout"><em class="citetitle">fout</em></a> et
+      <span class="emphasis"><em>foutk</em></span> peuvent utiliser soit une chaîne de caractères
+      contenant un nom de chemin de fichier, soit un identificateur numérique généré par
+      <a class="link" href="fiopen.html" title="fiopen"><em class="citetitle">fiopen</em></a>. Alors qu'avec
+      <a class="link" href="fouti.html" title="fouti"><em class="citetitle">fouti</em></a> et
+      <a class="link" href="foutir.html" title="foutir"><em class="citetitle">foutir</em></a>, le fichier
+      cible ne peut être spécifié que par un identificateur numérique.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887673569280"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="fiopen.html" title="fiopen"><em class="citetitle">fiopen</em></a>,
+      <a class="link" href="fout.html" title="fout"><em class="citetitle">fout</em></a>,
+      <a class="link" href="fouti.html" title="fouti"><em class="citetitle">fouti</em></a>,
+      <a class="link" href="foutir.html" title="foutir"><em class="citetitle">foutir</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887673564288"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Gabriel Maldonado</td>
+          </tr>
+          <tr>
+            <td>Italie</td>
+          </tr>
+          <tr>
+            <td>1999</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 3.56 de Csound</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="foutir.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="fprintks.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">foutir </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> fprintks</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

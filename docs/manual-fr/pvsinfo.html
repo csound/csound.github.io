@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>pvsinfo</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="pvsifd.html" title="pvsifd" />
+    <link rel="next" href="pvsinit.html" title="pvsinit" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">pvsinfo</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="pvsifd.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="pvsinit.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="pvsinfo"></a>
+      <div class="titlepage"></div>
+      <a id="IndexPvsinfo" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">pvsinfo</span>
+        </h2>
+        <p>pvsinfo — 
+      Retourne de l'information sur une source au format PVOC-EX.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887643043984"></a>
+        <h2>Description</h2>
+        <p>
+      Retourne de l'information sur le format de <span class="emphasis"><em>fsrc</em></span>, que
+      celui-ci soit créé par un opcode comme <span class="emphasis"><em>pvsanal</em></span> ou qu'il
+      soit obtenu à partir d'un fichier PVOC-EX par <span class="emphasis"><em>pvsfread</em></span>.
+      Cette information est disponible à l'initialisation et peut être utilisée
+      pour fixer les paramètres d'autres opcodes pvs, en particulier pour
+      créer des tables de fonction (par exemple pour <span class="emphasis"><em>pvsftw</em></span>),
+      ou pour fixer le nombre d'oscillateurs pour <span class="emphasis"><em>pvsadsyn</em></span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887643040032"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ioverlap, inumbins, iwinsize, iformat <span class="command"><strong>pvsinfo</strong></span> fsrc</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887643037856"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ioverlap</em></span> -- La taille de recouvrement du flot.
+    </p>
+        <p>
+      <span class="emphasis"><em>inumbins</em></span> -- Le nombre de bins d'analyse (amplitude +
+      fréquence) dans <span class="emphasis"><em>fsrc</em></span>. La taille de TFR sous-jacente
+      est calculée comme (<span class="emphasis"><em>inumbins</em></span> - 1) * 2.
+    </p>
+        <p>
+      <span class="emphasis"><em>iwinsize</em></span> -- La taille de la fenêtre d'analyse. Peut
+      être supérieure à la taille de TFR.
+    </p>
+        <p>
+      <span class="emphasis"><em>iformat</em></span> -- Le format de trame d'analyse. Si
+      <span class="emphasis"><em>fsrc</em></span> est créé par un opcode, <span class="emphasis"><em>iformat</em></span>
+      vaut toujours 0, ce qui signifie (amplitude + fréquence). Si
+      <span class="emphasis"><em>fsrc</em></span> est défini à partir d'un fichier PVOC-EX,
+      <span class="emphasis"><em>iformat</em></span> peut également valoir 1 ou 2 (amplitude + phase,
+      complexe).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887643030208"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode pvsinfo. Il utilise le fichier
+      <a class="ulink" href="examples/pvsinfo.csd" target="_top"><em class="citetitle">pvsinfo.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887643028336"></a>
+          <p class="title">
+            <strong>Exemple 731. Exemple de l'opcode pvsinfo.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887507894240"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac  <span class="comment">;;;realtime audio out</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o pvsinfo.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+
+<span class="oblock">instr</span> 1
+<span class="comment">; create a PVOC-EX (*.pvx) file with PVANAL first</span>
+idur <span class="opc">filelen</span>  "fox.pvx"		<span class="comment">;find duration of analysis file</span>
+kpos <span class="opc">line</span>     0,p3,idur		<span class="comment">;to ensure we process whole file</span>
+fsrc <span class="opc">pvsfread</span> kpos, "fox.pvx"	<span class="comment">;create fsig from (mono) file</span>
+
+iovl,inb,iws,ifmt <span class="opc">pvsinfo</span> fsrc	<span class="comment">;get info</span>
+<span class="opc">print</span> iovl,inb,iws,ifmt		<span class="comment">;print info</span>
+
+aout <span class="opc">pvsynth</span> fsrc
+     <span class="opc">outs</span> aout, aout
+
+<span class="oblock">endin</span>
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+<span class="stamnt">i</span> 1 0 3
+<span class="stamnt">e</span>
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+        <p>
+      L'exemple produira la sortie suivante :
+      </p>
+        <pre class="screen">
+instr 1:  iovl = 256.000  inb = 513.000  iws = 2048.000  ifmt = 0.000</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887643022816"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Richard Dobson</td>
+          </tr>
+          <tr>
+            <td>Août 2001 </td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 4.13</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="pvsifd.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="pvsinit.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">pvsifd </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> pvsinit</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

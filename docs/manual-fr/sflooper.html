@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>sflooper</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="sfload.html" title="sfload" />
+    <link rel="next" href="sfpassign.html" title="sfpassign" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">sflooper</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="sfload.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="sfpassign.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="sflooper"></a>
+      <div class="titlepage"></div>
+      <a id="Indexsflooper" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">sflooper</span>
+        </h2>
+        <p>sflooper — 
+      Joue un preset d'échantillons SoundFont2 (SF2), générant un son stéréo, avec
+      une boucle en fondu-enchainé à durée variable, définie par l'utilisateur.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887635372848"></a>
+        <h2>Description</h2>
+        <p>
+      Joue un preset d'échantillons SoundFont2 (SF2), générant un son stéréo, comme
+      <span class="emphasis"><em>sfplay</em></span>. Mais à l'inverse de ce dernier, il ignore les
+      points de boucle fixés dans le fichier SF2 et les remplace par une boucle en
+      fondu-enchainé définie par l'utilisateur. C'est un mélange de
+      <a class="link" href="sfplay.html" title="sfplay"><em class="citetitle">sfplay</em></a> et de
+      <a class="link" href="flooper2.html" title="flooper2"><em class="citetitle">flooper2</em></a>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887635369136"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ar1, ar2 <span class="command"><strong>sflooper</strong></span> ivel, inotenum, kamp, kpitch, ipreindex, kloopstart, kloopend, kcrossfade \
+      [, istart, imode, ifenv, iskip] </pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887635366832"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ivel</em></span> -- vélocité.
+    </p>
+        <p>
+      <span class="emphasis"><em>inotenum</em></span> -- numéro de note MIDI.
+    </p>
+        <p>
+      <span class="emphasis"><em>ipreindex</em></span> -- indice de preset.
+    </p>
+        <p>
+      <span class="emphasis"><em>istart </em></span> -- début de la lecture en secondes.
+    </p>
+        <p>
+      <span class="emphasis"><em>imode </em></span> -- modes de boucle : 0 à l'endroit, 1 à l'envers,
+      2 à l'envers et à l'endroit [0 par défaut].
+    </p>
+        <p>
+      <span class="emphasis"><em>ifenv </em></span> -- s'il est différent de zéro, numéro de la table de
+      l'enveloppe de fondu-enchainé. La valeur par défaut de 0 définit un fondu-enchainé
+      linéaire.
+    </p>
+        <p>
+      <span class="emphasis"><em>iskip </em></span> -- s'il vaut 1, l'initialisation de l'opcode est
+      ignorée, pour les notes liées, l'exécution continuant depuis la position
+      dans la boucle où la note précédente s'est terminée. Avec la valeur par
+      défaut de 0, l'initialisation a lieu.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887635359008"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kamp</em></span> -- contrôle de l'amplitude </p>
+        <p>
+      <span class="emphasis"><em>kpitch</em></span> -- contrôle de la hauteur (rapport de transposition) ;
+      les valeurs négatives sont interdites.
+    </p>
+        <p>
+      <span class="emphasis"><em>kloopstart</em></span> -- début de la boucle (en secondes). Noter que
+      bien qu'étant de taux-k, les paramètres de boucle comme celui-ci ne sont mis à
+      jour qu'une fois par itération de la boucle. Si le début de la boucle est fixé
+      au-dela de la fin des échantillons, il n'y aura pas de boucle.
+    </p>
+        <p>
+      <span class="emphasis"><em>kloopend</em></span> -- fin de la boucle (en secondes), mis à jour une
+      seule fois par itération de la boucle.
+    </p>
+        <p>
+      <span class="emphasis"><em>kcrossfade </em></span> -- longueur du fondu enchainé (en secondes), mis
+      à jour une seule fois par itération de la boucle et limité par la longueur de
+      la boucle.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887635352736"></a>
+        <p>
+      <span class="emphasis"><em>sflooper</em></span> joue un preset, générant un son stéréo. 
+    </p>
+        <p>
+      Ces opcodes ne supportent que la structure d'échantillon des fichiers SF2. La
+      structure de modulateur du format SoundFormat2 n'est pas supportée dans Csound.
+      Tout traitement ou modulation des données échantillonnées est à la charge de
+      l'utilisateur de Csound, ce qui permet de s'affranchir de toutes les
+      restrictions imposées par le standard SF2.
+    </p>
+        <p>
+      Note : les points de boucle sont fixés par rapport à la touche de base de
+      chaque son échantillonné faisant partie du preset du soundfont. Par exemple,
+      un soundfont peu avoir un seul son échantillonné pour tout le clavier. Dans
+      ce cas, <span class="emphasis"><em>sflooper</em></span> fonctionnera comme
+      <span class="emphasis"><em>flooper</em></span> et <span class="emphasis"><em>flooper2</em></span>, car lorsque
+      le son échantillonné est transposé (joué à différentes vitesses), la
+      boucle se raccourcit ou s'allonge. Au contraire, si le soundfont possède
+      un son échantillonné pour chaque touche, il n'y aura pas de transposition
+      et la boucle gardera la même longueur (sauf si <span class="emphasis"><em>kpitch</em></span>
+      est modifié).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887635346960"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode sflooper. Il utilise le fichier
+      <a class="ulink" href="examples/sflooper.csd" target="_top"><em class="citetitle">sflooper.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887635345088"></a>
+          <p class="title">
+            <strong>Exemple 841. Exemple de l'opcode sflooper.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887503956368"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in    No messages</span>
+-odac -+rtmidi=virtual  -M0     <span class="comment">;;;realtime audio in, midi in</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o sflooper.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+
+
+isf   <span class="opc">sfload</span> "07AcousticGuitar.sf2"
+      <span class="opc">sfpassign</span> 0, isf
+
+<span class="oblock">instr</span> 1	<span class="comment">; play from score and midi keyboard</span>
+
+      <span class="opc">mididefault</span>   60, p3
+      <span class="opc">midinoteonkey</span> p4, p5
+inum  <span class="opc">init</span> p4
+ivel  <span class="opc">init</span> p5
+<span class="opc">print</span> ivel
+
+ivel  <span class="opc">init</span>    ivel<span class="op">/</span>127		<span class="comment">;velocity dependent</span>
+kamp  <span class="opc">linsegr</span> 1,1,1,.1,0	<span class="comment">;envelope</span>
+kamp  <span class="op">=</span> kamp <span class="op">*</span> .0002		<span class="comment">;scale amplitude (= kamp/5000)</span>
+kfreq <span class="opc">init</span> 1			<span class="comment">;do not change freq from sf</span>
+<span class="comment">;"07AcousticGuitar.sf2" contains 2 samples, on notes E1 and C#4</span>
+<span class="comment">;start loop from beginning, loop .2 seconds - on the root key of these samples</span>
+aL,aR <span class="opc">sflooper</span> ivel, inum, kamp<span class="op">*</span>ivel, kfreq, 0, 0, .2, .05
+      <span class="opc">outs</span> aL, aR
+	
+<span class="oblock">endin</span>
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="stamnt">f</span>0  60		<span class="comment">; stay active for 1 minute</span>
+
+<span class="stamnt">i</span>1 0 1 60 100
+<span class="stamnt">i</span>1 + 1 62 &lt;
+<span class="stamnt">i</span>1 + 1 65 &lt;
+<span class="stamnt">i</span>1 + 1 69 10
+<span class="stamnt">e</span>
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887635340720"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="sfilist.html" title="sfilist"><em class="citetitle">sfilist</em></a>,
+      <a class="link" href="sfinstr.html" title="sfinstr"><em class="citetitle">sfinstr</em></a>,
+      <a class="link" href="sfinstrm.html" title="sfinstrm"><em class="citetitle">sfinstrm</em></a>,
+      <a class="link" href="sfload.html" title="sfload"><em class="citetitle">sfload</em></a>,
+      <a class="link" href="sfpassign.html" title="sfpassign"><em class="citetitle">sfpassign</em></a>,
+      <a class="link" href="sfplaym.html" title="sfplaym"><em class="citetitle">sfplaym</em></a>,
+      <a class="link" href="sfplist.html" title="sfplist"><em class="citetitle">sfplist</em></a>,
+      <a class="link" href="sfpreset.html" title="sfpreset"><em class="citetitle">sfpreset</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887635331952"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Victor Lazzarini</td>
+          </tr>
+          <tr>
+            <td>Août 2007</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 5.07 de Csound</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="sfload.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="sfpassign.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">sfload </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> sfpassign</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

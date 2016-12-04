@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>pvsmooth</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="pvsmorph.html" title="pvsmorph" />
+    <link rel="next" href="pvsout.html" title="pvsout" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">pvsmooth</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="pvsmorph.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="pvsout.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="pvsmooth"></a>
+      <div class="titlepage"></div>
+      <a id="Indexpvsmooth" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">pvsmooth</span>
+        </h2>
+        <p>pvsmooth — 
+      Lisse les fonctions temporelles d'amplitude et de fréquence d'un flot pv
+      en utilisant des filtres passe-bas RII du premier ordre en parallèle avec
+      une fréquence de coupure variable.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887642644000"></a>
+        <h2>Description</h2>
+        <p>
+      Lisse les fonctions temporelles d'amplitude et de fréquence d'un flot pv
+      en utilisant un filtre passe-bas RII du premier ordre avec une fréquence
+      de coupure variable. Cet opcode utilise le même filtre que l'opcode
+      <span class="emphasis"><em>tone</em></span>, mais il agit séparément sur les fonctions
+      temporelles d'amplitude et de fréquence qui constituent le flot pv. La
+      fréquence de coupure est un paramètre au taux de contrôle, mais à la
+      différence de <span class="emphasis"><em>tone</em></span> et de <span class="emphasis"><em>tonek</em></span>,
+      elle n'est pas spécifiée en Hz, mais en fractions du 1/2 taux de trame
+      (actuellement le taux d'échantillonnage du flot pv), ce qui est plus
+      facile à comprendre. Cela signifie que la fréquence de coupure la plus
+      haute vaut 1 et que la plus basse vaut 0 ; plus la fréquence de coupure
+      est basse et plus les fonctions sont lisses ce qui donne un effet plus
+      prononcé.
+    </p>
+        <p>
+      Ce sont des filtres appliqués à des signaux de contrôle si bien que l'effet
+      est fondamentalement un floutage de l'évolution spectrale. Les effets
+      produits ressemblent plus ou moins à
+      ceux de <span class="emphasis"><em>pvsblur</em></span>, mais avec deux différences
+      importantes : 1. le lissage des amplitudes et celui des fréquences
+      utilisent des ensembles séparés de filtres ; 2. le coût de calcul n'est
+      n'est pas plus élevé si l'on désire plus de "floutage" (lissage).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887642638160"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">fsig <span class="command"><strong>pvsmooth</strong></span> fsigin, kacf, kfcf</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887642635952"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>fsig</em></span> -- flot pv de sortie
+    </p>
+        <p>
+      <span class="emphasis"><em>fsigin</em></span> -- flot pv d'entrée
+    </p>
+        <p>
+      <span class="emphasis"><em>kacf</em></span> -- valeur de la fréquence de coupure pour le
+      filtrage de la fonction d'amplitude, entre 0 et 1 en fractions du 1/2 taux
+      de trame.
+    </p>
+        <p>
+      <span class="emphasis"><em>kfcf</em></span> -- valeur de la fréquence de coupure pour le
+      filtrage de la fonction de fréquence, entre 0 et 1 en fractions du 1/2 taux
+      de trame.
+    </p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Avertissement]" src="images/warning.png" />
+              </td>
+              <th align="left">Avertissement</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Il est dangereux d'utiliser la même variable-f à la fois comme entrée et
+        comme sortie des opcodes pvs. Ceci peut produire un comportement indéfini
+        de certains de ces opcodes. Utilisez une variable différente à gauche et
+        à droite de l'opcode.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887642629840"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode pvsmooth. Il utilise le fichier
+      <a class="ulink" href="examples/pvsmooth.csd" target="_top"><em class="citetitle">pvsmooth.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887642627968"></a>
+          <p class="title">
+            <strong>Exemple 739. Exemple de l'opcode pvsmooth.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887507706000"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac  <span class="comment">;;;realtime audio out</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o pvsmooth.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+
+<span class="oblock">instr</span> 1
+
+kacf <span class="op">=</span> p4
+kfcf <span class="op">=</span> p5
+asig <span class="opc">soundin</span> "fox.wav"
+fsig <span class="opc">pvsanal</span> asig, 1024, 256, 1024, 1	<span class="comment">; analyse it</span>
+ftps <span class="opc">pvsmooth</span> fsig, kacf, kfcf
+atps <span class="opc">pvsynth</span> ftps			<span class="comment">; synthesise it                      </span>
+     <span class="opc">outs</span> atps<span class="op">*</span>3, atps<span class="op">*</span>3
+
+<span class="oblock">endin</span>
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="comment">;       amp  freq </span>
+<span class="stamnt">i</span> 1 0 3 0.01 0.01	<span class="comment">;smooth amplitude and frequency with cutoff frequency of filter at 1% of 1/2 frame-rate (ca 0.86 Hz)</span>
+<span class="stamnt">i</span> 1 + 3  1   0.01	<span class="comment">;no smoothing on amplitude, but frequency with cf at 1% of 1/2 frame-rate (ca 0.86 Hz)</span>
+<span class="stamnt">i</span> 1 + 10 .001  1	<span class="comment">;smooth amplitude with cf at 0.1% of 1/2 frame-rate (ca 0.086 Hz)</span>
+			<span class="comment">;and no smoothing of frequency</span>
+<span class="stamnt">e</span>
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+        <p>
+      La formule du calcul de la fréquence de coupure du filtre étant :
+      (taux de trame) / (taille du saut) = (nouveaux départs de trame
+      par seconde) (en Hz), on en déduit le pourcentage du demi taux de
+      trame. Par exemple, pour la première note de l'exemple, le taux de trame
+      est 44100 / 256 = 172,265625 Hz (= 172 nouveaux départs de trame par
+      seconde). La moitié du taux de trame vaux 86 Hz, et un pour cent de ce taux
+      vaut 0.86 Hz.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887642622528"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Victor Lazzarini</td>
+          </tr>
+          <tr>
+            <td>Mai 2006 </td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau greffon dans la version 5</p>
+        <p>Mai 2006.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="pvsmorph.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="pvsout.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">pvsmorph </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> pvsout</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

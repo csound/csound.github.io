@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>FLsetsnap</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="FLsetSize.html" title="FLsetSize" />
+    <link rel="next" href="FLsetSnapGroup.html" title="FLsetSnapGroup" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">FLsetsnap</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="FLsetSize.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="FLsetSnapGroup.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="FLsetsnap"></a>
+      <div class="titlepage"></div>
+      <a id="IndexFLsetsnap" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">FLsetsnap</span>
+        </h2>
+        <p>FLsetsnap — 
+      Enregistre l'état courant de tous les valuateurs FLTK dans un instantané.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887678059200"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>FLsetsnap</em></span> enregistre l'état courant de tous les
+      valuateurs présents dans l'orchestre dans un instantané (en mémoire).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887678057344"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">inumsnap, inumval <span class="command"><strong>FLsetsnap</strong></span> index [, ifn, igroup]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887677984080"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>inumsnap</em></span> -- nombre courant d'instantanés.
+    </p>
+        <p>
+      <span class="emphasis"><em>inumval</em></span> -- nombre de valuateurs (dont la valeur est
+      enregistrée dans l'instantané) présents dans l'orchestre courant.
+    </p>
+        <p>
+      <span class="emphasis"><em>index</em></span> -- un nombre faisant référence de manière
+      univoque à un instantané. Plusieurs instantanés peuvent être enregistrés
+      dans la même banque.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifn</em></span> (optional) -- optional argument referring to an already allocated table, to store values of a snapshot.
+    </p>
+        <p>
+      <span class="emphasis"><em>igroup</em></span> -- (facultatif) un nombre entier faisant
+      référence à un groupe de widgets en relation avec un instantané. Cela
+      permet de lire/écrire, ou charger/sauvegarder l'état d'un sous-ensemble
+      de valuateurs. La valeur par défaut est zéro qui fait référence au premier
+      groupe. Le numéro de groupe est déterminé par l'opcode
+      <a class="link" href="FLsetSnapGroup.html" title="FLsetSnapGroup"><em class="citetitle">FLsetSnapGroup</em></a>.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Le paramètre <span class="emphasis"><em>igroup</em></span> n'a pas encore été complètement
+        implémenté dans la version actuelle de Csound. Prière de ne pas s'y fier.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887677975344"></a>
+        <h2>Exécution</h2>
+        <p>
+      L'opcode <span class="emphasis"><em>FLsetsnap</em></span> enregistre l'état courant de tous
+      les valuateurs dans l'orchestre dans un instantané (en mémoire). On peut
+      stocker n'importe quel nombre d'instantanés dans la banque courante. Les
+      banques sont des structures qui n'existent qu'en mémoire, sans autre
+      référence que le fait qu'on peut y accéder par les opcodes
+      <span class="emphasis"><em>FLsetsnap</em></span>,
+      <a class="link" href="FLsavesnap.html" title="FLsavesnap"><em class="citetitle">FLsavesnap</em></a>,
+      <a class="link" href="FLloadsnap.html" title="FLloadsnap"><em class="citetitle">FLloadsnap</em></a> et
+      <a class="link" href="FLgetsnap.html" title="FLgetsnap"><em class="citetitle">FLgetsnap</em></a>. Il ne
+      peut y avoir qu'un seule banque présente en mémoire.
+    </p>
+        <p>
+      Si l'argument facultatif <span class="emphasis"><em>ifn</em></span> fait référence à une
+      table valide déjà allouée, l'instantané sera enregistré dans la table
+      plutôt que dans la banque. Ainsi cette table est accessible depuis
+      d'autres opcodes de Csound.
+    </p>
+        <p>
+      L'argument <span class="emphasis"><em>index</em></span> fait référence à un instantané
+      déterminé de manière univoque. Si la valeur d'<span class="emphasis"><em>index</em></span>
+      fait référence à un instantané antérieurement sauvegardé, toutes ses
+      anciennes valeurs seront remplacées par les valeurs courantes. Si
+      <span class="emphasis"><em>index</em></span> fait référence à un instantané qui n'existe
+      pas, un nouvel instantané sera créé. Si la valeur
+      d'<span class="emphasis"><em>index</em></span> n'est pas adjacente à celle d'un instantané
+      déjà créé, des instantanés vides seront créés. Par exemple, si la
+      position d'<span class="emphasis"><em>index</em></span> 0 contient le seul instantané
+      présent dans une banque et que l'on sauvegarde un nouvel instantané avec
+      l'<span class="emphasis"><em>index</em></span> 5, toutes les positions entre 1 et 4
+      contiendront automatiquement des instantanés vides. Les instantanés vides
+      ne contiennent pas de données et sont neutres.
+    </p>
+        <p>
+      <span class="emphasis"><em>FLsetsnap</em></span> retourne le nombre courant d'instantanés
+      (l'argument <span class="emphasis"><em>inumsnap</em></span>) et le nombre total de valeurs
+      stockées dans chaque instantané (<span class="emphasis"><em>inumval</em></span>).
+      <span class="emphasis"><em>inumval</em></span> est égal au nombre de valuateurs présents
+      dans l'orchestre.
+    </p>
+        <p>
+      Pour économiser la mémoire, les widgets peuvent être groupés afin que les
+      instantanés n'affectent qu'un groupe défini de widgets. L'opcode
+      <a class="link" href="FLsetSnapGroup.html" title="FLsetSnapGroup"><em class="citetitle">FLsetSnapGroup</em></a>
+      est utilisé pour spécifier le groupe de tous les widgets déclarés après lui
+      jusqu'à la prochaine instruction
+      <a class="link" href="FLsetSnapGroup.html" title="FLsetSnapGroup"><em class="citetitle">FLsetSnapGroup</em></a>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887677958272"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="FLgetsnap.html" title="FLgetsnap"><em class="citetitle">FLgetsnap</em></a>,
+      <a class="link" href="FLloadsnap.html" title="FLloadsnap"><em class="citetitle">FLloadsnap</em></a>,
+      <a class="link" href="FLsetSnapGroup.html" title="FLsetSnapGroup"><em class="citetitle">FLsetSnapGroup</em></a>,
+      <a class="link" href="FLrun.html" title="FLrun"><em class="citetitle">FLrun</em></a>,
+      <a class="link" href="FLsavesnap.html" title="FLsavesnap"><em class="citetitle">FLsavesnap</em></a>,
+      <a class="link" href="FLupdate.html" title="FLupdate"><em class="citetitle">FLupdate</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887677951360"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Gabriel Maldonado</p>
+        <p>Nouveau dans la version 4.22</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="FLsetSize.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="FLsetSnapGroup.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">FLsetSize </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> FLsetSnapGroup</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

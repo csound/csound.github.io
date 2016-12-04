@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>oscbnk</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="opcode.html" title="opcode" />
+    <link rel="next" href="oscil1.html" title="oscil1" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">oscbnk</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="opcode.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="oscil1.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="oscbnk"></a>
+      <div class="titlepage"></div>
+      <a id="IndexOscbnk" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">oscbnk</span>
+        </h2>
+        <p>oscbnk — 
+      Mélange la sortie de n'importe quel nombre d'oscillateurs.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887653963728"></a>
+        <h2>Description</h2>
+        <p>
+      Ce générateur unitaire mélange la sortie de n'importe quel nombre d'oscillateurs. La fréquence, la
+      phase et l'amplitude de chaque oscillateur peuvent être modulées par deux LFO (tous les oscillateurs
+      ont un jeu de LFO séparé, avec différentes phase et fréquence) ; de plus, la sortie de chaque
+      oscillateur peut être filtrée au travers d'un égaliseur paramétrique (aussi contrôlé par les LFO).
+      Cet opcode trouve sa plus grande utilité dans des instruments de rendu d'ensemble (cordes, chœur,
+      etc.).
+    </p>
+        <p>
+      Bien que les LFO fonctionnent au taux-k, les modulations d'amplitude, de phase et de filtrage sont
+      interpolées en interne, et il est ainsi possible (et recommandé dans la plupart des cas) d'utiliser
+      cette unité avec de faibles taux de contrôle (~1000 Hz) sans dégradation audible de la qualité.
+    </p>
+        <p>
+      La phase et la fréquence initiale de tous les oscillateurs et LFO peuvent être fixées par un
+      générateur intégré de nombres aléatoires sur 31 bit amorçable par une <span class="quote">« <span class="quote">graine</span> »</span>, ou
+      spécifiées manuellement dans une table de fonction (GEN2).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887653959456"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>oscbnk</strong></span>  kcps, kamd, kfmd, kpmd, iovrlap, iseed, kl1minf, kl1maxf, \
+      kl2minf, kl2maxf, ilfomode, keqminf, keqmaxf, keqminl, keqmaxl, \
+      keqminq, keqmaxq, ieqmode, kfn [, il1fn] [, il2fn] [, ieqffn]   \
+      [, ieqlfn] [, ieqqfn] [, itabl] [, ioutfn]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887653957008"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>iovrlap</em></span> -- Nombre d'oscillateurs.
+    </p>
+        <p>
+      <span class="emphasis"><em>iseed</em></span> -- Valeur de la graine du générateur de nombres aléatoires (entier
+      positif dans l'intervalle 1 à 2147483646 (2 ^ 31 - 2)). Si <span class="emphasis"><em>iseed</em></span> &lt;= 0
+      la graine est l'heure courante.
+    </p>
+        <p>
+      <span class="emphasis"><em>ieqmode</em></span> -- Mode de l'égaliseur paramétrique
+        </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>-1 : désactive l'EQ (plus rapide)</p>
+            </li>
+            <li class="listitem">
+              <p>0 : crête</p>
+            </li>
+            <li class="listitem">
+              <p>1 : à plateau low shelf</p>
+            </li>
+            <li class="listitem">
+              <p>2 : à plateau high shelf</p>
+            </li>
+            <li class="listitem">
+              <p>3 : crête (filtrage sans interpolation)</p>
+            </li>
+            <li class="listitem">
+              <p>4 : à plateau low shelf (sans interpolation)</p>
+            </li>
+            <li class="listitem">
+              <p>5 : à plateau high shelf (sans interpolation)</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+
+      Les modes sans interpolation sont plus rapides, et dans certains cas (par exemple filtre à plateau
+      high shelf aux fréquences de coupure basses) également plus stables ; cependant, l'interpolation est
+      utile pour éviter le <span class="quote">« <span class="quote">bruit de transition</span> »</span> aux faibles taux de contrôle.
+    </p>
+        <p>
+      <span class="emphasis"><em>ilfomode</em></span> -- Type de la modulation par les LFO, somme de :
+        </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>128 : LFO1 module la fréquence</p>
+            </li>
+            <li class="listitem">
+              <p>64 : LFO1 module l'amplitude</p>
+            </li>
+            <li class="listitem">
+              <p>32 : LFO1 module la phase</p>
+            </li>
+            <li class="listitem">
+              <p>16 : LFO1 module l'EQ</p>
+            </li>
+            <li class="listitem">
+              <p>8 : LFO2 module la fréquence</p>
+            </li>
+            <li class="listitem">
+              <p>4 : LFO2 module l'amplitude</p>
+            </li>
+            <li class="listitem">
+              <p>2 : LFO2 module la phase</p>
+            </li>
+            <li class="listitem">
+              <p>1 : LFO2 module l'EQ</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+
+      Si un LFO ne module rien, il n'est pas calculé, et le numéro de sa ftable (<span class="emphasis"><em>il1fn</em></span>
+      ou <span class="emphasis"><em>il2fn</em></span>) peut être omis.
+    </p>
+        <p>
+      <span class="emphasis"><em>il1fn</em></span> (facultatif : par défaut 0) -- Numéro de la table de fonction de LFO1. La
+      forme d'onde dans cette table doit être normalisée (valeur absolue &lt;= 1), et elle est lue avec une
+      interpolation linéaire.
+    </p>
+        <p>
+      <span class="emphasis"><em>il2fn</em></span> (facultatif : par défaut 0) -- Numéro de la table de fonction de LFO2. La
+      forme d'onde dans cette table doit être normalisée (valeur absolue &lt;= 1), et elle est lue avec une
+      interpolation linéaire.
+    </p>
+        <p>
+      <span class="emphasis"><em>ieqffn, ieqlfn, ieqqfn</em></span> (facultatif : par défaut 0) -- Tables de lecture pour la
+      fréquence, le niveau et le Q de EQ (facultatif si EQ est désactivé). La position de lecture dans une
+      table est 0 si le signal de modulation est inférieur ou égal à -1, (longueur de table / 2) si le
+      signal de modulation vaut zero, et le point de garde si le signal de modulation est supérieur ou égal
+      à 1. Ces tables doivent être normalisées dans l'intervalle 0 - 1, et ont un point de garde étendu
+      (longueur de table = puissance de deux + 1). Toutes les tables sont lues avec une interpolation
+      linéaire.
+    </p>
+        <p>
+      <span class="emphasis"><em>itabl</em></span> (facultatif : par défaut 0) -- Table de fonction stockant les valeurs de
+      phase et de fréquence pour tous les oscillateurs (facultatif). Les valeurs dans cette table sont
+      dans l'ordre suivant (5 pour chaque oscillateur) :
+      </p>
+        <div class="informalexample">
+          <div class="literallayout">
+            <p>phase de l'oscillateur, phase de lfo1, fréquence de lfo1, phase de lfo2, fréquence de lfo2, ...</p>
+          </div>
+        </div>
+        <p>
+      Toutes les valeurs sont dans l'intervalle 0 à 1 ; si le nombre spécifié est supérieur à 1, il est
+      ramené cycliquement (phase) ou limité (fréquence) à l'intérieur de l'intervalle permis. Une valeur
+      négative (ou la fin de la table) utilisera la sortie du générateur de nombres aléatoires. La valeur
+      aléatoire est toujours calculée (même si aucun nombre aléatoire n'est utilisé), si bien que le fait
+      de basculer entre une valeur aléatoire et une valeur fixe n'altérera pas les autres valeurs.
+    </p>
+        <p>
+      <span class="emphasis"><em>ioutfn</em></span> (facultatif : par défaut 0) -- Table de fonction pour écrire les valeurs
+      de phase et de fréquence (facultatif). Le format est le même que celui de <span class="emphasis"><em>itabl</em></span>.
+      Cette table est utile lors de l'expérimentation avec des nombres aléatoires pour enregistrer les
+      meilleures valeurs.
+    </p>
+        <p>
+      L'accès aux deux tables facultatives (<span class="emphasis"><em>itabl</em></span> et <span class="emphasis"><em>ioutfn</em></span>) n'a
+      lieu que pendant l'initialisation. Il est utile de savoir cela, car les tables peuvent être réécrites
+      en toute sécurité après l'initialisation de l'opcode, permettant le pré-calcul des paramètres pendant
+      le temps-i et le stockage dans une table temporaire avant l'initialisation de
+      <span class="emphasis"><em>oscbnk</em></span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887653929136"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ares</em></span> -- Signal de sortie.
+    </p>
+        <p>
+      <span class="emphasis"><em>kcps</em></span> -- Fréquence de l'oscillateur en Hz.
+    </p>
+        <p>
+      <span class="emphasis"><em>kamd</em></span> -- Profondeur de la modulation d'amplitude (0 - 1). 
+      </p>
+        <div class="literallayout">
+          <p>(sortie MA) = (entrée MA) * ((1 - (prof MA)) + (prof MA) * (modulateur))</p>
+        </div>
+        <p>
+
+      Si <span class="emphasis"><em>ilfomode</em></span> n'est pas réglé pour moduler l'amplitude, alors (sortie MA) =
+      (entrée MA) quelque soit la valeur de <span class="emphasis"><em>kamd</em></span>. Dans ce cas,
+      <span class="emphasis"><em>kamd</em></span> n'aura pas d'effet.
+    </p>
+        <p>
+      Note : La modulation d'amplitude est appliquée avant l'égaliseur paramétrique. 
+    </p>
+        <p>
+      <span class="emphasis"><em>kfmd</em></span> -- Profondeur de la MF (en Hz).
+    </p>
+        <p>
+      <span class="emphasis"><em>kpmd</em></span> -- Profondeur de la modulation de phase.
+    </p>
+        <p>
+      <span class="emphasis"><em>kl1minf, kl1maxf</em></span> -- Fréquence minimale et maximale de LFO1 en Hz.
+    </p>
+        <p>
+      <span class="emphasis"><em>kl2minf, kl2maxf</em></span> --  Fréquence minimale et maximale de LFO2 en Hz. (Note :
+      il est permis d'avoir des fréquences nulles ou négatives pour l'oscillateur et les LFO.)
+    </p>
+        <p>
+      <span class="emphasis"><em>keqminf, keqmaxf</em></span> -- Fréquence minimale et maximale de l'égaliseur paramétrique
+      en Hz.
+    </p>
+        <p>
+      <span class="emphasis"><em>keqminl, keqmaxl</em></span> -- Niveau minimum et maximum de l'égaliseur paramétrique.
+    </p>
+        <p>
+      <span class="emphasis"><em>keqminq, keqmaxq</em></span> -- Q minimum et maximum de l'égaliseur paramétrique.
+    </p>
+        <p>
+      <span class="emphasis"><em>kfn</em></span> -- Table de la forme d'onde de l'oscillateur. Le numéro de la table peut
+      être changé au taux-k (c'est utile pour choisir parmi un ensemble de tables à bande limitée générées
+      par GEN30, afin d'éviter les erreurs de repliement). La table est lue avec une interpolation linéaire.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note: Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        <span class="emphasis"><em>oscbnk</em></span> utilise le même générateur de nombres aléatoires que
+        <span class="emphasis"><em>rnd31</em></span>. C'est pourquoi il est également recommandé de lire
+        <a class="link" href="rnd31.html" title="rnd31"><em class="citetitle">sa documentation</em></a>.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887653911216"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode oscbnk. Il utilise le fichier
+      <a class="ulink" href="examples/oscbnk.csd" target="_top"><em class="citetitle">oscbnk.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm47887653909344"></a>
+          <p class="title">
+            <strong>Exemple 588. Exemple de l'opcode oscbnk.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887512972224"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o oscbnk.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="op">/</span><span class="op">*</span> Written by Istvan Varga <span class="op">*</span><span class="op">/</span>
+<span class="ohdr">sr</span>	<span class="op">=</span>  48000
+<span class="ohdr">kr</span>	<span class="op">=</span>  750
+<span class="ohdr">ksmps</span>	<span class="op">=</span>  64
+<span class="ohdr">nchnls</span>	<span class="op">=</span>  2
+
+ga01	<span class="opc">init</span> 0
+ga02	<span class="opc">init</span> 0
+
+<span class="op">/</span><span class="op">*</span> sawtooth wave <span class="op">*</span><span class="op">/</span>
+i_	<span class="ohdr">ftgen</span> 1, 0, 16384, 7, 1, 16384, <span class="op">-</span>1
+<span class="op">/</span><span class="op">*</span> FM waveform <span class="op">*</span><span class="op">/</span>
+i_	<span class="ohdr">ftgen</span> 3, 0, 4096, 7, 0, 512, 0.25, 512, 1, 512, 0.25, 512,	\
+			     0, 512, <span class="op">-</span>0.25, 512, <span class="op">-</span>1, 512, <span class="op">-</span>0.25, 512, 0
+<span class="op">/</span><span class="op">*</span> AM waveform <span class="op">*</span><span class="op">/</span>
+i_	<span class="ohdr">ftgen</span> 4, 0, 4096, 5, 1, 4096, 0.01
+<span class="op">/</span><span class="op">*</span> FM to EQ <span class="op">*</span><span class="op">/</span>
+i_	<span class="ohdr">ftgen</span> 5, 0, 1024, 5, 1, 512, 32, 512, 1
+<span class="op">/</span><span class="op">*</span> sine wave <span class="op">*</span><span class="op">/</span>
+i_	<span class="ohdr">ftgen</span> 6, 0, 1024, 10, 1
+<span class="op">/</span><span class="op">*</span> room parameters <span class="op">*</span><span class="op">/</span>
+i_	<span class="ohdr">ftgen</span> 7, 0, 64, <span class="op">-</span>2, 4, 50, <span class="op">-</span>1, <span class="op">-</span>1, <span class="op">-</span>1, 11,			\
+			    1, 26.833, 0.05, 0.85, 10000, 0.8, 0.5, 2,	\
+			    1,  1.753, 0.05, 0.85,  5000, 0.8, 0.5, 2,	\
+			    1, 39.451, 0.05, 0.85,  7000, 0.8, 0.5, 2,	\
+			    1, 33.503, 0.05, 0.85,  7000, 0.8, 0.5, 2,	\
+			    1, 36.151, 0.05, 0.85,  7000, 0.8, 0.5, 2,	\
+			    1, 29.633, 0.05, 0.85,  7000, 0.8, 0.5, 2
+
+<span class="op">/</span><span class="op">*</span> generate bandlimited sawtooth waves <span class="op">*</span><span class="op">/</span>
+
+i0	<span class="op">=</span>  0
+<span class="olabel">loop1</span><span class="op">:</span>
+imaxh	<span class="op">=</span>  <span class="ohdr">sr</span> <span class="op">/</span> (2 <span class="op">*</span> 440.0 <span class="op">*</span> <span class="opc">exp</span>(<span class="opc">log</span>(2.0) <span class="op">*</span> (i0 <span class="op">-</span> 69) <span class="op">/</span> 12))
+i_	<span class="ohdr">ftgen</span> i0 <span class="op">+</span> 256, 0, 4096, <span class="op">-</span>30, 1, 1, imaxh
+i0	<span class="op">=</span>  i0 <span class="op">+</span> 1
+	<span class="octrl">if</span> (i0 <span class="op">&lt;</span> 127.5) <span class="octrl">igoto</span> <span class="olabel">loop1</span>
+
+	<span class="oblock">instr</span> 1
+
+p3	<span class="op">=</span>  p3 <span class="op">+</span> 0.4
+
+<span class="comment">; note frequency</span>
+kcps	<span class="op">=</span>  440.0 <span class="op">*</span> <span class="opc">exp</span>(<span class="opc">log</span>(2.0) <span class="op">*</span> (p4 <span class="op">-</span> 69) <span class="op">/</span> 12)
+<span class="comment">; lowpass max. frequency</span>
+klpmaxf	limit 64 <span class="op">*</span> kcps, 1000.0, 12000.0
+<span class="comment">; FM depth in Hz</span>
+kfmd1	<span class="op">=</span>  0.02 <span class="op">*</span> kcps
+<span class="comment">; AM frequency</span>
+kamfr	<span class="op">=</span>  kcps <span class="op">*</span> 0.02
+kamfr2	<span class="op">=</span>  kcps <span class="op">*</span> 0.1
+<span class="comment">; table number</span>
+kfnum	<span class="op">=</span>  (256 <span class="op">+</span> 69 <span class="op">+</span> 0.5 <span class="op">+</span> 12 <span class="op">*</span> <span class="opc">log</span>(kcps <span class="op">/</span> 440.0) <span class="op">/</span> <span class="opc">log</span>(2.0))
+<span class="comment">; amp. envelope</span>
+aenv	<span class="opc">linseg</span> 0, 0.1, 1.0, p3 <span class="op">-</span> 0.5, 1.0, 0.1, 0.5, 0.2, 0, 1.0, 0
+
+<span class="op">/</span><span class="op">*</span> oscillator <span class="op">/</span> left <span class="op">*</span><span class="op">/</span>
+
+a1	<span class="opc">oscbnk</span> kcps, 0.0, kfmd1, 0.0, 40, 200, 0.1, 0.2, 0, 0, 144,	      \
+		0.0, klpmaxf, 0.0, 0.0, 1.5, 1.5, 2,			      \
+		kfnum, 3, 0, 5, 5, 5
+a2	<span class="opc">oscbnk</span> kcps, 1.0, kfmd1, 0.0, 40, 201, 0.1, 0.2, kamfr, kamfr2, 148,  \
+		0, 0, 0, 0, 0, 0, <span class="op">-</span>1,					      \
+		kfnum, 3, 4
+a2	<span class="opc">pareq</span> a2, kcps <span class="op">*</span> 8, 0.0, 0.7071, 2
+a0	<span class="op">=</span>  a1 <span class="op">+</span> a2 <span class="op">*</span> 0.12
+<span class="op">/</span><span class="op">*</span> <span class="opc">delay</span> <span class="op">*</span><span class="op">/</span>
+adel	<span class="op">=</span>  0.001
+a01	<span class="opc">vdelayx</span> a0, adel, 0.01, 16
+a_	<span class="opc">oscili</span> 1.0, 0.25, 6, 0.0
+adel	<span class="op">=</span>  adel <span class="op">+</span> 1.0 <span class="op">/</span> (<span class="opc">exp</span>(<span class="opc">log</span>(2.0) <span class="op">*</span> a_) <span class="op">*</span> 8000)
+a02	<span class="opc">vdelayx</span> a0, adel, 0.01, 16
+a0	<span class="op">=</span>  a01 <span class="op">+</span> a02
+
+ga01	<span class="op">=</span>  ga01 <span class="op">+</span> a0 <span class="op">*</span> aenv <span class="op">*</span> 2500
+
+<span class="op">/</span><span class="op">*</span> oscillator <span class="op">/</span> right <span class="op">*</span><span class="op">/</span>
+
+<span class="comment">; lowpass max. frequency</span>
+
+a1	<span class="opc">oscbnk</span> kcps, 0.0, kfmd1, 0.0, 40, 202, 0.1, 0.2, 0, 0, 144,	      \
+		0.0, klpmaxf, 0.0, 0.0, 1.0, 1.0, 2,			      \
+		kfnum, 3, 0, 5, 5, 5
+a2	<span class="opc">oscbnk</span> kcps, 1.0, kfmd1, 0.0, 40, 203, 0.1, 0.2, kamfr, kamfr2, 148,  \
+		0, 0, 0, 0, 0, 0, <span class="op">-</span>1,					      \
+		kfnum, 3, 4
+a2	<span class="opc">pareq</span> a2, kcps <span class="op">*</span> 8, 0.0, 0.7071, 2
+a0	<span class="op">=</span>  a1 <span class="op">+</span> a2 <span class="op">*</span> 0.12
+<span class="op">/</span><span class="op">*</span> <span class="opc">delay</span> <span class="op">*</span><span class="op">/</span>
+adel	<span class="op">=</span>  0.001
+a01	<span class="opc">vdelayx</span> a0, adel, 0.01, 16
+a_	<span class="opc">oscili</span> 1.0, 0.25, 6, 0.25
+adel	<span class="op">=</span>  adel <span class="op">+</span> 1.0 <span class="op">/</span> (<span class="opc">exp</span>(<span class="opc">log</span>(2.0) <span class="op">*</span> a_) <span class="op">*</span> 8000)
+a02	<span class="opc">vdelayx</span> a0, adel, 0.01, 16
+a0	<span class="op">=</span>  a01 <span class="op">+</span> a02
+
+ga02	<span class="op">=</span>  ga02 <span class="op">+</span> a0 <span class="op">*</span> aenv <span class="op">*</span> 2500
+
+
+	<span class="oblock">endin</span>
+
+<span class="op">/</span><span class="op">*</span> output <span class="op">/</span> left <span class="op">*</span><span class="op">/</span>
+
+	<span class="oblock">instr</span> 81
+
+i1	<span class="op">=</span>  0.000001
+aLl, aLh, aRl, aRh	<span class="opc">spat3di</span> ga01 <span class="op">+</span> i1<span class="op">*</span>i1<span class="op">*</span>i1<span class="op">*</span>i1, <span class="op">-</span>8.0, 4.0, 0.0, 0.3, 7, 4
+ga01	<span class="op">=</span>  0
+aLl	<span class="opc">butterlp</span> aLl, 800.0
+aRl	<span class="opc">butterlp</span> aRl, 800.0
+
+	<span class="opc">outs</span> aLl <span class="op">+</span> aLh, aRl <span class="op">+</span> aRh
+
+	<span class="oblock">endin</span>
+
+<span class="op">/</span><span class="op">*</span> output <span class="op">/</span> right <span class="op">*</span><span class="op">/</span>
+
+	<span class="oblock">instr</span> 82
+
+i1	<span class="op">=</span>  0.000001
+aLl, aLh, aRl, aRh	<span class="opc">spat3di</span> ga02 <span class="op">+</span> i1<span class="op">*</span>i1<span class="op">*</span>i1<span class="op">*</span>i1, 8.0, 4.0, 0.0, 0.3, 7, 4
+ga02	<span class="op">=</span>  0
+aLl	<span class="opc">butterlp</span> aLl, 800.0
+aRl	<span class="opc">butterlp</span> aRl, 800.0
+
+	<span class="opc">outs</span> aLl <span class="op">+</span> aLh, aRl <span class="op">+</span> aRh
+
+	<span class="oblock">endin</span>
+
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+/* Written by Istvan Varga */
+<span class="stamnt">t</span> 0 60
+
+<span class="stamnt">i</span> 1 0 4 41
+<span class="stamnt">i</span> 1 0 4 60
+<span class="stamnt">i</span> 1 0 4 65
+<span class="stamnt">i</span> 1 0 4 69
+
+<span class="stamnt">i</span> 81 0 5.5
+<span class="stamnt">i</span> 82 0 5.5
+<span class="stamnt">e</span>
+
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887653904976"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Istvan Varga</td>
+          </tr>
+          <tr>
+            <td>2001</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 4.15</p>
+        <p>Mis à jour en avril 2002 par Istvan Varga</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="opcode.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="oscil1.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">opcode </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> oscil1</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

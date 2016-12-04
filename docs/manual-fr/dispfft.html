@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>dispfft</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="diskin2.html" title="diskin2" />
+    <link rel="next" href="display.html" title="display" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">dispfft</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="diskin2.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="display.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="dispfft"></a>
+      <div class="titlepage"></div>
+      <a id="IndexDispfft" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">dispfft</span>
+        </h2>
+        <p>displayfft — 
+      Affiche la transformée de Fourier d'un signal audio ou de contrôle.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887685688688"></a>
+        <h2>Description</h2>
+        <p>
+      Ces unités affichent les valeurs d'initialisation de l'orchestre ou
+      produisent un affichage graphique de signaux de contrôle ou audio de
+      l'orchestre. Des fenêtres X11 sont utilisées s'il est activé, sinon (ou si
+      l'option <a class="link" href="CommandFlags.html#FlagsMinusLowerG"><em class="citetitle">-g</em></a>
+      est positionnée) on a un affichage approximatif en caractères ASCII.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887685685968"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>dispfft</strong></span> xsig, iprd, iwsiz [, iwtyp] [, idbout] [, iwtflg] [,imin] [,imax]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887685683952"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>iprd</em></span> -- la période d'affichage en secondes.
+    </p>
+        <p>
+      <span class="emphasis"><em>iwsiz</em></span> -- taille de la fenêtre d'entrée en échantillons.
+      Une fenêtre de <span class="emphasis"><em>iwsiz</em></span> points produira une transformée de
+      Fourier de <span class="emphasis"><em>iwsiz</em></span>/2 points, répartis linéairement en
+      fréquence de 0 à <span class="emphasis"><em>sr</em></span>/2. <span class="emphasis"><em>iwsiz</em></span> doit
+      être une puissance de 2, comprise entre 16 et 4096. Les fenêtres peuvent
+      se chevaucher.
+    </p>
+        <p>
+      <span class="emphasis"><em>iwtyp</em></span> (facultatif, 0 par défaut) -- type de fenêtre.
+      0 = rectangulaire, 1 = Hanning. La valeur par défaut est 0 (rectangulaire).
+    </p>
+        <p>
+      <span class="emphasis"><em>idbout</em></span> (facultatif, 0 par défaut) -- unité d'affichage
+      des coefficients de Fourier. 0 = magnitude, 1 = décibels. La valeur par
+      défaut est 0 (magnitude).
+    </p>
+        <p>
+      <span class="emphasis"><em>iwtflg</em></span> (facultatif, 0 par défaut) -- indicateur de
+      maintien. S'il est différent de zéro, chaque affichage est maintenu jusqu'à
+      ce que l'utilisateur le libère. La valeur par défaut est 0 (pas de maintien).
+    </p>
+        <p>
+      <span class="emphasis"><em>imin</em></span> (facultatif, 0 par défaut) -- bin minimum de la
+      FFT à afficher.
+    </p>
+        <p>
+      <span class="emphasis"><em>imax</em></span> (facultatif, winsize/2 par défaut) -- bin
+      maximum de la FFT à afficher.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887685673616"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>dispfft</em></span> -- affiche la transformée de Fourier d'un signal
+      audio ou de contrôle (<span class="emphasis"><em>asig</em></span> ou <span class="emphasis"><em>ksig</em></span>)
+      chaque <span class="emphasis"><em>iprd</em></span> secondes au moyen de la méthode de transformée
+      de Fourier rapide.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887685670352"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode dispfft. Il utilise le fichier
+      <a class="ulink" href="examples/dispfft.csd" target="_top"><em class="citetitle">dispfft.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887685668480"></a>
+          <p class="title">
+            <strong>Exemple 210. Exemple de l'opcode dispfft.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887527980304"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac     <span class="comment">;;;realtime audio out</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o dispfft.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+
+<span class="oblock">instr</span> 1
+
+kcps <span class="op">=</span> 110
+ifn  <span class="op">=</span> 1
+
+knh	<span class="opc">line</span> p4, p3, p5
+asig	<span class="opc">buzz</span> 1, kcps, knh, ifn
+	<span class="opc">outs</span> asig, asig
+
+<span class="opc">dispfft</span>	asig, .1, 2048, 0, 1
+
+<span class="oblock">endin</span>
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="comment">;sine wave.</span>
+<span class="stamnt">f</span> 1 0 16384 10 1
+
+<span class="stamnt">i</span> 1 0 3 20 20
+<span class="stamnt">i</span> 1 + 3 3 3
+<span class="stamnt">i</span> 1 + 3 150 1
+<span class="stamnt">e</span>
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887685664160"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="display.html" title="display"><em class="citetitle">display</em></a>,
+      <a class="link" href="print.html" title="print"><em class="citetitle">print</em></a>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="diskin2.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="display.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">diskin2 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> display</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

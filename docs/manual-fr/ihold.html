@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ihold</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="igoto.html" title="igoto" />
+    <link rel="next" href="imagecreate.html" title="imagecreate" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ihold</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="igoto.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="imagecreate.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="ihold"></a>
+      <div class="titlepage"></div>
+      <a id="IndexIhold" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">ihold</span>
+        </h2>
+        <p>ihold — 
+      Crée une note tenue.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887668671632"></a>
+        <h2>Description</h2>
+        <p>
+      Transforme une note de durée finie en une note <span class="quote">« <span class="quote">tenue</span> »</span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887668669968"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">
+          <span class="command">
+            <strong>ihold</strong>
+          </span>
+        </pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887668668112"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ihold</em></span> -- cette instruction de la phase d'initialisation
+      transforme une note de durée finie en une note <span class="quote">« <span class="quote">tenue</span> »</span>. Elle a
+      ainsi le même effet qu'une valeur de p3 négative (voir
+      l'<a class="link" href="i.html" title="Instruction i (instruction d'instrument ou de note)"><em class="citetitle">instruction i</em></a> de la partition),
+      sauf qu'ici p3 reste positif et que l'instrument se redéfinit lui-même pour
+      durer indéfiniment. La note peut être arrêtée explicitement par un
+      <span class="emphasis"><em>turnoff</em></span>, ou son espace peut être utilisé par une autre
+      note ayant le même numéro d'instrument (c-à-d qu'elle est liée à cette note).
+      N'agit que pendant la phase d'initialisation ; inopérant pendant une phase de
+      réinitialisation (<span class="emphasis"><em>reinit</em></span>).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887668663040"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode ihold. Il utilise le fichier
+      <a class="ulink" href="examples/ihold.csd" target="_top"><em class="citetitle">ihold.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm47887668661264"></a>
+          <p class="title">
+            <strong>Exemple 405. Exemple de l'opcode ihold.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887519806048"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o ihold.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="comment">; Initialize the global variables.</span>
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">kr</span> <span class="op">=</span> 4410
+<span class="ohdr">ksmps</span> <span class="op">=</span> 10
+<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+
+<span class="comment">; Instrument #1.</span>
+<span class="oblock">instr</span> 1
+  <span class="comment">; A simple oscillator with its note held indefinitely.</span>
+  a1 <span class="opc">oscil</span> 10000, 440, 1
+  <span class="opc">ihold</span>
+
+  <span class="comment">; If p4 equals 0, turn the note off.</span>
+  <span class="octrl">if</span> (p4 <span class="op">==</span> 0) <span class="octrl">kgoto</span> <span class="olabel">offnow</span>
+    <span class="octrl">kgoto</span> <span class="olabel">playit</span>
+
+<span class="olabel">offnow</span><span class="op">:</span>
+  <span class="comment">; Turn the note off now.</span>
+  <span class="opc">turnoff</span>
+
+<span class="olabel">playit</span><span class="op">:</span>
+  <span class="comment">; Play the note.</span>
+  <span class="opc">out</span> a1
+<span class="oblock">endin</span>
+
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+<span class="comment">; Table #1: an ordinary sine wave.</span>
+<span class="stamnt">f</span> 1 0 32768 10 1
+
+<span class="comment">; p4 = turn the note off (if it is equal to 0).</span>
+<span class="comment">; Start playing Instrument #1.</span>
+<span class="stamnt">i</span> 1 0 1 1
+<span class="comment">; Turn Instrument #1 off after 3 seconds.</span>
+<span class="stamnt">i</span> 1 3 1 0
+<span class="stamnt">e</span>
+
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887668656960"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="i.html" title="Instruction i (instruction d'instrument ou de note)"><em class="citetitle">i Statement</em></a>,
+      <a class="link" href="turnoff.html" title="turnoff"><em class="citetitle">turnoff</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887668653984"></a>
+        <h2>Crédits</h2>
+        <p>Exemple écrit par Kevin Conder.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="igoto.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="imagecreate.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">igoto </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> imagecreate</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

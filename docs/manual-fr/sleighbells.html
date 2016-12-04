@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>sleighbells</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="sinsyn.html" title="sinsyn" />
+    <link rel="next" href="slicearray.html" title="slicearray" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">sleighbells</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="sinsyn.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="slicearray.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="sleighbells"></a>
+      <div class="titlepage"></div>
+      <a id="IndexSleighbells" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">sleighbells</span>
+        </h2>
+        <p>sleighbells — 
+      Modèle semi-physique d'un son de cloche de traineau.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887634152384"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>sleighbells</em></span> est un modèle semi-physique d'un son de cloche
+      de traineau. Il fait partie des opcodes de percussion de PhISEM. PhISEM (Physically
+      Informed Stochastic Event Modeling) est une approche algorithmique pour simuler
+      les collisions de multiples objets indépendants produisant des sons.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887634150224"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>sleighbells</strong></span> kamp, idettack [, inum] [, idamp] [, imaxshake] [, ifreq] \
+      [, ifreq1] [, ifreq2]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887634147824"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>idettack</em></span> -- période de temps durant laquelle tous les sons sont stoppés.
+    </p>
+        <p>
+      <span class="emphasis"><em>inum</em></span> (facultatif) -- le nombre de perles, de dents, de cloches, de
+      tambourins, etc. S'il vaut zéro, il prend la valeur par défaut de 32.
+    </p>
+        <p>
+      <span class="emphasis"><em>idamp</em></span> (facultatif) -- le facteur d'amortissement, intervenant dans
+      l'équation :
+      </p>
+        <div class="literallayout">
+          <p>damping_amount = 0,9994 + (idamp * 0,002)</p>
+        </div>
+        <p>
+    </p>
+        <p>
+      La valeur par défaut de <span class="emphasis"><em>damping_amount</em></span> est 0,9994 ce qui signifie que
+      la valeur par défaut de <span class="emphasis"><em>idamp</em></span> est 0. Le maximum de
+      <span class="emphasis"><em>damping_amount</em></span> est 1,0 (pas d'amortissement). La valeur maximale de
+      <span class="emphasis"><em>idamp</em></span> est donc 0,03.
+    </p>
+        <p>
+      L'intervalle recommandé pour <span class="emphasis"><em>idamp</em></span> se situe d'habitude sous les 75% de
+      la valeur maximale.
+    </p>
+        <p>
+      <span class="emphasis"><em>imaxshake</em></span> (facultatif, 0 par défaut) -- quantité d'énergie à réinjecter
+      dans le système. La valeur doit être comprise entre 0 et 1.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifreq</em></span> (facultatif) -- la fréquence de résonance principale.
+      La valeur par défaut est 2500.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifreq1</em></span> (facultatif) -- la première fréquence de résonance.
+      La valeur par défaut est 5300.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifreq2</em></span> (facultatif) -- la deuxième fréquence de résonance.
+      La valeur par défaut est 6500.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887634135104"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kamp</em></span> -- Amplitude de la sortie. Note : comme ces instruments sont
+      stochastiques, ce n'est qu'une approximation.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887634133232"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode sleighbells. Il utilise le fichier
+      <a class="ulink" href="examples/sleighbells.csd" target="_top"><em class="citetitle">sleighbells.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887634131264"></a>
+          <p class="title">
+            <strong>Exemple 856. Exemple de l'opcode sleighbells.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887503448224"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac      <span class="comment">;;;realtime audio out</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o sleighbells.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+
+
+<span class="oblock">instr</span> 1
+
+idamp <span class="op">=</span> p4
+asig  <span class="opc">sleighbells</span> .7, 0.01, 32, idamp, 0.55
+      <span class="opc">outs</span> asig, asig
+
+<span class="oblock">endin</span>
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+<span class="stamnt">i</span> 1 0.00 0.25 0	<span class="comment">;short sound</span>
+<span class="stamnt">i</span> 1 0.30 0.25
+<span class="stamnt">i</span> 1 0.60 0.25
+<span class="stamnt">i</span> 1 0.90 0.25
+<span class="stamnt">i</span> 1 1.20 0.25
+<span class="stamnt">i</span> 1 1.50 1   .3	<span class="comment">;longer sound</span>
+<span class="stamnt">i</span> 1 1.80 0.25 0	<span class="comment">;short sound again</span>
+<span class="stamnt">i</span> 1 2.10 0.25
+<span class="stamnt">i</span> 1 2.40 0.25
+<span class="stamnt">i</span> 1 2.70 0.25
+<span class="stamnt">i</span> 1 3.00 0.25
+<span class="stamnt">e</span>
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887634126800"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="bamboo.html" title="bamboo"><em class="citetitle">bamboo</em></a>,
+      <a class="link" href="dripwater.html" title="dripwater"><em class="citetitle">dripwater</em></a>,
+      <a class="link" href="guiro.html" title="guiro"><em class="citetitle">guiro</em></a>,
+      <a class="link" href="tambourine.html" title="tambourine"><em class="citetitle">tambourine</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887634121808"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Perry Cook, fait partie de PhISEM (Physically Informed Stochastic Event Modeling)</td>
+          </tr>
+          <tr>
+            <td>Adapté par John ffitch</td>
+          </tr>
+          <tr>
+            <td>Université de Bath, Codemist Ltd.</td>
+          </tr>
+          <tr>
+            <td>Bath, UK</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 4.07 de Csound</p>
+        <p>Notes ajoutées par Rasmus Ekman en mai 2002.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="sinsyn.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="slicearray.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">sinsyn </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> slicearray</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

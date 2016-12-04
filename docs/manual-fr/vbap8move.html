@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>vbap8move</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="vbap8.html" title="vbap8" />
+    <link rel="next" href="vbaplsinit.html" title="vbaplsinit" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">vbap8move</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="vbap8.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="vbaplsinit.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="vbap8move"></a>
+      <div class="titlepage"></div>
+      <a id="IndexVbap8move" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">vbap8move</span>
+        </h2>
+        <p>vbap8move — 
+      Distribue un signal audio sur 8 canaux avec des sources virtuelles en
+      mouvement.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887618812416"></a>
+        <h2>Description</h2>
+        <p>
+      Distribue un signal audio sur 8 canaux avec des sources virtuelles en
+      mouvement.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887618811152"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ar1, ..., ar8 <span class="command"><strong>vbap8move</strong></span> asig, idur, ispread, ifldnum, ifld1 \
+      [, ifld2] [...]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887618809008"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>idur</em></span> -- durée pendant laquelle le mouvement a lieu.
+    </p>
+        <p>
+      <span class="emphasis"><em>ispread</em></span> -- diffusion de la source virtuelle
+      (de 0 à 100). S'il vaut 0, on a un panoramique d'amplitude conventionnel.
+      Plus <span class="emphasis"><em>ispread</em></span> augmente et plus le nombre de haut-parleurs
+      utilisés dans le panoramique augmente. S'il vaut 100, le son est appliqué à
+      tous les haut-parleurs.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifldnum</em></span> -- nombre de champs (sa valeur absolue doit
+      être supérieure ou égale à 2). Si <span class="emphasis"><em>ifldnum</em></span> est positif,
+      le mouvement de la source virtuelle est une ligne brisée spécifiée par les
+      directions données. Chaque transition est exécutée durant un intervalle
+      de même durée. Si <span class="emphasis"><em>ifldnum</em></span> est négatif, les vélocités
+      angulaires spécifiées sont appliquées à la source virtuelle durant les
+      intervalles de temps spécifiés correspondants (voir ci-dessous).
+    </p>
+        <p>
+      <span class="emphasis"><em>ifld1, ifld2, ...</em></span> -- angles d'azimut ou vélocités
+      angulaires et durées correspondantes des phases du mouvement (voir ci-dessous).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887618801712"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>asig</em></span> -- signal audio à traiter.
+    </p>
+        <p>
+      <span class="emphasis"><em>vbap8move</em></span> permet l'utilisation de sources virtuelles
+      en mouvement. Si <span class="emphasis"><em>ifldnum</em></span> est positif, les champs
+      représentent les directions de la source virtuelle durant des intervalles
+      de temps égaux, <span class="emphasis"><em>iazi1</em></span>, [<span class="emphasis"><em>iele1</em></span>,]
+      <span class="emphasis"><em>iazi2</em></span>, [<span class="emphasis"><em>iele2</em></span>,], etc. La position
+      de la source virtuelle est interpolée entre ces directions en partant de
+      la première direction et en terminant à la dernière. Chaque intervalle est
+      interpolé durant une fraction de la durée de l'évènement sonore égale à
+      durée_totale / nombre_intervalles.
+    </p>
+        <p>
+      Si <span class="emphasis"><em>ifldnum</em></span> est négatif, les champs représentent les
+      vitesses angulaires à intervalles réguliers. Le premier champ est cependant
+      la direction de départ, <span class="emphasis"><em>iazi1</em></span>, [<span class="emphasis"><em>iele1</em></span>,]
+      <span class="emphasis"><em>iazi_vel1</em></span>, [<span class="emphasis"><em>iele_vel1</em></span>,]
+      <span class="emphasis"><em>iazi_vel2</em></span>, [<span class="emphasis"><em>iele_vel2</em></span>,] ...
+      Chaque vitesse est appliquée à la note qui occupe la fraction durée_totale /
+      nombre_de_vitesses de la durée de l'évènement sonore. Si l'élévation de
+      la source virtuelle dépasse 90 degrés ou devient inférieure à 0 degré, la
+      polarité de la vitesse angulaire change. Ainsi l'élévation angulaire
+      produit une source virtuelle qui monte et descend entre 0 et 90 degrés.
+    </p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Avertissement]" src="images/warning.png" />
+              </td>
+              <th align="left">Avertissement</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Prière de noter que tous les opcodes de panoramique <span class="emphasis"><em>vbap</em></span>
+        nécessitent une initialisation du système <span class="emphasis"><em>vbap</em></span> avec
+        <a class="link" href="vbaplsinit.html" title="vbaplsinit"><em class="citetitle">vbaplsinit</em></a>.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887618788848"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple simple de l'opcode <span class="emphasis"><em>vbap8move</em></span>. Il utilise le
+      fichier <a class="ulink" href="examples/vbap8move.csd" target="_top"><em class="citetitle">vbap8move.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm47887618786544"></a>
+          <p class="title">
+            <strong>Exemple 1011. Exemple de l'opcode vbap8move.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887497653200"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in</span>
+-odac           -iadc    <span class="comment">;;;RT audio I/O</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o vbap4move.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 48000
+<span class="ohdr">ksmps</span> <span class="op">=</span> 10
+<span class="ohdr">nchnls</span> <span class="op">=</span> 8
+
+<span class="comment">;Example by Hector Centeno 2007</span>
+
+<span class="opc">vbaplsinit</span>    2, 8, 15, 65, 115, 165, 195, 245, 295, 345
+
+    <span class="oblock">instr</span> 1
+ifldnum <span class="op">=</span> 9
+ispread <span class="op">=</span> 30
+idur <span class="op">=</span> p3
+
+<span class="comment">;; Generate a sound source</span>
+kenv <span class="opc">loopseg</span> 10, 0, 0, 0, 0.5, 1, 10, 0
+a1 <span class="opc">pinkish</span> 3000<span class="op">*</span>kenv
+
+<span class="comment">;; Move circling around once all the speakers</span>
+aout1, aout2, aout3, aout4, aout5, aout6, aout7, aout8 <span class="opc">vbap8move</span> a1, idur, ispread, ifldnum, 15, 65, 115, 165, 195, 245, 295, 345, 15
+
+<span class="comment">;; Speaker mapping</span>
+aFL <span class="op">=</span> aout8 <span class="comment">; Front Left</span>
+aFR <span class="op">=</span> aout1 <span class="comment">; Front Right</span>
+aMFL <span class="op">=</span> aout7 <span class="comment">; Mid Front Left</span>
+aMFR <span class="op">=</span> aout2 <span class="comment">; Mid Front Right</span>
+aMBL <span class="op">=</span> aout6 <span class="comment">; Mid Back Left</span>
+aMBR <span class="op">=</span> aout3 <span class="comment">; Mid Back Right</span>
+aBL <span class="op">=</span> aout5 <span class="comment">; Back Left</span>
+aBR <span class="op">=</span> aout4 <span class="comment">; Back Right</span>
+
+<span class="opc">outo</span> aFL, aFR, aMFL, aMFR, aMBL, aMBR, aBL, aBR
+
+    <span class="oblock">endin</span>
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="stamnt">i</span>1 0 30
+<span class="stamnt">e</span>
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887618782176"></a>
+        <h2>Référence</h2>
+        <p>
+      Ville Pulkki : <span class="quote">« <span class="quote">Virtual Sound Source Positioning Using Vector Base
+      Amplitude Panning</span> »</span> <span class="emphasis"><em>Journal of the Audio Engineering Society</em></span>,
+      juin 1997, Vol. 45/6, p. 456.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887618780032"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="vbap16.html" title="vbap16"><em class="citetitle">vbap16</em></a>,
+      <a class="link" href="vbap16move.html" title="vbap16move"><em class="citetitle">vbap16move</em></a>,
+      <a class="link" href="vbap4.html" title="vbap4"><em class="citetitle">vbap4</em></a>,
+      <a class="link" href="vbap4move.html" title="vbap4move"><em class="citetitle">vbap4move</em></a>,
+      <a class="link" href="vbap8.html" title="vbap8"><em class="citetitle">vbap8</em></a>,
+      <a class="link" href="vbaplsinit.html" title="vbaplsinit"><em class="citetitle">vbaplsinit</em></a>,
+      <a class="link" href="vbapz.html" title="vbapz"><em class="citetitle">vbapz</em></a>,
+      <a class="link" href="vbapzmove.html" title="vbapzmove"><em class="citetitle">vbapzmove</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887618771200"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Ville Pulkki</td>
+          </tr>
+          <tr>
+            <td>Sibelius Academy Computer Music Studio</td>
+          </tr>
+          <tr>
+            <td>Laboratoire d'Acoustique et de Traitement du Signal Audio</td>
+          </tr>
+          <tr>
+            <td>Helsinki, Université de Technologie</td>
+          </tr>
+          <tr>
+            <td>Helsinki, Finlande</td>
+          </tr>
+          <tr>
+            <td>Mai 2000</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la Version 4.07 de Csound.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="vbap8.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="vbaplsinit.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">vbap8 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> vbaplsinit</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>0dbfs</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="opor.html" title="||" />
+    <link rel="next" href="A4.html" title="A4" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">0dbfs</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="opor.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="A4.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="Zerodbfs"></a>
+      <div class="titlepage"></div>
+      <a id="Index0dbfs" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">0dbfs</span>
+        </h2>
+        <p>0dbfs — 
+      Fixe la valeur des 0 décibels à amplitude maximale.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887697292528"></a>
+        <h2>Description</h2>
+        <p>
+      Fixe la valeur des 0 décibels à amplitude maximale.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887697291232"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>0dbfs</strong></span> = iarg</pre>
+        <pre class="synopsis"><span class="command"><strong>0dbfs</strong></span> </pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887697288224"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>iarg</em></span> -- la valeur des 0 décibels à amplitude maximale.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887697286560"></a>
+        <h2>Exécution</h2>
+        <p>
+      La valeur par défaut est 32767, si bien que tous les orchestres existants
+      <span class="emphasis"><em>devraient</em></span> fonctionner.
+    </p>
+        <p>
+      Les valeurs d'amplitude dans Csound sont toujours relatives à une valeur
+      "<a class="link" href="Zerodbfs.html" title="0dbfs"><em class="citetitle">0dbfs</em></a>" représentant
+      l'amplitude maximale possible sans écrêtage. A l'origine cette valeur valait
+      toujours 32767 dans Csound, correspondant à l'étendue bipolaire d'un fichier son
+      sur 16 bit ou d'un codec AN/NA sur 16 bit. Cela reste l'amplitude maximale
+      <span class="emphasis"><em>par défaut</em></span> dans Csound, pour des raisons de compatibilité
+      descendante. La valeur <a class="link" href="Zerodbfs.html" title="0dbfs"><em class="citetitle">0dbfs</em></a>
+      permet à Csound de produire des valeurs mises à l'échelle de n'importe quel
+      format de sortie, que ce soit en entiers sur 16 bit ou 24 bit, en flottants sur
+      32 bit, et même en entiers sur 32 bit.
+    </p>
+        <p>
+      On peut définir 0dBFS dans l'en-tête, pour fixer l'amplitude de référence utilisée
+      par Csound, mais on peut aussi l'utiliser comme variable dans un instrument
+      comme ceci :
+
+      </p>
+        <div class="informalexample">
+          <pre class="programlisting">ipeak <span class="op">=</span> <span class="ohdr">0dbfs</span></pre>
+        </div>
+        <p>
+
+      </p>
+        <div class="informalexample">
+          <pre class="programlisting">
+asig <span class="opc">oscil</span> <span class="ohdr">0dbfs</span>, freq, 1
+     <span class="opc">out</span>   asig * 0.3 * <span class="ohdr">0dbfs</span></pre>
+        </div>
+        <p>
+
+    </p>
+        <p>
+      L'opcode <span class="emphasis"><em>0dbfs</em></span> a pour but le codage relatif à une valeur
+      0dbfs (et l'usage beaucoup plus fréquent des opcodes
+      <a class="link" href="ampdbfs.html" title="ampdbfs"><em class="citetitle">ampdbfs()</em></a> !), plutôt que
+      l'utilisation de valeurs d'échantillon explicites. L'utilisation de 0dbfs=1 est
+      conforme aux pratiques de l'industrie, car l'intervalle allant de -1 à 1 est
+      utilisé dans la plupart des formats de greffon commerciaux et dans la plupart des
+      autres systèmes de synthèse comme Pure Data.
+    </p>
+        <p>
+      Les nombres en virgule flottante écrits dans un fichier, lorsque <span class="emphasis"><em>0dbfs = 1</em></span>,
+      ne seront effectivement pas transposés du tout en amplitude. Ainsi les nombres dans le fichier
+      sont exactement ce que l'orchestre dit qu'ils sont.
+    </p>
+        <p>
+      Pour plus de détails sur les valeurs d'amplitude dans Csound, voir la section
+      <a class="link" href="UsingDesign.html#AmplitudeCsound" title="Valeurs d'amplitude dans Csound"><em class="citetitle">Valeurs d'amplitude dans Csound</em></a>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887697268256"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode 0dbfs. Il utilise le fichier
+      <a class="ulink" href="examples/0dbfs.csd" target="_top"><em class="citetitle">0dbfs.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm47887697265744"></a>
+          <p class="title">
+            <strong>Exemple 36. Exemple de l'opcode 0dbfs.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887534075056"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o 0dbfs.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="comment">; Initialize the global variables.</span>
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 10
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+
+<span class="comment">; Set the 0dbfs to 1.</span>
+<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+
+<span class="oblock">instr</span> 1  <span class="comment">; from linear amplitude (0-1 range)</span>
+<span class="opc">print</span> p4
+a1 <span class="opc">oscil</span> p4, 440, 1
+<span class="opc">outs</span> a1, a1
+<span class="oblock">endin</span>
+
+<span class="oblock">instr</span> 2  <span class="comment">; from linear amplitude (0-32767 range)</span>
+iamp <span class="op">=</span> p4 <span class="op">/</span> 32767
+<span class="opc">print</span> iamp
+a1 <span class="opc">oscil</span> iamp, 440, 1
+<span class="opc">outs</span> a1, a1
+<span class="oblock">endin</span>
+
+<span class="oblock">instr</span> 3  <span class="comment">; from dB FS</span>
+iamp <span class="op">=</span> <span class="opc">ampdbfs</span>(p4)
+<span class="opc">print</span> iamp
+a1 <span class="opc">oscil</span> iamp, 440, 1
+<span class="opc">outs</span> a1, a1
+<span class="oblock">endin</span>
+
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+<span class="comment">; Table #1, a sine wave.</span>
+<span class="stamnt">f</span> 1 0 16384 10 1
+
+<span class="stamnt">i</span> 1 0 1   1
+<span class="stamnt">i</span> 1 + 1   0.5
+<span class="stamnt">i</span> 1 + 1   0.1
+<span class="stamnt">s</span>
+<span class="stamnt">i</span> 2 0 1   32767
+<span class="stamnt">i</span> 2 + 1   [32767/2]
+<span class="stamnt">i</span> 2 + 1   [3276.7]
+<span class="stamnt">s</span>
+<span class="stamnt">i</span> 3 0 1   0
+<span class="stamnt">i</span> 3 + 1   -6
+<span class="stamnt">i</span> 3 + 1   -20
+<span class="stamnt">e</span>
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887697261376"></a>
+        <h2>Voir aussi</h2>
+        <p>
+          <a class="link" href="ampdbfs.html" title="ampdbfs">
+            <em class="citetitle">ampdbfs()</em>
+          </a>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887697259584"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Richard Dobson</td>
+          </tr>
+          <tr>
+            <td>Mai 2002</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 4.10</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="opor.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="A4.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">|| </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> A4</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>FLsavesnap</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="FLrun.html" title="FLrun" />
+    <link rel="next" href="FLscroll.html" title="FLscroll" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">FLsavesnap</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="FLrun.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="FLscroll.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="FLsavesnap"></a>
+      <div class="titlepage"></div>
+      <a id="IndexFLsavesnap" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">FLsavesnap</span>
+        </h2>
+        <p>FLsavesnap — 
+      Sauvegarde dans un fichier tous les instantanés actuellement créés.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887678773472"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>FLsavesnap</em></span> sauvegarde dans un fichier tous les
+      instantanés actuellement créés (c'est-à-dire la banque de mémoire en entier).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887678771664"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>FLsavesnap</strong></span> "filename" [, igroup]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887678769776"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em><span class="quote">« <span class="quote">filename</span> »</span></em></span> -- une chaîne de caractères
+      entre guillemets correspondant à un fichier dans lequel sauvegarder une
+      banque d'instantanés.
+    </p>
+        <p>
+      <span class="emphasis"><em>igroup</em></span> -- (facultatif) un nombre entier faisant
+      référence à un groupe de widgets en relation avec un instantané. Cela
+      permet de lire/écrire, ou charger/sauvegarder l'état d'un sous-ensemble
+      de valuateurs. La valeur par défaut est zéro qui fait référence au premier
+      groupe. Le numéro de groupe est déterminé par l'opcode
+      <a class="link" href="FLsetSnapGroup.html" title="FLsetSnapGroup"><em class="citetitle">FLsetSnapGroup</em></a>.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Le paramètre <span class="emphasis"><em>igroup</em></span> n'a pas encore été complètement
+        implémenté dans la version actuelle de Csound. Prière de ne pas s'y fier.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887678763808"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>FLsavesnap</em></span> sauvegarde tous les instantanés actuellement
+      créés (c'est-à-dire la banque de mémoire en entier) dans un fichier dont
+      le nom est <span class="emphasis"><em>filename</em></span>. Comme le fichier est un fichier
+      texte, les valeurs des instantanés peuvent être modifiées manuellement dans
+      un éditeur de texte. Le format des données du fichier est le suivant (pour
+      le moment, ceci pouvant changer dans une prochaine version de Csound) :
+
+      </p>
+        <div class="informalexample">
+          <pre class="programlisting">
+----------- 0 -----------
+FLvalue 0 0 1 0 ""
+FLvalue 0 0 1 0 ""
+FLvalue 0 0 1 0 ""
+FLslider 331.946 80 5000 -1 "frequency of the first oscillator"
+FLslider 385.923 80 5000 -1 "frequency of the second oscillator"
+FLslider 80 80 5000 -1 "frequency of the third oscillator"
+FLcount 0 0 10 0 "this index must point to the location number where snapshot is stored"
+FLbutton 0 0 1 0 "Store snapshot to current index"
+FLbutton 0 0 1 0 "Save snapshot bank to disk"
+FLbutton 0 0 1 0 "Load snapshot bank from disk"
+FLbox 0 0 1 0 ""
+----------- 1 -----------
+FLvalue 0 0 1 0 ""
+FLvalue 0 0 1 0 ""
+FLvalue 0 0 1 0 ""
+FLslider 819.72 80 5000 -1 "frequency of the first oscillator"
+FLslider 385.923 80 5000 -1 "frequency of the second oscillator"
+FLslider 80 80 5000 -1 "frequency of the third oscillator"
+FLcount 1 0 10 0 "this index must point to the location number where snapshot is stored"
+FLbutton 0 0 1 0 "Store snapshot to current index"
+FLbutton 0 0 1 0 "Save snapshot bank to disk"
+FLbutton 0 0 1 0 "Load snapshot bank from disk"
+FLbox 0 0 1 0 ""
+----------- 2 -----------
+..... etc...
+----------- 3 -----------
+..... etc...
+---------------------------</pre>
+        </div>
+        <p>
+    </p>
+        <p>
+      Comme on peut le voir, chaque instantané contient plusieurs lignes. Chaque
+      instantané est séparé du précédent et du suivant par une ligne de cette
+      sorte :
+
+      </p>
+        <div class="literallayout">
+          <p><br />
+"----------- Num d'instantané -----------"<br />
+      </p>
+        </div>
+        <p>
+
+      Suivent plusieurs lignes contenant les données. Chacune de ces lignes
+      correspond à un widget.
+    </p>
+        <p>
+      Le premier champ de chaque ligne est une chaîne de caractères sans
+      guillemets contenant le nom de l'opcode correspondant au widget. Le second
+      champ est un nombre exprimant la valeur courante d'un instantané. Dans la
+      version actuelle, c'est le seul champ que l'on peut modifier manuellement.
+      Les troisième et quatrième champs montrent les valeurs minimale et
+      maximale pour ce valuateur. Le cinquième champ est un nombre spécial qui
+      indique si le valuateur est linéaire (valeur 0), exponentiel (valeur -1),
+      ou est indexé par une table avec interpolation des valeurs (numéro de
+      table négatif) ou sans interpolation (numéro de table positif). Le
+      dernier champ, une chaîne de caractères entre guillemets, contient
+      l'étiquette du widget. La dernière ligne du fichier est toujours
+
+    </p>
+        <div class="literallayout">
+          <p><br />
+"---------------------------"<br />
+    </p>
+        </div>
+        <p>.
+    </p>
+        <p>
+      Noter que <a class="link" href="FLvalue.html" title="FLvalue"><em class="citetitle">FLvalue</em></a> et
+      <a class="link" href="FLbox.html" title="FLbox"><em class="citetitle">FLbox</em></a> ne sont pas des
+      valuateurs et que leurs valeurs sont constantes, ne pouvant pas être
+      modifées.
+    </p>
+        <p>
+      Pour économiser la mémoire, les widgets peuvent être groupés afin que les
+      instantanés n'affectent qu'un groupe défini de widgets. L'opcode
+      <a class="link" href="FLsetSnapGroup.html" title="FLsetSnapGroup"><em class="citetitle">FLsetSnapGroup</em></a>
+      est utilisé pour spécifier le groupe de tous les widgets déclarés après lui
+      jusqu'à la prochaine instruction
+      <a class="link" href="FLsetSnapGroup.html" title="FLsetSnapGroup"><em class="citetitle">FLsetSnapGroup</em></a>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887678748016"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple simple de sauvegarde d'un instantané FLTK. Il utilise le fichier
+      <a class="ulink" href="examples/FLsavesnap_simple.csd" target="_top"><em class="citetitle">FLsavesnap_simple.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm47887678746016"></a>
+          <p class="title">
+            <strong>Exemple 295. Exemple de sauvegarde d'un instantané FLTK.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887525504144"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in</span>
+-odac           -iadc    <span class="comment">;;;RT audio I/O</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span><span class="op">=</span>48000
+<span class="ohdr">ksmps</span><span class="op">=</span>128
+<span class="ohdr">nchnls</span><span class="op">=</span>2
+
+<span class="comment">; Example by Hector Centeno and Andres Cabrera 2007</span>
+
+<span class="comment">; giSWMtab4 ftgen 0, 0, 513, 21, 10, 1, .3</span>
+<span class="comment">; giSWMtab4M ftgen 0, 0, 64, 7, 1, 50, 1</span>
+
+<span class="opc">FLpanel</span>	"Snapshots", 530, 190, 40, 410, 3
+    <span class="opc">FLcolor</span>  100, 118 ,140
+    ivalSM1		 	<span class="opc">FLvalue</span>  "", 70, 20, 270, 20
+    gksliderA, gislidSM1 	<span class="opc">FLslider</span> "Slider", <span class="op">-</span>4, 4, 0, 3, ivalSM1, 250, 20, 20, 20
+    itext1		 <span class="opc">FLbox</span>	  "store", 1, 1, 14, 50, 25, 355, 15
+    itext2		 <span class="opc">FLbox</span>	  "load", 1, 1, 14, 50, 25, 415, 15
+    gksnap, ibuttn1	 <span class="opc">FLbutton</span> "1", 1, 0, 11, 25, 25, 364, 45, 0, 3, 0, 3, 1
+    gksnap, ibuttn2	 <span class="opc">FLbutton</span> "2", 1, 0, 11, 25, 25, 364, 75, 0, 3, 0, 3, 2
+    gksnap, ibuttn3	 <span class="opc">FLbutton</span> "3", 1, 0, 11, 25, 25, 364, 105, 0, 3, 0, 3, 3
+    gksnap, ibuttn4	 <span class="opc">FLbutton</span> "4", 1, 0, 11, 25, 25, 364, 135, 0, 3, 0, 3, 4
+
+    gkload, ibuttn1	 <span class="opc">FLbutton</span> "1", 1, 0, 11, 25, 25, 424, 45, 0, 4, 0, 3, 1
+    gkload, ibuttn2	 <span class="opc">FLbutton</span> "2", 1, 0, 11, 25, 25, 424, 75, 0, 4, 0, 3, 2
+    gkload, ibuttn3	 <span class="opc">FLbutton</span> "3", 1, 0, 11, 25, 25, 424, 105, 0, 4, 0, 3, 3
+    gkload, ibuttn4	 <span class="opc">FLbutton</span> "4", 1, 0, 11, 25, 25, 424, 135, 0, 4, 0, 3, 4
+
+    ivalSM2		 	<span class="opc">FLvalue</span>  "", 70, 20, 270, 80
+    gkknobA, gislidSM2 	<span class="opc">FLknob</span> "Knob", <span class="op">-</span>4, 4, 0, 3, ivalSM2, 60, 120, 60
+<span class="opc">FLpanelEnd</span>
+<span class="opc">FLsetVal_i</span> 1, gislidSM1
+<span class="opc">FLsetVal_i</span> 1, gislidSM2
+<span class="opc">FLrun</span>
+
+	<span class="oblock">instr</span> 1
+
+	<span class="oblock">endin</span>
+
+<span class="oblock">instr</span> 3 <span class="comment">; Save snapshot</span>
+index <span class="opc">init</span> 0
+ipstno <span class="op">=</span> p4
+Sfile <span class="opc">sprintf</span> "snapshot_simple.<span class="op">%</span>d.snap", ipstno 
+
+
+inumsnap, inumval  <span class="opc">FLsetsnap</span> index <span class="comment">;, -1, igroup</span>
+<span class="opc">FLsavesnap</span> Sfile
+
+	<span class="oblock">endin</span>
+
+
+<span class="oblock">instr</span> 4 <span class="comment">;Load snapshot</span>
+index <span class="opc">init</span> 0
+ipstno <span class="op">=</span> p4
+Sfile <span class="opc">sprintf</span> "snapshot_simple.<span class="op">%</span>d.snap", ipstno
+
+<span class="opc">FLloadsnap</span> Sfile
+inumload <span class="opc">FLgetsnap</span> index <span class="comment">;, igroup</span>
+
+	<span class="oblock">endin</span>
+
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="stamnt">f</span> 0 3600
+
+<span class="stamnt">e</span>
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+        <p>
+      Voici un autre exemple de sauvegarde d'instantané FLTK utilisant des groupes
+      d'instantanés. Il utilise le fichier
+      <a class="ulink" href="examples/FLsavesnap.csd" target="_top"><em class="citetitle">FLsavesnap.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm47887678740448"></a>
+          <p class="title">
+            <strong>Exemple 296. Exemple de sauvegarde d'instantané FLTK utilisant des groupes d'instantanés.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887525059088"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in</span>
+-odac           -iadc    <span class="comment">;;;RT audio I/O</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span><span class="op">=</span>48000
+<span class="ohdr">ksmps</span><span class="op">=</span>128
+<span class="ohdr">nchnls</span><span class="op">=</span>2
+
+<span class="comment">; Example by Hector Centeno and Andres Cabrera 2007</span>
+
+<span class="comment">; giSWMtab4 ftgen 0, 0, 513, 21, 10, 1, .3</span>
+<span class="comment">; giSWMtab4M ftgen 0, 0, 64, 7, 1, 50, 1</span>
+
+<span class="opc">FLpanel</span>	"Snapshots", 530, 350, 40, 410, 3
+    <span class="opc">FLcolor</span>  100, 118 ,140
+   <span class="opc">FLsetSnapGroup</span>  0
+    ivalSM1		 	<span class="opc">FLvalue</span>  "", 70, 20, 270, 20
+    ivalSM2			<span class="opc">FLvalue</span>  "", 70, 20, 270, 60
+    ivalSM3			<span class="opc">FLvalue</span>  "", 70, 20, 270, 100
+    ivalSM4			<span class="opc">FLvalue</span>  "", 70, 20, 270, 140
+    gksliderA, gislidSM1 	<span class="opc">FLslider</span> "Slider A", <span class="op">-</span>4, 4, 0, 3, ivalSM1, 250, 20, 20, 20
+    gksliderB, gislidSM2 	<span class="opc">FLslider</span> "Slider B", 1, 10, 0, 3, ivalSM2, 250, 20, 20, 60
+    gksliderC, gislidSM3 	<span class="opc">FLslider</span> "Slider C", 0, 1, 0, 3, ivalSM3, 250, 20, 20, 100
+    gksliderD, gislidSM4 	<span class="opc">FLslider</span> "Slider D", 0, 1, 0, 3, ivalSM4, 250, 20, 20, 140
+    itext1		 <span class="opc">FLbox</span>	  "store", 1, 1, 14, 50, 25, 355, 15
+    itext2		 <span class="opc">FLbox</span>	  "load", 1, 1, 14, 50, 25, 415, 15
+    itext3		 <span class="opc">FLbox</span>	  "Group 1", 1, 1, 14, 30, 145, 485, 15
+    gksnap, ibuttn1	 <span class="opc">FLbutton</span> "1", 1, 0, 11, 25, 25, 364, 45, 0, 3, 0, 3, 1
+    gksnap, ibuttn2	 <span class="opc">FLbutton</span> "2", 1, 0, 11, 25, 25, 364, 75, 0, 3, 0, 3, 2
+    gksnap, ibuttn3	 <span class="opc">FLbutton</span> "3", 1, 0, 11, 25, 25, 364, 105, 0, 3, 0, 3, 3
+    gksnap, ibuttn4	 <span class="opc">FLbutton</span> "4", 1, 0, 11, 25, 25, 364, 135, 0, 3, 0, 3, 4
+    gkload, ibuttn1	 <span class="opc">FLbutton</span> "1", 1, 0, 11, 25, 25, 424, 45, 0, 4, 0, 3, 1
+    gkload, ibuttn2	 <span class="opc">FLbutton</span> "2", 1, 0, 11, 25, 25, 424, 75, 0, 4, 0, 3, 2
+    gkload, ibuttn3	 <span class="opc">FLbutton</span> "3", 1, 0, 11, 25, 25, 424, 105, 0, 4, 0, 3, 3
+    gkload, ibuttn4	 <span class="opc">FLbutton</span> "4", 1, 0, 11, 25, 25, 424, 135, 0, 4, 0, 3, 4
+
+    <span class="opc">FLcolor</span>  100, 140 ,118
+   <span class="opc">FLsetSnapGroup</span>  1
+    ivalSM5		 	<span class="opc">FLvalue</span>  "", 70, 20, 270, 190
+    ivalSM6			<span class="opc">FLvalue</span>  "", 70, 20, 270, 230
+    ivalSM7			<span class="opc">FLvalue</span>  "", 70, 20, 270, 270
+    ivalSM8			<span class="opc">FLvalue</span>  "", 70, 20, 270, 310
+    gkknobA, gislidSM5 	<span class="opc">FLknob</span> "Knob A", <span class="op">-</span>4, 4, 0, 3, ivalSM5, 45, 10, 230
+    gkknobB, gislidSM6 	<span class="opc">FLknob</span> "Knob B", 1, 10, 0, 3, ivalSM6, 45, 75, 230
+    gkknobC, gislidSM7 	<span class="opc">FLknob</span> "Knob C", 0, 1, 0, 3, ivalSM7, 45, 140, 230
+    gkknobD, gislidSM8 	<span class="opc">FLknob</span> "Knob D", 0, 1, 0, 3, ivalSM8, 45, 205, 230
+    itext4		 <span class="opc">FLbox</span>	  "store", 1, 1, 14, 50, 25, 355, 185
+    itext5		 <span class="opc">FLbox</span>	  "load", 1, 1, 14, 50, 25, 415, 185
+    itext6		 <span class="opc">FLbox</span>	  "Group 2", 1, 1, 14, 30, 145, 485, 185
+    gksnap, ibuttn1	 <span class="opc">FLbutton</span> "5", 1, 0, 11, 25, 25, 364, 215, 0, 3, 0, 3, 5
+    gksnap, ibuttn2	 <span class="opc">FLbutton</span> "6", 1, 0, 11, 25, 25, 364, 245, 0, 3, 0, 3, 6
+    gksnap, ibuttn3	 <span class="opc">FLbutton</span> "7", 1, 0, 11, 25, 25, 364, 275, 0, 3, 0, 3, 7
+    gksnap, ibuttn4	 <span class="opc">FLbutton</span> "8", 1, 0, 11, 25, 25, 364, 305, 0, 3, 0, 3, 8
+    gkload, ibuttn1	 <span class="opc">FLbutton</span> "5", 1, 0, 11, 25, 25, 424, 215, 0, 4, 0, 3, 5
+    gkload, ibuttn2	 <span class="opc">FLbutton</span> "6", 1, 0, 11, 25, 25, 424, 245, 0, 4, 0, 3, 6
+    gkload, ibuttn3	 <span class="opc">FLbutton</span> "7", 1, 0, 11, 25, 25, 424, 275, 0, 4, 0, 3, 7
+    gkload, ibuttn4	 <span class="opc">FLbutton</span> "8", 1, 0, 11, 25, 25, 424, 305, 0, 4, 0, 3, 8
+<span class="opc">FLpanelEnd</span>
+<span class="opc">FLsetVal_i</span> 1, gislidSM1
+<span class="opc">FLsetVal_i</span> 1, gislidSM2
+<span class="opc">FLsetVal_i</span> 0, gislidSM3
+<span class="opc">FLsetVal_i</span> 0, gislidSM4
+<span class="opc">FLsetVal_i</span> 1, gislidSM5
+<span class="opc">FLsetVal_i</span> 1, gislidSM6
+<span class="opc">FLsetVal_i</span> 0, gislidSM7
+<span class="opc">FLsetVal_i</span> 0, gislidSM8
+<span class="opc">FLrun</span>
+
+	<span class="oblock">instr</span> 1
+
+	<span class="oblock">endin</span>
+
+<span class="oblock">instr</span> 3 <span class="comment">; Save snapshot</span>
+index <span class="opc">init</span> 0
+ipstno <span class="op">=</span> p4
+igroup <span class="op">=</span> 0
+Sfile <span class="opc">sprintf</span> "PVCsynth.<span class="op">%</span>d.snap", ipstno 
+<span class="octrl">if</span> ipstno <span class="op">&gt;</span> 4 then
+  igroup <span class="op">=</span> 1
+<span class="octrl">endif</span>
+
+
+  inumsnap, inumval  <span class="opc">FLsetsnap</span> index , <span class="op">-</span>1, igroup
+<span class="opc">FLsavesnap</span> Sfile
+
+	<span class="oblock">endin</span>
+
+
+<span class="oblock">instr</span> 4 <span class="comment">;Load snapshot</span>
+index <span class="opc">init</span> 0
+ipstno <span class="op">=</span> p4
+igroup <span class="op">=</span> 0
+Sfile <span class="opc">sprintf</span> "PVCsynth.<span class="op">%</span>d.snap", ipstno
+<span class="octrl">if</span> ipstno <span class="op">&gt;</span> 4 then
+  igroup <span class="op">=</span> 1
+<span class="octrl">endif</span>
+
+<span class="opc">FLloadsnap</span> Sfile
+  inumload <span class="opc">FLgetsnap</span> index , igroup
+
+	<span class="oblock">endin</span>
+
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+  <span class="comment">;Dummy table for FLgetsnap</span>
+<span class="comment">; f 1 0 1024 10 1</span>
+<span class="stamnt">f</span> 0 3600
+
+<span class="stamnt">e</span>
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887678735952"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="FLgetsnap.html" title="FLgetsnap"><em class="citetitle">FLgetsnap</em></a>,
+      <a class="link" href="FLloadsnap.html" title="FLloadsnap"><em class="citetitle">FLloadsnap</em></a>,
+      <a class="link" href="FLsetSnapGroup.html" title="FLsetSnapGroup"><em class="citetitle">FLsetSnapGroup</em></a>,
+      <a class="link" href="FLrun.html" title="FLrun"><em class="citetitle">FLrun</em></a>,
+      <a class="link" href="FLsetsnap.html" title="FLsetsnap"><em class="citetitle">FLsetsnap</em></a>,
+      <a class="link" href="FLupdate.html" title="FLupdate"><em class="citetitle">FLupdate</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887678729104"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Gabriel Maldonado</p>
+        <p>Nouveau dans la version 4.22</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="FLrun.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="FLscroll.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">FLrun </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> FLscroll</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

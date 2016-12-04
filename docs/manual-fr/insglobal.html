@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>insglobal</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="insremot.html" title="insremot" />
+    <link rel="next" href="instr.html" title="instr" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">insglobal</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="insremot.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="instr.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="insglobal"></a>
+      <div class="titlepage"></div>
+      <a id="Indexinsglobal" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">insglobal</span>
+        </h2>
+        <p>insglobal — 
+      Un opcode que l'on peut utiliser pour implémenter un orchestre distant. Cet
+      opcode envoie des évènements de note d'une machine source vers plusieurs
+      destinations.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887667121904"></a>
+        <h2>Description</h2>
+        <p>
+      Avec les opcodes <a class="link" href="insremot.html" title="insremot"><em class="citetitle">insremot</em></a>
+      et <span class="emphasis"><em>insglobal</em></span>, il est possible d'exécuter des instruments
+      sur des machines distantes et de les contrôler depuis une machine maître.
+      Les opcodes distants sont implémentés suivant le modèle maître/client. Toutes
+      les machines concernées contiennent le même orchestre mais seule la machine
+      maître possède l'information de la partition. Durant l'exécution, la machine
+      maître envoie les évènements de note aux clients. L'opcode <span class="emphasis"><em>insglobal</em></span>
+      envoie les évènements à toutes les machines impliquées dans le concert à
+      distance. Ces machines sont déterminées par les définitions
+      <a class="link" href="insremot.html" title="insremot"><em class="citetitle">insremot</em></a> placées
+      avant la commande <span class="emphasis"><em>insglobal</em></span>. Pour envoyer des
+      évènements à une seule machine on utilise
+      <a class="link" href="insremot.html" title="insremot"><em class="citetitle">insremot</em></a>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887667115360"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>insglobal</strong></span> isource, instrnum [,instrnum...] </pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887667113296"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>isource</em></span> -- une chaîne représentant l'ordinateur serveur
+      (par exemple 192.168.0.100). C'est l'hôte source qui génère les évènements
+      pour le ou les instruments donnés et les envoie à toute les machines impliquées
+      dans le concert à distance.
+    </p>
+        <p>
+      <span class="emphasis"><em>instrnum</em></span> -- liste des numéros des intruments qui
+      seront joués sur les machines destinataires.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887667110144"></a>
+        <h2>Exécution</h2>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+      Il est essentiel que les ordinateurs qui utilisent cet opcode aient les
+      mêmes ordre des octets, taille des données (double ou float) et taille de
+      pointeur. On ne peut pas l'utiliser par exemple en mélangeant des
+      ordinateurs 32 bit et 64 bit.
+    </td>
+            </tr>
+          </table>
+        </div>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+      Cet opcode utilise en interne les fonctions <span class="emphasis"><em>gethostname</em></span>
+      et <span class="emphasis"><em>gethostbyname</em></span> pour déterminer les adresses IP du
+      client et du serveur afin de tester quels messages sont destinés à chaque
+      machine. Si un ordinateur a plus d'une adresse IP il n'y a aucun moyen de
+      contrôler quelle adresse IP est choisie.
+    </td>
+            </tr>
+          </table>
+        </div>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+      L'opération à distance ne permet pas du tout l'envoi de chaînes de caractères.
+    </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887667105984"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voir l'entrée <a class="link" href="insremot.html" title="insremot"><em class="citetitle">insremot</em></a>
+      pour un exemple d'utilisation.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887667103744"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="insremot.html" title="insremot"><em class="citetitle">insremot</em></a>,
+      <a class="link" href="midglobal.html" title="midglobal"><em class="citetitle">midglobal</em></a>,
+      <a class="link" href="midremot.html" title="midremot"><em class="citetitle">midremot</em></a>,
+      <a class="link" href="remoteport.html" title="remoteport"><em class="citetitle">remoteport</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887667098752"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Simon Schampijer</td>
+          </tr>
+          <tr>
+            <td>2006</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>
+      Nouveau dans la version 5.03
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="insremot.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="instr.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">insremot </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> instr</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

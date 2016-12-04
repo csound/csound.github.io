@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>pvsfread</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="pvsfilter.html" title="pvsfilter" />
+    <link rel="next" href="pvsfreeze.html" title="pvsfreeze" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">pvsfread</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="pvsfilter.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="pvsfreeze.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="pvsfread"></a>
+      <div class="titlepage"></div>
+      <a id="IndexPvsfread" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">pvsfread</span>
+        </h2>
+        <p>pvsfread — 
+      Lit un canal sélectionné d'un fichier d'analyse PVOC-EX.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887643582112"></a>
+        <h2>Description</h2>
+        <p>
+      Crée un flot fsig en lisant un canal sélectionné d'un fichier d'analyse
+      PVOC-EX chargé en mémoire, avec interpolation de trame. Seuls les fichiers
+      au format 0 (amplitude + fréquence) sont actuellement supportés. L'opération
+      de cet opcode reflète celle de <span class="emphasis"><em>pvoc</em></span>, mais en restituant
+      un fsig au lieu d'un signal resynthétisé.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887643579792"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">fsig <span class="command"><strong>pvsfread</strong></span> ktimpt, ifn [, ichan]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887643577584"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ifn</em></span> -- Nom du fichier d'analyse. Il doit avoir
+      l'extension de fichier .pvx.
+    </p>
+        <p>
+      On peut générer un fichier PVOC-EX multi-canaux avec
+      l'<a class="link" href="pvanal.html" title="pvanal"><em class="citetitle">pvanal utility</em></a>
+      étendue.
+    </p>
+        <p>
+      <span class="emphasis"><em>ichan</em></span> -- (facultatif) Le canal à lire (en comptant à
+      partir de 0). Vaut 0 par défaut.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887643573424"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ktimpt</em></span> -- pointeur temporel dans le fichier d'analyse,
+      en secondes. Voir la description du même paramètre de
+      <a class="link" href="pvoc.html" title="pvoc"><em class="citetitle">pvoc</em></a> pour son utilisation.
+    </p>
+        <p>
+      Noter que les fichiers d'analyse peuvent être très grands, surtout s'ils
+      sont multi-canaux. La lecture de tels fichiers en mémoire provoquera
+      probablement des coupures audio durant une exécution en temps réel. Comme
+      le fichier n'est lu qu'une fois, étant ensuite disponible pour tous les
+      opcodes intéressés, il peut être opportun de disposer d'un intrument dédié
+      au préchargement de ces fichiers d'analyse au démarrage.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887643569488"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode pvsfread. Il utilise le fichier
+      <a class="ulink" href="examples/pvsfread.csd" target="_top"><em class="citetitle">pvsfread.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887643567616"></a>
+          <p class="title">
+            <strong>Exemple 721. Exemple de l'opcode pvsfread.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887508344064"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac  <span class="comment">;;;realtime audio out</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o pvsfread.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100 
+<span class="ohdr">ksmps</span> <span class="op">=</span> 32 
+<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1 
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+
+<span class="oblock">instr</span> 1
+<span class="comment">; create a PVOC-EX (*.pvx) file with PVANAL first</span>
+idur  <span class="opc">filelen</span>   "kickroll.pvx"		<span class="comment">;find duration of (stereo) analysis file</span>
+kpos  <span class="opc">line</span>      0,p3,idur		<span class="comment">;to ensure we process whole file</span>
+fsigr <span class="opc">pvsfread</span>  kpos,"kickroll.pvx", 1	<span class="comment">;create fsig from right channel</span>
+aout  <span class="opc">pvsynth</span>	fsigr			<span class="comment">;resynthesise it</span>
+      <span class="opc">outs</span>	aout, aout
+
+<span class="oblock">endin</span>
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+<span class="stamnt">i</span> 1 0 10
+<span class="stamnt">i</span> 1 11 1
+<span class="stamnt">e</span>
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887643563248"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Richard Dobson</td>
+          </tr>
+          <tr>
+            <td>Août 2001 </td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 4.13</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="pvsfilter.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="pvsfreeze.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">pvsfilter </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> pvsfreeze</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

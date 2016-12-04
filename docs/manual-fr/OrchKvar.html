@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Types, constantes et variables</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OrchTop.html" title="Syntaxe de l'orchestre" />
+    <link rel="prev" href="OrchStatemnt.html" title="Instructions ordinaires" />
+    <link rel="next" href="OrchExpress.html" title="Expressions" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Types, constantes et variables</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="OrchStatemnt.html">Précédent</a> </td>
+          <th width="60%" align="center">Syntaxe de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="OrchExpress.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="section">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="OrchKvar"></a>Types, constantes et variables</h2>
+          </div>
+        </div>
+      </div>
+      <p>
+    Les <span class="emphasis"><em>constantes</em></span> sont des nombres en virgule flottante tels que 1, 3.14159 ou
+    -73.45. Elles sont constamment disponibles et leur valeur ne change pas.
+  </p>
+      <p>
+    Les <span class="emphasis"><em>variables</em></span> sont des cellules nommées contenant des nombres. Elle sont
+    constamment disponibles et peuvent être mises à jour à l'un des quatre taux de mise à jour
+    (initialisation seulement, taux-i, taux-k, taux-a). Les variables de taux-i et de taux-k sont
+    scalaires (c'est-à-dire qu'elle ne peuvent prendre qu'une valeur à la fois) et sont utilisées
+    principalement pour stocker et rappeler des données de contrôle, données qui changent au rythme
+    des notes (pour les variables de taux-i) ou au taux de contrôle (pour les variables de taux-k).
+    Les i- et les k-variables sont ainsi utiles pour stocker les valeurs des paramètres de note,
+    hauteurs, durées, fréquences variant lentement, vibratos, etc. D'un autre côté, les variables
+    de taux-a sont des tableaux ou vecteurs d'information. Bien que rafraichies pendant le même
+    passage de contrôle de la période d'exécution que les variables de taux-k, ces cellules de tableau
+    représentent une résolution temporelle plus fine en divisant la période de contrôle en durées
+    d'échantillons (voir <a class="link" href="ksmps.html" title="ksmps"><em class="citetitle">ksmps</em></a>). Les variables de
+    taux-a sont utilisées pour stocker et rappeler des données qui changent au taux d'échantillonnage
+    audio (par exemple les signaux de sortie des oscillateurs, des filtres, etc.).
+  </p>
+      <p>
+    Certains types de variables peuvent être considérés comme des signaux. Par exemple
+    les variables de taux-a et de taux-k sont des signaux qui ont une fréquence de mise
+    à jour constante (voir <a class="link" href="kr.html" title="kr"><em class="citetitle">kr</em></a> et
+    <a class="link" href="sr.html" title="sr"><em class="citetitle">sr</em></a>). Cette abstraction est en
+    général assez utile, mais il faut être conscient que les signaux de taux-a sont en
+    fait des vecteurs qui sont traités au taux-k, c'est-à-dire que Csound travaille en
+    interne au taux-k mais qu'il traite <a class="link" href="ksmps.html" title="ksmps"><em class="citetitle">ksmps</em></a> échantillons numériques pour
+    chaque variable de taux-a à chaque cycle de contrôle.
+  </p>
+      <p>
+    Il y a d'autres types de signaux qui nécessitent des taux qui ne concordent pas
+    avec <a class="link" href="kr.html" title="kr"><em class="citetitle">kr</em></a> ou <a class="link" href="sr.html" title="sr"><em class="citetitle">sr</em></a>. Les signaux de taux-f et de taux-w
+    sont utilisés pour le traitement spectral et leur taux est déterminé par la
+    taille de fenêtre et le facteur de recouvrement.
+  </p>
+      <p>
+    On distingue également les variables locales des variables globales. Les variables
+    <span class="emphasis"><em>locales</em></span> sont privées dans un instrument, et un autre instrument ne peut
+    y accéder ni en lecture ni en écriture. Leurs valeurs sont conservées, et leur information est
+    reportée de passage en passage (par exemple de la période d'initialisation à la période
+    d'exécution) à l'intérieur d'un instrument. Les noms de variable locale commencent par
+    la lettre <span class="emphasis"><em>p, i, k</em></span>, ou <span class="emphasis"><em>a</em></span>. Le même nom de variable
+    locale peut apparaître dans plusieurs blocs d'instrument différents sans conflit.
+  </p>
+      <p><a id="GlobalVariables"></a>
+    Les variables <span class="emphasis"><em>globales</em></span> sont des cellules qui sont accessibles par tous les
+    instruments. Leurs noms sont formés soit comme les noms locaux précédés de la lettre
+    <span class="emphasis"><em>g</em></span>, soit de symboles réservés spéciaux. Les variables globales sont utilisées
+    pour diffuser des valeurs générales, pour la communication entre instruments (sémaphores), ou
+    pour envoyer un son d'un instrument à l'autre (par exemple un mixage avant une réverbération).
+  </p>
+      <p>
+    Etant données ces distinctions, il y a neuf formes de variables locales et globales :
+  </p>
+      <p>
+    </p>
+      <div class="table">
+        <a id="VariableTypes"></a>
+        <p class="title">
+          <strong>Tableau 3. Types de variables</strong>
+        </p>
+        <div class="table-contents">
+          <table summary="Types de variables" border="1">
+            <colgroup>
+              <col />
+              <col />
+              <col />
+              <col />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Renouvellement</th>
+                <th>Local</th>
+                <th>Global</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>symboles réservés</td>
+                <td>permanent</td>
+                <td> -- </td>
+                <td>rsymbole</td>
+              </tr>
+              <tr>
+                <td>p-champs de partition</td>
+                <td>temps-i</td>
+                <td>p nombre</td>
+                <td> -- </td>
+              </tr>
+              <tr>
+                <td>variables d'initialisation</td>
+                <td>temps-i</td>
+                <td>i nom</td>
+                <td>gi nom </td>
+              </tr>
+              <tr>
+                <td>signaux de contrôle</td>
+                <td>temps-p, taux-k</td>
+                <td>k nom</td>
+                <td>gk nom</td>
+              </tr>
+              <tr>
+                <td>signaux audio</td>
+                <td>temps-p, taux-k (tous les échantillons audio dans une passe-k)</td>
+                <td>a nom</td>
+                <td>ga nom</td>
+              </tr>
+              <tr>
+                <td>types de données spectrales</td>
+                <td>taux-k</td>
+                <td>w nom</td>
+                <td> -- </td>
+              </tr>
+              <tr>
+                <td>flots de données spectrales</td>
+                <td>taux-k</td>
+                <td>f nom</td>
+                <td>gf nom</td>
+              </tr>
+              <tr>
+                <td>variables chaînes</td>
+                <td>temps-i et optionnellement temps-k</td>
+                <td>S nom</td>
+                <td>gS nom</td>
+              </tr>
+              <tr>
+                <td>variables vecteur</td>
+                <td>taux-k</td>
+                <td>t nom</td>
+                <td> -- </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p><br class="table-break" />
+  </p>
+      <p>
+    où <span class="emphasis"><em>rsymbole</em></span> est un symbole réservé spécial (par exemple <span class="emphasis"><em>sr, kr</em></span>),
+    <span class="emphasis"><em>nombre</em></span> est un entier positif faisant référence à un p-champ de partition ou
+    à un numéro de séquence, et <span class="emphasis"><em>nom</em></span> est une chaîne composée de lettres, du
+    caractère de soulignement, et/ou de chiffres, avec une signification locale ou globale. Comme on
+    peut le voir, les paramètres de partition sont des variables de taux-i dont les valeurs sont
+    copiées à partir de l'instruction de partition appelante juste avant la passe d'initialisation
+    d'un instrument, tandis que les contrôleurs MIDI sont des variables que l'on peut mettre à jour
+    de manière asynchrone depuis un fichier MIDI ou un périphérique MIDI.
+  </p>
+      <div class="section">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="OrchVarinit"></a>Initialisation de variable</h3>
+            </div>
+          </div>
+        </div>
+        <p>
+      Les opcodes qui permettent l'initialisation de variable sont :
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>
+                <a class="link" href="assign.html" title="=">
+                  <em class="citetitle">assign</em>
+                </a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                <a class="link" href="divz.html" title="divz">
+                  <em class="citetitle">divz</em>
+                </a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                <a class="link" href="init.html" title="init">
+                  <em class="citetitle">init</em>
+                </a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                <a class="link" href="tival.html" title="tival">
+                  <em class="citetitle">tival</em>
+                </a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+        <div class="simplesect">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title"><a id="Predefined Constants"></a>Macros de constantes mathématiques prédéfinies</h4>
+              </div>
+            </div>
+          </div>
+          <p> Csound définit plusieurs constantes mathématiques importantes par des
+    <a class="link" href="OrchMacros.html" title="Macros"><em class="citetitle">macros</em></a>. On peut consulter la liste
+    complète <a class="link" href="define.html#opcodesDefineMathConstMacros" title="Macros Prédéfinies de Constantes Mathématiques"><em class="citetitle">ici</em></a>.</p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="OrchStatemnt.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OrchTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="OrchExpress.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Instructions ordinaires </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Expressions</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

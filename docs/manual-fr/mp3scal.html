@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>mp3scal</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="mp3len.html" title="mp3len" />
+    <link rel="next" href="mpulse.html" title="mpulse" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">mp3scal</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="mp3len.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="mpulse.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="mp3scal"></a>
+      <div class="titlepage"></div>
+      <a id="IndexMp3scal" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">mp3scal</span>
+        </h2>
+        <p>mp3scal — 
+      Traitement vocoder à verrouillage de phase avec détection/traitement
+      d'attaque, 'pondération du tempo'.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887656711808"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>mp3scal</em></span> implémente un traitement vocoder à
+      verrouillage de phase à partir de fichiers mp3 sur disque, avec
+      reéchantillonnage si nécessaire.
+    </p>
+        <p>
+      Cet opcode permet une pondération indépendante du temps et de la
+      fréquence. Le temps progresse en interne. La qualité de l'effet est
+      généralement améliorée lorsque le verrouillage de phase est actif.
+    </p>
+        <p>
+      <span class="emphasis"><em>mp3scal</em></span> pondère également la hauteur, indépendamment
+      de la fréquence, avec un facteur de transposition de taux-k.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887656643888"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">asig, asig2, ktime <span class="command"><strong>mp3scal</strong></span> Sfile, ktimescal, kpitch, kamp [,iskip, ifftsize, idecim, ilock]
+      </pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887656641872"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>Sfile</em></span> -- fichier son source, mp3 stéréo.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifftsize</em></span> -- taille de TFR (puissance de deux), 2048
+      par défaut.
+    </p>
+        <p>
+      <span class="emphasis"><em>idecim</em></span> -- décimation, 4 par défaut (ce qui signifie
+      hopsize = fftsize/4).
+    </p>
+        <p>
+      <span class="emphasis"><em>iskip</em></span> -- temps de décalage en secondes, 1 par défaut.
+    </p>
+        <p>
+      <span class="emphasis"><em>ilock</em></span> -- 0 ou 1, pour désactiver ou activer le
+      verrouillage de phase, 1 par défaut.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887656636336"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ktimescal</em></span> -- rapport de pondération temporelle,
+      &lt; 1 étirement, &gt; 1 contraction. Nombres non-négatifs seulement.
+    </p>
+        <p>
+      <span class="emphasis"><em>kamp</em></span> -- pondération de l'amplitude.
+    </p>
+        <p>
+      <span class="emphasis"><em>kpitch</em></span> -- pondération de la hauteur des grains
+      (1 = hauteur normale, &lt; 1 inférieure, &gt; 1 supérieure ;
+      négative, lecture inversée).
+    </p>
+        <p>
+      <span class="emphasis"><em>ktime</em></span> -- marque temporelle.
+    </p>
+        <p>
+      <span class="emphasis"><em>asig</em></span>, <span class="emphasis"><em>asig2</em></span> -- signal de sortie
+      stéréo.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887656630224"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode mp3scal. Il utilise le fichier
+      <a class="ulink" href="examples/mp3scal.csd" target="_top"><em class="citetitle">mp3scal.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887656628352"></a>
+          <p class="title">
+            <strong>Exemple 554. Exemple de l'opcode mp3scal.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887513892960"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="ohdr">nchnls</span><span class="op">=</span>2
+<span class="ohdr">ksmps</span><span class="op">=</span>64
+<span class="ohdr">sr</span><span class="op">=</span>44100
+<span class="oblock">instr</span> 1
+SFile <span class="op">=</span> p4
+p3 <span class="op">=</span> <span class="opc">mp3len</span>(SFile)<span class="op">/</span>p5
+a1,a2,k2 <span class="opc">mp3scal</span> SFile,p5,1,1
+ <span class="opc">outs</span> a1,a2
+
+<span class="oblock">endin</span>
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="stamnt">i</span>1.1 0 1 "beats.mp3" .75
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887656624048"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Victor Lazzarini</td>
+          </tr>
+          <tr>
+            <td>Avril 2016</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 6.07</p>
+        <p>Avril 2016.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="mp3len.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="mpulse.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">mp3len </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> mpulse</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

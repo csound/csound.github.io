@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>sndinfo</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="UtilityQueries.html" title="Requêtes sur un fichier (SNDINFO)" />
+    <link rel="prev" href="UtilityQueries.html" title="Requêtes sur un fichier (SNDINFO)" />
+    <link rel="next" href="UtilityConversion.html" title="Conversion de fichier (, HET_EXPORT, HET_IMPORT, PVLOOK, PV_EXPORT, PV_IMPORT, SDIF2AD, SRCONV)" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">sndinfo</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="UtilityQueries.html">Précédent</a> </td>
+          <th width="60%" align="center">Requêtes sur un fichier (SNDINFO)</th>
+          <td width="20%" align="right"> <a accesskey="n" href="UtilityConversion.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="sndinfo"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">sndinfo</span>
+        </h2>
+        <p>sndinfo — 
+      Affiche de l'information sur un fichier son.
+      <a id="IndexSndinfo" class="indexterm"></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887553986208"></a>
+        <h2>Description</h2>
+        <p>
+      Fournit l'information de base sur un ou plusieurs fichiers son.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887553984960"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>csound -U sndinfo</strong></span> [options] fichierson ...</pre>
+        <pre class="synopsis"><span class="command"><strong>sndinfo</strong></span> [options] fichierson ...</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887553981696"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>sndinfo</em></span> tentera de trouver chaque fichier nommé, de l'ouvrir en lecture, de
+      lire l'en-tête du fichier son, pour ensuite imprimer un rapport sur l'information de base trouvée.
+      L'ordre de recherche dans les répertoires de fichiers son est celle qui a été décrite
+      <a class="link" href="UtilityTop.html#UtilityDir" title="Répertoires.">précédemment</a>. Si le
+      fichier est de type AIFF, quelques détails plus avancés sont listés en premier.
+    </p>
+        <p>
+      Il y a deux types d'options :
+      </p>
+        <div class="orderedlist">
+          <ol class="orderedlist" type="1">
+            <li class="listitem">
+              <p><span class="emphasis"><em>-i</em></span> ou <span class="emphasis"><em>-i1</em></span> imprimera l'information d'instrument,
+          qui comprend les boucles. L'option continue jusqu'à une option <span class="emphasis"><em>-i0</em></span>.</p>
+            </li>
+            <li class="listitem">
+              <p>L'autre option est <span class="emphasis"><em>-b</em></span> qui imprime l'information de diffusion pour les
+          fichier WAV. Elle peut être arrêtée de façon similaire avec <span class="emphasis"><em>-b0</em></span>.</p>
+            </li>
+          </ol>
+        </div>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887553972944"></a>
+        <h2>Exemples</h2>
+        <p>
+
+        </p>
+        <pre class="programlisting">
+<span class="emphasis"><em>csound -U sndinfo</em></span> test Bosendorfer/"BOSEN mf A0 st" foo foo2</pre>
+        <p>
+
+
+      où l'on a les variables d'environnement SFDIR = /u/bv/sound, et SSDIR = /so/bv/Samples, pourra
+      produire ceci :
+
+
+        </p>
+        <pre class="programlisting">
+util  SNDINFO:      
+     /u/bv/sound/test:
+           srate 22050, monaural, 16 bit shorts, 1.10 seconds
+           headersiz 1024, datasiz 48500  (24250 sample frames)
+  
+    /so/bv/Samples/Bosendorfer/BOSEN mf A0 st:  AIFF, 197586 stereo samples, base Frq 261.6 (MIDI 60), sustnLp: mode 1, 121642 to 197454, relesLp: mode 0
+     AIFF soundfile, looping with modes 1, 0
+     srate 44100, stereo, 16 bit shorts, 4.48 seconds
+  
+     headersiz  402, datasiz 790344  (197586 sample frames)
+  
+     /u/bv/sound/foo:
+           no recognizable soundfile header
+  
+     /u/bv/sound/foo2:
+            couldn't find</pre>
+        <p>
+
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="UtilityQueries.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="UtilityQueries.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="UtilityConversion.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Requêtes sur un fichier (SNDINFO) </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Conversion de fichier (, HET_EXPORT, HET_IMPORT, PVLOOK, PV_EXPORT, PV_IMPORT, SDIF2AD,
+    SRCONV)</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

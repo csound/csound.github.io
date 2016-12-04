@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>loscil</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="lorisplay.html" title="lorisplay" />
+    <link rel="next" href="loscil3.html" title="loscil3" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">loscil</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="lorisplay.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="loscil3.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="loscil"></a>
+      <div class="titlepage"></div>
+      <a id="IndexLoscil" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">loscil</span>
+        </h2>
+        <p>loscil — 
+      Lit un son échantillonné depuis une table.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887663214000"></a>
+        <h2>Description</h2>
+        <p>
+      Lit un son échantillonné (mono ou stéréo) depuis une table, avec des boucles
+      facultatives d'entretien et de relâchement.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887663212544"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ar1 [,ar2] <span class="command"><strong>loscil</strong></span> xamp, kcps, ifn [, ibas] [, imod1] [, ibeg1] [, iend1] \
+      [, imod2] [, ibeg2] [, iend2]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887663210256"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ifn</em></span> -- numéro de table de fonction, contenant typiquement
+      un son échantillonné avec des points de boucle précisés, remplie au moyen de
+      <a class="link" href="GEN01.html" title="GEN01"><em class="citetitle">GEN01</em></a>. Le fichier source peut
+      être mono ou stéréo.
+    </p>
+        <p>
+      <span class="emphasis"><em>ibas</em></span> (facultatif) -- fréquence de base en Hz du son
+      enregistré. Elle remplace éventuellement la fréquence donnée dans le fichier
+      audio, mais devient nécessaire si le fichier n'en contient pas. La valeur par
+      défaut est 261,626 Hz, c-à-d le do médian. (Nouveau dans Csound 4.03). Si la
+      valeur est inconnue ou absente il faut utiliser 1 ici et dans
+      <span class="emphasis"><em>kcps</em></span>.
+    </p>
+        <p>
+      <span class="emphasis"><em>imod1, imod2</em></span> (facultatif, -1 par défaut) -- modes
+      d'interprétation des boucles d'entretien et de relâchement. Une valeur de 1
+      signifie une boucle normale, 2 signifie une boucle à l'endroit et à l'envers,
+      0 signifie pas de boucle. La valeur par défaut (-1) s'en remet au mode et aux
+      points de boucle définis dans le fichier source. Il faut s'assurer de choisir
+      un mode approprié si le fichier ne contient pas cette information.
+    </p>
+        <p>
+      <span class="emphasis"><em>ibeg1, iend1, ibeg2, iend2</em></span> (facultatifs, dépendants de
+      <span class="emphasis"><em>mod1, mod2</em></span>) -- début et fin des boucles d'entretien et de
+      relâchement. Ils sont mesurés en <span class="emphasis"><em>trames d'échantillon</em></span>
+      depuis le début du fichier, et auront ainsi la même valeur que le son soit
+      mono ou stéréo. Si aucun point de boucle n'est spécifié et qu'un mode de
+      boucle est donné (<span class="emphasis"><em>imod1</em></span>, <span class="emphasis"><em>imod2</em></span>, le
+      fichier sera lu en boucle sur toute sa longueur.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887663136048"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ar1, ar2</em></span> -- la sortie de taux audio. Il n'y a que
+      <span class="emphasis"><em>ar1</em></span> pour une sortie mono, alors qu'il y a
+      <span class="emphasis"><em>ar1</em></span> et <span class="emphasis"><em>ar2</em></span> pour une sortie stéréo.
+    </p>
+        <p>
+      <span class="emphasis"><em>xamp</em></span> -- l'amplitude du signal de sortie.
+    </p>
+        <p>
+      <span class="emphasis"><em>kcps</em></span> -- la fréquence du signal de sortie en Hz.
+    </p>
+        <p>
+      <span class="emphasis"><em>loscil</em></span> parcourt la ftable audio à un taux déterminé par
+      <span class="emphasis"><em>kcps</em></span>, en multipliant le résultat par <span class="emphasis"><em>xamp</em></span>.
+      L'incrément de lecture pour <span class="emphasis"><em>kcps</em></span> dépend de la fréquence de
+      base de la table <span class="emphasis"><em>ibas</em></span>, et il est automatiquement ajusté si
+      le taux d'échantillonnage <span class="emphasis"><em>sr</em></span>  de l'orchestre diffère de
+      celui auquel la source a été enregistrée. Dans cette unité, ftable est toujours
+      lue avec interpolation.
+    </p>
+        <p>
+      Si la lecture atteint la fin de la <span class="emphasis"><em>boucle d'entretien</em></span> et
+      que la boucle est active, le point de lecture sera modifié et
+      <span class="emphasis"><em>loscil</em></span> continuera sa lecture depuis l'intérieur de la
+      boucle. Une fois que l'instrument reçoit un signal <span class="emphasis"><em>turnoff</em></span>
+      (depuis la partition ou depuis un évènement MIDI noteoff), la fin de la boucle
+      est ignorée et la lecture continue vers la fin de la
+      <span class="emphasis"><em>boucle de relâchement</em></span>, ou vers le dernier échantillon
+      (dorénavant vers zéro).
+    </p>
+        <p>
+      <span class="emphasis"><em>loscil</em></span> est l'unité de base pour bâtir un échantilloneur.
+      Avec un ensemble suffisamment conséquent de sons de piano échantillonnés, par
+      exemple, cette unité peut les rééchantillonner pour simuler les hauteurs
+      manquantes. La détection de la source de son la plus proche d'une hauteur
+      donnée peut être réalisée par la consultation d'une table. Une fois qu'un
+      instrument échantillonneur est actif, son point de <span class="emphasis"><em>turnoff</em></span>
+      peut être imprévisible et nécessiter une enveloppe de <span class="emphasis"><em>relâchement</em></span>
+      externe ; on réalise souvent cela en munissant le son échantillonné d'un
+      détecteur <a class="link" href="linenr.html" title="linenr"><em class="citetitle">linenr</em></a>, qui
+      allonge la durée d'un instrument à la fin de la note d'une durée spécifique
+      car il implémente une chute.
+    </p>
+        <p>
+      Si l'on veut boucler sur tout le fichier, il faut spécifier un mode de boucle
+      dans <span class="emphasis"><em>imod1</em></span> et ne donner aucune valeur pour
+      <span class="emphasis"><em>ibeg</em></span> et <span class="emphasis"><em>iend</em></span>.
+    </p>
+        <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Caution: Note pour les utilisateurs de Windows">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Attention]" src="images/caution.png" />
+              </td>
+              <th align="left">Note pour les utilisateurs de Windows</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Les utilisateurs de Windows utilisent normalement l'antislash,
+        <span class="quote">« <span class="quote">\</span> »</span>, lorsqu'ils écrivent les chemins de leurs fichiers. Par
+        exemple, un utilisateur de Windows pourra utiliser le chemin
+        <span class="quote">« <span class="quote">c:\music\samples\loop001.wav</span> »</span>. Ceci pose problème car les
+        l'antislash est normalement utilisé pour spécifier des caractères spéciaux.
+      </p>
+                <p>
+        Pour écrire correctement ce chemin dans Csound, on peut :
+        </p>
+                <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                    <li class="listitem">
+                      <p>Soit <span class="emphasis"><em>utiliser le slash</em></span> :
+          c:/music/samples/loop001.wav</p>
+                    </li>
+                    <li class="listitem">
+                      <p>Soit <span class="emphasis"><em>utiliser le caractère spécial d'antislash,
+          <span class="quote">« <span class="quote">\\</span> »</span></em></span> : c:\\music\\samples\\loop001.wav</p>
+                    </li>
+                  </ul>
+                </div>
+                <p>
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note: Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Voici <span class="emphasis"><em>loscil</em></span> en mono :
+
+        </p>
+                <div class="informalexample">
+                  <pre class="programlisting">
+a1 <span class="opc">loscil</span> 10000, 1, 1, 1 ,1</pre>
+                </div>
+                <p>
+
+        ... et <span class="emphasis"><em>loscil</em></span> en stéréo :
+
+        </p>
+                <div class="informalexample">
+                  <pre class="programlisting">
+a1, a2 <span class="opc">loscil</span> 10000, 1, 1, 1 ,1</pre>
+                </div>
+                <p>
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887663107024"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode loscil. Il utilise les fichiers
+      <a class="ulink" href="examples/loscil.csd" target="_top"><em class="citetitle">loscil.csd</em></a>
+      <a class="ulink" href="examples/mary.wav" target="_top"><em class="citetitle">mary.wav</em></a>
+      et <a class="ulink" href="examples/kickroll.wav" target="_top"><em class="citetitle">kickroll.wav</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887663103488"></a>
+          <p class="title">
+            <strong>Exemple 465. Exemple de l'opcode loscil.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887517583008"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac     <span class="comment">;;;realtime audio out</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o loscil.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+
+<span class="oblock">instr</span> 1
+
+ichnls <span class="op">=</span> <span class="opc">ftchnls</span>(p4)
+<span class="opc">print</span> ichnls
+
+<span class="octrl">if</span> (ichnls <span class="op">==</span> 1) then
+   asigL <span class="opc">loscil</span> .8, 1, p4, 1
+   asigR <span class="op">=</span> 	asigL
+<span class="octrl">elseif</span> (ichnls <span class="op">==</span> 2) then
+   asigL, asigR <span class="opc">loscil</span> .8, 1, p4, 1
+<span class="comment">;safety precaution if not mono or stereo</span>
+<span class="octrl">else</span>
+   asigL <span class="op">=</span> 0
+   asigR <span class="op">=</span> 0
+<span class="octrl">endif</span>
+        <span class="opc">outs</span> asigL, asigR
+
+<span class="oblock">endin</span>
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="stamnt">f</span> 1 0 0 1 "mary.wav" 0 0 0
+<span class="stamnt">f</span> 2 0 0 1 "kickroll.wav" 0 0 0
+
+<span class="stamnt">i</span> 1 0 3 1 <span class="comment">;mono file</span>
+<span class="stamnt">i</span> 1 + 2 2 <span class="comment">;stereo file</span>
+<span class="stamnt">e</span>
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887663099120"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="loscil3.html" title="loscil3"><em class="citetitle">loscil3</em></a> et 
+      <a class="link" href="GEN01.html" title="GEN01"><em class="citetitle">GEN01</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887663096112"></a>
+        <h2>Crédits</h2>
+        <p>La note au sujet de la différence mono/stéréo est due à Rasmus Ekman.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="lorisplay.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="loscil3.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">lorisplay </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> loscil3</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

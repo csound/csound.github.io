@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>rms</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="rireturn.html" title="rireturn" />
+    <link rel="next" href="rnd.html" title="rnd" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">rms</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="rireturn.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="rnd.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="rms"></a>
+      <div class="titlepage"></div>
+      <a id="IndexRms" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">rms</span>
+        </h2>
+        <p>rms — 
+      Détermine la valeur efficace d'un signal audio.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887638657376"></a>
+        <h2>Description</h2>
+        <p>
+      Détermine la valeur efficace d'un signal audio. La valeur instantanée
+      passe à travers un filtre passe-bas pour en sortir une valeur
+      moyenne comme dans un VU-mètre.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887638655824"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">kres <span class="command"><strong>rms</strong></span> asig [, ihp] [, iskip]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887638653824"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ihp</em></span> (facultatif, 10 par défaut) -- point à mi-puissance (en Hz) d'un
+      d'un filtre passe-bas interne spécial. La valeur par défaut est 10.
+    </p>
+        <p>
+      <span class="emphasis"><em>iskip</em></span> (facultatif, 0 par défaut) -- disposition
+      initiale de l'espace de données interne (voir
+      <a class="link" href="reson.html" title="reson"><em class="citetitle">reson</em></a>). La valeur
+      par défaut est 0.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887638649888"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>asig</em></span> -- signal audio en entrée
+    </p>
+        <p>
+      <span class="emphasis"><em>kres</em></span> -- valeur efficace du signal d'entrée issue du
+      filtre passe-bas
+    </p>
+        <p>
+      Les valeurs de sortie <span class="emphasis"><em>kres</em></span> de <span class="emphasis"><em>rms</em></span>
+      suivent la valeur efficace de l'entrée audio <span class="emphasis"><em>asig</em></span>.
+      Cette unité n'est pas un modificateur de signal, mais fonctionne plutôt
+      comme une mesure de la puissance du signal. Elle utilise un filtre
+      passe-bas interne pour rendre la réponse plus lisse. On peut utiliser
+      <span class="emphasis"><em>ihp</em></span> pour contrôler ce lissage. Plus les valeurs sont
+      importantes, plus la mesure est "dynamique".
+    </p>
+        <p>
+      On peut aussi utiliser cet opcode comme suiveur d'enveloppe.
+    </p>
+        <p>
+      La sortie <span class="emphasis"><em>kres</em></span> de cet opcode est donnée en amplitude
+      et dépend de
+      <a class="link" href="Zerodbfs.html" title="0dbfs"><em class="citetitle">0dbfs</em></a>. Pour une
+      sortie en décibels, il faut utiliser
+      <a class="link" href="dbamp.html" title="dbamp"><em class="citetitle">dbamp</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887638640864"></a>
+        <h2>Exemples</h2>
+        <p>
+      </p>
+        <div class="informalexample">
+          <pre class="programlisting">
+arms <span class="opc">rms</span>    asig <span class="comment">; get rms value of signal asig</span>
+        </pre>
+        </div>
+        <p>
+    </p>
+        <p>
+      Voici un exemple de l'opcode rms. Il utilise le fichier
+      <a class="ulink" href="examples/rms.csd" target="_top"><em class="citetitle">rms.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm47887638636272"></a>
+          <p class="title">
+            <strong>Exemple 800. Exemple de l'opcode rms.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887505449136"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d  -m0   <span class="comment">;;;RT audio I/O</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o rms.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="comment">; Initialize the global variables.</span>
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 128
+<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+
+<span class="comment">;Example by Andres Cabrera 2007</span>
+
+<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+
+<span class="opc">FLpanel</span> "rms", 400, 100, 50, 50
+    gkrmstext, gihrmstext <span class="opc">FLtext</span> "Rms", <span class="op">-</span>100, 0, 0.1, 3, 110, 30, 60, 50
+    gkihp, gihandle <span class="opc">FLtext</span> "ihp", 0, 10, 0.05, 1, 100, 30, 220, 50
+    gkrmsslider, gihrmsslider <span class="opc">FLslider</span> "", <span class="op">-</span>60, <span class="op">-</span>0.5, <span class="op">-</span>1, 5, <span class="op">-</span>1, 380, 20, 10, 10
+
+<span class="opc">FLpanelEnd</span>
+<span class="opc">FLrun</span>
+
+
+<span class="opc">FLsetVal_i</span> 5, gihandle
+<span class="comment">; Instrument #1.</span>
+<span class="oblock">instr</span> 1
+  a1 <span class="opc">inch</span> 1   
+
+<span class="olabel">label</span><span class="op">:</span>
+  kval <span class="opc">rms</span> a1, <span class="opc">i</span>(gkihp)  <span class="comment">;measures rms of input channel 1</span>
+<span class="opc">rireturn</span>
+
+  kval <span class="op">=</span> <span class="opc">dbamp</span>(kval) <span class="comment">; convert to db full scale</span>
+  <span class="opc">printk</span> 0.5, kval
+  <span class="opc">FLsetVal</span> 1, kval, gihrmsslider   <span class="comment">;update the slider and text values</span>
+  <span class="opc">FLsetVal</span> 1, kval, gihrmstext
+  knewihp <span class="opc">changed</span> gkihp   <span class="comment">; reinit when ihp text has changed</span>
+  <span class="octrl">if</span> (knewihp <span class="op">==</span> 1) then
+    <span class="opc">reinit</span> <span class="olabel">label</span>  <span class="comment">;needed because ihp is an i-rate parameter</span>
+  <span class="octrl">endif</span>
+<span class="oblock">endin</span>
+
+
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+<span class="comment">; Play Instrument #1 for one minute</span>
+<span class="stamnt">i</span> 1 0 60
+<span class="stamnt">e</span>
+
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887638631904"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="balance.html" title="balance"><em class="citetitle">balance</em></a>,
+      <a class="link" href="gain.html" title="gain"><em class="citetitle">gain</em></a>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rireturn.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="rnd.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">rireturn </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> rnd</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

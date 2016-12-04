@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>max_k</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="maxalloc.html" title="maxalloc" />
+    <link rel="next" href="maxarray.html" title="maxarray" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">max_k</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="maxalloc.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="maxarray.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="max_k"></a>
+      <div class="titlepage"></div>
+      <a id="Indexmax_k" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">max_k</span>
+        </h2>
+        <p>max_k — 
+      Maximum (ou minimum) local d'un signal entrant de taux-a.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887660570688"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>max_k</em></span> retourne le maximum (ou le minimum) local du
+      signal entrant <span class="emphasis"><em>asig</em></span>, mesuré dans l'intervalle de temps
+      entre deux passages à true de <span class="emphasis"><em>ktrig</em></span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887660567984"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">knumkout <span class="command"><strong>max_k</strong></span> asig, ktrig, itype</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887660501584"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>itype</em></span> - détermine le comportement de <span class="emphasis"><em>max_k</em></span>
+      (voir ci-dessous)
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887660499536"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>asig</em></span> -- signal entrée
+    </p>
+        <p>
+      <span class="emphasis"><em>ktrig</em></span> -- signal de déclenchement
+    </p>
+        <p>
+      <span class="emphasis"><em>max_k</em></span> retourne le maximum (ou le minimum) local du
+      signal entrant <span class="emphasis"><em>asig</em></span>, mesuré dans l'intervalle de
+      temps entre deux passages à true de <span class="emphasis"><em>ktrig</em></span>.
+      <span class="emphasis"><em>itype</em></span> détermine le comportement de
+      <span class="emphasis"><em>max_k</em></span> :</p>
+        <p>
+      1 - maximum absolu (les valeurs négatives sont changées en valeurs positives
+      avant l'évaluation)
+    </p>
+        <p>
+      2 - maximum courant
+    </p>
+        <p>
+      3 - minimum courant
+    </p>
+        <p>
+      4 - calcule la valeur moyenne de <span class="emphasis"><em>asig</em></span> dans l'intervalle
+      de temps depuis le dernier déclenchement.
+    </p>
+        <p>
+      Cet opcode peut être utile dans plusieurs situations, par exemple pour
+      implémenter un vu-mètre.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887660490976"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode max_k. Il utilise le fichier
+      <a class="ulink" href="examples/max_k.csd" target="_top"><em class="citetitle">max_k.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887660489120"></a>
+          <p class="title">
+            <strong>Exemple 500. Exemple de l'opcode max_k.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887516287312"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac  -Ma   <span class="comment">;;;realtime audio out and midi in (on all inputs)</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o max_k.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+
+
+	<span class="opc">FLpanel</span>	"This Panel contains VU<span class="op">-</span>meter",300,100
+gk1,gih1 <span class="opc">FLslider</span> "VU<span class="op">-</span>meter", 0,1,0,1, <span class="op">-</span>1, 250,30, 30,30
+	<span class="opc">FLsetColor2</span> 50, 50, 255,  gih1
+	<span class="opc">FLpanel_end</span>
+	<span class="opc">FLrun</span>
+
+ga1 <span class="opc">init</span> 0
+	
+<span class="oblock">instr</span> 1
+
+kenv	<span class="opc">linsegr</span>	0,.5,.7,.5,.5,.2,0
+ifreq	<span class="opc">cpsmidi</span>
+a1	<span class="opc">poscil</span>	<span class="ohdr">0dbfs</span><span class="op">*</span>kenv, ifreq, 1
+ga1	<span class="op">=</span>	ga1<span class="op">+</span>a1
+
+<span class="oblock">endin</span>
+
+<span class="oblock">instr</span> 2
+
+	<span class="opc">outs</span>	ga1, ga1
+ktrig	<span class="opc">metro</span>	25					<span class="comment">;refresh 25 times per second</span>
+kval	<span class="opc">max_k</span>	ga1, ktrig, 1
+	<span class="opc">FLsetVal</span> ktrig, kval, gih1
+ga1	<span class="op">=</span>	0
+
+<span class="oblock">endin</span>
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="stamnt">f</span>1 0 1024 10 1
+
+<span class="stamnt">i</span>2 0 3600
+<span class="stamnt">f</span>0 3600
+
+<span class="stamnt">e</span>
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887660484752"></a>
+        <h2>Crédits</h2>
+        <p>Written by Gabriel Maldonado.</p>
+        <p>Nouveau dans Csound 5. (N'était disponible auparavant que dans CsoundAV)</p>
+        <p>Modifié pour être conforme à la documentation dans la version 5.15.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="maxalloc.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="maxarray.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">maxalloc </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> maxarray</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

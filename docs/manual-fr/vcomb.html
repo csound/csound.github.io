@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>vcomb</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="vco2init.html" title="vco2init" />
+    <link rel="next" href="vcopy.html" title="vcopy" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">vcomb</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="vco2init.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="vcopy.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="vcomb"></a>
+      <div class="titlepage"></div>
+      <a id="IndexVcomb" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">vcomb</span>
+        </h2>
+        <p>vcomb — 
+      Réverbération variable du  signal d'entrée avec une réponse en fréquence <span class="quote">« <span class="quote">colorée</span> »</span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887617852864"></a>
+        <h2>Description</h2>
+        <p>
+      Réverbération variable du  signal d'entrée avec une réponse en fréquence <span class="quote">« <span class="quote">colorée</span> »</span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887617851040"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>vcomb</strong></span> asig, krvt, xlpt, imaxlpt [, iskip] [, insmps]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887617848800"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>imaxlpt</em></span> -- durée de boucle maximale pour <span class="emphasis"><em>klpt</em></span>
+    </p>
+        <p>
+      <span class="emphasis"><em>iskip</em></span> (facultatif, 0 par défaut) -- état initial de
+      l'espace de données de la boucle de retard (cf.
+      <a class="link" href="reson.html" title="reson"><em class="citetitle">reson</em></a>). La valeur par
+      défaut est 0.
+    </p>
+        <p>
+      <span class="emphasis"><em>insmps</em></span> (facultatif, 0 par défaut) -- valeur du
+      retard, en nombre d'échantillons.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887617843696"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>krvt</em></span> -- la durée de réverbération (définie comme le
+      temps en secondes pris par un signal pour décroitre à 1/1000 ou 60 dB de
+      son amplitude originale).
+    </p>
+        <p>
+      <span class="emphasis"><em>xlpt</em></span> -- durée de boucle variable en secondes, comme
+      <span class="emphasis"><em>ilpt</em></span> dans <span class="emphasis"><em>comb</em></span>. La durée de
+      boucle peut aller jusqu'à <span class="emphasis"><em>imaxlpt</em></span>.
+    </p>
+        <p>
+      Ce filtre répète l'entrée avec une densité d'écho déterminée par la durée
+      de boucle <span class="emphasis"><em>xlpt</em></span>. Le taux d'atténuation est indépendant
+      et il est déterminé par <span class="emphasis"><em>krvt</em></span>, la durée de réverbération
+      (définie comme le temps en secondes pris par un signal pour décroitre à
+      1/1000 ou 60 dB de son amplitude originale). La sortie n'apparait qu'après
+      <span class="emphasis"><em>ilpt</em></span> secondes.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887617836992"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opdoce vcomb. Il utilise le fichier
+      <a class="ulink" href="examples/vcomb.csd" target="_top"><em class="citetitle">vcomb.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887617835136"></a>
+          <p class="title">
+            <strong>Exemple 1018. Exemple de l'opdoce vcomb.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887497276016"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in</span>
+-odac           -iadc       -M0 <span class="comment">;;;RT audio I/O with MIDI in</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="comment">; Example by Jonathan Murphy and Charles Gran 2007</span>
+  <span class="ohdr">sr</span>	    <span class="op">=</span>  44100
+  <span class="ohdr">ksmps</span>	    <span class="op">=</span>  10
+  <span class="ohdr">nchnls</span>    <span class="op">=</span>  2
+
+        <span class="comment">; new, and important. Make sure that midi note events are only</span>
+        <span class="comment">; received by instruments that actually need them.</span>
+
+	<span class="comment">; turn default midi routing off</span>
+	<span class="ohdr">massign</span>		0, 0
+	<span class="comment">; route note events on channel 1 to instr 1</span>
+	<span class="ohdr">massign</span>		1, 1
+
+<span class="comment">; Define your midi controllers</span>
+<span class="omacro">#define</span> C1 #21#
+<span class="omacro">#define</span> C2 #22#
+<span class="omacro">#define</span> C3 #23#
+
+<span class="comment">; Initialize MIDI controllers</span>
+	    <span class="opc">initc7</span>    1, $C1, 0.5 		  <span class="comment">;delay send</span>
+	    <span class="opc">initc7</span>    1, $C2, 0.5 		  <span class="comment">;delay: time to zero</span>
+	    <span class="opc">initc7</span>    1, $C3, 0.5 		  <span class="comment">;delay: rate </span>
+
+  gaosc	    <span class="opc">init</span>      0
+
+<span class="comment">; Define an opcode to "smooth" the MIDI controller signal</span>
+    <span class="oblock">opcode</span> smooth, k, <span class="opc">k</span>
+  kin       <span class="opc">xin</span>
+  kport	    <span class="opc">linseg</span>    0, 0.0001, 0.01, 1, 0.01
+  kin       <span class="opc">portk</span>     kin, kport
+            <span class="opc">xout</span>      kin
+    <span class="oblock">endop</span>
+
+<span class="oblock">instr</span>   1  
+ <span class="comment">; Generate a sine wave at the frequency of the MIDI note that triggered the intrument</span>
+  ifqc	    <span class="opc">cpsmidi</span>
+  iamp	    <span class="opc">ampmidi</span>   10000
+  aenv	    <span class="opc">linenr</span>    iamp, .01, .1, .01 	  <span class="comment">;envelope</span>
+  a1	    <span class="opc">oscil</span>     aenv, ifqc, 1
+<span class="comment">; All sound goes to the global variable gaosc</span>
+  gaosc	    <span class="op">=</span>  gaosc <span class="op">+</span> a1
+    <span class="oblock">endin</span>
+
+    <span class="oblock">instr</span>     198 <span class="comment">; ECHO</span>
+  kcmbsnd   <span class="opc">ctrl7</span>     1, $C1, 0, 1 		  <span class="comment">;delay send</span>
+  ktime	    <span class="opc">ctrl7</span>     1, $C2, 0.01, 6 		  <span class="comment">;time loop fades out</span>
+  kloop	    <span class="opc">ctrl7</span>     1, $C3, 0.01, 1 		  <span class="comment">;loop speed</span>
+<span class="comment">; Receive MIDI controller values and then smooth them</span>
+  kcmbsnd   smooth    kcmbsnd
+  ktime	    smooth    ktime
+  kloop	    smooth    kloop
+  imaxlpt   <span class="op">=</span>  1 				  <span class="comment">;max loop time</span>
+<span class="comment">; Create a variable reverberation (delay) of the gaosc signal</span>
+  acomb	    <span class="opc">vcomb</span>     gaosc, ktime, kloop, imaxlpt, 1
+  aout	    <span class="op">=</span>  (acomb <span class="op">*</span> kcmbsnd) <span class="op">+</span> gaosc <span class="op">*</span> (1 <span class="op">-</span> kcmbsnd)
+	    <span class="opc">outs</span>      aout, aout
+  gaosc	    <span class="op">=</span>  0
+    <span class="oblock">endin</span>
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="stamnt">f</span>1 0 16384 10 1
+<span class="stamnt">i</span>198 0 10000
+<span class="stamnt">e</span>
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887617830768"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="alpass.html" title="alpass"><em class="citetitle">alpass</em></a>,
+      <a class="link" href="comb.html" title="comb"><em class="citetitle">comb</em></a>,
+      <a class="link" href="reverb.html" title="reverb"><em class="citetitle">reverb</em></a>,
+      <a class="link" href="valpass.html" title="valpass"><em class="citetitle">valpass</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887617825840"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : William <span class="quote">« <span class="quote">Pete</span> »</span> Moss</td>
+          </tr>
+          <tr>
+            <td>Université du Texas à Austin</td>
+          </tr>
+          <tr>
+            <td>Austin, Texas USA</td>
+          </tr>
+          <tr>
+            <td>Janvier 2002</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="vco2init.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="vcopy.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">vco2init </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> vcopy</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

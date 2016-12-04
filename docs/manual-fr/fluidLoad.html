@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>fluidLoad</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="fluidEngine.html" title="fluidEngine" />
+    <link rel="next" href="fluidNote.html" title="fluidNote" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">fluidLoad</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="fluidEngine.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="fluidNote.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="fluidLoad"></a>
+      <div class="titlepage"></div>
+      <a id="IndexFluidLoad" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">fluidLoad</span>
+        </h2>
+        <p>fluidLoad — 
+      Charge un SoundFont dans un fluidEngine, en listant éventuellement le contenu du SoundFont.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887675924112"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">isfnum <span class="command"><strong>fluidLoad</strong></span> soundfont, ienginenum[, ilistpresets]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887675922272"></a>
+        <h2>Description</h2>
+        <p>Charge un SoundFont dans une instance d'un fluidEngine, en listant éventuellement les banques
+      et les presets du SoundFont.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887675920800"></a>
+        <h2>Initialisation</h2>
+        <p><span class="emphasis"><em>isfnum </em></span> -- numéro affecté au soundfont qui vient d'être chargé.</p>
+        <p><span class="emphasis"><em>soundfont </em></span> -- chaîne spécifiant le nom de fichier d'un SoundFont. Notez que
+      n'importe quel nombre de SoundFonts peuvent être chargés (évidemment, par différents appels de
+      fluidLoad).</p>
+        <p><span class="emphasis"><em>ienginenum </em></span> -- numéro du moteur affecté par fluidEngine</p>
+        <p><span class="emphasis"><em>ilistpresets </em></span> -- facultatif, s'il est spécifié, tous les programmes
+      Fluidsynth du SoundFont qui vient d'être chargé sont listés. Un programme FluidSynth est une
+      combinaison d'ID de SoundFont, de numéro de banque, et de numéro de preset qui est affecté à un
+      canal MIDI.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887675916064"></a>
+        <h2>Exécution</h2>
+        <p>Appelez fluidLoad dans l'en-tête de l'orchestre, autant de fois que vous voulez. Le même
+      SoundFont peut être appelé pour affecter des programmes à des canaux MIDI autant de fois que
+      l'on veut ; le SoundFont n'est chargé que la première fois.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887675914336"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode fluidLoad. Il utilise les fichiers
+      <a class="ulink" href="examples/fluidLoad.csd" target="_top"><em class="citetitle">fluidLoad.csd</em></a>
+      et <a class="ulink" href="examples/07AcousticGuitar.sf2" target="_top"><em class="citetitle">07AcousticGuitar.sf2</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47887675911600"></a>
+          <p class="title">
+            <strong>Exemple 307. Exemple de l'opcode fluidLoad.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887524048208"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac   -+rtmidi=virtual  -M0    <span class="comment">;;;realtime audio out and realtime midi in</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">;-o fluidLoad.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 32
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+
+giengine <span class="opc">fluidEngine</span>
+<span class="comment">; soundfont path to manual/examples</span>
+isfnum	 <span class="opc">fluidLoad</span> "07AcousticGuitar.sf2", giengine, 1
+	 <span class="opc">fluidProgramSelect</span> giengine, 1, isfnum, 0, 0
+
+<span class="oblock">instr</span> 1
+
+	<span class="opc">mididefault</span>   60, p3
+	<span class="opc">midinoteonkey</span> p4, p5
+ikey	<span class="opc">init</span> p4
+ivel	<span class="opc">init</span> p5
+	<span class="opc">fluidNote</span> giengine, 1, ikey, ivel
+
+<span class="oblock">endin</span>
+
+<span class="oblock">instr</span> 99
+
+imvol  <span class="opc">init</span> 7
+asigl, asigr <span class="opc">fluidOut</span> giengine
+       <span class="opc">outs</span> asigl<span class="op">*</span>imvol, asigr<span class="op">*</span>imvol
+
+<span class="oblock">endin</span>
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+<span class="stamnt">i</span> 1 0 2 60 100 <span class="comment">;play one note from score and...</span>
+<span class="stamnt">i</span> 99 0 60      <span class="comment">;play virtual keyboard for 60 sec.</span>
+<span class="stamnt">e</span>
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+      Sa sortie contiendra une ligne comme celle-ci :
+      </p>
+        <pre class="screen">
+SoundFont:   1  Bank:   0  Preset:   0  Seagul Acoustic Git</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887675906528"></a>
+        <h2>Voir aussi</h2>
+        <p><a class="link" href="fluidEngine.html" title="fluidEngine"><em class="citetitle">fluidEngine</em></a>,
+    <a class="link" href="fluidNote.html" title="fluidNote"><em class="citetitle">fluidNote</em></a></p>
+        <p>Plus d'information sur soundfonts dans les Floss Manuals :
+      <a class="ulink" href="http://en.flossmanuals.net/csound/ch048_d-reading-midi-files" target="_top">
+      <em class="citetitle">http://en.flossmanuals.net/csound/ch048_d-reading-midi-files</em>
+      </a></p>
+        <p>D'autres informations au sujet de soundfonts sur Wikipedia :
+    <a class="ulink" href="http://en.wikipedia.org/wiki/Soundfont" target="_top"><em class="citetitle">http://en.wikipedia.org/wiki/Soundfont</em></a></p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887675901056"></a>
+        <h2>Crédits</h2>
+        <p>Michael Gogins (gogins@pipeline.com), Steven Yi. Merci à Peter Hanappe pour Fluidsynth.
+    </p>
+        <p>Nouveau dans Csound5.00</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="fluidEngine.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="fluidNote.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">fluidEngine </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> fluidNote</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

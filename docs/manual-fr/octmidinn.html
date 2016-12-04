@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>octmidinn</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="octmidib.html" title="octmidib" />
+    <link rel="next" href="octpch.html" title="octpch" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">octmidinn</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="octmidib.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="octpch.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="octmidinn"></a>
+      <div class="titlepage"></div>
+      <a id="IndexOctmidinn" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">octmidinn</span>
+        </h2>
+        <p>octmidinn — 
+      Convertit un numéro de note Midi en octave-point-partie-décimale.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887654532816"></a>
+        <h2>Description</h2>
+        <p>
+      Convertit un numéro de note Midi en octave-point-partie-décimale.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887654531488"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>octmidinn</strong></span> (MidiNoteNumber)  (arguments de taux-i ou -k seulement)</pre>
+        <p>
+      où l'argument entre parenthèses peut être une expression.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887654529056"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>octmidinn</em></span> est une fonction qui prend une valeur de taux-i ou de taux-k
+      représentant un numéro de note Midi et qui retourne la valeur de hauteur équivalente dans le format
+      octave-point-partie-décimale de Csound. Cette conversion suppose que le do médian (8.000 en
+      <span class="emphasis"><em>oct</em></span>) est la note Midi numéro 60. Les numéros de note Midi sont par définition
+      des nombres entiers compris entre 0 et 127 mais des valeurs fractionnaires ou des valeurs en
+      dehors de cet intervalle seront correctement interprétées.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note: octmidinn vs. octmidi">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">octmidinn vs. octmidi</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        L'opcode <span class="emphasis"><em>octmidinn</em></span> peut être utilisé dans n'importe quelle instance
+        d'instrument de Csound, que celle-ci soit activée depuis un évènement Midi, un évènement de
+        partition, un évènement en ligne, ou depuis un autre instrument. La valeur
+        d'entrée de <span class="emphasis"><em>octmidinn</em></span> peut provenir par exemple d'un p-champ dans une
+        partition textuelle ou bien avoir été retrouvée au moyen de l'opcode
+        <a class="link" href="notnum.html" title="notnum"><em class="citetitle">notnum</em></a> à partir de l'évènement Midi en
+         qui a activé la note courante. Le numéro de note Midi à
+        convertir doit être spécifié comme une expression de taux-i ou de taux-k. D'un autre côté,
+        l'opcode <a class="link" href="octmidi.html" title="octmidi"><em class="citetitle">octmidi</em></a> ne fournit des
+        résultats significatifs qu'avec une note activée par le Midi (soit en temps réel soit à
+        partir d'une partition Midi avec l'option -F). Avec
+        <a class="link" href="octmidi.html" title="octmidi"><em class="citetitle">octmidi</em></a>, la valeur du numéro de note
+        Midi provient de l'évènement Midi associé à l'instance d'instrument, et aucune source
+        ni aucune expression ne peuvent être spécifiées pour cette valeur.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <p>
+      <span class="emphasis"><em>octmidinn</em></span> et ses opcodes associés sont réellement des
+      <span class="emphasis"><em> convertisseurs de valeur</em></span> spécialisés dans la manipulation des données
+      de hauteur.
+    </p>
+        <p>
+      Les données concernant la hauteur et la fréquence peuvent exister dans un des formats
+      suivants :
+    </p>
+        <div class="table">
+          <a id="idm47887654517056"></a>
+          <p class="title">
+            <strong>Tableau 17. Valeurs de Hauteur et de Fréquence</strong>
+          </p>
+          <div class="table-contents">
+            <table summary="Valeurs de Hauteur et de Fréquence" border="0">
+              <colgroup>
+                <col />
+                <col />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Abréviation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>octave point classe de hauteur (8ve.pc)</td>
+                  <td>pch</td>
+                </tr>
+                <tr>
+                  <td>octave point partie décimale</td>
+                  <td>oct</td>
+                </tr>
+                <tr>
+                  <td>cycles par seconde</td>
+                  <td>cps</td>
+                </tr>
+                <tr>
+                  <td>Numéro de note Midi (0-127)</td>
+                  <td>midinn</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <br class="table-break" />
+        <p>
+      Les deux premières formes sont constituées d'un nombre entier, représentant le registre
+      d'octave, suivi d'une partie décimale dont la signification est particulière. Pour
+      <span class="emphasis"><em>pch</em></span>, la partie fractionnaire est lue comme deux chiffres décimaux
+      représentant les douze classes de hauteur du tempérament égal de .00 pour do jusqu'à .11 pour
+      si. Pour <span class="emphasis"><em>oct</em></span>, la partie fractionnaire est interprétée comme une véritable
+      partie fractionnaire décimale d'une octave. Les deux formes fractionnaires sont ainsi dans
+      un rapport de 100/12. Dans les deux formes, la fraction est précédée par un nombre entier
+      indice de l'octave, tel que 8.00 représente le do médian, 9.00 le do au-dessus, etc. Les
+      numéros de note Midi sont compris entre 0 et 127 (inclus), avec 60 représentant le do médian,
+      et sont habituellement des nombres entiers. Ainsi, on peut représenter le la 440
+      alternativement par 440 (<span class="emphasis"><em>cps</em></span>), 69 (<span class="emphasis"><em>midinn</em></span>), 8.09
+      (<span class="emphasis"><em>pch</em></span>), ou 8.75 (<span class="emphasis"><em>oct</em></span>). On peut encoder des divisions
+      microtonales du demi-ton <span class="emphasis"><em>pch</em></span> en utilisant plus de deux positions
+      décimales.
+    </p>
+        <p>
+      Les noms mnémotechniques des unités de conversion de hauteur sont dérivés des morphèmes des
+      formes concernées, le second morphème décrivant la source et le premier morphème l'objet (le
+      résultat). Ainsi <span class="emphasis"><em>cpspch</em></span>(8.09) convertira l'argument de hauteur 8.09 en son
+      équivalent en <span class="emphasis"><em>cps</em></span> (ou Hertz), ce qui donne la valeur 440. Comme l'argument
+      est constant pendant toute la durée de la note, cette conversion aura lieu pendant
+      l'initialisation, avant qu'aucun échantillon de la note actuelle ne soit produit.
+    </p>
+        <p>
+      Par constraste, la conversion <span class="emphasis"><em>cpsoct</em></span>(8.75 + k1) donne la valeur du
+      la 440 transposée par l'intervalle octaviant <span class="emphasis"><em>k1</em></span>. Le calcul sera répété
+      à chaque k-période car c'est le taux de variation de <span class="emphasis"><em>k1</em></span>.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note: Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        La conversion de <span class="emphasis"><em>pch</em></span>, <span class="emphasis"><em>oct</em></span>, ou
+        <span class="emphasis"><em>midinn</em></span> vers <span class="emphasis"><em>cps</em></span> n'est pas une opération linéaire
+        mais elle implique un calcul d'exponentielle qui peut coûter cher en temps de traitement
+        s'il est exécuté de manière répétitive. Csound utilise dorénavant une consultation de table
+        interne pour faire cela efficacement, même aux taux audio. Comme l'indice dans la table est
+        tronqué sans interpolation, la résolution en hauteur avec un de ces opcodes est limitée à
+        8192 divisions discrètes et égales de l'octave, et quelques degrés de l'échelle tempérée
+        égale de 12 demi-tons sont très légèrement désaccordés (d'au plus 0,15 cent).
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887654494672"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode octmidinn. Il utilise le fichier
+      <a class="ulink" href="examples/cpsmidinn.csd" target="_top"><em class="citetitle">cpsmidinn.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm47887654492800"></a>
+          <p class="title">
+            <strong>Exemple 584. Exemple de l'opcode octmidinn.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887513085824"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform.</span>
+<span class="comment">; This example produces no audio, so we render in</span>
+<span class="comment">; non-realtime and turn off sound to disk:</span>
+-n
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="oblock">instr</span> 1
+  <span class="comment">; i-time loop to print conversion table</span>
+  imidiNN <span class="op">=</span>   0
+  loop1<span class="op">:</span>
+    icps  <span class="op">=</span> <span class="opc">cpsmidinn</span>(imidiNN)
+    ioct  <span class="op">=</span> <span class="opc">octmidinn</span>(imidiNN)
+    ipch  <span class="op">=</span> <span class="opc">pchmidinn</span>(imidiNN)
+            
+    <span class="opc">print</span>   imidiNN, icps, ioct, ipch
+      
+    imidiNN <span class="op">=</span> imidiNN <span class="op">+</span> 1
+  <span class="octrl">if</span> (imidiNN <span class="op">&lt;</span> 128) <span class="octrl">igoto</span> loop1
+<span class="oblock">endin</span>
+
+<span class="oblock">instr</span> 2
+  <span class="comment">; test k-rate converters</span>
+  kMiddleC  <span class="op">=</span>   60
+  kcps  <span class="op">=</span> <span class="opc">cpsmidinn</span>(kMiddleC)
+  koct  <span class="op">=</span> <span class="opc">octmidinn</span>(kMiddleC)
+  kpch  <span class="op">=</span> <span class="opc">pchmidinn</span>(kMiddleC)
+            
+  <span class="opc">printks</span> "<span class="op">%</span>d <span class="op">%</span>f <span class="op">%</span>f <span class="op">%</span>f\n", 1.0, kMiddleC, kcps, koct, kpch
+<span class="oblock">endin</span>
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="stamnt">i</span>1 0 0
+<span class="stamnt">i</span>2 0 0.1
+<span class="stamnt">e</span>
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887654488432"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="cpsmidinn.html" title="cpsmidinn"><em class="citetitle">cpsmidinn</em></a>,
+      <a class="link" href="pchmidinn.html" title="pchmidinn"><em class="citetitle">pchmidinn</em></a>,
+      <a class="link" href="octmidi.html" title="octmidi"><em class="citetitle">octmidi</em></a>,
+      <a class="link" href="notnum.html" title="notnum"><em class="citetitle">notnum</em></a>,
+      <a class="link" href="cpspch.html" title="cpspch"><em class="citetitle">cpspch</em></a>,
+      <a class="link" href="cpsoct.html" title="cpsoct"><em class="citetitle">cpsoct</em></a>,
+      <a class="link" href="octcps.html" title="octcps"><em class="citetitle">octcps</em></a>,
+      <a class="link" href="octpch.html" title="octpch"><em class="citetitle">octpch</em></a>,
+      <a class="link" href="pchoct.html" title="pchoct"><em class="citetitle">pchoct</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887654478704"></a>
+        <h2>Crédits</h2>
+        <p>Dérivé à partir des convertisseurs de valeur originaux de Barry Vercoe.</p>
+        <p>Nouveau dans la version 5.07</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="octmidib.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="octpch.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">octmidib </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> octpch</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

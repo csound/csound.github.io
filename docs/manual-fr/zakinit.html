@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>zakinit</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="zacl.html" title="zacl" />
+    <link rel="next" href="zamod.html" title="zamod" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">zakinit</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zacl.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="zamod.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="zakinit"></a>
+      <div class="titlepage"></div>
+      <a id="IndexZakinit" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">zakinit</span>
+        </h2>
+        <p>zakinit — 
+      Etablit l'espace zak.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887610778304"></a>
+        <h2>Description</h2>
+        <p>
+      Etablit l'espace zak. Ne doit être appelé qu'une seule fois.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887610776960"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>zakinit</strong></span> isizea, isizek</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887610774912"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>isizea</em></span> -- le nombre de positions de taux audio pour les
+      patch de taux-a. Chaque position est un tableau de longueur ksmps.
+    </p>
+        <p>
+      <span class="emphasis"><em>isizek</em></span> -- le nombre de positions à réserver pour les nombres
+      en virgule flottante dans l'espace zk. On peut lire et écrire dans celles-ci au
+      taux-i et au taux-k.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887610705280"></a>
+        <h2>Exécution</h2>
+        <p>
+      Il y a au moins une position d'allouée pour chaque espace za et zk. Il peut y
+      avoir des milliers ou des dizaines de milliers de positions za et zk, mais la
+      plupart des pièces n'en nécessitent probablement que quelques douzaines pour
+      patcher les signaux. Ces positions de patch sont référencées par un numéro dans
+      les autres opcodes zak.
+    </p>
+        <p>
+      Pour n'exécuter <span class="emphasis"><em>zakinit</em></span> qu'une seule fois, on le place en
+      dehors de toute définition d'instrument, dans l'en-tête de l'orchestre, après
+      <span class="emphasis"><em>sr</em></span>, <span class="emphasis"><em>kr</em></span>, <span class="emphasis"><em>ksmps</em></span>, et
+      <span class="emphasis"><em>nchnls</em></span>.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Les canaux zak se comptent à partir de 0, si bien que si l'on définit un canal,
+        le seul canal valide est le canal 0.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887610699776"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode zakinit. Il utilise le fichier
+      <a class="ulink" href="examples/zakinit.csd" target="_top"><em class="citetitle">zakinit.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm47887610697904"></a>
+          <p class="title">
+            <strong>Exemple 1098. Exemple de l'opcode zakinit.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887494198576"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="comment">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o zakinit.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 4410
+<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+
+<span class="comment">; Initialize the ZAK space.</span>
+<span class="comment">; Create 3 a-rate variables and 5 k-rate variables.</span>
+<span class="opc">zakinit</span> 2, 3
+
+<span class="oblock">instr</span> 1 <span class="comment">;a simple waveform.</span>
+	<span class="comment">; Generate a simple sine waveform.</span>
+	asin <span class="opc">oscil</span> 20000, 440, 1
+
+	<span class="comment">; Send the sine waveform to za variable #1.</span>
+	<span class="opc">zaw</span> asin, 1
+<span class="oblock">endin</span>
+
+<span class="oblock">instr</span> 2  <span class="comment">;generates audio output.</span>
+	<span class="comment">; Read za variable #1.</span>
+	a1 <span class="opc">zar</span> 1
+
+	<span class="comment">; Generate audio output.</span>
+	<span class="opc">out</span> a1
+
+	<span class="comment">; Clear the za variables, get them ready for </span>
+	<span class="comment">; another pass.</span>
+	<span class="opc">zacl</span> 0, 3
+<span class="oblock">endin</span>
+
+<span class="oblock">instr</span> 3  <span class="comment">;increments k-type channels</span>
+	k0 <span class="opc">zkr</span> 0
+	k1 <span class="opc">zkr</span> 1
+	k2 <span class="opc">zkr</span> 2
+
+	<span class="opc">zkw</span> k0<span class="op">+</span>1, 0
+	<span class="opc">zkw</span> k1<span class="op">+</span>5, 1
+	<span class="opc">zkw</span> k2<span class="op">+</span>10, 2
+<span class="oblock">endin</span>
+
+<span class="oblock">instr</span> 4 <span class="comment">;displays values from k-type channels</span>
+	k0 <span class="opc">zkr</span> 0
+	k1 <span class="opc">zkr</span> 1
+	k2 <span class="opc">zkr</span> 2
+
+<span class="comment">; The total count for k0 is 30, since there are 10</span>
+<span class="comment">; control blocks per second and intruments 3 and 4</span>
+<span class="comment">; are on for 3 seconds.</span>
+	<span class="opc">printf</span> "k0 <span class="op">=</span> <span class="op">%</span>i\n",k0, k0
+	<span class="opc">printf</span> "k1 <span class="op">=</span> <span class="op">%</span>i\n",k1, k1
+	<span class="opc">printf</span> "k2 <span class="op">=</span> <span class="op">%</span>i\n",k2, k2
+<span class="oblock">endin</span>
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+
+<span class="comment">; Table #1, a sine wave.</span>
+<span class="stamnt">f</span> 1 0 16384 10 1
+
+<span class="stamnt">i</span> 1 0 1
+<span class="stamnt">i</span> 2 0 1
+
+<span class="stamnt">i</span> 3 0 3
+<span class="stamnt">i</span> 4 0 3
+<span class="stamnt">e</span>
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887610693584"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Robin Whittle</td>
+          </tr>
+          <tr>
+            <td>Australie</td>
+          </tr>
+          <tr>
+            <td>Mai 1997</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 3.45</p>
+        <p>Exemple écrit par Kevin Conder.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zacl.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="zamod.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">zacl </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> zamod</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

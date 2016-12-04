@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>alpass</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="aftouch.html" title="aftouch" />
+    <link rel="next" href="alwayson.html" title="alwayson" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">alpass</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="aftouch.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="alwayson.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="alpass"></a>
+      <div class="titlepage"></div>
+      <a id="IndexAlpass" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">alpass</span>
+        </h2>
+        <p>alpass — 
+      Réverbère un signal en entrée avec une réponse en fréquence plate.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887696360624"></a>
+        <h2>Description</h2>
+        <p>
+      Réverbère un signal en entrée avec une réponse en fréquence plate.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887696359296"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>alpass</strong></span> asig, xrvt, ilpt [, iskip] [, insmps]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887696357280"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ilpt</em></span> -- durée de boucle en secondes, déterminant la
+      <span class="quote">« <span class="quote">densité d'échos</span> »</span> de la réverbération. Celle-ci caractérise
+      à son tour la <span class="quote">« <span class="quote">couleur</span> »</span> du filtre <span class="emphasis"><em>en peigne</em></span>
+      dont la courbe de réponse en fréquence contiendra <span class="emphasis"><em>ilpt</em></span> *
+      <span class="emphasis"><em>sr</em></span>/2 pics régulièrement espacés entre 0 et
+      <span class="emphasis"><em>sr</em></span>/2 (la fréquence de Nyquist). La durée de boucle
+      peut être aussi grande que le permet la mémoire disponible. L'espace requis
+      pour une boucle de <span class="emphasis"><em>n</em></span> secondes est de
+      4<span class="emphasis"><em>n</em></span>*<span class="emphasis"><em>sr</em></span> octets. L'espace pour le
+      retard est alloué et retourné comme dans
+      <a class="link" href="delay.html" title="delay"><em class="citetitle">delay</em></a>.
+    </p>
+        <p>
+      <span class="emphasis"><em>iskip</em></span> (facultatif, 0 par défaut) -- état initial de
+      l'espace de données de la boucle de retard (cf.
+      <a class="link" href="reson.html" title="reson"><em class="citetitle">reson</em></a>). La valeur par
+      défaut est 0.
+    </p>
+        <p>
+      <span class="emphasis"><em>insmps</em></span> (facultatif, 0 par défaut) -- valeur du
+      retard, en nombre d'échantillons.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887696347024"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>xrvt</em></span> -- la durée de réverbération (définie comme le
+      temps en secondes pris par un signal pour décroitre à 1/1000 ou 60 dB de
+      son amplitude originale).
+    </p>
+        <p>
+      Le filtre répète l'entrée avec une densité d'écho déterminée par la durée
+      de boucle <span class="emphasis"><em>ilpt</em></span>. Le taux d'atténuation est indépendant
+      et il est déterminé par <span class="emphasis"><em>xrvt</em></span>, la durée de réverbération
+      (définie comme le temps en secondes pris par un signal pour décroitre à
+      1/1000 ou 60 dB de son amplitude originale). La sortie apparait sans retard.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887696343056"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode alpass. Il utilise le fichier
+      <a class="ulink" href="examples/alpass.csd" target="_top"><em class="citetitle">alpass.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm47887696341184"></a>
+          <p class="title">
+            <strong>Exemple 49. Exemple de l'opcode alpass.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47887534068528"></a>
+              <pre class="programlisting">
+<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
+<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="comment">; Select audio/midi flags here according to platform</span>
+-odac     <span class="comment">;;;RT audio out</span>
+<span class="comment">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="comment">; For Non-realtime ouput leave only the line below:</span>
+<span class="comment">; -o alpass.wav -W ;;; for file output any platform</span>
+<span class="csdtag">&lt;/CsOptions&gt;</span>
+<span class="csdtag">&lt;CsInstruments&gt;</span>
+
+<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="ohdr">ksmps</span> <span class="op">=</span> 100
+<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+
+gamix <span class="opc">init</span> 0 
+
+<span class="oblock">instr</span> 1 
+
+acps    <span class="opc">expon</span> p4, p3, p5
+asig	<span class="opc">vco</span>  0.6, acps, 1
+	<span class="opc">outs</span>  asig, asig 
+
+gamix <span class="op">=</span> gamix <span class="op">+</span> asig 
+
+<span class="oblock">endin</span>
+
+<span class="oblock">instr</span> 99 
+
+arvt1 <span class="opc">line</span> 3.5<span class="op">*</span>1.5, p3, 6
+arvt2 <span class="opc">line</span> 3.5, p3, 4
+ilpt <span class="op">=</span>  0.1
+aleft	<span class="opc">alpass</span> gamix, arvt1, ilpt
+aright	<span class="opc">alpass</span> gamix, arvt2, ilpt<span class="op">*</span>2
+	<span class="opc">outs</span>   aleft, aright
+
+gamix <span class="op">=</span> 0	<span class="comment">; clear mixer</span>
+ 
+<span class="oblock">endin</span>
+
+<span class="csdtag">&lt;/CsInstruments&gt;</span>
+<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="stamnt">f</span>1 0 4096 10 1
+<span class="stamnt">i</span> 1 0 3 20 2000
+
+<span class="stamnt">i</span> 99 0 8
+<span class="stamnt">e</span>
+
+<span class="csdtag">&lt;/CsScore&gt;</span>
+<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887696336816"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="comb.html" title="comb"><em class="citetitle">comb</em></a>, 
+      <a class="link" href="reverb.html" title="reverb"><em class="citetitle">reverb</em></a>, 
+      <a class="link" href="valpass.html" title="valpass"><em class="citetitle">valpass</em></a>, 
+      <a class="link" href="vcomb.html" title="vcomb"><em class="citetitle">vcomb</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47887696331888"></a>
+        <h2>Crédits</h2>
+        <p>Paramètres de taux audio introduits dans la version 6.02</p>
+        <p>Novembre 2013.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="aftouch.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="alwayson.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">aftouch </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> alwayson</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
