@@ -39,3 +39,15 @@ Link: [http://www.ibs.it/code/9788888849904/zucco-giorgio/inside-csound-ediz.htm
 Year: 2010<br>
 Editors: R. Boulanger, V. Lazzarini <br>
 Link: [https://mitpress.mit.edu/books/audio-programming-book](https://mitpress.mit.edu/books/audio-programming-book)
+
+## The Csound FLOSS Manual
+
+Year: 2015<br>
+Editors: J.Heintz, I. McCurdy, M. Knevel <br>
+Link: [lulu.com](http://www.lulu.com/shop/joachim-heintz-and-iain-mccurdy/csound-floss-manual/paperback/product-22359512.html)
+
+## Ways Ahead: Proceedings of the First International Csound Conference
+
+Year: 2012<br>
+Editors: J.Heintz, A. Hofmann, I. McCurdy <br>
+Link: [http://www.cambridgescholars.com/ways-ahead-13](http://www.cambridgescholars.com/ways-ahead-13)
