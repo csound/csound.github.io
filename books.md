@@ -51,3 +51,18 @@ Link: [lulu.com](http://www.lulu.com/shop/joachim-heintz-and-iain-mccurdy/csound
 Year: 2012<br>
 Editors: J.Heintz, A. Hofmann, I. McCurdy <br>
 Link: [http://www.cambridgescholars.com/ways-ahead-13](http://www.cambridgescholars.com/ways-ahead-13)
+
+## Cooking With CSound Part 1: Woodwind and Brass Recipes
+
+Year: 2002<br>
+Authors: Andrew Horner and Lydia Ayers<br>
+Link: [http://www.areditions.com/horner-cooking-with-csound-das018.html](http://www.areditions.com/horner-cooking-with-csound-das018.html)
+
+
+## Generación y procesamiento de sonido y música a través del programa Csound
+
+Year: 2004<br>
+Author: Oscar Pablo Di Liscia<br>
+Link: [http://www.unq.edu.ar/catalogo/103-generaci%C3%B3n-y-procesamiento-de-sonido-y-m%C3%BAsica-a-trav%C3%A9s-del-programa-csound.php](http://www.unq.edu.ar/catalogo/103-generaci%C3%B3n-y-procesamiento-de-sonido-y-m%C3%BAsica-a-trav%C3%A9s-del-programa-csound.php)
+
+
