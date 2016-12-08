@@ -1,0 +1,30 @@
+<div class="three columns">
+    <h4>Learn</h4>
+    <ul class="footer-links">
+    {% for item in site.data.cms.main_menu['Learn'].children %}
+        <li><a href="{{ item[1].link }}">{{ item[0] }}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+
+<div class="four columns">
+    <h4>Create</h4>
+    {% for page in site.pages %}
+        {% if page.url == '/create' %}
+            <ul class="footer-links">
+            {% for item in page.sidebar_toc %}
+                <li><a href="{{ page.url | append: '.html' | append: item.url }}">{{ item.name }}</a></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endfor %}
+</div>      
+
+<div class="three columns">
+    <h4>Community</h4>
+    <ul class="footer-links">
+    {% for item in site.data.cms.main_menu['Community'].children %}
+        <li><a href="{{ item[1].link }}">{{ item[0] }}</a></li>
+    {% endfor %}
+    </ul>
+</div>

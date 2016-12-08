@@ -2,16 +2,16 @@
 <nav id="navigation" class="menu">
     <ul id="responsive">
     {% for item in site.data.cms.main_menu %}
-        {% if item.children %}
-            <li><a href="{{ item.link }}">{{ item.text }}</a>
+        {% if item[1].children %}
+            <li><a href="{{ item[1].link }}">{{ item[0] }}</a>
                 <ul>
-                {% for child in item.children %}
-                    <li><a href="{{ child.link }}">{{ child.text }}</a></li>
+                {% for child in item[1].children %}
+                    <li><a href="{{ child[1].link }}">{{ child[0] }}</a></li>
                 {% endfor %}
                 </ul>
             </li>
         {% else %}
-            <li><a href="{{ item.link }}">{{ item.text }}</a></li>
+            <li><a href="{{ item[1].link }}">{{ item[0] }}</a></li>
         {% endif %}   
     {% endfor %}
 
