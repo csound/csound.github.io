@@ -23,9 +23,9 @@ https://github.com/csound/csound.github.io/blob/master/_data/
 <div style="line-height: 1.1em">
     <div class="three columns align-center">
         <i class="fa fa-4x fa-windows"></i><br/>
-	<a href="{{ site.data.download.windows_64_full.link }}">Windows 64bit Full Installer .exe v{{ site.data.download.windows_64_full.ver }}</a><br/>
-	<a href="{{ site.data.download.windows_64.link }}">Windows 64bit Minimal .zip v{{ site.data.download.windows_64.ver }}</a><br/>
-	<a href="{{ site.data.download.windows_32.link }}">Windows 32bit Minimal .zip v{{ site.data.download.windows_32.ver }}</a>
+	<a href="{{ site.data.download.windows_64_full.link }}">64bit Full Installer v{{ site.data.download.windows_64_full.ver }}</a><br/>
+	<a href="{{ site.data.download.windows_64.link }}">64bit Minimal v{{ site.data.download.windows_64.ver }}</a><br/>
+	<a href="{{ site.data.download.windows_32.link }}">32bit Minimal v{{ site.data.download.windows_32.ver }}</a>
     </div>
     <div class="three columns align-center">
         <i class="fa fa-4x fa-apple"></i><br/>
