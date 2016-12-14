@@ -29,7 +29,11 @@ Although questions about the main frontends are frequently discussed on the Csou
 * [CsoundQt](https://lists.sourceforge.net/lists/listinfo/qutecsound-users)
 * [Blue](https://lists.sourceforge.net/lists/listinfo/bluemusic-users)
 
-Chat is available at IRC on freenode, using channel #csound. This is available through web chat (no registration required) at:
+Chat is available on Slack at csound.slack.com. Users can subscribe to join the slack channel at:
+
+* [Slack Signup](https://csound-slack.herokuapp.com/)
+
+Chat is also available at IRC on freenode, using channel #csound. This is available through web chat (no registration required) at:
 
 * [Freenode Webchat](http://webchat.freenode.net/?channels=#csound)
 
