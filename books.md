@@ -65,4 +65,10 @@ Year: 2004<br>
 Author: Oscar Pablo Di Liscia<br>
 Link: [http://www.unq.edu.ar/catalogo/103-generaci%C3%B3n-y-procesamiento-de-sonido-y-m%C3%BAsica-a-trav%C3%A9s-del-programa-csound.php](http://www.unq.edu.ar/catalogo/103-generaci%C3%B3n-y-procesamiento-de-sonido-y-m%C3%BAsica-a-trav%C3%A9s-del-programa-csound.php)
 
+##  Музыкальные компьютерные технологии. Современный инструментарий творчества.
+
+Year: 2005<br>
+Authors: Станислав Пучков (Stanislav Puchkov), Михаил Светлов (Mikhail
+Svetlov)<br>
+Link: [http://search.rsl.ru/ru/record/01002913736](http://search.rsl.ru/ru/record/01002913736)
 
