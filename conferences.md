@@ -16,6 +16,7 @@ become available later.
 
 2016, 25&ndash;27 November, Maynooth, Ireland<br>
 Links: [Website](http://csound.github.io/csound30/),
+[Photos](https://www.flickr.com/photos/149695969@N03/)
 [Videos](https://www.youtube.com/channel/UCFwbYL6ih0BjJAh6XQQJrHw)
 
 ##### The 3nd International Csound Conference
