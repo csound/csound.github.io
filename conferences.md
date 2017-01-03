@@ -9,8 +9,7 @@ and things related.
 ##### The 4th International Csound Conference
 
 2017, September 29 &ndash; October 1, Montevideo, Uruguay<br>
-The conference was pre-announced in the Csound mailing list: the days are fixed and more info will
-become available later.
+Links: [Website](http://csound.github.io/icsc2017/)
 
 ##### Csound.30 &mdash; Csound's 30th anniversary celebration!
 
