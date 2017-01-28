@@ -1,7 +1,7 @@
 ---
 title: Cross-adaptive audio effect toolkit
 layout: project
-image: /images/28-01-2017-cross-adaptive-audio-effect.png
+image: /images/2017-01-28-cross-adaptive-audio-effect.png
 website: https://github.com/iver56/cross-adaptive-audio
 categories: showcase
 tags: [adaptive, effect, experimental, python, AI]
