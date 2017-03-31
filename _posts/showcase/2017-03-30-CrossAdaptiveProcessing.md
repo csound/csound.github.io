@@ -1,7 +1,7 @@
 ---
 title: Live processing and crossadaptive processing
 layout: project
-image: /images/showcase/Crossadaptive_Dec_2016.png
+image: /images/showcase/CrossAdaptive_Dec_2016.png
 website: http://crossadaptive.hf.ntnu.no/
 categories: showcase
 tags: [live processing, cross-adaptive, adaptive, improvisation, live performance]
