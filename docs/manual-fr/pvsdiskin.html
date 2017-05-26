@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>pvsdiskin</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887643787008"></a>
+        <a id="idm47596138269424"></a>
         <h2>Description</h2>
         <p>
       Crée un flot fsig en lisant un canal sélectionné d'un fichier d'ananlyse
@@ -46,12 +47,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887643785584"></a>
+        <a id="idm47596138268000"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">fsig <span class="command"><strong>pvsdiskin</strong></span> SFname, ktscal, kgain[, ioffset, ichan]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887643783568"></a>
+        <a id="idm47596138265984"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>Sfname</em></span> -- Nom du fichier d'analyse. Il doit avoir
@@ -72,7 +73,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887643778384"></a>
+        <a id="idm47596138260736"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ktscal</em></span> -- échelle temporelle, c'est-à-dire la vitesse
@@ -85,54 +86,54 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887643774528"></a>
+        <a id="idm47596138256880"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode pvsdiskin. Il utilise le fichier
       <a class="ulink" href="examples/pvsdiskin.csd" target="_top"><em class="citetitle">pvsdiskin.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887643772656"></a>
+          <a id="idm47596138255008"></a>
           <p class="title">
-            <strong>Exemple 717. Exemple de l'opcode pvsdiskin.</strong>
+            <strong>Exemple 752. Exemple de l'opcode pvsdiskin.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887507912272"></a>
+              <a id="idm47595955718096"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac  <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o pvsdiskin.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac  <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o pvsdiskin.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100 
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32 
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1 
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span> 
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span> 
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span> 
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="oblock">instr</span> 1
-<span class="comment">; create a PVOC-EX (*.pvx) file with PVANAL first</span>
-ktscale	<span class="opc">line</span> 1, p3, .05			<span class="comment">;change speed </span>
-fsigr	<span class="opc">pvsdiskin</span> "fox.pvx", ktscale, 1	<span class="comment">;read PVOCEX file</span>
-aout	<span class="opc">pvsynth</span>	fsigr			<span class="comment">;resynthesise it</span>
-	<span class="opc">outs</span>	aout, aout
+<span class="kd">instr</span> <span class="nf">1</span>
+<span class="c1">; create a PVOC-EX (*.pvx) file with PVANAL first</span>
+k<span class="n">tscale</span>	<span class="nb">line</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="mf">.05</span>			<span class="c1">;change speed </span>
+<span class="n">fsigr</span>	<span class="nb">pvsdiskin</span> <span class="s">"fox.pvx"</span><span class="p">,</span> k<span class="n">tscale</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">;read PVOCEX file</span>
+a<span class="n">out</span>	<span class="nb">pvsynth</span>	<span class="n">fsigr</span>			<span class="c1">;resynthesise it</span>
+	<span class="nb">outs</span>	a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">i</span> 1 0 10
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -141,7 +142,7 @@ aout	<span class="opc">pvsynth</span>	fsigr			<span class="comment">;resynthesis
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887643768288"></a>
+        <a id="idm47596138250640"></a>
         <h2>Crédits</h2>
         <p>
       </p>

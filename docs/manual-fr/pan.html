@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>pan</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887650429328"></a>
+        <a id="idm47596145183600"></a>
         <h2>Description</h2>
         <p>
       Distribue un signal audio sur quatre canaux avec contrôle de la
@@ -46,12 +47,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887650368912"></a>
+        <a id="idm47596145123168"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">a1, a2, a3, a4 <span class="command"><strong>pan</strong></span> asig, kx, ky, ifn [, imode] [, ioffset]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887650366896"></a>
+        <a id="idm47596145121152"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifn</em></span> -- numéro de la table de fonction d'un modèle
@@ -72,7 +73,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887650361776"></a>
+        <a id="idm47596145116032"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>pan</em></span> distribue son signal d'entrée <span class="emphasis"><em>asig</em></span>
@@ -115,64 +116,64 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887650349040"></a>
+        <a id="idm47596145103232"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode pan. Il utilise le fichier
       <a class="ulink" href="examples/pan.csd" target="_top"><em class="citetitle">pan.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887650347184"></a>
+          <a id="idm47596145101456"></a>
           <p class="title">
-            <strong>Exemple 628. Exemple de l'opcode pan.</strong>
+            <strong>Exemple 658. Exemple de l'opcode pan.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887511399808"></a>
+              <a id="idm47595964738416"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if real audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o pan.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if real audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o pan.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 4
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-kcps <span class="op">=</span> p4
-k1   <span class="opc">phasor</span> kcps		<span class="comment">; "fraction" of circle - controls speed of rotation - can be negative</span>
-k2   <span class="opc">tablei</span> k1, 1, 1 		<span class="comment">; sin of angle (sinusoid in f1)</span>
-k3   <span class="opc">tablei</span> k1, 1, 1, .25, 1	<span class="comment">; cos of angle (sin offset 1/4 circle)</span>
-arnd <span class="opc">randomi</span> 400, 1000, 50	<span class="comment">; produce random values </span>
-asig <span class="opc">poscil</span> .7, arnd, 1		<span class="comment">; audio signal.. </span>
+k<span class="n">cps</span> <span class="o">=</span> <span class="nb">p4</span>
+k<span class="n">1</span>   <span class="nb">phasor</span> k<span class="n">cps</span>		<span class="c1">; "fraction" of circle - controls speed of rotation - can be negative</span>
+k<span class="n">2</span>   <span class="nb">tablei</span> k<span class="n">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> 		<span class="c1">; sin of angle (sinusoid in f1)</span>
+k<span class="n">3</span>   <span class="nb">tablei</span> k<span class="n">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.25</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">; cos of angle (sin offset 1/4 circle)</span>
+a<span class="n">rnd</span> <span class="nb">randomi</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">50</span>	<span class="c1">; produce random values </span>
+a<span class="n">sig</span> <span class="nb">poscil</span> <span class="mf">.7</span><span class="p">,</span> a<span class="n">rnd</span><span class="p">,</span> <span class="mi">1</span>		<span class="c1">; audio signal.. </span>
 
-a1,a2,a3,a4 <span class="opc">pan</span>	asig, k2<span class="op">/</span>2, k3<span class="op">/</span>2, 2, 1, 1	<span class="comment">; sent in a circle (f2=1st quad sin)</span>
-	<span class="opc">outq</span>	a1, a2, a3, a4
+a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span><span class="p">,</span>a<span class="n">3</span><span class="p">,</span>a<span class="n">4</span> <span class="nb">pan</span>	a<span class="n">sig</span><span class="p">,</span> k<span class="n">2</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> k<span class="n">3</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">; sent in a circle (f2=1st quad sin)</span>
+	<span class="nb">outq</span>	a<span class="n">1</span><span class="p">,</span> a<span class="n">2</span><span class="p">,</span> a<span class="n">3</span><span class="p">,</span> a<span class="n">4</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">f</span>1 0 8192 10 1
-<span class="stamnt">f</span>2 0 8193 9 .25 1 0
+<span class="nb">f</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">8192</span> <span class="mi">10</span> <span class="mi">1</span>
+<span class="nb">f</span><span class="mi">2</span> <span class="mi">0</span> <span class="mi">8193</span> <span class="mi">9</span> <span class="mf">.25</span> <span class="mi">1</span> <span class="mi">0</span>
 
-<span class="stamnt">i</span>1 0 10 .2	<span class="comment">;move to the tight</span>
-<span class="stamnt">i</span>1 11 10 -.2	<span class="comment">;move to the left</span>
-<span class="stamnt">e</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span> <span class="mf">.2</span>	<span class="c1">;move to the tight</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">11</span> <span class="mi">10</span> <span class="o">-</span><span class="mf">.2</span>	<span class="c1">;move to the left</span>
+<span class="nb">e</span>
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>aftouch</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887696428384"></a>
+        <a id="idm47596192915696"></a>
         <h2>Description</h2>
         <p>
       Reçoit la valeur d'after-touch actuelle de ce canal.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887696427088"></a>
+        <a id="idm47596192914400"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">kaft <span class="command"><strong>aftouch</strong></span> [imin] [, imax]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887696425040"></a>
+        <a id="idm47596192912352"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>imin</em></span> (facultatif, par défault 0) -- limite minimale des valeurs obtenues.
@@ -60,14 +61,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887696422304"></a>
+        <a id="idm47596192909616"></a>
         <h2>Exécution</h2>
         <p>
       Reçoit la valeur d'after-touch actuelle de ce canal.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887696420976"></a>
+        <a id="idm47596192908288"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode aftouch. Il utilise le fichier
@@ -75,7 +76,7 @@
 
       </p>
         <div class="example">
-          <a id="idm47887696419168"></a>
+          <a id="idm47596192906416"></a>
           <p class="title">
             <strong>Exemple 48. Exemple de l'opcode aftouch.</strong>
           </p>
@@ -84,42 +85,42 @@
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887533500048"></a>
+              <a id="idm47596023292880"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   No messages  MIDI in</span>
--odac           -d         -M0  <span class="comment">;;;RT audio out with MIDI in</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   No messages  MIDI in</span>
+-odac           -d         -M0  <span class="c1">;;;RT audio out with MIDI in</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-kaft <span class="opc">aftouch</span> 0, 1
-<span class="opc">printk2</span> kaft
+k<span class="n">aft</span> <span class="nb">aftouch</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+<span class="nb">printk2</span> k<span class="n">aft</span>
 
-<span class="comment">;aftertouch from music keyboard used for volume control</span>
-asig	<span class="opc">oscil</span> 0.7 <span class="op">*</span> kaft, 220, 1
-	<span class="opc">outs</span>  asig, asig
+<span class="c1">;aftertouch from music keyboard used for volume control</span>
+a<span class="n">sig</span>	<span class="nb">oscil</span> <span class="mf">0.7</span> <span class="o">*</span> k<span class="n">aft</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">1</span>
+	<span class="nb">outs</span>  a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
 
-<span class="oblock">endin</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="comment">;sine wave.</span>
-<span class="stamnt">f</span> 1 0 16384 10 1
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="c1">;sine wave.</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
 
-<span class="stamnt">i</span> 1 0 30
-<span class="stamnt">e</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">30</span>
+<span class="nb">e</span>
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -128,7 +129,7 @@ asig	<span class="opc">oscil</span> 0.7 <span class="op">*</span> kaft, 220, 1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887696414800"></a>
+        <a id="idm47596192902048"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="ampmidi.html" title="ampmidi"><em class="citetitle">ampmidi</em></a>,
@@ -145,7 +146,7 @@ asig	<span class="opc">oscil</span> 0.7 <span class="op">*</span> kaft, 220, 1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887696403152"></a>
+        <a id="idm47596192890400"></a>
         <h2>Crédits</h2>
         <p>
       </p>

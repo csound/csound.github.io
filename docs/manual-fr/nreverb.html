@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>nreverb</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887655304560"></a>
+        <a id="idm47596150160032"></a>
         <h2>Description</h2>
         <p>
       Réverbération constituée de 6 filtres en peigne passe-bas parallèles suivis
@@ -48,13 +49,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887655301776"></a>
+        <a id="idm47596150157248"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>nreverb</strong></span> asig, ktime, khdif [, iskip] [,inumCombs] [, ifnCombs] \
       [, inumAlpas] [, ifnAlpas]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887655231344"></a>
+        <a id="idm47596150086720"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iskip</em></span> (facultatif, 0 par défaut) -- L'initialisation
@@ -84,7 +85,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887655224240"></a>
+        <a id="idm47596150079680"></a>
         <h2>Exécution</h2>
         <p>
       Le signal d'entrée <span class="emphasis"><em>asig</em></span> est réverbéré pendant
@@ -104,74 +105,74 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887655218000"></a>
+        <a id="idm47596150073440"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple simple de l'opdoce nreverb. Il utilise le fichier
       <a class="ulink" href="examples/nreverb.csd" target="_top"><em class="citetitle">nreverb.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887655216128"></a>
+          <a id="idm47596150071568"></a>
           <p class="title">
-            <strong>Exemple 574. Exemple simple de l'opdoce nreverb.</strong>
+            <strong>Exemple 602. Exemple simple de l'opdoce nreverb.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887513460240"></a>
+              <a id="idm47595969030848"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o nreverb.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o nreverb.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-gaout <span class="opc">init</span>  0
+ga<span class="n">out</span> <span class="nb">init</span>  <span class="mi">0</span>
 
-<span class="oblock">instr</span> 1
-a1	<span class="opc">oscil</span>	15000, 440, 1
-	<span class="opc">out</span>	a1
+<span class="kd">instr</span> <span class="nf">1</span>
+a<span class="n">1</span>	<span class="nb">oscil</span>	<span class="mi">15000</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">1</span>
+	<span class="nb">out</span>	a<span class="n">1</span>
  
-gaout <span class="op">=</span> gaout<span class="op">+</span>a1
-<span class="oblock">endin</span>
+ga<span class="n">out</span> <span class="o">=</span> ga<span class="n">out</span><span class="o">+</span>a<span class="n">1</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 99
+<span class="kd">instr</span> <span class="nf">99</span>
 
-a2	<span class="opc">nreverb</span>	gaout, 2, .3
-	<span class="opc">out</span>	a2<span class="op">*</span>.15		<span class="comment">;volume of reverb		</span>
+a<span class="n">2</span>	<span class="nb">nreverb</span>	ga<span class="n">out</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">.3</span>
+	<span class="nb">out</span>	a<span class="n">2</span><span class="o">*</span><span class="mf">.15</span>		<span class="c1">;volume of reverb		</span>
 	 
-gaout <span class="op">=</span> 0
-<span class="oblock">endin</span>
+ga<span class="n">out</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="comment">; Table 1: an ordinary sine wave.</span>
-<span class="stamnt">f</span> 1 0 32768 10 1 
+<span class="c1">; Table 1: an ordinary sine wave.</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">32768</span> <span class="mi">10</span> <span class="mi">1</span> 
          
-<span class="stamnt">i</span> 1 0 .5
-<span class="stamnt">i</span> 1 1 .5
-<span class="stamnt">i</span> 1 2 .5
-<span class="stamnt">i</span> 1 3 .5
-<span class="stamnt">i</span> 1 4 .5
-<span class="stamnt">i</span> 99 0 9 
-<span class="stamnt">e</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">.5</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mf">.5</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mf">.5</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mf">.5</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">4</span> <span class="mf">.5</span>
+<span class="nb">i</span> <span class="mi">99</span> <span class="mi">0</span> <span class="mi">9</span> 
+<span class="nb">e</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -185,51 +186,51 @@ gaout <span class="op">=</span> 0
       et <a class="ulink" href="examples/beats.wav" target="_top"><em class="citetitle">beats.wav</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887655209840"></a>
+          <a id="idm47596150065280"></a>
           <p class="title">
-            <strong>Exemple 575. Un exemple de l'opcode nreverb utilisant une ftable pour les constantes de filtre.</strong>
+            <strong>Exemple 603. Un exemple de l'opcode nreverb utilisant une ftable pour les constantes de filtre.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm47887513246944"></a>
+              <a id="idm47595968949120"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o nreverb_ftable.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o nreverb_ftable.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
-  a1  <span class="opc">soundin</span> "beats.wav"
-  a2  <span class="opc">nreverb</span> a1, 1.5, .75, 0, 8, 71, 4, 72
-  <span class="opc">out</span> a1 <span class="op">+</span> a2 <span class="op">*</span> .4
-<span class="oblock">endin</span>
-
-
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-
-<span class="comment">; freeverb time constants, as direct (negative) sample, with arbitrary gains</span>
-<span class="stamnt">f</span>71 0 16   -2  -1116 -1188 -1277 -1356 -1422 -1491 -1557 -1617  0.8  0.79  0.78  0.77  0.76  0.75  0.74  0.73
-
-<span class="stamnt">f</span>72 0 16   -2  -556 -441 -341 -225  0.7  0.72  0.74  0.76
-
-<span class="stamnt">i</span>1 0 3
-<span class="stamnt">e</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+  a<span class="n">1</span>  <span class="nb">soundin</span> <span class="s">"beats.wav"</span>
+  a<span class="n">2</span>  <span class="nb">nreverb</span> a<span class="n">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">.75</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">71</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">72</span>
+  <span class="nb">out</span> a<span class="n">1</span> <span class="o">+</span> a<span class="n">2</span> <span class="o">*</span> <span class="mf">.4</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="c1">; freeverb time constants, as direct (negative) sample, with arbitrary gains</span>
+<span class="nb">f</span><span class="mi">71</span> <span class="mi">0</span> <span class="mi">16</span>   <span class="o">-</span><span class="mi">2</span>  <span class="o">-</span><span class="mi">1116</span> <span class="o">-</span><span class="mi">1188</span> <span class="o">-</span><span class="mi">1277</span> <span class="o">-</span><span class="mi">1356</span> <span class="o">-</span><span class="mi">1422</span> <span class="o">-</span><span class="mi">1491</span> <span class="o">-</span><span class="mi">1557</span> <span class="o">-</span><span class="mi">1617</span>  <span class="mf">0.8</span>  <span class="mf">0.79</span>  <span class="mf">0.78</span>  <span class="mf">0.77</span>  <span class="mf">0.76</span>  <span class="mf">0.75</span>  <span class="mf">0.74</span>  <span class="mf">0.73</span>
+
+<span class="nb">f</span><span class="mi">72</span> <span class="mi">0</span> <span class="mi">16</span>   <span class="o">-</span><span class="mi">2</span>  <span class="o">-</span><span class="mi">556</span> <span class="o">-</span><span class="mi">441</span> <span class="o">-</span><span class="mi">341</span> <span class="o">-</span><span class="mi">225</span>  <span class="mf">0.7</span>  <span class="mf">0.72</span>  <span class="mf">0.74</span>  <span class="mf">0.76</span>
+
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span>
+<span class="nb">e</span>
+
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -238,7 +239,7 @@ gaout <span class="op">=</span> 0
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887655207872"></a>
+        <a id="idm47596150063312"></a>
         <h2>Crédits</h2>
         <p>
       </p>

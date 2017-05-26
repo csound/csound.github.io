@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>fiopen</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681583488"></a>
+        <a id="idm47596177737040"></a>
         <h2>Description</h2>
         <p>
       On peut utiliser <span class="emphasis"><em>fiopen</em></span> pour ouvrir un fichier dans
@@ -46,12 +47,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681511168"></a>
+        <a id="idm47596177735360"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ihandle <span class="command"><strong>fiopen</strong></span> ifilename, imode</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887681508960"></a>
+        <a id="idm47596177733248"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ihandle</em></span> -- un nombre qui spécifie ce fichier.
@@ -83,7 +84,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681501232"></a>
+        <a id="idm47596177725584"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>fiopen</em></span> ouvre un fichier à utiliser par la famille
@@ -107,7 +108,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681491520"></a>
+        <a id="idm47596177715872"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode fiopen. Il utilise le fichier
@@ -116,52 +117,49 @@
       l'écriture est autorisée.
       </p>
         <div class="example">
-          <a id="idm47887681489424"></a>
+          <a id="idm47596177713776"></a>
           <p class="title">
-            <strong>Exemple 275. Exemple de l'opcode fiopen.</strong>
+            <strong>Exemple 280. Exemple de l'opcode fiopen.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887526693520"></a>
+              <a id="idm47596004398448"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
- 
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o fiopen.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
- 
+<span class="nt">&lt;CsoundSynthesizer&gt;</span> 
+<span class="nt">&lt;CsOptions&gt;</span> 
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o fiopen.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span> 
+<span class="nt">&lt;CsInstruments&gt;</span> 
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100 
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32 
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2 
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1 
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span> 
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span> 
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span> 
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span> 
 
-gihand <span class="opc">fiopen</span> "test1.txt", 0 
+gi<span class="n">hand</span> <span class="nb">fiopen</span> <span class="s">"test1.txt"</span><span class="p">,</span> <span class="mi">0</span> 
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-ires  <span class="opc">random</span>  0, 100
-      <span class="opc">fouti</span> gihand, 0, 1, ires 
-      <span class="opc">ficlose</span> gihand 
+i<span class="n">res</span>  <span class="nb">random</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span>
+      <span class="nb">fouti</span> gi<span class="n">hand</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">res</span> 
+      <span class="nb">ficlose</span> gi<span class="n">hand</span> 
 
-<span class="oblock">endin</span> 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
- 
+<span class="kd">endin</span> 
+<span class="nt">&lt;/CsInstruments&gt;</span> 
+<span class="nt">&lt;CsScore&gt;</span> 
 
-<span class="stamnt">i</span> 1 0 1 
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> 
 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span> 
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span> 
 </pre>
             </div>
           </div>
@@ -170,7 +168,7 @@ ires  <span class="opc">random</span>  0, 100
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681485056"></a>
+        <a id="idm47596177709408"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="ficlose.html" title="ficlose"><em class="citetitle">ficlose</em></a>
@@ -181,7 +179,7 @@ ires  <span class="opc">random</span>  0, 100
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681479200"></a>
+        <a id="idm47596177703552"></a>
         <h2>Crédits</h2>
         <p>
       </p>

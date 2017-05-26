@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>dssiinit</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -50,12 +51,12 @@
         </table>
       </div>
       <div class="refsect1">
-        <a id="idm47887685007904"></a>
+        <a id="idm47596181237008"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ihandle <span class="command"><strong>dssiinit</strong></span> ilibraryname, igreffondex [, iverbose] </pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887685005760"></a>
+        <a id="idm47596181234864"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>dssiinit</em></span> est utilisé pour charger en mémoire un
@@ -65,7 +66,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887685003696"></a>
+        <a id="idm47596181232800"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ihandle</em></span> - le numéro qui identifie le greffon, à passer
@@ -112,77 +113,77 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887684988560"></a>
+        <a id="idm47596181217664"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode dssinit. Il utilise le fichier
       <a class="ulink" href="examples/dssiinit.csd" target="_top"><em class="citetitle">dssiinit.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887684986624"></a>
+          <a id="idm47596181215728"></a>
           <p class="title">
-            <strong>Exemple 221. Exemple de l'opcode dssinit. (Penser à changer le nom de la bibliothèque)</strong>
+            <strong>Exemple 226. Exemple de l'opcode dssinit. (Penser à changer le nom de la bibliothèque)</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm47887527703712"></a>
+              <a id="idm47596008002080"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;RT audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o dssiinit.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;RT audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o dssiinit.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 
-gihandle dssiinit "g2reverb.so", 0, 1
-gaout    <span class="opc">init</span>  0
+gi<span class="n">handle</span> <span class="nb">dssiinit</span> <span class="s">"g2reverb.so"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+ga<span class="n">out</span>    <span class="nb">init</span>  <span class="mi">0</span>
 
-<span class="oblock">instr</span> 1	<span class="comment">; activate DSSI</span>
+<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">; activate DSSI</span>
 
-dssiactivate gihandle, 1
-<span class="oblock">endin</span>
+<span class="nb">dssiactivate</span> gi<span class="n">handle</span><span class="p">,</span> <span class="mi">1</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 2
+<span class="kd">instr</span> <span class="nf">2</span>
 
-ain1	<span class="opc">diskin2</span> "beats.wav", 1
+a<span class="n">in1</span>	<span class="nb">diskin2</span> <span class="s">"beats.wav"</span><span class="p">,</span> <span class="mi">1</span>
 
-gaout <span class="op">=</span> gaout<span class="op">+</span>(ain1<span class="op">*</span>.3)
-<span class="oblock">endin</span>
+ga<span class="n">out</span> <span class="o">=</span> ga<span class="n">out</span><span class="o">+</span><span class="p">(</span>a<span class="n">in1</span><span class="o">*</span><span class="mf">.3</span><span class="p">)</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 3 
+<span class="kd">instr</span> <span class="nf">3</span> 
 	
-dssictls gihandle, 4, 100, 1	<span class="comment">; room 10 to 150 </span>
-dssictls gihandle, 5, 10, 1	<span class="comment">; reverb time 1 to 20</span>
-dssictls gihandle, 6, .5, 1	<span class="comment">; input bandwith 0 to 1</span>
-dssictls gihandle, 7, .25, 1	<span class="comment">; damping 0 to 1</span>
-dssictls gihandle, 8, 0, 1	<span class="comment">; dry -80 to 0</span>
-dssictls gihandle, 9, <span class="op">-</span>10, 1	<span class="comment">; reflections -80 to 0</span>
-dssictls gihandle, 10, <span class="op">-</span>15, 1	<span class="comment">; rev. tail -80 to 0</span>
-<span class="oblock">endin</span>
+<span class="nb">dssictls</span> gi<span class="n">handle</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">; room 10 to 150 </span>
+<span class="nb">dssictls</span> gi<span class="n">handle</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">; reverb time 1 to 20</span>
+<span class="nb">dssictls</span> gi<span class="n">handle</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">; input bandwith 0 to 1</span>
+<span class="nb">dssictls</span> gi<span class="n">handle</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mf">.25</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">; damping 0 to 1</span>
+<span class="nb">dssictls</span> gi<span class="n">handle</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">; dry -80 to 0</span>
+<span class="nb">dssictls</span> gi<span class="n">handle</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">; reflections -80 to 0</span>
+<span class="nb">dssictls</span> gi<span class="n">handle</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">; rev. tail -80 to 0</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 4
+<span class="kd">instr</span> <span class="nf">4</span>
 
-aout1, aout2 dssiaudio gihandle, gaout, gaout	<span class="comment">;get beats.wav and</span>
-	     <span class="opc">outs</span> aout1,aout2	 		<span class="comment">; stereo DSSI plugin</span>
+a<span class="n">out1</span><span class="p">,</span> a<span class="n">out2</span> <span class="nb">dssiaudio</span> gi<span class="n">handle</span><span class="p">,</span> ga<span class="n">out</span><span class="p">,</span> ga<span class="n">out</span>	<span class="c1">;get beats.wav and</span>
+	     <span class="nb">outs</span> a<span class="n">out1</span><span class="p">,</span>a<span class="n">out2</span>	 		<span class="c1">; stereo DSSI plugin</span>
 
-gaout <span class="op">=</span> 0
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span> 1 0 2 
-<span class="stamnt">i</span> 2 1 10
-<span class="stamnt">i</span> 3 1 10
-<span class="stamnt">i</span> 4 0 10
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+ga<span class="n">out</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span> 
+<span class="nb">i</span> <span class="mi">2</span> <span class="mi">1</span> <span class="mi">10</span>
+<span class="nb">i</span> <span class="mi">3</span> <span class="mi">1</span> <span class="mi">10</span>
+<span class="nb">i</span> <span class="mi">4</span> <span class="mi">0</span> <span class="mi">10</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -191,7 +192,7 @@ gaout <span class="op">=</span> 0
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887684984592"></a>
+        <a id="idm47596181213696"></a>
         <h2>Crédits</h2>
         <p>2005</p>
         <p>Par Andrés Cabrera</p>

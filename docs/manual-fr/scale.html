@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>scale</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887637921200"></a>
+        <a id="idm47596132339232"></a>
         <h2>Description</h2>
         <p>
       Met les valeurs entrantes à l'échelle d'un intervalle défini par l'utilisateur. Semblable
@@ -47,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887637919600"></a>
+        <a id="idm47596132337632"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">kscl <span class="command"><strong>scale</strong></span> kinput, kmax, kmin</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887637917360"></a>
+        <a id="idm47596132335392"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kin</em></span> -- Valeur d'entrée. Elle peut provenir de n'importe quelle source
@@ -66,7 +67,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887637913568"></a>
+        <a id="idm47596132331600"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode scale. Il utilise le fichier
@@ -74,50 +75,50 @@
       
       </p>
         <div class="example">
-          <a id="idm47887637911632"></a>
+          <a id="idm47596132329664"></a>
           <p class="title">
-            <strong>Exemple 811. Exemple de l'opcode scale.</strong>
+            <strong>Exemple 847. Exemple de l'opcode scale.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887505131568"></a>
+              <a id="idm47595948827504"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    Silent</span>
--odac           -iadc     -d    <span class="comment">;;;realtime output</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    Silent</span>
+-odac           -iadc     -d    <span class="c1">;;;realtime output</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span>	<span class="op">=</span>	22050
-<span class="ohdr">ksmps</span>	<span class="op">=</span>	10
-<span class="ohdr">nchnls</span>	<span class="op">=</span>	2
+<span class="vg">sr</span>	<span class="o">=</span>	<span class="mi">22050</span>
+<span class="vg">ksmps</span>	<span class="o">=</span>	<span class="mi">10</span>
+<span class="vg">nchnls</span>	<span class="o">=</span>	<span class="mi">2</span>
 
-<span class="op">/</span><span class="op">*</span><span class="op">-</span><span class="op">-</span><span class="op">-</span> <span class="op">-</span><span class="op">-</span><span class="op">-</span><span class="op">*</span><span class="op">/</span>
+<span class="cm">/*--- ---*/</span>
 
-	<span class="oblock">instr</span>	1	<span class="comment">; scale test</span>
+	<span class="kd">instr</span>	<span class="nf">1</span>	<span class="c1">; scale test</span>
 
-kmod	<span class="opc">ctrl7</span>	1, 1, 0, 1
-	<span class="opc">printk2</span>	kmod
+k<span class="n">mod</span>	<span class="nb">ctrl7</span>	<span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+	<span class="nb">printk2</span>	k<span class="n">mod</span>
 
-kout	<span class="opc">scale</span>	kmod, 0, <span class="op">-</span>127
-	<span class="opc">printk2</span>	kout
+k<span class="n">out</span>	<span class="nb">scale</span>	k<span class="n">mod</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">127</span>
+	<span class="nb">printk2</span>	k<span class="n">out</span>
 
-	<span class="oblock">endin</span>
+	<span class="kd">endin</span>
 
-<span class="op">/</span><span class="op">*</span><span class="op">-</span><span class="op">-</span><span class="op">-</span> <span class="op">-</span><span class="op">-</span><span class="op">-</span><span class="op">*</span><span class="op">/</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="cm">/*--- ---*/</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">i</span>1	0	8888
+<span class="nb">i</span><span class="mi">1</span>	<span class="mi">0</span>	<span class="mi">8888</span>
 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -126,7 +127,7 @@ kout	<span class="opc">scale</span>	kmod, 0, <span class="op">-</span>127
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887637907216"></a>
+        <a id="idm47596132325248"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="gainslider.html" title="gainslider"><em class="citetitle">gainslider</em></a>,
@@ -135,7 +136,7 @@ kout	<span class="opc">scale</span>	kmod, 0, <span class="op">-</span>127
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887637903184"></a>
+        <a id="idm47596132321216"></a>
         <h2>Crédits</h2>
         <p>
       </p>

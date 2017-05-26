@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>schedkwhennamed</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887637442176"></a>
+        <a id="idm47596131860224"></a>
         <h2>Description</h2>
         <p>
       Semblable à <a class="link" href="schedkwhen.html" title="schedkwhen"><em class="citetitle">schedkwhen</em></a>
@@ -46,13 +47,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887637440016"></a>
+        <a id="idm47596131858016"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>schedkwhennamed</strong></span> ktrigger, kmintim, kmaxnum, "name", kwhen, kdur \
       [, ip4] [, ip5] [...]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887637437776"></a>
+        <a id="idm47596131855776"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ip4, ip5, ...</em></span> -- Equivalent à p4, p5, etc., dans une
@@ -60,7 +61,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887637435184"></a>
+        <a id="idm47596131853136"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ktrigger</em></span> -- déclenche un nouvel évènement de partition.
@@ -138,7 +139,7 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47887637413840"></a>
+        <a id="idm47596131831792"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode schedkwhennamed. Il utilise le fichier
@@ -146,60 +147,60 @@
 
       </p>
         <div class="example">
-          <a id="idm47887637411952"></a>
+          <a id="idm47596131829904"></a>
           <p class="title">
-            <strong>Exemple 817. Exemple de l'opcode schedkwhennamed.</strong>
+            <strong>Exemple 853. Exemple de l'opcode schedkwhennamed.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887505545264"></a>
+              <a id="idm47595949647952"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    No messages</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
 -odac           -iadc     -d
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o schedkwhennamed.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o schedkwhennamed.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-  <span class="ohdr">sr</span>	    <span class="op">=</span>  48000
-  <span class="ohdr">ksmps</span>	    <span class="op">=</span>  16
-  <span class="ohdr">nchnls</span>    <span class="op">=</span>  2
-  <span class="ohdr">0dbfs</span>	    <span class="op">=</span>  1
+  <span class="vg">sr</span>	    <span class="o">=</span>  <span class="mi">48000</span>
+  <span class="vg">ksmps</span>	    <span class="o">=</span>  <span class="mi">16</span>
+  <span class="vg">nchnls</span>    <span class="o">=</span>  <span class="mi">2</span>
+  <span class="vg">0dbfs</span>	    <span class="o">=</span>  <span class="mi">1</span>
 
-<span class="comment">; Example by Jonathan Murphy 2007</span>
+<span class="c1">; Example by Jonathan Murphy 2007</span>
 
-  gSinstr2  <span class="op">=</span>  "printer"
+  gS<span class="n">instr2</span>  <span class="o">=</span>  <span class="s">"printer"</span>
 
-    <span class="oblock">instr</span> 1
+    <span class="kd">instr</span> <span class="nf">1</span>
 
-  ktrig	    <span class="opc">metro</span>     1
-<span class="octrl">if</span> (ktrig <span class="op">==</span> 1) then
-  <span class="comment">;Call instrument "printer" once per second</span>
-	    <span class="opc">schedkwhennamed</span>   ktrig, 0, 1, gSinstr2, 0, 1
+  k<span class="n">trig</span>	    <span class="nb">metro</span>     <span class="mi">1</span>
+<span class="k">if</span> <span class="p">(</span>k<span class="n">trig</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+  <span class="c1">;Call instrument "printer" once per second</span>
+	    <span class="nb">schedkwhennamed</span>   k<span class="n">trig</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> gS<span class="n">instr2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
 
-<span class="octrl">endif</span>
+<span class="k">endif</span>
 
-    <span class="oblock">endin</span>
+    <span class="kd">endin</span>
 
-    <span class="oblock">instr</span> printer
+    <span class="kd">instr</span> <span class="nf">printer</span>
 
-  ktime	    <span class="opc">timeinsts</span>
-	    <span class="opc">printk2</span>   ktime
+  k<span class="n">time</span>	    <span class="nb">timeinsts</span>
+	    <span class="nb">printk2</span>   k<span class="n">time</span>
 
-    <span class="oblock">endin</span>
+    <span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span>1 0 10
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -208,7 +209,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887637407584"></a>
+        <a id="idm47596131825536"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="event.html" title="event"><em class="citetitle">event</em></a>,
@@ -221,7 +222,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887637399776"></a>
+        <a id="idm47596131817728"></a>
         <h2>Crédits</h2>
         <p>
       </p>

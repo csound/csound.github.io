@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>faustctl</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887682723072"></a>
+        <a id="idm47596178947232"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>faustctl</em></span> fixe un contrôle donnée dans un programme
@@ -46,12 +47,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887682721376"></a>
+        <a id="idm47596178945536"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>faustctl</strong></span> idsp, Scontrol, kval </pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887682719488"></a>
+        <a id="idm47596178943616"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em><span class="quote">« <span class="quote">Scontrol</span> »</span></em></span> -- une chaîne de caractères
@@ -63,7 +64,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887682716544"></a>
+        <a id="idm47596178940640"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em><span class="quote">« <span class="quote">kval</span> »</span></em></span> -- valeur à laquelle le contrôle
@@ -71,44 +72,44 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887682714688"></a>
+        <a id="idm47596178938784"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode faustctl.Il utilise le fichier
       <a class="ulink" href="examples/faustctl.csd" target="_top"><em class="citetitle">faustctl.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887682712816"></a>
+          <a id="idm47596178936912"></a>
           <p class="title">
-            <strong>Exemple 258. Example of the faustctl opcode.</strong>
+            <strong>Exemple 263. Example of the faustctl opcode.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887527360784"></a>
+              <a id="idm47596005696608"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
 -odac
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
-<span class="oblock">instr</span> 1
- ain1 <span class="opc">oscili</span> <span class="ohdr">0dbfs</span><span class="op">/</span>2, 440
- idsp,a1 faustgen {{
-   <span class="opc">gain</span> <span class="op">=</span> hslider("vol",1,0,1,0.01)<span class="comment">;</span>
-   process <span class="op">=</span> (_ <span class="op">*</span> gain)<span class="comment">; </span>
-  }}, ain1
- k1 <span class="opc">line</span>  0, p3, 1
- faustctl idsp, "vol", k1
-   <span class="opc">out</span> a1
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span>1 0 10
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+ a<span class="n">in1</span> <span class="nb">oscili</span> <span class="vg">0dbfs</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">440</span>
+ i<span class="n">dsp</span><span class="p">,</span>a<span class="n">1</span> <span class="nb">faustgen</span> <span class="s">{{
+   gain = hslider("vol",1,0,1,0.01);
+   process = (_ * gain); 
+  }}</span><span class="p">,</span> a<span class="n">in1</span>
+ k<span class="n">1</span> <span class="nb">line</span>  <span class="mi">0</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="mi">1</span>
+ <span class="nb">faustctl</span> i<span class="n">dsp</span><span class="p">,</span> <span class="s">"vol"</span><span class="p">,</span> k<span class="n">1</span>
+   <span class="nb">out</span> a<span class="n">1</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -117,7 +118,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887682708496"></a>
+        <a id="idm47596178932592"></a>
         <h2>Crédits</h2>
         <p>Auteur : Victor Lazzarini, 2013 </p>
       </div>

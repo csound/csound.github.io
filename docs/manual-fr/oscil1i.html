@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>oscil1i</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -39,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887653837408"></a>
+        <a id="idm47596148642000"></a>
         <h2>Description</h2>
         <p>
       Accède aux valeurs d'une table par échantillonnage incrémentiel avec interpolation
@@ -47,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887653760448"></a>
+        <a id="idm47596148565104"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">kres <span class="command"><strong>oscil1i</strong></span> idel, kamp, idur [, ifn]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887653758384"></a>
+        <a id="idm47596148563040"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>idel</em></span> -- délai en secondes avant que l'échantillonnage
@@ -70,7 +71,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887653753088"></a>
+        <a id="idm47596148557744"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kamp</em></span> -- facteur d'amplitude
@@ -85,63 +86,62 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887653748896"></a>
+        <a id="idm47596148553552"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode oscil1i. Il utilise le fichier
       <a class="ulink" href="examples/oscil1i.csd" target="_top"><em class="citetitle">oscil1i.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887653747024"></a>
+          <a id="idm47596148551680"></a>
           <p class="title">
-            <strong>Exemple 590. Exemple de l'opcode oscil1i.</strong>
+            <strong>Exemple 619. Exemple de l'opcode oscil1i.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887512806288"></a>
+              <a id="idm47595967916752"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac      <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o oscil1i.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o oscil1i.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span>     1   
+<span class="kd">instr</span>     <span class="nf">1</span>   
 
-ipanfn <span class="op">=</span> p4
-asig   <span class="opc">vco2</span> .3, 220
-kpan   <span class="opc">oscil1i</span> 0, 1, p3, ipanfn	<span class="comment">;create panning &amp;</span>
-kleft  <span class="op">=</span> <span class="opc">sqrt</span>(kpan)		<span class="comment">;start right away</span>
-kright <span class="op">=</span> <span class="opc">sqrt</span>(1<span class="op">-</span>kpan)     
-       <span class="opc">outs</span> kleft<span class="op">*</span>asig, kright<span class="op">*</span>asig
+i<span class="n">panfn</span> <span class="o">=</span> <span class="nb">p4</span>
+a<span class="n">sig</span>   <span class="nb">vco2</span> <span class="mf">.3</span><span class="p">,</span> <span class="mi">220</span>
+k<span class="n">pan</span>   <span class="nb">oscil1i</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> i<span class="n">panfn</span>	<span class="c1">;create panning &amp;</span>
+k<span class="n">left</span>  <span class="o">=</span> <span class="nb">sqrt</span><span class="p">(</span>k<span class="n">pan</span><span class="p">)</span>		<span class="c1">;start right away</span>
+k<span class="n">right</span> <span class="o">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span>k<span class="n">pan</span><span class="p">)</span>     
+       <span class="nb">outs</span> k<span class="n">left</span><span class="o">*</span>a<span class="n">sig</span><span class="p">,</span> k<span class="n">right</span><span class="o">*</span>a<span class="n">sig</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-                                                                                  
-<span class="stamnt">f</span> 1 0  3 -7 .5  3  .5		<span class="comment">;remain in center (.5 CONSTANT)                                                                          </span>
-<span class="stamnt">f</span> 2 0 129 7  1 129 0 		<span class="comment">;left--&gt;right                                                                                                     </span>
-<span class="stamnt">f</span> 3 0 129 7 .5  32 1 64 0 33 .5 <span class="comment">;center--&gt;left--&gt;right--&gt;center    </span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>                                                                                  
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span>  <span class="mi">3</span> <span class="o">-</span><span class="mi">7</span> <span class="mf">.5</span>  <span class="mi">3</span>  <span class="mf">.5</span>		<span class="c1">;remain in center (.5 CONSTANT)                                                                          </span>
+<span class="nb">f</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">129</span> <span class="mi">7</span>  <span class="mi">1</span> <span class="mi">129</span> <span class="mi">0</span> 		<span class="c1">;left--&gt;right                                                                                                     </span>
+<span class="nb">f</span> <span class="mi">3</span> <span class="mi">0</span> <span class="mi">129</span> <span class="mi">7</span> <span class="mf">.5</span>  <span class="mi">32</span> <span class="mi">1</span> <span class="mi">64</span> <span class="mi">0</span> <span class="mi">33</span> <span class="mf">.5</span> <span class="c1">;center--&gt;left--&gt;right--&gt;center    </span>
 
-<span class="stamnt">i</span> 1  0  2  1			<span class="comment">;use table 1</span>
-<span class="stamnt">i</span> 1  3  2  2			<span class="comment">;use table 2</span>
-<span class="stamnt">i</span> 1  6  2  3			<span class="comment">;use table 3</span>
+<span class="nb">i</span> <span class="mi">1</span>  <span class="mi">0</span>  <span class="mi">2</span>  <span class="mi">1</span>			<span class="c1">;use table 1</span>
+<span class="nb">i</span> <span class="mi">1</span>  <span class="mi">3</span>  <span class="mi">2</span>  <span class="mi">2</span>			<span class="c1">;use table 2</span>
+<span class="nb">i</span> <span class="mi">1</span>  <span class="mi">6</span>  <span class="mi">2</span>  <span class="mi">3</span>			<span class="c1">;use table 3</span>
 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -150,7 +150,7 @@ kright <span class="op">=</span> <span class="opc">sqrt</span>(1<span class="op"
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887653742832"></a>
+        <a id="idm47596148547312"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="table.html" title="table"><em class="citetitle">table</em></a>,

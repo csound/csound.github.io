@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>moogladder</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887657196912"></a>
+        <a id="idm47596152151888"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>moogladder</em></span> est une nouvelle implémentation numérique
@@ -50,7 +51,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887657123424"></a>
+        <a id="idm47596152078400"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">asig <span class="command"><strong>moogladder</strong></span> ain, kcf, kres[, istor]</pre>
         <pre class="synopsis">asig <span class="command"><strong>moogladder</strong></span> ain, acf, kres[, istor]</pre>
@@ -58,7 +59,7 @@
         <pre class="synopsis">asig <span class="command"><strong>moogladder</strong></span> ain, acf, ares[, istor]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887657117280"></a>
+        <a id="idm47596152072096"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>istor</em></span> -- état initial de l'espace de données interne.
@@ -69,7 +70,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887657115056"></a>
+        <a id="idm47596152069872"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>asig</em></span> -- signal d'entrée.
@@ -86,56 +87,56 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887657110304"></a>
+        <a id="idm47596152065120"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode moogladder. Il utilise le fichier
       <a class="ulink" href="examples/moogladder.csd" target="_top"><em class="citetitle">moogladder.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887657108432"></a>
+          <a id="idm47596152063248"></a>
           <p class="title">
-            <strong>Exemple 547. Exemple de l'opcode moogladder.</strong>
+            <strong>Exemple 573. Exemple de l'opcode moogladder.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887514027904"></a>
+              <a id="idm47595971449264"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac   <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o moogladder.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac   <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o moogladder.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-kfe  <span class="opc">expseg</span> 500, p3<span class="op">*</span>0.9, 1800, p3<span class="op">*</span>0.1, 3000
-asig <span class="opc">buzz</span>  1, 100, 20, 1
-kres <span class="opc">line</span> .1, p3, .99	<span class="comment">;increase resonance</span>
-afil <span class="opc">moogladder</span> asig, kfe, kres
-     <span class="opc">outs</span> afil, afil
+k<span class="n">fe</span>  <span class="nb">expseg</span> <span class="mi">500</span><span class="p">,</span> <span class="nb">p3</span><span class="o">*</span><span class="mf">0.9</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="nb">p3</span><span class="o">*</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">3000</span>
+a<span class="n">sig</span> <span class="nb">buzz</span>  <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">1</span>
+k<span class="n">res</span> <span class="nb">line</span> <span class="mf">.1</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="mf">.99</span>	<span class="c1">;increase resonance</span>
+a<span class="n">fil</span> <span class="nb">moogladder</span> a<span class="n">sig</span><span class="p">,</span> k<span class="n">fe</span><span class="p">,</span> k<span class="n">res</span>
+     <span class="nb">outs</span> a<span class="n">fil</span><span class="p">,</span> a<span class="n">fil</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span> 1 0 4096 10 1
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">4096</span> <span class="mi">10</span> <span class="mi">1</span>
 
-<span class="stamnt">i</span> 1 0 10
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -144,7 +145,7 @@ afil <span class="opc">moogladder</span> asig, kfe, kres
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887657104064"></a>
+        <a id="idm47596152058880"></a>
         <h2>Crédits</h2>
         <p>
       </p>

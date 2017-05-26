@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>tvconv</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="turnon.html" title="turnon" />
+    <link rel="next" href="unirand.html" title="unirand" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">tvconv</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="turnon.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="unirand.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="tvconv"></a>
+      <div class="titlepage"></div>
+      <a id="IndexTvconv" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">tvconv</span>
+        </h2>
+        <p>tvconv — 
+      Un opcode de convolution dynamique (filtre RIF).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47596114736144"></a>
+        <h2>Description</h2>
+        <p>
+      Un opcode prenant deux signaux en entrée et interprétant l'un deux comme
+      les coefficients à variation temporelle linéaire d'un filtre à réponse
+      impulsionnelle finie. Réalisé via une convolution directe (pour des tailles
+      de partition d'un échantillon) ou par une convolution partitionnée basée
+      sur la TFD. Les signaux peuvent être "gelés" (les coefficients du filtre
+      sont maintenus constants) à n'importe quel moment, au taux-a ou au taux-k.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47596114734288"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>tvconv</strong></span> asig1, asig2, xfreez1,
+    xfreez2, iparts, ifils</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm47596114732240"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>iparts</em></span> -- taille de partition, pour des tailles
+      &gt; 1, une convolution partitionnée basée sur la TFD est utilisée. Sinon
+      une ligne à retard à RIF est réalisée dans le domaine temporel. Les
+      tailles de partition &gt; 1 sont arrondies à la puissance de deux la plus
+      proche.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifils</em></span> -- taille du filtre. Pour des tailles de
+      partition &gt; 1, la taille du filtre est arrondie à la puissance de deux
+      la plus proche. Lorsque le taille de partition vaut 1, comme une
+      convolution directe est utilisée, les filtres peuvent avoir n'importe
+      quelle taille.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47596114728672"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ares</em></span> -- sortie audio.
+    </p>
+        <p>
+      <span class="emphasis"><em>asig1, asig2</em></span> -- entrées audio.
+    </p>
+        <p>
+      <span class="emphasis"><em>xfreez1</em></span> -- indicateur de gel de <span class="emphasis"><em>asig1</em></span>.
+      Les coefficients ne sont mis à jour (le signal passe dans la convolution)
+      que si <span class="emphasis"><em>xfreez1</em></span> &gt; 0. Cette entrée peut prendre un
+      signal audio ou de taux-k, ou une constante.
+    </p>
+        <p>
+      <span class="emphasis"><em>xfreez2</em></span> -- indicateur de gel de <span class="emphasis"><em>asig2</em></span>.
+      Fonctionne comme <span class="emphasis"><em>xfreez1</em></span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47596114722288"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode tvconv. Il utilise le fichier
+      <a class="ulink" href="examples/tvconv.csd" target="_top"><em class="citetitle">tvconv.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm47596114720416"></a>
+          <p class="title">
+            <strong>Exemple 1032. Exemple de l'opcode tvconv.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm47595937323216"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+-odac 
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="kd">instr</span> <span class="nf">1</span>
+ a<span class="n">sig</span> <span class="nb">diskin</span> <span class="s">"fox.wav"</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+ a<span class="n">ir</span> <span class="nb">diskin</span> <span class="s">"beats.wav"</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+ a<span class="n">ir</span> <span class="nb">buthp</span> a<span class="n">ir</span><span class="o">/</span><span class="vg">0dbfs</span><span class="p">,</span><span class="mi">1000</span>
+ k<span class="n">1</span> <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span><span class="nb">p3</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="nb">p3</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span>
+ a<span class="n">1</span> <span class="nb">oscili</span> k<span class="n">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span>
+ a<span class="n">2</span> <span class="nb">oscili</span> k<span class="n">1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mi">1</span>
+ a<span class="n">sig</span> <span class="n">tvconv</span> a<span class="n">sig</span><span class="p">,</span>a<span class="n">ir</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span>a<span class="n">2</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span>a<span class="n">1</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">1024</span>
+ a<span class="n">sig</span> <span class="nb">clip</span> a<span class="n">sig</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="vg">0dbfs</span>
+   <span class="nb">out</span> a<span class="n">sig</span>
+<span class="kd">endin</span>
+
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1024</span> <span class="mi">7</span> <span class="mi">0</span> <span class="mi">512</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">511</span> <span class="mi">1</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">30</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47596114716048"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="pconvolve.html" title="pconvolve"><em class="citetitle">pconvolve</em></a>,
+      <a class="link" href="convolve.html" title="convolve"><em class="citetitle">convolve</em></a>,
+      <a class="link" href="ftconv.html" title="ftconv"><em class="citetitle">ftconv</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47596114712080"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Victor Lazzarini </td>
+          </tr>
+          <tr>
+            <td>2017</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 6.09</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="turnon.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="unirand.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">turnon </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> unirand</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>pchbend</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,27 +39,27 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887649693904"></a>
+        <a id="idm47596144283632"></a>
         <h2>Description</h2>
         <p>
       Donne la valeur actuelle du pitch-bend pour ce canal.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887649692672"></a>
+        <a id="idm47596144282400"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ibend <span class="command"><strong>pchbend</strong></span> [imin] [, imax]</pre>
         <pre class="synopsis">kbend <span class="command"><strong>pchbend</strong></span> [imin] [, imax]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887649689120"></a>
+        <a id="idm47596144278816"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>imin, imax</em></span> (optionel) -- fixe les limites minimale et maximale pour les valeurs obtenues
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887649687424"></a>
+        <a id="idm47596144277120"></a>
         <h2>Exécution</h2>
         <p>
       Donne la valeur actuelle du pitch-bend pour ce canal. Noter que l'on a la valeur du pitch-bend qui
@@ -67,7 +68,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887649685792"></a>
+        <a id="idm47596144275488"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode pchbend. Il utilise le fichier
@@ -75,50 +76,48 @@
 
       </p>
         <div class="example">
-          <a id="idm47887649683920"></a>
+          <a id="idm47596144273616"></a>
           <p class="title">
-            <strong>Exemple 637. Exemple de l'opcode pchbend.</strong>
+            <strong>Exemple 670. Exemple de l'opcode pchbend.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887511397360"></a>
+              <a id="idm47595962176752"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac -Q1 -Ma  <span class="comment">;;;realtime audio out and midi in (on all inputs) and out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o pchbend.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span> 
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac -Q1 -Ma  <span class="c1">;;;realtime audio out and midi in (on all inputs) and out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o pchbend.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span> 
+
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+
+<span class="kd">instr</span>   <span class="nf">1</span>	<span class="c1">;use external midi keyboard</span>
+
+i<span class="n">cps</span> <span class="nb">cpsmidi</span>
+k<span class="n">bnd</span> <span class="nb">pchbend</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span>					<span class="c1">;one octave lower and higher</span>
+k<span class="n">env</span> <span class="nb">linsegr</span> <span class="mi">0</span><span class="p">,</span><span class="mf">.001</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mi">0</span>				<span class="c1">;amplitude envelope </span>
+a<span class="n">sig</span> <span class="nb">pluck</span> <span class="mf">.8</span> <span class="o">*</span> k<span class="n">env</span><span class="p">,</span> i<span class="n">cps</span><span class="o">+</span>k<span class="n">bnd</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+     <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+
+<span class="kd">endin</span> 
+<span class="nt">&lt;/CsInstruments&gt;</span> 
+<span class="nt">&lt;CsScore&gt;</span> 
+
+<span class="nb">f</span> <span class="mi">0</span> <span class="mi">30</span>	<span class="c1">;runs 30 seconds</span>
  
-
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
-
-<span class="oblock">instr</span>   1	<span class="comment">;use external midi keyboard</span>
-
-icps <span class="opc">cpsmidi</span>
-kbnd <span class="opc">pchbend</span> 0, 100					<span class="comment">;one octave lower and higher</span>
-kenv <span class="opc">linsegr</span> 0,.001, 1, .1, 0				<span class="comment">;amplitude envelope </span>
-asig <span class="opc">pluck</span> .8 <span class="op">*</span> kenv, icps<span class="op">+</span>kbnd, 440, 0, 1
-     <span class="opc">outs</span> asig, asig
-
-<span class="oblock">endin</span> 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
- 
-
-<span class="stamnt">f</span> 0 30	<span class="comment">;runs 30 seconds</span>
- 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsScore&gt;</span> 
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>   
 </pre>
             </div>
           </div>
@@ -127,7 +126,7 @@ asig <span class="opc">pluck</span> .8 <span class="op">*</span> kenv, icps<span
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887649679552"></a>
+        <a id="idm47596144269248"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="aftouch.html" title="aftouch"><em class="citetitle">aftouch</em></a>,
@@ -144,7 +143,7 @@ asig <span class="opc">pluck</span> .8 <span class="op">*</span> kenv, icps<span
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887649667904"></a>
+        <a id="idm47596144257600"></a>
         <h2>Crédits</h2>
         <p>
       </p>

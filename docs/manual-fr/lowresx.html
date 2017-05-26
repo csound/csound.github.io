@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>lowresx</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887662782048"></a>
+        <a id="idm47596157789520"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>lowresx</em></span> est équivalent à plusieurs étages de
@@ -47,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887662779312"></a>
+        <a id="idm47596157786784"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>lowresx</strong></span> asig, xcutoff, xresonance [, inumlayer] [, iskip]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887662711408"></a>
+        <a id="idm47596157718880"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>inumlayer</em></span> -- nombre d'éléments dans une aggrégation
@@ -66,7 +67,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887662708000"></a>
+        <a id="idm47596157715472"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>asig</em></span> -- signal d'entrée
@@ -89,63 +90,63 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887662701536"></a>
+        <a id="idm47596157708928"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode lowresx. Il utilise le fichier
       <a class="ulink" href="examples/lowresx.csd" target="_top"><em class="citetitle">lowresx.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887662699792"></a>
+          <a id="idm47596157707184"></a>
           <p class="title">
-            <strong>Exemple 470. Exemple de l'opcode lowresx.</strong>
+            <strong>Exemple 495. Exemple de l'opcode lowresx.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
         <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887517335184"></a>
+              <a id="idm47595978923472"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o lowresx.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o lowresx.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-kres <span class="op">=</span> p4
-inumlayer <span class="op">=</span> 4
+k<span class="n">res</span> <span class="o">=</span> <span class="nb">p4</span>
+i<span class="n">numlayer</span> <span class="o">=</span> <span class="mi">4</span>
 
-kenv <span class="opc">linseg</span> 0, p3<span class="op">*</span>.1, 1, p3<span class="op">*</span>.8, 1, p3<span class="op">*</span>.1, 0 	<span class="comment">;envelope</span>
-asig <span class="opc">vco</span> .3 <span class="op">*</span> kenv, 220, 1			<span class="comment">;sawtooth</span>
-kcut <span class="opc">line</span> 30, p3, 1000				<span class="comment">;note: kcut is not in Hz</span>
-alx  <span class="opc">lowresx</span> asig, kcut, kres, inumlayer	<span class="comment">;note: kres is not in dB</span>
-aout <span class="opc">balance</span> alx, asig				<span class="comment">;avoid very loud sounds</span>
-     <span class="opc">outs</span> aout, aout
+k<span class="n">env</span> <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">p3</span><span class="o">*</span><span class="mf">.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">p3</span><span class="o">*</span><span class="mf">.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">p3</span><span class="o">*</span><span class="mf">.1</span><span class="p">,</span> <span class="mi">0</span> 	<span class="c1">;envelope</span>
+a<span class="n">sig</span> <span class="nb">vco</span> <span class="mf">.3</span> <span class="o">*</span> k<span class="n">env</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">1</span>			<span class="c1">;sawtooth</span>
+k<span class="n">cut</span> <span class="nb">line</span> <span class="mi">30</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="mi">1000</span>				<span class="c1">;note: kcut is not in Hz</span>
+a<span class="n">lx</span>  <span class="nb">lowresx</span> a<span class="n">sig</span><span class="p">,</span> k<span class="n">cut</span><span class="p">,</span> k<span class="n">res</span><span class="p">,</span> i<span class="n">numlayer</span>	<span class="c1">;note: kres is not in dB</span>
+a<span class="n">out</span> <span class="nb">balance</span> a<span class="n">lx</span><span class="p">,</span> a<span class="n">sig</span>				<span class="c1">;avoid very loud sounds</span>
+     <span class="nb">outs</span> a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="comment">;sine wave</span>
-<span class="stamnt">f</span> 1 0 16384 10 1
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="c1">;sine wave</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
 
-<span class="stamnt">i</span> 1 0 5 1
-<span class="stamnt">i</span> 1 + 5 3
-<span class="stamnt">i</span> 1 + 5 20
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">5</span> <span class="mi">1</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">5</span> <span class="mi">3</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">5</span> <span class="mi">20</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -154,14 +155,14 @@ aout <span class="opc">balance</span> alx, asig				<span class="comment">;avoid 
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887662695424"></a>
+        <a id="idm47596157702816"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="lowres.html" title="lowres"><em class="citetitle">lowres</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887662693376"></a>
+        <a id="idm47596157700768"></a>
         <h2>Crédits</h2>
         <p>
       </p>

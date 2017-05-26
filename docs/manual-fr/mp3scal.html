@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>mp3scal</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -39,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887656711808"></a>
+        <a id="idm47596151666608"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>mp3scal</em></span> implémente un traitement vocoder à
@@ -57,13 +58,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887656643888"></a>
+        <a id="idm47596151598688"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">asig, asig2, ktime <span class="command"><strong>mp3scal</strong></span> Sfile, ktimescal, kpitch, kamp [,iskip, ifftsize, idecim, ilock]
       </pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887656641872"></a>
+        <a id="idm47596151596576"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>Sfile</em></span> -- fichier son source, mp3 stéréo.
@@ -85,7 +86,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887656636336"></a>
+        <a id="idm47596151591104"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ktimescal</em></span> -- rapport de pondération temporelle,
@@ -108,45 +109,44 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887656630224"></a>
+        <a id="idm47596151585040"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode mp3scal. Il utilise le fichier
       <a class="ulink" href="examples/mp3scal.csd" target="_top"><em class="citetitle">mp3scal.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887656628352"></a>
+          <a id="idm47596151583168"></a>
           <p class="title">
-            <strong>Exemple 554. Exemple de l'opcode mp3scal.</strong>
+            <strong>Exemple 580. Exemple de l'opcode mp3scal.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887513892960"></a>
+              <a id="idm47595970451920"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="vg">nchnls</span><span class="o">=</span><span class="mi">2</span>
+<span class="vg">ksmps</span><span class="o">=</span><span class="mi">64</span>
+<span class="vg">sr</span><span class="o">=</span><span class="mi">44100</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+S<span class="n">File</span> <span class="o">=</span> <span class="nb">p4</span>
+<span class="nb">p3</span> <span class="o">=</span> <span class="nb">mp3len</span><span class="p">(</span>S<span class="n">File</span><span class="p">)</span><span class="o">/</span><span class="nb">p5</span>
+a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span><span class="p">,</span>k<span class="n">2</span> <span class="nb">mp3scal</span> S<span class="n">File</span><span class="p">,</span><span class="nb">p5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span>
+ <span class="nb">outs</span> a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span>
 
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
-<span class="ohdr">nchnls</span><span class="op">=</span>2
-<span class="ohdr">ksmps</span><span class="op">=</span>64
-<span class="ohdr">sr</span><span class="op">=</span>44100
-<span class="oblock">instr</span> 1
-SFile <span class="op">=</span> p4
-p3 <span class="op">=</span> <span class="opc">mp3len</span>(SFile)<span class="op">/</span>p5
-a1,a2,k2 <span class="opc">mp3scal</span> SFile,p5,1,1
- <span class="opc">outs</span> a1,a2
+<span class="kd">endin</span>
 
-<span class="oblock">endin</span>
-
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span>1.1 0 1 "beats.mp3" .75
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span><span class="mf">1.1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="s">"beats.mp3"</span> <span class="mf">.75</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -155,7 +155,7 @@ a1,a2,k2 <span class="opc">mp3scal</span> SFile,p5,1,1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887656624048"></a>
+        <a id="idm47596151578800"></a>
         <h2>Crédits</h2>
         <p>
       </p>

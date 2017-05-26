@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>statevar</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887629861344"></a>
+        <a id="idm47596123913008"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>statevar</em></span> est une nouvelle implémentation numérique
@@ -50,12 +51,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887629859088"></a>
+        <a id="idm47596123910752"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ahp,alp,abp,abr <span class="command"><strong>statevar</strong></span> ain, xcf, xq [, iosamps, istor]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887629856912"></a>
+        <a id="idm47596123908576"></a>
         <h2>Initialisation</h2>
         <p>
         <span class="emphasis"><em>iosamps</em></span> -- nom de fois que le sur-échantillonnage
@@ -74,7 +75,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887629852768"></a>
+        <a id="idm47596123904432"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ahp</em></span> -- signal de sortie du passe-haut.
@@ -102,56 +103,56 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887629845392"></a>
+        <a id="idm47596123897056"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode statevar. Il utilise le fichier
       <a class="ulink" href="examples/statevar.csd" target="_top"><em class="citetitle">statevar.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887629843520"></a>
+          <a id="idm47596123895184"></a>
           <p class="title">
-            <strong>Exemple 874. Exemple de l'opcode statevar.</strong>
+            <strong>Exemple 917. Exemple de l'opcode statevar.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887502813936"></a>
+              <a id="idm47595942157232"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac      <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o statevar.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o statevar.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100 
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32 
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1 
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span> 
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span> 
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span> 
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-kenv <span class="opc">linseg</span> 0,0.1,1, p3<span class="op">-</span>0.2,1, 0.1, 0		<span class="comment">;declick envelope	</span>
-asig <span class="opc">buzz</span> .6<span class="op">*</span>kenv, 100, 100, 1
-kf   <span class="opc">expseg</span> 100, p3<span class="op">/</span>2, 5000, p3<span class="op">/</span>2, 1000		<span class="comment">;envelope for filter cutoff</span>
-ahp,alp,abp,abr <span class="opc">statevar</span> asig, kf, 4
-     <span class="opc">outs</span> alp,ahp				<span class="comment">; lowpass left, highpass right</span>
+k<span class="n">env</span> <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="nb">p3</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span>		<span class="c1">;declick envelope	</span>
+a<span class="n">sig</span> <span class="nb">buzz</span> <span class="mf">.6</span><span class="o">*</span>k<span class="n">env</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span>
+k<span class="n">f</span>   <span class="nb">expseg</span> <span class="mi">100</span><span class="p">,</span> <span class="nb">p3</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="nb">p3</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1000</span>		<span class="c1">;envelope for filter cutoff</span>
+a<span class="n">hp</span><span class="p">,</span>a<span class="n">lp</span><span class="p">,</span>a<span class="n">bp</span><span class="p">,</span>a<span class="n">br</span> <span class="nb">statevar</span> a<span class="n">sig</span><span class="p">,</span> k<span class="n">f</span><span class="p">,</span> <span class="mi">4</span>
+     <span class="nb">outs</span> a<span class="n">lp</span><span class="p">,</span>a<span class="n">hp</span>				<span class="c1">; lowpass left, highpass right</span>
 	
-<span class="oblock">endin</span>	
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span> 1 0 16384 10 1	<span class="comment">;sine wave</span>
+<span class="kd">endin</span>	
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>	<span class="c1">;sine wave</span>
 
-<span class="stamnt">i</span>1 0 5 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">5</span> 
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -160,7 +161,7 @@ ahp,alp,abp,abr <span class="opc">statevar</span> asig, kf, 4
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887629839152"></a>
+        <a id="idm47596123890816"></a>
         <h2>Crédits</h2>
         <p>
       </p>

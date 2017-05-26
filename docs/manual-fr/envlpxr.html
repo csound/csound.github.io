@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>envlpxr</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887683997584"></a>
+        <a id="idm47596180224224"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>envlpxr</em></span> est le même que
@@ -48,13 +49,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887683994640"></a>
+        <a id="idm47596180221280"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>envlpxr</strong></span> xamp, irise, idec, ifn, iatss, iatdec [, ixmod] [,irind]</pre>
         <pre class="synopsis">kres <span class="command"><strong>envlpxr</strong></span> kamp, irise, idec, ifn, iatss, iatdec [, ixmod] [,irind]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887683991008"></a>
+        <a id="idm47596180217648"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>irise</em></span> -- durée de l'attaque en secondes. Une valeur nulle ou négative signifie pas
@@ -101,7 +102,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887683977696"></a>
+        <a id="idm47596180204336"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kamp, xamp</em></span> -- amplitude du signal d'entrée.
@@ -147,7 +148,7 @@
       </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887683959408"></a>
+        <a id="idm47596180186112"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode envlpxr. Il utilise le fichier
@@ -155,48 +156,48 @@
 
       </p>
         <div class="example">
-          <a id="idm47887683957536"></a>
+          <a id="idm47596180184240"></a>
           <p class="title">
-            <strong>Exemple 237. Exemple de l'opcode envlpxr.</strong>
+            <strong>Exemple 242. Exemple de l'opcode envlpxr.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm47887527655712"></a>
+              <a id="idm47596008625440"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac  -+rtmidi=virtual -M0   <span class="comment">;;;realtime audio out and realtime midi in</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o envlpxr.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac  -+rtmidi=virtual -M0   <span class="c1">;;;realtime audio out and realtime midi in</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o envlpxr.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
  	 
-icps	<span class="opc">cpsmidi</span>	 	 
-iamp	<span class="opc">ampmidi</span>	.5	 
+i<span class="n">cps</span>	<span class="nb">cpsmidi</span>	 	 
+i<span class="n">amp</span>	<span class="nb">ampmidi</span>	<span class="mf">.5</span>	 
  	 	 	 
-kenv	<span class="opc">envlpxr</span>	iamp, 0.2, 1, 1, 1, 0.01
-asig	<span class="opc">pluck</span>	kenv, icps, 200, 2, 1	 
-	<span class="opc">outs</span>	asig, asig
+k<span class="n">env</span>	<span class="nb">envlpxr</span>	i<span class="n">amp</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span>
+a<span class="n">sig</span>	<span class="nb">pluck</span>	k<span class="n">env</span><span class="p">,</span> i<span class="n">cps</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span>	 
+	<span class="nb">outs</span>	a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
 	 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span> 1 0 129 -7 0 128 1
-<span class="stamnt">f</span> 2 0 4096 10 1	
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">129</span> <span class="o">-</span><span class="mi">7</span> <span class="mi">0</span> <span class="mi">128</span> <span class="mi">1</span>
+<span class="nb">f</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">4096</span> <span class="mi">10</span> <span class="mi">1</span>	
 
-<span class="stamnt">f</span>0 30	<span class="comment">;runs 30 seconds</span>
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">f</span><span class="mi">0</span> <span class="mi">30</span>	<span class="c1">;runs 30 seconds</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -205,7 +206,7 @@ asig	<span class="opc">pluck</span>	kenv, icps, 200, 2, 1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887683955616"></a>
+        <a id="idm47596180182320"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="envlpx.html" title="envlpx"><em class="citetitle">envlpx</em></a>,
@@ -214,7 +215,7 @@ asig	<span class="opc">pluck</span>	kenv, icps, 200, 2, 1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887683951648"></a>
+        <a id="idm47596180178352"></a>
         <h2>Crédits</h2>
         <p>Merci à Luis Jure pour avoir signalé une erreur avec <span class="emphasis"><em>iatss</em></span>.</p>
       </div>

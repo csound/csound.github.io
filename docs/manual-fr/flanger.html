@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>flanger</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681427904"></a>
+        <a id="idm47596177652384"></a>
         <h2>Description</h2>
         <p>
       Un flanger contrôlé par l'utilisateur.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681426624"></a>
+        <a id="idm47596177651104"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>flanger</strong></span> asig, adel, kfeedback [, imaxd]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887681424512"></a>
+        <a id="idm47596177648928"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>imaxd</em></span>(facultatif) -- délai maximum en secondes
@@ -58,7 +59,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681422688"></a>
+        <a id="idm47596177647104"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>asig</em></span> -- signal d"entrée
@@ -85,57 +86,57 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681414512"></a>
+        <a id="idm47596177638928"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode flanger. Il utilise le fichier
       <a class="ulink" href="examples/flanger.csd" target="_top"><em class="citetitle">flanger.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887681412640"></a>
+          <a id="idm47596177637056"></a>
           <p class="title">
-            <strong>Exemple 276. Exemple de l'opcode flanger.</strong>
+            <strong>Exemple 281. Exemple de l'opcode flanger.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887526692192"></a>
+              <a id="idm47596004361488"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">;-o flanger.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">;-o flanger.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-kfeedback <span class="op">=</span> p4
-asnd <span class="opc">vco2</span> .2, 50
-adel <span class="opc">linseg</span> 0, p3<span class="op">*</span>.5, 0.02, p3<span class="op">*</span>.5, 0	<span class="comment">;max delay time =20ms	</span>
-aflg <span class="opc">flanger</span> asnd, adel, kfeedback
-asig <span class="opc">clip</span> aflg, 1, 1
-     <span class="opc">outs</span> asig<span class="op">+</span>asnd, asig<span class="op">+</span>asnd		<span class="comment">;mix flanger with original</span>
+k<span class="n">feedback</span> <span class="o">=</span> <span class="nb">p4</span>
+a<span class="n">snd</span> <span class="nb">vco2</span> <span class="mf">.2</span><span class="p">,</span> <span class="mi">50</span>
+a<span class="n">del</span> <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">p3</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="nb">p3</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span> <span class="mi">0</span>	<span class="c1">;max delay time =20ms	</span>
+a<span class="n">flg</span> <span class="nb">flanger</span> a<span class="n">snd</span><span class="p">,</span> a<span class="n">del</span><span class="p">,</span> k<span class="n">feedback</span>
+a<span class="n">sig</span> <span class="nb">clip</span> a<span class="n">flg</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+     <span class="nb">outs</span> a<span class="n">sig</span><span class="o">+</span>a<span class="n">snd</span><span class="p">,</span> a<span class="n">sig</span><span class="o">+</span>a<span class="n">snd</span>		<span class="c1">;mix flanger with original</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">i</span> 1 0 10 .2
-<span class="stamnt">i</span> 1 11 10 .8	<span class="comment">;lot of feedback</span>
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span> <span class="mf">.2</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">11</span> <span class="mi">10</span> <span class="mf">.8</span>	<span class="c1">;lot of feedback</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -144,7 +145,7 @@ asig <span class="opc">clip</span> aflg, 1, 1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681408352"></a>
+        <a id="idm47596177632688"></a>
         <h2>Voir aussi</h2>
         <p>
       Plus d'informatioin sur le flanger sur Wikipedia :
@@ -152,7 +153,7 @@ asig <span class="opc">clip</span> aflg, 1, 1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681406272"></a>
+        <a id="idm47596177630688"></a>
         <h2>Crédits</h2>
         <p>
       </p>

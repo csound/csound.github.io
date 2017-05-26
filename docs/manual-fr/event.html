@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>event</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,20 +39,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887683797664"></a>
+        <a id="idm47596180024320"></a>
         <h2>Description</h2>
         <p>
       Génère un évènement de partition à partir d'un instrument.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887683796352"></a>
+        <a id="idm47596180023008"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>event</strong></span> "scorechar", kinsnum, kdelay, kdur, [, kp4] [, kp5] [, ...]</pre>
         <pre class="synopsis"><span class="command"><strong>event</strong></span> "scorechar", "insname", kdelay, kdur, [, kp4] [, kp5] [, ...]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887683743632"></a>
+        <a id="idm47596179970240"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em><span class="quote">« <span class="quote">scorechar</span> »</span></em></span> -- Une chaîne de caractères (entre
@@ -67,7 +68,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887683737680"></a>
+        <a id="idm47596179964352"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kinsnum</em></span> -- L'instrument à utiliser pour l'évènement. Cela
@@ -108,7 +109,7 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47887683728912"></a>
+        <a id="idm47596179955584"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode event. Il utilise le fichier
@@ -116,75 +117,75 @@
 
       </p>
         <div class="example">
-          <a id="idm47887683727136"></a>
+          <a id="idm47596179953808"></a>
           <p class="title">
-            <strong>Exemple 241. Exemple de l'opcode event.</strong>
+            <strong>Exemple 246. Exemple de l'opcode event.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887527206560"></a>
+              <a id="idm47596006522096"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o event.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o event.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">; Instrument #1 - an oscillator with a high note.</span>
-<span class="oblock">instr</span> 1
-  <span class="comment">; Create a trigger and set its initial value to 1.</span>
-  ktrigger <span class="opc">init</span> 1
+<span class="c1">; Instrument #1 - an oscillator with a high note.</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+  <span class="c1">; Create a trigger and set its initial value to 1.</span>
+  k<span class="n">trigger</span> <span class="nb">init</span> <span class="mi">1</span>
 
-  <span class="comment">; If the trigger is equal to 0, continue playing.</span>
-  <span class="comment">; If not, schedule another event.</span>
-  <span class="octrl">if</span> (ktrigger <span class="op">==</span> 0) <span class="octrl">goto</span> <span class="olabel">contin</span>
-    <span class="comment">; kscoreop="i", an i-statement.</span>
-    <span class="comment">; kinsnum=2, play Instrument #2.</span>
-    <span class="comment">; kwhen=1, start at 1 second.</span>
-    <span class="comment">; kdur=0.5, play for a half-second.</span>
-    <span class="opc">event</span> "i", 2, 1, 0.5
+  <span class="c1">; If the trigger is equal to 0, continue playing.</span>
+  <span class="c1">; If not, schedule another event.</span>
+  <span class="k">if</span> <span class="p">(</span>k<span class="n">trigger</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">goto</span> <span class="nl">contin</span>
+    <span class="c1">; kscoreop="i", an i-statement.</span>
+    <span class="c1">; kinsnum=2, play Instrument #2.</span>
+    <span class="c1">; kwhen=1, start at 1 second.</span>
+    <span class="c1">; kdur=0.5, play for a half-second.</span>
+    <span class="nb">event</span> <span class="s">"i"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span>
 
-    <span class="comment">; Make sure the event isn't triggered again.</span>
-    ktrigger <span class="op">=</span> 0
+    <span class="c1">; Make sure the event isn't triggered again.</span>
+    k<span class="n">trigger</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="olabel">contin</span><span class="op">:</span>
-  a1 <span class="opc">oscils</span> 10000, 440, 1
-  <span class="opc">out</span> a1
-<span class="oblock">endin</span>
+<span class="nl">contin</span><span class="p">:</span>
+  a<span class="n">1</span> <span class="nb">oscils</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">1</span>
+  <span class="nb">out</span> a<span class="n">1</span>
+<span class="kd">endin</span>
 
-<span class="comment">; Instrument #2 - an oscillator with a low note.</span>
-<span class="oblock">instr</span> 2
-  a1 <span class="opc">oscils</span> 10000, 220, 1
-  <span class="opc">out</span> a1
-<span class="oblock">endin</span>
-
-
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-
-<span class="comment">; Make sure the score plays for two seconds.</span>
-<span class="stamnt">f</span> 0 2
-
-<span class="comment">; Play Instrument #1 for a half-second.</span>
-<span class="stamnt">i</span> 1 0 0.5
-<span class="stamnt">e</span>
+<span class="c1">; Instrument #2 - an oscillator with a low note.</span>
+<span class="kd">instr</span> <span class="nf">2</span>
+  a<span class="n">1</span> <span class="nb">oscils</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">1</span>
+  <span class="nb">out</span> a<span class="n">1</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="c1">; Make sure the score plays for two seconds.</span>
+<span class="nb">f</span> <span class="mi">0</span> <span class="mi">2</span>
+
+<span class="c1">; Play Instrument #1 for a half-second.</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">0.5</span>
+<span class="nb">e</span>
+
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -197,72 +198,72 @@
 
       </p>
         <div class="example">
-          <a id="idm47887683721616"></a>
+          <a id="idm47596179948288"></a>
           <p class="title">
-            <strong>Exemple 242. Exemple de l'opcode event utilisant un instrument nommé.</strong>
+            <strong>Exemple 247. Exemple de l'opcode event utilisant un instrument nommé.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm47887526916800"></a>
+              <a id="idm47596006459488"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o event_named.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o event_named.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">; Instrument #1 - an oscillator with a high note.</span>
-<span class="oblock">instr</span> 1
-  <span class="comment">; Create a trigger and set its initial value to 1.</span>
-  ktrigger <span class="opc">init</span> 1
+<span class="c1">; Instrument #1 - an oscillator with a high note.</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+  <span class="c1">; Create a trigger and set its initial value to 1.</span>
+  k<span class="n">trigger</span> <span class="nb">init</span> <span class="mi">1</span>
 
-  <span class="comment">; If the trigger is equal to 0, continue playing.</span>
-  <span class="comment">; If not, schedule another event.</span>
-  <span class="octrl">if</span> (ktrigger <span class="op">==</span> 0) <span class="octrl">goto</span> <span class="olabel">contin</span>
-    <span class="comment">; kscoreop="i", an i-statement.</span>
-    <span class="comment">; kinsnum="low_note", instrument named "low_note".</span>
-    <span class="comment">; kwhen=1, start at 1 second.</span>
-    <span class="comment">; kdur=0.5, play for a half-second.</span>
-    <span class="opc">event</span> "i", "low_note", 1, 0.5
+  <span class="c1">; If the trigger is equal to 0, continue playing.</span>
+  <span class="c1">; If not, schedule another event.</span>
+  <span class="k">if</span> <span class="p">(</span>k<span class="n">trigger</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">goto</span> <span class="nl">contin</span>
+    <span class="c1">; kscoreop="i", an i-statement.</span>
+    <span class="c1">; kinsnum="low_note", instrument named "low_note".</span>
+    <span class="c1">; kwhen=1, start at 1 second.</span>
+    <span class="c1">; kdur=0.5, play for a half-second.</span>
+    <span class="nb">event</span> <span class="s">"i"</span><span class="p">,</span> <span class="s">"low_note"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span>
 
-    <span class="comment">; Make sure the event isn't triggered again.</span>
-    ktrigger <span class="op">=</span> 0
+    <span class="c1">; Make sure the event isn't triggered again.</span>
+    k<span class="n">trigger</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="olabel">contin</span><span class="op">:</span>
-  a1 <span class="opc">oscils</span> 10000, 440, 1
-  <span class="opc">out</span> a1
-<span class="oblock">endin</span>
+<span class="nl">contin</span><span class="p">:</span>
+  a<span class="n">1</span> <span class="nb">oscils</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">1</span>
+  <span class="nb">out</span> a<span class="n">1</span>
+<span class="kd">endin</span>
 
-<span class="comment">; Instrument "low_note" - an oscillator with a low note.</span>
-<span class="oblock">instr</span> low_note
-  a1 <span class="opc">oscils</span> 10000, 220, 1
-  <span class="opc">out</span> a1
-<span class="oblock">endin</span>
-
-
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-
-<span class="comment">; Make sure the score plays for two seconds.</span>
-<span class="stamnt">f</span> 0 2
-
-<span class="comment">; Play Instrument #1 for a half-second.</span>
-<span class="stamnt">i</span> 1 0 0.5
-<span class="stamnt">e</span>
+<span class="c1">; Instrument "low_note" - an oscillator with a low note.</span>
+<span class="kd">instr</span> <span class="nf">low_note</span>
+  a<span class="n">1</span> <span class="nb">oscils</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">1</span>
+  <span class="nb">out</span> a<span class="n">1</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="c1">; Make sure the score plays for two seconds.</span>
+<span class="nb">f</span> <span class="mi">0</span> <span class="mi">2</span>
+
+<span class="c1">; Play Instrument #1 for a half-second.</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">0.5</span>
+<span class="nb">e</span>
+
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -271,7 +272,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887683719616"></a>
+        <a id="idm47596179946288"></a>
         <h2>Voir aussi</h2>
         <p><a class="link" href="event_i.html" title="event_i"><em class="citetitle">event_i</em></a>,
     <a class="link" href="schedule.html" title="schedule"><em class="citetitle">schedule</em></a>,
@@ -282,7 +283,7 @@
     <a class="link" href="scoreline_i.html" title="scoreline_i"><em class="citetitle">scoreline_i</em></a></p>
       </div>
       <div class="refsect1">
-        <a id="idm47887683712064"></a>
+        <a id="idm47596179938736"></a>
         <h2>Crédits</h2>
         <p>Exemples écrits par Kevin Conder.</p>
         <p>Nouveau dans la version 4.17</p>

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>granule</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887670629808"></a>
+        <a id="idm47596166541856"></a>
         <h2>Description</h2>
         <p>
       Le générateur unitaire <span class="emphasis"><em>granule</em></span> est plus complexe que <span class="emphasis"><em>grain</em></span>,
@@ -62,14 +63,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887670622640"></a>
+        <a id="idm47596166534560"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>granule</strong></span> xamp, ivoice, iratio, imode, ithd, ifn, ipshift, igskip, \
       igskip_os, ilength, kgap, igap_os, kgsize, igsize_os, iatt, idec \
       [, iseed] [, ipitch1] [, ipitch2] [, ipitch3] [, ipitch4] [, ifnenv]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887670620240"></a>
+        <a id="idm47596166532160"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ivoice</em></span> -- nombre de voix.
@@ -139,7 +140,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887670597952"></a>
+        <a id="idm47596166509952"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>xamp</em></span> -- amplitude.
@@ -152,7 +153,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887670594576"></a>
+        <a id="idm47596166506576"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode granule. Il utilise les fichiers
@@ -161,55 +162,55 @@
 
       </p>
         <div class="example">
-          <a id="idm47887670591856"></a>
+          <a id="idm47596166503856"></a>
           <p class="title">
-            <strong>Exemple 380. Exemple de l'opcode granule.</strong>
+            <strong>Exemple 391. Exemple de l'opcode granule.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887521244832"></a>
+              <a id="idm47595991405008"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o granule.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o granule.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="oblock">instr</span> 1
-<span class="comment">;</span>
-k1      <span class="opc">linseg</span> 0,0.5,1,(p3<span class="op">-</span>p2<span class="op">-</span>1),1,0.5,0
-a1      <span class="opc">granule</span> p4<span class="op">*</span>k1,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,\
-        p16,p17,p18,p19,p20,p21,p22,p23,p24
-a2      <span class="opc">granule</span> p4<span class="op">*</span>k1,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,\
-        p16,p17,p18,p19, p20<span class="op">+</span>0.17,p21,p22,p23,p24
-<span class="opc">outs</span> a1,a2
-<span class="oblock">endin</span>
-
-
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-
-<span class="comment">; f statement read sound file mary.wav in the SFDIR </span>
-<span class="comment">; directory into f-table 1</span>
-<span class="stamnt">f</span>1      0 262144 1 "mary.wav" 0 0 0
-<span class="stamnt">i</span>1      0 10 2000 64 0.5 0 0 1 4 0 0.005 5 0.01 50 0.02 50 30 30 0.39 \
-        1 1.42 0.29 2
-<span class="stamnt">e</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+<span class="c1">;</span>
+k<span class="n">1</span>      <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,(</span><span class="nb">p3</span><span class="o">-</span><span class="nb">p2</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">0</span>
+a<span class="n">1</span>      <span class="nb">granule</span> <span class="nb">p4</span><span class="o">*</span>k<span class="n">1</span><span class="p">,</span><span class="nb">p5</span><span class="p">,</span><span class="nb">p6</span><span class="p">,</span><span class="nb">p7</span><span class="p">,</span><span class="nb">p8</span><span class="p">,</span><span class="nb">p9</span><span class="p">,</span><span class="nb">p10</span><span class="p">,</span><span class="nb">p11</span><span class="p">,</span><span class="nb">p12</span><span class="p">,</span><span class="nb">p13</span><span class="p">,</span><span class="nb">p14</span><span class="p">,</span><span class="nb">p15</span><span class="p">,</span>\
+        <span class="nb">p16</span><span class="p">,</span><span class="nb">p17</span><span class="p">,</span><span class="nb">p18</span><span class="p">,</span><span class="nb">p19</span><span class="p">,</span><span class="nb">p20</span><span class="p">,</span><span class="nb">p21</span><span class="p">,</span><span class="nb">p22</span><span class="p">,</span><span class="nb">p23</span><span class="p">,</span><span class="nb">p24</span>
+a<span class="n">2</span>      <span class="nb">granule</span> <span class="nb">p4</span><span class="o">*</span>k<span class="n">1</span><span class="p">,</span><span class="nb">p5</span><span class="p">,</span><span class="nb">p6</span><span class="p">,</span><span class="nb">p7</span><span class="p">,</span><span class="nb">p8</span><span class="p">,</span><span class="nb">p9</span><span class="p">,</span><span class="nb">p10</span><span class="p">,</span><span class="nb">p11</span><span class="p">,</span><span class="nb">p12</span><span class="p">,</span><span class="nb">p13</span><span class="p">,</span><span class="nb">p14</span><span class="p">,</span><span class="nb">p15</span><span class="p">,</span>\
+        <span class="nb">p16</span><span class="p">,</span><span class="nb">p17</span><span class="p">,</span><span class="nb">p18</span><span class="p">,</span><span class="nb">p19</span><span class="p">,</span> <span class="nb">p20</span><span class="o">+</span><span class="mf">0.17</span><span class="p">,</span><span class="nb">p21</span><span class="p">,</span><span class="nb">p22</span><span class="p">,</span><span class="nb">p23</span><span class="p">,</span><span class="nb">p24</span>
+<span class="nb">outs</span> a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="c1">; f statement read sound file mary.wav in the SFDIR </span>
+<span class="c1">; directory into f-table 1</span>
+<span class="nb">f</span><span class="mi">1</span>      <span class="mi">0</span> <span class="mi">262144</span> <span class="mi">1</span> <span class="s">"mary.wav"</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="nb">i</span><span class="mi">1</span>      <span class="mi">0</span> <span class="mi">10</span> <span class="mi">2000</span> <span class="mi">64</span> <span class="mf">0.5</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">4</span> <span class="mi">0</span> <span class="mf">0.005</span> <span class="mi">5</span> <span class="mf">0.01</span> <span class="mi">50</span> <span class="mf">0.02</span> <span class="mi">50</span> <span class="mi">30</span> <span class="mi">30</span> <span class="mf">0.39</span> \
+        <span class="mi">1</span> <span class="mf">1.42</span> <span class="mf">0.29</span> <span class="mi">2</span>
+<span class="nb">e</span>
+
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -309,7 +310,7 @@ a2      <span class="opc">granule</span> p4<span class="op">*</span>k1,p5,p6,p7,
    </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887670554976"></a>
+        <a id="idm47596166466976"></a>
         <h2>Crédits</h2>
         <p>Auteur : Allan Lee</p>
         <p>Belfast</p>

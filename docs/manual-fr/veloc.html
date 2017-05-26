@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>veloc</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,81 +39,81 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887616778336"></a>
+        <a id="idm47596110738448"></a>
         <h2>Description</h2>
         <p>
       Donne la vélocité d'un évènement MIDI.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887616777024"></a>
+        <a id="idm47596110737136"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ival <span class="command"><strong>veloc</strong></span> [ilow] [, ihigh]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887616709936"></a>
+        <a id="idm47596110670064"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ilow, ihigh</em></span> -- Limites basse et haute pour le mappage
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887616708304"></a>
+        <a id="idm47596110668432"></a>
         <h2>Exécution</h2>
         <p>
       Donne la valeur de l'octet MIDI (0 - 127) pour la vélocité de l'évènement courant.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887616706912"></a>
+        <a id="idm47596110667040"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode veloc. Il utilise le fichier
       <a class="ulink" href="examples/veloc.csd" target="_top"><em class="citetitle">veloc.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887616705136"></a>
+          <a id="idm47596110665248"></a>
           <p class="title">
-            <strong>Exemple 1029. Exemple le l'opcode veloc.</strong>
+            <strong>Exemple 1073. Exemple le l'opcode veloc.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887497216912"></a>
+              <a id="idm47595928356960"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac -+rtmidi=virtual  -M0  <span class="comment">;;;realtime audio I/O with MIDI in</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac -+rtmidi=virtual  -M0  <span class="c1">;;;realtime audio I/O with MIDI in</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-gisine	<span class="ohdr">ftgen</span> 0, 0, 1024, 10, 1
+gi<span class="n">sine</span>	<span class="nb">ftgen</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-ivel <span class="opc">veloc</span> 0, 1				<span class="comment">;scale 0 - 1</span>
-<span class="opc">print</span> ivel				<span class="comment">;print velocity</span>
-asig <span class="opc">poscil</span> .5<span class="op">*</span>ivel, 220, gisine	<span class="comment">;and use it as amplitude</span>
-     <span class="opc">outs</span> asig, asig
+i<span class="n">vel</span> <span class="nb">veloc</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>				<span class="c1">;scale 0 - 1</span>
+<span class="nb">print</span> i<span class="n">vel</span>				<span class="c1">;print velocity</span>
+a<span class="n">sig</span> <span class="nb">poscil</span> <span class="mf">.5</span><span class="o">*</span>i<span class="n">vel</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> gi<span class="n">sine</span>	<span class="c1">;and use it as amplitude</span>
+     <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
        
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">f</span> 0 30     <span class="comment">;runs 30 seconds</span>
+<span class="nb">f</span> <span class="mi">0</span> <span class="mi">30</span>     <span class="c1">;runs 30 seconds</span>
 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -121,7 +122,7 @@ asig <span class="opc">poscil</span> .5<span class="op">*</span>ivel, 220, gisin
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887616700768"></a>
+        <a id="idm47596110660880"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="aftouch.html" title="aftouch"><em class="citetitle">aftouch</em></a>,
@@ -138,7 +139,7 @@ asig <span class="opc">poscil</span> .5<span class="op">*</span>ivel, 220, gisin
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887616689120"></a>
+        <a id="idm47596110649232"></a>
         <h2>Crédits</h2>
         <p>
       </p>

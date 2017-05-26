@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>pvscale</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644178656"></a>
+        <a id="idm47596138660640"></a>
         <h2>Description</h2>
         <p>
       Met à l'échelle les composantes de fréquence d'un flot pv, ce qui provoque
@@ -47,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644136944"></a>
+        <a id="idm47596138619040"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">fsig <span class="command"><strong>pvscale</strong></span> fsigin, kscal[, kkeepform, kgain, kcoefs]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887644134800"></a>
+        <a id="idm47596138616960"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>fsig</em></span> -- flot pv de sortie
@@ -104,14 +105,14 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47887644125696"></a>
+        <a id="idm47596138607808"></a>
         <h2>Exemples</h2>
         <p>
       </p>
         <div class="example">
-          <a id="idm47887644124768"></a>
+          <a id="idm47596138606880"></a>
           <p class="title">
-            <strong>Exemple 711. Exemples</strong>
+            <strong>Exemple 746. Exemples</strong>
           </p>
           <div class="example-contents">
             <pre class="programlisting">
@@ -140,52 +141,52 @@ adel  <span class="opc">deltapn</span>   1024                     <span class="c
       <a class="ulink" href="examples/pvscale.csd" target="_top"><em class="citetitle">pvscale.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887644109968"></a>
+          <a id="idm47596138592032"></a>
           <p class="title">
-            <strong>Exemple 712. Exemple de l'opcode pvscale.</strong>
+            <strong>Exemple 747. Exemple de l'opcode pvscale.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887508028896"></a>
+              <a id="idm47595955819120"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
 -odac
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 16
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
-<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">;; example written by joachim heintz 2009</span>
+<span class="c1">;; example written by joachim heintz 2009</span>
 
-<span class="oblock">instr</span> 1
-ifftsize	<span class="op">=</span>		1024
-ioverlap	<span class="op">=</span>		ifftsize <span class="op">/</span> 4
-iwinsize	<span class="op">=</span>		ifftsize
-iwinshape	<span class="op">=</span>		1<span class="comment">; von-Hann window</span>
-Sfile		<span class="op">=</span>		"fox.wav"
-ain		<span class="opc">soundin</span>	Sfile
-fftin		<span class="opc">pvsanal</span>	ain, ifftsize, ioverlap, iwinsize, iwinshape<span class="comment">; fft-analysis of the audio-signal</span>
-fftblur	<span class="opc">pvscale</span>	fftin, p4, p5, p6<span class="comment">; scale</span>
-aout		<span class="opc">pvsynth</span>	fftblur<span class="comment">; resynthesis</span>
-		<span class="opc">out</span>		aout
-<span class="oblock">endin</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+i<span class="n">fftsize</span>	<span class="o">=</span>		<span class="mi">1024</span>
+i<span class="n">overlap</span>	<span class="o">=</span>		i<span class="n">fftsize</span> <span class="o">/</span> <span class="mi">4</span>
+i<span class="n">winsize</span>	<span class="o">=</span>		i<span class="n">fftsize</span>
+i<span class="n">winshape</span>	<span class="o">=</span>		<span class="mi">1</span><span class="c1">; von-Hann window</span>
+S<span class="n">file</span>		<span class="o">=</span>		<span class="s">"fox.wav"</span>
+a<span class="n">in</span>		<span class="nb">soundin</span>	S<span class="n">file</span>
+<span class="n">fftin</span>		<span class="nb">pvsanal</span>	a<span class="n">in</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> i<span class="n">overlap</span><span class="p">,</span> i<span class="n">winsize</span><span class="p">,</span> i<span class="n">winshape</span><span class="c1">; fft-analysis of the audio-signal</span>
+<span class="n">fftblur</span>	<span class="nb">pvscale</span>	<span class="n">fftin</span><span class="p">,</span> <span class="nb">p4</span><span class="p">,</span> <span class="nb">p5</span><span class="p">,</span> <span class="nb">p6</span><span class="c1">; scale</span>
+a<span class="n">out</span>		<span class="nb">pvsynth</span>	<span class="n">fftblur</span><span class="c1">; resynthesis</span>
+		<span class="nb">out</span>		a<span class="n">out</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span> 1 0 3 1 0 1<span class="comment">; original sound</span>
-<span class="stamnt">i</span> 1 3 3 1.5 0 2<span class="comment">; fifth higher without ...</span>
-<span class="stamnt">i</span> 1 6 3 1.5 1 2<span class="comment">; ... and with different ...</span>
-<span class="stamnt">i</span> 1 9 3 1.5 2 5<span class="comment">; ... kinds of formant preservation</span>
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span><span class="c1">; original sound</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mi">3</span> <span class="mf">1.5</span> <span class="mi">0</span> <span class="mi">2</span><span class="c1">; fifth higher without ...</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">6</span> <span class="mi">3</span> <span class="mf">1.5</span> <span class="mi">1</span> <span class="mi">2</span><span class="c1">; ... and with different ...</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">9</span> <span class="mi">3</span> <span class="mf">1.5</span> <span class="mi">2</span> <span class="mi">5</span><span class="c1">; ... kinds of formant preservation</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -194,7 +195,7 @@ aout		<span class="opc">pvsynth</span>	fftblur<span class="comment">; resynthesi
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644105600"></a>
+        <a id="idm47596138587664"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>,
@@ -203,7 +204,7 @@ aout		<span class="opc">pvsynth</span>	fftblur<span class="comment">; resynthesi
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644101632"></a>
+        <a id="idm47596138583696"></a>
         <h2>Crédits</h2>
         <p>
       </p>

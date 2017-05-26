@@ -5,10 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>seed</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
-    <link rel="prev" href="scoreline_i.html" title="scoreline_i" />
+    <link rel="prev" href="sc_trig.html" title="sc_trig" />
     <link rel="next" href="sekere.html" title="sekere" />
   </head>
   <body>
@@ -18,7 +19,7 @@
           <th colspan="3" align="center">seed</th>
         </tr>
         <tr>
-          <td width="20%" align="left"><a accesskey="p" href="scoreline_i.html">Précédent</a> </td>
+          <td width="20%" align="left"><a accesskey="p" href="sc_trig.html">Précédent</a> </td>
           <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
           <td width="20%" align="right"> <a accesskey="n" href="sekere.html">Suivant</a></td>
         </tr>
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887637089200"></a>
+        <a id="idm47596131284816"></a>
         <h2>Description</h2>
         <p>
       Fixe la valeur globale de la graine pour tous les <span class="emphasis"><em>générateurs de
@@ -67,12 +68,12 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47887637013312"></a>
+        <a id="idm47596131210448"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>seed</strong></span> ival</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887637011264"></a>
+        <a id="idm47596131208400"></a>
         <h2>Exécution</h2>
         <p>
       Avec l'utilisation de <span class="emphasis"><em>seed</em></span> on obtiendra des résultats
@@ -87,67 +88,67 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887637006832"></a>
+        <a id="idm47596131203968"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode seed. Il utilise le fichier
       <a class="ulink" href="examples/seed.csd" target="_top"><em class="citetitle">seed.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887637004976"></a>
+          <a id="idm47596131202112"></a>
           <p class="title">
-            <strong>Exemple 822. Exemple de l'opcode seed.</strong>
+            <strong>Exemple 862. Exemple de l'opcode seed.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887505526272"></a>
+              <a id="idm47595947577568"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o seed.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o seed.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1	<span class="comment">;same values every time</span>
+<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">;same values every time</span>
 
-<span class="ohdr">seed</span> 10
-krnd <span class="opc">randomh</span> 100, 200, 5
-     <span class="opc">printk</span> .5, krnd			<span class="comment">; look </span>
-aout <span class="opc">oscili</span> 0.8, 440<span class="op">+</span>krnd, 1		<span class="comment">; &amp; listen</span>
-     <span class="opc">outs</span> aout, aout
+<span class="nb">seed</span> <span class="mi">10</span>
+k<span class="n">rnd</span> <span class="nb">randomh</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">5</span>
+     <span class="nb">printk</span> <span class="mf">.5</span><span class="p">,</span> k<span class="n">rnd</span>			<span class="c1">; look </span>
+a<span class="n">out</span> <span class="nb">oscili</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">440</span><span class="o">+</span>k<span class="n">rnd</span><span class="p">,</span> <span class="mi">1</span>		<span class="c1">; &amp; listen</span>
+     <span class="nb">outs</span> a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
 
-<span class="oblock">endin</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 2	<span class="comment">;different values every time - value is derived from system clock</span>
+<span class="kd">instr</span> <span class="nf">2</span>	<span class="c1">;different values every time - value is derived from system clock</span>
 
-<span class="ohdr">seed</span> 0					<span class="comment">; seed from system clock</span>
-krnd <span class="opc">randomh</span> 100, 200, 5		
-     <span class="opc">printk</span> .5, krnd			<span class="comment">; look </span>
-aout <span class="opc">oscili</span> 0.8, 440<span class="op">+</span>krnd, 1		<span class="comment">; &amp; listen</span>
-     <span class="opc">outs</span> aout, aout
+<span class="nb">seed</span> <span class="mi">0</span>					<span class="c1">; seed from system clock</span>
+k<span class="n">rnd</span> <span class="nb">randomh</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">5</span>		
+     <span class="nb">printk</span> <span class="mf">.5</span><span class="p">,</span> k<span class="n">rnd</span>			<span class="c1">; look </span>
+a<span class="n">out</span> <span class="nb">oscili</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">440</span><span class="o">+</span>k<span class="n">rnd</span><span class="p">,</span> <span class="mi">1</span>		<span class="c1">; &amp; listen</span>
+     <span class="nb">outs</span> a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span> 1 0 16384 10 1	<span class="comment">;sine wave.</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>	<span class="c1">;sine wave.</span>
 
-<span class="stamnt">i</span> 1 0 1
-<span class="stamnt">i</span> 2 2 1
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="nb">i</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">1</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -173,14 +174,14 @@ WARNING: Seeding from current time 834128659
       <hr />
       <table width="100%" summary="Navigation footer">
         <tr>
-          <td width="40%" align="left"><a accesskey="p" href="scoreline_i.html">Précédent</a> </td>
+          <td width="40%" align="left"><a accesskey="p" href="sc_trig.html">Précédent</a> </td>
           <td width="20%" align="center">
             <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
           </td>
           <td width="40%" align="right"> <a accesskey="n" href="sekere.html">Suivant</a></td>
         </tr>
         <tr>
-          <td width="40%" align="left" valign="top">scoreline_i </td>
+          <td width="40%" align="left" valign="top">sc_trig </td>
           <td width="20%" align="center">
             <a accesskey="h" href="index.html">Sommaire</a>
           </td>

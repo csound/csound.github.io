@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>readfi</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887640638736"></a>
+        <a id="idm47596135059056"></a>
         <h2>Description</h2>
         <p>
       Lit une ligne de texte depuis un fichier externe une seule fois, à
@@ -46,12 +47,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887640576864"></a>
+        <a id="idm47596134997184"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">Sres, iline <span class="command"><strong>readfi</strong></span> ifilname</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887640574848"></a>
+        <a id="idm47596134995168"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifilname</em></span> -- un entier N indiquant un fichier nommé
@@ -77,44 +78,47 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887640568896"></a>
+        <a id="idm47596134989216"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode readfi. Il utilise le fichier
       <a class="ulink" href="examples/readfi.csd" target="_top"><em class="citetitle">readfi.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887640567120"></a>
+          <a id="idm47596134987440"></a>
           <p class="title">
-            <strong>Exemple 773. Exemple de l'opcode readfi.</strong>
+            <strong>Exemple 809. Exemple de l'opcode readfi.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887507239696"></a>
+              <a id="idm47595952139696"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
 -n
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
-<span class="oblock">instr</span> 1
-    Swd <span class="opc">pwd</span>
-        <span class="opc">printf_i</span> "Working <span class="opc">directory</span> is '<span class="op">%</span>s'\n", 1, Swd
-        <span class="opc">prints</span> "Reading myself <span class="op">=</span>)<span class="op">:</span>\n"
-<span class="olabel">read</span><span class="op">:</span>
-Sline, iLineNum <span class="opc">readfi</span> "readfi.csd"
-        <span class="opc">printf_i</span>  "Line <span class="op">%</span>d<span class="op">:</span> <span class="op">%</span>s", iLineNum, iLineNum, Sline
-        <span class="octrl">if</span> iLineNum <span class="op">!=</span> <span class="op">-</span>1 <span class="octrl">igoto</span> <span class="olabel">read</span>
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span>1 0 0.1
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+
+<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+    S<span class="n">wd</span> <span class="nb">pwd</span>
+        <span class="nb">printf_i</span> <span class="s">"Working directory is '%s'</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> S<span class="n">wd</span>
+        <span class="nb">prints</span> <span class="s">"Reading myself =):</span><span class="se">\n</span><span class="s">"</span>
+<span class="nl">read</span><span class="p">:</span>
+S<span class="n">line</span><span class="p">,</span> i<span class="n">LineNum</span> <span class="nb">readfi</span> <span class="s">"readfi.csd"</span>
+        <span class="nb">printf_i</span>  <span class="s">"Line </span><span class="si">%d</span><span class="s">: %s"</span><span class="p">,</span> i<span class="n">LineNum</span><span class="p">,</span> i<span class="n">LineNum</span><span class="p">,</span> S<span class="n">line</span>
+        <span class="k">if</span> i<span class="n">LineNum</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">igoto</span> <span class="nl">read</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mf">0.1</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -123,14 +127,14 @@ Sline, iLineNum <span class="opc">readfi</span> "readfi.csd"
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887640562752"></a>
+        <a id="idm47596134983072"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="readf.html" title="readf"><em class="citetitle">readf</em></a>.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887640560672"></a>
+        <a id="idm47596134980992"></a>
         <h2>Crédits</h2>
         <p>John ffitch et Joachim Heintz</p>
         <p>2012 ; nouveau dans la version 5.17.12</p>

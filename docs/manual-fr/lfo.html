@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>lfo</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,20 +39,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887665322400"></a>
+        <a id="idm47596161008720"></a>
         <h2>Description</h2>
         <p>
       Un oscillateur basse fréquence avec différentes formes d'onde.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887665321072"></a>
+        <a id="idm47596161007360"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">kres <span class="command"><strong>lfo</strong></span> kamp, kcps [, itype]</pre>
         <pre class="synopsis">ares <span class="command"><strong>lfo</strong></span> kamp, kcps [, itype]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887665317488"></a>
+        <a id="idm47596161003744"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>itype</em></span> (facultatif, par défaut 0) -- détermine la forme d'onde de l'oscillateur.
@@ -87,7 +88,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887665307776"></a>
+        <a id="idm47596160994032"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kamp</em></span> -- amplitude de la sortie
@@ -97,7 +98,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887665305136"></a>
+        <a id="idm47596160991392"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode lfo. Il utilise le fichier
@@ -105,54 +106,54 @@
 
       </p>
         <div class="example">
-          <a id="idm47887665303200"></a>
+          <a id="idm47596160989456"></a>
           <p class="title">
-            <strong>Exemple 438. Exemple de l'opcode lfo.</strong>
+            <strong>Exemple 453. Exemple de l'opcode lfo.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887518509120"></a>
+              <a id="idm47595983252432"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac      <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o lfo.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o lfo.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-kcps  <span class="op">=</span> 5
-itype <span class="op">=</span> p4	<span class="comment">;lfo type</span>
+k<span class="n">cps</span>  <span class="o">=</span> <span class="mi">5</span>
+i<span class="n">type</span> <span class="o">=</span> <span class="nb">p4</span>	<span class="c1">;lfo type</span>
 
-klfo <span class="opc">line</span> 0, p3, 20
-al   <span class="opc">lfo</span> klfo, kcps, itype
-asig <span class="opc">poscil</span> .5, 220<span class="op">+</span>al, 1
-     <span class="opc">outs</span> asig, asig
+k<span class="n">lfo</span> <span class="nb">line</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="mi">20</span>
+a<span class="n">l</span>   <span class="nb">lfo</span> k<span class="n">lfo</span><span class="p">,</span> k<span class="n">cps</span><span class="p">,</span> i<span class="n">type</span>
+a<span class="n">sig</span> <span class="nb">poscil</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">220</span><span class="o">+</span>a<span class="n">l</span><span class="p">,</span> <span class="mi">1</span>
+     <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="comment">; sine wave.</span>
-<span class="stamnt">f</span> 1 0 32768 10 1
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="c1">; sine wave.</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">32768</span> <span class="mi">10</span> <span class="mi">1</span>
 
-<span class="stamnt">i</span> 1 0 3 0	<span class="comment">;lfo = sine</span>
-<span class="stamnt">i</span> 1 + 3 2	<span class="comment">;lfo = square</span>
-<span class="stamnt">i</span> 1 + 3 5	<span class="comment">;lfo = saw-tooth down</span>
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mi">0</span>	<span class="c1">;lfo = sine</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="mi">2</span>	<span class="c1">;lfo = square</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="mi">5</span>	<span class="c1">;lfo = saw-tooth down</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -161,7 +162,7 @@ asig <span class="opc">poscil</span> .5, 220<span class="op">+</span>al, 1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887665298736"></a>
+        <a id="idm47596160984992"></a>
         <h2>Crédits</h2>
         <p>
       </p>

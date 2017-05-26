@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>filevalid</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,26 +39,26 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887682036768"></a>
+        <a id="idm47596178260976"></a>
         <h2>Description</h2>
         <p>
       Retourne 1 si le fichier son est valide, 0 sinon.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887682035584"></a>
+        <a id="idm47596178259792"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ir <span class="command"><strong>filevalid</strong></span> ifilcod</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887681964672"></a>
+        <a id="idm47596178188960"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifilcod</em></span> -- fichier son à tester
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681963136"></a>
+        <a id="idm47596178187344"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>filevalid</em></span> retourne 1 si le fichier son
@@ -65,7 +66,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681961088"></a>
+        <a id="idm47596178185328"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode filevalid. Il utilise le fichier
@@ -73,53 +74,53 @@
 
       </p>
         <div class="example">
-          <a id="idm47887681959216"></a>
+          <a id="idm47596178183456"></a>
           <p class="title">
-            <strong>Exemple 268. Exemple de l'opcode filevalid.</strong>
+            <strong>Exemple 273. Exemple de l'opcode filevalid.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887527051648"></a>
+              <a id="idm47596008252000"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">;-o filevalid.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">;-o filevalid.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
-Sfile     <span class="opc">strget</span>    p4
-ivld      <span class="opc">filevalid</span> Sfile
+<span class="kd">instr</span> <span class="nf">1</span>
+S<span class="n">file</span>     <span class="nb">strget</span>    <span class="nb">p4</span>
+i<span class="n">vld</span>      <span class="nb">filevalid</span> S<span class="n">file</span>
 
-<span class="octrl">if</span> ivld<span class="op">&gt;</span>0 then
-asig      <span class="opc">diskin2</span>   Sfile, 1
-          <span class="opc">outs</span>      asig, asig
-<span class="octrl">else</span>
-          <span class="opc">printf_i</span>  "Audiofile '<span class="op">%</span>s' does not exist!\n", 1, Sfile
-<span class="octrl">endif</span>
-<span class="oblock">endin</span>
+<span class="k">if</span> i<span class="n">vld</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">then</span>
+a<span class="n">sig</span>      <span class="nb">diskin2</span>   S<span class="n">file</span><span class="p">,</span> <span class="mi">1</span>
+          <span class="nb">outs</span>      a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+<span class="k">else</span>
+          <span class="nb">printf_i</span>  <span class="s">"Audiofile '%s' does not exist!</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> S<span class="n">file</span>
+<span class="k">endif</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">i</span> 1 0 3 "frox.wav"<span class="comment">;file does not exist!!!</span>
-<span class="stamnt">i</span> 1 + 3 "fox.wav" <span class="comment">;but this one certainly does...</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="s">"frox.wav"</span><span class="c1">;file does not exist!!!</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="s">"fox.wav"</span> <span class="c1">;but this one certainly does...</span>
 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -133,7 +134,7 @@ Audiofile 'frox.wav' does not exist!</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681954096"></a>
+        <a id="idm47596178178336"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="filebit.html" title="filebit"><em class="citetitle">filebit</em></a>,
@@ -144,7 +145,7 @@ Audiofile 'frox.wav' does not exist!</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887681948176"></a>
+        <a id="idm47596178172416"></a>
         <h2>Crédits</h2>
         <p>
       </p>

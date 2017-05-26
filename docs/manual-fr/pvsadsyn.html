@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>pvsadsyn</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644883552"></a>
+        <a id="idm47596139365728"></a>
         <h2>Description</h2>
         <p>
       Resynthèse au moyen d'une banque d'oscillateurs rapide.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644882240"></a>
+        <a id="idm47596139364416"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>pvsadsyn</strong></span> fsrc, inoscs, kfmod [, ibinoffset] [, ibinincr] [, iinit]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887644880096"></a>
+        <a id="idm47596139362272"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>inoscs</em></span> -- Le nombre de bins d'analyse à synthétiser.
@@ -76,7 +77,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644871168"></a>
+        <a id="idm47596139353344"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kfmod</em></span> -- Facteur de multiplication pour toutes les
@@ -104,79 +105,79 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644862592"></a>
+        <a id="idm47596139344768"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode pvsadsyn. Il utilise le fichier
       <a class="ulink" href="examples/pvsadsyn.csd" target="_top"><em class="citetitle">pvsadsyn.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887644860720"></a>
+          <a id="idm47596139342896"></a>
           <p class="title">
-            <strong>Exemple 700. Exemple de l'opcode pvsadsyn.</strong>
+            <strong>Exemple 735. Exemple de l'opcode pvsadsyn.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887508611968"></a>
+              <a id="idm47595956781168"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in</span>
--odac    <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o pvsadsyn.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o pvsadsyn.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 16
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
-<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">;; example written by joachim heintz 2009</span>
+<span class="c1">;; example written by joachim heintz 2009</span>
 
-<span class="oblock">opcode</span> FileToPvsBuf, iik, Siiii
-<span class="comment">;;writes an audio file at the first k-cycle to a fft-buffer (via pvsbuffer)</span>
-Sfile, ifftsize, ioverlap, iwinsize, iwinshape <span class="opc">xin</span>
-ktimek		<span class="opc">timeinstk</span>
-<span class="octrl">if</span> ktimek <span class="op">==</span> 1 then
-ilen		<span class="opc">filelen</span>	Sfile
-kcycles	<span class="op">=</span>		ilen <span class="op">*</span> <span class="ohdr">kr</span><span class="comment">; number of k-cycles to write the fft-buffer</span>
-kcount		<span class="opc">init</span>		0
-<span class="olabel">loop</span><span class="op">:</span>
-ain		<span class="opc">soundin</span>	Sfile
-fftin		<span class="opc">pvsanal</span>	ain, ifftsize, ioverlap, iwinsize, iwinshape
-ibuf, ktim	<span class="opc">pvsbuffer</span>	fftin, ilen <span class="op">+</span> (ifftsize <span class="op">/</span> sr)
-		<span class="octrl">loop_lt</span>	kcount, 1, kcycles, <span class="olabel">loop</span>
-		<span class="opc">xout</span>		ibuf, ilen, ktim
-<span class="octrl">endif</span>
-<span class="oblock">endop</span>
+<span class="kd">opcode</span> <span class="nf">FileToPvsBuf</span><span class="p">,</span> <span class="kt">iik</span><span class="p">,</span> <span class="kt">Siiii</span>
+<span class="c1">;;writes an audio file at the first k-cycle to a fft-buffer (via pvsbuffer)</span>
+S<span class="n">file</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> i<span class="n">overlap</span><span class="p">,</span> i<span class="n">winsize</span><span class="p">,</span> i<span class="n">winshape</span> <span class="nb">xin</span>
+k<span class="n">timek</span>		<span class="nb">timeinstk</span>
+<span class="k">if</span> k<span class="n">timek</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">then</span>
+i<span class="n">len</span>		<span class="nb">filelen</span>	S<span class="n">file</span>
+k<span class="n">cycles</span>	<span class="o">=</span>		i<span class="n">len</span> <span class="o">*</span> <span class="vg">kr</span><span class="c1">; number of k-cycles to write the fft-buffer</span>
+k<span class="n">count</span>		<span class="nb">init</span>		<span class="mi">0</span>
+<span class="nl">loop</span><span class="p">:</span>
+a<span class="n">in</span>		<span class="nb">soundin</span>	S<span class="n">file</span>
+<span class="n">fftin</span>		<span class="nb">pvsanal</span>	a<span class="n">in</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> i<span class="n">overlap</span><span class="p">,</span> i<span class="n">winsize</span><span class="p">,</span> i<span class="n">winshape</span>
+i<span class="n">buf</span><span class="p">,</span> k<span class="n">tim</span>	<span class="nb">pvsbuffer</span>	<span class="n">fftin</span><span class="p">,</span> i<span class="n">len</span> <span class="o">+</span> <span class="p">(</span>i<span class="n">fftsize</span> <span class="o">/</span> <span class="vg">sr</span><span class="p">)</span>
+		<span class="k">loop_lt</span>	k<span class="n">count</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">cycles</span><span class="p">,</span> <span class="nl">loop</span>
+		<span class="nb">xout</span>		i<span class="n">buf</span><span class="p">,</span> i<span class="n">len</span><span class="p">,</span> k<span class="n">tim</span>
+<span class="k">endif</span>
+<span class="kd">endop</span>
 
 
-<span class="oblock">instr</span> 1
-istretch	<span class="op">=</span>		p4<span class="comment">; time stretching factor</span>
-ifftsize	<span class="op">=</span>		1024
-ioverlap	<span class="op">=</span>		ifftsize <span class="op">/</span> 4
-iwinsize	<span class="op">=</span>		ifftsize
-iwinshape	<span class="op">=</span>		1<span class="comment">; von-Hann window</span>
-ibuffer, ilen, k0		FileToPvsBuf	"fox.wav", ifftsize, ioverlap, iwinsize, iwinshape
-p3		<span class="op">=</span>		istretch <span class="op">*</span> ilen<span class="comment">; set p3 to the correct value</span>
-ktmpnt		<span class="opc">linseg</span>		0, p3, ilen<span class="comment">; time pointer</span>
-fread 		<span class="opc">pvsbufread</span>  	ktmpnt, ibuffer<span class="comment">; read the buffer</span>
-aout		<span class="opc">pvsadsyn</span>	fread, 10, 1<span class="comment">; resynthesis with the first 10 bins</span>
-		<span class="opc">out</span>		aout
-<span class="oblock">endin</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+i<span class="n">stretch</span>	<span class="o">=</span>		<span class="nb">p4</span><span class="c1">; time stretching factor</span>
+i<span class="n">fftsize</span>	<span class="o">=</span>		<span class="mi">1024</span>
+i<span class="n">overlap</span>	<span class="o">=</span>		i<span class="n">fftsize</span> <span class="o">/</span> <span class="mi">4</span>
+i<span class="n">winsize</span>	<span class="o">=</span>		i<span class="n">fftsize</span>
+i<span class="n">winshape</span>	<span class="o">=</span>		<span class="mi">1</span><span class="c1">; von-Hann window</span>
+i<span class="n">buffer</span><span class="p">,</span> i<span class="n">len</span><span class="p">,</span> k<span class="n">0</span>		<span class="nf">FileToPvsBuf</span>	<span class="s">"fox.wav"</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> i<span class="n">overlap</span><span class="p">,</span> i<span class="n">winsize</span><span class="p">,</span> i<span class="n">winshape</span>
+<span class="nb">p3</span>		<span class="o">=</span>		i<span class="n">stretch</span> <span class="o">*</span> i<span class="n">len</span><span class="c1">; set p3 to the correct value</span>
+k<span class="n">tmpnt</span>		<span class="nb">linseg</span>		<span class="mi">0</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> i<span class="n">len</span><span class="c1">; time pointer</span>
+<span class="n">fread</span> 		<span class="nb">pvsbufread</span>  	k<span class="n">tmpnt</span><span class="p">,</span> i<span class="n">buffer</span><span class="c1">; read the buffer</span>
+a<span class="n">out</span>		<span class="nb">pvsadsyn</span>	<span class="n">fread</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="c1">; resynthesis with the first 10 bins</span>
+		<span class="nb">out</span>		a<span class="n">out</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span> 1 0 1 20
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">20</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -185,7 +186,7 @@ aout		<span class="opc">pvsadsyn</span>	fread, 10, 1<span class="comment">; resy
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644856352"></a>
+        <a id="idm47596139338528"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>,
@@ -194,7 +195,7 @@ aout		<span class="opc">pvsadsyn</span>	fread, 10, 1<span class="comment">; resy
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644852384"></a>
+        <a id="idm47596139334560"></a>
         <h2>Crédits</h2>
         <p>
       </p>

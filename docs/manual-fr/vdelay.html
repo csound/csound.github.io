@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>vdelay</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887617638752"></a>
+        <a id="idm47596111598992"></a>
         <h2>Description</h2>
         <p>
       C'est un délai variable avec interpolation qui n'est pas très différent de
@@ -48,12 +49,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887617596384"></a>
+        <a id="idm47596111556624"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>vdelay</strong></span> asig, adel, imaxdel [, iskip]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887617594368"></a>
+        <a id="idm47596111554608"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>imaxdel</em></span> -- Valeur maximale du délai en millisecondes. Si
@@ -67,7 +68,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887617590240"></a>
+        <a id="idm47596111550416"></a>
         <h2>Exécution</h2>
         <p>
       Avec ce générateur unitaire il est possible de faire des effets Doppler ou de
@@ -84,58 +85,58 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887617586144"></a>
+        <a id="idm47596111546320"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode vdelay. Il utilise le fichier
       <a class="ulink" href="examples/vdelay.csd" target="_top"><em class="citetitle">vdelay.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887617584272"></a>
+          <a id="idm47596111544448"></a>
           <p class="title">
-            <strong>Exemple 1020. Exemple de l'opcode vdelay.</strong>
+            <strong>Exemple 1064. Exemple de l'opcode vdelay.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887497385872"></a>
+              <a id="idm47595930582192"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac  <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o vdelay.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac  <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o vdelay.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span>   <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span>   <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1 
+<span class="kd">instr</span> <span class="nf">1</span> 
 
-ims  <span class="op">=</span> 100				<span class="comment">;maximum delay time in msec</span>
-aout <span class="opc">poscil</span> .8, 220, 1			<span class="comment">;make a signal</span>
-a2   <span class="opc">poscil3</span> ims<span class="op">/</span>2, 1<span class="op">/</span>p3, 1		<span class="comment">;make an LFO</span>
-a2   <span class="op">=</span> a2 <span class="op">+</span> ims<span class="op">/</span>2 			<span class="comment">;offset the LFO so that it is positive</span>
-asig <span class="opc">vdelay</span> aout, a2, ims		<span class="comment">;use the LFO to control delay time</span>
-     <span class="opc">outs</span>  asig, asig
+i<span class="n">ms</span>  <span class="o">=</span> <span class="mi">100</span>				<span class="c1">;maximum delay time in msec</span>
+a<span class="n">out</span> <span class="nb">poscil</span> <span class="mf">.8</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">1</span>			<span class="c1">;make a signal</span>
+a<span class="n">2</span>   <span class="nb">poscil3</span> i<span class="n">ms</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="nb">p3</span><span class="p">,</span> <span class="mi">1</span>		<span class="c1">;make an LFO</span>
+a<span class="n">2</span>   <span class="o">=</span> a<span class="n">2</span> <span class="o">+</span> i<span class="n">ms</span><span class="o">/</span><span class="mi">2</span> 			<span class="c1">;offset the LFO so that it is positive</span>
+a<span class="n">sig</span> <span class="nb">vdelay</span> a<span class="n">out</span><span class="p">,</span> a<span class="n">2</span><span class="p">,</span> i<span class="n">ms</span>		<span class="c1">;use the LFO to control delay time</span>
+     <span class="nb">outs</span>  a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span>1 0 8192 10 1 <span class="comment">;sine wave</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">8192</span> <span class="mi">10</span> <span class="mi">1</span> <span class="c1">;sine wave</span>
 
-<span class="stamnt">i</span> 1 0 5 
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">5</span> 
 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span> 
 </pre>
             </div>
           </div>
@@ -148,14 +149,14 @@ asig <span class="opc">vdelay</span> aout, a2, ims		<span class="comment">;use t
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887617579312"></a>
+        <a id="idm47596111539488"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="vdelay3.html" title="vdelay3"><em class="citetitle">vdelay3</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887617577264"></a>
+        <a id="idm47596111537440"></a>
         <h2>Crédits</h2>
         <p>
       </p>

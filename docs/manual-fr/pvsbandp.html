@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>pvsbandp</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644623200"></a>
+        <a id="idm47596139105584"></a>
         <h2>Description</h2>
         <p>
       Filtre les trames pvoc, laissant passer les bins dont la fréquence se
@@ -47,13 +48,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644621680"></a>
+        <a id="idm47596139104064"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">fsig <span class="command"><strong>pvsbandp</strong></span> fsigin, xlowcut, xlowfull, \
       xhighfull, xhighcut[, ktype]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887644619520"></a>
+        <a id="idm47596139101840"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>fsig</em></span> -- flot pv de sortie
@@ -102,7 +103,7 @@ ________/                                   �
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644610624"></a>
+        <a id="idm47596139092944"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode pvsbandp. Il utilise le fichier
@@ -110,54 +111,54 @@ ________/                                   �
 
       </p>
         <div class="example">
-          <a id="idm47887644608848"></a>
+          <a id="idm47596139091168"></a>
           <p class="title">
-            <strong>Exemple 704. Exemple de l'opcode pvsbandp.</strong>
+            <strong>Exemple 739. Exemple de l'opcode pvsbandp.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887508692944"></a>
+              <a id="idm47595955637040"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in</span>
--odac    <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o pvsbandp.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o pvsbandp.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 16
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
-<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">;; example written by joachim heintz 2009</span>
+<span class="c1">;; example written by joachim heintz 2009</span>
 
-<span class="oblock">instr</span> 1
-Sfile		<span class="op">=</span>		"fox.wav"
-klowcut <span class="op">=</span> 100
-klowfull <span class="op">=</span> 200
-khighfull <span class="op">=</span> 1900
-khighcut <span class="op">=</span> 2000
-ain		<span class="opc">soundin</span>	Sfile
-fftin		<span class="opc">pvsanal</span>	ain, 1024, 256, 1024, 1<span class="comment">; fft-analysis of the audio-signal</span>
-fftbp		<span class="opc">pvsbandp</span>	fftin, klowcut, klowfull, khighfull, khighcut <span class="comment">; band pass</span>
-abp		<span class="opc">pvsynth</span>	fftbp<span class="comment">; resynthesis</span>
-		<span class="opc">out</span>		abp
-<span class="oblock">endin</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+S<span class="n">file</span>		<span class="o">=</span>		<span class="s">"fox.wav"</span>
+k<span class="n">lowcut</span> <span class="o">=</span> <span class="mi">100</span>
+k<span class="n">lowfull</span> <span class="o">=</span> <span class="mi">200</span>
+k<span class="n">highfull</span> <span class="o">=</span> <span class="mi">1900</span>
+k<span class="n">highcut</span> <span class="o">=</span> <span class="mi">2000</span>
+a<span class="n">in</span>		<span class="nb">soundin</span>	S<span class="n">file</span>
+<span class="n">fftin</span>		<span class="nb">pvsanal</span>	a<span class="n">in</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1</span><span class="c1">; fft-analysis of the audio-signal</span>
+<span class="n">fftbp</span>		<span class="nb">pvsbandp</span>	<span class="n">fftin</span><span class="p">,</span> k<span class="n">lowcut</span><span class="p">,</span> k<span class="n">lowfull</span><span class="p">,</span> k<span class="n">highfull</span><span class="p">,</span> k<span class="n">highcut</span> <span class="c1">; band pass</span>
+a<span class="n">bp</span>		<span class="nb">pvsynth</span>	<span class="n">fftbp</span><span class="c1">; resynthesis</span>
+		<span class="nb">out</span>		a<span class="n">bp</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span> 1 0 3
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -166,7 +167,7 @@ abp		<span class="opc">pvsynth</span>	fftbp<span class="comment">; resynthesis</
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644604544"></a>
+        <a id="idm47596139086800"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>,
@@ -176,7 +177,7 @@ abp		<span class="opc">pvsynth</span>	fftbp<span class="comment">; resynthesis</
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644599552"></a>
+        <a id="idm47596139081872"></a>
         <h2>Crédits</h2>
         <p>
       </p>

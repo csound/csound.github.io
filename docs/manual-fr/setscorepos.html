@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>setscorepos</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,82 +39,82 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887636045600"></a>
+        <a id="idm47596130187680"></a>
         <h2>Description</h2>
         <p>
       Modifie la position de lecture de l'exécution courante de la partition.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887635978336"></a>
+        <a id="idm47596130120208"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"> <span class="command"><strong>setscorepos ipos</strong></span></pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887635976448"></a>
+        <a id="idm47596130118320"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ipos</em></span> -- position de lecture en secondes. 
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887635974912"></a>
+        <a id="idm47596130116720"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode setscorepos. Il utilise le fichier
       <a class="ulink" href="examples/setscorepos.csd" target="_top"><em class="citetitle">setscorepos.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887635973200"></a>
+          <a id="idm47596130114832"></a>
           <p class="title">
-            <strong>Exemple 835. Exemple de l'opcode setscorepos.</strong>
+            <strong>Exemple 876. Exemple de l'opcode setscorepos.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887504252976"></a>
+              <a id="idm47595946513600"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac  <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o setscorepos.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac  <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o setscorepos.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-giSine <span class="ohdr">ftgen</span> 0, 0, 8192, 10, 1
+gi<span class="n">Sine</span> <span class="nb">ftgen</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8192</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-asig <span class="opc">poscil</span> 0.5, p4, giSine		<span class="comment">;play something</span>
-     <span class="opc">outs</span> asig, asig
-<span class="oblock">endin</span>
+a<span class="n">sig</span> <span class="nb">poscil</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nb">p4</span><span class="p">,</span> gi<span class="n">Sine</span>		<span class="c1">;play something</span>
+     <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 11
+<span class="kd">instr</span> <span class="nf">11</span>
 
-<span class="opc">setscorepos</span> 8.5				
-<span class="oblock">endin</span>
+<span class="nb">setscorepos</span> <span class="mf">8.5</span>				
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">i</span>1 0 2 220	<span class="comment">;this one will be played</span>
-<span class="stamnt">i</span>11 2.5 1	<span class="comment">;start setscorepos now</span>
-<span class="stamnt">i</span>1 3 2 330	<span class="comment">;skip this note</span>
-<span class="stamnt">i</span>1 6 2 440	<span class="comment">;and this one</span>
-<span class="stamnt">i</span>1 9 2 550	<span class="comment">;play this one        </span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span> <span class="mi">220</span>	<span class="c1">;this one will be played</span>
+<span class="nb">i</span><span class="mi">11</span> <span class="mf">2.5</span> <span class="mi">1</span>	<span class="c1">;start setscorepos now</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">3</span> <span class="mi">2</span> <span class="mi">330</span>	<span class="c1">;skip this note</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">6</span> <span class="mi">2</span> <span class="mi">440</span>	<span class="c1">;and this one</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">9</span> <span class="mi">2</span> <span class="mi">550</span>	<span class="c1">;play this one        </span>
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -122,14 +123,14 @@ asig <span class="opc">poscil</span> 0.5, p4, giSine		<span class="comment">;pla
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887635968832"></a>
+        <a id="idm47596130110464"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="rewindscore.html" title="rewindscore"><em class="citetitle">rewindscore</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887635966784"></a>
+        <a id="idm47596130108416"></a>
         <h2>Crédits</h2>
         <p>
       </p>

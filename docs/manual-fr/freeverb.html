@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>freeverb</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887673279872"></a>
+        <a id="idm47596169298288"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>freeverb</em></span> est une unité de réverbération stéréo basée
@@ -49,12 +50,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887673277632"></a>
+        <a id="idm47596169296048"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">aoutL, aoutR <span class="command"><strong>freeverb</strong></span> ainL, ainR, kRoomSize, kHFDamp[, iSRate[, iSkip]] </pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887673201296"></a>
+        <a id="idm47596169219728"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iSRate</em></span> (facultatif, 44100 par défaut) -- ajuste les
@@ -74,7 +75,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887673197264"></a>
+        <a id="idm47596169215664"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ainL, ainR</em></span> -- signaux d'entrée ; habituellement, les
@@ -123,56 +124,56 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887673189808"></a>
+        <a id="idm47596169208208"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode freeverb. Il utilise le fichier
       <a class="ulink" href="examples/freeverb.csd" target="_top"><em class="citetitle">freeverb.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887673187936"></a>
+          <a id="idm47596169206336"></a>
           <p class="title">
-            <strong>Exemple 343. Un exemple de l'opcode freeverb.</strong>
+            <strong>Exemple 352. Un exemple de l'opcode freeverb.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887522611392"></a>
+              <a id="idm47595994742928"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o freeverb.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
-<span class="ohdr">sr</span>      <span class="op">=</span>  44100
-<span class="ohdr">ksmps</span>   <span class="op">=</span>  32
-<span class="ohdr">nchnls</span>  <span class="op">=</span>  2
-<span class="ohdr">0dbfs</span>   <span class="op">=</span>  1
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o freeverb.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="vg">sr</span>      <span class="o">=</span>  <span class="mi">44100</span>
+<span class="vg">ksmps</span>   <span class="o">=</span>  <span class="mi">32</span>
+<span class="vg">nchnls</span>  <span class="o">=</span>  <span class="mi">2</span>
+<span class="vg">0dbfs</span>   <span class="o">=</span>  <span class="mi">1</span>
 
-        <span class="oblock">instr</span> 1
-a1      <span class="opc">vco2</span> 0.75, 440, 10
-kfrq    <span class="opc">port</span> 100, 0.008, 20000
-a1      <span class="opc">butterlp</span> a1, kfrq
-a2      <span class="opc">linseg</span> 0, 0.003, 1, 0.01, 0.7, 0.005, 0, 1, 0
-a1      <span class="op">=</span>  a1 <span class="op">*</span> a2
-        <span class="opc">denorm</span> a1
-aL, aR  <span class="opc">freeverb</span> a1, a1, 0.9, 0.35, sr, 0
-        <span class="opc">outs</span> a1 <span class="op">+</span> aL, a1 <span class="op">+</span> aR
-        <span class="oblock">endin</span>
+        <span class="kd">instr</span> <span class="nf">1</span>
+a<span class="n">1</span>      <span class="nb">vco2</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">10</span>
+k<span class="n">frq</span>    <span class="nb">port</span> <span class="mi">100</span><span class="p">,</span> <span class="mf">0.008</span><span class="p">,</span> <span class="mi">20000</span>
+a<span class="n">1</span>      <span class="nb">butterlp</span> a<span class="n">1</span><span class="p">,</span> k<span class="n">frq</span>
+a<span class="n">2</span>      <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+a<span class="n">1</span>      <span class="o">=</span>  a<span class="n">1</span> <span class="o">*</span> a<span class="n">2</span>
+        <span class="nb">denorm</span> a<span class="n">1</span>
+a<span class="n">L</span><span class="p">,</span> a<span class="n">R</span>  <span class="nb">freeverb</span> a<span class="n">1</span><span class="p">,</span> a<span class="n">1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="vg">sr</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="nb">outs</span> a<span class="n">1</span> <span class="o">+</span> a<span class="n">L</span><span class="p">,</span> a<span class="n">1</span> <span class="o">+</span> a<span class="n">R</span>
+        <span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span> 1 0 5
-<span class="stamnt">e</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">5</span>
+<span class="nb">e</span>
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -181,7 +182,7 @@ aL, aR  <span class="opc">freeverb</span> a1, a1, 0.9, 0.35, sr, 0
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887673183568"></a>
+        <a id="idm47596169202032"></a>
         <h2>Crédits</h2>
         <p>
       </p>

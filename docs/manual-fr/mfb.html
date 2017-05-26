@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>mfb</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887660130880"></a>
+        <a id="idm47596155138048"></a>
         <h2>Description</h2>
         <p>
        Applique un banc de filtres étalonnés en mels à un tableau contenant une
@@ -46,12 +47,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887660129472"></a>
+        <a id="idm47596155136640"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">kout[] <span class="command"><strong>mfb</strong></span> kin[], klow, khigh, ibands</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887660127456"></a>
+        <a id="idm47596155134624"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ibands</em></span> -- nombres de bandes dans le banc de filtres
@@ -59,7 +60,7 @@
    </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887660125696"></a>
+        <a id="idm47596155132864"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kout[]</em></span> -- tableau de sortie contenant les valeurs
@@ -79,58 +80,57 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887660121088"></a>
+        <a id="idm47596155128192"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode mfb. Il utilise le fichier
       <a class="ulink" href="examples/mfb.csd" target="_top"><em class="citetitle">mfb.csd</em></a>.</p>
         <div class="example">
-          <a id="idm47887660119216"></a>
+          <a id="idm47596155126320"></a>
           <p class="title">
-            <strong>Exemple 508. Exemple de l'opcode mfb.</strong>
+            <strong>Exemple 533. Exemple de l'opcode mfb.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887516423136"></a>
+              <a id="idm47595974525200"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="kd">instr</span> <span class="nf">1</span>
 
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
-<span class="ohdr">ksmps</span> <span class="op">=</span> 64
-<span class="oblock">instr</span> 1
-
- ifftsize <span class="opc">init</span> 1024
- ibins <span class="opc">init</span> ifftsize<span class="op">/</span>2
- kIn[] <span class="opc">init</span> ifftsize
- kcnt <span class="opc">init</span> 0
- p3 <span class="op">=</span> <span class="opc">filelen</span>("fox.wav")
- asig <span class="opc">diskin</span> "fox.wav"
- kIn <span class="opc">shiftin</span> asig
- kcnt <span class="op">+</span><span class="op">=</span> <span class="ohdr">ksmps</span>
- <span class="octrl">if</span> kcnt <span class="op">==</span> ifftsize then
-  kFFT[] <span class="op">=</span> <span class="opc">rfft</span>(kIn)
-  kPows[] <span class="op">=</span> <span class="opc">pows</span>(kFFT)
-  kMFB[] <span class="op">=</span> <span class="opc">log</span>(<span class="opc">mfb</span>(kPows,300,8000,32))
-  kmfcc[] <span class="op">=</span> <span class="opc">dct</span>(kMFB)
-  kcnt <span class="op">=</span> 0
-  kfb <span class="op">=</span> 0
-  while kfb <span class="op">&lt;</span> 32 do
-   <span class="opc">printf</span>("mfcc[<span class="op">%</span>d] <span class="op">=</span> <span class="op">%</span>.3f \n", kfb<span class="op">+</span>1, kfb, kmfcc[kfb])
-   kfb <span class="op">+</span><span class="op">=</span> 1
-  od
- <span class="octrl">endif</span>
+ i<span class="n">fftsize</span> <span class="nb">init</span> <span class="mi">1024</span>
+ i<span class="n">bins</span> <span class="nb">init</span> i<span class="n">fftsize</span><span class="o">/</span><span class="mi">2</span>
+ k<span class="n">In</span><span class="p">[]</span> <span class="nb">init</span> i<span class="n">fftsize</span>
+ k<span class="n">cnt</span> <span class="nb">init</span> <span class="mi">0</span>
+ <span class="nb">p3</span> <span class="o">=</span> <span class="nb">filelen</span><span class="p">(</span><span class="s">"fox.wav"</span><span class="p">)</span>
+ a<span class="n">sig</span> <span class="nb">diskin</span> <span class="s">"fox.wav"</span>
+ k<span class="n">In</span> <span class="nb">shiftin</span> a<span class="n">sig</span>
+ k<span class="n">cnt</span> <span class="o">+=</span> <span class="vg">ksmps</span>
+ <span class="k">if</span> k<span class="n">cnt</span> <span class="o">==</span> i<span class="n">fftsize</span> <span class="k">then</span>
+  k<span class="n">FFT</span><span class="p">[]</span> <span class="o">=</span> <span class="nb">rfft</span><span class="p">(</span>k<span class="n">In</span><span class="p">)</span>
+  k<span class="n">Pows</span><span class="p">[]</span> <span class="o">=</span> <span class="nb">pows</span><span class="p">(</span>k<span class="n">FFT</span><span class="p">)</span>
+  k<span class="n">MFB</span><span class="p">[]</span> <span class="o">=</span> <span class="nb">log</span><span class="p">(</span><span class="nb">mfb</span><span class="p">(</span>k<span class="n">Pows</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="mi">8000</span><span class="p">,</span><span class="mi">32</span><span class="p">))</span>
+  k<span class="n">mfcc</span><span class="p">[]</span> <span class="o">=</span> <span class="nb">dct</span><span class="p">(</span>k<span class="n">MFB</span><span class="p">)</span>
+  k<span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
+  k<span class="n">fb</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> k<span class="n">fb</span> <span class="o">&lt;</span> <span class="mi">32</span> <span class="k">do</span>
+   <span class="nb">printf</span><span class="p">(</span><span class="s">"mfcc[</span><span class="si">%d</span><span class="s">] = %.3f </span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">fb</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">fb</span><span class="p">,</span> k<span class="n">mfcc</span><span class="p">[</span>k<span class="n">fb</span><span class="p">])</span>
+   k<span class="n">fb</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="k">od</span>
+ <span class="k">endif</span>
                
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span>1  0 1
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span><span class="mi">1</span>  <span class="mi">0</span> <span class="mi">1</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -138,7 +138,7 @@
         <br class="example-break" />
       </div>
       <div class="refsect1">
-        <a id="idm47887660114976"></a>
+        <a id="idm47596155122080"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="vectorial.html" title="Opcodes vectoriels"><em class="citetitle"></em>Vectorial opcodes</a>,
@@ -147,7 +147,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887660111040"></a>
+        <a id="idm47596155118144"></a>
         <h2>Crédits</h2>
         <p>
       </p>

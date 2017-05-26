@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>strcatk</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887627821984"></a>
+        <a id="idm47596121873488"></a>
         <h2>Description</h2>
         <p>
       Concaténation de deux chaînes et stockage du résultat dans une variable.
@@ -48,68 +49,68 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887627819888"></a>
+        <a id="idm47596121871392"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">Sdst <span class="command"><strong>strcatk</strong></span> Ssrc1, Ssrc2</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887627817872"></a>
+        <a id="idm47596121869376"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode strcatk. Il utilise le fichier
       <a class="ulink" href="examples/strcatk.csd" target="_top"><em class="citetitle">strcatk.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887627816000"></a>
+          <a id="idm47596121867504"></a>
           <p class="title">
-            <strong>Exemple 906. Exemple de l'opcode strcatk.</strong>
+            <strong>Exemple 949. Exemple de l'opcode strcatk.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887501627424"></a>
+              <a id="idm47595940582160"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in</span>
--odac           -iadc    <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o strcatk.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o strcatk.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-  <span class="ohdr">sr</span>	    <span class="op">=</span>  48000
-  <span class="ohdr">ksmps</span>	    <span class="op">=</span>  16
-  <span class="ohdr">nchnls</span>    <span class="op">=</span>  2
-  <span class="ohdr">0dbfs</span>	    <span class="op">=</span>  1
+  <span class="vg">sr</span>	    <span class="o">=</span>  <span class="mi">48000</span>
+  <span class="vg">ksmps</span>	    <span class="o">=</span>  <span class="mi">16</span>
+  <span class="vg">nchnls</span>    <span class="o">=</span>  <span class="mi">2</span>
+  <span class="vg">0dbfs</span>	    <span class="o">=</span>  <span class="mi">1</span>
 
-<span class="comment">; Example by Jonathan Murphy 2007</span>
+<span class="c1">; Example by Jonathan Murphy 2007</span>
 
-    <span class="oblock">instr</span> 1
+    <span class="kd">instr</span> <span class="nf">1</span>
 
-  S1	    <span class="op">=</span>  "1"
-  S2	    <span class="op">=</span>  " <span class="op">+</span> 1"
-  ktrig	    <span class="opc">init</span>      0
-  kval	    <span class="opc">init</span>      2
-<span class="octrl">if</span> (ktrig <span class="op">==</span> 1) then
-  S1	    <span class="opc">strcatk</span>   S1, S2
-  kval	    <span class="op">=</span>  kval <span class="op">+</span> 1
-<span class="octrl">endif</span>
-  String    <span class="opc">sprintfk</span>  "<span class="op">%</span>s <span class="op">=</span> <span class="op">%</span>d", S1, kval
-	    <span class="opc">puts</span>      String, kval
-  ktrig	    <span class="opc">metro</span>     1
+  S<span class="n">1</span>	    <span class="o">=</span>  <span class="s">"1"</span>
+  S<span class="n">2</span>	    <span class="o">=</span>  <span class="s">" + 1"</span>
+  k<span class="n">trig</span>	    <span class="nb">init</span>      <span class="mi">0</span>
+  k<span class="n">val</span>	    <span class="nb">init</span>      <span class="mi">2</span>
+<span class="k">if</span> <span class="p">(</span>k<span class="n">trig</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+  S<span class="n">1</span>	    <span class="nb">strcatk</span>   S<span class="n">1</span><span class="p">,</span> S<span class="n">2</span>
+  k<span class="n">val</span>	    <span class="o">=</span>  k<span class="n">val</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="k">endif</span>
+  S<span class="n">tring</span>    <span class="nb">sprintfk</span>  <span class="s">"%s = </span><span class="si">%d</span><span class="s">"</span><span class="p">,</span> S<span class="n">1</span><span class="p">,</span> k<span class="n">val</span>
+	    <span class="nb">puts</span>      S<span class="n">tring</span><span class="p">,</span> k<span class="n">val</span>
+  k<span class="n">trig</span>	    <span class="nb">metro</span>     <span class="mi">1</span>
 
-    <span class="oblock">endin</span>
+    <span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span>1 0 10
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -133,7 +134,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887627810800"></a>
+        <a id="idm47596121862304"></a>
         <h2>Voir aussi</h2>
         <p>
           <a class="link" href="strcat.html" title="strcat">
@@ -142,7 +143,7 @@
         </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887627808976"></a>
+        <a id="idm47596121860480"></a>
         <h2>Crédits</h2>
         <p>
       </p>

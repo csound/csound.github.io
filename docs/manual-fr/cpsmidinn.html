@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>cpsmidinn</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,14 +39,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887689350256"></a>
+        <a id="idm47596185682464"></a>
         <h2>Description</h2>
         <p>
       Convertit un numéro de note Midi en cycles par seconde.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887689276320"></a>
+        <a id="idm47596185608544"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>cpsmidinn</strong></span> (MidiNoteNumber)  (arguments de taux-i ou -k seulement)</pre>
         <p>
@@ -53,7 +54,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887689273888"></a>
+        <a id="idm47596185606112"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>cpsmidinn</em></span> est une fonction qui prend une valeur de taux-i ou de taux-k
@@ -103,7 +104,7 @@
       suivants :
     </p>
         <div class="table">
-          <a id="idm47887689262608"></a>
+          <a id="idm47596185594832"></a>
           <p class="title">
             <strong>Tableau 6. Valeurs de Hauteur et de Fréquence</strong>
           </p>
@@ -196,7 +197,7 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47887689240080"></a>
+        <a id="idm47596185572208"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode cpsmidinn. Il utilise le fichier
@@ -204,58 +205,62 @@
 
       </p>
         <div class="example">
-          <a id="idm47887689238208"></a>
+          <a id="idm47596185570336"></a>
           <p class="title">
-            <strong>Exemple 156. Exemple de l'opcode cpsmidinn.</strong>
+            <strong>Exemple 159. Exemple de l'opcode cpsmidinn.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
         <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887529528464"></a>
+              <a id="idm47596014570736"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform.</span>
-<span class="comment">; This example produces no audio, so we render in</span>
-<span class="comment">; non-realtime and turn off sound to disk:</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="c1">; Prints a table showing the equivalents of all Midi</span>
+<span class="c1">; note numbers from 0-127 in cycles-per-second, </span>
+<span class="c1">; octave.decimal, and octave.pitchclass units.</span>
+
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform.</span>
+<span class="c1">; This example produces no audio, so we render in</span>
+<span class="c1">; non-realtime and turn off sound to disk:</span>
 -n
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="oblock">instr</span> 1
-  <span class="comment">; i-time loop to print conversion table</span>
-  imidiNN <span class="op">=</span>   0
-  loop1<span class="op">:</span>
-    icps  <span class="op">=</span> <span class="opc">cpsmidinn</span>(imidiNN)
-    ioct  <span class="op">=</span> <span class="opc">octmidinn</span>(imidiNN)
-    ipch  <span class="op">=</span> <span class="opc">pchmidinn</span>(imidiNN)
+<span class="kd">instr</span> <span class="nf">1</span>
+  <span class="c1">; i-time loop to print conversion table</span>
+  i<span class="n">midiNN</span> <span class="o">=</span>   <span class="mi">0</span>
+  <span class="nl">loop1</span><span class="p">:</span>
+    i<span class="n">cps</span>  <span class="o">=</span> <span class="nb">cpsmidinn</span><span class="p">(</span>i<span class="n">midiNN</span><span class="p">)</span>
+    i<span class="n">oct</span>  <span class="o">=</span> <span class="nb">octmidinn</span><span class="p">(</span>i<span class="n">midiNN</span><span class="p">)</span>
+    i<span class="n">pch</span>  <span class="o">=</span> <span class="nb">pchmidinn</span><span class="p">(</span>i<span class="n">midiNN</span><span class="p">)</span>
             
-    <span class="opc">print</span>   imidiNN, icps, ioct, ipch
+    <span class="nb">print</span>   i<span class="n">midiNN</span><span class="p">,</span> i<span class="n">cps</span><span class="p">,</span> i<span class="n">oct</span><span class="p">,</span> i<span class="n">pch</span>
       
-    imidiNN <span class="op">=</span> imidiNN <span class="op">+</span> 1
-  <span class="octrl">if</span> (imidiNN <span class="op">&lt;</span> 128) <span class="octrl">igoto</span> loop1
-<span class="oblock">endin</span>
+    i<span class="n">midiNN</span> <span class="o">=</span> i<span class="n">midiNN</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="k">if</span> <span class="p">(</span>i<span class="n">midiNN</span> <span class="o">&lt;</span> <span class="mi">128</span><span class="p">)</span> <span class="k">igoto</span> <span class="nl">loop1</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 2
-  <span class="comment">; test k-rate converters</span>
-  kMiddleC  <span class="op">=</span>   60
-  kcps  <span class="op">=</span> <span class="opc">cpsmidinn</span>(kMiddleC)
-  koct  <span class="op">=</span> <span class="opc">octmidinn</span>(kMiddleC)
-  kpch  <span class="op">=</span> <span class="opc">pchmidinn</span>(kMiddleC)
+<span class="kd">instr</span> <span class="nf">2</span>
+  <span class="c1">; test k-rate converters</span>
+  k<span class="n">MiddleC</span>  <span class="o">=</span>   <span class="mi">60</span>
+  k<span class="n">cps</span>  <span class="o">=</span> <span class="nb">cpsmidinn</span><span class="p">(</span>k<span class="n">MiddleC</span><span class="p">)</span>
+  k<span class="n">oct</span>  <span class="o">=</span> <span class="nb">octmidinn</span><span class="p">(</span>k<span class="n">MiddleC</span><span class="p">)</span>
+  k<span class="n">pch</span>  <span class="o">=</span> <span class="nb">pchmidinn</span><span class="p">(</span>k<span class="n">MiddleC</span><span class="p">)</span>
             
-  <span class="opc">printks</span> "<span class="op">%</span>d <span class="op">%</span>f <span class="op">%</span>f <span class="op">%</span>f\n", 1.0, kMiddleC, kcps, koct, kpch
-<span class="oblock">endin</span>
+  <span class="nb">printks</span> <span class="s">"</span><span class="si">%d</span><span class="s"> %f %f %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> k<span class="n">MiddleC</span><span class="p">,</span> k<span class="n">cps</span><span class="p">,</span> k<span class="n">oct</span><span class="p">,</span> k<span class="n">pch</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span>1 0 0
-<span class="stamnt">i</span>2 0 0.1
-<span class="stamnt">e</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="nb">i</span><span class="mi">2</span> <span class="mi">0</span> <span class="mf">0.1</span>
+<span class="nb">e</span>
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -268,52 +273,52 @@
 
       </p>
         <div class="example">
-          <a id="idm47887689232832"></a>
+          <a id="idm47596185564960"></a>
           <p class="title">
-            <strong>Exemple 157. Second exemple de l'opcode cpsmidinn.</strong>
+            <strong>Exemple 160. Second exemple de l'opcode cpsmidinn.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm47887529489760"></a>
+              <a id="idm47596012527200"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">;;;RT audio out, midi in, note=p4 and velocity=p5</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">;;;RT audio out, midi in, note=p4 and velocity=p5</span>
 -odac -+rtmidi=virtual -M0d --midi-key=4 --midi-velocity-amp=5
-<span class="comment">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o cpsmidinn.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o cpsmidinn.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="ohdr">massign</span> 0, 1	<span class="comment">;assign all midi to instr. 1</span>
+<span class="nb">massign</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">;assign all midi to instr. 1</span>
 
-<span class="oblock">instr</span> 1	<span class="comment">;play virtual keyboard</span>
+<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">;play virtual keyboard</span>
 
-inote <span class="op">=</span> p4
-icps  <span class="op">=</span> <span class="opc">cpsmidinn</span>(inote)
-asig	<span class="opc">oscil</span> 0.6, icps, 1
-	<span class="opc">print</span> icps
-	<span class="opc">outs</span>  asig, asig
+i<span class="n">note</span> <span class="o">=</span> <span class="nb">p4</span>
+i<span class="n">cps</span>  <span class="o">=</span> <span class="nb">cpsmidinn</span><span class="p">(</span>i<span class="n">note</span><span class="p">)</span>
+a<span class="n">sig</span>	<span class="nb">oscil</span> <span class="mf">0.6</span><span class="p">,</span> i<span class="n">cps</span><span class="p">,</span> <span class="mi">1</span>
+	<span class="nb">print</span> i<span class="n">cps</span>
+	<span class="nb">outs</span>  a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
 
-<span class="oblock">endin</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span>0 20
-<span class="comment">;sine wave.</span>
-<span class="stamnt">f</span> 1 0 16384 10 1
-<span class="comment">;play note from score too</span>
-<span class="stamnt">i</span>1 0 1 60
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span><span class="mi">0</span> <span class="mi">20</span>
+<span class="c1">;sine wave.</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
+<span class="c1">;play note from score too</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">60</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -322,7 +327,7 @@ asig	<span class="opc">oscil</span> 0.6, icps, 1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887689230912"></a>
+        <a id="idm47596185563040"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="octmidinn.html" title="octmidinn"><em class="citetitle">octmidinn</em></a>,
@@ -337,7 +342,7 @@ asig	<span class="opc">oscil</span> 0.6, icps, 1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887689221184"></a>
+        <a id="idm47596185553312"></a>
         <h2>Crédits</h2>
         <p>Dérivé à partir des convertisseurs de valeur originaux de Barry Vercoe.</p>
         <p>Nouveau dans la version 5.07</p>

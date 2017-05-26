@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>midiout</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887658763792"></a>
+        <a id="idm47596153718672"></a>
         <h2>Description</h2>
         <p>
       Envoie un message générique MIDI sur le port MIDI OUT.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887658762480"></a>
+        <a id="idm47596153717360"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>midiout</strong></span> kstatus, kchan, kdata1, kdata2</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887658760592"></a>
+        <a id="idm47596153715472"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kstatus</em></span> -- le type du message MIDI. Peut être :
@@ -118,53 +119,53 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47887658748832"></a>
+        <a id="idm47596153703712"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode midiout. Il utilise le fichier
       <a class="ulink" href="examples/midiout.csd" target="_top"><em class="citetitle">midiout.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887658746960"></a>
+          <a id="idm47596153701840"></a>
           <p class="title">
-            <strong>Exemple 525. Exemple de l'opcode midiout.</strong>
+            <strong>Exemple 551. Exemple de l'opcode midiout.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887515522896"></a>
+              <a id="idm47595975109072"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in</span>
--odac -Ma -Q1 <span class="comment">;;;realtime audio out and midi out and midi in (all midi inputs)</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac -Ma -Q1 <span class="c1">;;;realtime audio out and midi out and midi in (all midi inputs)</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-<span class="opc">midiout</span>	192, 1, 21, 0	<span class="comment">;program change to instr. 21</span>
-inum <span class="opc">notnum</span>
-ivel <span class="opc">veloc</span>
-<span class="opc">midion</span> 1, inum, ivel
+<span class="nb">midiout</span>	<span class="mi">192</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">0</span>	<span class="c1">;program change to instr. 21</span>
+i<span class="n">num</span> <span class="nb">notnum</span>
+i<span class="n">vel</span> <span class="nb">veloc</span>
+<span class="nb">midion</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">num</span><span class="p">,</span> i<span class="n">vel</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">i</span> 1 0 3  80 100		<span class="comment">;play note for 3 seconds</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span>  <span class="mi">80</span> <span class="mi">100</span>		<span class="c1">;play note for 3 seconds</span>
 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -173,7 +174,7 @@ ivel <span class="opc">veloc</span>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887658742592"></a>
+        <a id="idm47596153697536"></a>
         <h2>Crédits</h2>
         <p>
       </p>

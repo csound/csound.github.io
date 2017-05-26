@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>sfplaym</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887634843824"></a>
+        <a id="idm47596128985456"></a>
         <h2>Description</h2>
         <p>
       Joue un preset d'échantillons SoundFont2 (SF2), générant un son mono.
@@ -49,12 +50,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887634841072"></a>
+        <a id="idm47596128982704"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>sfplaym</strong></span> ivel, inotenum, xamp, xfreq, ipreindex [, iflag] [, ioffset] [, ienv]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887634838896"></a>
+        <a id="idm47596128980528"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ivel</em></span> -- vélocité.
@@ -80,7 +81,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887634831488"></a>
+        <a id="idm47596128973120"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>xamp</em></span> -- facteur de correction de l'amplitude.
@@ -144,71 +145,71 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887634811408"></a>
+        <a id="idm47596128953040"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode sfplaym. Il utilise le fichier
       <a class="ulink" href="examples/sfplaym.csd" target="_top"><em class="citetitle">sfplaym.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887634809536"></a>
+          <a id="idm47596128951168"></a>
           <p class="title">
-            <strong>Exemple 845. Exemple de l'opcode sfplaym.</strong>
+            <strong>Exemple 886. Exemple de l'opcode sfplaym.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887503874560"></a>
+              <a id="idm47595946442800"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac -+rtmidi=virtual -M0 <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o sfplaym.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac -+rtmidi=virtual -M0 <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o sfplaym.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100 
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1 
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span> 
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span> 
 
 
-gisf	<span class="opc">sfload</span>	"07AcousticGuitar.sf2"
-	<span class="opc">sfplist</span>	gisf
-	<span class="opc">sfpassign</span> 100, gisf
+gi<span class="n">sf</span>	<span class="nb">sfload</span>	<span class="s">"07AcousticGuitar.sf2"</span>
+	<span class="nb">sfplist</span>	gi<span class="n">sf</span>
+	<span class="nb">sfpassign</span> <span class="mi">100</span><span class="p">,</span> gi<span class="n">sf</span>
 
-<span class="oblock">instr</span> 1	<span class="comment">; play from score and midi keyboard</span>
+<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">; play from score and midi keyboard</span>
 
-	<span class="opc">mididefault</span>	60, p3
-	<span class="opc">midinoteonkey</span>	p4, p5
-inum	<span class="opc">init</span>	p4
-ivel	<span class="opc">init</span>	p5
-ivel	<span class="opc">init</span>	ivel<span class="op">/</span>127					<span class="comment">;make velocity dependent</span>
-kamp	<span class="opc">linsegr</span>	1, 1, 1, .1, 0
-kamp	<span class="op">=</span> kamp<span class="op">/</span>7000						<span class="comment">;scale amplitude</span>
-kfreq	<span class="opc">init</span>	1						<span class="comment">;do not change freq from sf</span>
-aout	<span class="opc">sfplaym</span> ivel, inum, kamp<span class="op">*</span>ivel, kfreq, 100		<span class="comment">;preset index = 100</span>
-	<span class="opc">outs</span>	aout, aout
+	<span class="nb">mididefault</span>	<span class="mi">60</span><span class="p">,</span> <span class="nb">p3</span>
+	<span class="nb">midinoteonkey</span>	<span class="nb">p4</span><span class="p">,</span> <span class="nb">p5</span>
+i<span class="n">num</span>	<span class="nb">init</span>	<span class="nb">p4</span>
+i<span class="n">vel</span>	<span class="nb">init</span>	<span class="nb">p5</span>
+i<span class="n">vel</span>	<span class="nb">init</span>	i<span class="n">vel</span><span class="o">/</span><span class="mi">127</span>					<span class="c1">;make velocity dependent</span>
+k<span class="n">amp</span>	<span class="nb">linsegr</span>	<span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mi">0</span>
+k<span class="n">amp</span>	<span class="o">=</span> k<span class="n">amp</span><span class="o">/</span><span class="mi">7000</span>						<span class="c1">;scale amplitude</span>
+k<span class="n">freq</span>	<span class="nb">init</span>	<span class="mi">1</span>						<span class="c1">;do not change freq from sf</span>
+a<span class="n">out</span>	<span class="nb">sfplaym</span> i<span class="n">vel</span><span class="p">,</span> i<span class="n">num</span><span class="p">,</span> k<span class="n">amp</span><span class="o">*</span>i<span class="n">vel</span><span class="p">,</span> k<span class="n">freq</span><span class="p">,</span> <span class="mi">100</span>		<span class="c1">;preset index = 100</span>
+	<span class="nb">outs</span>	a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
 	
-<span class="oblock">endin</span>
+<span class="kd">endin</span>
 	
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span>0  60	<span class="comment">; stay active for 1 minute</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span><span class="mi">0</span>  <span class="mi">60</span>	<span class="c1">; stay active for 1 minute</span>
 
-<span class="stamnt">i</span>1 0 1 60 127
-<span class="stamnt">i</span>1 + 1 62 &lt;
-<span class="stamnt">i</span>1 + 1 65 &lt;
-<span class="stamnt">i</span>1 + 1 69 10
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">60</span> <span class="mi">127</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="mi">62</span> <span class="o">&lt;</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="mi">65</span> <span class="o">&lt;</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="mi">69</span> <span class="mi">10</span>
 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -217,7 +218,7 @@ aout	<span class="opc">sfplaym</span> ivel, inum, kamp<span class="op">*</span>i
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887634805168"></a>
+        <a id="idm47596128946800"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="sfilist.html" title="sfilist"><em class="citetitle">sfilist</em></a>,
@@ -233,7 +234,7 @@ aout	<span class="opc">sfplaym</span> ivel, inum, kamp<span class="op">*</span>i
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887634794480"></a>
+        <a id="idm47596128936112"></a>
         <h2>Crédits</h2>
         <p>
       </p>

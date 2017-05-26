@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>timek</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,20 +39,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887622376864"></a>
+        <a id="idm47596116406864"></a>
         <h2>Description</h2>
         <p>
       Lit le temps absolu en cycles de taux-k, depuis le début de l'exécution.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887622375520"></a>
+        <a id="idm47596116405520"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ires <span class="command"><strong>timek</strong></span></pre>
         <pre class="synopsis">kres <span class="command"><strong>timek</strong></span></pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887622372464"></a>
+        <a id="idm47596116402384"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>timek</em></span> donne le temps en cycles de taux-k. Ainsi avec :
@@ -79,7 +80,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887622362400"></a>
+        <a id="idm47596116392320"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode timek. Il utilise le fichier
@@ -87,51 +88,51 @@
 
       </p>
         <div class="example">
-          <a id="idm47887622360544"></a>
+          <a id="idm47596116390464"></a>
           <p class="title">
-            <strong>Exemple 963. Exemple de l'opcode timek.</strong>
+            <strong>Exemple 1006. Exemple de l'opcode timek.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887499384016"></a>
+              <a id="idm47595937504560"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in</span>
--odac           -iadc    <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o timek.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o timek.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">; Instrument #1.</span>
-<span class="oblock">instr</span> 1
-  <span class="comment">; Print out the value from timek every half-second.</span>
-  k1 <span class="opc">timek</span>
-  <span class="opc">printks</span> "k1 <span class="op">=</span> <span class="op">%</span>f samples\\n", 0.5, k1
-<span class="oblock">endin</span>
-
-
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-
-<span class="comment">; Play Instrument #1 for two seconds.</span>
-<span class="stamnt">i</span> 1 0 2
-<span class="stamnt">e</span>
+<span class="c1">; Instrument #1.</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+  <span class="c1">; Print out the value from timek every half-second.</span>
+  k<span class="n">1</span> <span class="nb">timek</span>
+  <span class="nb">printks</span> <span class="s">"k1 = %f samples</span><span class="se">\\</span><span class="s">n"</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> k<span class="n">1</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="c1">; Play Instrument #1 for two seconds.</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span>
+<span class="nb">e</span>
+
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -150,7 +151,7 @@ k1 = 8820.000000 samples</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887622355328"></a>
+        <a id="idm47596116385248"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="timeinstk.html" title="timeinstk"><em class="citetitle">timeinstk</em></a>,
@@ -159,7 +160,7 @@ k1 = 8820.000000 samples</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887622351328"></a>
+        <a id="idm47596116381248"></a>
         <h2>Crédits</h2>
         <p>
       </p>

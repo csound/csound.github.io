@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>outletk</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887651610224"></a>
+        <a id="idm47596146364400"></a>
         <h2>Description</h2>
         <p>
       Envoie un signal de taux-k depuis un port nommé d'un instrument.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887651544864"></a>
+        <a id="idm47596146299040"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>outletk </strong></span>Sname, ksignal</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887651542848"></a>
+        <a id="idm47596146297024"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>Sname</em></span> -- Nom sous forme de chaîne de caractères du
@@ -62,7 +63,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887651540576"></a>
+        <a id="idm47596146294752"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ksignal</em></span> -- signal de taux-k en sortie.
@@ -77,68 +78,66 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887651536928"></a>
+        <a id="idm47596146291104"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode outletk. Il utilise le fichier
       <a class="ulink" href="examples/outletk.csd" target="_top"><em class="citetitle">outletk.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887651535056"></a>
+          <a id="idm47596146289232"></a>
           <p class="title">
-            <strong>Exemple 614. Exemple de l'opcode outletk.</strong>
+            <strong>Exemple 644. Exemple de l'opcode outletk.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887512178960"></a>
+              <a id="idm47595965418256"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o inletk.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
- 
+<span class="nt">&lt;CsoundSynthesizer&gt;</span> 
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o inletk.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span> 
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="opc">connect</span> "bend", "bendout", "guitar", "bendin" 
+<span class="nb">connect</span> <span class="s">"bend"</span><span class="p">,</span> <span class="s">"bendout"</span><span class="p">,</span> <span class="s">"guitar"</span><span class="p">,</span> <span class="s">"bendin"</span> 
 
-<span class="oblock">instr</span> bend 
+<span class="kd">instr</span> <span class="nf">bend</span> 
 
-kbend <span class="opc">line</span> p4, p3, p5 
-      <span class="opc">outletk</span> "bendout", kbend 
-<span class="oblock">endin</span> 
+k<span class="n">bend</span> <span class="nb">line</span> <span class="nb">p4</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="nb">p5</span> 
+      <span class="nb">outletk</span> <span class="s">"bendout"</span><span class="p">,</span> k<span class="n">bend</span> 
+<span class="kd">endin</span> 
 
-<span class="oblock">instr</span> guitar 
+<span class="kd">instr</span> <span class="nf">guitar</span> 
 
-kbend <span class="opc">inletk</span> "bendin" 
-kpch <span class="opc">pow</span> 2, kbend<span class="op">/</span>12
-     <span class="opc">printk2</span> kpch
-asig <span class="opc">oscili</span> .4, 440<span class="op">*</span>kpch, 1 
-     <span class="opc">outs</span> asig, asig
-<span class="oblock">endin</span> 
+k<span class="n">bend</span> <span class="nb">inletk</span> <span class="s">"bendin"</span> 
+k<span class="n">pch</span> <span class="nb">pow</span> <span class="mi">2</span><span class="p">,</span> k<span class="n">bend</span><span class="o">/</span><span class="mi">12</span>
+     <span class="nb">printk2</span> k<span class="n">pch</span>
+a<span class="n">sig</span> <span class="nb">oscili</span> <span class="mf">.4</span><span class="p">,</span> <span class="mi">440</span><span class="o">*</span>k<span class="n">pch</span><span class="p">,</span> <span class="mi">1</span> 
+     <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+<span class="kd">endin</span> 
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
- 
-<span class="stamnt">f</span>1 0 1024 10 1
+<span class="nt">&lt;/CsInstruments&gt;</span> 
+<span class="nt">&lt;CsScore&gt;</span> 
+<span class="nb">f</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1024</span> <span class="mi">10</span> <span class="mi">1</span>
 
-<span class="stamnt">i</span>"gu<span class="stamnt">i</span>tar" 0 5 8.00 
-<span class="stamnt">i</span>"bend" 3 .2 -12 12 
-<span class="stamnt">i</span>"bend" 4 .1 -17 40 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span><span class="s">"guitar"</span> <span class="mi">0</span> <span class="mi">5</span> <span class="mf">8.00</span> 
+<span class="nb">i</span><span class="s">"bend"</span> <span class="mi">3</span> <span class="mf">.2</span> <span class="o">-</span><span class="mi">12</span> <span class="mi">12</span> 
+<span class="nb">i</span><span class="s">"bend"</span> <span class="mi">4</span> <span class="mf">.1</span> <span class="o">-</span><span class="mi">17</span> <span class="mi">40</span> 
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span> 
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span> 
 </pre>
             </div>
           </div>
@@ -147,7 +146,7 @@ asig <span class="opc">oscili</span> .4, 440<span class="op">*</span>kpch, 1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887651530688"></a>
+        <a id="idm47596146284864"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="outleta.html" title="outleta"><em class="citetitle">outleta</em></a>,
@@ -167,7 +166,7 @@ asig <span class="opc">oscili</span> .4, 440<span class="op">*</span>kpch, 1
       écrit par Michael Gogins.</p>
       </div>
       <div class="refsect1">
-        <a id="idm47887651518480"></a>
+        <a id="idm47596146272656"></a>
         <h2>Crédits</h2>
         <p>Par Michael Gogins, 2009</p>
       </div>

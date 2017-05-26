@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>cngoto</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,14 +39,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887690815472"></a>
+        <a id="idm47596187153344"></a>
         <h2>Description</h2>
         <p>
       Transfère le contrôle à chaque passage si la condition n'est <span class="emphasis"><em>pas</em></span> vraie.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887690750528"></a>
+        <a id="idm47596187090336"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>cngoto</strong></span> condition, label</pre>
         <p>
@@ -58,7 +59,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887690743744"></a>
+        <a id="idm47596187083552"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode cngoto. Il utilise le fichier
@@ -66,70 +67,70 @@
 
       </p>
         <div class="example">
-          <a id="idm47887690741872"></a>
+          <a id="idm47596187081680"></a>
           <p class="title">
-            <strong>Exemple 133. Exemple de l'opcode cngoto.</strong>
+            <strong>Exemple 136. Exemple de l'opcode cngoto.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887530257232"></a>
+              <a id="idm47596016572944"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Audio out   Audio in</span>
--odac           -iadc    <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; -o cngoto.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; -o cngoto.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">; Instrument #1.</span>
-<span class="oblock">instr</span> 1
-  <span class="comment">; Change kval linearly from 0 to 2 over</span>
-  <span class="comment">; the period set by the third p-field.</span>
-  kval <span class="opc">line</span> 0, p3, 2
+<span class="c1">; Instrument #1.</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+  <span class="c1">; Change kval linearly from 0 to 2 over</span>
+  <span class="c1">; the period set by the third p-field.</span>
+  k<span class="n">val</span> <span class="nb">line</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="mi">2</span>
 
-  <span class="comment">; If kval *is not* greater than or equal to 1 then play</span>
-  <span class="comment">; the high note. Otherwise, play the low note.</span>
-  <span class="octrl">cngoto</span> (kval <span class="op">&gt;=</span> 1), <span class="olabel">highnote</span>
-    <span class="octrl">kgoto</span> <span class="olabel">lownote</span>
+  <span class="c1">; If kval *is not* greater than or equal to 1 then play</span>
+  <span class="c1">; the high note. Otherwise, play the low note.</span>
+  <span class="k">cngoto</span> <span class="p">(</span>k<span class="n">val</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">),</span> <span class="nl">highnote</span>
+    <span class="k">kgoto</span> <span class="nl">lownote</span>
 
-<span class="olabel">highnote</span><span class="op">:</span>
-  kfreq <span class="op">=</span> 880
-  <span class="octrl">goto</span> <span class="olabel">playit</span>
+<span class="nl">highnote</span><span class="p">:</span>
+  k<span class="n">freq</span> <span class="o">=</span> <span class="mi">880</span>
+  <span class="k">goto</span> <span class="nl">playit</span>
 
-<span class="olabel">lownote</span><span class="op">:</span>
-  kfreq <span class="op">=</span> 440
-  <span class="octrl">goto</span> <span class="olabel">playit</span>
+<span class="nl">lownote</span><span class="p">:</span>
+  k<span class="n">freq</span> <span class="o">=</span> <span class="mi">440</span>
+  <span class="k">goto</span> <span class="nl">playit</span>
 
-<span class="olabel">playit</span><span class="op">:</span>
-  <span class="comment">; Print the values of kval and kfreq.</span>
-  <span class="opc">printks</span> "kval <span class="op">=</span> <span class="op">%</span>f, kfreq <span class="op">=</span> <span class="op">%</span>f\\n", 1, kval, kfreq
+<span class="nl">playit</span><span class="p">:</span>
+  <span class="c1">; Print the values of kval and kfreq.</span>
+  <span class="nb">printks</span> <span class="s">"kval = %f, kfreq = %f</span><span class="se">\\</span><span class="s">n"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">val</span><span class="p">,</span> k<span class="n">freq</span>
 
-  a1 <span class="opc">oscil</span> 10000, kfreq, 1
-  <span class="opc">out</span> a1
-<span class="oblock">endin</span>
+  a<span class="n">1</span> <span class="nb">oscil</span> <span class="mi">10000</span><span class="p">,</span> k<span class="n">freq</span><span class="p">,</span> <span class="mi">1</span>
+  <span class="nb">out</span> a<span class="n">1</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="comment">; Table: a simple sine wave.</span>
-<span class="stamnt">f</span> 1 0 32768 10 1
+<span class="c1">; Table: a simple sine wave.</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">32768</span> <span class="mi">10</span> <span class="mi">1</span>
 
-<span class="comment">; Play Instrument #1 for two seconds.</span>
-<span class="stamnt">i</span> 1 0 2
-<span class="stamnt">e</span>
+<span class="c1">; Play Instrument #1 for two seconds.</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span>
+<span class="nb">e</span>
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -146,7 +147,7 @@ kval = 1.999639, kfreq = 440.000000</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887690736752"></a>
+        <a id="idm47596187076560"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="cggoto.html" title="cggoto"><em class="citetitle">cggoto</em></a>,
@@ -160,7 +161,7 @@ kval = 1.999639, kfreq = 440.000000</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887690728016"></a>
+        <a id="idm47596187067824"></a>
         <h2>Crédits</h2>
         <p>Exemple écrit par Kevin Conder.</p>
         <p>Nouveau dans la version 4.21</p>

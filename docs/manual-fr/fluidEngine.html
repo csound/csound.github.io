@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>fluidEngine</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,12 +39,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887675979840"></a>
+        <a id="idm47596172201040"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ienginenum <span class="command"><strong>fluidEngine</strong></span> [iReverbEnabled] [, iChorusEnabled] [,iNumChannels] [, iPolyphony] </pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887675977824"></a>
+        <a id="idm47596172199024"></a>
         <h2>Description</h2>
         <p>Crée une instance de moteur fluidsynth, et retourne <span class="emphasis"><em>ienginenum</em></span> pour identifier le moteur.
     <span class="emphasis"><em>ienginenum</em></span> est passé à d'autres opcodes pour charger et jouer
@@ -51,7 +52,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887675975424"></a>
+        <a id="idm47596172196592"></a>
         <h2>Initialisation</h2>
         <p><span class="emphasis"><em>ienginenum </em></span> -- numéro du moteur affecté par fluidEngine</p>
         <p><span class="emphasis"><em>iReverbEnabled </em></span> -- fixé de manière facultative à 0 pour désactiver
@@ -67,7 +68,7 @@
 </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887675969680"></a>
+        <a id="idm47596172190848"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple des opcodes fluidsynth utilisant 2 moteurs. Il utilise les fichiers
@@ -75,99 +76,99 @@
       et <a class="ulink" href="examples/midichn_advanced.mid" target="_top"><em class="citetitle">midichn_advanced.mid</em></a>.
     </p>
         <div class="refsect1">
-          <a id="idm47887524183728"></a>
+          <a id="idm47595999251600"></a>
           <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac  -F  midichn_advanced.mid <span class="comment">;;;reatime audio out and midifile in</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o fluidEngine.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac  -F  midichn_advanced.mid <span class="c1">;;;reatime audio out and midifile in</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o fluidEngine.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32  
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>  
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">; LOAD SOUNDFONTS</span>
-gienginenum1	<span class="opc">fluidEngine</span>
-gienginenum2	<span class="opc">fluidEngine</span>
-isfnum1	<span class="opc">fluidLoad</span> "sf_GMbank.sf2", gienginenum1, 1
-                <span class="comment">; Piano 2, program 1, channel 1</span>
-		<span class="opc">fluidProgramSelect</span>	gienginenum1, 1, isfnum1, 0, 1
-                <span class="comment">; Piano 3, program 2, channel 2</span>
-		<span class="opc">fluidProgramSelect</span>	gienginenum1, 2, isfnum1, 0, 2
-isfnum2	<span class="opc">fluidLoad</span> "19Trumpet.sf2", gienginenum2, 1
-                <span class="comment">; Trumpet, program 56, channel 3</span>
-		<span class="opc">fluidProgramSelect</span>	gienginenum2, 3, isfnum2, 0, 56
+<span class="c1">; LOAD SOUNDFONTS</span>
+gi<span class="n">enginenum1</span>	<span class="nb">fluidEngine</span>
+gi<span class="n">enginenum2</span>	<span class="nb">fluidEngine</span>
+i<span class="n">sfnum1</span>	<span class="nb">fluidLoad</span> <span class="s">"sf_GMbank.sf2"</span><span class="p">,</span> gi<span class="n">enginenum1</span><span class="p">,</span> <span class="mi">1</span>
+                <span class="c1">; Piano 2, program 1, channel 1</span>
+		<span class="nb">fluidProgramSelect</span>	gi<span class="n">enginenum1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">sfnum1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+                <span class="c1">; Piano 3, program 2, channel 2</span>
+		<span class="nb">fluidProgramSelect</span>	gi<span class="n">enginenum1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> i<span class="n">sfnum1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span>
+i<span class="n">sfnum2</span>	<span class="nb">fluidLoad</span> <span class="s">"19Trumpet.sf2"</span><span class="p">,</span> gi<span class="n">enginenum2</span><span class="p">,</span> <span class="mi">1</span>
+                <span class="c1">; Trumpet, program 56, channel 3</span>
+		<span class="nb">fluidProgramSelect</span>	gi<span class="n">enginenum2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> i<span class="n">sfnum2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">56</span>
 
-<span class="comment">;Look for midifile in folder manual/examples</span>
-<span class="comment">;"midichn_advanced.mid" sends notes to the soundfonts</span>
+<span class="c1">;Look for midifile in folder manual/examples</span>
+<span class="c1">;"midichn_advanced.mid" sends notes to the soundfonts</span>
 
-<span class="oblock">instr</span> 1 <span class="comment">; GM soundfont</span>
-  <span class="comment">; INITIALIZATION</span>
-	<span class="opc">mididefault</span>	60, p3 <span class="comment">; Default duration of 60 -- overridden by score.</span>
-	<span class="opc">midinoteonkey</span>	p4, p5 <span class="comment">; Channels MIDI input to pfields.</span>
-  <span class="comment">; Use channel assigned in fluidload.</span>
-  ichannel   <span class="op">=</span> 1
-  ikey       <span class="op">=</span> p4
-  ivelocity  <span class="op">=</span> p5
-	<span class="opc">fluidNote</span> gienginenum1, ichannel, ikey, ivelocity
-<span class="oblock">endin</span>
+<span class="kd">instr</span> <span class="nf">1</span> <span class="c1">; GM soundfont</span>
+  <span class="c1">; INITIALIZATION</span>
+	<span class="nb">mididefault</span>	<span class="mi">60</span><span class="p">,</span> <span class="nb">p3</span> <span class="c1">; Default duration of 60 -- overridden by score.</span>
+	<span class="nb">midinoteonkey</span>	<span class="nb">p4</span><span class="p">,</span> <span class="nb">p5</span> <span class="c1">; Channels MIDI input to pfields.</span>
+  <span class="c1">; Use channel assigned in fluidload.</span>
+  i<span class="n">channel</span>   <span class="o">=</span> <span class="mi">1</span>
+  i<span class="n">key</span>       <span class="o">=</span> <span class="nb">p4</span>
+  i<span class="n">velocity</span>  <span class="o">=</span> <span class="nb">p5</span>
+	<span class="nb">fluidNote</span> gi<span class="n">enginenum1</span><span class="p">,</span> i<span class="n">channel</span><span class="p">,</span> i<span class="n">key</span><span class="p">,</span> i<span class="n">velocity</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 2 <span class="comment">; GM soundfont</span>
-  <span class="comment">; INITIALIZATION</span>
-         <span class="opc">mididefault</span>   60, p3 <span class="comment">; Default duration of 60 -- overridden by score.</span>
-         <span class="opc">midinoteonkey</span> p4, p5 <span class="comment">; Channels MIDI input to pfields.</span>
-  <span class="comment">; Use channel assigned in fluidload.</span>
-  ichannel   <span class="op">=</span> 2
-  ikey       <span class="op">=</span> p4
-  ivelocity  <span class="op">=</span> p5
-         <span class="opc">fluidNote</span> gienginenum1, ichannel, ikey, ivelocity
-<span class="oblock">endin</span>
+<span class="kd">instr</span> <span class="nf">2</span> <span class="c1">; GM soundfont</span>
+  <span class="c1">; INITIALIZATION</span>
+         <span class="nb">mididefault</span>   <span class="mi">60</span><span class="p">,</span> <span class="nb">p3</span> <span class="c1">; Default duration of 60 -- overridden by score.</span>
+         <span class="nb">midinoteonkey</span> <span class="nb">p4</span><span class="p">,</span> <span class="nb">p5</span> <span class="c1">; Channels MIDI input to pfields.</span>
+  <span class="c1">; Use channel assigned in fluidload.</span>
+  i<span class="n">channel</span>   <span class="o">=</span> <span class="mi">2</span>
+  i<span class="n">key</span>       <span class="o">=</span> <span class="nb">p4</span>
+  i<span class="n">velocity</span>  <span class="o">=</span> <span class="nb">p5</span>
+         <span class="nb">fluidNote</span> gi<span class="n">enginenum1</span><span class="p">,</span> i<span class="n">channel</span><span class="p">,</span> i<span class="n">key</span><span class="p">,</span> i<span class="n">velocity</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 3 <span class="comment">; Trumpet</span>
-  <span class="comment">; INITIALIZATION</span>
-         <span class="opc">mididefault</span>   60, p3 <span class="comment">; Default duration of 60 -- overridden by score.</span>
-         <span class="opc">midinoteonkey</span> p4, p5 <span class="comment">; Channels MIDI input to pfields.</span>
-  <span class="comment">; Use channel assigned in fluidload.</span>
-  ichannel   <span class="op">=</span> 3
-  ikey       <span class="op">=</span> p4
-  ivelocity  <span class="op">=</span> p5
-         <span class="opc">fluidNote</span> gienginenum2, ichannel, ikey, ivelocity
-<span class="oblock">endin</span>
+<span class="kd">instr</span> <span class="nf">3</span> <span class="c1">; Trumpet</span>
+  <span class="c1">; INITIALIZATION</span>
+         <span class="nb">mididefault</span>   <span class="mi">60</span><span class="p">,</span> <span class="nb">p3</span> <span class="c1">; Default duration of 60 -- overridden by score.</span>
+         <span class="nb">midinoteonkey</span> <span class="nb">p4</span><span class="p">,</span> <span class="nb">p5</span> <span class="c1">; Channels MIDI input to pfields.</span>
+  <span class="c1">; Use channel assigned in fluidload.</span>
+  i<span class="n">channel</span>   <span class="o">=</span> <span class="mi">3</span>
+  i<span class="n">key</span>       <span class="o">=</span> <span class="nb">p4</span>
+  i<span class="n">velocity</span>  <span class="o">=</span> <span class="nb">p5</span>
+         <span class="nb">fluidNote</span> gi<span class="n">enginenum2</span><span class="p">,</span> i<span class="n">channel</span><span class="p">,</span> i<span class="n">key</span><span class="p">,</span> i<span class="n">velocity</span>
+<span class="kd">endin</span>
 
-<span class="comment">; COLLECT AUDIO FROM ALL SOUNDFONTS</span>
+<span class="c1">; COLLECT AUDIO FROM ALL SOUNDFONTS</span>
 
-<span class="oblock">instr</span> 100 <span class="comment">; Fluidsynth output</span>
+<span class="kd">instr</span> <span class="nf">100</span> <span class="c1">; Fluidsynth output</span>
 
-  iamplitude1 <span class="op">=</span> 7
-  iamplitude2 <span class="op">=</span> 7
+  i<span class="n">amplitude1</span> <span class="o">=</span> <span class="mi">7</span>
+  i<span class="n">amplitude2</span> <span class="o">=</span> <span class="mi">7</span>
 
-<span class="comment">; AUDIO</span>
-aleft1, aright1 <span class="opc">fluidOut</span>   gienginenum1
-aleft2, aright2 <span class="opc">fluidOut</span>   gienginenum2
-                <span class="opc">outs</span>       (aleft1 <span class="op">*</span> iamplitude1) <span class="op">+</span> (aleft2 <span class="op">*</span> iamplitude2),  \
-                           (aright1 <span class="op">*</span> iamplitude1) <span class="op">+</span> (aright2 <span class="op">*</span> iamplitude2)
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="c1">; AUDIO</span>
+a<span class="n">left1</span><span class="p">,</span> a<span class="n">right1</span> <span class="nb">fluidOut</span>   gi<span class="n">enginenum1</span>
+a<span class="n">left2</span><span class="p">,</span> a<span class="n">right2</span> <span class="nb">fluidOut</span>   gi<span class="n">enginenum2</span>
+                <span class="nb">outs</span>       <span class="p">(</span>a<span class="n">left1</span> <span class="o">*</span> i<span class="n">amplitude1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span>a<span class="n">left2</span> <span class="o">*</span> i<span class="n">amplitude2</span><span class="p">),</span>  \
+                           <span class="p">(</span>a<span class="n">right1</span> <span class="o">*</span> i<span class="n">amplitude1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span>a<span class="n">right2</span> <span class="o">*</span> i<span class="n">amplitude2</span><span class="p">)</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">i</span> 1 0 3  60  100
-<span class="stamnt">i</span> 2 1 3  60  100
-<span class="stamnt">i</span> 3 3 3  63  100
-<span class="stamnt">i</span> 100 0 10		<span class="comment">;run for 10 seconds </span>
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span>  <span class="mi">60</span>  <span class="mi">100</span>
+<span class="nb">i</span> <span class="mi">2</span> <span class="mi">1</span> <span class="mi">3</span>  <span class="mi">60</span>  <span class="mi">100</span>
+<span class="nb">i</span> <span class="mi">3</span> <span class="mi">3</span> <span class="mi">3</span>  <span class="mi">63</span>  <span class="mi">100</span>
+<span class="nb">i</span> <span class="mi">100</span> <span class="mi">0</span> <span class="mi">10</span>		<span class="c1">;run for 10 seconds </span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47887675965808"></a>
+        <a id="idm47596172186976"></a>
         <h2>Voir aussi</h2>
         <p><a class="link" href="fluidNote.html" title="fluidNote"><em class="citetitle">fluidNote</em></a>,
     <a class="link" href="fluidLoad.html" title="fluidLoad"><em class="citetitle">fluidLoad</em></a></p>
@@ -179,7 +180,7 @@ aleft2, aright2 <span class="opc">fluidOut</span>   gienginenum2
     <a class="ulink" href="http://en.wikipedia.org/wiki/Soundfont" target="_top"><em class="citetitle">http://en.wikipedia.org/wiki/Soundfont</em></a></p>
       </div>
       <div class="refsect1">
-        <a id="idm47887675960368"></a>
+        <a id="idm47596172181536"></a>
         <h2>Crédits</h2>
         <p>Michael Gogins (gogins@pipeline.com), Steven Yi. 
     Merci à Peter Hanappe pour Fluidsynth.</p>

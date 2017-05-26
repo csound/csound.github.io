@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>pvsfwrite</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887643332736"></a>
+        <a id="idm47596137815216"></a>
         <h2>Description</h2>
         <p>
       Cet opcode écrit un signal fsig dans un fichier PVOCEX (qui peut être lu à son
@@ -47,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887643290320"></a>
+        <a id="idm47596137772880"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>pvsfwrite</strong></span> fsig, ifile</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887643288272"></a>
+        <a id="idm47596137770832"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>fsig</em></span> -- données du fsig en entrée.
@@ -61,7 +62,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887643285984"></a>
+        <a id="idm47596137768544"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode pvsfwrite. Il utilise le fichier
@@ -69,57 +70,57 @@
       Cet exemple utilise une entrée temps réel.
       </p>
         <div class="example">
-          <a id="idm47887643284016"></a>
+          <a id="idm47596137766576"></a>
           <p class="title">
-            <strong>Exemple 726. Exemple de l'opcode pvsfwrite</strong>
+            <strong>Exemple 761. Exemple de l'opcode pvsfwrite</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887508290928"></a>
+              <a id="idm47595954395872"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in</span>
--odac           -iadc    <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o pvsfwrite.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o pvsfwrite.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">;By Victor Lazzarini 2008</span>
+<span class="c1">;By Victor Lazzarini 2008</span>
 
-<span class="oblock">instr</span> 1
-asig <span class="opc">oscili</span> 10000, 440, 1
-fss <span class="opc">pvsanal</span>  asig, 1024,256,1024,0
-<span class="opc">pvsfwrite</span> fss, "mypvs.pvx"
-ase <span class="opc">pvsynth</span> fss
-           <span class="opc">out</span> ase
-<span class="oblock">endin</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+a<span class="n">sig</span> <span class="nb">oscili</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">1</span>
+<span class="n">fss</span> <span class="nb">pvsanal</span>  a<span class="n">sig</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">0</span>
+<span class="nb">pvsfwrite</span> <span class="n">fss</span><span class="p">,</span> <span class="s">"mypvs.pvx"</span>
+a<span class="n">se</span> <span class="nb">pvsynth</span> <span class="n">fss</span>
+           <span class="nb">out</span> a<span class="n">se</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 2 <span class="comment">; must be called after instr 1 finishes</span>
-ktim <span class="opc">timeinsts</span>
-fss  <span class="opc">pvsfread</span> ktim, "mypvs.pvx"
-asig <span class="opc">pvsynth</span> fss
-  <span class="opc">out</span> asig
-<span class="oblock">endin</span>
+<span class="kd">instr</span> <span class="nf">2</span> <span class="c1">; must be called after instr 1 finishes</span>
+k<span class="n">tim</span> <span class="nb">timeinsts</span>
+<span class="n">fss</span>  <span class="nb">pvsfread</span> k<span class="n">tim</span><span class="p">,</span> <span class="s">"mypvs.pvx"</span>
+a<span class="n">sig</span> <span class="nb">pvsynth</span> <span class="n">fss</span>
+  <span class="nb">out</span> a<span class="n">sig</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span>1 0 16384 10 1
-<span class="stamnt">i</span>1 0   1
-<span class="stamnt">i</span>2 1   1
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span>   <span class="mi">1</span>
+<span class="nb">i</span><span class="mi">2</span> <span class="mi">1</span>   <span class="mi">1</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -128,7 +129,7 @@ asig <span class="opc">pvsynth</span> fss
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887643279648"></a>
+        <a id="idm47596137762208"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>,
@@ -137,7 +138,7 @@ asig <span class="opc">pvsynth</span> fss
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887643275680"></a>
+        <a id="idm47596137758240"></a>
         <h2>Crédits</h2>
         <p>
       </p>

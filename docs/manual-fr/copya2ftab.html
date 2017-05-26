@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>copya2ftab</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887690013216"></a>
+        <a id="idm47596186353184"></a>
         <h2>Description</h2>
         <p>
       L'opcode <span class="emphasis"><em>copya2ftab</em></span> prend une variable k-tableau et en
@@ -46,12 +47,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887690011552"></a>
+        <a id="idm47596186351520"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>copya2ftab</strong></span> kftbl, tab</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887690009504"></a>
+        <a id="idm47596186349472"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kftbl</em></span> -- tableau unidimensionnel pour la source.
@@ -61,86 +62,86 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887690007072"></a>
+        <a id="idm47596186347040"></a>
         <h2>Exemple</h2>
         <p>
       Voici un exemple de l'opcode copya2ftab. Il utilise le fichier
       <a class="ulink" href="examples/copya2ftab.csd" target="_top"><em class="citetitle">copya2ftab.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887690005200"></a>
+          <a id="idm47596186345168"></a>
           <p class="title">
-            <strong>Exemple 143. Exemple de l'opcode copya2ftab.</strong>
+            <strong>Exemple 146. Exemple de l'opcode copya2ftab.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887529893920"></a>
+              <a id="idm47596016237520"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
 -n
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">;an 'empty' function table with 10 points</span>
-giTable <span class="ohdr">ftgen</span>   0, 0, <span class="op">-</span>10, 2, 0
+<span class="c1">;an 'empty' function table with 10 points</span>
+gi<span class="n">Table</span> <span class="nb">ftgen</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span>
 
 
-  <span class="oblock">instr</span> 1
+  <span class="kd">instr</span> <span class="nf">1</span>
 
-<span class="comment">;print inital values of giTable</span>
-        <span class="opc">puts</span>    "\nInitial <span class="opc">table</span> content<span class="op">:</span>", 1
-indx    <span class="op">=</span>       0
-  until indx <span class="op">==</span> <span class="opc">ftlen</span>(giTable) do
-iVal    <span class="opc">table</span>   indx, giTable
-        <span class="opc">printf_i</span> "Table index <span class="op">%</span>d <span class="op">=</span> <span class="op">%</span>f\n", 1, indx, iVal
-indx <span class="op">+</span><span class="op">=</span> 1
-  od
+<span class="c1">;print inital values of giTable</span>
+        <span class="nb">puts</span>    <span class="s">"</span><span class="se">\n</span><span class="s">Initial table content:"</span><span class="p">,</span> <span class="mi">1</span>
+i<span class="n">ndx</span>    <span class="o">=</span>       <span class="mi">0</span>
+  <span class="k">until</span> i<span class="n">ndx</span> <span class="o">==</span> <span class="nb">ftlen</span><span class="p">(</span>gi<span class="n">Table</span><span class="p">)</span> <span class="k">do</span>
+i<span class="n">Val</span>    <span class="nb">table</span>   i<span class="n">ndx</span><span class="p">,</span> gi<span class="n">Table</span>
+        <span class="nb">printf_i</span> <span class="s">"Table index </span><span class="si">%d</span><span class="s"> = %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">ndx</span><span class="p">,</span> i<span class="n">Val</span>
+i<span class="n">ndx</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="k">od</span>
 
-<span class="comment">;create array</span>
-kArr[]  <span class="opc">init</span>    10
+<span class="c1">;create array</span>
+k<span class="n">Arr</span><span class="p">[]</span>  <span class="nb">init</span>    <span class="mi">10</span>
 
-<span class="comment">;fill in values</span>
-kArr    <span class="opc">genarray</span> 1, 10
+<span class="c1">;fill in values</span>
+k<span class="n">Arr</span>    <span class="nb">genarray</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span>
 
-<span class="comment">;print array values</span>
-        <span class="opc">printf</span>  "<span class="op">%</span>s", 1, "\nArray content<span class="op">:</span>\n"
-kndx    <span class="op">=</span>       0
-  until kndx <span class="op">==</span> <span class="opc">lenarray</span>(kArr) do
-        <span class="opc">printf</span>  "kArr[<span class="op">%</span>d] <span class="op">=</span> <span class="op">%</span>f\n", kndx<span class="op">+</span>1, kndx, kArr[kndx]
-kndx    <span class="op">+</span><span class="op">=</span>      1
-  od
+<span class="c1">;print array values</span>
+        <span class="nb">printf</span>  <span class="s">"%s"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"</span><span class="se">\n</span><span class="s">Array content:</span><span class="se">\n</span><span class="s">"</span>
+k<span class="n">ndx</span>    <span class="o">=</span>       <span class="mi">0</span>
+  <span class="k">until</span> k<span class="n">ndx</span> <span class="o">==</span> <span class="nb">lenarray</span><span class="p">(</span>k<span class="n">Arr</span><span class="p">)</span> <span class="k">do</span>
+        <span class="nb">printf</span>  <span class="s">"kArr[</span><span class="si">%d</span><span class="s">] = %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">ndx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">ndx</span><span class="p">,</span> k<span class="n">Arr</span><span class="p">[</span>k<span class="n">ndx</span><span class="p">]</span>
+k<span class="n">ndx</span>    <span class="o">+=</span>      <span class="mi">1</span>
+  <span class="k">od</span>
 
-<span class="comment">;copy array values to table</span>
-        <span class="opc">copya2ftab</span> kArr, giTable
+<span class="c1">;copy array values to table</span>
+        <span class="nb">copya2ftab</span> k<span class="n">Arr</span><span class="p">,</span> gi<span class="n">Table</span>
 
-<span class="comment">;print modified values of giTable</span>
-        <span class="opc">printf</span>  "<span class="op">%</span>s", 1, "\nModified <span class="opc">table</span> content after <span class="opc">copya2ftab</span><span class="op">:</span>\n"
-kndx    <span class="op">=</span>       0
-  until kndx <span class="op">==</span> <span class="opc">ftlen</span>(giTable) do
-kVal    <span class="opc">table</span>   kndx, giTable
-        <span class="opc">printf</span>  "Table index <span class="op">%</span>d <span class="op">=</span> <span class="op">%</span>f\n", kndx<span class="op">+</span>1, kndx, kVal
-kndx <span class="op">+</span><span class="op">=</span> 1
-  od
+<span class="c1">;print modified values of giTable</span>
+        <span class="nb">printf</span>  <span class="s">"%s"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"</span><span class="se">\n</span><span class="s">Modified table content after copya2ftab:</span><span class="se">\n</span><span class="s">"</span>
+k<span class="n">ndx</span>    <span class="o">=</span>       <span class="mi">0</span>
+  <span class="k">until</span> k<span class="n">ndx</span> <span class="o">==</span> <span class="nb">ftlen</span><span class="p">(</span>gi<span class="n">Table</span><span class="p">)</span> <span class="k">do</span>
+k<span class="n">Val</span>    <span class="nb">table</span>   k<span class="n">ndx</span><span class="p">,</span> gi<span class="n">Table</span>
+        <span class="nb">printf</span>  <span class="s">"Table index </span><span class="si">%d</span><span class="s"> = %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">ndx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">ndx</span><span class="p">,</span> k<span class="n">Val</span>
+k<span class="n">ndx</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="k">od</span>
 
-<span class="comment">;turn instrument off</span>
-        <span class="opc">turnoff</span>
-  <span class="oblock">endin</span>
+<span class="c1">;turn instrument off</span>
+        <span class="nb">turnoff</span>
+  <span class="kd">endin</span>
   
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span> 1 0 0.1
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">0.1</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -149,14 +150,14 @@ kndx <span class="op">+</span><span class="op">=</span> 1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887690000832"></a>
+        <a id="idm47596186340800"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="copyf2array.html" title="copyf2array"><em class="citetitle">copyf2array</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887689998784"></a>
+        <a id="idm47596186338752"></a>
         <h2>Crédits</h2>
         <p>
       </p>

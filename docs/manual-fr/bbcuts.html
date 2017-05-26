@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>bbcuts</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887694057296"></a>
+        <a id="idm47596190544512"></a>
         <h2>Description</h2>
         <p>
       Le BreakBeat Cutter extrait automatiquement des segments à partir d'un flux audio
@@ -70,13 +71,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887694051200"></a>
+        <a id="idm47596190538416"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">a1,a2 <span class="command"><strong>bbcuts</strong></span> asource1, asource2, ibps, isubdiv, ibarlength, iphrasebars, \
       inumrepeats [, istutterspeed] [, istutterchance] [, ienvchoice]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887694048880"></a>
+        <a id="idm47596190536096"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ibps</em></span> -- Tempo pour les coupures, en pulsations par seconde.
@@ -121,7 +122,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887694037488"></a>
+        <a id="idm47596190524704"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>asource</em></span> -- Le signal sonore à couper. Cette version
@@ -129,7 +130,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887694035616"></a>
+        <a id="idm47596190522832"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode bbcuts. Il utilise le fichier
@@ -137,7 +138,7 @@
 
       </p>
         <div class="example">
-          <a id="idm47887694033744"></a>
+          <a id="idm47596190520960"></a>
           <p class="title">
             <strong>Exemple 85. Exemple de l'opcode bbcuts.</strong>
           </p>
@@ -146,54 +147,54 @@
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887532472464"></a>
+              <a id="idm47596022675088"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;RT audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o bbcuts.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;RT audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o bbcuts.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-
-
-<span class="oblock">instr</span> 1	<span class="comment">;Play an audio file</span>
-
-aleft, aright <span class="opc">diskin2</span> "kickroll.wav", 1, 0
-	      <span class="opc">outs</span> aleft, aright
-
-<span class="oblock">endin</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 
 
-<span class="oblock">instr</span> 2	<span class="comment">;Cut-up stereo audio file.</span>
+<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">;Play an audio file</span>
 
-ibps <span class="op">=</span> 16
-isubdiv <span class="op">=</span> 2
-ibarlength <span class="op">=</span> 2
-iphrasebars <span class="op">=</span> 1
-inumrepeats <span class="op">=</span> 8
+a<span class="n">left</span><span class="p">,</span> a<span class="n">right</span> <span class="nb">diskin2</span> <span class="s">"kickroll.wav"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+	      <span class="nb">outs</span> a<span class="n">left</span><span class="p">,</span> a<span class="n">right</span>
 
-aleft, aright <span class="opc">diskin2</span> "kickroll.wav", 1, 0
-aleft, aright <span class="opc">bbcuts</span> aleft, aright, ibps, isubdiv, ibarlength, iphrasebars, inumrepeats
-	      <span class="opc">outs</span> aleft, aright
+<span class="kd">endin</span>
 
-<span class="oblock">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="kd">instr</span> <span class="nf">2</span>	<span class="c1">;Cut-up stereo audio file.</span>
 
-<span class="stamnt">i</span> 1 0 2
-<span class="stamnt">i</span> 2 3 2
-<span class="stamnt">e</span>
+i<span class="n">bps</span> <span class="o">=</span> <span class="mi">16</span>
+i<span class="n">subdiv</span> <span class="o">=</span> <span class="mi">2</span>
+i<span class="n">barlength</span> <span class="o">=</span> <span class="mi">2</span>
+i<span class="n">phrasebars</span> <span class="o">=</span> <span class="mi">1</span>
+i<span class="n">numrepeats</span> <span class="o">=</span> <span class="mi">8</span>
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+a<span class="n">left</span><span class="p">,</span> a<span class="n">right</span> <span class="nb">diskin2</span> <span class="s">"kickroll.wav"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+a<span class="n">left</span><span class="p">,</span> a<span class="n">right</span> <span class="nb">bbcuts</span> a<span class="n">left</span><span class="p">,</span> a<span class="n">right</span><span class="p">,</span> i<span class="n">bps</span><span class="p">,</span> i<span class="n">subdiv</span><span class="p">,</span> i<span class="n">barlength</span><span class="p">,</span> i<span class="n">phrasebars</span><span class="p">,</span> i<span class="n">numrepeats</span>
+	      <span class="nb">outs</span> a<span class="n">left</span><span class="p">,</span> a<span class="n">right</span>
+
+<span class="kd">endin</span>
+
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span>
+<span class="nb">i</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">2</span>
+<span class="nb">e</span>
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -202,14 +203,14 @@ aleft, aright <span class="opc">bbcuts</span> aleft, aright, ibps, isubdiv, ibar
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887694029440"></a>
+        <a id="idm47596190516592"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="bbcutm.html" title="bbcutm"><em class="citetitle">bbcutm</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887694027392"></a>
+        <a id="idm47596190514544"></a>
         <h2>Crédits</h2>
         <p>
       </p>

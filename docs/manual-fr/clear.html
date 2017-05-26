@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>clear</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887691213968"></a>
+        <a id="idm47596187600672"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>clear</em></span> met à zéro une liste de signaux audio.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887691212256"></a>
+        <a id="idm47596187598960"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>clear</strong></span> avar1 [, avar2] [, avar3] [...]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887691139808"></a>
+        <a id="idm47596187526512"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>avar1, avar2, avar3,</em></span> ... -- signals to be zeroed
@@ -72,7 +73,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887691132960"></a>
+        <a id="idm47596187519664"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode clear. Il utilise le fichier
@@ -80,57 +81,57 @@
 
       </p>
         <div class="example">
-          <a id="idm47887691131184"></a>
+          <a id="idm47596187517888"></a>
           <p class="title">
-            <strong>Exemple 126. Exemple de l'opcode clear.</strong>
+            <strong>Exemple 128. Exemple de l'opcode clear.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm47887530565120"></a>
+              <a id="idm47596014815520"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o clear.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o clear.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-gaReverb <span class="opc">init</span> 0
+ga<span class="n">Reverb</span> <span class="nb">init</span> <span class="mi">0</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
     
-idur	<span class="op">=</span>	p3
-kpitch	<span class="op">=</span>	p4
-a1	<span class="opc">diskin2</span>	"fox.wav", kpitch
-a1	<span class="op">=</span>	a1<span class="op">*</span>.5			<span class="comment">;reduce volume</span>
-	<span class="opc">vincr</span>	gaReverb, a1
-<span class="oblock">endin</span>
+i<span class="n">dur</span>	<span class="o">=</span>	<span class="nb">p3</span>
+k<span class="n">pitch</span>	<span class="o">=</span>	<span class="nb">p4</span>
+a<span class="n">1</span>	<span class="nb">diskin2</span>	<span class="s">"fox.wav"</span><span class="p">,</span> k<span class="n">pitch</span>
+a<span class="n">1</span>	<span class="o">=</span>	a<span class="n">1</span><span class="o">*</span><span class="mf">.5</span>			<span class="c1">;reduce volume</span>
+	<span class="nb">vincr</span>	ga<span class="n">Reverb</span><span class="p">,</span> a<span class="n">1</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 99 <span class="comment">; global reverb		</span>
-al, ar	<span class="opc">reverbsc</span> gaReverb, gaReverb, .8, 10000
-	<span class="opc">outs</span>	gaReverb<span class="op">+</span>al, gaReverb<span class="op">+</span>ar
+<span class="kd">instr</span> <span class="nf">99</span> <span class="c1">; global reverb		</span>
+a<span class="n">l</span><span class="p">,</span> a<span class="n">r</span>	<span class="nb">reverbsc</span> ga<span class="n">Reverb</span><span class="p">,</span> ga<span class="n">Reverb</span><span class="p">,</span> <span class="mf">.8</span><span class="p">,</span> <span class="mi">10000</span>
+	<span class="nb">outs</span>	ga<span class="n">Reverb</span><span class="o">+</span>a<span class="n">l</span><span class="p">,</span> ga<span class="n">Reverb</span><span class="o">+</span>a<span class="n">r</span>
 	
-<span class="opc">clear</span>	gaReverb
+<span class="nb">clear</span>	ga<span class="n">Reverb</span>
 
-<span class="oblock">endin</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">i</span>1  0 3 1
-<span class="stamnt">i</span>99 0 5
-<span class="stamnt">e</span>
+<span class="nb">i</span><span class="mi">1</span>  <span class="mi">0</span> <span class="mi">3</span> <span class="mi">1</span>
+<span class="nb">i</span><span class="mi">99</span> <span class="mi">0</span> <span class="mi">5</span>
+<span class="nb">e</span>
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -143,14 +144,14 @@ al, ar	<span class="opc">reverbsc</span> gaReverb, gaReverb, .8, 10000
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887691127936"></a>
+        <a id="idm47596187514640"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="vincr.html" title="vincr"><em class="citetitle">vincr</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887691125824"></a>
+        <a id="idm47596187512528"></a>
         <h2>Crédits</h2>
         <p>
       </p>

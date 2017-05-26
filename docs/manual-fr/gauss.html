@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>gauss</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -39,21 +40,21 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887672084208"></a>
+        <a id="idm47596168047504"></a>
         <h2>Description</h2>
         <p>
       Générateur de nombres aléatoires de distribution gaussienne. C'est un générateur de bruit de classe x. 
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887672082800"></a>
+        <a id="idm47596168046096"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>gauss</strong></span> krange</pre>
         <pre class="synopsis">ires <span class="command"><strong>gauss</strong></span> krange</pre>
         <pre class="synopsis">kres <span class="command"><strong>gauss</strong></span> krange</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887672077936"></a>
+        <a id="idm47596168041328"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>krange</em></span> -- l'intervalle des nombres aléatoires (-<span class="emphasis"><em>krange</em></span> à
@@ -85,7 +86,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887672069072"></a>
+        <a id="idm47596168032464"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode gauss. Il utilise le fichier
@@ -93,53 +94,55 @@
 
       </p>
         <div class="example">
-          <a id="idm47887672067296"></a>
+          <a id="idm47596168030688"></a>
           <p class="title">
-            <strong>Exemple 360. Exemple de l'opcode gauss.</strong>
+            <strong>Exemple 370. Exemple de l'opcode gauss.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887522647072"></a>
+              <a id="idm47595993170960"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-  -d -o dac
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
-<span class="oblock">instr</span> 1
-irange   <span class="op">=</span> p4
-imu      <span class="op">=</span> p5
-isamples <span class="op">=</span> p6
-indx     <span class="op">=</span> 0
-icount   <span class="op">=</span> 1
-ix       <span class="op">=</span> 0.0
-ix2      <span class="op">=</span> 0.0
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
 
-<span class="olabel">loop</span><span class="op">:</span>
-i1       <span class="opc">gauss</span>   irange
-i1       <span class="op">=</span>       i1 <span class="op">+</span> imu
-ix       <span class="op">=</span>       ix <span class="op">+</span> i1
-ix2      <span class="op">=</span>       ix2 <span class="op">+</span> i1<span class="op">*</span>i1
-<span class="octrl">if</span> i1 <span class="op">&gt;=</span> <span class="op">-</span>(irange<span class="op">+</span>imu) <span class="op">&amp;&amp;</span> i1 <span class="op">&lt;=</span> (irange<span class="op">+</span>imu) then
-  icount <span class="op">=</span> icount<span class="op">+</span>1
-<span class="octrl">endif</span>
-         <span class="octrl">loop_lt</span> indx, 1, isamples, <span class="olabel">loop</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+  -d -o dac
+<span class="nt">&lt;/CsOptions&gt;</span>
+
+<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+i<span class="n">range</span>   <span class="o">=</span> <span class="nb">p4</span>
+i<span class="n">mu</span>      <span class="o">=</span> <span class="nb">p5</span>
+i<span class="n">samples</span> <span class="o">=</span> <span class="nb">p6</span>
+i<span class="n">ndx</span>     <span class="o">=</span> <span class="mi">0</span>
+i<span class="n">count</span>   <span class="o">=</span> <span class="mi">1</span>
+i<span class="n">x</span>       <span class="o">=</span> <span class="mf">0.0</span>
+i<span class="n">x2</span>      <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="nl">loop</span><span class="p">:</span>
+i<span class="n">1</span>       <span class="nb">gauss</span>   i<span class="n">range</span>
+i<span class="n">1</span>       <span class="o">=</span>       i<span class="n">1</span> <span class="o">+</span> i<span class="n">mu</span>
+i<span class="n">x</span>       <span class="o">=</span>       i<span class="n">x</span> <span class="o">+</span> i<span class="n">1</span>
+i<span class="n">x2</span>      <span class="o">=</span>       i<span class="n">x2</span> <span class="o">+</span> i<span class="n">1</span><span class="o">*</span>i<span class="n">1</span>
+<span class="k">if</span> i<span class="n">1</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="p">(</span>i<span class="n">range</span><span class="o">+</span>i<span class="n">mu</span><span class="p">)</span> <span class="o">&amp;&amp;</span> i<span class="n">1</span> <span class="o">&lt;=</span> <span class="p">(</span>i<span class="n">range</span><span class="o">+</span>i<span class="n">mu</span><span class="p">)</span> <span class="k">then</span>
+  i<span class="n">count</span> <span class="o">=</span> i<span class="n">count</span><span class="o">+</span><span class="mi">1</span>
+<span class="k">endif</span>
+         <span class="k">loop_lt</span> i<span class="n">ndx</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">samples</span><span class="p">,</span> <span class="nl">loop</span>
         
-imean    <span class="op">=</span>       ix <span class="op">/</span> isamples                         <span class="comment">;mean value</span>
-istd     <span class="op">=</span>       <span class="opc">sqrt</span>(ix2<span class="op">/</span>isamples <span class="op">-</span> imean<span class="op">*</span>imean)      <span class="comment">;standard deviation</span>
-         <span class="opc">prints</span> "mean <span class="op">=</span> <span class="op">%</span>3.3f, std <span class="op">=</span> <span class="op">%</span>3.3f, ", imean, istd
-         <span class="opc">prints</span> "samples inside the given range<span class="op">:</span> <span class="op">%</span>3.3f\<span class="op">%</span>\n", icount<span class="op">*</span>100.0<span class="op">/</span>isamples
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span> 1 0   0.1 1.0   0   100000  <span class="comment">; range = 1, mu = 0.0, sigma = 1/3.83 = 0.261</span>
-<span class="stamnt">i</span> 1 0.1 0.1 3.83  0   100000  <span class="comment">; range = 3.83, mu = 0.0, sigma = 1</span>
-<span class="stamnt">i</span> 1 0.2 0.1 5.745 2.7 100000  <span class="comment">; range = 5.745, mu = 2.7, sigma = 5.745/3.83 = 1.5</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+i<span class="n">mean</span>    <span class="o">=</span>       i<span class="n">x</span> <span class="o">/</span> i<span class="n">samples</span>                         <span class="c1">;mean value</span>
+i<span class="n">std</span>     <span class="o">=</span>       <span class="nb">sqrt</span><span class="p">(</span>i<span class="n">x2</span><span class="o">/</span>i<span class="n">samples</span> <span class="o">-</span> i<span class="n">mean</span><span class="o">*</span>i<span class="n">mean</span><span class="p">)</span>      <span class="c1">;standard deviation</span>
+         <span class="nb">prints</span> <span class="s">"mean = %3.3f, std = %3.3f, "</span><span class="p">,</span> i<span class="n">mean</span><span class="p">,</span> i<span class="n">std</span>
+         <span class="nb">prints</span> <span class="s">"samples inside the given range: %3.3f\%</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> i<span class="n">count</span><span class="o">*</span><span class="mf">100.0</span><span class="o">/</span>i<span class="n">samples</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span>   <span class="mf">0.1</span> <span class="mf">1.0</span>   <span class="mi">0</span>   <span class="mi">100000</span>  <span class="c1">; range = 1, mu = 0.0, sigma = 1/3.83 = 0.261</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mf">0.1</span> <span class="mf">0.1</span> <span class="mf">3.83</span>  <span class="mi">0</span>   <span class="mi">100000</span>  <span class="c1">; range = 3.83, mu = 0.0, sigma = 1</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mf">0.2</span> <span class="mf">0.1</span> <span class="mf">5.745</span> <span class="mf">2.7</span> <span class="mi">100000</span>  <span class="c1">; range = 5.745, mu = 2.7, sigma = 5.745/3.83 = 1.5</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -156,7 +159,7 @@ mean = 2.700, std = 1.497, samples inside the given range: 100.000%</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887672062000"></a>
+        <a id="idm47596168025392"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="seed.html" title="seed"><em class="citetitle">seed</em></a>,
@@ -173,7 +176,7 @@ mean = 2.700, std = 1.497, samples inside the given range: 100.000%</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887672050320"></a>
+        <a id="idm47596168013712"></a>
         <h2>Crédits</h2>
         <p>
       </p>

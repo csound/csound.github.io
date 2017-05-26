@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>looptseg</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -39,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887663576912"></a>
+        <a id="idm47596158584496"></a>
         <h2>Description</h2>
         <p>
       Génère un signal de contrôle constitué de segments linéaires ou exponentiels
@@ -49,13 +50,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887663574800"></a>
+        <a id="idm47596158582384"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ksig <span class="command"><strong>looptseg</strong></span> kfreq, ktrig, iphase, kvalue0, ktype0, ktime0, [, kvalue1] [,ktype1] [, ktime1] \
       [, kvalue2] [,ktype2] [, ktime2] [...] [, kvalueN] [,ktypeN] [, ktimeN]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887663572544"></a>
+        <a id="idm47596158580128"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iphase</em></span> -- Une valeur comprise entre 0 et 1 pour indiquer
@@ -64,7 +65,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887663570624"></a>
+        <a id="idm47596158578208"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ksig</em></span> -- Signal de sortie.
@@ -121,7 +122,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887663555504"></a>
+        <a id="idm47596158563072"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode looptseg. Il utilise le fichier
@@ -129,54 +130,54 @@
 
       </p>
         <div class="example">
-          <a id="idm47887663553632"></a>
+          <a id="idm47596158561200"></a>
           <p class="title">
-            <strong>Exemple 459. Exemple de l'opcode looptseg.</strong>
+            <strong>Exemple 484. Exemple de l'opcode looptseg.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
         <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887517910064"></a>
+              <a id="idm47595980178576"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac      <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o looptseg.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o looptseg.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
-kfreq   <span class="op">=</span>        1         <span class="comment">; frequency of loop repetition</span>
-ktrig   <span class="opc">init</span>     0         <span class="comment">; loop restart trigger (not used)</span>
-iphase  <span class="op">=</span>        0         <span class="comment">; initial phase</span>
-ktyp    <span class="opc">line</span>     6,p3,<span class="op">-</span>6   <span class="comment">; explore the useful range of curve types</span>
-<span class="comment">; loop of filter cutoff values (oct format)</span>
-<span class="comment">;                                     value curve dur.</span>
-kcfoct <span class="opc">looptseg</span>  kfreq, ktrig, iphase,13,   ktyp, 1, \
-                                      4,    ktyp, 0, \
-                                      11,   ktyp, 1, \
-                                      4
-asig  <span class="opc">vco2</span>     0.2,cpsmidinn(48),0             <span class="comment">; a sawtooth</span>
-asig  <span class="opc">moogladder</span>  asig,cpsoct(kcfoct),rnd(0.6) <span class="comment">; filter sawtooth</span>
-      <span class="opc">outs</span>     asig, asig
-<span class="oblock">endin</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+k<span class="n">freq</span>   <span class="o">=</span>        <span class="mi">1</span>         <span class="c1">; frequency of loop repetition</span>
+k<span class="n">trig</span>   <span class="nb">init</span>     <span class="mi">0</span>         <span class="c1">; loop restart trigger (not used)</span>
+i<span class="n">phase</span>  <span class="o">=</span>        <span class="mi">0</span>         <span class="c1">; initial phase</span>
+k<span class="n">typ</span>    <span class="nb">line</span>     <span class="mi">6</span><span class="p">,</span><span class="nb">p3</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span>   <span class="c1">; explore the useful range of curve types</span>
+<span class="c1">; loop of filter cutoff values (oct format)</span>
+<span class="c1">;                                     value curve dur.</span>
+k<span class="n">cfoct</span> <span class="nb">looptseg</span>  k<span class="n">freq</span><span class="p">,</span> k<span class="n">trig</span><span class="p">,</span> i<span class="n">phase</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span>   k<span class="n">typ</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> \
+                                      <span class="mi">4</span><span class="p">,</span>    k<span class="n">typ</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> \
+                                      <span class="mi">11</span><span class="p">,</span>   k<span class="n">typ</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> \
+                                      <span class="mi">4</span>
+a<span class="n">sig</span>  <span class="nb">vco2</span>     <span class="mf">0.2</span><span class="p">,</span><span class="nb">cpsmidinn</span><span class="p">(</span><span class="mi">48</span><span class="p">),</span><span class="mi">0</span>             <span class="c1">; a sawtooth</span>
+a<span class="n">sig</span>  <span class="nb">moogladder</span>  a<span class="n">sig</span><span class="p">,</span><span class="nb">cpsoct</span><span class="p">(</span>k<span class="n">cfoct</span><span class="p">),</span><span class="nb">rnd</span><span class="p">(</span><span class="mf">0.6</span><span class="p">)</span> <span class="c1">; filter sawtooth</span>
+      <span class="nb">outs</span>     a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span> 1 0 12
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">12</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -185,7 +186,7 @@ asig  <span class="opc">moogladder</span>  asig,cpsoct(kcfoct),rnd(0.6) <span cl
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887663549264"></a>
+        <a id="idm47596158556832"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="lpshold.html" title="lpshold"><em class="citetitle">lpshold</em></a>
@@ -193,7 +194,7 @@ asig  <span class="opc">moogladder</span>  asig,cpsoct(kcfoct),rnd(0.6) <span cl
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887663546288"></a>
+        <a id="idm47596158553856"></a>
         <h2>Crédits</h2>
         <p>Auteur : John ffitch</p>
         <p>Nouveau dans la version 5.12</p>

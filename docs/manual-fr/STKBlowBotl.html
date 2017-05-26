@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>STKBlowBotl</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -39,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887629665904"></a>
+        <a id="idm47596123717600"></a>
         <h2>Description</h2>
         <p>
       Cet opcode implémente un résonateur de Helmholtz (filtre biquadratique) avec
@@ -47,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887629664416"></a>
+        <a id="idm47596123716112"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">asignal <span class="command"><strong>STKBlowBotl</strong></span> ifrequency, iamplitude, [knoise, kv1[, klfo, kv2[, klfodepth, kv3[, kvol, kv4]]]]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887629591504"></a>
+        <a id="idm47596123643280"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifrequency</em></span> -- Fréquence de la note jouée, en Hz.
@@ -62,7 +63,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887629588960"></a>
+        <a id="idm47596123640736"></a>
         <h2>Exécution</h2>
         <p><span class="emphasis"><em>knoise</em></span> -- contrôleur 4, gain du bruit. kv1 compris entre 0 et 127.</p>
         <p><span class="emphasis"><em>klfo</em></span> -- contrôleur 11, vitesse de l'oscillateur basse-fréquence. kv2 compris entre 0 et 127.</p>
@@ -70,7 +71,7 @@
         <p><span class="emphasis"><em>kvol</em></span> -- contrôleur 128, volume. kv4 compris entre 0 et 127.</p>
       </div>
       <div class="refsect1">
-        <a id="idm47887629584832"></a>
+        <a id="idm47596123636608"></a>
         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
           <table border="0" summary="Note: Notes">
             <tr>
@@ -108,55 +109,55 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47887629578128"></a>
+        <a id="idm47596123629904"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode STKBlowBotl. Il utilise le fichier
       <a class="ulink" href="examples/STKBlowBotl.csd" target="_top"><em class="citetitle">STKBlowBotl.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887629576240"></a>
+          <a id="idm47596123628016"></a>
           <p class="title">
-            <strong>Exemple 878. Exemple de l'opcode STKBlowBotl.</strong>
+            <strong>Exemple 921. Exemple de l'opcode STKBlowBotl.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm47887502503264"></a>
+              <a id="idm47595942304176"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o STKBlowBotl.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o STKBlowBotl.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-ipch	<span class="op">=</span> p4
-kv1	<span class="opc">line</span> p5, p3, p6					<span class="comment">;gain of noise</span>
-kv4	<span class="opc">line</span>	100, p3, 70				<span class="comment">;volume</span>
+i<span class="n">pch</span>	<span class="o">=</span> <span class="nb">p4</span>
+k<span class="n">v1</span>	<span class="nb">line</span> <span class="nb">p5</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="nb">p6</span>					<span class="c1">;gain of noise</span>
+k<span class="n">v4</span>	<span class="nb">line</span>	<span class="mi">100</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="mi">70</span>				<span class="c1">;volume</span>
 
-asig	<span class="opc">STKBlowBotl</span> <span class="opc">cpspch</span>(ipch), 1, 4, kv1, 11, 10, 1, 50, 128, kv4
-asig	<span class="op">=</span>	asig <span class="op">*</span> .5				<span class="comment">;too loud</span>
-	<span class="opc">outs</span>	asig, asig
-<span class="oblock">endin</span>
+a<span class="n">sig</span>	<span class="nb">STKBlowBotl</span> <span class="nb">cpspch</span><span class="p">(</span>i<span class="n">pch</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> k<span class="n">v1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> k<span class="n">v4</span>
+a<span class="n">sig</span>	<span class="o">=</span>	a<span class="n">sig</span> <span class="o">*</span> <span class="mf">.5</span>				<span class="c1">;too loud</span>
+	<span class="nb">outs</span>	a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">i</span> 1 0 2 9.00 20 100
-<span class="stamnt">i</span> 1 + 5 8.03 120 0
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span> <span class="mf">9.00</span> <span class="mi">20</span> <span class="mi">100</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">5</span> <span class="mf">8.03</span> <span class="mi">120</span> <span class="mi">0</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -165,7 +166,7 @@ asig	<span class="op">=</span>	asig <span class="op">*</span> .5				<span class=
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887629574320"></a>
+        <a id="idm47596123626096"></a>
         <h2>Crédits</h2>
         <p>
       </p>

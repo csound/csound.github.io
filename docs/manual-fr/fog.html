@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>fog</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -39,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887674330560"></a>
+        <a id="idm47596170351696"></a>
         <h2>Description</h2>
         <p>
       La sortie audio est une succession de grains obtenus à partir des données de la table de
@@ -49,13 +50,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887674327968"></a>
+        <a id="idm47596170349104"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>fog</strong></span> xamp, xdens, xtrans, aspd, koct, kband, kris, kdur, kdec, \
       iolaps, ifna, ifnb, itotdur [, iphs] [, itmode] [, iskip]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887674325808"></a>
+        <a id="idm47596170346912"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iolaps</em></span> -- quantité de mémoire préallouée nécessaire pour contenir les données
@@ -92,7 +93,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887674311408"></a>
+        <a id="idm47596170332416"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>xamp</em></span> -- facteur d'amplitude. L'amplitude dépend également du nombre de grains
@@ -130,7 +131,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887674295280"></a>
+        <a id="idm47596170316208"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode fog. Il utilise le fichier
@@ -138,54 +139,54 @@
 
       </p>
         <div class="example">
-          <a id="idm47887674293504"></a>
+          <a id="idm47596170314432"></a>
           <p class="title">
-            <strong>Exemple 326. Exemple de l'opcode fog.</strong>
+            <strong>Exemple 335. Exemple de l'opcode fog.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887523631232"></a>
+              <a id="idm47595996842928"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac      <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o fog.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o fog.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-<span class="comment">;p4 = transposition factor</span>
-<span class="comment">;p5 = speed factor</span>
-<span class="comment">;p6 = function table for grain data</span>
-i1    <span class="op">=</span>	<span class="ohdr">sr</span><span class="op">/</span><span class="opc">ftlen</span>(1) <span class="comment">;scaling to reflect sample rate and table length</span>
-a1    <span class="opc">phasor</span> i1<span class="op">*</span>p5 <span class="comment">;index for speed</span>
-asigl <span class="opc">fog</span>    .5, 15, p4, a1, 1, 0, .01, .5, .01, 30, 1, 2, p3 		<span class="comment">;left channel</span>
-asigr <span class="opc">fog</span>    .4, 25, p4<span class="op">+</span>.2, a1, 1, 0, .01, .5, .01, 30, 1, 2, p3, .5	<span class="comment">;right channel</span>
-      <span class="opc">outs</span>   asigl, asigr
-<span class="oblock">endin</span>
+<span class="c1">;p4 = transposition factor</span>
+<span class="c1">;p5 = speed factor</span>
+<span class="c1">;p6 = function table for grain data</span>
+i<span class="n">1</span>    <span class="o">=</span>	<span class="vg">sr</span><span class="o">/</span><span class="nb">ftlen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">;scaling to reflect sample rate and table length</span>
+a<span class="n">1</span>    <span class="nb">phasor</span> i<span class="n">1</span><span class="o">*</span><span class="nb">p5</span> <span class="c1">;index for speed</span>
+a<span class="n">sigl</span> <span class="nb">fog</span>    <span class="mf">.5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="nb">p4</span><span class="p">,</span> a<span class="n">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.01</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mf">.01</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">p3</span> 		<span class="c1">;left channel</span>
+a<span class="n">sigr</span> <span class="nb">fog</span>    <span class="mf">.4</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="nb">p4</span><span class="o">+</span><span class="mf">.2</span><span class="p">,</span> a<span class="n">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.01</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mf">.01</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="mf">.5</span>	<span class="c1">;right channel</span>
+      <span class="nb">outs</span>   a<span class="n">sigl</span><span class="p">,</span> a<span class="n">sigr</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span> 1 0 131072 1 "<span class="stamnt">f</span>ox.wav" 0 0 0
-<span class="stamnt">f</span> 2 0 1024 19 .5 .5 270 .5
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">131072</span> <span class="mi">1</span> <span class="s">"fox.wav"</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="nb">f</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">1024</span> <span class="mi">19</span> <span class="mf">.5</span> <span class="mf">.5</span> <span class="mi">270</span> <span class="mf">.5</span>
 
-<span class="stamnt">i</span> 1 0 10 .7  .1
-<span class="stamnt">i</span> 1 + 4  1.2  2
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span> <span class="mf">.7</span>  <span class="mf">.1</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">4</span>  <span class="mf">1.2</span>  <span class="mi">2</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -194,7 +195,7 @@ asigr <span class="opc">fog</span>    .4, 25, p4<span class="op">+</span>.2, a1,
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887674289136"></a>
+        <a id="idm47596170310160"></a>
         <h2>Crédits</h2>
         <p>
       </p>

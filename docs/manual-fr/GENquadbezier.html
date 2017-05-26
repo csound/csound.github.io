@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>GENquadbezier</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="ScoregensTop.html" title="Instructions de partition et routines GEN" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887561045504"></a>
+        <a id="idm47596053146704"></a>
         <h2>Description</h2>
         <p>
       Cette routine crée une ftable de segments construits par les chemins
@@ -46,13 +47,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887561044064"></a>
+        <a id="idm47596053145264"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>f</strong></span> # time size "quadbezier" y1 cx1 cy1 x2 y2 [cx2 cy2 x3 y3 ...]
 </pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887561042176"></a>
+        <a id="idm47596053143376"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>x2, x3,</em></span> etc. -- Positions dans la table auxquelles
@@ -76,59 +77,60 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887561036784"></a>
+        <a id="idm47596053137920"></a>
         <h2>Exrmples</h2>
         <p>
       Voici un exemple de la routine GENquadbezier. Il utilise le fichier
       <a class="ulink" href="examples/genquadbezier.csd" target="_top"><em class="citetitle">genquadbezier.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887561034896"></a>
+          <a id="idm47596053136032"></a>
           <p class="title">
-            <strong>Exemple 1168. Exemple de la routine GENquadbezier.</strong>
+            <strong>Exemple 1219. Exemple de la routine GENquadbezier.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887491752640"></a>
+              <a id="idm47595912662752"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac  <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o quadbezier.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac  <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o quadbezier.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
-kndx <span class="opc">phasor</span> 1<span class="op">/</span>p3
-kenv <span class="opc">tablei</span> kndx, p4, 1
-asig <span class="opc">poscil</span> kenv, 440, 1
-     <span class="opc">outs</span> asig, asig
+<span class="kd">instr</span> <span class="nf">1</span>
+k<span class="n">ndx</span> <span class="nb">phasor</span> <span class="mi">1</span><span class="o">/</span><span class="nb">p3</span>
+k<span class="n">env</span> <span class="nb">tablei</span> k<span class="n">ndx</span><span class="p">,</span> <span class="nb">p4</span><span class="p">,</span> <span class="mi">1</span>
+a<span class="n">sig</span> <span class="nb">poscil</span> k<span class="n">env</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">1</span>
+     <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
   
-<span class="oblock">endin</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span> 1 0 32768 10 1
-<span class="stamnt">f</span> 2 0 1024 "quadbezier" 0 140 0.61 324 0.53 338 0.27 449 0.32 571 0.08 675 0.5 873 0.47 1024 0
-<span class="stamnt">f</span> 3 0 1024 "quadbezier" 0 92 0.04 94 0.25 177 0.58 373 0.39 537 0.15 675 0.5 910 0.68 1024 0
-<span class="stamnt">f</span> 4 0 1024 "quadbezier" 0 196 0.68 537 0.71 873 0.7 1024 0
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">32768</span> <span class="mi">10</span> <span class="mi">1</span>
+<span class="nb">f</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">1024</span> <span class="s">"quadbezier"</span> <span class="mi">0</span> <span class="mi">140</span> <span class="mf">0.61</span> <span class="mi">324</span> <span class="mf">0.53</span> <span class="mi">338</span> <span class="mf">0.27</span> <span class="mi">449</span> <span class="mf">0.32</span> <span class="mi">571</span> <span class="mf">0.08</span> <span class="mi">675</span> <span class="mf">0.5</span> <span class="mi">873</span> <span class="mf">0.47</span> <span class="mi">1024</span> <span class="mi">0</span>
+<span class="nb">f</span> <span class="mi">3</span> <span class="mi">0</span> <span class="mi">1024</span> <span class="s">"quadbezier"</span> <span class="mi">0</span> <span class="mi">92</span> <span class="mf">0.04</span> <span class="mi">94</span> <span class="mf">0.25</span> <span class="mi">177</span> <span class="mf">0.58</span> <span class="mi">373</span> <span class="mf">0.39</span> <span class="mi">537</span> <span class="mf">0.15</span> <span class="mi">675</span> <span class="mf">0.5</span> <span class="mi">910</span> <span class="mf">0.68</span> <span class="mi">1024</span> <span class="mi">0</span>
+<span class="nb">f</span> <span class="mi">4</span> <span class="mi">0</span> <span class="mi">1024</span> <span class="s">"quadbezier"</span> <span class="mi">0</span> <span class="mi">196</span> <span class="mf">0.68</span> <span class="mi">537</span> <span class="mf">0.71</span> <span class="mi">873</span> <span class="mf">0.7</span> <span class="mi">1024</span> <span class="mi">0</span>
 
-<span class="stamnt">i</span> 1 0 4 2
-<span class="stamnt">i</span> 1 4 4 3
-<span class="stamnt">i</span> 1 8 4 4
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">4</span> <span class="mi">2</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">4</span> <span class="mi">4</span> <span class="mi">3</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">8</span> <span class="mi">4</span> <span class="mi">4</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -166,14 +168,14 @@ asig <span class="opc">poscil</span> kenv, 440, 1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887561019648"></a>
+        <a id="idm47596053120784"></a>
         <h2>Voir aussi</h2>
         <p> Pour les références, consulter les commentaires dans le
     <a class="ulink" href="https://github.com/csound/csound/blob/develop/Opcodes/quadbezier.c" target="_top">
     <em class="citetitle">code source</em></a>.</p>
       </div>
       <div class="refsect1">
-        <a id="idm47887561017392"></a>
+        <a id="idm47596053118528"></a>
         <h2>Crédits</h2>
         <p>Ecrit par Guillermo Senna</p>
         <p>2016</p>

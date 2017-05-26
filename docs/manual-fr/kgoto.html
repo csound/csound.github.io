@@ -5,10 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>kgoto</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
-    <link rel="prev" href="opk.html" title="k" />
+    <link rel="prev" href="k35_lpf.html" title="K35_lpf" />
     <link rel="next" href="kr.html" title="kr" />
   </head>
   <body>
@@ -18,7 +19,7 @@
           <th colspan="3" align="center">kgoto</th>
         </tr>
         <tr>
-          <td width="20%" align="left"><a accesskey="p" href="opk.html">Précédent</a> </td>
+          <td width="20%" align="left"><a accesskey="p" href="k35_lpf.html">Précédent</a> </td>
           <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
           <td width="20%" align="right"> <a accesskey="n" href="kr.html">Suivant</a></td>
         </tr>
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887665584240"></a>
+        <a id="idm47596161338976"></a>
         <h2>Description</h2>
         <p>
       Transfère le contrôle sans condition vers l'instruction étiquetée par
@@ -46,7 +47,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887665582400"></a>
+        <a id="idm47596161337072"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>kgoto</strong></span> label</pre>
         <p>
@@ -55,7 +56,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887665579408"></a>
+        <a id="idm47596161265648"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode kgoto. Il utilise le fichier
@@ -63,74 +64,74 @@
 
       </p>
         <div class="example">
-          <a id="idm47887665577632"></a>
+          <a id="idm47596161264000"></a>
           <p class="title">
-            <strong>Exemple 436. Exemple de l'opcode kgoto.</strong>
+            <strong>Exemple 451. Exemple de l'opcode kgoto.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887518775040"></a>
+              <a id="idm47595983574864"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in</span>
--odac           -iadc    <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o kgoto.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o kgoto.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">; Instrument #1.</span>
-<span class="oblock">instr</span> 1
-  <span class="comment">; Change kval linearly from 0 to 2 over</span>
-  <span class="comment">; the period set by the third p-field.</span>
-  kval <span class="opc">line</span> 0, p3, 2
+<span class="c1">; Instrument #1.</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+  <span class="c1">; Change kval linearly from 0 to 2 over</span>
+  <span class="c1">; the period set by the third p-field.</span>
+  k<span class="n">val</span> <span class="nb">line</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="mi">2</span>
 
-  <span class="comment">; If kval is greater than or equal to 1 then play the high note.</span>
-  <span class="comment">; If not then play the low note.</span>
-  <span class="octrl">if</span> (kval <span class="op">&gt;=</span> 1) <span class="octrl">kgoto</span> <span class="olabel">highnote</span>
-    <span class="octrl">kgoto</span> <span class="olabel">lownote</span>
+  <span class="c1">; If kval is greater than or equal to 1 then play the high note.</span>
+  <span class="c1">; If not then play the low note.</span>
+  <span class="k">if</span> <span class="p">(</span>k<span class="n">val</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="k">kgoto</span> <span class="nl">highnote</span>
+    <span class="k">kgoto</span> <span class="nl">lownote</span>
 
-<span class="olabel">highnote</span><span class="op">:</span>
-  kfreq <span class="op">=</span> 880
-  <span class="octrl">goto</span> <span class="olabel">playit</span>
+<span class="nl">highnote</span><span class="p">:</span>
+  k<span class="n">freq</span> <span class="o">=</span> <span class="mi">880</span>
+  <span class="k">goto</span> <span class="nl">playit</span>
 
-<span class="olabel">lownote</span><span class="op">:</span>
-  kfreq <span class="op">=</span> 440
-  <span class="octrl">goto</span> <span class="olabel">playit</span>
+<span class="nl">lownote</span><span class="p">:</span>
+  k<span class="n">freq</span> <span class="o">=</span> <span class="mi">440</span>
+  <span class="k">goto</span> <span class="nl">playit</span>
 
-<span class="olabel">playit</span><span class="op">:</span>
-  <span class="comment">; Print the values of kval and kfreq.</span>
-  <span class="opc">printks</span> "kval <span class="op">=</span> <span class="op">%</span>f, kfreq <span class="op">=</span> <span class="op">%</span>f\\n", 1, kval, kfreq
+<span class="nl">playit</span><span class="p">:</span>
+  <span class="c1">; Print the values of kval and kfreq.</span>
+  <span class="nb">printks</span> <span class="s">"kval = %f, kfreq = %f</span><span class="se">\\</span><span class="s">n"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">val</span><span class="p">,</span> k<span class="n">freq</span>
 
-  a1 <span class="opc">oscil</span> 10000, kfreq, 1
-  <span class="opc">out</span> a1
-<span class="oblock">endin</span>
-
-
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-
-<span class="comment">; Table #1: a simple sine wave.</span>
-<span class="stamnt">f</span> 1 0 32768 10 1
-
-<span class="comment">; Play Instrument #1 for two seconds.</span>
-<span class="stamnt">i</span> 1 0 2
-<span class="stamnt">e</span>
+  a<span class="n">1</span> <span class="nb">oscil</span> <span class="mi">10000</span><span class="p">,</span> k<span class="n">freq</span><span class="p">,</span> <span class="mi">1</span>
+  <span class="nb">out</span> a<span class="n">1</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="c1">; Table #1: a simple sine wave.</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">32768</span> <span class="mi">10</span> <span class="mi">1</span>
+
+<span class="c1">; Play Instrument #1 for two seconds.</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span>
+<span class="nb">e</span>
+
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -147,7 +148,7 @@ kval = 1.999639, kfreq = 880.000000</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887665572528"></a>
+        <a id="idm47596161258800"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="cggoto.html" title="cggoto"><em class="citetitle">cggoto</em></a>,
@@ -161,7 +162,7 @@ kval = 1.999639, kfreq = 880.000000</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887665563792"></a>
+        <a id="idm47596161250064"></a>
         <h2>Crédits</h2>
         <p>Exemple écrit by Kevin Conder.</p>
       </div>
@@ -170,14 +171,14 @@ kval = 1.999639, kfreq = 880.000000</pre>
       <hr />
       <table width="100%" summary="Navigation footer">
         <tr>
-          <td width="40%" align="left"><a accesskey="p" href="opk.html">Précédent</a> </td>
+          <td width="40%" align="left"><a accesskey="p" href="k35_lpf.html">Précédent</a> </td>
           <td width="20%" align="center">
             <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
           </td>
           <td width="40%" align="right"> <a accesskey="n" href="kr.html">Suivant</a></td>
         </tr>
         <tr>
-          <td width="40%" align="left" valign="top">k </td>
+          <td width="40%" align="left" valign="top">K35_lpf </td>
           <td width="20%" align="center">
             <a accesskey="h" href="index.html">Sommaire</a>
           </td>

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>pvcross</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -39,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887645288208"></a>
+        <a id="idm47596139770464"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>pvcross</em></span> applique les amplitudes d'un fichier d'analyse
@@ -61,12 +62,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887645280848"></a>
+        <a id="idm47596139763072"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>pvcross</strong></span> ktimpnt, kfmod, ifile, kampscale1, kampscale2 [, ispecwp]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887645278624"></a>
+        <a id="idm47596139760896"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifile</em></span> -- le numéro <span class="emphasis"><em>pvoc</em></span> (n dans
@@ -82,7 +83,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887645273264"></a>
+        <a id="idm47596139755536"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ktimpnt</em></span> -- l'écoulement du temps, en secondes, dans
@@ -113,7 +114,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887645265056"></a>
+        <a id="idm47596139747328"></a>
         <h2>Exemples</h2>
         <p>
       Ci-dessous un example de l'utilisation de
@@ -142,55 +143,55 @@ apv     <span class="opc">pvcross</span>   ktime2, 1, "clar.pvoc", 1<span class=
       <a class="ulink" href="examples/pvcross.csd" target="_top"><em class="citetitle">pvcross.csd</em></a>
       </p>
         <div class="example">
-          <a id="idm47887645252720"></a>
+          <a id="idm47596139734992"></a>
           <p class="title">
-            <strong>Exemple 696. Exemple de l'opcode pvcross.</strong>
+            <strong>Exemple 731. Exemple de l'opcode pvcross.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887509874848"></a>
+              <a id="idm47595956328832"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac   <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o pvcross.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac   <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o pvcross.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100 
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32 
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1 
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span> 
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span> 
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span> 
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="oblock">instr</span> 1
-<span class="comment">; analyze "beats.wav", "flute.aiff" and "mary.wav" with PVANAL first</span>
-ktime1 <span class="opc">line</span> 0, p3, 2			<span class="comment">; used as index in the "beats.pvx" file</span>
-ktime2 <span class="opc">line</span> 0, p3, 2.6			<span class="comment">; used as index in the "flute.pvx" or "mary.pvx"	</span>
-       <span class="opc">pvbufread</span> ktime1, "beats.pvx"	<span class="comment">;take only amplitude from "beats.pvx"</span>
-<span class="octrl">if</span> p4 <span class="op">=</span> 0 then
-asig   <span class="opc">pvcross</span>	ktime2, 1, "flute.pvx", 1, 0 <span class="comment">;and keep freqs of "flute.aiff"</span>
-asig   <span class="op">=</span> asig<span class="op">*</span>.8			<span class="comment">;scale output</span>
-<span class="octrl">else</span>
-asig   <span class="opc">pvcross</span>	ktime2, 1, "mary.pvx", 1, 0 <span class="comment">;and keep freqs of "mary.wav"</span>
-asig   <span class="op">=</span> asig<span class="op">*</span>.4			<span class="comment">;scale output</span>
-<span class="octrl">endif</span>
-       <span class="opc">outs</span> asig, asig
+<span class="kd">instr</span> <span class="nf">1</span>
+<span class="c1">; analyze "beats.wav", "flute.aiff" and "mary.wav" with PVANAL first</span>
+k<span class="n">time1</span> <span class="nb">line</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="mi">2</span>			<span class="c1">; used as index in the "beats.pvx" file</span>
+k<span class="n">time2</span> <span class="nb">line</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="mf">2.6</span>			<span class="c1">; used as index in the "flute.pvx" or "mary.pvx"	</span>
+       <span class="nb">pvbufread</span> k<span class="n">time1</span><span class="p">,</span> <span class="s">"beats.pvx"</span>	<span class="c1">;take only amplitude from "beats.pvx"</span>
+<span class="k">if</span> <span class="nb">p4</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span>
+a<span class="n">sig</span>   <span class="nb">pvcross</span>	k<span class="n">time2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"flute.pvx"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;and keep freqs of "flute.aiff"</span>
+a<span class="n">sig</span>   <span class="o">=</span> a<span class="n">sig</span><span class="o">*</span><span class="mf">.8</span>			<span class="c1">;scale output</span>
+<span class="k">else</span>
+a<span class="n">sig</span>   <span class="nb">pvcross</span>	k<span class="n">time2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"mary.pvx"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;and keep freqs of "mary.wav"</span>
+a<span class="n">sig</span>   <span class="o">=</span> a<span class="n">sig</span><span class="o">*</span><span class="mf">.4</span>			<span class="c1">;scale output</span>
+<span class="k">endif</span>
+       <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span> 1 0 3 0
-<span class="stamnt">i</span> 1 + 3 1
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mi">0</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="mi">1</span>
 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -199,7 +200,7 @@ asig   <span class="op">=</span> asig<span class="op">*</span>.4			<span class="
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887645248352"></a>
+        <a id="idm47596139730624"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="pvbufread.html" title="pvbufread"><em class="citetitle">pvbufread</em></a>,
@@ -210,7 +211,7 @@ asig   <span class="op">=</span> asig<span class="op">*</span>.4			<span class="
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887645242464"></a>
+        <a id="idm47596139724736"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>ephasor</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -39,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887683893408"></a>
+        <a id="idm47596180120112"></a>
         <h2>Description</h2>
         <p>
       Cet opcode produit deux sorties : un signal de phase périodique (comme
@@ -51,12 +52,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887683891056"></a>
+        <a id="idm47596180117760"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">aexp,aph<span class="command"><strong>ephasor</strong></span> kfreq, kR</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887683888848"></a>
+        <a id="idm47596180115552"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kfreq</em></span> - le taux de génération des signaux de phase
@@ -69,67 +70,66 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887683886128"></a>
+        <a id="idm47596180112784"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcoce ephasor. Il utilise le fichier
       <a class="ulink" href="examples/ephasor.csd" target="_top"><em class="citetitle">ephasor.csd</em></a>.
     </p>
         <div class="example">
-          <a id="idm47887683884128"></a>
+          <a id="idm47596180110784"></a>
           <p class="title">
-            <strong>Exemple 238. Exemple de l'opcode ephasor.</strong>
+            <strong>Exemple 243. Exemple de l'opcode ephasor.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
       et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
       d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887527207808"></a>
+              <a id="idm47596006709136"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="vg">sr</span><span class="o">=</span><span class="mi">44100</span>
+<span class="vg">ksmps</span><span class="o">=</span><span class="mi">64</span>
+<span class="vg">nchnls</span><span class="o">=</span><span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="ohdr">sr</span><span class="op">=</span>44100
-<span class="ohdr">ksmps</span><span class="op">=</span>64
-<span class="ohdr">nchnls</span><span class="op">=</span>2
-<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-<span class="oblock">instr</span> 1
+i<span class="n">amp</span> <span class="o">=</span> <span class="nb">p4</span>
+i<span class="n">fr</span> <span class="o">=</span> <span class="nb">p5</span>
+k<span class="n">fr</span> <span class="nb">expon</span> i<span class="n">fr</span><span class="p">,</span><span class="nb">p3</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span>i<span class="n">fr</span>
 
-iamp <span class="op">=</span> p4
-ifr <span class="op">=</span> p5
-kfr <span class="opc">expon</span> ifr,p3,2<span class="op">*</span>ifr
+k<span class="n">fc</span> <span class="nb">expon</span> <span class="mi">2000</span><span class="p">,</span><span class="nb">p3</span><span class="p">,</span> <span class="mi">4000</span>
+k<span class="n">q</span> <span class="o">=</span> <span class="mi">10</span>
+k<span class="n">bw</span> <span class="o">=</span> k<span class="n">fc</span><span class="o">/</span>k<span class="n">q</span>
+k<span class="n">R</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="cp">$M_PI</span><span class="o">*</span><span class="p">(</span>k<span class="n">bw</span><span class="o">/</span><span class="vg">sr</span><span class="p">)</span>
 
-kfc <span class="opc">expon</span> 2000,p3, 4000
-kq <span class="op">=</span> 10
-kbw <span class="op">=</span> kfc<span class="op">/</span>kq
-kR <span class="op">=</span> 1 <span class="op">-</span> $M_PI<span class="op">*</span>(kbw<span class="op">/</span>sr)
+k<span class="n">1</span> <span class="o">=</span> k<span class="n">fc</span><span class="o">/</span>k<span class="n">fr</span>
+k<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>k<span class="n">1</span><span class="p">)</span>
+k<span class="n">1</span> <span class="o">=</span> k<span class="n">1</span> <span class="o">-</span> k<span class="n">n</span>
 
-k1 <span class="op">=</span> kfc<span class="op">/</span>kfr
-kn <span class="op">=</span> <span class="opc">int</span>(k1)
-k1 <span class="op">=</span> k1 <span class="op">-</span> kn
+a<span class="n">mod</span><span class="p">,</span>a<span class="n">ph</span> <span class="nb">ephasor</span> k<span class="n">fr</span><span class="p">,</span>k<span class="n">R</span>
+a<span class="n">osc1</span> <span class="nb">table</span> a<span class="n">ph</span><span class="o">*</span>k<span class="n">n</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+a<span class="n">osc2</span> <span class="nb">table</span> a<span class="n">ph</span><span class="o">*</span><span class="p">(</span>k<span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
 
-amod,aph <span class="opc">ephasor</span> kfr,kR
-aosc1 <span class="opc">table</span> aph<span class="op">*</span>kn,<span class="op">-</span>1,1,0,1
-aosc2 <span class="opc">table</span> aph<span class="op">*</span>(kn<span class="op">+</span>1),<span class="op">-</span>1,1,0,1
-
-asig <span class="op">=</span> iamp<span class="op">*</span>(aosc1<span class="op">*</span>(1 <span class="op">-</span> k1) <span class="op">+</span> aosc2<span class="op">*</span>k1)<span class="op">*</span>amod
-  <span class="opc">outs</span> asig, asig
+a<span class="n">sig</span> <span class="o">=</span> i<span class="n">amp</span><span class="o">*</span><span class="p">(</span>a<span class="n">osc1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> k<span class="n">1</span><span class="p">)</span> <span class="o">+</span> a<span class="n">osc2</span><span class="o">*</span>k<span class="n">1</span><span class="p">)</span><span class="o">*</span>a<span class="n">mod</span>
+  <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
   
-<span class="oblock">endin</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">i</span>1 0 10 0.5 220
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span> <span class="mf">0.5</span> <span class="mi">220</span>
 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -137,7 +137,7 @@ asig <span class="op">=</span> iamp<span class="op">*</span>(aosc1<span class="o
         <br class="example-break" />
       </div>
       <div class="refsect1">
-        <a id="idm47887683879952"></a>
+        <a id="idm47596180106608"></a>
         <h2>Crédits</h2>
         <p>
       </p>

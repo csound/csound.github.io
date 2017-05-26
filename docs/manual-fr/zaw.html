@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>zaw</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887610486144"></a>
+        <a id="idm47596104395136"></a>
         <h2>Description</h2>
         <p>
       Ecrit dans une variable za au taux-a sans mixage.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887610484848"></a>
+        <a id="idm47596104393840"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>zaw</strong></span> asig, kndx</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887610482864"></a>
+        <a id="idm47596104391856"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>asig</em></span> -- Valeur à écrire dans la position za.
@@ -69,7 +70,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887610477456"></a>
+        <a id="idm47596104386448"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode zaw. Il utilise le fichier
@@ -77,75 +78,75 @@
 
       </p>
         <div class="example">
-          <a id="idm47887610475520"></a>
+          <a id="idm47596104384512"></a>
           <p class="title">
-            <strong>Exemple 1102. Exemple de l'opcode zaw.</strong>
+            <strong>Exemple 1147. Exemple de l'opcode zaw.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887494509664"></a>
+              <a id="idm47595923290128"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o zaw.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o zaw.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">; Initialize the ZAK space.</span>
-<span class="comment">; Create 1 a-rate variable and 1 k-rate variable.</span>
-<span class="opc">zakinit</span> 1, 1
+<span class="c1">; Initialize the ZAK space.</span>
+<span class="c1">; Create 1 a-rate variable and 1 k-rate variable.</span>
+<span class="nb">zakinit</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
 
-<span class="comment">; Instrument #1 -- a simple waveform.</span>
-<span class="oblock">instr</span> 1
-  <span class="comment">; Generate a simple sine waveform.</span>
-  asin <span class="opc">oscil</span> 20000, 440, 1
+<span class="c1">; Instrument #1 -- a simple waveform.</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+  <span class="c1">; Generate a simple sine waveform.</span>
+  a<span class="n">sin</span> <span class="nb">oscil</span> <span class="mi">20000</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">1</span>
 
-  <span class="comment">; Send the sine waveform to za variable #1.</span>
-  <span class="opc">zaw</span> asin, 1
-<span class="oblock">endin</span>
+  <span class="c1">; Send the sine waveform to za variable #1.</span>
+  <span class="nb">zaw</span> a<span class="n">sin</span><span class="p">,</span> <span class="mi">1</span>
+<span class="kd">endin</span>
 
-<span class="comment">; Instrument #2 -- generates audio output.</span>
-<span class="oblock">instr</span> 2
-  <span class="comment">; Read za variable #1.</span>
-  a1 <span class="opc">zar</span> 1
+<span class="c1">; Instrument #2 -- generates audio output.</span>
+<span class="kd">instr</span> <span class="nf">2</span>
+  <span class="c1">; Read za variable #1.</span>
+  a<span class="n">1</span> <span class="nb">zar</span> <span class="mi">1</span>
 
-  <span class="comment">; Generate the audio output.</span>
-  <span class="opc">out</span> a1
+  <span class="c1">; Generate the audio output.</span>
+  <span class="nb">out</span> a<span class="n">1</span>
 
-  <span class="comment">; Clear the za variables, get them ready for </span>
-  <span class="comment">; another pass.</span>
-  <span class="opc">zacl</span> 0, 1
-<span class="oblock">endin</span>
-
-
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-
-<span class="comment">; Table #1, a sine wave.</span>
-<span class="stamnt">f</span> 1 0 16384 10 1
-
-<span class="comment">; Play Instrument #1 for one second.</span>
-<span class="stamnt">i</span> 1 0 1
-<span class="comment">; Play Instrument #2 for one second.</span>
-<span class="stamnt">i</span> 2 0 1
-<span class="stamnt">e</span>
+  <span class="c1">; Clear the za variables, get them ready for </span>
+  <span class="c1">; another pass.</span>
+  <span class="nb">zacl</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="c1">; Table #1, a sine wave.</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
+
+<span class="c1">; Play Instrument #1 for one second.</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="c1">; Play Instrument #2 for one second.</span>
+<span class="nb">i</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="nb">e</span>
+
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -154,7 +155,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887610471056"></a>
+        <a id="idm47596104380048"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="zawm.html" title="zawm"><em class="citetitle">zawm</em></a>, 
@@ -165,7 +166,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887610465232"></a>
+        <a id="idm47596104374256"></a>
         <h2>Crédits</h2>
         <p>
       </p>

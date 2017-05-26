@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>nestedap</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887655860672"></a>
+        <a id="idm47596150716384"></a>
         <h2>Description</h2>
         <p>
       Trois différents filtres passe-tout imbriqués, utiles pour implémenter
@@ -46,13 +47,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887655859280"></a>
+        <a id="idm47596150714992"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>nestedap</strong></span> asig, imode, imaxdel, idel1, igain1 [, idel2] [, igain2] \
       [, idel3] [, igain3] [, istor]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887655857152"></a>
+        <a id="idm47596150712864"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>imode</em></span> -- mode opératoire du filtre :
@@ -92,7 +93,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887655845712"></a>
+        <a id="idm47596150701216"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>asig</em></span> -- signal d'entrée
@@ -132,7 +133,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887655831616"></a>
+        <a id="idm47596150687072"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode nestedap. Il utilise les fichiers
@@ -140,85 +141,85 @@
       et <a class="ulink" href="examples/beats.wav" target="_top"><em class="citetitle">beats.wav</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887655828896"></a>
+          <a id="idm47596150684352"></a>
           <p class="title">
-            <strong>Exemple 566. Exemple de l'opcode nestedap.</strong>
+            <strong>Exemple 594. Exemple de l'opcode nestedap.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887513593152"></a>
+              <a id="idm47595969588624"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o nestedap.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o nestedap.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="oblock">instr</span> 5
-  insnd     <span class="op">=</span>           p4
-  gasig     <span class="opc">diskin2</span>     insnd, 1
-<span class="oblock">endin</span>
+<span class="kd">instr</span> <span class="nf">5</span>
+  i<span class="n">nsnd</span>     <span class="o">=</span>           <span class="nb">p4</span>
+  ga<span class="n">sig</span>     <span class="nb">diskin2</span>     i<span class="n">nsnd</span><span class="p">,</span> <span class="mi">1</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 10
-  imax      <span class="op">=</span>           1
-  idel1     <span class="op">=</span>           p4<span class="op">/</span>1000
-  igain1    <span class="op">=</span>           p5
-  idel2     <span class="op">=</span>           p6<span class="op">/</span>1000
-  igain2    <span class="op">=</span>           p7
-  idel3     <span class="op">=</span>           p8<span class="op">/</span>1000
-  igain3    <span class="op">=</span>           p9
-  idel4     <span class="op">=</span>           p10<span class="op">/</span>1000
-  igain4    <span class="op">=</span>           p11
-  idel5     <span class="op">=</span>           p12<span class="op">/</span>1000
-  igain5    <span class="op">=</span>           p13
-  idel6     <span class="op">=</span>           p14<span class="op">/</span>1000
-  igain6    <span class="op">=</span>           p15
+<span class="kd">instr</span> <span class="nf">10</span>
+  i<span class="n">max</span>      <span class="o">=</span>           <span class="mi">1</span>
+  i<span class="n">del1</span>     <span class="o">=</span>           <span class="nb">p4</span><span class="o">/</span><span class="mi">1000</span>
+  i<span class="n">gain1</span>    <span class="o">=</span>           <span class="nb">p5</span>
+  i<span class="n">del2</span>     <span class="o">=</span>           <span class="nb">p6</span><span class="o">/</span><span class="mi">1000</span>
+  i<span class="n">gain2</span>    <span class="o">=</span>           <span class="nb">p7</span>
+  i<span class="n">del3</span>     <span class="o">=</span>           <span class="nb">p8</span><span class="o">/</span><span class="mi">1000</span>
+  i<span class="n">gain3</span>    <span class="o">=</span>           <span class="nb">p9</span>
+  i<span class="n">del4</span>     <span class="o">=</span>           <span class="nb">p10</span><span class="o">/</span><span class="mi">1000</span>
+  i<span class="n">gain4</span>    <span class="o">=</span>           <span class="nb">p11</span>
+  i<span class="n">del5</span>     <span class="o">=</span>           <span class="nb">p12</span><span class="o">/</span><span class="mi">1000</span>
+  i<span class="n">gain5</span>    <span class="o">=</span>           <span class="nb">p13</span>
+  i<span class="n">del6</span>     <span class="o">=</span>           <span class="nb">p14</span><span class="o">/</span><span class="mi">1000</span>
+  i<span class="n">gain6</span>    <span class="o">=</span>           <span class="nb">p15</span>
 
-  afdbk     <span class="opc">init</span> 0
+  a<span class="n">fdbk</span>     <span class="nb">init</span> <span class="mi">0</span>
 
-  aout1     <span class="opc">nestedap</span> gasig<span class="op">+</span>afdbk<span class="op">*</span>.4, 3, imax, idel1, igain1, idel2, igain2, idel3, igain3
+  a<span class="n">out1</span>     <span class="nb">nestedap</span> ga<span class="n">sig</span><span class="o">+</span>a<span class="n">fdbk</span><span class="o">*</span><span class="mf">.4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> i<span class="n">max</span><span class="p">,</span> i<span class="n">del1</span><span class="p">,</span> i<span class="n">gain1</span><span class="p">,</span> i<span class="n">del2</span><span class="p">,</span> i<span class="n">gain2</span><span class="p">,</span> i<span class="n">del3</span><span class="p">,</span> i<span class="n">gain3</span>
   
-  aout2     <span class="opc">nestedap</span> aout1, 2, imax, idel4, igain4, idel5, igain5
+  a<span class="n">out2</span>     <span class="nb">nestedap</span> a<span class="n">out1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> i<span class="n">max</span><span class="p">,</span> i<span class="n">del4</span><span class="p">,</span> i<span class="n">gain4</span><span class="p">,</span> i<span class="n">del5</span><span class="p">,</span> i<span class="n">gain5</span>
 
-  aout      <span class="opc">nestedap</span> aout2, 1, imax, idel6, igain6
+  a<span class="n">out</span>      <span class="nb">nestedap</span> a<span class="n">out2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">max</span><span class="p">,</span> i<span class="n">del6</span><span class="p">,</span> i<span class="n">gain6</span>
 
-  afdbk     <span class="opc">butterlp</span> aout, 1000
+  a<span class="n">fdbk</span>     <span class="nb">butterlp</span> a<span class="n">out</span><span class="p">,</span> <span class="mi">1000</span>
 
-            <span class="opc">outs</span> gasig<span class="op">+</span>(aout<span class="op">+</span>aout1)<span class="op">/</span>2, gasig<span class="op">-</span>(aout<span class="op">+</span>aout1)<span class="op">/</span>2
+            <span class="nb">outs</span> ga<span class="n">sig</span><span class="o">+</span><span class="p">(</span>a<span class="n">out</span><span class="o">+</span>a<span class="n">out1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> ga<span class="n">sig</span><span class="o">-</span><span class="p">(</span>a<span class="n">out</span><span class="o">+</span>a<span class="n">out1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
   
-gasig     <span class="op">=</span>           0
-<span class="oblock">endin</span>
+ga<span class="n">sig</span>     <span class="o">=</span>           <span class="mi">0</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">f</span>1 0 8192 10 1
+<span class="nb">f</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">8192</span> <span class="mi">10</span> <span class="mi">1</span>
 
-<span class="comment">; Diskin</span>
-<span class="comment">;   Sta  Dur  Soundin</span>
-<span class="stamnt">i</span>5  0    3    "beats.wav"
+<span class="c1">; Diskin</span>
+<span class="c1">;   Sta  Dur  Soundin</span>
+<span class="nb">i</span><span class="mi">5</span>  <span class="mi">0</span>    <span class="mi">3</span>    <span class="s">"beats.wav"</span>
 
-<span class="comment">; Reverb</span>
-<span class="comment">;   St  Dur  Del1 Gn1  Del2  Gn2  Del3  Gn3  Del4  Gn4  Del5  Gn5  Del6  Gn6</span>
-<span class="stamnt">i</span>10 0   4    97   .11  23   .07   43   .09   72    .2   53    .2   119   .3
-<span class="stamnt">e</span>
+<span class="c1">; Reverb</span>
+<span class="c1">;   St  Dur  Del1 Gn1  Del2  Gn2  Del3  Gn3  Del4  Gn4  Del5  Gn5  Del6  Gn6</span>
+<span class="nb">i</span><span class="mi">10</span> <span class="mi">0</span>   <span class="mi">4</span>    <span class="mi">97</span>   <span class="mf">.11</span>  <span class="mi">23</span>   <span class="mf">.07</span>   <span class="mi">43</span>   <span class="mf">.09</span>   <span class="mi">72</span>    <span class="mf">.2</span>   <span class="mi">53</span>    <span class="mf">.2</span>   <span class="mi">119</span>   <span class="mf">.3</span>
+<span class="nb">e</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -227,7 +228,7 @@ gasig     <span class="op">=</span>           0
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887655824528"></a>
+        <a id="idm47596150679984"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Opcodes de tableaux</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="MathTop.html" title="Opérations mathématiques" />
@@ -36,7 +37,7 @@
         <p>Opcodes de tableaux</p>
       </div>
       <div class="refsect1">
-        <a id="idm47887702563840"></a>
+        <a id="idm47596199133120"></a>
         <h2>Nom de variable</h2>
         <p>
       Un tableau doit être créé (via <a class="link" href="init.html" title="init"><em class="citetitle">init</em></a>
@@ -83,7 +84,7 @@ kArr2[] <span class="op">=</span> kArr1              <span class="comment">;crea
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887702545792"></a>
+        <a id="idm47596199115008"></a>
         <h2>k-rate</h2>
         <p>
       Noter que la plupart des opérations sur les tableaux ne se font actuellement
@@ -123,7 +124,7 @@ kTrig <span class="opc">metro</span> 1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887702524992"></a>
+        <a id="idm47596199094256"></a>
         <h2>Création/initialisation</h2>
         <p>
       La manière habituelle de créer un tableau est d'utiliser <span class="emphasis"><em>init</em></span> :
@@ -147,7 +148,7 @@ kArr[] <span class="opc">fillarray</span> 1, 2, 3, 4</pre>
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47887702516352"></a>
+        <a id="idm47596199085616"></a>
         <h2>Longueur</h2>
         <p>
       La fonction <span class="emphasis"><em>lenarray(kArr)</em></span> retourne la longueur d'un
@@ -156,7 +157,7 @@ kArr[] <span class="opc">fillarray</span> 1, 2, 3, 4</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887702513488"></a>
+        <a id="idm47596199082752"></a>
         <h2>Copie d'un tableau vers ou d'une table</h2>
         <p>
       </p>
@@ -183,10 +184,10 @@ kArr[] <span class="opc">fillarray</span> 1, 2, 3, 4</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887702505648"></a>
+        <a id="idm47596199074912"></a>
         <h2>Opérations sur les tableaux : maths</h2>
         <div class="refsect2">
-          <a id="idm47887702504912"></a>
+          <a id="idm47596199074176"></a>
           <h3>+, -, *, / avec un nombre</h3>
           <p>
         Si les quatre opérateurs de base sont utilisés entre un tableau et un
@@ -204,88 +205,88 @@ kArr2[] <span class="op">=</span> kArr1 <span class="op">+</span> 10    <span cl
         <a class="ulink" href="examples/array_scalar_math.csd" target="_top"><em class="citetitle">array_scalar_math.csd</em></a>.
         </p>
           <div class="example">
-            <a id="idm47887702498704"></a>
+            <a id="idm47596199067968"></a>
             <p class="title">
               <strong>Exemple 3. Exemple des opérations tableau/scalaire</strong>
             </p>
             <div class="example-contents">
               <div class="refsect1">
-                <a id="idm47887535844976"></a>
+                <a id="idm47596027422176"></a>
                 <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
 -n -m128
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
 
-  <span class="oblock">instr</span> 1
+  <span class="kd">instr</span> <span class="nf">1</span>
 
-<span class="comment">;create array and fill with numbers 1..10</span>
-kArr1[] <span class="opc">fillarray</span> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+<span class="c1">;create array and fill with numbers 1..10</span>
+k<span class="n">Arr1</span><span class="p">[]</span> <span class="nb">fillarray</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span>
 
-<span class="comment">;print content</span>
-        <span class="opc">printf</span>  "<span class="op">%</span>s", 1, "\nInitial content<span class="op">:</span>\n"
-kndx    <span class="op">=</span>       0
-  until kndx <span class="op">==</span> <span class="opc">lenarray</span>(kArr1) do
-        <span class="opc">printf</span>  "kArr[<span class="op">%</span>d] <span class="op">=</span> <span class="op">%</span>f\n", kndx<span class="op">+</span>1, kndx, kArr1[kndx]
-kndx    <span class="op">+</span><span class="op">=</span>      1
-  od
+<span class="c1">;print content</span>
+        <span class="nb">printf</span>  <span class="s">"%s"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"</span><span class="se">\n</span><span class="s">Initial content:</span><span class="se">\n</span><span class="s">"</span>
+k<span class="n">ndx</span>    <span class="o">=</span>       <span class="mi">0</span>
+  <span class="k">until</span> k<span class="n">ndx</span> <span class="o">==</span> <span class="nb">lenarray</span><span class="p">(</span>k<span class="n">Arr1</span><span class="p">)</span> <span class="k">do</span>
+        <span class="nb">printf</span>  <span class="s">"kArr[</span><span class="si">%d</span><span class="s">] = %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">ndx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">ndx</span><span class="p">,</span> k<span class="n">Arr1</span><span class="p">[</span>k<span class="n">ndx</span><span class="p">]</span>
+k<span class="n">ndx</span>    <span class="o">+=</span>      <span class="mi">1</span>
+  <span class="k">od</span>
 
-<span class="comment">;add 10</span>
-kArr2[] <span class="op">=</span>       kArr1 <span class="op">+</span> 10
+<span class="c1">;add 10</span>
+k<span class="n">Arr2</span><span class="p">[]</span> <span class="o">=</span>       k<span class="n">Arr1</span> <span class="o">+</span> <span class="mi">10</span>
 
-<span class="comment">;print content</span>
-        <span class="opc">printf</span>  "<span class="op">%</span>s", 1, "\nAfter adding 10<span class="op">:</span>\n"
-kndx    <span class="op">=</span>       0
-  until kndx <span class="op">==</span> <span class="opc">lenarray</span>(kArr2) do
-        <span class="opc">printf</span>  "kArr[<span class="op">%</span>d] <span class="op">=</span> <span class="op">%</span>f\n", kndx<span class="op">+</span>1, kndx, kArr2[kndx]
-kndx    <span class="op">+</span><span class="op">=</span>      1
-  od
+<span class="c1">;print content</span>
+        <span class="nb">printf</span>  <span class="s">"%s"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"</span><span class="se">\n</span><span class="s">After adding 10:</span><span class="se">\n</span><span class="s">"</span>
+k<span class="n">ndx</span>    <span class="o">=</span>       <span class="mi">0</span>
+  <span class="k">until</span> k<span class="n">ndx</span> <span class="o">==</span> <span class="nb">lenarray</span><span class="p">(</span>k<span class="n">Arr2</span><span class="p">)</span> <span class="k">do</span>
+        <span class="nb">printf</span>  <span class="s">"kArr[</span><span class="si">%d</span><span class="s">] = %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">ndx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">ndx</span><span class="p">,</span> k<span class="n">Arr2</span><span class="p">[</span>k<span class="n">ndx</span><span class="p">]</span>
+k<span class="n">ndx</span>    <span class="o">+=</span>      <span class="mi">1</span>
+  <span class="k">od</span>
 
-<span class="comment">;subtract 5</span>
-kArr3[] <span class="op">=</span>       kArr2 <span class="op">-</span> 5
+<span class="c1">;subtract 5</span>
+k<span class="n">Arr3</span><span class="p">[]</span> <span class="o">=</span>       k<span class="n">Arr2</span> <span class="o">-</span> <span class="mi">5</span>
 
-<span class="comment">;print content</span>
-        <span class="opc">printf</span>  "<span class="op">%</span>s", 1, "\nAfter subtracting 5<span class="op">:</span>\n"
-kndx    <span class="op">=</span>       0
-  until kndx <span class="op">==</span> <span class="opc">lenarray</span>(kArr3) do
-        <span class="opc">printf</span>  "kArr[<span class="op">%</span>d] <span class="op">=</span> <span class="op">%</span>f\n", kndx<span class="op">+</span>1, kndx, kArr3[kndx]
-kndx    <span class="op">+</span><span class="op">=</span>      1
-  od
+<span class="c1">;print content</span>
+        <span class="nb">printf</span>  <span class="s">"%s"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"</span><span class="se">\n</span><span class="s">After subtracting 5:</span><span class="se">\n</span><span class="s">"</span>
+k<span class="n">ndx</span>    <span class="o">=</span>       <span class="mi">0</span>
+  <span class="k">until</span> k<span class="n">ndx</span> <span class="o">==</span> <span class="nb">lenarray</span><span class="p">(</span>k<span class="n">Arr3</span><span class="p">)</span> <span class="k">do</span>
+        <span class="nb">printf</span>  <span class="s">"kArr[</span><span class="si">%d</span><span class="s">] = %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">ndx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">ndx</span><span class="p">,</span> k<span class="n">Arr3</span><span class="p">[</span>k<span class="n">ndx</span><span class="p">]</span>
+k<span class="n">ndx</span>    <span class="o">+=</span>      <span class="mi">1</span>
+  <span class="k">od</span>
 
-<span class="comment">;multiply by -1.5</span>
-kArr4[] <span class="op">=</span>       kArr3 <span class="op">*</span> <span class="op">-</span>1.5
+<span class="c1">;multiply by -1.5</span>
+k<span class="n">Arr4</span><span class="p">[]</span> <span class="o">=</span>       k<span class="n">Arr3</span> <span class="o">*</span> <span class="o">-</span><span class="mf">1.5</span>
 
-<span class="comment">;print content</span>
-        <span class="opc">printf</span>  "<span class="op">%</span>s", 1, "\nAfter multiplying by <span class="op">-</span>1.5<span class="op">:</span>\n"
-kndx    <span class="op">=</span>       0
-  until kndx <span class="op">==</span> <span class="opc">lenarray</span>(kArr4) do
-        <span class="opc">printf</span>  "kArr[<span class="op">%</span>d] <span class="op">=</span> <span class="op">%</span>f\n", kndx<span class="op">+</span>1, kndx, kArr4[kndx]
-kndx    <span class="op">+</span><span class="op">=</span>      1
-  od
+<span class="c1">;print content</span>
+        <span class="nb">printf</span>  <span class="s">"%s"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"</span><span class="se">\n</span><span class="s">After multiplying by -1.5:</span><span class="se">\n</span><span class="s">"</span>
+k<span class="n">ndx</span>    <span class="o">=</span>       <span class="mi">0</span>
+  <span class="k">until</span> k<span class="n">ndx</span> <span class="o">==</span> <span class="nb">lenarray</span><span class="p">(</span>k<span class="n">Arr4</span><span class="p">)</span> <span class="k">do</span>
+        <span class="nb">printf</span>  <span class="s">"kArr[</span><span class="si">%d</span><span class="s">] = %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">ndx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">ndx</span><span class="p">,</span> k<span class="n">Arr4</span><span class="p">[</span>k<span class="n">ndx</span><span class="p">]</span>
+k<span class="n">ndx</span>    <span class="o">+=</span>      <span class="mi">1</span>
+  <span class="k">od</span>
 
-<span class="comment">;divide by -3/2</span>
-kArr5[] <span class="op">=</span>       kArr4 <span class="op">/</span> <span class="op">-</span>(3<span class="op">/</span>2)
+<span class="c1">;divide by -3/2</span>
+k<span class="n">Arr5</span><span class="p">[]</span> <span class="o">=</span>       k<span class="n">Arr4</span> <span class="o">/</span> <span class="o">-</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="comment">;print content</span>
-        <span class="opc">printf</span>  "<span class="op">%</span>s", 1, "\nAfter dividing by <span class="op">-</span>3<span class="op">/</span>2<span class="op">:</span>\n"
-kndx    <span class="op">=</span>       0
-  until kndx <span class="op">==</span> <span class="opc">lenarray</span>(kArr5) do
-        <span class="opc">printf</span>  "kArr[<span class="op">%</span>d] <span class="op">=</span> <span class="op">%</span>f\n", kndx<span class="op">+</span>1, kndx, kArr5[kndx]
-kndx    <span class="op">+</span><span class="op">=</span>      1
-  od
+<span class="c1">;print content</span>
+        <span class="nb">printf</span>  <span class="s">"%s"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"</span><span class="se">\n</span><span class="s">After dividing by -3/2:</span><span class="se">\n</span><span class="s">"</span>
+k<span class="n">ndx</span>    <span class="o">=</span>       <span class="mi">0</span>
+  <span class="k">until</span> k<span class="n">ndx</span> <span class="o">==</span> <span class="nb">lenarray</span><span class="p">(</span>k<span class="n">Arr5</span><span class="p">)</span> <span class="k">do</span>
+        <span class="nb">printf</span>  <span class="s">"kArr[</span><span class="si">%d</span><span class="s">] = %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">ndx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">ndx</span><span class="p">,</span> k<span class="n">Arr5</span><span class="p">[</span>k<span class="n">ndx</span><span class="p">]</span>
+k<span class="n">ndx</span>    <span class="o">+=</span>      <span class="mi">1</span>
+  <span class="k">od</span>
 
-<span class="comment">;turnoff</span>
-        <span class="opc">turnoff</span>
-  <span class="oblock">endin</span>
+<span class="c1">;turnoff</span>
+        <span class="nb">turnoff</span>
+  <span class="kd">endin</span>
   
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span> 1 0 .1
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">.1</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
               </div>
             </div>
@@ -294,7 +295,7 @@ kndx    <span class="op">+</span><span class="op">=</span>      1
       </p>
         </div>
         <div class="refsect2">
-          <a id="idm47887702496736"></a>
+          <a id="idm47596199066000"></a>
           <h3>+, -, *, / avec un autre tableau</h3>
           <p>
         Si les quatre opérateurs de base sont utilisés entre deux tableaux,
@@ -312,94 +313,94 @@ kArr3[] <span class="op">=</span> kArr1 <span class="op">+</span> kArr2    <span
         <a class="ulink" href="examples/array_array_math.csd" target="_top"><em class="citetitle">array_array_math.csd</em></a>.
         </p>
           <div class="example">
-            <a id="idm47887702490000"></a>
+            <a id="idm47596199059264"></a>
             <p class="title">
               <strong>Exemple 4. Exemple des opérations de tableau</strong>
             </p>
             <div class="example-contents">
               <div class="refsect1">
-                <a id="idm47887535844080"></a>
+                <a id="idm47596027348640"></a>
                 <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
 -n -m128
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-  <span class="oblock">instr</span> 1
+  <span class="kd">instr</span> <span class="nf">1</span>
 
-<span class="comment">;create array and fill with numbers 1..10 resp .1..1</span>
-kArr1[] <span class="opc">fillarray</span> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-kArr2[] <span class="opc">fillarray</span> 1, 2, 3, 5, 8, 13, 21, 34, 55, 89
+<span class="c1">;create array and fill with numbers 1..10 resp .1..1</span>
+k<span class="n">Arr1</span><span class="p">[]</span> <span class="nb">fillarray</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span>
+k<span class="n">Arr2</span><span class="p">[]</span> <span class="nb">fillarray</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">89</span>
 
-<span class="comment">;print contents</span>
-        <span class="opc">printf</span>  "<span class="op">%</span>s", 1, "\nkArr1<span class="op">:</span>\n"
-kndx    <span class="op">=</span>       0
-  until kndx <span class="op">==</span> <span class="opc">lenarray</span>(kArr1) do
-        <span class="opc">printf</span>  "kArr1[<span class="op">%</span>d] <span class="op">=</span> <span class="op">%</span>f\n", kndx<span class="op">+</span>1, kndx, kArr1[kndx]
-kndx    <span class="op">+</span><span class="op">=</span>      1
-  od
-        <span class="opc">printf</span>  "<span class="op">%</span>s", 1, "\nkArr2<span class="op">:</span>\n"
-kndx    <span class="op">=</span>       0
-  until kndx <span class="op">==</span> <span class="opc">lenarray</span>(kArr2) do
-        <span class="opc">printf</span>  "kArr2[<span class="op">%</span>d] <span class="op">=</span> <span class="op">%</span>f\n", kndx<span class="op">+</span>1, kndx, kArr2[kndx]
-kndx    <span class="op">+</span><span class="op">=</span>      1
-  od
+<span class="c1">;print contents</span>
+        <span class="nb">printf</span>  <span class="s">"%s"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"</span><span class="se">\n</span><span class="s">kArr1:</span><span class="se">\n</span><span class="s">"</span>
+k<span class="n">ndx</span>    <span class="o">=</span>       <span class="mi">0</span>
+  <span class="k">until</span> k<span class="n">ndx</span> <span class="o">==</span> <span class="nb">lenarray</span><span class="p">(</span>k<span class="n">Arr1</span><span class="p">)</span> <span class="k">do</span>
+        <span class="nb">printf</span>  <span class="s">"kArr1[</span><span class="si">%d</span><span class="s">] = %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">ndx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">ndx</span><span class="p">,</span> k<span class="n">Arr1</span><span class="p">[</span>k<span class="n">ndx</span><span class="p">]</span>
+k<span class="n">ndx</span>    <span class="o">+=</span>      <span class="mi">1</span>
+  <span class="k">od</span>
+        <span class="nb">printf</span>  <span class="s">"%s"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"</span><span class="se">\n</span><span class="s">kArr2:</span><span class="se">\n</span><span class="s">"</span>
+k<span class="n">ndx</span>    <span class="o">=</span>       <span class="mi">0</span>
+  <span class="k">until</span> k<span class="n">ndx</span> <span class="o">==</span> <span class="nb">lenarray</span><span class="p">(</span>k<span class="n">Arr2</span><span class="p">)</span> <span class="k">do</span>
+        <span class="nb">printf</span>  <span class="s">"kArr2[</span><span class="si">%d</span><span class="s">] = %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">ndx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">ndx</span><span class="p">,</span> k<span class="n">Arr2</span><span class="p">[</span>k<span class="n">ndx</span><span class="p">]</span>
+k<span class="n">ndx</span>    <span class="o">+=</span>      <span class="mi">1</span>
+  <span class="k">od</span>
 
-<span class="comment">;add arrays</span>
-kArr3[] <span class="op">=</span>       kArr1 <span class="op">+</span> kArr2
+<span class="c1">;add arrays</span>
+k<span class="n">Arr3</span><span class="p">[]</span> <span class="o">=</span>       k<span class="n">Arr1</span> <span class="o">+</span> k<span class="n">Arr2</span>
 
-<span class="comment">;print content</span>
-        <span class="opc">printf</span>  "<span class="op">%</span>s", 1, "\nkArr1 <span class="op">+</span> kArr2<span class="op">:</span>\n"
-kndx    <span class="op">=</span>       0
-  until kndx <span class="op">==</span> <span class="opc">lenarray</span>(kArr3) do
-        <span class="opc">printf</span>  "kArr3[<span class="op">%</span>d] <span class="op">=</span> <span class="op">%</span>f\n", kndx<span class="op">+</span>1, kndx, kArr3[kndx]
-kndx    <span class="op">+</span><span class="op">=</span>      1
-  od
+<span class="c1">;print content</span>
+        <span class="nb">printf</span>  <span class="s">"%s"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"</span><span class="se">\n</span><span class="s">kArr1 + kArr2:</span><span class="se">\n</span><span class="s">"</span>
+k<span class="n">ndx</span>    <span class="o">=</span>       <span class="mi">0</span>
+  <span class="k">until</span> k<span class="n">ndx</span> <span class="o">==</span> <span class="nb">lenarray</span><span class="p">(</span>k<span class="n">Arr3</span><span class="p">)</span> <span class="k">do</span>
+        <span class="nb">printf</span>  <span class="s">"kArr3[</span><span class="si">%d</span><span class="s">] = %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">ndx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">ndx</span><span class="p">,</span> k<span class="n">Arr3</span><span class="p">[</span>k<span class="n">ndx</span><span class="p">]</span>
+k<span class="n">ndx</span>    <span class="o">+=</span>      <span class="mi">1</span>
+  <span class="k">od</span>
 
-<span class="comment">;subtract arrays</span>
-kArr4[] <span class="op">=</span>       kArr1 <span class="op">-</span> kArr2
+<span class="c1">;subtract arrays</span>
+k<span class="n">Arr4</span><span class="p">[]</span> <span class="o">=</span>       k<span class="n">Arr1</span> <span class="o">-</span> k<span class="n">Arr2</span>
 
-<span class="comment">;print content</span>
-        <span class="opc">printf</span>  "<span class="op">%</span>s", 1, "\nkArr1 <span class="op">-</span> kArr2<span class="op">:</span>\n"
-kndx    <span class="op">=</span>       0
-  until kndx <span class="op">==</span> <span class="opc">lenarray</span>(kArr4) do
-        <span class="opc">printf</span>  "kArr4[<span class="op">%</span>d] <span class="op">=</span> <span class="op">%</span>f\n", kndx<span class="op">+</span>1, kndx, kArr4[kndx]
-kndx    <span class="op">+</span><span class="op">=</span>      1
-  od
+<span class="c1">;print content</span>
+        <span class="nb">printf</span>  <span class="s">"%s"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"</span><span class="se">\n</span><span class="s">kArr1 - kArr2:</span><span class="se">\n</span><span class="s">"</span>
+k<span class="n">ndx</span>    <span class="o">=</span>       <span class="mi">0</span>
+  <span class="k">until</span> k<span class="n">ndx</span> <span class="o">==</span> <span class="nb">lenarray</span><span class="p">(</span>k<span class="n">Arr4</span><span class="p">)</span> <span class="k">do</span>
+        <span class="nb">printf</span>  <span class="s">"kArr4[</span><span class="si">%d</span><span class="s">] = %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">ndx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">ndx</span><span class="p">,</span> k<span class="n">Arr4</span><span class="p">[</span>k<span class="n">ndx</span><span class="p">]</span>
+k<span class="n">ndx</span>    <span class="o">+=</span>      <span class="mi">1</span>
+  <span class="k">od</span>
 
-<span class="comment">;multiply arrays</span>
-kArr5[] <span class="op">=</span>       kArr1 <span class="op">*</span> kArr2
+<span class="c1">;multiply arrays</span>
+k<span class="n">Arr5</span><span class="p">[]</span> <span class="o">=</span>       k<span class="n">Arr1</span> <span class="o">*</span> k<span class="n">Arr2</span>
 
-<span class="comment">;print content</span>
-        <span class="opc">printf</span>  "<span class="op">%</span>s", 1, "\nkArr1 <span class="op">*</span> kArr2<span class="op">:</span>\n"
-kndx    <span class="op">=</span>       0
-  until kndx <span class="op">==</span> <span class="opc">lenarray</span>(kArr5) do
-        <span class="opc">printf</span>  "kArr5[<span class="op">%</span>d] <span class="op">=</span> <span class="op">%</span>f\n", kndx<span class="op">+</span>1, kndx, kArr5[kndx]
-kndx <span class="op">+</span><span class="op">=</span> 1
-  od
+<span class="c1">;print content</span>
+        <span class="nb">printf</span>  <span class="s">"%s"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"</span><span class="se">\n</span><span class="s">kArr1 * kArr2:</span><span class="se">\n</span><span class="s">"</span>
+k<span class="n">ndx</span>    <span class="o">=</span>       <span class="mi">0</span>
+  <span class="k">until</span> k<span class="n">ndx</span> <span class="o">==</span> <span class="nb">lenarray</span><span class="p">(</span>k<span class="n">Arr5</span><span class="p">)</span> <span class="k">do</span>
+        <span class="nb">printf</span>  <span class="s">"kArr5[</span><span class="si">%d</span><span class="s">] = %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">ndx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">ndx</span><span class="p">,</span> k<span class="n">Arr5</span><span class="p">[</span>k<span class="n">ndx</span><span class="p">]</span>
+k<span class="n">ndx</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="k">od</span>
 
-<span class="comment">;divide arrays</span>
-kArr6[] <span class="op">=</span>       kArr1 <span class="op">/</span> kArr2
+<span class="c1">;divide arrays</span>
+k<span class="n">Arr6</span><span class="p">[]</span> <span class="o">=</span>       k<span class="n">Arr1</span> <span class="o">/</span> k<span class="n">Arr2</span>
 
-<span class="comment">;print content</span>
-        <span class="opc">printf</span>  "<span class="op">%</span>s", 1, "\nkArr1 <span class="op">/</span> kArr2<span class="op">:</span>\n"
-kndx    <span class="op">=</span>       0
-  until kndx <span class="op">==</span> <span class="opc">lenarray</span>(kArr6) do
-        <span class="opc">printf</span>  "kArr5[<span class="op">%</span>d] <span class="op">=</span> <span class="op">%</span>f\n", kndx<span class="op">+</span>1, kndx, kArr6[kndx]
-kndx <span class="op">+</span><span class="op">=</span> 1
-  od
+<span class="c1">;print content</span>
+        <span class="nb">printf</span>  <span class="s">"%s"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"</span><span class="se">\n</span><span class="s">kArr1 / kArr2:</span><span class="se">\n</span><span class="s">"</span>
+k<span class="n">ndx</span>    <span class="o">=</span>       <span class="mi">0</span>
+  <span class="k">until</span> k<span class="n">ndx</span> <span class="o">==</span> <span class="nb">lenarray</span><span class="p">(</span>k<span class="n">Arr6</span><span class="p">)</span> <span class="k">do</span>
+        <span class="nb">printf</span>  <span class="s">"kArr5[</span><span class="si">%d</span><span class="s">] = %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">ndx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">ndx</span><span class="p">,</span> k<span class="n">Arr6</span><span class="p">[</span>k<span class="n">ndx</span><span class="p">]</span>
+k<span class="n">ndx</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="k">od</span>
 
-<span class="comment">;turnoff</span>
-        <span class="opc">turnoff</span>
+<span class="c1">;turnoff</span>
+        <span class="nb">turnoff</span>
         
-  <span class="oblock">endin</span>
+  <span class="kd">endin</span>
   
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span> 1 0 .1
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">.1</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
               </div>
             </div>
@@ -409,7 +410,7 @@ kndx <span class="op">+</span><span class="op">=</span> 1
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47887702487920"></a>
+        <a id="idm47596199057184"></a>
         <h2>Application d'une fonction à un tableau</h2>
         <p>
       </p>
@@ -437,10 +438,10 @@ kArrRes   <span class="opc">maparray</span>  kArrSrc, "sqrt"</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887702479376"></a>
+        <a id="idm47596199048704"></a>
         <h2>Opérations sur les tableaux : min, max, sum, scale, slice</h2>
         <div class="refsect2">
-          <a id="idm47887702478608"></a>
+          <a id="idm47596199047936"></a>
           <h3>Minimum et maximum</h3>
           <p>
         </p>
@@ -465,7 +466,7 @@ kArrRes   <span class="opc">maparray</span>  kArrSrc, "sqrt"</pre>
       </p>
         </div>
         <div class="refsect2">
-          <a id="idm47887702471344"></a>
+          <a id="idm47596199040672"></a>
           <h3>Somme</h3>
           <p>
         </p>
@@ -480,7 +481,7 @@ kArrRes   <span class="opc">maparray</span>  kArrSrc, "sqrt"</pre>
       </p>
         </div>
         <div class="refsect2">
-          <a id="idm47887702466896"></a>
+          <a id="idm47596199036224"></a>
           <h3>Pondération</h3>
           <p>
         </p>
@@ -506,7 +507,7 @@ kArrRes   <span class="opc">maparray</span>  kArrSrc, "sqrt"</pre>
       </p>
         </div>
         <div class="refsect2">
-          <a id="idm47887702458192"></a>
+          <a id="idm47596199027520"></a>
           <h3>Extrait</h3>
           <p>
         </p>
@@ -536,7 +537,7 @@ kArrRes   <span class="opc">maparray</span>  kArrSrc, "sqrt"</pre>
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47887702446224"></a>
+        <a id="idm47596199015488"></a>
         <h2>Tableaux dans un UDO</h2>
         <p>
       La dimension d'un tableau en entrée doit être déclarée en deux endroits :
@@ -567,38 +568,38 @@ kArr[] <span class="opc">xin</span>
       <a class="ulink" href="examples/array_udo.csd" target="_top"><em class="citetitle">array_udo.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887702438032"></a>
+          <a id="idm47596199007296"></a>
           <p class="title">
             <strong>Exemple 5. Exemple d'un tableau dans un UDO</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm47887535828160"></a>
+              <a id="idm47596027307248"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
 -nm128
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-  <span class="oblock">opcode</span> FirstEl, k, k[]
-  <span class="comment">;returns the first element of vector kArr</span>
-kArr[] <span class="opc">xin</span>
-<span class="opc">xout</span> kArr[0]
-  <span class="oblock">endop</span>
+  <span class="kd">opcode</span> <span class="nf">FirstEl</span><span class="p">,</span> <span class="kt">k</span><span class="p">,</span> <span class="kt">k[]</span>
+  <span class="c1">;returns the first element of vector kArr</span>
+k<span class="n">Arr</span><span class="p">[]</span> <span class="nb">xin</span>
+<span class="nb">xout</span> k<span class="n">Arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+  <span class="kd">endop</span>
 
-  <span class="oblock">instr</span> 1 
-kArr[] <span class="opc">fillarray</span> 6, 3, 9, 5, 1
-kFirst FirstEl kArr
-<span class="opc">printf</span> "kFirst <span class="op">=</span> <span class="op">%</span>d\n", 1, kFirst
-<span class="opc">turnoff</span>
-  <span class="oblock">endin</span>
+  <span class="kd">instr</span> <span class="nf">1</span> 
+k<span class="n">Arr</span><span class="p">[]</span> <span class="nb">fillarray</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span>
+k<span class="n">First</span> <span class="nf">FirstEl</span> k<span class="n">Arr</span>
+<span class="nb">printf</span> <span class="s">"kFirst = </span><span class="si">%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">First</span>
+<span class="nb">turnoff</span>
+  <span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span> 1 0 .1
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">.1</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -607,7 +608,16 @@ kFirst FirstEl kArr
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887702436112"></a>
+        <a id="idm47596199005376"></a>
+        <p>
+      A noter que si un opcode (par exemple <span class="emphasis"><em>inrg</em></span>) modifie
+      les arguments de la liste d'arguments sur sa droite, on ne doit pas
+      utiliser un élément de tableau indicé dans cette liste. Contrairement
+      au variables normales, les tableaux ne sont pas changés par les opcodes.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm47596199003648"></a>
         <h2>Crédits</h2>
         <p>
       </p>

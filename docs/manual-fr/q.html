@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Instruction q</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="ScoregensTop.html" title="Instructions de partition et routines GEN" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887564819824"></a>
+        <a id="idm47596056920992"></a>
         <h2>Description</h2>
         <p>
       Cette instruction peut être utilisée pour rendre un instrument silencieux.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887564818480"></a>
+        <a id="idm47596056919648"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>q</strong></span> p1  p2  p3</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887564816576"></a>
+        <a id="idm47596056917760"></a>
         <h2>Exécution</h2>
         <p>
        <span class="emphasis"><em>p1</em></span> -- Numéro de l'instrument à rendre muet/sonore.
@@ -68,62 +69,62 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887564811904"></a>
+        <a id="idm47596056913040"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'instruction q. Il utilise le fichier
       <a class="ulink" href="examples/q.csd" target="_top"><em class="citetitle">q.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887564810032"></a>
+          <a id="idm47596056911168"></a>
           <p class="title">
-            <strong>Exemple 1118. Exemple de l'instruction q.</strong>
+            <strong>Exemple 1169. Exemple de l'instruction q.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm47887494395248"></a>
+              <a id="idm47595922884656"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o q.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o q.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-aenv <span class="opc">expseg</span> .01, p3<span class="op">*</span>0.25, 1, p3<span class="op">*</span>0.75, 0.01
-asig <span class="opc">poscil3</span> .8<span class="op">*</span>aenv, p4, 1
-     <span class="opc">outs</span> asig, asig
+a<span class="n">env</span> <span class="nb">expseg</span> <span class="mf">.01</span><span class="p">,</span> <span class="nb">p3</span><span class="o">*</span><span class="mf">0.25</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">p3</span><span class="o">*</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.01</span>
+a<span class="n">sig</span> <span class="nb">poscil3</span> <span class="mf">.8</span><span class="o">*</span>a<span class="n">env</span><span class="p">,</span> <span class="nb">p4</span><span class="p">,</span> <span class="mi">1</span>
+     <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span> 1 0 16384 10 1<span class="comment">;sine wave</span>
-<span class="stamnt">s</span>
-<span class="stamnt">q</span> 1 6 0		<span class="comment">;mute at 6 seconds in this section</span>
-<span class="stamnt">i</span> 1 0 2 110
-<span class="stamnt">i</span> 1 3 2 220
-<span class="stamnt">i</span> 1 6 2 440
-<span class="stamnt">i</span> 1 9 2 880
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span><span class="c1">;sine wave</span>
+<span class="nb">s</span>
+<span class="nb">q</span> <span class="mi">1</span> <span class="mi">6</span> <span class="mi">0</span>		<span class="c1">;mute at 6 seconds in this section</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span> <span class="mi">110</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mi">2</span> <span class="mi">220</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">6</span> <span class="mi">2</span> <span class="mi">440</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">9</span> <span class="mi">2</span> <span class="mi">880</span>
 
-<span class="stamnt">s</span>
-<span class="stamnt">q</span> 1 6 1		<span class="comment">;unmute again at 6 seconds in this section</span>
-<span class="stamnt">i</span> 1 0 2 110
-<span class="stamnt">i</span> 1 3 2 220
-<span class="stamnt">i</span> 1 6 2 440
-<span class="stamnt">i</span> 1 9 2 880
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">s</span>
+<span class="nb">q</span> <span class="mi">1</span> <span class="mi">6</span> <span class="mi">1</span>		<span class="c1">;unmute again at 6 seconds in this section</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span> <span class="mi">110</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mi">2</span> <span class="mi">220</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">6</span> <span class="mi">2</span> <span class="mi">440</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">9</span> <span class="mi">2</span> <span class="mi">880</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>

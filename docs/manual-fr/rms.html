@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>rms</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887638657376"></a>
+        <a id="idm47596133077712"></a>
         <h2>Description</h2>
         <p>
       Détermine la valeur efficace d'un signal audio. La valeur instantanée
@@ -47,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887638655824"></a>
+        <a id="idm47596133076160"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">kres <span class="command"><strong>rms</strong></span> asig [, ihp] [, iskip]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887638653824"></a>
+        <a id="idm47596133074144"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ihp</em></span> (facultatif, 10 par défaut) -- point à mi-puissance (en Hz) d'un
@@ -66,7 +67,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887638649888"></a>
+        <a id="idm47596133070208"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>asig</em></span> -- signal audio en entrée
@@ -96,7 +97,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887638640864"></a>
+        <a id="idm47596133061184"></a>
         <h2>Exemples</h2>
         <p>
       </p>
@@ -113,76 +114,76 @@ arms <span class="opc">rms</span>    asig <span class="comment">; get rms value 
 
       </p>
         <div class="example">
-          <a id="idm47887638636272"></a>
+          <a id="idm47596133056592"></a>
           <p class="title">
-            <strong>Exemple 800. Exemple de l'opcode rms.</strong>
+            <strong>Exemple 836. Exemple de l'opcode rms.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887505449136"></a>
+              <a id="idm47595949584608"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d  -m0   <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o rms.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d  -m0   <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o rms.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 128
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">;Example by Andres Cabrera 2007</span>
+<span class="c1">;Example by Andres Cabrera 2007</span>
 
-<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="opc">FLpanel</span> "rms", 400, 100, 50, 50
-    gkrmstext, gihrmstext <span class="opc">FLtext</span> "Rms", <span class="op">-</span>100, 0, 0.1, 3, 110, 30, 60, 50
-    gkihp, gihandle <span class="opc">FLtext</span> "ihp", 0, 10, 0.05, 1, 100, 30, 220, 50
-    gkrmsslider, gihrmsslider <span class="opc">FLslider</span> "", <span class="op">-</span>60, <span class="op">-</span>0.5, <span class="op">-</span>1, 5, <span class="op">-</span>1, 380, 20, 10, 10
+<span class="nb">FLpanel</span> <span class="s">"rms"</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span>
+    gk<span class="n">rmstext</span><span class="p">,</span> gi<span class="n">hrmstext</span> <span class="nb">FLtext</span> <span class="s">"Rms"</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">50</span>
+    gk<span class="n">ihp</span><span class="p">,</span> gi<span class="n">handle</span> <span class="nb">FLtext</span> <span class="s">"ihp"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">50</span>
+    gk<span class="n">rmsslider</span><span class="p">,</span> gi<span class="n">hrmsslider</span> <span class="nb">FLslider</span> <span class="s">""</span><span class="p">,</span> <span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">380</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>
 
-<span class="opc">FLpanelEnd</span>
-<span class="opc">FLrun</span>
-
-
-<span class="opc">FLsetVal_i</span> 5, gihandle
-<span class="comment">; Instrument #1.</span>
-<span class="oblock">instr</span> 1
-  a1 <span class="opc">inch</span> 1   
-
-<span class="olabel">label</span><span class="op">:</span>
-  kval <span class="opc">rms</span> a1, <span class="opc">i</span>(gkihp)  <span class="comment">;measures rms of input channel 1</span>
-<span class="opc">rireturn</span>
-
-  kval <span class="op">=</span> <span class="opc">dbamp</span>(kval) <span class="comment">; convert to db full scale</span>
-  <span class="opc">printk</span> 0.5, kval
-  <span class="opc">FLsetVal</span> 1, kval, gihrmsslider   <span class="comment">;update the slider and text values</span>
-  <span class="opc">FLsetVal</span> 1, kval, gihrmstext
-  knewihp <span class="opc">changed</span> gkihp   <span class="comment">; reinit when ihp text has changed</span>
-  <span class="octrl">if</span> (knewihp <span class="op">==</span> 1) then
-    <span class="opc">reinit</span> <span class="olabel">label</span>  <span class="comment">;needed because ihp is an i-rate parameter</span>
-  <span class="octrl">endif</span>
-<span class="oblock">endin</span>
+<span class="nb">FLpanelEnd</span>
+<span class="nb">FLrun</span>
 
 
+<span class="nb">FLsetVal_i</span> <span class="mi">5</span><span class="p">,</span> gi<span class="n">handle</span>
+<span class="c1">; Instrument #1.</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+  a<span class="n">1</span> <span class="nb">inch</span> <span class="mi">1</span>   
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="nl">label</span><span class="p">:</span>
+  k<span class="n">val</span> <span class="nb">rms</span> a<span class="n">1</span><span class="p">,</span> <span class="nb">i</span><span class="p">(</span>gk<span class="n">ihp</span><span class="p">)</span>  <span class="c1">;measures rms of input channel 1</span>
+<span class="nb">rireturn</span>
 
-<span class="comment">; Play Instrument #1 for one minute</span>
-<span class="stamnt">i</span> 1 0 60
-<span class="stamnt">e</span>
+  k<span class="n">val</span> <span class="o">=</span> <span class="nb">dbamp</span><span class="p">(</span>k<span class="n">val</span><span class="p">)</span> <span class="c1">; convert to db full scale</span>
+  <span class="nb">printk</span> <span class="mf">0.5</span><span class="p">,</span> k<span class="n">val</span>
+  <span class="nb">FLsetVal</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">val</span><span class="p">,</span> gi<span class="n">hrmsslider</span>   <span class="c1">;update the slider and text values</span>
+  <span class="nb">FLsetVal</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">val</span><span class="p">,</span> gi<span class="n">hrmstext</span>
+  k<span class="n">newihp</span> <span class="nb">changed</span> gk<span class="n">ihp</span>   <span class="c1">; reinit when ihp text has changed</span>
+  <span class="k">if</span> <span class="p">(</span>k<span class="n">newihp</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+    <span class="nb">reinit</span> <span class="n">label</span>  <span class="c1">;needed because ihp is an i-rate parameter</span>
+  <span class="k">endif</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="c1">; Play Instrument #1 for one minute</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">60</span>
+<span class="nb">e</span>
+
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -191,7 +192,7 @@ arms <span class="opc">rms</span>    asig <span class="comment">; get rms value 
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887638631904"></a>
+        <a id="idm47596133052224"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="balance.html" title="balance"><em class="citetitle">balance</em></a>,

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>vcomb</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887617852864"></a>
+        <a id="idm47596111812880"></a>
         <h2>Description</h2>
         <p>
       Réverbération variable du  signal d'entrée avec une réponse en fréquence <span class="quote">« <span class="quote">colorée</span> »</span>.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887617851040"></a>
+        <a id="idm47596111811056"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>vcomb</strong></span> asig, krvt, xlpt, imaxlpt [, iskip] [, insmps]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887617848800"></a>
+        <a id="idm47596111808816"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>imaxlpt</em></span> -- durée de boucle maximale pour <span class="emphasis"><em>klpt</em></span>
@@ -67,7 +68,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887617843696"></a>
+        <a id="idm47596111803712"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>krvt</em></span> -- la durée de réverbération (définie comme le
@@ -89,98 +90,99 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887617836992"></a>
+        <a id="idm47596111796944"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opdoce vcomb. Il utilise le fichier
       <a class="ulink" href="examples/vcomb.csd" target="_top"><em class="citetitle">vcomb.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887617835136"></a>
+          <a id="idm47596111795168"></a>
           <p class="title">
-            <strong>Exemple 1018. Exemple de l'opdoce vcomb.</strong>
+            <strong>Exemple 1062. Exemple de l'opdoce vcomb.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887497276016"></a>
+              <a id="idm47595929354544"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in</span>
--odac           -iadc       -M0 <span class="comment">;;;RT audio I/O with MIDI in</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc       -M0 <span class="c1">;;;RT audio I/O with MIDI in</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Example by Jonathan Murphy and Charles Gran 2007</span>
-  <span class="ohdr">sr</span>	    <span class="op">=</span>  44100
-  <span class="ohdr">ksmps</span>	    <span class="op">=</span>  10
-  <span class="ohdr">nchnls</span>    <span class="op">=</span>  2
+<span class="c1">; Example by Jonathan Murphy and Charles Gran 2007</span>
+  <span class="vg">sr</span>	    <span class="o">=</span>  <span class="mi">44100</span>
+  <span class="vg">ksmps</span>	    <span class="o">=</span>  <span class="mi">10</span>
+  <span class="vg">nchnls</span>    <span class="o">=</span>  <span class="mi">2</span>
 
-        <span class="comment">; new, and important. Make sure that midi note events are only</span>
-        <span class="comment">; received by instruments that actually need them.</span>
+        <span class="c1">; new, and important. Make sure that midi note events are only</span>
+        <span class="c1">; received by instruments that actually need them.</span>
 
-	<span class="comment">; turn default midi routing off</span>
-	<span class="ohdr">massign</span>		0, 0
-	<span class="comment">; route note events on channel 1 to instr 1</span>
-	<span class="ohdr">massign</span>		1, 1
+	<span class="c1">; turn default midi routing off</span>
+	<span class="nb">massign</span>		<span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+	<span class="c1">; route note events on channel 1 to instr 1</span>
+	<span class="nb">massign</span>		<span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
 
-<span class="comment">; Define your midi controllers</span>
-<span class="omacro">#define</span> C1 #21#
-<span class="omacro">#define</span> C2 #22#
-<span class="omacro">#define</span> C3 #23#
+<span class="c1">; Define your midi controllers</span>
+<span class="cp">#define</span> <span class="cp">C1</span> <span class="p">#</span><span class="cp">21</span><span class="p">#</span>
+<span class="cp">#define</span> <span class="cp">C2</span> <span class="p">#</span><span class="cp">22</span><span class="p">#</span>
+<span class="cp">#define</span> <span class="cp">C3</span> <span class="p">#</span><span class="cp">23</span><span class="p">#</span>
 
-<span class="comment">; Initialize MIDI controllers</span>
-	    <span class="opc">initc7</span>    1, $C1, 0.5 		  <span class="comment">;delay send</span>
-	    <span class="opc">initc7</span>    1, $C2, 0.5 		  <span class="comment">;delay: time to zero</span>
-	    <span class="opc">initc7</span>    1, $C3, 0.5 		  <span class="comment">;delay: rate </span>
+<span class="c1">; Initialize MIDI controllers</span>
+	    <span class="nb">initc7</span>    <span class="mi">1</span><span class="p">,</span> <span class="cp">$C1</span><span class="p">,</span> <span class="mf">0.5</span> 		  <span class="c1">;delay send</span>
+	    <span class="nb">initc7</span>    <span class="mi">1</span><span class="p">,</span> <span class="cp">$C2</span><span class="p">,</span> <span class="mf">0.5</span> 		  <span class="c1">;delay: time to zero</span>
+	    <span class="nb">initc7</span>    <span class="mi">1</span><span class="p">,</span> <span class="cp">$C3</span><span class="p">,</span> <span class="mf">0.5</span> 		  <span class="c1">;delay: rate </span>
 
-  gaosc	    <span class="opc">init</span>      0
+  ga<span class="n">osc</span>	    <span class="nb">init</span>      <span class="mi">0</span>
 
-<span class="comment">; Define an opcode to "smooth" the MIDI controller signal</span>
-    <span class="oblock">opcode</span> smooth, k, <span class="opc">k</span>
-  kin       <span class="opc">xin</span>
-  kport	    <span class="opc">linseg</span>    0, 0.0001, 0.01, 1, 0.01
-  kin       <span class="opc">portk</span>     kin, kport
-            <span class="opc">xout</span>      kin
-    <span class="oblock">endop</span>
+<span class="c1">; Define an opcode to "smooth" the MIDI controller signal</span>
+    <span class="kd">opcode</span> <span class="nf">smooth</span><span class="p">,</span> <span class="kt">k</span><span class="p">,</span> <span class="kt">k</span>
+  k<span class="n">in</span>       <span class="nb">xin</span>
+  k<span class="n">port</span>	    <span class="nb">linseg</span>    <span class="mi">0</span><span class="p">,</span> <span class="mf">0.0001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.01</span>
+  k<span class="n">in</span>       <span class="nb">portk</span>     k<span class="n">in</span><span class="p">,</span> k<span class="n">port</span>
+            <span class="nb">xout</span>      k<span class="n">in</span>
+    <span class="kd">endop</span>
 
-<span class="oblock">instr</span>   1  
- <span class="comment">; Generate a sine wave at the frequency of the MIDI note that triggered the intrument</span>
-  ifqc	    <span class="opc">cpsmidi</span>
-  iamp	    <span class="opc">ampmidi</span>   10000
-  aenv	    <span class="opc">linenr</span>    iamp, .01, .1, .01 	  <span class="comment">;envelope</span>
-  a1	    <span class="opc">oscil</span>     aenv, ifqc, 1
-<span class="comment">; All sound goes to the global variable gaosc</span>
-  gaosc	    <span class="op">=</span>  gaosc <span class="op">+</span> a1
-    <span class="oblock">endin</span>
+<span class="kd">instr</span>   <span class="nf">1</span>  
+ <span class="c1">; Generate a sine wave at the frequency of the MIDI note that triggered the intrument</span>
+  i<span class="n">fqc</span>	    <span class="nb">cpsmidi</span>
+  i<span class="n">amp</span>	    <span class="nb">ampmidi</span>   <span class="mi">10000</span>
+  a<span class="n">env</span>	    <span class="nb">linenr</span>    i<span class="n">amp</span><span class="p">,</span> <span class="mf">.01</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.01</span> 	  <span class="c1">;envelope</span>
+  a<span class="n">1</span>	    <span class="nb">oscil</span>     a<span class="n">env</span><span class="p">,</span> i<span class="n">fqc</span><span class="p">,</span> <span class="mi">1</span>
+<span class="c1">; All sound goes to the global variable gaosc</span>
+  ga<span class="n">osc</span>	    <span class="o">=</span>  ga<span class="n">osc</span> <span class="o">+</span> a<span class="n">1</span>
+    <span class="kd">endin</span>
 
-    <span class="oblock">instr</span>     198 <span class="comment">; ECHO</span>
-  kcmbsnd   <span class="opc">ctrl7</span>     1, $C1, 0, 1 		  <span class="comment">;delay send</span>
-  ktime	    <span class="opc">ctrl7</span>     1, $C2, 0.01, 6 		  <span class="comment">;time loop fades out</span>
-  kloop	    <span class="opc">ctrl7</span>     1, $C3, 0.01, 1 		  <span class="comment">;loop speed</span>
-<span class="comment">; Receive MIDI controller values and then smooth them</span>
-  kcmbsnd   smooth    kcmbsnd
-  ktime	    smooth    ktime
-  kloop	    smooth    kloop
-  imaxlpt   <span class="op">=</span>  1 				  <span class="comment">;max loop time</span>
-<span class="comment">; Create a variable reverberation (delay) of the gaosc signal</span>
-  acomb	    <span class="opc">vcomb</span>     gaosc, ktime, kloop, imaxlpt, 1
-  aout	    <span class="op">=</span>  (acomb <span class="op">*</span> kcmbsnd) <span class="op">+</span> gaosc <span class="op">*</span> (1 <span class="op">-</span> kcmbsnd)
-	    <span class="opc">outs</span>      aout, aout
-  gaosc	    <span class="op">=</span>  0
-    <span class="oblock">endin</span>
+    <span class="kd">instr</span>     <span class="nf">198</span> <span class="c1">; ECHO</span>
+  k<span class="n">cmbsnd</span>   <span class="nb">ctrl7</span>     <span class="mi">1</span><span class="p">,</span> <span class="cp">$C1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> 		  <span class="c1">;delay send</span>
+  k<span class="n">time</span>	    <span class="nb">ctrl7</span>     <span class="mi">1</span><span class="p">,</span> <span class="cp">$C2</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">6</span> 		  <span class="c1">;time loop fades out</span>
+  k<span class="n">loop</span>	    <span class="nb">ctrl7</span>     <span class="mi">1</span><span class="p">,</span> <span class="cp">$C3</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span> 		  <span class="c1">;loop speed</span>
+<span class="c1">; Receive MIDI controller values and then smooth them</span>
+  k<span class="n">cmbsnd</span>   <span class="nf">smooth</span>    k<span class="n">cmbsnd</span>
+  k<span class="n">time</span>	    <span class="nf">smooth</span>    k<span class="n">time</span>
+  k<span class="n">loop</span>	    <span class="nf">smooth</span>    k<span class="n">loop</span>
+  i<span class="n">maxlpt</span>   <span class="o">=</span>  <span class="mi">1</span> 				  <span class="c1">;max loop time</span>
+<span class="c1">; Create a variable reverberation (delay) of the gaosc signal</span>
+  a<span class="n">comb</span>	    <span class="nb">vcomb</span>     ga<span class="n">osc</span><span class="p">,</span> k<span class="n">time</span><span class="p">,</span> k<span class="n">loop</span><span class="p">,</span> i<span class="n">maxlpt</span><span class="p">,</span> <span class="mi">1</span>
+  a<span class="n">out</span>	    <span class="o">=</span>  <span class="p">(</span>a<span class="n">comb</span> <span class="o">*</span> k<span class="n">cmbsnd</span><span class="p">)</span> <span class="o">+</span> ga<span class="n">osc</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> k<span class="n">cmbsnd</span><span class="p">)</span>
+	    <span class="nb">outs</span>      a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
+  ga<span class="n">osc</span>	    <span class="o">=</span>  <span class="mi">0</span>
+    <span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span>1 0 16384 10 1
-<span class="stamnt">i</span>198 0 10000
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
+<span class="nb">i</span><span class="mi">198</span> <span class="mi">0</span> <span class="mi">10000</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -189,7 +191,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887617830768"></a>
+        <a id="idm47596111790800"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="alpass.html" title="alpass"><em class="citetitle">alpass</em></a>,
@@ -199,7 +201,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887617825840"></a>
+        <a id="idm47596111785872"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>jacktransport</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -52,7 +53,7 @@
         </table>
       </div>
       <div class="refsect1">
-        <a id="idm47887665975104"></a>
+        <a id="idm47596161786960"></a>
         <h2>Description</h2>
         <p>
       Démarre/arrête jack_transport et peut optionnellement repositionner la tête
@@ -60,12 +61,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887665911472"></a>
+        <a id="idm47596161723296"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>jacktransport</strong></span> icommand [, ilocation]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887665909488"></a>
+        <a id="idm47596161721344"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>icommand</em></span> -- 1 pour démarrer, 0 pour arrêter.
@@ -92,54 +93,54 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47887665905504"></a>
+        <a id="idm47596161717424"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple simple de l'opcode jacktransport. Il utilise le fichier
       <a class="ulink" href="examples/jacktransport.csd" target="_top"><em class="citetitle">jacktransport.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887665903616"></a>
+          <a id="idm47596161715536"></a>
           <p class="title">
-            <strong>Exemple 432. Exemple simple de l'opcode jacktransport.</strong>
+            <strong>Exemple 445. Exemple simple de l'opcode jacktransport.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm47887519351232"></a>
+              <a id="idm47595985393936"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span> 
  
+<span class="nt">&lt;CsOptions&gt;</span> 
 -+rtaudio=JACK -b 64 --sched  -o dac:system:playback_ 
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;/CsOptions&gt;</span> 
  
-<span class="ohdr">sr</span>      <span class="op">=</span>      	44100
-<span class="ohdr">ksmps</span>  	<span class="op">=</span>     	16
-<span class="ohdr">nchnls</span>	<span class="op">=</span>	2
+<span class="nt">&lt;CsInstruments&gt;</span> 
+<span class="vg">sr</span>      <span class="o">=</span>      	<span class="mi">44100</span>
+<span class="vg">ksmps</span>  	<span class="o">=</span>     	<span class="mi">16</span>
+<span class="vg">nchnls</span>	<span class="o">=</span>	<span class="mi">2</span>
 
 
-	<span class="oblock">instr</span> 1
-jacktransport p4, p5 
-	<span class="oblock">endin</span>
+	<span class="kd">instr</span> <span class="nf">1</span>
+<span class="nb">jacktransport</span> <span class="nb">p4</span><span class="p">,</span> <span class="nb">p5</span> 
+	<span class="kd">endin</span>
 
-	<span class="oblock">instr</span> 2
-jacktransport p4 
-	<span class="oblock">endin</span>
+	<span class="kd">instr</span> <span class="nf">2</span>
+<span class="nb">jacktransport</span> <span class="nb">p4</span> 
+	<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span> 
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">i</span>2 0 5 1<span class="comment">; play</span>
-<span class="stamnt">i</span>2 5 1 0<span class="comment">; stop</span>
-<span class="stamnt">i</span>1 6 5 1 2 <span class="comment">; move at 2 seconds and start playing back</span>
-<span class="stamnt">i</span>1 11 1 0 0 <span class="comment">; stop and rewind</span>
+<span class="nb">i</span><span class="mi">2</span> <span class="mi">0</span> <span class="mi">5</span> <span class="mi">1</span><span class="c1">; play</span>
+<span class="nb">i</span><span class="mi">2</span> <span class="mi">5</span> <span class="mi">1</span> <span class="mi">0</span><span class="c1">; stop</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">6</span> <span class="mi">5</span> <span class="mi">1</span> <span class="mi">2</span> <span class="c1">; move at 2 seconds and start playing back</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">11</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="c1">; stop and rewind</span>
 
-<span class="stamnt">e</span>
+<span class="nb">e</span>
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsScore&gt;</span> 
+ <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -148,7 +149,7 @@ jacktransport p4
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887665901680"></a>
+        <a id="idm47596161713600"></a>
         <h2>Crédits</h2>
         <table border="0" summary="Simple list" class="simplelist">
           <tr>

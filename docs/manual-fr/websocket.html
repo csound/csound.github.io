@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>websocket</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887612763712"></a>
+        <a id="idm47596106723184"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>websocket</em></span> lit et écrit <span class="emphasis"><em>N</em></span> signaux
@@ -46,19 +47,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887612698272"></a>
+        <a id="idm47596106657792"></a>
         <h2>Syntaxe</h2>
-        <pre class="synopsis">xout1[, xout2, xout3, ..., xoutN] <span class="command"><strong>websocket</strong></span> iport, xin1[, xin2, xin3, ..., xinN]</pre>
+        <pre class="synopsis">xout1[, xout2, xout3, ..., xoutN] <span class="command"><strong>websocket</strong></span> iport, xin</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887612696208"></a>
+        <a id="idm47596106655776"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iport</em></span> -- Le port web local où lire/écrire les données.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887612694512"></a>
+        <a id="idm47596106654080"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>xout1,... xoutN</em></span> -- Les variables en sortie contenant
@@ -72,8 +73,8 @@
       nombres 32 ou 64 bit en fonction de la version de Csound utilisée. 
     </p>
         <p>
-      <span class="emphasis"><em>xin1,... xinN</em></span> -- Les variables d'entrée qui contiennent
-      les données envoyées au WebSocket. Côté Web, le WebSocket reçoit les
+      <span class="emphasis"><em>xin1</em></span> -- La variable d'entrée qui contient
+      les données à envoyer au WebSocket. Côté Web, le WebSocket reçoit les
       données en utilisant un nom de protocole qui correspond au nom de la
       variable d'entrée, par exemple "ksignal" pour une variable de taux-k.
       Lorsque l'on reçoit des données d'un WebSocket sur la page Web, il faut
@@ -105,7 +106,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887612687600"></a>
+        <a id="idm47596106647184"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple simple de l'opcode websocket. Il utilise les fichiers
@@ -113,41 +114,40 @@
       et <a class="ulink" href="examples/websocket.html" target="_top"><em class="citetitle">websocket.html</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887612684880"></a>
+          <a id="idm47596106644464"></a>
           <p class="title">
-            <strong>Exemple 1072. Exemple de l'opcode websocket.</strong>
+            <strong>Exemple 1116. Exemple de l'opcode websocket.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887495314912"></a>
+              <a id="idm47595924374192"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
 -odac
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
-<span class="ohdr">ksmps</span> <span class="op">=</span> 256
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
 
-<span class="opc">schedule</span> 1, 0, <span class="op">-</span>1
+<span class="nb">schedule</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
-    klfo <span class="opc">lfo</span> 1, 1
-    iport <span class="opc">init</span> 8888
-    kinput websocket iport, klfo
-    <span class="opc">printk2</span> kinput
-<span class="oblock">endin</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+    k<span class="n">lfo</span> <span class="nb">lfo</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+    i<span class="n">port</span> <span class="nb">init</span> <span class="mi">8888</span>
+    k<span class="n">input</span> <span class="nb">websocket</span> i<span class="n">port</span><span class="p">,</span> k<span class="n">lfo</span>
+    <span class="nb">printk2</span> k<span class="n">input</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -156,7 +156,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887612680512"></a>
+        <a id="idm47596106640096"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="OSClisten.html" title="OSClisten"><em class="citetitle">OSClisten</em></a>
@@ -164,7 +164,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887612677536"></a>
+        <a id="idm47596106637120"></a>
         <h2>Crédits</h2>
         <p>
       </p>

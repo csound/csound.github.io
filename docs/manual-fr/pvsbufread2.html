@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>pvsbufread2</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -39,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644215312"></a>
+        <a id="idm47596138697536"></a>
         <h2>Description</h2>
         <p>
       Cet opcode lit à partir d'un tampon circulaire de longueur
@@ -53,12 +54,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644212208"></a>
+        <a id="idm47596138694432"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">fsig <span class="command"><strong>pvsbufread2</strong></span>  ktime, khandle, ift1, ift2 </pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887644210032"></a>
+        <a id="idm47596138692256"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ift1</em></span> -- table de fonction d'au moins
@@ -74,7 +75,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644206624"></a>
+        <a id="idm47596138688848"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>fsig</em></span> -- flot pv en sortie.
@@ -131,59 +132,60 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47887644195760"></a>
+        <a id="idm47596138677984"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode pvsbufread2. Il utilise le fichier
       <a class="ulink" href="examples/pvsbufread2.csd" target="_top"><em class="citetitle">pvsbufread2.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887644193872"></a>
+          <a id="idm47596138676096"></a>
           <p class="title">
-            <strong>Exemple 710. Exemple de l'opcode pvsbufread2.</strong>
+            <strong>Exemple 745. Exemple de l'opcode pvsbufread2.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887508330160"></a>
+              <a id="idm47595958654192"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
 
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
-<span class="ohdr">ksmps</span>  <span class="op">=</span> 64
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="vg">ksmps</span>  <span class="o">=</span> <span class="mi">64</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="oblock">instr</span> 1
-kcnt     <span class="opc">init</span>         0
-ifftsize <span class="op">=</span>            2048
-ihop     <span class="op">=</span>            ifftsize<span class="op">/</span>4
+<span class="kd">instr</span> <span class="nf">1</span>
+k<span class="n">cnt</span>     <span class="nb">init</span>         <span class="mi">0</span>
+i<span class="n">fftsize</span> <span class="o">=</span>            <span class="mi">2048</span>
+i<span class="n">hop</span>     <span class="o">=</span>            i<span class="n">fftsize</span><span class="o">/</span><span class="mi">4</span>
 
-a1       <span class="opc">diskin2</span>      "beats.wav", 1, 0, 1
-a1       <span class="op">=</span>            a1<span class="op">*</span>0.5
-fsig1    <span class="opc">pvsanal</span>      a1, ifftsize, ihop, ifftsize, 1
-ih, kt   <span class="opc">pvsbuffer</span>    fsig1, 10
+a<span class="n">1</span>       <span class="nb">diskin2</span>      <span class="s">"beats.wav"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+a<span class="n">1</span>       <span class="o">=</span>            a<span class="n">1</span><span class="o">*</span><span class="mf">0.5</span>
+<span class="n">fsig1</span>    <span class="nb">pvsanal</span>      a<span class="n">1</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> i<span class="n">hop</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> <span class="mi">1</span>
+i<span class="n">h</span><span class="p">,</span> k<span class="n">t</span>   <span class="nb">pvsbuffer</span>    <span class="n">fsig1</span><span class="p">,</span> <span class="mi">10</span>
 
-fsig2    <span class="opc">pvsbufread2</span>  kt, ih, 1, 1
-fsig3    <span class="opc">pvsbufread2</span>  kt, ih, 2, 2
+<span class="n">fsig2</span>    <span class="nb">pvsbufread2</span>  k<span class="n">t</span><span class="p">,</span> i<span class="n">h</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+<span class="n">fsig3</span>    <span class="nb">pvsbufread2</span>  k<span class="n">t</span><span class="p">,</span> i<span class="n">h</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
 
-a2       <span class="opc">pvsynth</span>      fsig3
-a3       <span class="opc">pvsynth</span>      fsig2
+a<span class="n">2</span>       <span class="nb">pvsynth</span>      <span class="n">fsig3</span>
+a<span class="n">3</span>       <span class="nb">pvsynth</span>      <span class="n">fsig2</span>
 
-         <span class="opc">outs</span>         a2, a3
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span>1 0 2048 -7 0 128 1.1 128 0.5  256 1.8 512 1.1 1024 0.1
-<span class="stamnt">f</span>2 0 2048 -7 1 128 0.2 128 0.05 256 0.5 512 0.9 1024 0.1
+         <span class="nb">outs</span>         a<span class="n">2</span><span class="p">,</span> a<span class="n">3</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
 
-<span class="stamnt">i</span>1 0 60
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">2048</span> <span class="o">-</span><span class="mi">7</span> <span class="mi">0</span> <span class="mi">128</span> <span class="mf">1.1</span> <span class="mi">128</span> <span class="mf">0.5</span>  <span class="mi">256</span> <span class="mf">1.8</span> <span class="mi">512</span> <span class="mf">1.1</span> <span class="mi">1024</span> <span class="mf">0.1</span>
+<span class="nb">f</span><span class="mi">2</span> <span class="mi">0</span> <span class="mi">2048</span> <span class="o">-</span><span class="mi">7</span> <span class="mi">1</span> <span class="mi">128</span> <span class="mf">0.2</span> <span class="mi">128</span> <span class="mf">0.05</span> <span class="mi">256</span> <span class="mf">0.5</span> <span class="mi">512</span> <span class="mf">0.9</span> <span class="mi">1024</span> <span class="mf">0.1</span>
+
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">60</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -192,7 +194,7 @@ a3       <span class="opc">pvsynth</span>      fsig2
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644189504"></a>
+        <a id="idm47596138671728"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>,
@@ -202,7 +204,7 @@ a3       <span class="opc">pvsynth</span>      fsig2
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887644184576"></a>
+        <a id="idm47596138666800"></a>
         <h2>Crédits</h2>
         <p>
       </p>

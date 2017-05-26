@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>filelen</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887682366512"></a>
+        <a id="idm47596178590896"></a>
         <h2>Description</h2>
         <p>
       Retourne la longueur d'un fichier son.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887682365264"></a>
+        <a id="idm47596178589648"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ir <span class="command"><strong>filelen</strong></span> ifilcod, [iallowraw]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887682289568"></a>
+        <a id="idm47596178513952"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifilcod</em></span> -- fichier son à interroger
@@ -61,7 +62,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887682287088"></a>
+        <a id="idm47596178511472"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>filelen</em></span> retourne la longueur du fichier son
@@ -72,7 +73,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887682283792"></a>
+        <a id="idm47596178508176"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode filelen. Il utilise les fichiers
@@ -82,61 +83,61 @@
 
       </p>
         <div class="example">
-          <a id="idm47887682280320"></a>
+          <a id="idm47596178504704"></a>
           <p class="title">
-            <strong>Exemple 263. Exemple de l'opcode filelen.</strong>
+            <strong>Exemple 268. Exemple de l'opcode filelen.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887526680880"></a>
+              <a id="idm47596006908432"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">;-odac     ;;;realtime audio out</span>
--iadc    <span class="comment">;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">;-o filelen.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">;-odac     ;;;realtime audio out</span>
+-iadc    <span class="c1">;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">;-o filelen.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1 <span class="comment">; choose between mono or stereo file</span>
+<span class="kd">instr</span> <span class="nf">1</span> <span class="c1">; choose between mono or stereo file</span>
 
-ilen   <span class="opc">filelen</span> p4	<span class="comment">;calculate length of soundfile</span>
-<span class="opc">print</span>  ilen
-ichn <span class="opc">filenchnls</span>  p4	<span class="comment">;check number of channels</span>
-<span class="comment">;print  ichn</span>
+i<span class="n">len</span>   <span class="nb">filelen</span> <span class="nb">p4</span>	<span class="c1">;calculate length of soundfile</span>
+<span class="nb">print</span>  i<span class="n">len</span>
+i<span class="n">chn</span> <span class="nb">filenchnls</span>  <span class="nb">p4</span>	<span class="c1">;check number of channels</span>
+<span class="c1">;print  ichn</span>
 
-<span class="octrl">if</span> (ichn <span class="op">==</span> 1) then
-<span class="comment">;mono signal</span>
-asig <span class="opc">diskin2</span> p4, 1	
-     <span class="opc">outs</span>    asig, asig
+<span class="k">if</span> <span class="p">(</span>i<span class="n">chn</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+<span class="c1">;mono signal</span>
+a<span class="n">sig</span> <span class="nb">diskin2</span> <span class="nb">p4</span><span class="p">,</span> <span class="mi">1</span>	
+     <span class="nb">outs</span>    a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
 
-<span class="octrl">else</span>
-<span class="comment">;stereo signal</span>
-aL, aR <span class="opc">diskin2</span> p4, .5, 0, 1 
-       <span class="opc">outs</span>    aL, aR
+<span class="k">else</span>
+<span class="c1">;stereo signal</span>
+a<span class="n">L</span><span class="p">,</span> a<span class="n">R</span> <span class="nb">diskin2</span> <span class="nb">p4</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> 
+       <span class="nb">outs</span>    a<span class="n">L</span><span class="p">,</span> a<span class="n">R</span>
 
-<span class="octrl">endif</span>
+<span class="k">endif</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">i</span> 1 0 3 "fox.wav"	<span class="comment">;mono signal</span>
-<span class="stamnt">i</span> 1 5 2 "k<span class="stamnt">i</span>ckroll.wav"	<span class="comment">;stereo signal</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="s">"fox.wav"</span>	<span class="c1">;mono signal</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">5</span> <span class="mi">2</span> <span class="s">"kickroll.wav"</span>	<span class="c1">;stereo signal</span>
 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -155,7 +156,7 @@ instr 1:  ilen = 0.857</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887682273616"></a>
+        <a id="idm47596178498000"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="filebit.html" title="filebit"><em class="citetitle">filebit</em></a>,
@@ -165,7 +166,7 @@ instr 1:  ilen = 0.857</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887682268624"></a>
+        <a id="idm47596178493008"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>locsig</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887664433168"></a>
+        <a id="idm47596159448640"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>locsig</em></span> distribue le signal d'entrée entre 2 ou 4 canaux
@@ -51,13 +52,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887664430576"></a>
+        <a id="idm47596159445952"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">a1, a2 <span class="command"><strong>locsig</strong></span> asig, kdegree, kdistance, kreverbsend</pre>
         <pre class="synopsis">a1, a2,  a3, a4 <span class="command"><strong>locsig</strong></span> asig, kdegree, kdistance, kreverbsend</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887664426976"></a>
+        <a id="idm47596159442352"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kdegree</em></span> -- valeur entre 0 et 360 pour le placement
@@ -82,85 +83,85 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887664419488"></a>
+        <a id="idm47596159434864"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode locsig. Il utilise le fichier
       <a class="ulink" href="examples/locsig_quad.csd" target="_top"><em class="citetitle">locsig_quad.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887664417600"></a>
+          <a id="idm47596159432976"></a>
           <p class="title">
-            <strong>Exemple 449. Exemple de l'opcode locsig.</strong>
+            <strong>Exemple 474. Exemple de l'opcode locsig.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887518448768"></a>
+              <a id="idm47595981751664"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac      <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o locsig_quad.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o locsig_quad.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 4
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-ga1 <span class="opc">init</span> 0
-ga2 <span class="opc">init</span> 0
-ga3 <span class="opc">init</span> 0
-ga4 <span class="opc">init</span> 0
+ga<span class="n">1</span> <span class="nb">init</span> <span class="mi">0</span>
+ga<span class="n">2</span> <span class="nb">init</span> <span class="mi">0</span>
+ga<span class="n">3</span> <span class="nb">init</span> <span class="mi">0</span>
+ga<span class="n">4</span> <span class="nb">init</span> <span class="mi">0</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-krevsend  <span class="op">=</span> p4
-aout	  <span class="opc">diskin2</span> "beats.wav", 1, 0, 1
-kdegree	  <span class="opc">line</span> 0, p3, 360 <span class="comment">;full circle</span>
-kdistance <span class="opc">line</span> 1, p3 , 1
-a1, a2, a3, a4     <span class="opc">locsig</span> aout, kdegree, kdistance, krevsend
-ar1, ar2, ar3, ar4 <span class="opc">locsend</span>
+k<span class="n">revsend</span>  <span class="o">=</span> <span class="nb">p4</span>
+a<span class="n">out</span>	  <span class="nb">diskin2</span> <span class="s">"beats.wav"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+k<span class="n">degree</span>	  <span class="nb">line</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="mi">360</span> <span class="c1">;full circle</span>
+k<span class="n">distance</span> <span class="nb">line</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">p3</span> <span class="p">,</span> <span class="mi">1</span>
+a<span class="n">1</span><span class="p">,</span> a<span class="n">2</span><span class="p">,</span> a<span class="n">3</span><span class="p">,</span> a<span class="n">4</span>     <span class="nb">locsig</span> a<span class="n">out</span><span class="p">,</span> k<span class="n">degree</span><span class="p">,</span> k<span class="n">distance</span><span class="p">,</span> k<span class="n">revsend</span>
+a<span class="n">r1</span><span class="p">,</span> a<span class="n">r2</span><span class="p">,</span> a<span class="n">r3</span><span class="p">,</span> a<span class="n">r4</span> <span class="nb">locsend</span>
 
-ga1 <span class="op">=</span> ga1<span class="op">+</span>ar1
-ga2 <span class="op">=</span> ga2<span class="op">+</span>ar2
-ga3 <span class="op">=</span> ga3<span class="op">+</span>ar3
-ga4 <span class="op">=</span> ga4<span class="op">+</span>ar4
-    <span class="opc">outq</span> a1, a2, a3, a4
+ga<span class="n">1</span> <span class="o">=</span> ga<span class="n">1</span><span class="o">+</span>a<span class="n">r1</span>
+ga<span class="n">2</span> <span class="o">=</span> ga<span class="n">2</span><span class="o">+</span>a<span class="n">r2</span>
+ga<span class="n">3</span> <span class="o">=</span> ga<span class="n">3</span><span class="o">+</span>a<span class="n">r3</span>
+ga<span class="n">4</span> <span class="o">=</span> ga<span class="n">4</span><span class="o">+</span>a<span class="n">r4</span>
+    <span class="nb">outq</span> a<span class="n">1</span><span class="p">,</span> a<span class="n">2</span><span class="p">,</span> a<span class="n">3</span><span class="p">,</span> a<span class="n">4</span>
 
-<span class="oblock">endin</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 99 <span class="comment">; reverb instrument</span>
-a1 <span class="opc">reverb2</span> ga1, 3.5, .5
-a2 <span class="opc">reverb2</span> ga2, 3.5, .5
-a3 <span class="opc">reverb2</span> ga3, 3.5, .5
-a4 <span class="opc">reverb2</span> ga4, 3.5, .5
-   <span class="opc">outq</span>	a1, a2, a3, a4
+<span class="kd">instr</span> <span class="nf">99</span> <span class="c1">; reverb instrument</span>
+a<span class="n">1</span> <span class="nb">reverb2</span> ga<span class="n">1</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">.5</span>
+a<span class="n">2</span> <span class="nb">reverb2</span> ga<span class="n">2</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">.5</span>
+a<span class="n">3</span> <span class="nb">reverb2</span> ga<span class="n">3</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">.5</span>
+a<span class="n">4</span> <span class="nb">reverb2</span> ga<span class="n">4</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">.5</span>
+   <span class="nb">outq</span>	a<span class="n">1</span><span class="p">,</span> a<span class="n">2</span><span class="p">,</span> a<span class="n">3</span><span class="p">,</span> a<span class="n">4</span>
 	
-ga1 <span class="op">=</span> 0
-ga2 <span class="op">=</span> 0
-ga3 <span class="op">=</span> 0
-ga4 <span class="op">=</span> 0
+ga<span class="n">1</span> <span class="o">=</span> <span class="mi">0</span>
+ga<span class="n">2</span> <span class="o">=</span> <span class="mi">0</span>
+ga<span class="n">3</span> <span class="o">=</span> <span class="mi">0</span>
+ga<span class="n">4</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="comment">; sine wave.</span>
-<span class="stamnt">f</span> 1 0 16384 10 1
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="c1">; sine wave.</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
 
-<span class="stamnt">i</span> 1 0  14  .1	<span class="comment">;with reverb</span>
-<span class="stamnt">i</span> 1 14 14  0	<span class="comment">;no reverb</span>
-<span class="stamnt">i</span>99 0 36
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span>  <span class="mi">14</span>  <span class="mf">.1</span>	<span class="c1">;with reverb</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">14</span> <span class="mi">14</span>  <span class="mi">0</span>	<span class="c1">;no reverb</span>
+<span class="nb">i</span><span class="mi">99</span> <span class="mi">0</span> <span class="mi">36</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -236,14 +237,14 @@ ga4 <span class="op">=</span> 0
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887664384336"></a>
+        <a id="idm47596159399712"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="locsend.html" title="locsend"><em class="citetitle">locsend</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887664382224"></a>
+        <a id="idm47596159397600"></a>
         <h2>Crédits</h2>
         <p>
       </p>

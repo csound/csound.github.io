@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>rspline</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,20 +39,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887638428032"></a>
+        <a id="idm47596132847184"></a>
         <h2>Description</h2>
         <p>
       Génère des courbes splines aléatoires.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887638426720"></a>
+        <a id="idm47596132845872"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>rspline</strong></span> xrangeMin, xrangeMax, kcpsMin, kcpsMax</pre>
         <pre class="synopsis">kres <span class="command"><strong>rspline</strong></span> krangeMin, krangeMax, kcpsMin, kcpsMax</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887638356448"></a>
+        <a id="idm47596132774560"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kres, ares</em></span> -- Signal de sortie.
@@ -89,61 +90,61 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887638343312"></a>
+        <a id="idm47596132761312"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode rspline. Il utilise le fichier
       <a class="ulink" href="examples/rspline.csd" target="_top"><em class="citetitle">rspline.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887638341504"></a>
+          <a id="idm47596132759440"></a>
           <p class="title">
-            <strong>Exemple 807. Exemple de l'opcode rspline.</strong>
+            <strong>Exemple 843. Exemple de l'opcode rspline.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887505258224"></a>
+              <a id="idm47595949626112"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o jspline.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o jspline.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-krangeMin <span class="opc">init</span> p4
-krangeMax <span class="opc">init</span> p5
-kcpsmin <span class="opc">init</span> 2
-kcpsmax <span class="opc">init</span> 3
+k<span class="n">rangeMin</span> <span class="nb">init</span> <span class="nb">p4</span>
+k<span class="n">rangeMax</span> <span class="nb">init</span> <span class="nb">p5</span>
+k<span class="n">cpsmin</span> <span class="nb">init</span> <span class="mi">2</span>
+k<span class="n">cpsmax</span> <span class="nb">init</span> <span class="mi">3</span>
 
-ksp  <span class="opc">rspline</span> krangeMin, krangeMax, kcpsmin, kcpsmax
-aout <span class="opc">pluck</span> 1, 200<span class="op">+</span>ksp, 1000, 0, 1
-aout <span class="opc">dcblock</span> aout	<span class="comment">;remove DC</span>
-     <span class="opc">outs</span> aout, aout
+k<span class="n">sp</span>  <span class="nb">rspline</span> k<span class="n">rangeMin</span><span class="p">,</span> k<span class="n">rangeMax</span><span class="p">,</span> k<span class="n">cpsmin</span><span class="p">,</span> k<span class="n">cpsmax</span>
+a<span class="n">out</span> <span class="nb">pluck</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="o">+</span>k<span class="n">sp</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+a<span class="n">out</span> <span class="nb">dcblock</span> a<span class="n">out</span>	<span class="c1">;remove DC</span>
+     <span class="nb">outs</span> a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">i</span> 1 0  10  2  5	<span class="comment">;a bit jitter</span>
-<span class="stamnt">i</span> 1 8  10 10 20	<span class="comment">;some more</span>
-<span class="stamnt">i</span> 1 16 10 20 50	<span class="comment">;lots more</span>
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span>  <span class="mi">10</span>  <span class="mi">2</span>  <span class="mi">5</span>	<span class="c1">;a bit jitter</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">8</span>  <span class="mi">10</span> <span class="mi">10</span> <span class="mi">20</span>	<span class="c1">;some more</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">16</span> <span class="mi">10</span> <span class="mi">20</span> <span class="mi">50</span>	<span class="c1">;lots more</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -152,7 +153,7 @@ aout <span class="opc">dcblock</span> aout	<span class="comment">;remove DC</spa
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887638337136"></a>
+        <a id="idm47596132755072"></a>
         <h2>Crédits</h2>
         <p>Auteur : Gabriel Maldonado</p>
         <p>Nouveau dans la Version 4.15</p>

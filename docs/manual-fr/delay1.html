@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>delay1</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887687092960"></a>
+        <a id="idm47596183411392"></a>
         <h2>Description</h2>
         <p>
       Retarde un signal d'entrée d'un échantillon.
    </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887687091680"></a>
+        <a id="idm47596183410112"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>delay1</strong></span> asig [, iskip]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887687089600"></a>
+        <a id="idm47596183408096"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iskip</em></span> (facultatif, 0 par défaut) -- disposition
@@ -60,7 +61,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887687086768"></a>
+        <a id="idm47596183405552"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>delay1</em></span> est une forme spéciale de délai qui sert à
@@ -73,7 +74,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887687083056"></a>
+        <a id="idm47596183402112"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple des opcodes delay et delay1. Il utilise le fichier
@@ -81,54 +82,54 @@
 
       </p>
         <div class="example">
-          <a id="idm47887687081184"></a>
+          <a id="idm47596183400464"></a>
           <p class="title">
-            <strong>Exemple 188. Exemple de l'opcode delay1.</strong>
+            <strong>Exemple 191. Exemple de l'opcode delay1.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887528736976"></a>
+              <a id="idm47596010655056"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
--o delay.wav -W <span class="comment">;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+-o delay.wav -W <span class="c1">;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
-  <span class="comment">; Make white noise.</span>
-  a0    <span class="opc">random</span> <span class="op">-</span>1, 1
+<span class="kd">instr</span> <span class="nf">1</span>
+  <span class="c1">; Make white noise.</span>
+  a<span class="n">0</span>    <span class="nb">random</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
 
-  <span class="comment">; Simple Lowpass filter</span>
-  a1    <span class="opc">delay1</span>  a0
-  aout  <span class="op">=</span>       (a0<span class="op">+</span>0.99<span class="op">*</span>a1)<span class="op">/</span>2
+  <span class="c1">; Simple Lowpass filter</span>
+  a<span class="n">1</span>    <span class="nb">delay1</span>  a<span class="n">0</span>
+  a<span class="n">out</span>  <span class="o">=</span>       <span class="p">(</span>a<span class="n">0</span><span class="o">+</span><span class="mf">0.99</span><span class="o">*</span>a<span class="n">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
 
-  <span class="comment">; output white and filtered</span>
-        <span class="opc">outs</span>    aout, a0
-<span class="oblock">endin</span>
-
-
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="comment">; Play Instrument #1.</span>
-<span class="stamnt">i</span> 1 0.0 3
-
-<span class="stamnt">e</span>
+  <span class="c1">; output white and filtered</span>
+        <span class="nb">outs</span>    a<span class="n">out</span><span class="p">,</span> a<span class="n">0</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="c1">; Play Instrument #1.</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mf">0.0</span> <span class="mi">3</span>
+
+<span class="nb">e</span>
+
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -137,7 +138,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887687076816"></a>
+        <a id="idm47596183396864"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="delay.html" title="delay"><em class="citetitle">delay</em></a>,
@@ -146,7 +147,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887687072848"></a>
+        <a id="idm47596183393456"></a>
         <h2>Crédits</h2>
         <p>Auteur : Barry Vercoe</p>
         <p>Exemple écrit par John ffitch.</p>

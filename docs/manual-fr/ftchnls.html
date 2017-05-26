@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>ftchnls</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887673206784"></a>
+        <a id="idm47596169225088"></a>
         <h2>Description</h2>
         <p>
       Retourne le nombre de canaux dans un table de fonction en mémoire.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887673205424"></a>
+        <a id="idm47596169223728"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>ftchnls</strong></span>(x) (arg de taux-i seulement)</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887673203360"></a>
+        <a id="idm47596169221712"></a>
         <h2>Exécution</h2>
         <p>
       Retourne le nombre de canaux d'une table
@@ -61,7 +62,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887673138800"></a>
+        <a id="idm47596169157184"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode ftchnls. Il utilise les fichiers
@@ -71,60 +72,60 @@
 
       </p>
         <div class="example">
-          <a id="idm47887673135232"></a>
+          <a id="idm47596169153616"></a>
           <p class="title">
-            <strong>Exemple 344. Exemple de l'opcode ftchnls.</strong>
+            <strong>Exemple 353. Exemple de l'opcode ftchnls.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887522615136"></a>
+              <a id="idm47595994799888"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">;-odac     ;;;realtime audio out</span>
--iadc    <span class="comment">;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o ftchnls.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">;-odac     ;;;realtime audio out</span>
+-iadc    <span class="c1">;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o ftchnls.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-ichnls <span class="op">=</span> <span class="opc">ftchnls</span>(p4)
-<span class="opc">print</span> ichnls
+i<span class="n">chnls</span> <span class="o">=</span> <span class="nb">ftchnls</span><span class="p">(</span><span class="nb">p4</span><span class="p">)</span>
+<span class="nb">print</span> i<span class="n">chnls</span>
 
-<span class="octrl">if</span> (ichnls <span class="op">==</span> 1) then
-   asigL <span class="opc">loscil3</span> .8, 4, p4
-   asigR <span class="op">=</span> 	asigL
-<span class="octrl">elseif</span> (ichnls <span class="op">==</span> 2) then
-   asigL, asigR <span class="opc">loscil3</span> .8, 4, p4
-<span class="comment">;safety precaution if not mono or stereo</span>
-<span class="octrl">else</span>
-   asigL <span class="op">=</span> 0
-   asigR <span class="op">=</span> 0
-<span class="octrl">endif</span>
-        <span class="opc">outs</span> asigL, asigR
+<span class="k">if</span> <span class="p">(</span>i<span class="n">chnls</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+   a<span class="n">sigL</span> <span class="nb">loscil3</span> <span class="mf">.8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="nb">p4</span>
+   a<span class="n">sigR</span> <span class="o">=</span> 	a<span class="n">sigL</span>
+<span class="k">elseif</span> <span class="p">(</span>i<span class="n">chnls</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="k">then</span>
+   a<span class="n">sigL</span><span class="p">,</span> a<span class="n">sigR</span> <span class="nb">loscil3</span> <span class="mf">.8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="nb">p4</span>
+<span class="c1">;safety precaution if not mono or stereo</span>
+<span class="k">else</span>
+   a<span class="n">sigL</span> <span class="o">=</span> <span class="mi">0</span>
+   a<span class="n">sigR</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">endif</span>
+        <span class="nb">outs</span> a<span class="n">sigL</span><span class="p">,</span> a<span class="n">sigR</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span> 1 0 0 1 "mary.wav" 0 0 0
-<span class="stamnt">f</span> 2 0 0 1 "kickroll.wav" 0 0 0
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="s">"mary.wav"</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="nb">f</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="s">"kickroll.wav"</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
 
-<span class="stamnt">i</span> 1 0 3 1 <span class="comment">;mono file</span>
-<span class="stamnt">i</span> 1 + 2 2 <span class="comment">;stereo file</span>
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mi">1</span> <span class="c1">;mono file</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="mi">2</span> <span class="c1">;stereo file</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -142,7 +143,7 @@ instr 1:  ichnls = 2.000</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887673129024"></a>
+        <a id="idm47596169147488"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="ftlen.html" title="ftlen"><em class="citetitle">ftlen</em></a>,
@@ -152,7 +153,7 @@ instr 1:  ichnls = 2.000</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887673124032"></a>
+        <a id="idm47596169142496"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>oscilikt</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887653566880"></a>
+        <a id="idm47596148371488"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>oscilikt</em></span> ressemble beaucoup à
@@ -49,13 +50,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887653489520"></a>
+        <a id="idm47596148294032"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>oscilikt</strong></span> xamp, xcps, kfn [, iphs] [, istor]</pre>
         <pre class="synopsis">kres <span class="command"><strong>oscilikt</strong></span> kamp, kcps, kfn [, iphs] [, istor]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887653485920"></a>
+        <a id="idm47596148290384"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iphs</em></span> (facultatif, par défaut 0) -- phase initiale dans l'intervalle 0 à 1.
@@ -66,7 +67,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887653483040"></a>
+        <a id="idm47596148287504"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kamp</em></span>, <span class="emphasis"><em>xamp</em></span> -- amplitude.
@@ -84,7 +85,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887653475488"></a>
+        <a id="idm47596148279904"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode oscilikt. Il utilise le fichier
@@ -92,65 +93,65 @@
 
       </p>
         <div class="example">
-          <a id="idm47887653473616"></a>
+          <a id="idm47596148278032"></a>
           <p class="title">
-            <strong>Exemple 594. Exemple de l'opcode oscilikt.</strong>
+            <strong>Exemple 623. Exemple de l'opcode oscilikt.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887512673408"></a>
+              <a id="idm47595966825600"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o oscilikt.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o oscilikt.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">; Instrument #1.</span>
-<span class="oblock">instr</span> 1
-  <span class="comment">; Generate a uni-polar (0-1) square wave.</span>
-  kamp1 <span class="opc">init</span> 1 
-  kcps1 <span class="opc">init</span> 2
-  itype <span class="op">=</span> 3
-  ksquare <span class="opc">lfo</span> kamp1, kcps1, itype
+<span class="c1">; Instrument #1.</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+  <span class="c1">; Generate a uni-polar (0-1) square wave.</span>
+  k<span class="n">amp1</span> <span class="nb">init</span> <span class="mi">1</span> 
+  k<span class="n">cps1</span> <span class="nb">init</span> <span class="mi">2</span>
+  i<span class="n">type</span> <span class="o">=</span> <span class="mi">3</span>
+  k<span class="n">square</span> <span class="nb">lfo</span> k<span class="n">amp1</span><span class="p">,</span> k<span class="n">cps1</span><span class="p">,</span> i<span class="n">type</span>
 
-  <span class="comment">; Use the square wave to switch between Tables #1 and #2.</span>
-  kamp2 <span class="opc">init</span> 20000
-  kcps2 <span class="opc">init</span> 220
-  kfn <span class="op">=</span> ksquare <span class="op">+</span> 1
+  <span class="c1">; Use the square wave to switch between Tables #1 and #2.</span>
+  k<span class="n">amp2</span> <span class="nb">init</span> <span class="mi">20000</span>
+  k<span class="n">cps2</span> <span class="nb">init</span> <span class="mi">220</span>
+  k<span class="n">fn</span> <span class="o">=</span> k<span class="n">square</span> <span class="o">+</span> <span class="mi">1</span>
 
-  a1 <span class="opc">oscilikt</span> kamp2, kcps2, kfn
-  <span class="opc">out</span> a1
-<span class="oblock">endin</span>
-
-
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-
-<span class="comment">; Table #1, a sine waveform.</span>
-<span class="stamnt">f</span> 1 0 4096 10 0 1
-<span class="comment">; Table #2: a sawtooth wave</span>
-<span class="stamnt">f</span> 2 0 3 -2 1 0 -1
-
-<span class="comment">; Play Instrument #1 for two seconds.</span>
-<span class="stamnt">i</span> 1 0 2
+  a<span class="n">1</span> <span class="nb">oscilikt</span> k<span class="n">amp2</span><span class="p">,</span> k<span class="n">cps2</span><span class="p">,</span> k<span class="n">fn</span>
+  <span class="nb">out</span> a<span class="n">1</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="c1">; Table #1, a sine waveform.</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">4096</span> <span class="mi">10</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="c1">; Table #2: a sawtooth wave</span>
+<span class="nb">f</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">3</span> <span class="o">-</span><span class="mi">2</span> <span class="mi">1</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="c1">; Play Instrument #1 for two seconds.</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span>
+
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -159,7 +160,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887653469248"></a>
+        <a id="idm47596148273792"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="osciliktp.html" title="osciliktp"><em class="citetitle">osciliktp</em></a> et
@@ -167,7 +168,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887653466208"></a>
+        <a id="idm47596148270752"></a>
         <h2>Crédits</h2>
         <p>Auteur : Istvan Varga</p>
         <p>Exemple écrit par Kevin Conder.</p>

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>prints</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887646229600"></a>
+        <a id="idm47596140751664"></a>
         <h2>Description</h2>
         <p>
       Imprime au taux-i avec une syntaxe à la <span class="emphasis"><em>printf()</em></span>.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887646227920"></a>
+        <a id="idm47596140749984"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>prints</strong></span> "string" [, kval1] [, kval2] [...]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887646225792"></a>
+        <a id="idm47596140747856"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>"string"</em></span> -- la chaîne de caractères à imprimer.
@@ -58,7 +59,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887646223920"></a>
+        <a id="idm47596140745984"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kval1, kval2, ...</em></span> (optional) -- Les valeurs de taux-k
@@ -75,7 +76,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887646218672"></a>
+        <a id="idm47596140740736"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode prints. Il utilise le fichier
@@ -83,51 +84,51 @@
 
       </p>
         <div class="example">
-          <a id="idm47887646216800"></a>
+          <a id="idm47596140738864"></a>
           <p class="title">
-            <strong>Exemple 686. Exemple de l'opcode prints.</strong>
+            <strong>Exemple 720. Exemple de l'opcode prints.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887509303968"></a>
+              <a id="idm47595957698128"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in</span>
--odac           -iadc    <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o prints.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o prints.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="op">/</span><span class="op">*</span> Written by Matt Ingalls, edited by Kevin Conder. <span class="op">*</span><span class="op">/</span>
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="cm">/* Written by Matt Ingalls, edited by Kevin Conder. */</span>
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">; Instrument #1.</span>
-<span class="oblock">instr</span> 1
-  <span class="comment">; Init-time print.</span>
-  <span class="opc">prints</span> "<span class="op">%</span>2.3f\\t<span class="op">%</span>!<span class="op">%</span>!<span class="op">%</span>!<span class="op">%</span>!<span class="op">%</span>!<span class="op">%</span>!semicolons! <span class="op">%</span><span class="op">%</span>\\n", 1234.56789
-<span class="oblock">endin</span>
-
-
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-
-/* Written by Matt Ingalls, edited by Kevin Conder. */
-<span class="comment">; Play instrument #1.</span>
-<span class="stamnt">i</span> 1 0 0.004
+<span class="c1">; Instrument #1.</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+  <span class="c1">; Init-time print.</span>
+  <span class="nb">prints</span> <span class="s">"%2.3f</span><span class="se">\\</span><span class="s">t</span><span class="se">%!%!%!%!%!%!</span><span class="s">semicolons! </span><span class="se">%%\\</span><span class="s">n"</span><span class="p">,</span> <span class="mf">1234.56789</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="cm">/* Written by Matt Ingalls, edited by Kevin Conder. */</span>
+<span class="c1">; Play instrument #1.</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">0.004</span>
+
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -143,14 +144,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887646211696"></a>
+        <a id="idm47596140733760"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="printks.html" title="printks"><em class="citetitle">printks</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887646209616"></a>
+        <a id="idm47596140731680"></a>
         <h2>Crédits</h2>
         <p>
       </p>

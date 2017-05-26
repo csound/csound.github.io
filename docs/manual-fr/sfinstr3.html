@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>sfinstr3</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -39,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887635864672"></a>
+        <a id="idm47596130006384"></a>
         <h2>Description</h2>
         <p>
       Joue un instrument échantillonné SoundFont2 (SF2), produisant un son stéréo avec
@@ -50,13 +51,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887635862048"></a>
+        <a id="idm47596130003760"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ar1, ar2 <span class="command"><strong>sfinstr3</strong></span> ivel, inotenum, xamp, xfreq, instrnum, ifilhandle \
       [, iflag] [, ioffset]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887635859776"></a>
+        <a id="idm47596130001488"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ivel</em></span> -- vélocité.
@@ -82,7 +83,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887635852048"></a>
+        <a id="idm47596129993760"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>xamp</em></span> -- facteur de correction de l'amplitude.
@@ -135,77 +136,74 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887635836752"></a>
+        <a id="idm47596129978464"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode sfinstr3. Il utilise le fichier
       <a class="ulink" href="examples/sfinstr3.csd" target="_top"><em class="citetitle">sfinstr3.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887635834880"></a>
+          <a id="idm47596129976592"></a>
           <p class="title">
-            <strong>Exemple 837. Exemple de l'opcode sfinstr3.</strong>
+            <strong>Exemple 878. Exemple de l'opcode sfinstr3.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887504251168"></a>
+              <a id="idm47595946286352"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
- 
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac -+rtmidi=virtual -M0 <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o sfinstr3.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
- 
+<span class="nt">&lt;CsoundSynthesizer&gt;</span> 
+<span class="nt">&lt;CsOptions&gt;</span> 
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac -+rtmidi=virtual -M0 <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o sfinstr3.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span> 
+<span class="nt">&lt;CsInstruments&gt;</span> 
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100 
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1 
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span> 
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span> 
 
-gi24   <span class="ohdr">ftgen</span> 1, 0, 32, <span class="op">-</span>2, 24, 2, 261.626, 60, 1, 1.0293022, 1.059463, 1.0905076, 1.1224619, 1.1553525, 1.1892069, \
-             1.2240532, 1.2599207, 1.2968391, 1.33483924, 1.3739531, 1.414213, 1.4556525, 1.4983063, 1.54221, 1.5874001, \
-             1.6339145, 1.6817917, 1.73107, 1.7817962, 1.8340067, 1.8877471, 1.9430623,  2 <span class="comment">;table for microtuning, a 24 tone equal temperament</span>
+gi<span class="n">24</span>   <span class="nb">ftgen</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">261.626</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">1.0293022</span><span class="p">,</span> <span class="mf">1.059463</span><span class="p">,</span> <span class="mf">1.0905076</span><span class="p">,</span> <span class="mf">1.1224619</span><span class="p">,</span> <span class="mf">1.1553525</span><span class="p">,</span> <span class="mf">1.1892069</span><span class="p">,</span> \
+             <span class="mf">1.2240532</span><span class="p">,</span> <span class="mf">1.2599207</span><span class="p">,</span> <span class="mf">1.2968391</span><span class="p">,</span> <span class="mf">1.33483924</span><span class="p">,</span> <span class="mf">1.3739531</span><span class="p">,</span> <span class="mf">1.414213</span><span class="p">,</span> <span class="mf">1.4556525</span><span class="p">,</span> <span class="mf">1.4983063</span><span class="p">,</span> <span class="mf">1.54221</span><span class="p">,</span> <span class="mf">1.5874001</span><span class="p">,</span> \
+             <span class="mf">1.6339145</span><span class="p">,</span> <span class="mf">1.6817917</span><span class="p">,</span> <span class="mf">1.73107</span><span class="p">,</span> <span class="mf">1.7817962</span><span class="p">,</span> <span class="mf">1.8340067</span><span class="p">,</span> <span class="mf">1.8877471</span><span class="p">,</span> <span class="mf">1.9430623</span><span class="p">,</span>  <span class="mi">2</span> <span class="c1">;table for microtuning, a 24 tone equal temperament</span>
 
-giSF	<span class="opc">sfload</span>	"sf_GMbank.sf2" 
-        <span class="opc">sfilist</span> giSF 
+gi<span class="n">SF</span>	<span class="nb">sfload</span>	<span class="s">"sf_GMbank.sf2"</span> 
+        <span class="nb">sfilist</span> gi<span class="n">SF</span> 
 
-<span class="oblock">instr</span> 1 
+<span class="kd">instr</span> <span class="nf">1</span> 
 
-	<span class="opc">mididefault</span>	60, p3
-	<span class="opc">midinoteonkey</span>	p4, p5
-ikey	<span class="op">=</span> p4
-ivel	<span class="op">=</span> p5
-aenv    <span class="opc">linsegr</span>	1, 1, 1, 1, 0			<span class="comment">;envelope</span>
-icps    <span class="opc">cpstuni</span> ikey, 1				<span class="comment">;24 tones per octave</span>
-iamp    <span class="op">=</span> 0.0002				<span class="comment">;scale amplitude</span>
-iamp    <span class="op">=</span> iamp <span class="op">*</span> ivel <span class="op">*</span> 1<span class="op">/</span>128 			<span class="comment">;make velocity-dependent</span>
-aL, aR	<span class="opc">sfinstr3</span> ivel, ikey, iamp, icps, 180, giSF, 1 <span class="comment">;= Slap Bass 3</span>
-aL      <span class="op">=</span> aL <span class="op">*</span> aenv 
-aR      <span class="op">=</span> aR <span class="op">*</span> aenv 
-        <span class="opc">outs</span> aL, aR 
+	<span class="nb">mididefault</span>	<span class="mi">60</span><span class="p">,</span> <span class="nb">p3</span>
+	<span class="nb">midinoteonkey</span>	<span class="nb">p4</span><span class="p">,</span> <span class="nb">p5</span>
+i<span class="n">key</span>	<span class="o">=</span> <span class="nb">p4</span>
+i<span class="n">vel</span>	<span class="o">=</span> <span class="nb">p5</span>
+a<span class="n">env</span>    <span class="nb">linsegr</span>	<span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>			<span class="c1">;envelope</span>
+i<span class="n">cps</span>    <span class="nb">cpstuni</span> i<span class="n">key</span><span class="p">,</span> <span class="mi">1</span>				<span class="c1">;24 tones per octave</span>
+i<span class="n">amp</span>    <span class="o">=</span> <span class="mf">0.0002</span>				<span class="c1">;scale amplitude</span>
+i<span class="n">amp</span>    <span class="o">=</span> i<span class="n">amp</span> <span class="o">*</span> i<span class="n">vel</span> <span class="o">*</span> <span class="mi">1</span><span class="o">/</span><span class="mi">128</span> 			<span class="c1">;make velocity-dependent</span>
+a<span class="n">L</span><span class="p">,</span> a<span class="n">R</span>	<span class="nb">sfinstr3</span> i<span class="n">vel</span><span class="p">,</span> i<span class="n">key</span><span class="p">,</span> i<span class="n">amp</span><span class="p">,</span> i<span class="n">cps</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> gi<span class="n">SF</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">;= Slap Bass 3</span>
+a<span class="n">L</span>      <span class="o">=</span> a<span class="n">L</span> <span class="o">*</span> a<span class="n">env</span> 
+a<span class="n">R</span>      <span class="o">=</span> a<span class="n">R</span> <span class="o">*</span> a<span class="n">env</span> 
+        <span class="nb">outs</span> a<span class="n">L</span><span class="p">,</span> a<span class="n">R</span> 
 
-<span class="oblock">endin</span> 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
- 
-<span class="stamnt">f</span>0 60	<span class="comment">;play for 60 seconds</span>
+<span class="kd">endin</span> 
+<span class="nt">&lt;/CsInstruments&gt;</span> 
+<span class="nt">&lt;CsScore&gt;</span> 
+<span class="nb">f</span><span class="mi">0</span> <span class="mi">60</span>	<span class="c1">;play for 60 seconds</span>
 
-<span class="stamnt">i</span>1 0 1 60 100 1	<span class="comment">;using ftable 1</span>
-<span class="stamnt">i</span>1 + 1 62 &lt;   .
-<span class="stamnt">i</span>1 + 1 65 &lt;   .
-<span class="stamnt">i</span>1 + 1 69 40  .
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">60</span> <span class="mi">100</span> <span class="mi">1</span>	<span class="c1">;using ftable 1</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="mi">62</span> <span class="o">&lt;</span>   <span class="o">.</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="mi">65</span> <span class="o">&lt;</span>   <span class="o">.</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="mi">69</span> <span class="mi">40</span>  <span class="o">.</span>
 
-<span class="stamnt">e</span> 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">e</span> 
+<span class="nt">&lt;/CsScore&gt;</span> 
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span> 
 </pre>
             </div>
           </div>
@@ -214,7 +212,7 @@ aR      <span class="op">=</span> aR <span class="op">*</span> aenv
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887635830512"></a>
+        <a id="idm47596129972224"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="sfilist.html" title="sfilist"><em class="citetitle">sfilist</em></a>,
@@ -232,7 +230,7 @@ aR      <span class="op">=</span> aR <span class="op">*</span> aenv
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887635817904"></a>
+        <a id="idm47596129959616"></a>
         <h2>Crédits</h2>
         <p>
       </p>

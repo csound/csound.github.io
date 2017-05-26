@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Instruction i (instruction d'instrument ou de note)</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="ScoregensTop.html" title="Instructions de partition et routines GEN" />
@@ -40,7 +41,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887565116736"></a>
+        <a id="idm47596057218400"></a>
         <h2>Description</h2>
         <p>
       Cette instruction est nécessaire pour activer un instrument à une date précise et pour une certaine
@@ -49,18 +50,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887565114976"></a>
+        <a id="idm47596057216672"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>i</strong></span>  p1  p2  p3  p4  ...</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887565112960"></a>
+        <a id="idm47596057214656"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>p1</em></span> -- Numéro d'instrument, habituellement un nombre entier non négatif. 
       Une partie décimale facultative permet d'ajouter une étiquette indiquant des liaisons entre des
       notes particulières d'aggrégats consécutifs. Un p1 négatif (incluant une étiquette) peut être
-      utilisé pour faire cesser une note <span class="quote">« <span class="quote">tenue</span> »</span> particulière.
+      utilisé pour faire cesser une note <span class="quote">« <span class="quote">tenue</span> »</span> particulière. Dans
+      le cas d'un instrument nommé, on peut obtenir le même effet en ayant un '-'
+      comme premier caractère du nom.
     </p>
         <p>
       <span class="emphasis"><em>p2</em></span> -- Date de début en unités arbitraires appelées pulsations.
@@ -78,7 +81,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887565104096"></a>
+        <a id="idm47596057205488"></a>
         <h2>Exécution</h2>
         <p>
       Une pulsation vaut une seconde, à moins qu'il n'y ait une
@@ -226,7 +229,7 @@
         <p>
     </p>
         <div class="refsect2">
-          <a id="idm47887565054736"></a>
+          <a id="idm47596057156128"></a>
           <h3>Considérations Spéciales</h3>
           <p>
         Le numéro d'instrument maximum était de 200. Cela a changé et il n'est plus limité que par la
@@ -236,90 +239,90 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47887565052864"></a>
+        <a id="idm47596057154256"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'instruction i. Il utilise le fichier
       <a class="ulink" href="examples/i_statement.csd" target="_top"><em class="citetitle">i_statement.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887565050976"></a>
+          <a id="idm47596057152368"></a>
           <p class="title">
-            <strong>Exemple 1116. Exemple de l'instruction i.</strong>
+            <strong>Exemple 1167. Exemple de l'instruction i.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm47887494140592"></a>
+              <a id="idm47595919237152"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o i_statement.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o i_statement.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 10
+<span class="kd">instr</span> <span class="nf">10</span>
         
-  icps     <span class="opc">init</span>      <span class="opc">cpspch</span>(p4)                  <span class="comment">; Get target pitch from score event</span>
-  iportime <span class="opc">init</span>      <span class="opc">abs</span>(p3)<span class="op">/</span>7                   <span class="comment">; Portamento time dep on note length</span>
-  iamp0    <span class="opc">init</span>      p5                          <span class="comment">; Set default amps</span>
-  iamp1    <span class="opc">init</span>      p5
-  iamp2    <span class="opc">init</span>      p5
+  i<span class="n">cps</span>     <span class="nb">init</span>      <span class="nb">cpspch</span><span class="p">(</span><span class="nb">p4</span><span class="p">)</span>                  <span class="c1">; Get target pitch from score event</span>
+  i<span class="n">portime</span> <span class="nb">init</span>      <span class="nb">abs</span><span class="p">(</span><span class="nb">p3</span><span class="p">)</span><span class="o">/</span><span class="mi">7</span>                   <span class="c1">; Portamento time dep on note length</span>
+  i<span class="n">amp0</span>    <span class="nb">init</span>      <span class="nb">p5</span>                          <span class="c1">; Set default amps</span>
+  i<span class="n">amp1</span>    <span class="nb">init</span>      <span class="nb">p5</span>
+  i<span class="n">amp2</span>    <span class="nb">init</span>      <span class="nb">p5</span>
       
-  itie     <span class="opc">tival</span>                                 <span class="comment">; Check if this note is tied,</span>
-  <span class="octrl">if</span> itie  <span class="op">==</span>  1     <span class="octrl">igoto</span> <span class="olabel">nofadein</span>              <span class="comment">; if not fade in</span>
-  iamp0    <span class="opc">init</span>      0
+  i<span class="n">tie</span>     <span class="nb">tival</span>                                 <span class="c1">; Check if this note is tied,</span>
+  <span class="k">if</span> i<span class="n">tie</span>  <span class="o">==</span>  <span class="mi">1</span>     <span class="k">igoto</span> <span class="nl">nofadein</span>              <span class="c1">; if not fade in</span>
+  i<span class="n">amp0</span>    <span class="nb">init</span>      <span class="mi">0</span>
 
-<span class="olabel">nofadein</span><span class="op">:</span>
-  <span class="octrl">if</span> p3    <span class="op">&lt;</span> 0       <span class="octrl">igoto</span> <span class="olabel">nofadeout</span>             <span class="comment">; Check if this note is held, if not fade out</span>
-  iamp2    <span class="opc">init</span>      0    
+<span class="nl">nofadein</span><span class="p">:</span>
+  <span class="k">if</span> <span class="nb">p3</span>    <span class="o">&lt;</span> <span class="mi">0</span>       <span class="k">igoto</span> <span class="nl">nofadeout</span>             <span class="c1">; Check if this note is held, if not fade out</span>
+  i<span class="n">amp2</span>    <span class="nb">init</span>      <span class="mi">0</span>    
 
-<span class="olabel">nofadeout</span><span class="op">:</span>
-  <span class="comment">; Now do amp from the set values:</span>
-  kamp     <span class="opc">linseg</span>    iamp0, .03, iamp1, <span class="opc">abs</span>(p3)<span class="op">-</span>.03, iamp2
+<span class="nl">nofadeout</span><span class="p">:</span>
+  <span class="c1">; Now do amp from the set values:</span>
+  k<span class="n">amp</span>     <span class="nb">linseg</span>    i<span class="n">amp0</span><span class="p">,</span> <span class="mf">.03</span><span class="p">,</span> i<span class="n">amp1</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">p3</span><span class="p">)</span><span class="o">-</span><span class="mf">.03</span><span class="p">,</span> i<span class="n">amp2</span>
         
-  <span class="comment">; Skip rest of initialization on tied note:</span>
-           <span class="octrl">tigoto</span>    <span class="olabel">tieskip</span>
+  <span class="c1">; Skip rest of initialization on tied note:</span>
+           <span class="k">tigoto</span>    <span class="nl">tieskip</span>
 
-  kcps     <span class="opc">init</span>      icps                        <span class="comment">; Init pitch for untied note</span>
-  kcps     <span class="opc">port</span>      icps, iportime, icps        <span class="comment">; Drift towards target pitch</span>
+  k<span class="n">cps</span>     <span class="nb">init</span>      i<span class="n">cps</span>                        <span class="c1">; Init pitch for untied note</span>
+  k<span class="n">cps</span>     <span class="nb">port</span>      i<span class="n">cps</span><span class="p">,</span> i<span class="n">portime</span><span class="p">,</span> i<span class="n">cps</span>        <span class="c1">; Drift towards target pitch</span>
 
-  kpw      <span class="opc">oscil</span>     .4, <span class="opc">rnd</span>(1), 1, <span class="opc">rnd</span>(.7)      <span class="comment">; A simple triangle-saw oscil</span>
-  ar       <span class="opc">vco</span>       kamp, kcps, 3, kpw<span class="op">+</span>.5, 1, 1<span class="op">/</span>icps
+  k<span class="n">pw</span>      <span class="nb">oscil</span>     <span class="mf">.4</span><span class="p">,</span> <span class="nb">rnd</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">rnd</span><span class="p">(</span><span class="mf">.7</span><span class="p">)</span>      <span class="c1">; A simple triangle-saw oscil</span>
+  a<span class="n">r</span>       <span class="nb">vco</span>       k<span class="n">amp</span><span class="p">,</span> k<span class="n">cps</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> k<span class="n">pw</span><span class="o">+</span><span class="mf">.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span>i<span class="n">cps</span>
         
-  <span class="comment">; (Used in testing - one may set ipch to cpspch(p4+2)</span>
-  <span class="comment">;       and view output spectrum)</span>
-  <span class="comment">;       ar oscil kamp, kcps, 1</span>
+  <span class="c1">; (Used in testing - one may set ipch to cpspch(p4+2)</span>
+  <span class="c1">;       and view output spectrum)</span>
+  <span class="c1">;       ar oscil kamp, kcps, 1</span>
 
-          <span class="opc">outs</span>        ar, ar
+          <span class="nb">outs</span>        a<span class="n">r</span><span class="p">,</span> a<span class="n">r</span>
 
-<span class="olabel">tieskip</span><span class="op">:</span>                                        <span class="comment">; Skip some initialization on tied note</span>
+<span class="nl">tieskip</span><span class="p">:</span>                                        <span class="c1">; Skip some initialization on tied note</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span>1   0 8192 10 1            <span class="comment">; Sine</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span><span class="mi">1</span>   <span class="mi">0</span> <span class="mi">8192</span> <span class="mi">10</span> <span class="mi">1</span>            <span class="c1">; Sine</span>
 
-<span class="stamnt">i</span>10.1    0    -1    7.00    .15
-<span class="stamnt">i</span>10.2    0    -1    7.04
-<span class="stamnt">i</span>10.3    0    -1    7.07
-<span class="stamnt">i</span>10.1    1    -1    8.00  
-<span class="stamnt">i</span>10.2    1    -1    8.04
-<span class="stamnt">i</span>10.3    1    -1    8.07
-<span class="stamnt">i</span>10.1    2     1    7.11  
-<span class="stamnt">i</span>10.2    2     1    8.04  
-<span class="stamnt">i</span>10.3    2     1    8.07
-  <span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span><span class="mf">10.1</span>    <span class="mi">0</span>    <span class="o">-</span><span class="mi">1</span>    <span class="mf">7.00</span>    <span class="mf">.15</span>
+<span class="nb">i</span><span class="mf">10.2</span>    <span class="mi">0</span>    <span class="o">-</span><span class="mi">1</span>    <span class="mf">7.04</span>
+<span class="nb">i</span><span class="mf">10.3</span>    <span class="mi">0</span>    <span class="o">-</span><span class="mi">1</span>    <span class="mf">7.07</span>
+<span class="nb">i</span><span class="mf">10.1</span>    <span class="mi">1</span>    <span class="o">-</span><span class="mi">1</span>    <span class="mf">8.00</span>  
+<span class="nb">i</span><span class="mf">10.2</span>    <span class="mi">1</span>    <span class="o">-</span><span class="mi">1</span>    <span class="mf">8.04</span>
+<span class="nb">i</span><span class="mf">10.3</span>    <span class="mi">1</span>    <span class="o">-</span><span class="mi">1</span>    <span class="mf">8.07</span>
+<span class="nb">i</span><span class="mf">10.1</span>    <span class="mi">2</span>     <span class="mi">1</span>    <span class="mf">7.11</span>  
+<span class="nb">i</span><span class="mf">10.2</span>    <span class="mi">2</span>     <span class="mi">1</span>    <span class="mf">8.04</span>  
+<span class="nb">i</span><span class="mf">10.3</span>    <span class="mi">2</span>     <span class="mi">1</span>    <span class="mf">8.07</span>
+  <span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -328,7 +331,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887565049056"></a>
+        <a id="idm47596057150448"></a>
         <h2>Crédits</h2>
         <p>
       Texte supplémentaire (Version 4.07 de Csound) expliquant les notes liées, publié par

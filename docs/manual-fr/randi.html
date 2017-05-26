@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>randi</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -39,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887641209808"></a>
+        <a id="idm47596135630064"></a>
         <h2>Description</h2>
         <p>
       Génère une suite contrôlée de nombres aléatoires avec interpolation entre chaque
@@ -47,13 +48,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887641133664"></a>
+        <a id="idm47596135553824"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>randi</strong></span> xamp, xcps [, iseed] [, isize] [, ioffset]</pre>
         <pre class="synopsis">kres <span class="command"><strong>randi</strong></span> kamp, kcps [, iseed] [, isize] [, ioffset]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887641130176"></a>
+        <a id="idm47596135550336"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iseed</em></span> (facultatif, par défaut=0,5) -- une graine pour la formule
@@ -73,7 +74,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887641124512"></a>
+        <a id="idm47596135544672"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kamp, xamp</em></span> -- intervalle sur lequel les nombres aléatoires sont
@@ -98,7 +99,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887641116768"></a>
+        <a id="idm47596135536928"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode randi. Il utilise le fichier
@@ -106,58 +107,58 @@
 
       </p>
         <div class="example">
-          <a id="idm47887641114992"></a>
+          <a id="idm47596135535152"></a>
           <p class="title">
-            <strong>Exemple 766. Exemple de l'opcode randi.</strong>
+            <strong>Exemple 802. Exemple de l'opcode randi.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887507570304"></a>
+              <a id="idm47595952747248"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o randi.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o randi.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1	<span class="comment">;same values every time</span>
+<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">;same values every time</span>
 
-krnd <span class="opc">randi</span> 100, 10
-     <span class="opc">printk</span> .5, krnd			<span class="comment">; look </span>
-aout <span class="opc">oscili</span> 0.8, 440<span class="op">+</span>krnd, 1		<span class="comment">; &amp; listen</span>
-     <span class="opc">outs</span> aout, aout
+k<span class="n">rnd</span> <span class="nb">randi</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span>
+     <span class="nb">printk</span> <span class="mf">.5</span><span class="p">,</span> k<span class="n">rnd</span>			<span class="c1">; look </span>
+a<span class="n">out</span> <span class="nb">oscili</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">440</span><span class="o">+</span>k<span class="n">rnd</span><span class="p">,</span> <span class="mi">1</span>		<span class="c1">; &amp; listen</span>
+     <span class="nb">outs</span> a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
 
-<span class="oblock">endin</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 2	<span class="comment">;different values every time</span>
+<span class="kd">instr</span> <span class="nf">2</span>	<span class="c1">;different values every time</span>
 
-krnd <span class="opc">randi</span> 100, 10, 10			<span class="comment">; seed from system clock</span>
-     <span class="opc">printk</span> .5, krnd			<span class="comment">; look </span>
-aout <span class="opc">oscili</span> 0.8, 440<span class="op">+</span>krnd, 1		<span class="comment">; &amp; listen</span>
-     <span class="opc">outs</span> aout, aout
+k<span class="n">rnd</span> <span class="nb">randi</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>			<span class="c1">; seed from system clock</span>
+     <span class="nb">printk</span> <span class="mf">.5</span><span class="p">,</span> k<span class="n">rnd</span>			<span class="c1">; look </span>
+a<span class="n">out</span> <span class="nb">oscili</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">440</span><span class="o">+</span>k<span class="n">rnd</span><span class="p">,</span> <span class="mi">1</span>		<span class="c1">; &amp; listen</span>
+     <span class="nb">outs</span> a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span> 1 0 16384 10 1	<span class="comment">;sine wave.</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>	<span class="c1">;sine wave.</span>
 
-<span class="stamnt">i</span> 1 0 1
-<span class="stamnt">i</span> 2 2 1
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="nb">i</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">1</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -181,7 +182,7 @@ WARNING: Seeding from current time 1482746120
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887641109264"></a>
+        <a id="idm47596135529472"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="rand.html" title="rand"><em class="citetitle">rand</em></a>,

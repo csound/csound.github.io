@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>strsub</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887627284624"></a>
+        <a id="idm47596121336304"></a>
         <h2>Description</h2>
         <p>
       Retourne une sous-chaîne d'une chaîne source. <span class="emphasis"><em>strsub</em></span>
@@ -46,12 +47,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887627220176"></a>
+        <a id="idm47596121271744"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">Sdst <span class="command"><strong>strsub</strong></span> Ssrc[, istart[, iend]]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887627217968"></a>
+        <a id="idm47596121269728"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>istart</em></span> (facultatif, 0 par défaut) -- position du
@@ -66,54 +67,54 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887627213024"></a>
+        <a id="idm47596121264784"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode strsub. Il utilise le fichier
       <a class="ulink" href="examples/strsub.csd" target="_top"><em class="citetitle">strsub.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887627211152"></a>
+          <a id="idm47596121262912"></a>
           <p class="title">
-            <strong>Exemple 915. Exemple de l'opcode strsub.</strong>
+            <strong>Exemple 958. Exemple de l'opcode strsub.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
         <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887501365552"></a>
+              <a id="idm47595939531520"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    No messages</span>
--odac           -iadc     <span class="comment">;;;-d     RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o strsub.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
-<span class="comment">; By: Jonathan Murphy 2007</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     <span class="c1">;;;-d     RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o strsub.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="c1">; By: Jonathan Murphy 2007</span>
 
-<span class="oblock">instr</span> 1
-    Smember <span class="opc">strget</span> p4
+<span class="kd">instr</span> <span class="nf">1</span>
+    S<span class="n">member</span> <span class="nb">strget</span> <span class="nb">p4</span>
 
-    <span class="comment">; Parse Smember</span>
-    istrlen    <span class="opc">strlen</span>   Smember
-    idelimiter <span class="opc">strindex</span> Smember, "<span class="op">:</span>"
+    <span class="c1">; Parse Smember</span>
+    i<span class="n">strlen</span>    <span class="nb">strlen</span>   S<span class="n">member</span>
+    i<span class="n">delimiter</span> <span class="nb">strindex</span> S<span class="n">member</span><span class="p">,</span> <span class="s">":"</span>
 
-    S1    <span class="opc">strsub</span> Smember, 0, idelimiter  <span class="comment">; "String1"</span>
-    S2    <span class="opc">strsub</span> Smember, idelimiter <span class="op">+</span> 1, istrlen  <span class="comment">; "String2"</span>
+    S<span class="n">1</span>    <span class="nb">strsub</span> S<span class="n">member</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> i<span class="n">delimiter</span>  <span class="c1">; "String1"</span>
+    S<span class="n">2</span>    <span class="nb">strsub</span> S<span class="n">member</span><span class="p">,</span> i<span class="n">delimiter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">strlen</span>  <span class="c1">; "String2"</span>
 
-    <span class="opc">printf</span> "First string<span class="op">:</span> <span class="op">%</span>s\nSecond string<span class="op">:</span> <span class="op">%</span>s\n", 1, S1, S2
+    <span class="nb">printf</span> <span class="s">"First string: %s</span><span class="se">\n</span><span class="s">Second string: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> S<span class="n">1</span><span class="p">,</span> S<span class="n">2</span>
 
-<span class="oblock">endin</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span> 1 0 1 "Str<span class="stamnt">i</span>ng1:Str<span class="stamnt">i</span>ng2"
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="s">"String1:String2"</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -122,7 +123,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887627206784"></a>
+        <a id="idm47596121258640"></a>
         <h2>Voir aussi</h2>
         <p>
           <a class="link" href="strsubk.html" title="strsubk">
@@ -131,7 +132,7 @@
         </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887627204992"></a>
+        <a id="idm47596121256848"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>xtratim</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887610901600"></a>
+        <a id="idm47596104861392"></a>
         <h2>Description</h2>
         <p>
       Allonge la durée d'évènements générés en temps réel et gère cet allongement.
@@ -49,12 +50,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887610897408"></a>
+        <a id="idm47596104857120"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>xtratim</strong></span> iextradur</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887610895360"></a>
+        <a id="idm47596104855072"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iextradur</em></span> -- durée additionnelle pour l'instance
@@ -62,7 +63,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887610893584"></a>
+        <a id="idm47596104853296"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>xtratim</em></span> allonge la durée de la note MIDI courante de
@@ -78,7 +79,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887610889312"></a>
+        <a id="idm47596104849024"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode xtratim. Il utilise le fichier
@@ -86,9 +87,9 @@
 
       </p>
         <div class="example">
-          <a id="idm47887610887440"></a>
+          <a id="idm47596104847152"></a>
           <p class="title">
-            <strong>Exemple 1094. Exemple de l'opcode xtratim.</strong>
+            <strong>Exemple 1138. Exemple de l'opcode xtratim.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
@@ -100,56 +101,60 @@
         <a class="link" href="release.html" title="release"><em class="citetitle">release</em></a> pour
         tester si la note est dans sa phase de relâchement.</p>
             <div class="refsect1">
-              <a id="idm47887494766640"></a>
+              <a id="idm47595921397312"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    Silent  MIDI in</span>
--odac           -iadc     -d       -M0  <span class="comment">;;;realtime I/O</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
-<span class="comment">;Simple usage of the xtratim opcode</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
 
-<span class="comment">; sine wave for oscillators</span>
-gisin	    <span class="ohdr">ftgen</span>     1, 0, 4096, 10, 1
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    Silent  MIDI in</span>
+-odac           -iadc     -d       -M0  <span class="c1">;;;realtime I/O</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
 
-<span class="oblock">instr</span> 1
+<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="c1">;Simple usage of the xtratim opcode</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 
-  inum <span class="opc">notnum</span>
-  icps <span class="opc">cpsmidi</span>
-  iamp <span class="opc">ampmidi</span> 4000
- <span class="comment">;</span>
- <span class="comment">;------- complex envelope block ------</span>
-  <span class="opc">xtratim</span> 1 <span class="comment">;extra-time, i.e. release dur</span>
-  krel <span class="opc">init</span> 0
-  krel <span class="opc">release</span> <span class="comment">;outputs release-stage flag (0 or 1 values)</span>
-  <span class="octrl">if</span> (krel <span class="op">==</span> 1) <span class="octrl">kgoto</span> rel <span class="comment">;if in release-stage goto release section</span>
- <span class="comment">;</span>
- <span class="comment">;************ attack and sustain section ***********</span>
-  kmp1 <span class="opc">linseg</span> 0, .03, 1, .05, 1, .07, 0, .08, .5, 4, 1, 50, 1
-  kmp <span class="op">=</span> kmp1<span class="op">*</span>iamp
-   <span class="octrl">kgoto</span> done
- <span class="comment">;</span>
- <span class="comment">;--------- release section --------</span>
-   rel<span class="op">:</span>
-  kmp2 <span class="opc">linseg</span> 1, .3, .2, .7, 0
-  kmp <span class="op">=</span> kmp1<span class="op">*</span>kmp2<span class="op">*</span>iamp
-  done<span class="op">:</span>
- <span class="comment">;------</span>
-  a1 <span class="opc">oscili</span> kmp, icps, gisin
-  <span class="opc">outs</span> a1, a1
- <span class="oblock">endin</span>
+<span class="c1">; sine wave for oscillators</span>
+gi<span class="n">sin</span>	    <span class="nb">ftgen</span>     <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4096</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span> 0 3600 <span class="comment">;dummy table to wait for realtime MIDI events</span>
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+
+  i<span class="n">num</span> <span class="nb">notnum</span>
+  i<span class="n">cps</span> <span class="nb">cpsmidi</span>
+  i<span class="n">amp</span> <span class="nb">ampmidi</span> <span class="mi">4000</span>
+ <span class="c1">;</span>
+ <span class="c1">;------- complex envelope block ------</span>
+  <span class="nb">xtratim</span> <span class="mi">1</span> <span class="c1">;extra-time, i.e. release dur</span>
+  k<span class="n">rel</span> <span class="nb">init</span> <span class="mi">0</span>
+  k<span class="n">rel</span> <span class="nb">release</span> <span class="c1">;outputs release-stage flag (0 or 1 values)</span>
+  <span class="k">if</span> <span class="p">(</span>k<span class="n">rel</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">kgoto</span> <span class="nl">rel</span> <span class="c1">;if in release-stage goto release section</span>
+ <span class="c1">;</span>
+ <span class="c1">;************ attack and sustain section ***********</span>
+  k<span class="n">mp1</span> <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.03</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.07</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.08</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">1</span>
+  k<span class="n">mp</span> <span class="o">=</span> k<span class="n">mp1</span><span class="o">*</span>i<span class="n">amp</span>
+   <span class="k">kgoto</span> <span class="nl">done</span>
+ <span class="c1">;</span>
+ <span class="c1">;--------- release section --------</span>
+   <span class="nl">rel</span><span class="p">:</span>
+  k<span class="n">mp2</span> <span class="nb">linseg</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.3</span><span class="p">,</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">.7</span><span class="p">,</span> <span class="mi">0</span>
+  k<span class="n">mp</span> <span class="o">=</span> k<span class="n">mp1</span><span class="o">*</span>k<span class="n">mp2</span><span class="o">*</span>i<span class="n">amp</span>
+  <span class="nl">done</span><span class="p">:</span>
+ <span class="c1">;------</span>
+  a<span class="n">1</span> <span class="nb">oscili</span> k<span class="n">mp</span><span class="p">,</span> i<span class="n">cps</span><span class="p">,</span> gi<span class="n">sin</span>
+  <span class="nb">outs</span> a<span class="n">1</span><span class="p">,</span> a<span class="n">1</span>
+ <span class="kd">endin</span>
+
+<span class="nt">&lt;/CsInstruments&gt;</span>
+
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span> <span class="mi">0</span> <span class="mi">3600</span> <span class="c1">;dummy table to wait for realtime MIDI events</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span> 
 </pre>
             </div>
           </div>
@@ -162,9 +167,9 @@ gisin	    <span class="ohdr">ftgen</span>     1, 0, 4096, 10, 1
 
       </p>
         <div class="example">
-          <a id="idm47887610879680"></a>
+          <a id="idm47596104839392"></a>
           <p class="title">
-            <strong>Exemple 1095. Exemple plus complexe de l'opcode xtratim.</strong>
+            <strong>Exemple 1139. Exemple plus complexe de l'opcode xtratim.</strong>
           </p>
           <div class="example-contents">
             <p>Cet exemple montre comment générer un segment de relâchement pour
@@ -174,91 +179,95 @@ gisin	    <span class="ohdr">ftgen</span>     1, 0, 4096, 10, 1
         tester si la note est dans sa phase de relâchement. Deux enveloppes sont
         générées simultanément pour les canaux gauche et droit.</p>
             <div class="refsect1">
-              <a id="idm47887494336864"></a>
+              <a id="idm47595923379456"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    Silent  MIDI in</span>
--odac           -iadc     -d       -M0  <span class="comment">;;;realtime I/O</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
-<span class="comment">;xtratim example by Jonathan Murphy Dec. 2006</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
 
-	    <span class="comment">; sine wave for oscillators</span>
-gisin	    <span class="ohdr">ftgen</span>     1, 0, 4096, 10, 1
-	    <span class="comment">; set volume initially to midpoint</span>
-	    <span class="ohdr">ctrlinit</span>  1, 7,64
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    Silent  MIDI in</span>
+-odac           -iadc     -d       -M0  <span class="c1">;;;realtime I/O</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
 
-<span class="comment">;;; simple two oscil, two envelope synth</span>
-    <span class="oblock">instr</span> 1
+<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="c1">;xtratim example by Jonathan Murphy Dec. 2006</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 
-	    <span class="comment">; frequency</span>
-  kcps	    <span class="opc">cpsmidib</span>
-	    <span class="comment">; initial velocity (noteon)</span>
-  ivel	    <span class="opc">veloc</span>
+	    <span class="c1">; sine wave for oscillators</span>
+gi<span class="n">sin</span>	    <span class="nb">ftgen</span>     <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4096</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span>
+	    <span class="c1">; set volume initially to midpoint</span>
+	    <span class="nb">ctrlinit</span>  <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span><span class="mi">64</span>
 
-	    <span class="comment">; master volume</span>
-  kamp	    <span class="opc">ctrl7</span>     1, 7, 0, 127
-  kamp	    <span class="op">=</span>  kamp <span class="op">*</span> ivel
+<span class="c1">;;; simple two oscil, two envelope synth</span>
+    <span class="kd">instr</span> <span class="nf">1</span>
 
-	    <span class="comment">; parameters for aenv1</span>
-  iatt1	    <span class="op">=</span>  0.03	
-  idec1	    <span class="op">=</span>  1
-  isus1	    <span class="op">=</span>  0.25	
-  irel1	    <span class="op">=</span>  1
-	    <span class="comment">; parameters for aenv2</span>
-  iatt2	    <span class="op">=</span>  0.06	
-  idec2	    <span class="op">=</span>  2	
-  isus2	    <span class="op">=</span>  0.5
-  irel2	    <span class="op">=</span>  2
+	    <span class="c1">; frequency</span>
+  k<span class="n">cps</span>	    <span class="nb">cpsmidib</span>
+	    <span class="c1">; initial velocity (noteon)</span>
+  i<span class="n">vel</span>	    <span class="nb">veloc</span>
 
-	    <span class="comment">; extra (release) time allocated</span>
-	    <span class="opc">xtratim</span>   (irel1<span class="op">&gt;</span>irel2 <span class="op">?</span> irel1 <span class="op">:</span> irel2)
-            <span class="comment">; krel is used to trigger envelope release</span>
-  krel	    <span class="opc">init</span>      0
-  krel	    <span class="opc">release</span>
-	    <span class="comment">; if noteoff received, krel == 1, otherwise krel == 0</span>
-<span class="octrl">if</span> (krel <span class="op">==</span> 1) <span class="octrl">kgoto</span> <span class="olabel">rel</span>
+	    <span class="c1">; master volume</span>
+  k<span class="n">amp</span>	    <span class="nb">ctrl7</span>     <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">127</span>
+  k<span class="n">amp</span>	    <span class="o">=</span>  k<span class="n">amp</span> <span class="o">*</span> i<span class="n">vel</span>
 
-	    <span class="comment">; attack, decay, sustain segments</span>
-  atmp1	    <span class="opc">linseg</span>    0, iatt1, 1, idec1, isus1	, 1, isus1
-  atmp2	    <span class="opc">linseg</span>    0, iatt2, 1, idec2, isus2	, 1, isus2
-  aenv1	    <span class="op">=</span>  atmp1
-  aenv2	    <span class="op">=</span>  atmp2
-	    <span class="octrl">kgoto</span>     <span class="olabel">done</span>
+	    <span class="c1">; parameters for aenv1</span>
+  i<span class="n">att1</span>	    <span class="o">=</span>  <span class="mf">0.03</span>	
+  i<span class="n">dec1</span>	    <span class="o">=</span>  <span class="mi">1</span>
+  i<span class="n">sus1</span>	    <span class="o">=</span>  <span class="mf">0.25</span>	
+  i<span class="n">rel1</span>	    <span class="o">=</span>  <span class="mi">1</span>
+	    <span class="c1">; parameters for aenv2</span>
+  i<span class="n">att2</span>	    <span class="o">=</span>  <span class="mf">0.06</span>	
+  i<span class="n">dec2</span>	    <span class="o">=</span>  <span class="mi">2</span>	
+  i<span class="n">sus2</span>	    <span class="o">=</span>  <span class="mf">0.5</span>
+  i<span class="n">rel2</span>	    <span class="o">=</span>  <span class="mi">2</span>
 
-	    <span class="comment">; release segment</span>
-<span class="olabel">rel</span><span class="op">:</span>
-  atmp3	    <span class="opc">linseg</span>    1, irel1, 0, 1, 0
-  atmp4	    <span class="opc">linseg</span>    1, irel2, 0, 1, 0
-  aenv1	    <span class="op">=</span>  atmp1 <span class="op">*</span> atmp3  <span class="comment">;to go from the current value (in case</span>
-  aenv2	    <span class="op">=</span>  atmp2 <span class="op">*</span> atmp4  <span class="comment">;the attack hasn't finished) to the release.</span>
+	    <span class="c1">; extra (release) time allocated</span>
+	    <span class="nb">xtratim</span>   <span class="p">(</span>i<span class="n">rel1</span><span class="o">&gt;</span>i<span class="n">rel2</span> <span class="p">?</span> i<span class="n">rel1</span> <span class="p">:</span> i<span class="n">rel2</span><span class="p">)</span>
+            <span class="c1">; krel is used to trigger envelope release</span>
+  k<span class="n">rel</span>	    <span class="nb">init</span>      <span class="mi">0</span>
+  k<span class="n">rel</span>	    <span class="nb">release</span>
+	    <span class="c1">; if noteoff received, krel == 1, otherwise krel == 0</span>
+<span class="k">if</span> <span class="p">(</span>k<span class="n">rel</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">kgoto</span> <span class="nl">rel</span>
 
-	    <span class="comment">; control oscillator amplitude using envelopes</span>
-<span class="olabel">done</span><span class="op">:</span>
-  aosc1	    <span class="opc">oscil</span>     aenv1, kcps, gisin
-  aosc2	    <span class="opc">oscil</span>     aenv2, kcps <span class="op">*</span> 1.5, gisin
-  aosc1	    <span class="op">=</span>  aosc1 <span class="op">*</span> kamp
-  aosc2	    <span class="op">=</span>  aosc2 <span class="op">*</span> kamp
+	    <span class="c1">; attack, decay, sustain segments</span>
+  a<span class="n">tmp1</span>	    <span class="nb">linseg</span>    <span class="mi">0</span><span class="p">,</span> i<span class="n">att1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">dec1</span><span class="p">,</span> i<span class="n">sus1</span>	<span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">sus1</span>
+  a<span class="n">tmp2</span>	    <span class="nb">linseg</span>    <span class="mi">0</span><span class="p">,</span> i<span class="n">att2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">dec2</span><span class="p">,</span> i<span class="n">sus2</span>	<span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">sus2</span>
+  a<span class="n">env1</span>	    <span class="o">=</span>  a<span class="n">tmp1</span>
+  a<span class="n">env2</span>	    <span class="o">=</span>  a<span class="n">tmp2</span>
+	    <span class="k">kgoto</span>     <span class="nl">done</span>
 
-	    <span class="comment">; send aosc1 to left channel, aosc2 to right,</span>
-	    <span class="comment">; release times are noticably different</span>
+	    <span class="c1">; release segment</span>
+<span class="nl">rel</span><span class="p">:</span>
+  a<span class="n">tmp3</span>	    <span class="nb">linseg</span>    <span class="mi">1</span><span class="p">,</span> i<span class="n">rel1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+  a<span class="n">tmp4</span>	    <span class="nb">linseg</span>    <span class="mi">1</span><span class="p">,</span> i<span class="n">rel2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+  a<span class="n">env1</span>	    <span class="o">=</span>  a<span class="n">tmp1</span> <span class="o">*</span> a<span class="n">tmp3</span>  <span class="c1">;to go from the current value (in case</span>
+  a<span class="n">env2</span>	    <span class="o">=</span>  a<span class="n">tmp2</span> <span class="o">*</span> a<span class="n">tmp4</span>  <span class="c1">;the attack hasn't finished) to the release.</span>
+
+	    <span class="c1">; control oscillator amplitude using envelopes</span>
+<span class="nl">done</span><span class="p">:</span>
+  a<span class="n">osc1</span>	    <span class="nb">oscil</span>     a<span class="n">env1</span><span class="p">,</span> k<span class="n">cps</span><span class="p">,</span> gi<span class="n">sin</span>
+  a<span class="n">osc2</span>	    <span class="nb">oscil</span>     a<span class="n">env2</span><span class="p">,</span> k<span class="n">cps</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">,</span> gi<span class="n">sin</span>
+  a<span class="n">osc1</span>	    <span class="o">=</span>  a<span class="n">osc1</span> <span class="o">*</span> k<span class="n">amp</span>
+  a<span class="n">osc2</span>	    <span class="o">=</span>  a<span class="n">osc2</span> <span class="o">*</span> k<span class="n">amp</span>
+
+	    <span class="c1">; send aosc1 to left channel, aosc2 to right,</span>
+	    <span class="c1">; release times are noticably different</span>
  
-	    <span class="opc">outs</span>      aosc1, aosc2
+	    <span class="nb">outs</span>      a<span class="n">osc1</span><span class="p">,</span> a<span class="n">osc2</span>
 
-    <span class="oblock">endin</span>
+    <span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
 
-<span class="stamnt">f</span> 0 3600 <span class="comment">;dummy table to wait for realtime MIDI events</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">f</span> <span class="mi">0</span> <span class="mi">3600</span> <span class="c1">;dummy table to wait for realtime MIDI events</span>
+
+<span class="nt">&lt;/CsScore&gt;</span>
+
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -267,7 +276,7 @@ gisin	    <span class="ohdr">ftgen</span>     1, 0, 4096, 10, 1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887610875280"></a>
+        <a id="idm47596104834992"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="linenr.html" title="linenr"><em class="citetitle">linenr</em></a>, 
@@ -275,7 +284,7 @@ gisin	    <span class="ohdr">ftgen</span>     1, 0, 4096, 10, 1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887610872272"></a>
+        <a id="idm47596104831984"></a>
         <h2>Crédits</h2>
         <p>Auteur : Gabriel Maldonado</p>
         <p>Italie</p>

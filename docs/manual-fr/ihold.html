@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>ihold</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,14 +39,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887668671632"></a>
+        <a id="idm47596164483936"></a>
         <h2>Description</h2>
         <p>
       Transforme une note de durée finie en une note <span class="quote">« <span class="quote">tenue</span> »</span>.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887668669968"></a>
+        <a id="idm47596164482272"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">
           <span class="command">
@@ -54,7 +55,7 @@
         </pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887668668112"></a>
+        <a id="idm47596164480592"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ihold</em></span> -- cette instruction de la phase d'initialisation
@@ -70,7 +71,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887668663040"></a>
+        <a id="idm47596164475568"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode ihold. Il utilise le fichier
@@ -78,69 +79,69 @@
 
       </p>
         <div class="example">
-          <a id="idm47887668661264"></a>
+          <a id="idm47596164473712"></a>
           <p class="title">
-            <strong>Exemple 405. Exemple de l'opcode ihold.</strong>
+            <strong>Exemple 418. Exemple de l'opcode ihold.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887519806048"></a>
+              <a id="idm47595987388928"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o ihold.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o ihold.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">; Instrument #1.</span>
-<span class="oblock">instr</span> 1
-  <span class="comment">; A simple oscillator with its note held indefinitely.</span>
-  a1 <span class="opc">oscil</span> 10000, 440, 1
-  <span class="opc">ihold</span>
+<span class="c1">; Instrument #1.</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+  <span class="c1">; A simple oscillator with its note held indefinitely.</span>
+  a<span class="n">1</span> <span class="nb">oscil</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">1</span>
+  <span class="nb">ihold</span>
 
-  <span class="comment">; If p4 equals 0, turn the note off.</span>
-  <span class="octrl">if</span> (p4 <span class="op">==</span> 0) <span class="octrl">kgoto</span> <span class="olabel">offnow</span>
-    <span class="octrl">kgoto</span> <span class="olabel">playit</span>
+  <span class="c1">; If p4 equals 0, turn the note off.</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nb">p4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">kgoto</span> <span class="nl">offnow</span>
+    <span class="k">kgoto</span> <span class="nl">playit</span>
 
-<span class="olabel">offnow</span><span class="op">:</span>
-  <span class="comment">; Turn the note off now.</span>
-  <span class="opc">turnoff</span>
+<span class="nl">offnow</span><span class="p">:</span>
+  <span class="c1">; Turn the note off now.</span>
+  <span class="nb">turnoff</span>
 
-<span class="olabel">playit</span><span class="op">:</span>
-  <span class="comment">; Play the note.</span>
-  <span class="opc">out</span> a1
-<span class="oblock">endin</span>
-
-
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-
-<span class="comment">; Table #1: an ordinary sine wave.</span>
-<span class="stamnt">f</span> 1 0 32768 10 1
-
-<span class="comment">; p4 = turn the note off (if it is equal to 0).</span>
-<span class="comment">; Start playing Instrument #1.</span>
-<span class="stamnt">i</span> 1 0 1 1
-<span class="comment">; Turn Instrument #1 off after 3 seconds.</span>
-<span class="stamnt">i</span> 1 3 1 0
-<span class="stamnt">e</span>
+<span class="nl">playit</span><span class="p">:</span>
+  <span class="c1">; Play the note.</span>
+  <span class="nb">out</span> a<span class="n">1</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="c1">; Table #1: an ordinary sine wave.</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">32768</span> <span class="mi">10</span> <span class="mi">1</span>
+
+<span class="c1">; p4 = turn the note off (if it is equal to 0).</span>
+<span class="c1">; Start playing Instrument #1.</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="c1">; Turn Instrument #1 off after 3 seconds.</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mi">1</span> <span class="mi">0</span>
+<span class="nb">e</span>
+
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -149,7 +150,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887668656960"></a>
+        <a id="idm47596164469344"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="i.html" title="Instruction i (instruction d'instrument ou de note)"><em class="citetitle">i Statement</em></a>,
@@ -157,7 +158,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887668653984"></a>
+        <a id="idm47596164466368"></a>
         <h2>Crédits</h2>
         <p>Exemple écrit par Kevin Conder.</p>
       </div>

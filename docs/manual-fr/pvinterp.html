@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>pvinterp</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -39,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887645180144"></a>
+        <a id="idm47596139662416"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>pvinterp</em></span> interpole entre les amplitudes et les
@@ -57,13 +58,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887645175824"></a>
+        <a id="idm47596139658096"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>pvinterp</strong></span> ktimpnt, kfmod, ifile, kfreqscale1, kfreqscale2, \
       kampscale1, kampscale2, kfreqinterp, kampinterp</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887645173520"></a>
+        <a id="idm47596139655792"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifile</em></span> -- le numéro <span class="emphasis"><em>pvoc</em></span> (n dans
@@ -73,7 +74,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887645169856"></a>
+        <a id="idm47596139652128"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ktimpnt</em></span> -- l'écoulement du temps, en secondes, dans
@@ -136,7 +137,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887645148688"></a>
+        <a id="idm47596139630960"></a>
         <h2>Exemples</h2>
         <p>
       L'exemple ci-dessous montre une utilisation de <span class="emphasis"><em>pvbufread</em></span>
@@ -173,50 +174,50 @@ apv     <span class="opc">pvinterp</span>  ktime2,1,"clar.pvoc", 1, 1.065, 1, 0.
       <a class="ulink" href="examples/pvinterp.csd" target="_top"><em class="citetitle">pvinterp.csd</em></a>
       </p>
         <div class="example">
-          <a id="idm47887645131104"></a>
+          <a id="idm47596139613280"></a>
           <p class="title">
-            <strong>Exemple 697. Exemple de l'opcode pvinterp.</strong>
+            <strong>Exemple 732. Exemple de l'opcode pvinterp.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887508613648"></a>
+              <a id="idm47595956236784"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac   <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o pvinterp.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac   <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o pvinterp.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100 
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32 
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1 
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span> 
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span> 
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span> 
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="oblock">instr</span> 1
-<span class="comment">; analyze "fox.wav" and "flute.aiff" with PVANAL first</span>
-ktime1 <span class="opc">line</span> 0, p3, 2.8		 <span class="comment">; used as index in the "fox.pvx" file</span>
-ktime2 <span class="opc">line</span> 0, p3, 3		 <span class="comment">; used as index in the "flute.pvx" file</span>
-kinterp <span class="opc">line</span> 1, p3, 0
-	<span class="opc">pvbufread</span> ktime1, "fox.pvx"
-asig	<span class="opc">pvinterp</span> ktime2,1,"flute.pvx",.9, 3, .6, 1, kinterp,1<span class="op">-</span>kinterp
-        <span class="opc">outs</span> asig, asig
+<span class="kd">instr</span> <span class="nf">1</span>
+<span class="c1">; analyze "fox.wav" and "flute.aiff" with PVANAL first</span>
+k<span class="n">time1</span> <span class="nb">line</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="mf">2.8</span>		 <span class="c1">; used as index in the "fox.pvx" file</span>
+k<span class="n">time2</span> <span class="nb">line</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="mi">3</span>		 <span class="c1">; used as index in the "flute.pvx" file</span>
+k<span class="n">interp</span> <span class="nb">line</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="mi">0</span>
+	<span class="nb">pvbufread</span> k<span class="n">time1</span><span class="p">,</span> <span class="s">"fox.pvx"</span>
+a<span class="n">sig</span>	<span class="nb">pvinterp</span> k<span class="n">time2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s">"flute.pvx"</span><span class="p">,</span><span class="mf">.9</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">.6</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">interp</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span>k<span class="n">interp</span>
+        <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span> 1 0 3
-<span class="stamnt">i</span> 1 + 10
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">10</span>
 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -225,7 +226,7 @@ asig	<span class="opc">pvinterp</span> ktime2,1,"flute.pvx",.9, 3, .6, 1, kinter
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887645126784"></a>
+        <a id="idm47596139608912"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="pvbufread.html" title="pvbufread"><em class="citetitle">pvbufread</em></a>,
@@ -236,7 +237,7 @@ asig	<span class="opc">pvinterp</span> ktime2,1,"flute.pvx",.9, 3, .6, 1, kinter
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887645120896"></a>
+        <a id="idm47596139603024"></a>
         <h2>Crédits</h2>
         <p>
       </p>

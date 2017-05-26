@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>vibrato</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
@@ -38,21 +39,21 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887616085360"></a>
+        <a id="idm47596110045536"></a>
         <h2>Description</h2>
         <p>
       Génère un vibrato naturel contrôlable par l'utilisateur.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887616084048"></a>
+        <a id="idm47596110044224"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">kout <span class="command"><strong>vibrato</strong></span> kAverageAmp, kAverageFreq, kRandAmountAmp, \
       kRandAmountFreq, kAmpMinRate, kAmpMaxRate, kcpsMinRate, \
       kcpsMaxRate, ifn [, iphs</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47887616081872"></a>
+        <a id="idm47596110042048"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifn</em></span> -- Numéro de la table de vibrato. Elle contient normalement une onde
@@ -65,7 +66,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887616078896"></a>
+        <a id="idm47596110039072"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kAverageAmp</em></span> -- Valeur de l'amplitude moyenne du vibrato
@@ -112,63 +113,63 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887616065184"></a>
+        <a id="idm47596110025344"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode vibrato. Il utilise le fichier
       <a class="ulink" href="examples/vibrato.csd" target="_top"><em class="citetitle">vibrato.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47887616063312"></a>
+          <a id="idm47596110023472"></a>
           <p class="title">
-            <strong>Exemple 1036. Exemple de l'opcode vibrato.</strong>
+            <strong>Exemple 1080. Exemple de l'opcode vibrato.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm47887497650064"></a>
+              <a id="idm47595927962080"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac      <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o vibrato.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o vibrato.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-kaverageamp     <span class="opc">init</span> .5
-kaveragefreq    <span class="opc">init</span> 5
-krandamountamp  <span class="opc">line</span> p4, p3, p5			<span class="comment">;increase random amplitude of vibrato</span>
-krandamountfreq <span class="opc">init</span> .3
-kampminrate <span class="opc">init</span> 3
-kampmaxrate <span class="opc">init</span> 5
-kcpsminrate <span class="opc">init</span> 3
-kcpsmaxrate <span class="opc">init</span> 5
-kvib <span class="opc">vibrato</span> kaverageamp, kaveragefreq, krandamountamp, krandamountfreq, kampminrate, kampmaxrate, kcpsminrate, kcpsmaxrate, 1
-asig <span class="opc">poscil</span> .8, 220<span class="op">+</span>kvib, 1			<span class="comment">;add vibrato</span>
-     <span class="opc">outs</span> asig, asig
+k<span class="n">averageamp</span>     <span class="nb">init</span> <span class="mf">.5</span>
+k<span class="n">averagefreq</span>    <span class="nb">init</span> <span class="mi">5</span>
+k<span class="n">randamountamp</span>  <span class="nb">line</span> <span class="nb">p4</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> <span class="nb">p5</span>			<span class="c1">;increase random amplitude of vibrato</span>
+k<span class="n">randamountfreq</span> <span class="nb">init</span> <span class="mf">.3</span>
+k<span class="n">ampminrate</span> <span class="nb">init</span> <span class="mi">3</span>
+k<span class="n">ampmaxrate</span> <span class="nb">init</span> <span class="mi">5</span>
+k<span class="n">cpsminrate</span> <span class="nb">init</span> <span class="mi">3</span>
+k<span class="n">cpsmaxrate</span> <span class="nb">init</span> <span class="mi">5</span>
+k<span class="n">vib</span> <span class="nb">vibrato</span> k<span class="n">averageamp</span><span class="p">,</span> k<span class="n">averagefreq</span><span class="p">,</span> k<span class="n">randamountamp</span><span class="p">,</span> k<span class="n">randamountfreq</span><span class="p">,</span> k<span class="n">ampminrate</span><span class="p">,</span> k<span class="n">ampmaxrate</span><span class="p">,</span> k<span class="n">cpsminrate</span><span class="p">,</span> k<span class="n">cpsmaxrate</span><span class="p">,</span> <span class="mi">1</span>
+a<span class="n">sig</span> <span class="nb">poscil</span> <span class="mf">.8</span><span class="p">,</span> <span class="mi">220</span><span class="o">+</span>k<span class="n">vib</span><span class="p">,</span> <span class="mi">1</span>			<span class="c1">;add vibrato</span>
+     <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">f</span> 1 0 16384 10 1       <span class="comment">;sine wave</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>       <span class="c1">;sine wave</span>
 
-<span class="stamnt">i</span> 1 0 15 .01 20
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">15</span> <span class="mf">.01</span> <span class="mi">20</span>
 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -177,7 +178,7 @@ asig <span class="opc">poscil</span> .8, 220<span class="op">+</span>kvib, 1			<
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887616058992"></a>
+        <a id="idm47596110019104"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="jitter.html" title="jitter"><em class="citetitle">jitter</em></a>, 
@@ -186,7 +187,7 @@ asig <span class="opc">poscil</span> .8, 220<span class="op">+</span>kvib, 1			<
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47887616055024"></a>
+        <a id="idm47596110015136"></a>
         <h2>Crédits</h2>
         <p>Auteur : Gabriel Maldonado</p>
         <p>Nouveau dans la version 4.15</p>
