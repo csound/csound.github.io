@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>ceps</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161647003584"></a>
+        <a id="idm47550321388816"></a>
         <h2>Description</h2>
         <p>
 
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161647002400"></a>
+        <a id="idm47550321387632"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">keps[] <span class="command"><strong>ceps</strong></span> kmags[][, icoefs]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47161646939152"></a>
+        <a id="idm47550321324256"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>icoefs</em></span> -- the number of retained
@@ -59,7 +60,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161646937408"></a>
+        <a id="idm47550321322512"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>keps[]</em></span> -- the cepstrum output, an array of
@@ -70,51 +71,50 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161646934848"></a>
+        <a id="idm47550321319952"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the use of the <span class="emphasis"><em>ceps</em></span> opcode. It uses the file <a class="ulink" href="examples/ceps.csd" target="_top"><em class="citetitle">ceps.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47161646932544"></a>
+          <a id="idm47550321317728"></a>
           <p class="title">
-            <strong>Example 110. Example of the <span class="emphasis"><em>ceps</em></span> opcode.</strong>
+            <strong>Example 111. Example of the <span class="emphasis"><em>ceps</em></span> opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm47161492596544"></a>
+              <a id="idm47550156136816"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="kd">instr</span> <span class="nf">1</span>
 
-<span class="oblock">instr</span> 1
+a<span class="n">1</span> <span class="nb">diskin</span> <span class="s">"fox.wav"</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+k<span class="n">1</span> <span class="nb">randh</span>  <span class="mi">80</span><span class="p">,</span> <span class="mf">2.5</span>
+a<span class="n">2</span> <span class="nb">vco2</span>  <span class="mi">1</span><span class="p">,</span> <span class="mi">220</span><span class="o">+</span>k<span class="n">1</span>
+k<span class="n">fsig</span><span class="p">[]</span> <span class="nb">init</span> <span class="mi">1026</span>
+<span class="n">fsig</span> <span class="nb">pvsanal</span> a<span class="n">1</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">1</span>
+<span class="n">fsig2</span> <span class="nb">pvsanal</span> a<span class="n">2</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">1</span>
+k<span class="n">f</span> <span class="nb">pvs2tab</span> k<span class="n">fsig</span><span class="p">,</span><span class="n">fsig</span>
+k<span class="n">eps</span><span class="p">[]</span> <span class="nb">ceps</span> <span class="nb">c2r</span><span class="p">(</span>k<span class="n">fsig</span><span class="p">),</span><span class="mi">30</span>
+k<span class="n">env</span><span class="p">[]</span> <span class="nb">cepsinv</span> k<span class="n">eps</span>
+<span class="n">fenv</span> <span class="nb">tab2pvs</span> <span class="nb">r2c</span><span class="p">(</span>k<span class="n">env</span><span class="p">)</span>
+<span class="n">fvoc</span> <span class="nb">pvsfilter</span> <span class="n">fsig2</span><span class="p">,</span> <span class="n">fenv</span><span class="p">,</span> <span class="mi">1</span>
+a<span class="n">sig</span> <span class="nb">pvsynth</span> <span class="n">fvoc</span>
 
-a1 <span class="opc">diskin</span> "fox.wav",1,0,1
-k1 <span class="opc">randh</span>  80, 2.5
-a2 <span class="opc">vco2</span>  1, 220<span class="op">+</span>k1
-kfsig[] <span class="opc">init</span> 1026
-fsig <span class="opc">pvsanal</span> a1,1024,256,1024,1
-fsig2 <span class="opc">pvsanal</span> a2,1024,256,1024,1
-kf <span class="opc">pvs2tab</span> kfsig,fsig
-keps[] <span class="opc">ceps</span> <span class="opc">c2r</span>(kfsig),30
-kenv[] <span class="opc">cepsinv</span> keps
-fenv <span class="opc">tab2pvs</span> <span class="opc">r2c</span>(kenv)
-fvoc <span class="opc">pvsfilter</span> fsig2, fenv, 1
-asig <span class="opc">pvsynth</span> fvoc
-
-    <span class="opc">out</span> asig
-<span class="oblock">endin</span>
+    <span class="nb">out</span> a<span class="n">sig</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span>1 0 60
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">60</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -123,7 +123,7 @@ asig <span class="opc">pvsynth</span> fvoc
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161646927824"></a>
+        <a id="idm47550321313008"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>,
@@ -133,7 +133,7 @@ asig <span class="opc">pvsynth</span> fvoc
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161646922800"></a>
+        <a id="idm47550321307952"></a>
         <h2>Credits</h2>
         <p>
       </p>

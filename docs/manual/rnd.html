@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>rnd</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
@@ -38,14 +39,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161595719136"></a>
+        <a id="idm47550268051664"></a>
         <h2>Description</h2>
         <p>
       Returns a random number in a unipolar range at the rate given by the input argument.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161595717712"></a>
+        <a id="idm47550268050240"></a>
         <h2>Syntax</h2>
         <pre class="synopsis"><span class="command"><strong>rnd</strong></span>(x) (init- or control-rate only)</pre>
         <p>
@@ -53,70 +54,70 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161595642656"></a>
+        <a id="idm47550267975184"></a>
         <h2>Performance</h2>
         <p>
       Returns a random number in the unipolar range 0 to <span class="emphasis"><em>x</em></span>.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161595641024"></a>
+        <a id="idm47550267973552"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the rnd opcode. It uses the file <a class="ulink" href="examples/rnd.csd" target="_top"><em class="citetitle">rnd.csd</em></a>.
 
       </p>
         <div class="example">
-          <a id="idm47161595639168"></a>
+          <a id="idm47550267971696"></a>
           <p class="title">
-            <strong>Example 801. Example of the rnd opcode.</strong>
+            <strong>Example 837. Example of the rnd opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm47161466890160"></a>
+              <a id="idm47550089473216"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in</span>
--odac           -iadc    <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o rnd.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o rnd.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Andres Cabrera 2010</span>
+<span class="c1">; Andres Cabrera 2010</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 4410
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
-<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
-	<span class="comment">; Generate a random number from 0 to 10.</span>
-	irand <span class="op">=</span> <span class="opc">rnd</span>(10)
-	<span class="opc">print</span> irand
-<span class="oblock">endin</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+	<span class="c1">; Generate a random number from 0 to 10.</span>
+	i<span class="n">rand</span> <span class="o">=</span> <span class="nb">rnd</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+	<span class="nb">print</span> i<span class="n">rand</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 2
-	klimit <span class="opc">init</span> 10
-	krand <span class="op">=</span> <span class="opc">rnd</span>(klimit)
-	<span class="opc">printk</span> 0, krand
-<span class="oblock">endin</span>
+<span class="kd">instr</span> <span class="nf">2</span>
+	k<span class="n">limit</span> <span class="nb">init</span> <span class="mi">10</span>
+	k<span class="n">rand</span> <span class="o">=</span> <span class="nb">rnd</span><span class="p">(</span>k<span class="n">limit</span><span class="p">)</span>
+	<span class="nb">printk</span> <span class="mi">0</span><span class="p">,</span> k<span class="n">rand</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">i</span> 1 0 1  <span class="comment">; Generate 1 number</span>
-<span class="stamnt">i</span> 1 0 1  <span class="comment">; Generate another number</span>
-<span class="stamnt">i</span> 1 0 1  <span class="comment">; yet another number</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>  <span class="c1">; Generate 1 number</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>  <span class="c1">; Generate another number</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>  <span class="c1">; yet another number</span>
 
-<span class="stamnt">i</span> 2 2 1  <span class="comment">; 1 second prints 9 values (kr = 10)</span>
-<span class="stamnt">e</span>
+<span class="nb">i</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">1</span>  <span class="c1">; 1 second prints 9 values (kr = 10)</span>
+<span class="nb">e</span>
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -148,14 +149,14 @@ new alloc for instr 2:
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161595633264"></a>
+        <a id="idm47550267965856"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="birnd.html" title="birnd"><em class="citetitle">birnd</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161595631120"></a>
+        <a id="idm47550267963712"></a>
         <h2>Credits</h2>
         <p>
       </p>

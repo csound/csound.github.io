@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>fprints</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161628803280"></a>
+        <a id="idm47550302725840"></a>
         <h2>Description</h2>
         <p>
       Similar to <a class="link" href="prints.html" title="prints"><em class="citetitle">prints</em></a> but prints to a file.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161628801040"></a>
+        <a id="idm47550302723600"></a>
         <h2>Syntax</h2>
         <pre class="synopsis"><span class="command"><strong>fprints</strong></span> "filename", "string" [, ival1] [, ival2] [...]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47161628798864"></a>
+        <a id="idm47550302721424"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>"filename"</em></span> -- name of the output file.
@@ -63,14 +64,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161628794560"></a>
+        <a id="idm47550302717120"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>fprints</em></span> is similar to the <a class="link" href="prints.html" title="prints"><em class="citetitle">prints</em></a> opcode except it outputs to a file. For more information about output formatting, please look at <a class="link" href="printks.html" title="printks"><em class="citetitle">printks's documentation</em></a>.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161628790864"></a>
+        <a id="idm47550302713424"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the fprints opcode. It uses the file <a class="ulink" href="examples/fprints.csd" target="_top"><em class="citetitle">fprints.csd</em></a>.
@@ -79,49 +80,49 @@
 
       </p>
         <div class="example">
-          <a id="idm47161628788880"></a>
+          <a id="idm47550302711440"></a>
           <p class="title">
-            <strong>Example 339. Example of the fprints opcode.</strong>
+            <strong>Example 348. Example of the fprints opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm47161484692144"></a>
+              <a id="idm47550135869456"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in</span>
--odac           -iadc    <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o fprints.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o fprints.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="op">/</span><span class="op">*</span> Written by Matt Ingalls, edited by Kevin Conder. <span class="op">*</span><span class="op">/</span>
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="cm">/* Written by Matt Ingalls, edited by Kevin Conder. */</span>
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">; Instrument #1 - a score generator example.</span>
-<span class="oblock">instr</span> 1
-  <span class="comment">; Print to the file "my.sco".</span>
-  <span class="opc">fprints</span> "my.sco", "<span class="op">%</span>!Generated score by ma<span class="op">+</span><span class="op">+</span>\\n \\n"
-<span class="oblock">endin</span>
-
-
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-
-/* Written by Matt Ingalls, edited by Kevin Conder. */
-<span class="comment">; Play Instrument #1.</span>
-<span class="stamnt">i</span> 1 0 0.001
+<span class="c1">; Instrument #1 - a score generator example.</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+  <span class="c1">; Print to the file "my.sco".</span>
+  <span class="nb">fprints</span> <span class="s">"my.sco"</span><span class="p">,</span> <span class="s">"</span><span class="se">%!</span><span class="s">Generated score by ma++</span><span class="se">\\</span><span class="s">n </span><span class="se">\\</span><span class="s">n"</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="cm">/* Written by Matt Ingalls, edited by Kevin Conder. */</span>
+<span class="c1">; Play Instrument #1.</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">0.001</span>
+
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -138,14 +139,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161628783264"></a>
+        <a id="idm47550302705824"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="prints.html" title="prints"><em class="citetitle">prints</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161628781120"></a>
+        <a id="idm47550302703680"></a>
         <h2>Credits</h2>
         <p>
       </p>

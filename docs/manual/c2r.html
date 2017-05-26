@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>c2r</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
@@ -38,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161647509024"></a>
+        <a id="idm47550321897632"></a>
         <h2>Description</h2>
         <p>
       Converts a complex-valued input array into a real-valued array, by removing its imaginary part. The output array will be halt the size of the input. This is a utility operation to facilitate complex-valued operations where the result is purely real.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161647507568"></a>
+        <a id="idm47550321896208"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">kout[] <span class="command"><strong>c2r</strong></span> kin[]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47161647416736"></a>
+        <a id="idm47550321805184"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>kout[]</em></span> -- output array containing the real-valued output. It will be created if it does not exist.
@@ -60,53 +61,53 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161647414224"></a>
+        <a id="idm47550321802672"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the c2r opcode. It uses the file <a class="ulink" href="examples/c2r.csd" target="_top"><em class="citetitle">c2r.csd</em></a>.</p>
         <div class="example">
-          <a id="idm47161647412352"></a>
+          <a id="idm47550321800800"></a>
           <p class="title">
-            <strong>Example 102. Example of the c2r opcode.</strong>
+            <strong>Example 103. Example of the c2r opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm47161492876000"></a>
+              <a id="idm47550156280704"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
 -d -o dac
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
-<span class="ohdr">ksmps</span> <span class="op">=</span> 64
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">64</span>
 
-<span class="oblock">instr</span> 1
-ifftsize <span class="op">=</span> 1024
-kcnt <span class="opc">init</span> 0
-kIn[] <span class="opc">init</span>  ifftsize
-kOut[] <span class="opc">init</span> ifftsize
+<span class="kd">instr</span> <span class="nf">1</span>
+i<span class="n">fftsize</span> <span class="o">=</span> <span class="mi">1024</span>
+k<span class="n">cnt</span> <span class="nb">init</span> <span class="mi">0</span>
+k<span class="n">In</span><span class="p">[]</span> <span class="nb">init</span>  i<span class="n">fftsize</span>
+k<span class="n">Out</span><span class="p">[]</span> <span class="nb">init</span> i<span class="n">fftsize</span>
 
-a1 <span class="opc">oscili</span> <span class="ohdr">0dbfs</span><span class="op">/</span>2, 440
+a<span class="n">1</span> <span class="nb">oscili</span> <span class="vg">0dbfs</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">440</span>
 
-<span class="octrl">if</span> kcnt <span class="op">&gt;=</span> ifftsize then
- kCmplx[] <span class="opc">r2c</span> kIn
- kSpec[] <span class="opc">fft</span> kCmplx
- kCmplx <span class="opc">fftinv</span> kSpec
- kOut <span class="opc">c2r</span> kCmplx
- kcnt <span class="op">=</span> 0 
-<span class="octrl">endif</span>
+<span class="k">if</span> k<span class="n">cnt</span> <span class="o">&gt;=</span> i<span class="n">fftsize</span> <span class="k">then</span>
+ k<span class="n">Cmplx</span><span class="p">[]</span> <span class="nb">r2c</span> k<span class="n">In</span>
+ k<span class="n">Spec</span><span class="p">[]</span> <span class="nb">fft</span> k<span class="n">Cmplx</span>
+ k<span class="n">Cmplx</span> <span class="nb">fftinv</span> k<span class="n">Spec</span>
+ k<span class="n">Out</span> <span class="nb">c2r</span> k<span class="n">Cmplx</span>
+ k<span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span> 
+<span class="k">endif</span>
 
-kIn[] <span class="opc">shiftin</span> a1
-a2 <span class="opc">shiftout</span> kOut
-kcnt <span class="op">+</span><span class="op">=</span> <span class="ohdr">ksmps</span>
-   <span class="opc">out</span> a2
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span>1 0 10
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+k<span class="n">In</span><span class="p">[]</span> <span class="nb">shiftin</span> a<span class="n">1</span>
+a<span class="n">2</span> <span class="nb">shiftout</span> k<span class="n">Out</span>
+k<span class="n">cnt</span> <span class="o">+=</span> <span class="vg">ksmps</span>
+   <span class="nb">out</span> a<span class="n">2</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -114,7 +115,7 @@ kcnt <span class="op">+</span><span class="op">=</span> <span class="ohdr">ksmps
         <br class="example-break" />
       </div>
       <div class="refsect1">
-        <a id="idm47161647408192"></a>
+        <a id="idm47550321796640"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="vectorial.html" title="Vectorial Opcodes"><em class="citetitle"></em>Vectorial opcodes</a>,
@@ -122,7 +123,7 @@ kcnt <span class="op">+</span><span class="op">=</span> <span class="ohdr">ksmps
 </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161647405120"></a>
+        <a id="idm47550321793568"></a>
         <h2>Credits</h2>
         <p>
       </p>

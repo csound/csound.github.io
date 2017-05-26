@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>cpspch</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
@@ -38,14 +39,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161643733744"></a>
+        <a id="idm47550318006704"></a>
         <h2>Description</h2>
         <p>
       Converts a pitch-class value to cycles-per-second.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161643732512"></a>
+        <a id="idm47550318005472"></a>
         <h2>Syntax</h2>
         <pre class="synopsis"><span class="command"><strong>cpspch</strong></span> (pch)  (init- or control-rate args only)</pre>
         <p>
@@ -53,7 +54,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161643729952"></a>
+        <a id="idm47550318002912"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>cpspch</em></span> and its related opcodes are really <span class="emphasis"><em>value converters</em></span> with a special function of manipulating pitch data.
@@ -62,7 +63,7 @@
       Data concerning pitch and frequency can exist in any of the following forms:
     </p>
         <div class="table">
-          <a id="idm47161643727440"></a>
+          <a id="idm47550318000400"></a>
           <p class="title">
             <strong>Table 8. Pitch and Frequency Values</strong>
           </p>
@@ -134,60 +135,60 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47161643705200"></a>
+        <a id="idm47550317978160"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the cpspch opcode. It uses the file <a class="ulink" href="examples/cpspch.csd" target="_top"><em class="citetitle">cpspch.csd</em></a>.
 
       </p>
         <div class="example">
-          <a id="idm47161643703344"></a>
+          <a id="idm47550317976304"></a>
           <p class="title">
-            <strong>Example 159. Example of the cpspch opcode.</strong>
+            <strong>Example 162. Example of the cpspch opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm47161490838992"></a>
+              <a id="idm47550151707472"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;RT audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o cpspch.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;RT audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o cpspch.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span> <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1	<span class="comment">; Convert pitch-class value into Hz </span>
+<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">; Convert pitch-class value into Hz </span>
   
-ipch <span class="op">=</span>	p4
-icps <span class="op">=</span>	<span class="opc">cpspch</span>(ipch)
-	<span class="opc">print</span> icps
-asig	<span class="opc">oscil</span> 0.7, icps, 1
-	<span class="opc">outs</span>  asig, asig
+i<span class="n">pch</span> <span class="o">=</span>	<span class="nb">p4</span>
+i<span class="n">cps</span> <span class="o">=</span>	<span class="nb">cpspch</span><span class="p">(</span>i<span class="n">pch</span><span class="p">)</span>
+	<span class="nb">print</span> i<span class="n">cps</span>
+a<span class="n">sig</span>	<span class="nb">oscil</span> <span class="mf">0.7</span><span class="p">,</span> i<span class="n">cps</span><span class="p">,</span> <span class="mi">1</span>
+	<span class="nb">outs</span>  a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
 
-<span class="oblock">endin</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="comment">;sine wave.</span>
-<span class="stamnt">f</span> 1 0 16384 10 1
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="c1">;sine wave.</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
 
-<span class="stamnt">i</span> 1 0 1 8.01
-<span class="stamnt">i</span> 1 + 1 8.02
-<span class="stamnt">i</span> 1 + 1 8.03
-<span class="stamnt">i</span> 1 + .5 5.09
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mf">8.01</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="mf">8.02</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="mf">8.03</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">.5</span> <span class="mf">5.09</span>
 
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -206,7 +207,7 @@ instr 1:  icps = 54.995
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161643698240"></a>
+        <a id="idm47550317971200"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="cps2pch.html" title="cps2pch"><em class="citetitle">cps2pch</em></a>,

@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>filebit</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
@@ -38,19 +39,19 @@
           </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161637380656"></a>
+        <a id="idm47550311542256"></a>
         <h2>Description</h2>
         <p>
       Returns the number of bits in each sample in a sound file.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161637379344"></a>
+        <a id="idm47550311500896"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">ir <span class="command"><strong>filebit</strong></span> ifilcod [, iallowraw]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47161637377264"></a>
+        <a id="idm47550311498688"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>ifilcod</em></span> -- sound file to be queried
@@ -60,7 +61,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161637374624"></a>
+        <a id="idm47550311496048"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>filebit</em></span> returns the number of bits in each
@@ -71,7 +72,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161637372000"></a>
+        <a id="idm47550311493424"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the filebit opcode. It uses the file <a class="ulink" href="examples/filebit.csd" target="_top"><em class="citetitle">filebit.csd</em></a>,
@@ -79,50 +80,50 @@ and <a class="ulink" href="examples/mary.wav" target="_top"><em class="citetitle
 
       </p>
         <div class="example">
-          <a id="idm47161637369376"></a>
+          <a id="idm47550311490800"></a>
           <p class="title">
-            <strong>Example 262. Example of the filebit opcode.</strong>
+            <strong>Example 267. Example of the filebit opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm47161488026832"></a>
+              <a id="idm47550144490224"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in</span>
--odac           -iadc    <span class="comment">;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o filebit.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o filebit.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">; Instrument #1.</span>
-<span class="oblock">instr</span> 1
-  <span class="comment">; Print out the number of channels in the </span>
-  <span class="comment">; audio file "mary.wav".</span>
-  ibits <span class="opc">filebit</span> "mary.wav"
-  <span class="opc">print</span> ibits
-<span class="oblock">endin</span>
-
-
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-
-<span class="comment">; Play Instrument #1 for 1 second.</span>
-<span class="stamnt">i</span> 1 0 1
-<span class="stamnt">e</span>
+<span class="c1">; Instrument #1.</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+  <span class="c1">; Print out the number of channels in the </span>
+  <span class="c1">; audio file "mary.wav".</span>
+  i<span class="n">bits</span> <span class="nb">filebit</span> <span class="s">"mary.wav"</span>
+  <span class="nb">print</span> i<span class="n">bits</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="c1">; Play Instrument #1 for 1 second.</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="nb">e</span>
+
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -138,7 +139,7 @@ instr 1:  ibits = 16.000
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161637363328"></a>
+        <a id="idm47550311484752"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="filelen.html" title="filelen"><em class="citetitle">filelen</em></a>,
@@ -148,7 +149,7 @@ instr 1:  ibits = 16.000
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161637358304"></a>
+        <a id="idm47550311479728"></a>
         <h2>Credits</h2>
         <p>
       </p>

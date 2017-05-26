@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>centroid</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
@@ -38,21 +39,21 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161647052768"></a>
+        <a id="idm47550321438016"></a>
         <h2>Description</h2>
         <p>
       Calculate the spectral centroid of an audio signal on a given trigger.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161647051488"></a>
+        <a id="idm47550321436736"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">kcent <span class="command"><strong>centroid</strong></span> asig, ktrig, ifftsize</pre>
       </div>
-      <div class="refsect1"><a id="idm47161646987920"></a><h2>Initialization</h2><span class="emphasis"><em>ifftsize</em></span>  -- fftsize. Non pow-of-two values are converted to the next pow-of-two not smaller than ifftsize. 
+      <div class="refsect1"><a id="idm47550321373024"></a><h2>Initialization</h2><span class="emphasis"><em>ifftsize</em></span>  -- fftsize. Non pow-of-two values are converted to the next pow-of-two not smaller than ifftsize. 
   </div>
       <div class="refsect1">
-        <a id="idm47161646986592"></a>
+        <a id="idm47550321371696"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>kcent</em></span> -- the spectral centroid in Hz
@@ -65,58 +66,58 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161646983184"></a>
+        <a id="idm47550321368288"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the centroid opcode. It uses the file <a class="ulink" href="examples/centroid.csd" target="_top"><em class="citetitle">centroid.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47161646981328"></a>
+          <a id="idm47550321366432"></a>
           <p class="title">
-            <strong>Example 109. Example of the centroid opcode.</strong>
+            <strong>Example 110. Example of the centroid opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm47161492781776"></a>
+              <a id="idm47550155887312"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac     <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o centroid.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o centroid.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-giSine <span class="ohdr">ftgen</span> 0, 0, 16384, 10, 1
+gi<span class="n">Sine</span> <span class="nb">ftgen</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">16384</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span>
 
-<span class="oblock">instr</span> 1
+<span class="kd">instr</span> <span class="nf">1</span>
 
-ktrig <span class="opc">init</span> 1				<span class="comment">;calculate centroid</span>
-a1   <span class="opc">oscil3</span> 0.5, p4, giSine		<span class="comment">;of the sine wave</span>
-k1   <span class="opc">centroid</span> a1, ktrig, 16384
-asig <span class="opc">oscil3</span> 0.5, k1, giSine
-     <span class="opc">printk2</span> k1				<span class="comment">;print &amp; compare:</span>
-     <span class="opc">outs</span> a1, asig			<span class="comment">;left = original, right = centroid signal</span>
+k<span class="n">trig</span> <span class="nb">init</span> <span class="mi">1</span>				<span class="c1">;calculate centroid</span>
+a<span class="n">1</span>   <span class="nb">oscil3</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nb">p4</span><span class="p">,</span> gi<span class="n">Sine</span>		<span class="c1">;of the sine wave</span>
+k<span class="n">1</span>   <span class="nb">centroid</span> a<span class="n">1</span><span class="p">,</span> k<span class="n">trig</span><span class="p">,</span> <span class="mi">16384</span>
+a<span class="n">sig</span> <span class="nb">oscil3</span> <span class="mf">0.5</span><span class="p">,</span> k<span class="n">1</span><span class="p">,</span> gi<span class="n">Sine</span>
+     <span class="nb">printk2</span> k<span class="n">1</span>				<span class="c1">;print &amp; compare:</span>
+     <span class="nb">outs</span> a<span class="n">1</span><span class="p">,</span> a<span class="n">sig</span>			<span class="c1">;left = original, right = centroid signal</span>
 
-<span class="oblock">endin</span>
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="stamnt">i</span>1 0 2 20
-<span class="stamnt">i</span>1 + 2 200
-<span class="stamnt">i</span>1 + 2 2000
-<span class="stamnt">e</span>     
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span> <span class="mi">20</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="mi">200</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="mi">2000</span>
+<span class="nb">e</span>     
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -125,14 +126,14 @@ asig <span class="opc">oscil3</span> 0.5, k1, giSine
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161646977040"></a>
+        <a id="idm47550321362144"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="pvscent.html" title="pvscent"><em class="citetitle">pvscent</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161646974992"></a>
+        <a id="idm47550321360096"></a>
         <h2>Credits</h2>
         <p>
       </p>

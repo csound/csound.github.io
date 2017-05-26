@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>&lt;&lt;</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
@@ -38,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161651630912"></a>
+        <a id="idm47550326029280"></a>
         <h2>Description</h2>
         <p>
       The bitshift operators shift the bits to the left or to the right the number of bits given.
@@ -52,7 +53,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161651628608"></a>
+        <a id="idm47550326026976"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">a <span class="command"><strong>&lt;&lt;</strong></span> b  (bitshift left)</pre>
         <p>
@@ -61,65 +62,65 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161651551616"></a>
+        <a id="idm47550325950048"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the bitshift left operator. It uses the file <a class="ulink" href="examples/bitshift.csd" target="_top"><em class="citetitle">bitshift.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47161651549744"></a>
+          <a id="idm47550325948176"></a>
           <p class="title">
             <strong>Example 37. Example of the bitshift left operator.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm47161495360640"></a>
+              <a id="idm47550162449360"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in</span>
-<span class="comment">;-odac           -iadc    ;;;RT audio I/O</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
--o bitshift.wav -W --nosound <span class="comment">;;; for file output any platform </span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+<span class="c1">;-odac           -iadc    ;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+-o bitshift.wav -W --nosound <span class="c1">;;; for file output any platform </span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">ksmps</span> <span class="op">=</span> 128
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="oblock">instr</span> 1 <span class="comment">;bit shift right</span>
-ival <span class="op">=</span> p4<span class="op">&gt;</span><span class="op">&gt;</span>p5
-<span class="opc">printf_i</span> "<span class="op">%</span><span class="opc">i</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">%</span><span class="opc">i</span> <span class="op">=</span> <span class="op">%</span>i\n", 1, p4, p5, ival
-<span class="oblock">endin</span>
+<span class="kd">instr</span> <span class="nf">1</span> <span class="c1">;bit shift right</span>
+i<span class="n">val</span> <span class="o">=</span> <span class="nb">p4</span><span class="o">&gt;&gt;</span><span class="nb">p5</span>
+<span class="nb">printf_i</span> <span class="s">"</span><span class="si">%i</span><span class="s">&gt;&gt;</span><span class="si">%i</span><span class="s"> = </span><span class="si">%i</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">p4</span><span class="p">,</span> <span class="nb">p5</span><span class="p">,</span> i<span class="n">val</span>
+<span class="kd">endin</span>
 
-<span class="oblock">instr</span> 2 <span class="comment">;bit shift left</span>
-ival <span class="op">=</span> p4<span class="op">&lt;</span><span class="op">&lt;</span>p5
-<span class="opc">printf_i</span> "<span class="op">%</span><span class="opc">i</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="op">%</span><span class="opc">i</span> <span class="op">=</span> <span class="op">%</span>i\n", 1, p4, p5, ival
-<span class="oblock">endin</span>
+<span class="kd">instr</span> <span class="nf">2</span> <span class="c1">;bit shift left</span>
+i<span class="n">val</span> <span class="o">=</span> <span class="nb">p4</span><span class="o">&lt;&lt;</span><span class="nb">p5</span>
+<span class="nb">printf_i</span> <span class="s">"</span><span class="si">%i</span><span class="s">&lt;&lt;</span><span class="si">%i</span><span class="s"> = </span><span class="si">%i</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">p4</span><span class="p">,</span> <span class="nb">p5</span><span class="p">,</span> i<span class="n">val</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-<span class="stamnt">i</span> 1   0   0.1  2   1
-<span class="stamnt">i</span> 1   +    .   3   1
-<span class="stamnt">i</span> 1   +    .   7   2
-<span class="stamnt">i</span> 1   +    .   16   1
-<span class="stamnt">i</span> 1   +    .   16   2
-<span class="stamnt">i</span> 1   +    .   16   3
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span>   <span class="mi">0</span>   <span class="mf">0.1</span>  <span class="mi">2</span>   <span class="mi">1</span>
+<span class="nb">i</span> <span class="mi">1</span>   <span class="o">+</span>    <span class="o">.</span>   <span class="mi">3</span>   <span class="mi">1</span>
+<span class="nb">i</span> <span class="mi">1</span>   <span class="o">+</span>    <span class="o">.</span>   <span class="mi">7</span>   <span class="mi">2</span>
+<span class="nb">i</span> <span class="mi">1</span>   <span class="o">+</span>    <span class="o">.</span>   <span class="mi">16</span>   <span class="mi">1</span>
+<span class="nb">i</span> <span class="mi">1</span>   <span class="o">+</span>    <span class="o">.</span>   <span class="mi">16</span>   <span class="mi">2</span>
+<span class="nb">i</span> <span class="mi">1</span>   <span class="o">+</span>    <span class="o">.</span>   <span class="mi">16</span>   <span class="mi">3</span>
 
-<span class="stamnt">i</span> 2   5    0.1 1   1
-<span class="stamnt">i</span> 2   +    .   1   2
-<span class="stamnt">i</span> 2   +    .   1   3
-<span class="stamnt">i</span> 2   +    .   1   4
-<span class="stamnt">i</span> 2   +    .   2   1
-<span class="stamnt">i</span> 2   +    .   2   2
-<span class="stamnt">i</span> 2   +    .   2   3
-<span class="stamnt">i</span> 2   +    .   3   2
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nb">i</span> <span class="mi">2</span>   <span class="mi">5</span>    <span class="mf">0.1</span> <span class="mi">1</span>   <span class="mi">1</span>
+<span class="nb">i</span> <span class="mi">2</span>   <span class="o">+</span>    <span class="o">.</span>   <span class="mi">1</span>   <span class="mi">2</span>
+<span class="nb">i</span> <span class="mi">2</span>   <span class="o">+</span>    <span class="o">.</span>   <span class="mi">1</span>   <span class="mi">3</span>
+<span class="nb">i</span> <span class="mi">2</span>   <span class="o">+</span>    <span class="o">.</span>   <span class="mi">1</span>   <span class="mi">4</span>
+<span class="nb">i</span> <span class="mi">2</span>   <span class="o">+</span>    <span class="o">.</span>   <span class="mi">2</span>   <span class="mi">1</span>
+<span class="nb">i</span> <span class="mi">2</span>   <span class="o">+</span>    <span class="o">.</span>   <span class="mi">2</span>   <span class="mi">2</span>
+<span class="nb">i</span> <span class="mi">2</span>   <span class="o">+</span>    <span class="o">.</span>   <span class="mi">2</span>   <span class="mi">3</span>
+<span class="nb">i</span> <span class="mi">2</span>   <span class="o">+</span>    <span class="o">.</span>   <span class="mi">3</span>   <span class="mi">2</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -162,7 +163,7 @@ B  5.600 ..  5.700 T  5.700 TT  5.700 M:      0.0      0
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161651543168"></a>
+        <a id="idm47550325941600"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="opbitshr.html" title="&gt;&gt;"><em class="citetitle">&gt;&gt;</em></a>,

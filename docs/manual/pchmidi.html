@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>pchmidi</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
@@ -38,19 +39,19 @@
           </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161606147888"></a>
+        <a id="idm47550278655216"></a>
         <h2>Description</h2>
         <p>
       Get the note number of the current MIDI event, expressed in pitch-class units.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161606146592"></a>
+        <a id="idm47550278653920"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">ipch <span class="command"><strong>pchmidi</strong></span></pre>
       </div>
       <div class="refsect1">
-        <a id="idm47161606070064"></a>
+        <a id="idm47550278577248"></a>
         <h2>Performance</h2>
         <p>
       Get the note number of the current MIDI event, expressed in pitch-class units for local processing.
@@ -74,57 +75,57 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm47161606064784"></a>
+        <a id="idm47550278571936"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the pchmidi opcode. It uses the file <a class="ulink" href="examples/pchmidi.csd" target="_top"><em class="citetitle">pchmidi.csd</em></a>.
 
       </p>
         <div class="example">
-          <a id="idm47161606063008"></a>
+          <a id="idm47550278570160"></a>
           <p class="title">
-            <strong>Example 638. Example of the pchmidi opcode.</strong>
+            <strong>Example 671. Example of the pchmidi opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm47161472341360"></a>
+              <a id="idm47550101818912"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
-<span class="comment">; Audio out   Audio in   No messages  MIDI in</span>
--odac           -iadc     -d         -M0  <span class="comment">;;;RT audio I/O with MIDI in</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o pchmidi.wav -W ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in   No messages  MIDI in</span>
+-odac           -iadc     -d         -M0  <span class="c1">;;;RT audio I/O with MIDI in</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o pchmidi.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="comment">; Initialize the global variables.</span>
-<span class="ohdr">sr</span> <span class="op">=</span> 44100
-<span class="ohdr">kr</span> <span class="op">=</span> 4410
-<span class="ohdr">ksmps</span> <span class="op">=</span> 10
-<span class="ohdr">nchnls</span> <span class="op">=</span> 1
+<span class="c1">; Initialize the global variables.</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="comment">; Instrument #1.</span>
-<span class="oblock">instr</span> 1
-  <span class="comment">; This example expects MIDI note inputs on channel 1</span>
-  i1 <span class="opc">pchmidi</span>
+<span class="c1">; Instrument #1.</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+  <span class="c1">; This example expects MIDI note inputs on channel 1</span>
+  i<span class="n">1</span> <span class="nb">pchmidi</span>
 
-  <span class="opc">print</span> i1
-<span class="oblock">endin</span>
-
-
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
-
-<span class="comment">;Dummy f-table to give time for real-time MIDI events</span>
-<span class="stamnt">f</span> 0 8000
-<span class="stamnt">e</span>
+  <span class="nb">print</span> i<span class="n">1</span>
+<span class="kd">endin</span>
 
 
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="c1">;Dummy f-table to give time for real-time MIDI events</span>
+<span class="nb">f</span> <span class="mi">0</span> <span class="mi">8000</span>
+<span class="nb">e</span>
+
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -133,7 +134,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161606058720"></a>
+        <a id="idm47550278565872"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="aftouch.html" title="aftouch"><em class="citetitle">aftouch</em></a>,
@@ -153,7 +154,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161606044192"></a>
+        <a id="idm47550278551344"></a>
         <h2>Credits</h2>
         <p>
       </p>

@@ -5,11 +5,12 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>limit</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="lfo.html" title="lfo" />
-    <link rel="next" href="line.html" title="line" />
+    <link rel="next" href="limit1.html" title="limit1" />
   </head>
   <body>
     <div class="navheader">
@@ -20,7 +21,7 @@
         <tr>
           <td width="20%" align="left"><a accesskey="p" href="lfo.html">Prev</a> </td>
           <th width="60%" align="center">Orchestra Opcodes and Operators</th>
-          <td width="20%" align="right"> <a accesskey="n" href="line.html">Next</a></td>
+          <td width="20%" align="right"> <a accesskey="n" href="limit1.html">Next</a></td>
         </tr>
       </table>
       <hr />
@@ -38,21 +39,23 @@
           </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161621088896"></a>
+        <a id="idm47550294680400"></a>
         <h2>Description</h2>
         <p>
       Sets the lower and upper limits of the value it processes.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161621087712"></a>
+        <a id="idm47550294679216"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">ares <span class="command"><strong>limit</strong></span> asig, klow, khigh</pre>
         <pre class="synopsis">ires <span class="command"><strong>limit</strong></span> isig, ilow, ihigh</pre>
         <pre class="synopsis">kres <span class="command"><strong>limit</strong></span> ksig, klow, khigh</pre>
+        <pre class="synopsis">ires[] <span class="command"><strong>limit</strong></span> isig[], ilow, ihigh</pre>
+        <pre class="synopsis">kres[] <span class="command"><strong>limit</strong></span> ksig[], klow, khigh</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47161621010256"></a>
+        <a id="idm47550294598880"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>isig</em></span> -- input signal
@@ -65,7 +68,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161621006960"></a>
+        <a id="idm47550294595584"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>xsig</em></span> -- input signal
@@ -84,74 +87,74 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161621000384"></a>
+        <a id="idm47550294589056"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the limit opcode. It uses the file <a class="ulink" href="examples/limit.csd" target="_top"><em class="citetitle">limit.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47161620998528"></a>
+          <a id="idm47550294587200"></a>
           <p class="title">
-            <strong>Example 439. Example of the limit opcode.</strong>
+            <strong>Example 454. Example of the limit opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm47161479901152"></a>
+              <a id="idm47550122751472"></a>
               <pre class="programlisting">
-<span class="csdtag">&lt;CsoundSynthesizer&gt;</span>
-<span class="csdtag">&lt;CsOptions&gt;</span>
-<span class="comment">; Select audio/midi flags here according to platform</span>
--odac   <span class="comment">;;;realtime audio out</span>
-<span class="comment">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
-<span class="comment">; For Non-realtime ouput leave only the line below:</span>
-<span class="comment">; -o limit.wav -W  ;;; for file output any platform</span>
-<span class="csdtag">&lt;/CsOptions&gt;</span>
-<span class="csdtag">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac   <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o limit.wav -W  ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="ohdr">sr</span> <span class="op">=</span> 44100 
-<span class="ohdr">ksmps</span> <span class="op">=</span> 32 
-<span class="ohdr">0dbfs</span>  <span class="op">=</span> 1 
-<span class="ohdr">nchnls</span> <span class="op">=</span> 2
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span> 
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span> 
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span> 
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="oblock">instr</span>    1 <span class="comment">; Limit / Mirror / Wrap</span>
+<span class="kd">instr</span>    <span class="nf">1</span> <span class="c1">; Limit / Mirror / Wrap</span>
 
-igain    <span class="op">=</span> p4				<span class="comment">;gain</span>
-ilevl1   <span class="op">=</span> p5				<span class="comment">; + level</span>
-ilevl2   <span class="op">=</span> p6				<span class="comment">; - level</span>
-imode    <span class="op">=</span> p7				<span class="comment">;1 = limit, 2 = mirror, 3 = wrap</span>
+i<span class="n">gain</span>    <span class="o">=</span> <span class="nb">p4</span>				<span class="c1">;gain</span>
+i<span class="n">levl1</span>   <span class="o">=</span> <span class="nb">p5</span>				<span class="c1">; + level</span>
+i<span class="n">levl2</span>   <span class="o">=</span> <span class="nb">p6</span>				<span class="c1">; - level</span>
+i<span class="n">mode</span>    <span class="o">=</span> <span class="nb">p7</span>				<span class="c1">;1 = limit, 2 = mirror, 3 = wrap</span>
 
-ain   <span class="opc">soundin</span>  "fox.wav"
-ain   <span class="op">=</span> ain<span class="op">*</span>igain
+a<span class="n">in</span>   <span class="nb">soundin</span>  <span class="s">"fox.wav"</span>
+a<span class="n">in</span>   <span class="o">=</span> a<span class="n">in</span><span class="o">*</span>i<span class="n">gain</span>
 
-<span class="octrl">if</span>    imode <span class="op">=</span> 1 <span class="octrl">goto</span> <span class="olabel">limit</span>
-<span class="octrl">if</span>    imode <span class="op">=</span> 2 <span class="octrl">goto</span> <span class="olabel">mirror</span>
+<span class="k">if</span>    i<span class="n">mode</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">goto</span> <span class="nl">limit</span>
+<span class="k">if</span>    i<span class="n">mode</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">goto</span> <span class="nl">mirror</span>
 
-asig  <span class="opc">wrap</span>  ain, ilevl2, ilevl1
-<span class="octrl">goto</span>  <span class="olabel">outsignal</span>
+a<span class="n">sig</span>  <span class="nb">wrap</span>  a<span class="n">in</span><span class="p">,</span> i<span class="n">levl2</span><span class="p">,</span> i<span class="n">levl1</span>
+<span class="k">goto</span>  <span class="nl">outsignal</span>
 
-<span class="olabel">limit</span><span class="op">:</span>
-asig  <span class="olabel">limit</span>  ain, ilevl2, ilevl1
-<span class="octrl">goto</span>  <span class="olabel">outsignal</span>
+<span class="nl">limit</span><span class="p">:</span>
+a<span class="n">sig</span>  <span class="nb">limit</span>  a<span class="n">in</span><span class="p">,</span> i<span class="n">levl2</span><span class="p">,</span> i<span class="n">levl1</span>
+<span class="k">goto</span>  <span class="nl">outsignal</span>
 
-<span class="olabel">mirror</span><span class="op">:</span>
-asig  <span class="olabel">mirror</span>  ain, ilevl2, ilevl1
-<span class="olabel">outsignal</span><span class="op">:</span>
+<span class="nl">mirror</span><span class="p">:</span>
+a<span class="n">sig</span>  <span class="nb">mirror</span>  a<span class="n">in</span><span class="p">,</span> i<span class="n">levl2</span><span class="p">,</span> i<span class="n">levl1</span>
+<span class="nl">outsignal</span><span class="p">:</span>
 
-<span class="opc">outs</span>  asig<span class="op">*</span>.5, asig<span class="op">*</span>.5			<span class="comment">;mind your speakers</span>
+<span class="nb">outs</span>  a<span class="n">sig</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span> a<span class="n">sig</span><span class="o">*</span><span class="mf">.5</span>			<span class="c1">;mind your speakers</span>
   
-<span class="oblock">endin</span>
+<span class="kd">endin</span>
 
-<span class="csdtag">&lt;/CsInstruments&gt;</span>
-<span class="csdtag">&lt;CsScore&gt;</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
 
-<span class="comment">;           Gain  +Levl -Levl Mode</span>
-<span class="stamnt">i</span>1  0  3    4.00  .25  -1.00   1	<span class="comment">;limit</span>
-<span class="stamnt">i</span>1  4  3    4.00  .25  -1.00   2	<span class="comment">;mirror</span>
-<span class="stamnt">i</span>1  8  3    4.00  .25  -1.00   3	<span class="comment">;wrap</span>
-<span class="stamnt">e</span>
-<span class="csdtag">&lt;/CsScore&gt;</span>
-<span class="csdtag">&lt;/CsoundSynthesizer&gt;</span>
+<span class="c1">;           Gain  +Levl -Levl Mode</span>
+<span class="nb">i</span><span class="mi">1</span>  <span class="mi">0</span>  <span class="mi">3</span>    <span class="mf">4.00</span>  <span class="mf">.25</span>  <span class="o">-</span><span class="mf">1.00</span>   <span class="mi">1</span>	<span class="c1">;limit</span>
+<span class="nb">i</span><span class="mi">1</span>  <span class="mi">4</span>  <span class="mi">3</span>    <span class="mf">4.00</span>  <span class="mf">.25</span>  <span class="o">-</span><span class="mf">1.00</span>   <span class="mi">2</span>	<span class="c1">;mirror</span>
+<span class="nb">i</span><span class="mi">1</span>  <span class="mi">8</span>  <span class="mi">3</span>    <span class="mf">4.00</span>  <span class="mf">.25</span>  <span class="o">-</span><span class="mf">1.00</span>   <span class="mi">3</span>	<span class="c1">;wrap</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
@@ -160,7 +163,7 @@ asig  <span class="olabel">mirror</span>  ain, ilevl2, ilevl1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161620994240"></a>
+        <a id="idm47550294582912"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="mirror.html" title="mirror"><em class="citetitle">mirror</em></a>,
@@ -168,7 +171,7 @@ asig  <span class="olabel">mirror</span>  ain, ilevl2, ilevl1
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47161620991232"></a>
+        <a id="idm47550294579904"></a>
         <h2>Credits</h2>
         <p>
       </p>
@@ -193,14 +196,14 @@ asig  <span class="olabel">mirror</span>  ain, ilevl2, ilevl1
           <td width="20%" align="center">
             <a accesskey="u" href="OpcodesTop.html">Up</a>
           </td>
-          <td width="40%" align="right"> <a accesskey="n" href="line.html">Next</a></td>
+          <td width="40%" align="right"> <a accesskey="n" href="limit1.html">Next</a></td>
         </tr>
         <tr>
           <td width="40%" align="left" valign="top">lfo </td>
           <td width="20%" align="center">
             <a accesskey="h" href="index.html">Home</a>
           </td>
-          <td width="40%" align="right" valign="top"> line</td>
+          <td width="40%" align="right" valign="top"> limit1</td>
         </tr>
       </table>
     </div>
