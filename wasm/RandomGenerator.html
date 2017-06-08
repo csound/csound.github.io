@@ -33,7 +33,8 @@ function main() {
   console.log = print_msg;
   console.warn = print_msg;
   // function to be called after Wasm Csound is loaded
-  Module["onRuntimeInitialized"] = function (){
+ Module["onRuntimeInitialized"] = function (){
+    console.log("loading... loaded!");
     var csound = new CsoundObj();
     csound.compileOrc(document.getElementById('instruments').value);
     csound.start();
@@ -43,7 +44,7 @@ function main() {
 </script>
 <body onload="main()">
 <h1> WASM Csound Example</h2>
-<div id="console">
+<div id="console">loading...
 </div>
 
 <textarea class="code" id="instruments" hidden>
