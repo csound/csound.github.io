@@ -61,9 +61,10 @@ https://github.com/csound/csound.github.io/blob/master/_data/
     </div>
     <div class="three columns align-center">
         <i class="fa fa-4x fa-html5"></i><br/>
+
+	<a href="{{ site.data.download.wasm.link }}">WASM v{{ site.data.download.wasm.ver }}</a>
+  <br/>
 	<a href="{{ site.data.download.web_emscripten.link }}">Emscripten v{{ site.data.download.web_emscripten.ver }}</a>
-	<br/>
-	<a href="{{ site.data.download.web_pnacl.link }}">PNaCl v{{ site.data.download.web_pnacl.ver }}</a>
     </div>
 </div>
 
