@@ -99,7 +99,7 @@ various different language wrappers.
 
 [Csound API Examples](https://github.com/csound/csoundAPI_examples)
 
-[The Csound API](http://booki.flossmanuals.net/csound/the-csound-api/) This chapters from the Csound FLOSS manual provides a great overview of the API. 
+[The Csound API](http://write.flossmanuals.net/csound/a-the-csound-api/) This chapters from the Csound FLOSS manual provides a great overview of the API. 
 
 <br>
 <br>

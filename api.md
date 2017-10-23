@@ -8,7 +8,7 @@ The Csound API allows users to call the Csound engine from a host language, and 
 
 The [API Documentation](docs/api/index.html) is available online [here](docs/api/index.html).
 
-There is a description of Francois Pinot about how to use the API in the Csound FLOSS Manual: [flossmanuals.net/csound/the-csound-api](http://flossmanuals.net/csound/the-csound-api).
+There is a description of Francois Pinot about how to use the API in the Csound FLOSS Manual: [flossmanuals.net/csound/the-csound-api](http://write.flossmanuals.net/csound/a-the-csound-api/).
 
 There is a huge collection of examples for the Python API by Steven Yi in the form of a practical and in-depth tutorial. The examples have been amended by translations into other programming languages by others contributors and can be found here: [http://github.com/csound/csoundAPI_examples](http://github.com/csound/csoundAPI_examples)
 

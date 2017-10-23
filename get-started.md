@@ -555,7 +555,7 @@ capital letters. Remember that Csound is case sensitive; oscil is not the same a
 ## Where to now?
 
 There are lots of great resources available to those wishing to learn more about Csound. The [Csound
-FLOSS Manual](http://www.flossmanuals.net/csound/index/) is a comprehensive online textbook for
+FLOSS Manual](http://write.flossmanuals.net/csound/preface/) is a comprehensive online textbook for
 learning and using Csound. It covers all aspects of the language and provides detailed code examples
 for you to follow.
 
