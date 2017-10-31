@@ -59,4 +59,9 @@ The Csound Journal collects a huge number of articles on interesting subjects re
 * [You Tube Channel](http://www.youtube.com/channel/UCVI8hmelNnKGP-wnf9FqNYQ)
 * [Photos](https://www.flickr.com/photos/icsc2015/)
 
+2017, September 29 - October 1, Montevideo, Uruguay
+
+* [Website](http://csound.github.io/icsc2017/)
+* [Photos](http://csound.github.io/icsc2017/photos.html)
+* [Videos](https://www.youtube.com/playlist?list=PLuRqlaVXQNzsQupcaNwRz6pmlzhuM3uoG)
 
