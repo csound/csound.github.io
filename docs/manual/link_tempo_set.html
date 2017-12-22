@@ -3,83 +3,81 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>link_tempo_get</title>
+    <title>link_tempo_set</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
-    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
-    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
-    <link rel="prev" href="opcodeslinkpeers.html" title="link_peers" />
-    <link rel="next" href="opcodeslinktemposet.html" title="link_tempo_set" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
+    <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
+    <link rel="prev" href="link_tempo_get.html" title="link_tempo_get" />
+    <link rel="next" href="linrand.html" title="linrand" />
   </head>
   <body>
     <div class="navheader">
       <table width="100%" summary="Navigation header">
         <tr>
-          <th colspan="3" align="center">link_tempo_get</th>
+          <th colspan="3" align="center">link_tempo_set</th>
         </tr>
         <tr>
-          <td width="20%" align="left"><a accesskey="p" href="opcodeslinkpeers.html">Précédent</a> </td>
-          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
-          <td width="20%" align="right"> <a accesskey="n" href="opcodeslinktemposet.html">Suivant</a></td>
+          <td width="20%" align="left"><a accesskey="p" href="link_tempo_get.html">Prev</a> </td>
+          <th width="60%" align="center">Orchestra Opcodes and Operators</th>
+          <td width="20%" align="right"> <a accesskey="n" href="linrand.html">Next</a></td>
         </tr>
       </table>
       <hr />
     </div>
     <div class="refentry">
-      <a id="opcodeslinktempoget"></a>
+      <a id="link_tempo_set"></a>
       <div class="titlepage"></div>
-      <a id="IndexLinkTempoGet" class="indexterm"></a>
+      <a id="IndexLinkTempoSet" class="indexterm"></a>
       <div class="refnamediv">
         <h2>
-          <span class="refentrytitle">link_tempo_get</span>
+          <span class="refentrytitle">link_tempo_set</span>
         </h2>
-        <p>link_tempo_get — 
-      Retourne le tempo courant de la session du réseau global Ableton Link.
+        <p>link_tempo_set — 
+      Sets the tempo.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47596160147568"></a>
+        <a id="idm45344056399344"></a>
         <h2>Description</h2>
         <p>
-      Retourne le tempo courant de la session du réseau global Ableton Link.
+      Sets the local tempo if this peer is not enabled; sets the tempo of the global network Ableton Link session if this peer is enabled.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47596160079904"></a>
-        <h2>Syntaxe</h2>
-        <pre class="synopsis">k_bpm <span class="command"><strong>link_tempo_get</strong></span> i_peer</pre>
+        <a id="idm45344056398000"></a>
+        <h2>Syntax</h2>
+        <pre class="synopsis"><span class="command"><strong>link_tempo_set</strong></span> i_peer, k_bpm [, k_at_time_seconds]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47596160077552"></a>
-        <h2>Initialisation</h2>
+        <a id="idm45344056332560"></a>
+        <h2>Initialization</h2>
         <p>
-      <span class="emphasis"><em>i_peer</em></span> -- L'objet pair Ableton Link.
+      <span class="emphasis"><em>i_peer</em></span> -- The Ableton Link peer object.
+    </p>
+        <p>
+      <span class="emphasis"><em>k_bpm</em></span> -- The requested tempo in beats per minute.
+    </p>
+        <p>
+      <span class="emphasis"><em>k_at_time_seconds</em></span> -- The session time at which the indicated tempo will take effect. The default
+      value is the current session time.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47596160075552"></a>
-        <h2>Exécution</h2>
+        <a id="idm45344056328752"></a>
+        <h2>Examples</h2>
         <p>
-      <span class="emphasis"><em>k_bpm</em></span> -- Le tempo courant de la session du réseau
-      global Ableton Link.
-    </p>
-      </div>
-      <div class="refsect1">
-        <a id="idm47596160073488"></a>
-        <h2>Exemples</h2>
-        <p>
-      Voici un exemple de l'opcode link_tempo_get. Il utilise le fichier
-      <a class="ulink" href="examples/ableton_link.csd" target="_top"><em class="citetitle">ableton_link.csd</em></a>.
+      Here is an example of the link_tempo_set opcode. It uses the file <a class="ulink" href="examples/ableton_link.csd" target="_top"><em class="citetitle">ableton_link.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47596160070432"></a>
+          <a id="idm45344056325696"></a>
           <p class="title">
-            <strong>Exemple 466. Exemple de l'opcode link_tempo_get.</strong>
+            <strong>Example 468. Example of the link_tempo_set opcode.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm47595982006832"></a>
+              <a id="idm45343883111616"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsLicense&gt;</span>
@@ -147,34 +145,36 @@ k<span class="n">_hz</span> <span class="o">=</span> <span class="mi">2000</span
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47596160068576"></a>
-        <h2>Voir aussi</h2>
-        <p>Voir la section <a class="link" href="OSCNetwork.html#AbletonLink" title="Opcodes Ableton Link"><em class="citetitle">Ableton Link
-      Opcodes</em></a> pour plus d'information.
+        <a id="idm45344056323840"></a>
+        <h2>See Also</h2>
+        <p>
+        </p>
+        <p>See the section <a class="link" href="OSCNetwork.html#AbletonLink" title="Ableton Link Opcodes"><em class="citetitle">Ableton Link Opcodes</em></a> for more information.</p>
+        <p>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47596160065984"></a>
-        <h2>Crédits</h2>
-        <p>Par : Michael Gogins 2017</p>
+        <a id="idm45344056320928"></a>
+        <h2>Credits</h2>
+        <p>By: Michael Gogins 2017</p>
       </div>
     </div>
     <div class="navfooter">
       <hr />
       <table width="100%" summary="Navigation footer">
         <tr>
-          <td width="40%" align="left"><a accesskey="p" href="opcodeslinkpeers.html">Précédent</a> </td>
+          <td width="40%" align="left"><a accesskey="p" href="link_tempo_get.html">Prev</a> </td>
           <td width="20%" align="center">
-            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+            <a accesskey="u" href="OpcodesTop.html">Up</a>
           </td>
-          <td width="40%" align="right"> <a accesskey="n" href="opcodeslinktemposet.html">Suivant</a></td>
+          <td width="40%" align="right"> <a accesskey="n" href="linrand.html">Next</a></td>
         </tr>
         <tr>
-          <td width="40%" align="left" valign="top">link_peers </td>
+          <td width="40%" align="left" valign="top">link_tempo_get </td>
           <td width="20%" align="center">
-            <a accesskey="h" href="index.html">Sommaire</a>
+            <a accesskey="h" href="index.html">Home</a>
           </td>
-          <td width="40%" align="right" valign="top"> link_tempo_set</td>
+          <td width="40%" align="right" valign="top"> linrand</td>
         </tr>
       </table>
     </div>

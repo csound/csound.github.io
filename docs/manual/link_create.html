@@ -3,85 +3,77 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>link_is_enabled</title>
+    <title>link_create</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
-    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
-    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
-    <link rel="prev" href="opcodeslinkenable.html" title="link_enable" />
-    <link rel="next" href="opcodeslinkmetro.html" title="link_metro" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
+    <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
+    <link rel="prev" href="link_beat_request.html" title="link_beat_request" />
+    <link rel="next" href="link_enable.html" title="link_enable" />
   </head>
   <body>
     <div class="navheader">
       <table width="100%" summary="Navigation header">
         <tr>
-          <th colspan="3" align="center">link_is_enabled</th>
+          <th colspan="3" align="center">link_create</th>
         </tr>
         <tr>
-          <td width="20%" align="left"><a accesskey="p" href="opcodeslinkenable.html">Précédent</a> </td>
-          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
-          <td width="20%" align="right"> <a accesskey="n" href="opcodeslinkmetro.html">Suivant</a></td>
+          <td width="20%" align="left"><a accesskey="p" href="link_beat_request.html">Prev</a> </td>
+          <th width="60%" align="center">Orchestra Opcodes and Operators</th>
+          <td width="20%" align="right"> <a accesskey="n" href="link_enable.html">Next</a></td>
         </tr>
       </table>
       <hr />
     </div>
     <div class="refentry">
-      <a id="opcodeslinkisenabled"></a>
+      <a id="link_create"></a>
       <div class="titlepage"></div>
-      <a id="IndexLinkIsEnabled" class="indexterm"></a>
+      <a id="IndexLinkCreate" class="indexterm"></a>
       <div class="refnamediv">
         <h2>
-          <span class="refentrytitle">link_is_enabled</span>
+          <span class="refentrytitle">link_create</span>
         </h2>
-        <p>link_is_enabled — 
-      Indique si ce pair est synchronisé avec la session du réseau global
-      Ableton Link.
+        <p>link_create — 
+      Creates a peer in an Ableton Link network session.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47596160302128"></a>
+        <a id="idm45344056683616"></a>
         <h2>Description</h2>
         <p>
-      Indique si la pulsation et le temps de ce pair sont synchronisés avec la
-      session du réseau global Ableton Link.
+     Creates a peer in an Ableton Link network session. The first peer in a session determines the initial tempo of the session. The value returned must be passed as the first parameter to all subsequent Ableton Link opcode calls for this peer.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47596160238848"></a>
-        <h2>Syntaxe</h2>
-        <pre class="synopsis">k_is_enabled <span class="command"><strong>link_is_enabled</strong></span> i_peer</pre>
+        <a id="idm45344056682160"></a>
+        <h2>Syntax</h2>
+        <pre class="synopsis">i_peer <span class="command"><strong>link_create</strong></span> [i_bpm]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm47596160236384"></a>
-        <h2>Initialisation</h2>
+        <a id="idm45344056679552"></a>
+        <h2>Initialization</h2>
         <p>
-      <span class="emphasis"><em>i_peer</em></span> -- L'objet pair Ableton Link.
+      <span class="emphasis"><em>i_bpm</em></span> -- Initial tempo of the session, in beats per minute. Has no effect unless this is the first peer in the session. The default value is 60.
+    </p>
+        <p>
+      <span class="emphasis"><em>i_peer</em></span> -- The Ableton Link peer object returned for use with the other Ableton Link opcodes.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47596160234496"></a>
-        <h2>Exécution</h2>
+        <a id="idm45344056632528"></a>
+        <h2>Examples</h2>
         <p>
-      <span class="emphasis"><em>k_is_enabled</em></span> -- Retourne 1 si ce pair est activé, 0
-      sinon.
-    </p>
-      </div>
-      <div class="refsect1">
-        <a id="idm47596160232400"></a>
-        <h2>Exemples</h2>
-        <p>
-      Voici un exemple de l'opcode link_is_enabled. Il utilise le fichier
-      <a class="ulink" href="examples/ableton_link.csd" target="_top"><em class="citetitle">ableton_link.csd</em></a>.
+      Here is an example of the link_create opcode. It uses the file <a class="ulink" href="examples/ableton_link.csd" target="_top"><em class="citetitle">ableton_link.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm47596160229344"></a>
+          <a id="idm45344056629424"></a>
           <p class="title">
-            <strong>Exemple 463. Exemple de l'opcode link_is_enabled.</strong>
+            <strong>Example 462. Example of the link_create opcode.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm47595982383296"></a>
+              <a id="idm45343884137232"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsLicense&gt;</span>
@@ -149,34 +141,36 @@ k<span class="n">_hz</span> <span class="o">=</span> <span class="mi">2000</span
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47596160227488"></a>
-        <h2>Voir aussi</h2>
-        <p>Voir la section <a class="link" href="OSCNetwork.html#AbletonLink" title="Opcodes Ableton Link"><em class="citetitle">Ableton Link
-      Opcodes</em></a> pour plus d'information.
-    </p>
+        <a id="idm45344056627664"></a>
+        <h2>See Also</h2>
+        <p>
+        </p>
+        <p>See the section <a class="link" href="OSCNetwork.html#AbletonLink" title="Ableton Link Opcodes"><em class="citetitle">Ableton Link Opcodes</em></a> for more information.</p>
+        <p>
+     </p>
       </div>
       <div class="refsect1">
-        <a id="idm47596160224896"></a>
-        <h2>Crédits</h2>
-        <p>Par : Michael Gogins 2017</p>
+        <a id="idm45344056624752"></a>
+        <h2>Credits</h2>
+        <p>By: Michael Gogins 2017</p>
       </div>
     </div>
     <div class="navfooter">
       <hr />
       <table width="100%" summary="Navigation footer">
         <tr>
-          <td width="40%" align="left"><a accesskey="p" href="opcodeslinkenable.html">Précédent</a> </td>
+          <td width="40%" align="left"><a accesskey="p" href="link_beat_request.html">Prev</a> </td>
           <td width="20%" align="center">
-            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+            <a accesskey="u" href="OpcodesTop.html">Up</a>
           </td>
-          <td width="40%" align="right"> <a accesskey="n" href="opcodeslinkmetro.html">Suivant</a></td>
+          <td width="40%" align="right"> <a accesskey="n" href="link_enable.html">Next</a></td>
         </tr>
         <tr>
-          <td width="40%" align="left" valign="top">link_enable </td>
+          <td width="40%" align="left" valign="top">link_beat_request </td>
           <td width="20%" align="center">
-            <a accesskey="h" href="index.html">Sommaire</a>
+            <a accesskey="h" href="index.html">Home</a>
           </td>
-          <td width="40%" align="right" valign="top"> link_metro</td>
+          <td width="40%" align="right" valign="top"> link_enable</td>
         </tr>
       </table>
     </div>
