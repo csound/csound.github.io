@@ -3,6 +3,8 @@ layout: sidebar_links
 title: Community 
 ---
 
+### Mailing lists
+
 The main discussion forums for Csound are the user list and the developer list. To join these lists, go to these sites:
 
 * [Csound Users](https://listserv.heanet.ie/cgi-bin/wa?A0=CSOUND)
@@ -29,6 +31,8 @@ Although questions about the main frontends are frequently discussed on the Csou
 * [CsoundQt](https://lists.sourceforge.net/lists/listinfo/qutecsound-users)
 * [Blue](https://lists.sourceforge.net/lists/listinfo/bluemusic-users)
 
+### Chat
+
 Chat is available on Slack at csound.slack.com. Users can subscribe to join the slack channel at:
 
 * [Slack Signup](https://csound-slack.herokuapp.com/)
@@ -36,6 +40,8 @@ Chat is available on Slack at csound.slack.com. Users can subscribe to join the 
 Chat is also available at IRC on freenode, using channel #csound. This is available through web chat (no registration required) at:
 
 * [Freenode Webchat](http://webchat.freenode.net/?channels=#csound)
+
+### Webpages
 
 Users may also post questions on Stackoverflow, using the "csound" tag.  You can view questions here:
 
@@ -45,23 +51,5 @@ The Csound Journal collects a huge number of articles on interesting subjects re
 
 * [Csound Journal](http://www.csoundjournal.com)
 
-## International Csound Conferences
 
-2011, September 30 - October 2, Hannover, Germany
-
-* [You Tube Channel](http://www.youtube.com/user/csconf2011)
-* [Papers and Program](http://www.incontri.hmtm-hannover.de/de/fmsbw/csound-conference/)
-
-2013, October 25 - 27, Boston, USA
-
-2015, October 2 - 4, St. Petersburg, Russia
-
-* [You Tube Channel](http://www.youtube.com/channel/UCVI8hmelNnKGP-wnf9FqNYQ)
-* [Photos](https://www.flickr.com/photos/icsc2015/)
-
-2017, September 29 - October 1, Montevideo, Uruguay
-
-* [Website](http://csound.github.io/icsc2017/)
-* [Photos](http://csound.github.io/icsc2017/photos.html)
-* [Videos](https://www.youtube.com/playlist?list=PLuRqlaVXQNzsQupcaNwRz6pmlzhuM3uoG)
 
