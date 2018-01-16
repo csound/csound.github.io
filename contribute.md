@@ -23,6 +23,11 @@ sidebar_toc:
 * Events - make Csound meetup or organise a Csound concert
 
 * Share code - Share your UDO repo or favorite Csound instruments -> link to the share page
+
+* Csound showcase
+
+* Share projects 
+
 -->
 
 <h2 id="documentation">Documentation</h2>
