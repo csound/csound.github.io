@@ -46,6 +46,7 @@ files.
 * <a href="http://cabbageaudio.com/" target="_blank">Cabbage</a>
 * <a href="https://appsto.re/us/9GV8db.i">RunloopSound</a>
 * <a href="https://atom.io/packages/language-csound">Csound for Atom</a>
+* <a href="https://github.com/hlolli/csound-mode">Csound-Mode for Emacs</a>
 
 
 ## Csound syntax

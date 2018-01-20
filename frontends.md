@@ -61,6 +61,16 @@ to install Csound prior to use WinXound.
 modes and libraries intended to compose music for Csound using the legendary
 Emacs environment.
 
+### Csound-Mode for Emacs
+<img src="/images/csound-mode.gif" alt="csound-mode"
+	style="width: 400px;"/>
+[csound-mode](https://github.com/hlolli/csound-mode) is a lightweight plugin/mode
+for the Emacs text-editor that ships with a REPL (read-eval-print-loop) based on 
+Csound's UDP mechanism, enabling realtime interaction in development as well as in
+performance. Csound-Mode can be installed from within Emacs via MELPA-stable and 
+MELPA-unstable.
+
+
 ### RunloopSound
 <img src="/images/RunloopSound-icon.svg" alt="" style="width: 400px;"/>
 RunloopSound is a Csound frontend for iOS devices. It supports most cloud
