@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['_5fmm_5fdenormals_5fzero_5fmask',['_MM_DENORMALS_ZERO_MASK',['../csoundCore_8h.html#ae14d8bd09ddd9b380262a070b108e8da',1,'csoundCore.h']]],
-  ['_5fmm_5fdenormals_5fzero_5foff',['_MM_DENORMALS_ZERO_OFF',['../csoundCore_8h.html#a3fe511b122f7320f24e1817e8924af9c',1,'csoundCore.h']]],
-  ['_5fmm_5fdenormals_5fzero_5fon',['_MM_DENORMALS_ZERO_ON',['../csoundCore_8h.html#a5d16bacd654fa152bc169454f065d4ba',1,'csoundCore.h']]],
-  ['_5fmm_5fset_5fdenormals_5fzero_5fmode',['_MM_SET_DENORMALS_ZERO_MODE',['../csoundCore_8h.html#a8a0c716610df0edd3bd62369c073e557',1,'csoundCore.h']]]
+  ['csound_5fcallback_5fkbd_5fevent',['CSOUND_CALLBACK_KBD_EVENT',['../csound_8h.html#a69d9c59e8990ac53dd5c033bb521c078',1,'csound.h']]],
+  ['csound_5fcallback_5fkbd_5ftext',['CSOUND_CALLBACK_KBD_TEXT',['../csound_8h.html#a030ff48f9c4a09073906951b5140f221',1,'csound.h']]],
+  ['csound_5fexitjmp_5fsuccess',['CSOUND_EXITJMP_SUCCESS',['../csound_8h.html#aaca458953b26a31f650477f0c5509f23',1,'csound.h']]],
+  ['csoundinit_5fno_5fatexit',['CSOUNDINIT_NO_ATEXIT',['../csound_8h.html#a2a867c2edcfebfc7253f857e71083062',1,'csound.h']]],
+  ['csoundinit_5fno_5fsignal_5fhandler',['CSOUNDINIT_NO_SIGNAL_HANDLER',['../csound_8h.html#a410289c3cb7c80ddb52a7b7035169a39',1,'csound.h']]]
 ];

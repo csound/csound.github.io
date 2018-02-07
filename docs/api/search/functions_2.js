@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['kperf_5fdebug',['kperf_debug',['../csoundCore_8h.html#adcf55c6f5072a2e64ae02a5b39946555',1,'csoundCore.h']]],
-  ['kperf_5fnodebug',['kperf_nodebug',['../csoundCore_8h.html#a9afe925291a89ccd1aaaa4fb7230d711',1,'csoundCore.h']]]
+  ['count',['count',['../classcsnd_1_1_fsig.html#a9b3a40c8f7f6afff400523b73001cbc3',1,'csnd::Fsig::count() const'],['../classcsnd_1_1_fsig.html#a2e6d605700ba0f0c45a3c4f51f83e69c',1,'csnd::Fsig::count(uint32_t cnt)']]]
 ];

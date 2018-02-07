@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['messages_20and_20text',['Messages and Text',['../group__MESSAGES.html',1,'']]],
-  ['miscellaneous_20functions',['Miscellaneous functions',['../group__MISCELLANEOUS.html',1,'']]]
+  ['opcodes',['Opcodes',['../group___o_p_c_o_d_e_s.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vdsp_5flib',['VDSP_LIB',['../csoundCore_8h.html#a06fc87d81c62e9abb8790b6e5713c55ba069469b3e14aedc80b408da8efbf9b4d',1,'csoundCore.h']]]
+  ['k',['k',['../namespacecsnd.html#a9bb8e34198ce91ee0096ad0237d448acafb070a17f5af876015abcd323e339efd',1,'csnd']]]
 ];

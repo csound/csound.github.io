@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['_5fmm_5fdenormals_5fzero_5fmask',['_MM_DENORMALS_ZERO_MASK',['../csoundCore_8h.html#ae14d8bd09ddd9b380262a070b108e8da',1,'csoundCore.h']]],
-  ['_5fmm_5fdenormals_5fzero_5foff',['_MM_DENORMALS_ZERO_OFF',['../csoundCore_8h.html#a3fe511b122f7320f24e1817e8924af9c',1,'csoundCore.h']]],
-  ['_5fmm_5fdenormals_5fzero_5fon',['_MM_DENORMALS_ZERO_ON',['../csoundCore_8h.html#a5d16bacd654fa152bc169454f065d4ba',1,'csoundCore.h']]],
-  ['_5fmm_5fset_5fdenormals_5fzero_5fmode',['_MM_SET_DENORMALS_ZERO_MODE',['../csoundCore_8h.html#a8a0c716610df0edd3bd62369c073e557',1,'csoundCore.h']]],
-  ['_5fsystem_5fsr',['_system_sr',['../structCSOUND__.html#aec14b1fd11034ed3dbaaf1edef35a29b',1,'CSOUND_']]]
+  ['ascii_5fgraphs',['ascii_graphs',['../struct_c_s_o_u_n_d___p_a_r_a_m_s.html#a2577d2991c243af1725292ab0eb538a1',1,'CSOUND_PARAMS']]],
+  ['attributes',['attributes',['../structcontrol_channel_hints__s.html#add96287c083ed5d426b69139f15de82d',1,'controlChannelHints_s::attributes()'],['../group___a_t_t_r_i_b_u_t_e_s.html',1,'(Global Namespace)']]]
 ];
