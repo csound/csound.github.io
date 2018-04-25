@@ -383,7 +383,7 @@ i1 2 1 300 .7
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
 
-###Controlling your instrument with MIDI
+### Controlling your instrument with MIDI
 
 While the score section offers lots of versatility when it comes to writing and composing music with
 Csound, it can be a little restrictive when it comes to performing live. Many musicians will prefer
