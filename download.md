@@ -24,7 +24,7 @@ https://github.com/csound/csound.github.io/blob/master/_data/
     <div class="three columns align-center">
         <i class="fa fa-4x fa-windows"></i><br/>
 	<a href="{{ site.data.download.windows_64_full.link }}">64bit Full Installer v{{ site.data.download.windows_64_full.ver }}</a><br/>
-	<a href="{{ site.data.download.windows_64.link }}">64bit Minimal v{{ site.data.download.windows_64.ver }}</a><br/>
+	<a href="{{ site.data.download.windows_64.link }}">64bit Binaries v{{ site.data.download.windows_64.ver }}</a><br/>
 	<a href="{{ site.data.download.windows_32.link }}">32bit Minimal v{{ site.data.download.windows_32.ver }}</a>
     </div>
     <div class="three columns align-center">
@@ -62,9 +62,7 @@ https://github.com/csound/csound.github.io/blob/master/_data/
     <div class="three columns align-center">
         <i class="fa fa-4x fa-html5"></i><br/>
 
-	<a href="{{ site.data.download.web_wasm.link }}">WASM v{{ site.data.download.web_wasm.ver }}</a>
-  <br/>
-	<a href="{{ site.data.download.web_emscripten.link }}">Emscripten v{{ site.data.download.web_emscripten.ver }}</a>
+	<a href="{{ site.data.download.web.link }}">Web v{{ site.data.download.web.ver }}</a>
     </div>
 </div>
 
