@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45724070176048"></a>
+        <a id="idm46197577248336"></a>
         <h2>Description</h2>
         <p>
       Filtre le signal entrant avec la fréquence de résonance et le facteur de
@@ -50,12 +50,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45724070174192"></a>
+        <a id="idm46197577246448"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">aout <span class="command"><strong>mode</strong></span> ain, xfreq, xQ [, iskip]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm45724070172048"></a>
+        <a id="idm46197577244272"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iskip</em></span> (facultatif, 0 par défaut) -- s'il est non nul,
@@ -63,7 +63,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45724070170224"></a>
+        <a id="idm46197577242448"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>aout</em></span> -- signal filtré
@@ -85,8 +85,13 @@
             <tr>
               <td align="left" valign="top">
                 <p>
-          Ce filtre devient instable si <span class="emphasis"><em>sr</em></span>/<span class="emphasis"><em>xfreq</em></span>
-          &lt; pi (par exemple <span class="emphasis"><em>xfreq</em></span> &gt; 14037 Hz à 44100 Hz).
+          Comme ce filtre devient instable si <span class="emphasis"><em>sr</em></span>/<span class="emphasis"><em>xfreq</em></span>
+          &lt; pi, la valeur de <span class="emphasis"><em>xfreq</em></span> est limitée en interne à
+          <span class="emphasis"><em>sr</em></span>/<span class="emphasis"><em>pi</em></span>-<span class="emphasis"><em>sr</em></span>/100
+          &gt; (par exemple <span class="emphasis"><em>xfreq</em></span> &gt; 13595 Hz à 44.1 kHz).
+          Le terme <span class="emphasis"><em>sr</em></span>/100 est dû au fait que le filtre, bien
+          que mathématiquemet stable, a une très forte amplification lorsque l'on
+          s'approche de la région instable.
         </p>
               </td>
             </tr>
@@ -108,23 +113,23 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45724070159856"></a>
+        <a id="idm46197577229600"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode mode. Il utilise le fichier
       <a class="ulink" href="examples/mode.csd" target="_top"><em class="citetitle">mode.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm45724070158000"></a>
+          <a id="idm46197577227744"></a>
           <p class="title">
-            <strong>Exemple 571. Exemple de l'opcode mode.</strong>
+            <strong>Exemple 572. Exemple de l'opcode mode.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
         <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm45723888640000"></a>
+              <a id="idm46197394756016"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -221,7 +226,7 @@ a<span class="n">res</span> <span class="o">=</span> <span class="p">(</span>a<s
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45724070153632"></a>
+        <a id="idm46197577223376"></a>
         <h2>Crédits</h2>
         <p>UDO original et documentation/exemple par François Blanc</p>
         <p>Traduction de l'opcode en code-C par Steven Yi</p>

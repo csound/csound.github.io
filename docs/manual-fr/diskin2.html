@@ -41,7 +41,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45724099948224"></a>
+        <a id="idm46197607050544"></a>
         <h2>Description</h2>
         <p>
       Lit des données audio depuis un fichier, et peut altérer leur hauteur au
@@ -52,7 +52,7 @@
       de Csound antérieures à la 5.14, et entre 1 et 40 pour les versions suivantes.
     </p>
       </div>
-      <div class="refsect1"><a id="idm45724099945680"></a><h2>Syntaxe</h2><pre class="synopsis">a1[, a2[, ... aN]] <span class="command"><strong>diskin2</strong></span> ifilcod[, kpitch[, iskiptim \
+      <div class="refsect1"><a id="idm46197607048000"></a><h2>Syntaxe</h2><pre class="synopsis">a1[, a2[, ... aN]] <span class="command"><strong>diskin2</strong></span> ifilcod[, kpitch[, iskiptim \
       [, iwrap[, iformat[, iwsize[, ibufsize[, iskipinit]]]]]]]</pre><span class="emphasis"><em>diskin2</em></span> offre plus de contrôle et une meilleure
       qualité de son que <span class="emphasis"><em>diskin</em></span> mais au prix d'une
       utilisation plus intensive des ressources CPU.
@@ -61,10 +61,10 @@
       [, iwrap[, iformat[, iwsize[, ibufsize[, iskipinit]]]]]]]</pre><p> (dans la version de la sortie dans un tableau, le nombre de canaux
     de sortie n'a pas de limite supérieure.)</p></div>
       <div class="refsect1">
-        <a id="idm45724099940192"></a>
+        <a id="idm46197607042512"></a>
         <h2>Initialisation</h2>
         <p>
-	<span class="emphasis"><em>ifilcod</em></span> -- entier ou chaîne de caractères donnant le nom
+  <span class="emphasis"><em>ifilcod</em></span> -- entier ou chaîne de caractères donnant le nom
       du fichier son source. Un entier indique le fichier soundin.filcod ; une chaîne
       de caractères (entre guillemets, espaces autorisés) donne le nom de fichier
       lui-même, éventuellement un nom de chemin complet. Si ce n'est pas un nom de
@@ -78,9 +78,9 @@
       trames d'échantillons ne soient pas joués correctement sur les plates-formes
       32 bit ; cela donne une longueur maximale d'environ trois heures avec un
       taux d'échantillonnage de 192000 Hz.
-   	</p>
+     </p>
         <p>
-   	<span class="emphasis"><em>iskiptim</em></span> (facultatif, zéro par défaut) -- portion du son
+     <span class="emphasis"><em>iskiptim</em></span> (facultatif, zéro par défaut) -- portion du son
     en entrée à ignorer, exprimée en secondes, en supposant que
     <span class="emphasis"><em>kpitch</em></span>=1. Peut être négatif, pour ajouter
     -<span class="emphasis"><em>iskiptim</em></span>/<span class="emphasis"><em>kpitch</em></span> secondes de délai
@@ -105,15 +105,15 @@
           </table>
         </div>
         <p>
-   	</p>
+     </p>
         <p>
-	<span class="emphasis"><em>iwrap</em></span> (facultatif, zéro par défaut) -- s'il a n'importe
+  <span class="emphasis"><em>iwrap</em></span> (facultatif, zéro par défaut) -- s'il a n'importe
     quelle valeur non nulle, les positions de lecture négatives ou au-delà de la
     fin du fichier sont ramenées à l'intérieur de la durée du fichier son au
     lieu d'être remplacées par des échantillons nuls. Pratique pour jouer un
     fichier en boucle.
 
-   	</p>
+     </p>
         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
           <table border="0" summary="Note: Note">
             <tr>
@@ -128,63 +128,81 @@
       Si <span class="emphasis"><em>iwrap</em></span> est activé, la longueur du fichier ne doit
       pas être inférieure à la taille de la fenêtre d'interpolation (voir ci-dessous),
       sinon il pourra y avoir des craquements dans le son de sortie.
-   	</p>
+     </p>
               </td>
             </tr>
           </table>
         </div>
         <p>
 
-   	</p>
+     </p>
         <p>
-   	<span class="emphasis"><em>iformat</em></span> (facultatif, zéro par défaut) -- format d'échantillon,
-      seulement pour les fichiers bruts (sans en-tête). Ce paramètre est ignoré si
-      le fichier a un en-tête. Les valeurs admises sont :
+     <span class="emphasis"><em>iformat</em></span> (facultatif, zéro par défaut) -- fixe le
+     format d'échantillon pour les fichiers bruts (sans en-tête). Ce paramètre
+     doit être nul si le fichier a un en-tête. Les valeurs admises pour les
+     fichiers bruts sont :
 
-	</p>
+  </p>
         <div class="itemizedlist">
           <ul class="itemizedlist" style="list-style-type: disc; ">
             <li class="listitem">
-              <p>0 : entiers courts sur 16 bit</p>
+              <p>1 : entiers courts sur 16 bit</p>
             </li>
             <li class="listitem">
-              <p>1 : caractères signés sur 8 bit (les 8 bit de poids fort d'un entier
+              <p>2 : caractères signés sur 8 bit (les 8 bit de poids fort d'un entier
           sur 16 bit)</p>
             </li>
             <li class="listitem">
-              <p>2 : octets sur 8 bit A-law</p>
+              <p>3 : octets sur 8 bit A-law</p>
             </li>
             <li class="listitem">
-              <p>3 : octets sur 8 bit U-law</p>
+              <p>4 : octets sur 8 bit U-law</p>
             </li>
             <li class="listitem">
-              <p>4 : entiers courts sur 16 bit</p>
+              <p>5 : entiers courts sur 16 bit</p>
             </li>
             <li class="listitem">
-              <p>5 : entiers longs sur 32 bit</p>
+              <p>6 : entiers longs sur 32 bit</p>
             </li>
             <li class="listitem">
-              <p>6 : flottants sur 32 bit</p>
+              <p>7 : flottants sur 32 bit</p>
             </li>
             <li class="listitem">
-              <p>7 : entiers non signés sur 8 bit</p>
+              <p>8 : entiers non signés sur 8 bit</p>
             </li>
             <li class="listitem">
-              <p>8 : entiers sur 24 bit</p>
+              <p>9 : entiers sur 24 bit</p>
             </li>
             <li class="listitem">
-              <p>9 : doubles sur 64 bit</p>
+              <p>10 : doubles sur 64 bit</p>
             </li>
           </ul>
         </div>
         <p>
-
-	</p>
+  </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+    Cette liste n'est pas la même que celle qui est dans
+    <a class="link" href="GEN01.html" title="GEN01"><em class="citetitle">GEN01</em></a>.
+  </p>
+              </td>
+            </tr>
+          </table>
+        </div>
         <p>
-	<span class="emphasis"><em>iwsize</em></span> (facultatif, zéro par défaut) -- taille de la
+  <span class="emphasis"><em>iwsize</em></span> (facultatif, zéro par défaut) -- taille de la
     fenêtre d'interpolation, en échantillons. Peut prendre une de ces valeurs :
 
- 	</p>
+   </p>
         <div class="itemizedlist">
           <ul class="itemizedlist" style="list-style-type: disc; ">
             <li class="listitem">
@@ -207,7 +225,7 @@
   Zéro ou des valeurs négatives sélectionnent la valeur par défaut, qui est
   l'interpolation cubique.
 
-  	</p>
+    </p>
         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
           <table border="0" summary="Note: Note">
             <tr>
@@ -232,7 +250,7 @@
 
     </p>
         <p>
-	<span class="emphasis"><em>ibufsize</em></span> (facultatif, zéro par défaut) -- taille du tampon
+  <span class="emphasis"><em>ibufsize</em></span> (facultatif, zéro par défaut) -- taille du tampon
     en échantillons mono (pas en trames d'échantillons). Ce n'est que la valeur
     suggérée, la valeur retenue étant arrondie afin que le nombre de trames
     d'échantillons soit une puissance entière de deux et soit comprise entre
@@ -251,10 +269,10 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45724099902816"></a>
+        <a id="idm46197607003760"></a>
         <h2>Exécution</h2>
         <p>
-	<span class="emphasis"><em>a1 ... a24</em></span> -- signaux de sortie, dans l'intervalle allant
+  <span class="emphasis"><em>a1 ... a24</em></span> -- signaux de sortie, dans l'intervalle allant
     de -0dbfs à 0dbfs. Tous les échantillons avant le début du fichier (positions
     négatives) et après la fin du fichier prennent la valeur zéro, à moins que
     <span class="emphasis"><em>iwrap</em></span> soit non nul. Le nombre d'arguments de sortie
@@ -266,8 +284,8 @@
   </p>
         <p>
     <span class="emphasis"><em>ar1[]</em></span> --- signaux de sortie, dans un tableau de
-	    taux-a de taille N, où N est le nombre de canaux dans le fichier. Les
-	    tableaux sont automatiquement alloués avec la taille correcte.
+      taux-a de taille N, où N est le nombre de canaux dans le fichier. Les
+      tableaux sont automatiquement alloués avec la taille correcte.
   </p>
         <p>
 
@@ -285,16 +303,16 @@
                 <p>Il est plus efficace de lire un seul fichier avec plusieurs canaux, que
     plusieurs fichiers à un seul canal, spécialement avec de grandes valeurs de
     <span class="emphasis"><em>iwsize</em></span>.
-	  </p>
+    </p>
               </td>
             </tr>
           </table>
         </div>
         <p>
 
-	</p>
+  </p>
         <p>
-	<span class="emphasis"><em>kpitch</em></span> -- transpose la hauteur du son en entrée par ce facteur
+  <span class="emphasis"><em>kpitch</em></span> -- transpose la hauteur du son en entrée par ce facteur
     (par exemple 0.5 signifie une octave plus bas, 2 une octave plus haut, et 1
     la hauteur originale, qui est la valeur par défaut). Des valeurs fractionnaires
     et négatives sont permises
@@ -310,7 +328,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45724099891584"></a>
+        <a id="idm46197606992528"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode diskin2. Il utilise les fichiers
@@ -318,16 +336,16 @@
       et <a class="ulink" href="examples/beats.wav" target="_top"><em class="citetitle">beats.wav</em></a>.
       </p>
         <div class="example">
-          <a id="idm45724099888864"></a>
+          <a id="idm46197606989808"></a>
           <p class="title">
-            <strong>Exemple 214. Exemple de l'opcode diskin2.</strong>
+            <strong>Exemple 215. Exemple de l'opcode diskin2.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm45723927502048"></a>
+              <a id="idm46197432362032"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -368,7 +386,7 @@ a<span class="n">1</span>     <span class="nb">diskin2</span> <span class="s">"b
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45724099884496"></a>
+        <a id="idm46197606985440"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="in.html" title="in"><em class="citetitle">in</em></a>,
@@ -376,12 +394,12 @@ a<span class="n">1</span>     <span class="nb">diskin2</span> <span class="s">"b
       <a class="link" href="ino.html" title="ino"><em class="citetitle">ino</em></a>,
       <a class="link" href="inq.html" title="inq"><em class="citetitle">inq</em></a>,
       <a class="link" href="ins.html" title="ins"><em class="citetitle">ins</em></a>,
-      <a class="link" href="soundin.html" title="soundin"><em class="citetitle">soundin</em></a> and 
+      <a class="link" href="soundin.html" title="soundin"><em class="citetitle">soundin</em></a> et 
       <a class="link" href="diskin.html" title="diskin"><em class="citetitle">diskin</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45724099877008"></a>
+        <a id="idm46197606977952"></a>
         <h2>Crédits</h2>
         <p>
       </p>

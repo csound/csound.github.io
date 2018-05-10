@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>What's new in Csound 6.10.0</title>
+    <title>What's new in Csound 6.11.0</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -16,7 +16,7 @@
     <div class="navheader">
       <table width="100%" summary="Navigation header">
         <tr>
-          <th colspan="3" align="center">What's new in Csound 6.10.0</th>
+          <th colspan="3" align="center">What's new in Csound 6.11.0</th>
         </tr>
         <tr>
           <td width="20%" align="left"><a accesskey="p" href="PrefaceGettingStarted.html">Prev</a> </td>
@@ -30,11 +30,223 @@
       <div class="titlepage">
         <div>
           <div>
-            <h2 class="title" style="clear: both"><a id="PrefaceWhatsNew"></a>What's new in Csound 6.10.0</h2>
+            <h2 class="title" style="clear: both"><a id="PrefaceWhatsNew"></a>What's new in Csound 6.11.0</h2>
           </div>
         </div>
       </div>
-      <h3><a id="idm45344110171520"></a>Release Notes for Csound 6.10 (2017 December)</h3>
+      <h3><a id="idm45862857078400"></a>Release Notes for Csound 6.11 (2018 May)</h3>
+      <p>
+    There has been a great amount of internal reorganisation, which should not
+    affect most users. Some components are now independently managed and will
+    eventually be installable via a new package manager. The realtime option is
+    now considered stable and has the "experimental" tag removed. There have
+    been more steps towards completing the arithmetic operations involving
+    a-arrays.
+    </p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.png" />
+            </td>
+            <th align="left">Note</th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">Note that changes to GEN01 and diskin2 may not be backward compatible
+    if a none zero value is given for the format.</td>
+          </tr>
+        </table>
+      </div>
+      <p>
+  </p>
+      <p>
+    </p>
+      <div class="itemizedlist">
+        <ul class="itemizedlist" style="list-style-type: disc; ">
+          <li class="listitem">
+            <p>New opcodes:
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                <a class="link" href="loscil.html" title="loscil"><em class="citetitle">loscilphs</em></a>,
+                <a class="link" href="loscil3.html" title="loscil3"><em class="citetitle">loscil3phs</em></a>
+                are like loscil but return the phase in  addition to the audio.
+              </li>
+              </ul>
+            </div>
+            <p>
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                More arithmetic between a-rate arrays and a-rate values; this
+                completes the arithmetic where one or more argument is an audio
+                array.
+              </li>
+              </ul>
+            </div>
+            <p>
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                <a class="link" href="balance2.html" title="balance2"><em class="citetitle">balance2</em></a>
+                is like balance but scales the output at a-rate,
+                rather than k-rate. 
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Score:
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                Characters following a \ in a score string are treated as
+                escaped, so \n is a newline rather than two characters. It
+                handles escaped a, b, f, n, r, t and v. Other characters
+                following a \ ignore the backslash.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Modified Opcodes and Gens:
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                print, printk2 now take an additional optional argument which
+                if non-zero causes the k-variable name to be printed as well as
+                the value.
+              </li>
+                <li class="listitem">
+                getrow, setrow, getcol, and setcol can now act on i-rate arrays.
+              </li>
+                <li class="listitem">
+                diskin2 was incorrectly described in the manual with respect to
+                the iformat parameter. Now if iformat is zero the file is
+                expected to have an audio header; if in the range 1-10 (rather
+                than 0-9 as before) then it is opened as raw with the specified
+                sample format. THIS MAY BE INCOMPATIBLE. For most users the
+                value of zero will be correct.
+              </li>
+                <li class="listitem">
+                GEN01 now uses format 0 to get the file type from the header;
+                any other value indicates a raw file. THIS MAY BE INCOMPATIBLE.
+                For most users the value of zero will be correct.
+              </li>
+                <li class="listitem">
+                GEN01 was incorrectly documented with respect to the format
+                argument. There are 9 raw formats whereas the earlier manual
+                stated 6.
+              </li>
+                <li class="listitem">
+                Small change in slicearray should allow it to be used in
+                functional form in most cases.
+              </li>
+                <li class="listitem">
+                The family of opcodes tb0 to tb15 and their initialisation
+                opcodes tb0_init to tb15_init are deprecated as multi-argument
+                functions are allowed.
+              </li>
+                <li class="listitem">
+                The mode filter now does not allow a frequency in the unstable
+                region.
+              </li>
+                <li class="listitem">
+                In scanu and xscanu the value of kpos is supposed to be in the
+                range [0,1]. This is now enforced by treating all negative
+                values as 0 and all values bigger than 1 as 1.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Bugs Fixed:
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                linen was reworked to allow for long durations and overlaps.
+              </li>
+                <li class="listitem">
+                Resetting csound caused a crash if Lua opcodes were used; fixed.
+              </li>
+                <li class="listitem">
+                The poscil family of opcodes could give incorrect results if
+                used in multi-core orchestras AND another instrument changed
+                the f-table. This is now corrected.
+              </li>
+                <li class="listitem">
+                Use of out with an audio array did not check that the array
+                dimension was not greater than the number of channels, which
+                caused a crash. It is now checked and truncated if too large
+                with a warning.
+              </li>
+                <li class="listitem">
+                Bug in stereo versions of loscil introduced distortion;
+                now fixed.
+              </li>
+                <li class="listitem">Fencepost error in phs fixed.</li>
+                <li class="listitem">
+                gen49 read deleted memory if the file was not found; fixed.
+              </li>
+                <li class="listitem">
+                Loading of LADSPA plugins when relying on search paths was
+                wrong and mangled the name; now fixed.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>System Changes:
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                OPCODE6DIR{64} now can contain a colon-separated list of
+                directories.
+              </li>
+                <li class="listitem">
+                The somewhat curious distinction between k-rate and a-rate
+                perf-time has been removed throughput, so only threads 1, 2
+                and 3 are used, the s-type output is not used, and some x-type
+                inputs have been changed for direct polymorphism. This only
+                matters for opcode writers as the s, and x codes and threads
+                4, 5, 6 and 7 will be removed in a while.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Translations:
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">As ever the French translations are complete.</li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+        </ul>
+      </div>
+      <p>
+  </p>
+      <h3><a id="idm45862857001856"></a>Release Notes for Csound 6.10 (2017 December)</h3>
       <p>
     This is mostly a bugfix release, including a major bug introduced in loscil
     recently. New and improved opcodes and a long orphaned GEN (53) are here, as
@@ -380,7 +592,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45344110054080"></a>Release Notes for Csound 6.09 (2017 May)</h3>
+      <h3><a id="idm45862856926160"></a>Release Notes for Csound 6.09 (2017 May)</h3>
       <p>A mixed bag of new opcodes and many fixes and improvements.</p>
       <p>
     Also as usual there are a number of internal changes, including many memory
@@ -792,7 +1004,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45344109943248"></a>Release Notes for Csound 6.08 (2016 November)</h3>
+      <h3><a id="idm45862856815328"></a>Release Notes for Csound 6.08 (2016 November)</h3>
       <p>
     As usual there are a number of opcode fixes and improvements, but the major
     changes are in the language structures. First the score language has all-new
@@ -1123,7 +1335,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45344109859664"></a>Release Notes for Csound 6.07 (2016 March)</h3>
+      <h3><a id="idm45862856731744"></a>Release Notes for Csound 6.07 (2016 March)</h3>
       <p>
     A large number of bug fixes, some quite major, some internal are
     included, as well as some new facilities and extensions. As ever there
@@ -1651,7 +1863,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45344109707088"></a>Release Notes for Csound 6.06 (2015 September)</h3>
+      <h3><a id="idm45862856579216"></a>Release Notes for Csound 6.06 (2015 September)</h3>
       <p>A number of bug fixes, some quite major, are included, as well as some
   new facilities and extensions.</p>
       <p>
@@ -1875,7 +2087,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45344109651392"></a>Release Notes for Csound 6.05 (2015 April)</h3>
+      <h3><a id="idm45862856523520"></a>Release Notes for Csound 6.05 (2015 April)</h3>
       <p>As ever there are new facilities and numerous bug-fixes.  A major part of
   this release is the removal of a number of memory leaks and over use
   of memory.  Naturally these changes are all but invisible, just a
@@ -2138,7 +2350,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45344109587072"></a>Release Notes for Csound 6.04 (2014 November)</h3>
+      <h3><a id="idm45862856459200"></a>Release Notes for Csound 6.04 (2014 November)</h3>
       <p>This new version has many extensions and fixes; many new opcodes
   and significant numbers of internal reworking.  There is a new
   frontend and iOS and Android version have seen many improvements.</p>
@@ -2395,7 +2607,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45344109508624"></a>Release Notes for Csound 6.03 (2014 May)</h3>
+      <h3><a id="idm45862856380752"></a>Release Notes for Csound 6.03 (2014 May)</h3>
       <p>
     This new version has a large number of bug fixes (including clearing
     many tickets on SourceForge and GitHub) as well internal changes to improve
@@ -2722,7 +2934,7 @@ void csoundDebugFreeVariables(CSOUND *csound, debug_variable_t *varHead);</pre>
       </div>
       <p>
   </p>
-      <h3><a id="idm45344109435680"></a>Release Notes for Csound 6.02</h3>
+      <h3><a id="idm45862856307808"></a>Release Notes for Csound 6.02</h3>
       <p>
 This new version has a large number of bug fixes (including clearing
 all general tickets on SourceForge). It also introduces some major new
@@ -2959,7 +3171,7 @@ changeable at audio rate.
       </div>
       <p>
   </p>
-      <h3><a id="idm45344109367392"></a>Release Notes for Csound6</h3>
+      <h3><a id="idm45862856239520"></a>Release Notes for Csound6</h3>
       <p>
   Csound6 is a significant rewrite of much of the code.  In particular
   the API is not compatible, although all orc/sco/csd works should still
@@ -3439,7 +3651,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
 </p>
-      <h3><a id="idm45344109247312"></a>New in Version 5.19 (2013 January 7)</h3>
+      <h3><a id="idm45862856119440"></a>New in Version 5.19 (2013 January 7)</h3>
       <p>
   This is mainly a bug-fixing release but with a number of new opcodes and
   enhanced features.
@@ -3721,7 +3933,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
 </p>
-      <h3><a id="idm45344109182496"></a>New in Version 5.18 (2012 August 29)</h3>
+      <h3><a id="idm45862856054624"></a>New in Version 5.18 (2012 August 29)</h3>
       <p>
   This is mainly a bug-fixing release but with a number of new opcodes and
   enhanced features.
@@ -3866,7 +4078,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45344109139984"></a>New in Version 5.17 (March 2012)</h3>
+      <h3><a id="idm45862856012112"></a>New in Version 5.17 (March 2012)</h3>
       <p>
   This is mainly a bug-fixing release with no major changes, but the
   number of fixes warrants a release.
@@ -3971,7 +4183,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45344109110464"></a>New in Version 5.16 (February 2012)</h3>
+      <h3><a id="idm45862855982592"></a>New in Version 5.16 (February 2012)</h3>
       <p>
     The major change is that the new parser is now the default. The old
     parser is still available in case of difficulty but the new has been
@@ -4118,7 +4330,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45344109061680"></a>New in Version 5.15 (December 2011)</h3>
+      <h3><a id="idm45862855933808"></a>New in Version 5.15 (December 2011)</h3>
       <p>
   </p>
       <div class="itemizedlist">
@@ -4252,7 +4464,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45344109014432"></a>New in Version 5.14 (October 2011)</h3>
+      <h3><a id="idm45862855886560"></a>New in Version 5.14 (October 2011)</h3>
       <p>
   </p>
       <div class="itemizedlist">
@@ -4411,7 +4623,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45344108944176"></a>New in Version 5.13 (January 2011)</h3>
+      <h3><a id="idm45862855816304"></a>New in Version 5.13 (January 2011)</h3>
       <p>
     </p>
       <div class="itemizedlist">
@@ -4512,7 +4724,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45344108887056"></a>New in Version 5.12 (January 2010)</h3>
+      <h3><a id="idm45862855759184"></a>New in Version 5.12 (January 2010)</h3>
       <p>
    </p>
       <div class="itemizedlist">
@@ -4628,7 +4840,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
  </p>
-      <h3><a id="idm45344108848176"></a>New in Version 5.11 (June 2009)</h3>
+      <h3><a id="idm45862855720304"></a>New in Version 5.11 (June 2009)</h3>
       <p>
     </p>
       <div class="itemizedlist">
@@ -4759,7 +4971,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45344108789264"></a>New in Version 5.10 (December 2008)</h3>
+      <h3><a id="idm45862855661392"></a>New in Version 5.10 (December 2008)</h3>
       <p>
     </p>
       <div class="itemizedlist">
@@ -4835,7 +5047,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45344108767408"></a>New in Version 5.09 (October 2008)</h3>
+      <h3><a id="idm45862855639536"></a>New in Version 5.09 (October 2008)</h3>
       <p>
     </p>
       <div class="itemizedlist">
@@ -4946,7 +5158,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45344108719008"></a>New in Version 5.08 (February 2008)</h3>
+      <h3><a id="idm45862855591136"></a>New in Version 5.08 (February 2008)</h3>
       <p>
     </p>
       <div class="itemizedlist">
@@ -5050,7 +5262,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45344108672656"></a>New in Version 5.07 (October 2007)</h3>
+      <h3><a id="idm45862855544784"></a>New in Version 5.07 (October 2007)</h3>
       <p>
       </p>
       <div class="itemizedlist">
@@ -5126,7 +5338,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
     </p>
-      <h3><a id="idm45344108637824"></a>New in Version 5.06 (June 2007)</h3>
+      <h3><a id="idm45862855509952"></a>New in Version 5.06 (June 2007)</h3>
       <p>
     </p>
       <div class="itemizedlist">
