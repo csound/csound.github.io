@@ -29,7 +29,8 @@ https://github.com/csound/csound.github.io/blob/master/_data/
     </div>
     <div class="three columns align-center">
         <i class="fa fa-4x fa-apple"></i><br/>
-	<a href="{{ site.data.download.osx.link }}">OS X v{{ site.data.download.osx.ver }}</a>
+	<a href="{{ site.data.download.osx.link }}">OS X (dmg archive) v{{site.data.download.osx.ver }}</a>
+    <a href="{{ site.data.download.osx.zip_link }}">OS X (zip archive) v{{ site.data.download.osx.ver }}</a>
     </div>
     <div class="three columns align-center">
         <i class="fa fa-4x fa-linux"></i><br/>
