@@ -36,10 +36,10 @@ https://github.com/csound/csound.github.io/blob/master/_data/
         <i class="fa fa-4x fa-linux"></i><br/>
     <a href="{{ site.data.download.linux.archive_link }}">Linux x86_64
     v{{site.data.download.linux.ver }}
-    (tar.gz archive)</a> <br/>,
+    (tar.gz archive)</a> <br/>
         <a href="{{ site.data.download.linux.bela_link }}">Bela
         (armhf) v{{site.data.download.linux.ver }}
-    (.deb package)</a> <br/>,
+    (.deb package)</a> <br/>
 	<a href="{{ site.data.download.linux.debian_link }}">Debian</a>,
 	<a href="{{ site.data.download.linux.ubuntu_link }}">Ubuntu</a>,
 	<a href="{{ site.data.download.linux.fedora_link }}">Fedora</a>
