@@ -94,7 +94,7 @@ https://github.com/csound/csound.github.io/blob/master/_data/
     </div>
     <div class="three columns align-center">
         <i class="fa fa-4x fa-archive"></i><br/>
-	<a href="olderversions.md">Older versions</a>
+	<a href="olderversions.html">Older versions</a>
     </div>
 </div>
 
