@@ -16,6 +16,8 @@ Link: [http://www.springer.com/gp/book/9783319453682](http://www.springer.com/gp
 
 ## The Csound Book
 
+<img src="images/csound_book.jpg" style="width:216px; height:237px" alt="The Csound Book" title="The Csound Book">
+
 Year: 2000<br>
 Editor: R. Boulanger<br>
 Link: [https://mitpress.mit.edu/books/csound-book](https://mitpress.mit.edu/books/csound-book)
