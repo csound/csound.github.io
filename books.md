@@ -40,6 +40,19 @@ Link: [http://www.amazon.com/Virtual-Sound-Synthesis-Processing-Practice/dp/8890
 
 ---
 
+## CSOUND音乐编程入门 (Music Programming with Csound)
+
+<img src="images/csound_book_yang_wanjun.jpg" style="width:230px; height:230px" alt="CSOUND音乐编程入门 (Music Programming with Csound)" title="CSOUND音乐编程入门 (Music Programming with Csound)">
+
+
+Press: 西南师范大学出版社 (Southwestern Normal University Press)<br>
+Year: 2015.09<br>
+Author: 杨万钧 (Wanjun Yang) <br>
+ISBN: 978-7-5621-7547-6 <br>
+Link: [https://detail.tmall.com/item.htm?id=523778675175&ns=1&abbucket=5](https://detail.tmall.com/item.htm?id=523778675175&ns=1&abbucket=5)
+
+---
+
 ## Csound Power
 
 Year: 2012<br>
