@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46197607189216"></a>
+        <a id="idm54121"></a>
         <h2>Description</h2>
         <p>
       Lit des données audio d'un périphérique ou d'un flot externe et
@@ -48,7 +48,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46197607187792"></a>
+        <a id="idm54124"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ar1 [, ar2 [, ar3 [, ... arN]]] <span class="command"><strong>diskin</strong></span> ifilcod[, kpitch[, iskiptim \
       [, iwraparound[, iformat[, iskipinit]]]]]</pre>
@@ -59,7 +59,7 @@
         <p>(dans cette version, le nombre de canaux de sortie n'est pas limité.)</p>
       </div>
       <div class="refsect1">
-        <a id="idm46197607182944"></a>
+        <a id="idm54132"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifilcod</em></span> -- entier ou chaîne de caractères donnant le nom
@@ -78,40 +78,41 @@
       ignorer, exprimée en secondes. La valeur par défaut est 0.
     </p>
         <p>
-      <span class="emphasis"><em>iformat</em></span> (facultatif) -- spécifie le format des données
-      audio du fichier :
+      <span class="emphasis"><em>iformat</em></span> (facultatif) -- ignoré s'il est positif, mais
+      s'il est négatif il spécifie le format des données audio d'un fichier
+      brut :
       </p>
         <div class="itemizedlist">
           <ul class="itemizedlist" style="list-style-type: disc; ">
             <li class="listitem">
-              <p>1 = caractères signés sur 8 bit (les 8 bit de poids fort d'un entier
+              <p>-1 = caractères signés sur 8 bit (les 8 bit de poids fort d'un entier
           sur 16 bit)</p>
             </li>
             <li class="listitem">
-              <p>2 = octets sur 8 bit A-law</p>
+              <p>-2 = octets sur 8 bit A-law</p>
             </li>
             <li class="listitem">
-              <p>3 = octets sur 8 bit U-law</p>
+              <p>-3 = octets sur 8 bit U-law</p>
             </li>
             <li class="listitem">
-              <p>4 = entiers courts sur 16 bit</p>
+              <p>-4 = entiers courts sur 16 bit</p>
             </li>
             <li class="listitem">
-              <p>5 = entiers longs sur 32 bit</p>
+              <p>-5 = entiers longs sur 32 bit</p>
             </li>
             <li class="listitem">
-              <p>6 = flottants sur 32 bit</p>
+              <p>-6 = flottants sur 32 bit</p>
             </li>
             <li class="listitem">
-              <p>7 = entiers non signés sur 8 bit (non disponible dans les versions
+              <p>-7 = entiers non signés sur 8 bit (non disponible dans les versions
           de Csound antérieures à la 5.00)</p>
             </li>
             <li class="listitem">
-              <p>8 = entiers sur 24 bit (non disponible dans les versions de Csound
+              <p>-8 = entiers sur 24 bit (non disponible dans les versions de Csound
           antérieures à la 5.00)</p>
             </li>
             <li class="listitem">
-              <p>9 = doubles sur 64 bit (non disponible dans les versions
+              <p>-9 = doubles sur 64 bit (non disponible dans les versions
           de Csound antérieures à la 5.00)</p>
             </li>
           </ul>
@@ -134,12 +135,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46197607162976"></a>
+        <a id="idm54173"></a>
         <h2>Exécution</h2>
         <p>
-	    <span class="emphasis"><em>a1 ... a24</em></span>	-- signaux de sortie, dans l'intervalle
-	    -0dbfs, 0dbfs. Tous les échantillons avant le début (position négative) et
-	    après la fin du fichier sont supposés nuls, à moins que
+      <span class="emphasis"><em>a1 ... a24</em></span>  -- signaux de sortie, dans l'intervalle
+      -0dbfs, 0dbfs. Tous les échantillons avant le début (position négative) et
+      après la fin du fichier sont supposés nuls, à moins que
       <span class="emphasis"><em>iwrap</em></span> soit différent de zéro. Le nombre d'arguments
       en sortie doit être le même que le nombre de canaux dans le fichier, que
       l'on peut déterminer avec l'opcode
@@ -147,9 +148,9 @@
       sinon il y aura une erreur.
     </p>
         <p>
-	    <span class="emphasis"><em>ar1[]</em></span> --- signaux de sortie, dans un tableau de
-	    taux-a de taille N, où N est le nombre de canaux dans le fichier. Les
-	    tableaux sont automatiquement alloués avec la taille correcte.
+      <span class="emphasis"><em>ar1[]</em></span> --- signaux de sortie, dans un tableau de
+      taux-a de taille N, où N est le nombre de canaux dans le fichier. Les
+      tableaux sont automatiquement alloués avec la taille correcte.
     </p>
         <p>
       <span class="emphasis"><em>kpitch</em></span> -- N'importe quel nombre réel. Un nombre négatif
@@ -221,7 +222,7 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm46197607144592"></a>
+        <a id="idm54220"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode diskin. Il utilise les fichiers
@@ -229,16 +230,16 @@
       <a class="ulink" href="examples/beats.wav" target="_top"><em class="citetitle">beats.wav</em></a>.
       </p>
         <div class="example">
-          <a id="idm46197607141872"></a>
+          <a id="idm54227"></a>
           <p class="title">
-            <strong>Exemple 214. Exemple de l'opcode diskin.</strong>
+            <strong>Exemple 218. Exemple de l'opcode diskin.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm46197432773616"></a>
+              <a id="idm54234"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -279,7 +280,7 @@ a<span class="n">1</span>     <span class="nb">diskin</span> <span class="s">"be
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46197607137504"></a>
+        <a id="idm54298"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="in.html" title="in"><em class="citetitle">in</em></a>,
@@ -292,7 +293,7 @@ a<span class="n">1</span>     <span class="nb">diskin</span> <span class="s">"be
      </p>
       </div>
       <div class="refsect1">
-        <a id="idm46197607130016"></a>
+        <a id="idm54315"></a>
         <h2>Crédits</h2>
         <p>
       </p>

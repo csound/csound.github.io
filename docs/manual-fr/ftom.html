@@ -10,7 +10,7 @@
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="ftmorf.html" title="ftmorf" />
-    <link rel="next" href="ftsamplebank.html" title="ftsamplebank" />
+    <link rel="next" href="ftprint.html" title="ftprint" />
   </head>
   <body>
     <div class="navheader">
@@ -21,7 +21,7 @@
         <tr>
           <td width="20%" align="left"><a accesskey="p" href="ftmorf.html">Précédent</a> </td>
           <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
-          <td width="20%" align="right"> <a accesskey="n" href="ftsamplebank.html">Suivant</a></td>
+          <td width="20%" align="right"> <a accesskey="n" href="ftprint.html">Suivant</a></td>
         </tr>
       </table>
       <hr />
@@ -39,27 +39,32 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46197593416736"></a>
+        <a id="idm91559"></a>
         <h2>Description</h2>
+        <p>Opcode de greffon dans emugens.</p>
         <p>
       Convertit une fréquence en numéro de note MIDI, en tenant compte de la
       valeur globale du la3 (A4).
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46197593342512"></a>
+        <a id="idm91563"></a>
         <h2>Syntaxe</h2>
-        <pre class="synopsis">imidi <span class="command"><strong>ftom</strong></span> ifreq</pre>
-        <pre class="synopsis">kmidi <span class="command"><strong>ftom</strong></span> kfreq</pre>
+        <pre class="synopsis">imidi <span class="command"><strong>ftom</strong></span> ifreq [,irnd]</pre>
+        <pre class="synopsis">kmidi <span class="command"><strong>ftom</strong></span> kfreq [,irnd]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm46197593338992"></a>
+        <a id="idm91569"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kfreq</em></span> / <span class="emphasis"><em>ifreq</em></span> -- Fréquence.
     </p>
         <p>
-      <span class="emphasis"><em>kfmidi</em></span> / <span class="emphasis"><em>imidi</em></span> -- Numéro de note
+      <span class="emphasis"><em>irnd</em></span> -- Facultatif, s'il est différent de zéro le
+      résultat est arrondi à l'entier le plus proche (zéro par défaut).
+    </p>
+        <p>
+      <span class="emphasis"><em>kmidi</em></span> / <span class="emphasis"><em>imidi</em></span> -- Numéro de note
       MIDI correspondant.
     </p>
         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
@@ -82,20 +87,20 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm46197593333696"></a>
+        <a id="idm91583"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode ftom. Il utilise le fichier
       <a class="ulink" href="examples/mtof-ftom.csd" target="_top"><em class="citetitle">mtof-ftom.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm46197593331920"></a>
+          <a id="idm91588"></a>
           <p class="title">
-            <strong>Exemple 366. Exemple de l'opcode ftom.</strong>
+            <strong>Exemple 374. Exemple de l'opcode ftom.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm46197417542624"></a>
+              <a id="idm91590"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -103,9 +108,9 @@
 <span class="nt">&lt;CsInstruments&gt;</span>
 
 <span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">128</span>
 <span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">A4</span> <span class="o">=</span> <span class="mi">440</span>
 
 <span class="kd">instr</span> <span class="nf">1</span>
@@ -115,6 +120,9 @@
     k<span class="n">midi</span> <span class="o">=</span> <span class="nb">ftom</span><span class="p">(</span><span class="mi">442</span><span class="p">)</span>
     <span class="nb">printks2</span> <span class="s">"freq 442  -&gt; %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">midi</span>
 
+    k<span class="n">midi</span> <span class="o">=</span> <span class="nb">ftom</span><span class="p">(</span><span class="mi">442</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">printks2</span> <span class="s">"freq 442  -&gt; %f rounded</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">midi</span>
+
     k<span class="n">freq</span> <span class="o">=</span> <span class="nb">mtof</span><span class="p">(</span>k<span class="n">midi</span><span class="p">)</span>
     <span class="nb">printks</span> <span class="s">"midi %f -&gt; %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">midi</span><span class="p">,</span> k<span class="n">freq</span>
 
@@ -123,15 +131,16 @@
 
     i<span class="n">freq</span> <span class="o">=</span> <span class="nb">mtof</span><span class="p">:</span><span class="nb">i</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
     <span class="nb">print</span> i<span class="n">freq</span>
-    
 
-    
+
+
     <span class="nb">turnoff</span>
 <span class="kd">endin</span>
 
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span>
+
 <span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
@@ -142,7 +151,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46197593330000"></a>
+        <a id="idm91697"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="cpsmidinn.html" title="cpsmidinn"><em class="citetitle">cpsmidinn</em></a>, 
@@ -150,10 +159,11 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46197593326880"></a>
+        <a id="idm91704"></a>
         <h2>Crédits</h2>
         <p>Par : Eduardo Moguillansky 2017</p>
         <p>Nouveau dans la version 6.09</p>
+        <p>Option d'arrondi ajoutée dans la 6.12</p>
       </div>
     </div>
     <div class="navfooter">
@@ -164,14 +174,14 @@
           <td width="20%" align="center">
             <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
           </td>
-          <td width="40%" align="right"> <a accesskey="n" href="ftsamplebank.html">Suivant</a></td>
+          <td width="40%" align="right"> <a accesskey="n" href="ftprint.html">Suivant</a></td>
         </tr>
         <tr>
           <td width="40%" align="left" valign="top">ftmorf </td>
           <td width="20%" align="center">
             <a accesskey="h" href="index.html">Sommaire</a>
           </td>
-          <td width="40%" align="right" valign="top"> ftsamplebank</td>
+          <td width="40%" align="right" valign="top"> ftprint</td>
         </tr>
       </table>
     </div>

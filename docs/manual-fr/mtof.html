@@ -39,21 +39,22 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46197576302480"></a>
+        <a id="idm142021"></a>
         <h2>Description</h2>
+        <p>Opcode de greffon dans emugens.</p>
         <p>
       Convertit un numéro de note MIDI en fréquence en tenant compte de la
       valeur globale du la3 (A4).
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46197576301040"></a>
+        <a id="idm142025"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ifreq <span class="command"><strong>mtof</strong></span> imidi</pre>
         <pre class="synopsis">kfreq <span class="command"><strong>mtof</strong></span> kmidi</pre>
       </div>
       <div class="refsect1">
-        <a id="idm46197576255008"></a>
+        <a id="idm142031"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kmidi</em></span> / <span class="emphasis"><em>imidi</em></span> -- Numéro de note
@@ -65,20 +66,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46197576251664"></a>
+        <a id="idm142039"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode mtof. Il utilise le fichier
       <a class="ulink" href="examples/mtof-ftom.csd" target="_top"><em class="citetitle">mtof-ftom.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm46197576249888"></a>
+          <a id="idm142044"></a>
           <p class="title">
-            <strong>Exemple 585. Exemple de l'opcode mtof.</strong>
+            <strong>Exemple 598. Exemple de l'opcode mtof.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm46197394617216"></a>
+              <a id="idm142046"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -86,9 +87,9 @@
 <span class="nt">&lt;CsInstruments&gt;</span>
 
 <span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">128</span>
 <span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">A4</span> <span class="o">=</span> <span class="mi">440</span>
 
 <span class="kd">instr</span> <span class="nf">1</span>
@@ -98,6 +99,9 @@
     k<span class="n">midi</span> <span class="o">=</span> <span class="nb">ftom</span><span class="p">(</span><span class="mi">442</span><span class="p">)</span>
     <span class="nb">printks2</span> <span class="s">"freq 442  -&gt; %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">midi</span>
 
+    k<span class="n">midi</span> <span class="o">=</span> <span class="nb">ftom</span><span class="p">(</span><span class="mi">442</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">printks2</span> <span class="s">"freq 442  -&gt; %f rounded</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">midi</span>
+
     k<span class="n">freq</span> <span class="o">=</span> <span class="nb">mtof</span><span class="p">(</span>k<span class="n">midi</span><span class="p">)</span>
     <span class="nb">printks</span> <span class="s">"midi %f -&gt; %f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">midi</span><span class="p">,</span> k<span class="n">freq</span>
 
@@ -106,15 +110,16 @@
 
     i<span class="n">freq</span> <span class="o">=</span> <span class="nb">mtof</span><span class="p">:</span><span class="nb">i</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
     <span class="nb">print</span> i<span class="n">freq</span>
-    
 
-    
+
+
     <span class="nb">turnoff</span>
 <span class="kd">endin</span>
 
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span>
+
 <span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
@@ -125,7 +130,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46197576248032"></a>
+        <a id="idm142153"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="cpsmidinn.html" title="cpsmidinn"><em class="citetitle">cpsmidinn</em></a>, 
@@ -135,10 +140,10 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46197576242976"></a>
+        <a id="idm142164"></a>
         <h2>Crédits</h2>
         <p>Par : Eduardo Moguillansky 2017</p>
-        <p>Nouveau dans la version 6.09</p>
+        <p>Nouveau greffon dans la version 6.11</p>
       </div>
     </div>
     <div class="navfooter">

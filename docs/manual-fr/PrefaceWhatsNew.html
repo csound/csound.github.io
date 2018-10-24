@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Les nouveautés de Csound 6.11.0</title>
+    <title>Les nouveautés de Csound 6.12.0</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -16,7 +16,7 @@
     <div class="navheader">
       <table width="100%" summary="Navigation header">
         <tr>
-          <th colspan="3" align="center">Les nouveautés de Csound 6.11.0</th>
+          <th colspan="3" align="center">Les nouveautés de Csound 6.12.0</th>
         </tr>
         <tr>
           <td width="20%" align="left"><a accesskey="p" href="PrefaceGettingStarted.html">Précédent</a> </td>
@@ -30,11 +30,388 @@
       <div class="titlepage">
         <div>
           <div>
-            <h2 class="title" style="clear: both"><a id="PrefaceWhatsNew"></a>Les nouveautés de Csound 6.11.0</h2>
+            <h2 class="title" style="clear: both"><a id="PrefaceWhatsNew"></a>Les nouveautés de Csound 6.12.0</h2>
           </div>
         </div>
       </div>
-      <h3><a id="idm46692682108464"></a>Notes de parution de Csound 6.11 (mai 2018)</h3>
+      <h3><a id="idm330"></a>Notes de parution de Csound 6.12 ()</h3>
+      <p>
+    De nombreux changements comprenant la suppression de la fonctionnalité
+    vst2cs à cause d'un problème de copyright.
+  </p>
+      <p>
+    Les changements apportés dans la version 6.11 à la lecture en format raw ont
+    été modfifiés afin que gen1 et diskin ignorent les formats de fichiers
+    exprimés par un nombre positif et utilisent à la place l'en-tête du fichier,
+    à moins que le format soit exprimé par un nombre négatif dont la valeur
+    absolue est alors utilisée pour le format d'un fichier audio raw. Cela
+    devrait régler la plupart des problèmes de compatibilité.
+  </p>
+      <p>
+    Il y a plusieurs nouveaux opcodes et améliorations d'opcodes, de nouvelles
+    facilités dans les partitions et plusieurs corrections de bogues.
+  </p>
+      <p>
+    </p>
+      <div class="itemizedlist">
+        <ul class="itemizedlist" style="list-style-type: disc; ">
+          <li class="listitem">
+            <p>Nouveaux opcodes :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem"><a class="link" href="fluidInfo.html" title="fluidInfo"><em class="citetitle">fluidInfo</em></a>
+               retrouve l'information de programme dans un soundfont
+              chargé.
+            </li>
+                <li class="listitem">
+              Le nouvel opcode <a class="link" href="ftaudio.html" title="ftaudio"><em class="citetitle">ftaudio</em></a>
+              écrit une ftable dans un fichier audio ; il existe des versions
+              au taux-i et déclenchée au taux-k et la version de taux-k
+              supporte l'écriture synchrone ou asynchrone.
+            </li>
+                <li class="listitem">
+              Une version de <a class="link" href="OSClisten.html" title="OSClisten"><em class="citetitle">OSClisten</em></a>
+               qui écrit les données dans un tableau de taux-k.
+            </li>
+                <li class="listitem"><a class="link" href="OSCcount.html" title="OSCcount"><em class="citetitle">OSCcount</em>
+              </a> retourne le nombre restant de messages OSC
+              entrants.
+            </li>
+                <li class="listitem"><p class="simpara"><a class="link" href="faustplay.html" title="faustplay"><em class="citetitle">faustplay</em></a>
+              </p> et <p class="simpara"><a class="link" href="faustdsp.html" title="faustdsp">
+              <em class="citetitle">faustdsp</em></a></p> sont de nouveaux
+              opcodes séparant l'instanciation du TNS faust et son exécution.
+            </li>
+                <li class="listitem"><a class="link" href="OSCbundle.html" title="OSCbundle"><em class="citetitle">OSCbundle</em></a>
+               envoit une collection de messages OSC similaires sous
+              forme d'un paquet unique pour plus d'efficacité.
+            </li>
+                <li class="listitem"><p class="simpara"><a class="link" href="beosc.html" title="beosc"><em class="citetitle">beosc</em></a>
+              </p> et <p class="simpara"><a class="link" href="beadsynt.html" title="beadsynt">
+              <em class="citetitle">beadsynt</em></a></p> sont un
+              oscillateur et un banc d'oscillateurs à bande améliorée.
+              <p class="simpara"><a class="link" href="bpfcos.html" title="bpfcos"><em class="citetitle">bpfcos</em></a></p>
+              sert pour des fonctions à points charnière avec interpolation.
+              De même <p class="simpara">
+              <a class="link" href="lincos.html" title="lincos"><em class="citetitle">lincos</em></a>
+              </p> ajoute une interpolation par cosinus à <p class="simpara"><a class="link" href="linlin.html" title="linlin"><em class="citetitle">linlin</em></a></p>.
+            </li>
+                <li class="listitem"><p class="simpara"><a class="link" href="printarray.html" title="printarray"><em class="citetitle">printarray</em></a>
+              </p> et <p class="simpara"><a class="link" href="reshapearray.html" title="reshapearray">
+              <em class="citetitle">reshapearray</em></a></p> agissent sur
+              les tableaux.
+            </li>
+                <li class="listitem"><p class="simpara"><a class="link" href="trim.html" title="trim"><em class="citetitle">trim</em></a>
+              </p> et <p class="simpara"><a class="link" href="trim.html" title="trim">
+              <em class="citetitle">trim_i</em></a></p> ajustent la taille
+              d'un tableau unidimensionnel soit en l'augmentant soit en la
+              diminuant, en préservant les données et/ou en complétant avec des
+              zéros.
+            </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>
+          Orchestre :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                Nouvelle option du préprocesseut #includestr. Comme
+                #include avec en plus développement de macro de la chaîne de
+                caractères délimitées par doubles apostrophes.
+              </li>
+                <li class="listitem">
+                Utilisation des notes liées dans subinstr corrigée.
+              </li>
+                <li class="listitem">
+                Les appels de macro imbriqués plus de 10 fois provoquaient un
+                plantage ; maintenant l'imbrication n'est plus limitée.
+              </li>
+                <li class="listitem">
+                Un message d'erreur d'exécution comprend maintenant
+                (habituellement) un numéro de ligne et une trace de
+                fichier/macro.
+              </li>
+                <li class="listitem">
+                Les affectations multiples telles que ka, kb = 1, 2 sont à
+                nouveau supportées par le parseur ; cette possibilité avait été
+                annulée par erreur.
+              </li>
+                <li class="listitem">
+                L'utilisation problématique de i() directement avec un élément
+                de tableau est maintenant indiquée comme une erreur.
+              </li>
+                <li class="listitem">
+                Si un nom de fichier inclu contient un "/", alors toute
+                inclusion imbriquée est relative à ce répertoire. (Issue n°973).
+              </li>
+                <li class="listitem">
+                Redéfinition des UDOs avec aucun argument en sortie corrigée.
+              </li>
+                <li class="listitem">
+                Un bogue très obscur dans les sous-instrumenst, qui a été
+                présent pendant presqu'un an, a été corrigé.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Partition :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                Nouvelle option du préprocesseut #includestr. Comme
+                #include avec en plus développement de macro de la chaîne de
+                caractères délimitées par doubles apostrophes.
+              </li>
+                <li class="listitem">
+                Opcode de partition 'd' pour exécution en temps réel. C'était
+                l'issue n°966.
+              </li>
+                <li class="listitem">Bogue dans l'opération np corrigé.</li>
+                <li class="listitem">
+                L'utilisation de la syntaxe [] dans une partition pouvait
+                entraîner une perte de précision pour les nombres supérieurs à
+                1 million ; l'ancienne version a été restaurée.
+              </li>
+                <li class="listitem">
+                Les appels de macro imbriqués plus de 10 fois provoquaient un
+                plantage ; maintenant l'imbrication n'est plus limitée.
+              </li>
+                <li class="listitem">
+                Les formes pour fins de sections retardées (e 5 ou s 5)
+                fonctionnent maintenant avec des retards fractionnaires ;
+                auparavant seule la partie entière était lue.
+              </li>
+                <li class="listitem">
+                Si un nom de fichier inclu contient un "/", alors toute
+                inclusion imbriquée est relative à ce répertoire. (Issue n°973).
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Opcodes et Gens modifiés :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                Argument facultatif ajouté à ftom pour arrondir la réponse à
+                un entier.
+              </li>
+                <li class="listitem">
+                flooper2 et syncgrain etc permettent maintenant le
+                reéchantillonnage.
+              </li>
+                <li class="listitem">
+                chnclear peut prendre maintenant une liste de canaux à effacer
+                au lieu d'un seul.
+              </li>
+                <li class="listitem">
+                printf et printf_i now sont maintenant conformes au manuel :
+                tous les arguments au-delà de format et de trigger sont
+                facultatifs.
+              </li>
+                <li class="listitem">
+                prints et printks peuvent recevoir des arguments chaîne de
+                caractères affichés avec %s.
+              </li>
+                <li class="listitem">
+                GEN2 peut prendre maintenant une taille nulle, qui est
+                interprétée comme la taille suffisante pour le nombre de valeurs
+                fournies.
+              </li>
+                <li class="listitem">
+                faustcompile comprend maintenant un nouveau paramètre
+                facultatif pour permettre l'exécution en mode bloqué. Par
+                défaut (comme précédemment) il est en mode non-bloqué.
+              </li>
+                <li class="listitem">
+                fillarray peut être exécuté au taux-k si n'importe lequel de
+                ses arguments/valeurs est au taux-k.
+              </li>
+                <li class="listitem">
+                slicearray pour les tableaux autres que ceux de taux-i ne
+                s'exécute qu'au taux-k.
+              </li>
+                <li class="listitem">
+                pvstrace a maintenant l'option de retourner aussi un tableau
+                contenant les numéros de bin.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Utilités :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                Une erreur de codage dans mixer a été corrigée. L'opcode était
+                très abimé.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Bogues corrigés :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                Une erreur de typographie dans p5glove signifiait que la
+                commande pour lire l'état du bouton comme un bitmap ne
+                retournait que l'état du bouton A.
+              </li>
+                <li class="listitem">
+                diskin vers tableau corrigé et également l'utilsation avec de
+                petites valeurs de ksmps.
+              </li>
+                <li class="listitem">
+                loscil échouait parfois à traiter l'argument ibas ; le
+                traitement est correct maintenant.
+              </li>
+                <li class="listitem">
+                madsr pouvait provoquer un dépassement sur un compteur interne
+                lorqu'un p3 négatif était donné.
+              </li>
+                <li class="listitem">
+                La correspondance entre threads et lua_States a été corrigée
+                (issue n°959).
+              </li>
+                <li class="listitem">
+                Le temps de calcul dans flooper2, flooper et syncgrain a été
+                corrigé.
+              </li>
+                <li class="listitem">
+                Rééchantillonnage et hauteur corrigés dans pvstanal.
+              </li>
+                <li class="listitem">
+                De rares cas de saturation de tampon ont été corrigés dans
+                faust.
+              </li>
+                <li class="listitem">
+                pvsftw avait un contrôle de format de TFR incorrect qui
+                produisait un message d'erreur de format ; c'est corrigé.
+              </li>
+                <li class="listitem">
+                Si ksmps valait 1, l'opcode linenr au taux-a ne fonctionnait
+                pas ; c'est corrigé.
+              </li>
+                <li class="listitem">Opcode window corrigé.</li>
+                <li class="listitem">
+                Le contrôle de compatibilité des sous-types de f-valeurs dans
+                plusieurs opcodes pvs était défectueux, provoquant de faux
+                messages d'erreur.
+              </li>
+                <li class="listitem">
+                cosseg était inopérant pour plus d'un segment. Corrigé
+                maintenant.
+              </li>
+                <li class="listitem">
+                L'opcode monitor ne fonctionnait pas correctement lors de
+                l'utilisation de plusieurs processus ; c'est corrigé.
+              </li>
+                <li class="listitem">
+                Dans l'opcode linenr si la chute commençait avant la fin
+                de l'attaque la valeur de sortie sautait à la valeur finale
+                et ensuite diminuait, provoquant une discontinuité. C'est
+                corrigé (n°1048).
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Changements système :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                Les différentes options -zN rapportent maintenant le nombre
+                d'opcodes pour la demande et diffèrent ainsi sur les opcodes
+                obsolètes et les opcodes polymorphes.
+              </li>
+                <li class="listitem">
+                La recompilation des instruments nommés a été totalement
+                repensée pour éviter les erreurs et les fuites de mémoire.
+              </li>
+                <li class="listitem">
+                L'allocation des noms d'instrument à des numéros internes a été
+                réécrite et devrait rester stable lors des remplacements en
+                codage en temps réel.
+              </li>
+                <li class="listitem">
+                L'affichage du numéro alloué à un instrument nommé s'effectue
+                maintenant normalement, pas seulement en mode débogage.
+              </li>
+                <li class="listitem">
+                Si la version 0.29 de liblo est disponible, csound peut être
+                construit pour l'utiliser (avec l'option de compilation LIBLO29)
+                et cela corrige certains bogues liés à une utilisation
+                lourde/complexe de OSClisten. Malheureusement l'ancienne version
+                0.28 version est toujours distribuée sur certaines versions de
+                linux.
+              </li>
+                <li class="listitem">
+                Le compilateur d'orchestre a plusieurs nouvelles optimisations
+                évitant des affectations inutiles et réalisant un peu plus
+                d'optimisation d'expressions.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>API:
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                csound-&gt;ReadScore a été modifié pour avoir le même comportement
+                qu'avec un fichier csd ou sco. Avant cela, il pouvait donner ou
+                pas une partition infinie de manière inattendue.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Changements sur les plates-formes :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                Bela : autorise les E/S analogiques avec différents numéros de
+                canaux.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+        </ul>
+      </div>
+      <p>
+  </p>
+      <h3><a id="idm520"></a>Notes de parution de Csound 6.11 (mai 2018)</h3>
       <p>
     Il y a eu une importante réoganisation en interne qui ne devrait pas affecter
     la plupart des utilisateurs. Certains composants sont maintenant gérés
@@ -318,7 +695,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm46692682025632"></a>Notes de parution de Csound 6.10 (décembre 2017)</h3>
+      <h3><a id="idm619"></a>Notes de parution de Csound 6.10 (décembre 2017)</h3>
       <p>
     C'est principalement une distribution de correction de bogues, incluant un
     bogue important introduit récemment dans loscil. Il y a aussi de nouveaux
@@ -589,13 +966,6 @@
             <div class="itemizedlist">
               <ul class="itemizedlist" style="list-style-type: circle; ">
                 <li class="listitem">
-                La licence GNU Lesser General Public, version 2.1, pour CsoundVST
-                et les opcodes vst4cs a été modifiée pour garantir une exception
-                pour compiler et lier le code avec le SDK VST2, qui est disponible
-                à <a class="ulink" href="https://github.com/steinbergmedia/vst3sdk" target="_top">https://github.com/steinbergmedia/vst3sdk</a>.
-                Pour plus d'information, voir <a class="ulink" href="https://github.com/csound/csound/blob/develop/Opcodes/vst4cs/licensing_considerations_for_csoundvst_and_vst4cs.md" target="_top">https://github.com/csound/csound/blob/develop/Opcodes/vst4cs/licensing_considerations_for_csoundvst_and_vst4cs.md</a>.
-              </li>
-                <li class="listitem">
                 Le serveur UDP accepte maintenant de nouvelles commandes qui sont
                 préfixées par un opcode. Cela comprend le support des évènements
                 (&amp;) et des partitions ($) ; l'affectation des canaux de contrôle
@@ -667,15 +1037,6 @@
                     ultérieur.
                   </li>
                       <li class="listitem">Intégration continue pour Windows avec AppVeyor.</li>
-                      <li class="listitem">
-                    Le constructeur et installeur AppVeyor comprend maintenant
-                    les opcodes CsoundVST et vst4cs ce qui permet le chargement
-                    de greffons VST dans Csound. La licence LGPL v2.1 pour ce
-                    code a été modifiée, avec la permission de Hermann Seib
-                    l'auteur à l'origine du code VSTHost, pour permettre son
-                    utilisation avec le VST2 SDK de Steinberg téléchargé
-                    séparément.
-                  </li>
                     </ul>
                   </div>
                 </li>
@@ -699,7 +1060,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm46692681939616"></a>Notes de parution de Csound 6.09 (mai 2017)</h3>
+      <h3><a id="idm785"></a>Notes de parution de Csound 6.09 (mai 2017)</h3>
       <p>De nouveaux opcodes et plusieurs corrections et améliorations.</p>
       <p>
     Il y a comme d'habitude un certain nombres de changement internes, y compris
@@ -1061,7 +1422,7 @@
             <div class="itemizedlist">
               <ul class="itemizedlist" style="list-style-type: circle; ">
                 <li class="listitem">
-                Nouvelles facilités présentes seulement dans l'entête
+                Nouvelles facilités présentes seulement dans l'en-tête
                 csound_threaded.hpp, supprimant l'utilisation de
                 csPerfThread.cpp dans certains projets.
               </li>
@@ -1072,8 +1433,8 @@
               </li>
                 <li class="listitem">Ajout de la fonction StrDup.</li>
                 <li class="listitem">
-                Dépendances à boost supprimées des interfaces de Csound, de
-                CsoundAC et CsoundVST.
+                Dépendances à boost supprimées des interfaces de Csound et de
+                CsoundAC.
               </li>
                 <li class="listitem">
                 (à partir de la 6.09.1) Deux nouvelles fonctions de l'API,
@@ -1137,7 +1498,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm46692681816576"></a>Notes de parution de Csound 6.08 (novembre 2016)</h3>
+      <h3><a id="idm1053"></a>Notes de parution de Csound 6.08 (novembre 2016)</h3>
       <p>
     Comme d'habitude, il y a un certain nombre de corrections et d'améliorations
     des opcodes, mais les changements les plus importants apparaissent dans les
@@ -1507,7 +1868,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm46692681721232"></a>Notes de parution de Csound 6.07 (mars 2016)</h3>
+      <h3><a id="idm1257"></a>Notes de parution de Csound 6.07 (mars 2016)</h3>
       <p>
     De nombreux bogues corrigés, dont certains importants, des éléments internes
     sont inclus, ainsi que de nouvelles fonctionnalités et extensions. Comme
@@ -1894,9 +2255,6 @@
                 d'une puissance de deux.
               </li>
                 <li class="listitem">
-                vst4cs fonctionne maintenant sur architecture 64 bit.
-              </li>
-                <li class="listitem">
                 <a class="link" href="strcat.html" title="strcat"><em class="citetitle">strcat</em></a>
                 réparé.
               </li>
@@ -2071,7 +2429,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm46692681562752"></a>Notes de parution de Csound 6.06 (septembre 2015)</h3>
+      <h3><a id="idm1607"></a>Notes de parution de Csound 6.06 (septembre 2015)</h3>
       <p>De nombreux bogues, certains assez importants, ont été corrigés et de
   nouvelles facilités et extensions ont été ajoutées.</p>
       <p>
@@ -2132,7 +2490,7 @@
               pour donner le nombre de canaux dans le format de fichier brut.</li>
                 <li class="listitem">Le paramètre kpitch de diskin2 vaut 1 par défaut pour
               les utilisations simples.</li>
-                <li class="listitem">La f-table de vibrato dans wgflute et dans wgcar est
+                <li class="listitem">La ftable de vibrato dans wgflute et dans wgcar est
               facultative, étant définie par défaut sur une onde sinus.</li>
                 <li class="listitem">schedule accepte maintenant les arguments chaîne de
               caractères.</li>
@@ -2303,7 +2661,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm46692681502192"></a>Notes de parution de Csound 6.05 (Avril 2015)</h3>
+      <h3><a id="idm1743"></a>Notes de parution de Csound 6.05 (Avril 2015)</h3>
       <p>Comme toujours il y a de nouvelles facilités et de nombreuses
   corrections de bogues. Une grande partie de cette livraison consiste en la
   suppression de nombreuses fuites et de saturation de mémoire. Naturellement
@@ -2399,7 +2757,7 @@
               acceptent maintenant les tables stéréo.</li>
                 <li class="listitem">La phase de relâchement d'<span class="emphasis"><em>expsegr</em></span>
               a été corrigée.</li>
-                <li class="listitem">Les f-tables crées avec un grand nombre d'arguments pouvaient
+                <li class="listitem">Les ftables crées avec un grand nombre d'arguments pouvaient
               saturer la mémoire ; c'est corrigé maintenant.</li>
                 <li class="listitem">L'exécution de <span class="emphasis"><em>plltrack</em></span> a été
               améliorée.</li>
@@ -2407,8 +2765,8 @@
                 <li class="listitem"><span class="emphasis"><em>gen23</em></span> a été corrigé pour stopper une
               boucle infinie.</li>
                 <li class="listitem">alwayson démarre maintenant depuis le décalage de la
-               partition ; cela fait partie de la correction d'un problème
-               ancien avec alwayson dans CsoundVST</li>
+                partition.
+              </li>
                 <li class="listitem">invalue teste dorénavant la taille de chaîne de caractères
               en sortie et réalloue de la mémoire si elle est inférieure à la
               taille par défaut (fixée à 256 octets pour une compatibité
@@ -2580,7 +2938,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm46692681431360"></a>Notes de parution de Csound 6.04 (novembre 2014)</h3>
+      <h3><a id="idm1903"></a>Notes de parution de Csound 6.04 (novembre 2014)</h3>
       <p>Cette nouvelle version comprend de nombreuses extensions et corrections ;
   de nouveaux opcodes et un nombre important de réorganisations internes. Il y a
   un nouveau frontal et les versions iOS et Android présentent de nombreuses
@@ -2850,7 +3208,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm46692681344000"></a>Notes de parution de Csound 6.03 (mai 2014)</h3>
+      <h3><a id="idm2097"></a>Notes de parution de Csound 6.03 (mai 2014)</h3>
       <p>
     Cette nouvelle version corrige de nombreux bogues, comprenant la résolution
     de tickets sur SourceForge et sur GitHub. Elle apporte également des
@@ -3198,7 +3556,7 @@ void csoundDebugFreeVariables(CSOUND *csound, debug_variable_t *varHead);</pre>
       </div>
       <p>
   </p>
-      <h3><a id="idm46692682114688"></a>Notes de parution de Csound 6.02</h3>
+      <h3><a id="idm2273"></a>Notes de parution de Csound 6.02</h3>
       <p>
     Cette nouvelle version comporte de nombreuses corrections de bogues
     (y compris la résolution générale de tous les tickets sur SourceForge).
@@ -3281,10 +3639,6 @@ void csoundDebugFreeVariables(CSOUND *csound, debug_variable_t *varHead);</pre>
               maintenant la documentation. Dans certains cas les résultats
               étaient bizarres.
               </li>
-                <li class="listitem">Les opcodes vst4cs ont été réécrits. Le code FLTK a été
-              encapsulé. Le système de construction a été mis à jour pour
-              Csound 6.
-              </li>
                 <li class="listitem">Dans l'opcode <span class="emphasis"><em>alwayson</em></span>, modifications
               pour une meilleure gestion des p-champs et une insertion plus fiable
               d'une instance d'instrument pour répéter ou redémarrer des sections
@@ -3333,10 +3687,6 @@ void csoundDebugFreeVariables(CSOUND *csound, debug_variable_t *varHead);</pre>
               </li>
                 <li class="listitem">Dépassement d'indice dans <span class="emphasis"><em>randh</em></span> et
               dans <span class="emphasis"><em>randi</em></span>.
-              </li>
-                <li class="listitem">Plusieurs corrections dans CsoundVST : initialisation,
-              gestion de la partition et initialisation du pilote MIDI, ce qui
-              le rend fonctionnel dans Csound 6.
               </li>
                 <li class="listitem"><span class="emphasis"><em>pycalln</em></span> s'il n'y a pas d'entrée.
               </li>
@@ -3453,7 +3803,7 @@ void csoundDebugFreeVariables(CSOUND *csound, debug_variable_t *varHead);</pre>
       </div>
       <p>
   </p>
-      <h3><a id="idm46692681175376"></a>Notes de parution de Csound6</h3>
+      <h3><a id="idm2445"></a>Notes de parution de Csound6</h3>
       <p>
   Csound6 est une réécriture significative d'une grande partie du code. En
   particulier, l'API n'est plus compatible, mais tous les anciens fichiers
@@ -3626,7 +3976,7 @@ void csoundDebugFreeVariables(CSOUND *csound, debug_variable_t *varHead);</pre>
  ktab2 <span class="opc">maparray_i</span> ktab1, "sin" <span class="comment">applique le fonction de taux-i à 1 arg</span>
                           <span class="comment">dans la chaîne, à chaque élément du vecteur</span>
  ktab2 <span class="opc">slicearray</span> ktab1, istart, iend
-                          <span class="comment">retourne une tranche de ktab1 allant de ktab1[istart]</span>
+                          <span class="comment">retourne un bout de ktab1 allant de ktab1[istart]</span>
                           <span class="comment">à ktab1[iend]</span>
  <span class="opc">copyf2array</span> ktab, kfn    <span class="comment">copie les données d'une ftable dans un vecteur</span>
  <span class="opc">copya2ftab</span>  ktab, kfn    <span class="comment">copie les données d'un vecteur dans une ftable</span></pre></div>
@@ -3963,7 +4313,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
 </p>
-      <h3><a id="idm46692681040016"></a>Nouveautés dans la version 5.19 (7 janvier 2013)</h3>
+      <h3><a id="idm2702"></a>Nouveautés dans la version 5.19 (7 janvier 2013)</h3>
       <p>
   C'est principalement une distribution de correction de bogues avec cependant
   de nouveaux opcodes et des améliorations.
@@ -4263,7 +4613,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
 </p>
-      <h3><a id="idm46692680969552"></a>Nouveautés dans la version 5.18 (29 août 2012)</h3>
+      <h3><a id="idm2866"></a>Nouveautés dans la version 5.18 (29 août 2012)</h3>
       <p>
   C'est principalement une distribution de correction de bogues avec cependant
   de nouveaux opcodes et des améliorations.
@@ -4415,7 +4765,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm46692680919328"></a>Nouveautés dans la version 5.17 (mars 2012)</h3>
+      <h3><a id="idm2986"></a>Nouveautés dans la version 5.17 (mars 2012)</h3>
       <p>
     C'est principalement une distribution sans changement majeur mais avec de
     nombreuses corrections.
@@ -4542,7 +4892,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm46692680882816"></a>Nouveautés dans la version 5.16 (février 2012)</h3>
+      <h3><a id="idm3070"></a>Nouveautés dans la version 5.16 (février 2012)</h3>
       <p>
     Le changement principal est que le nouveau parseur est maintenant employé
     par défaut. L'ancien parseur est toujours disponible en cas de difficultés,
@@ -4704,7 +5054,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm46692680828640"></a>Nouveautés dans la version 5.15 (décembre 2011)</h3>
+      <h3><a id="idm3184"></a>Nouveautés dans la version 5.15 (décembre 2011)</h3>
       <p>
   </p>
       <div class="itemizedlist">
@@ -4844,7 +5194,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm46692680771280"></a>Nouveautés dans la version 5.14 (octobre 2011)</h3>
+      <h3><a id="idm3324"></a>Nouveautés dans la version 5.14 (octobre 2011)</h3>
       <p>
   </p>
       <div class="itemizedlist">
@@ -4980,7 +5330,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm46692680695712"></a>Nouveautés dans la version 5.13 (janvier 2011)</h3>
+      <h3><a id="idm3505"></a>Nouveautés dans la version 5.13 (janvier 2011)</h3>
       <p>
     </p>
       <div class="itemizedlist">
@@ -5114,7 +5464,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm46692680630928"></a>Nouveautés dans la version 5.12 (janvier 2010)</h3>
+      <h3><a id="idm3664"></a>Nouveautés dans la version 5.12 (janvier 2010)</h3>
       <p>
    </p>
       <div class="itemizedlist">
@@ -5189,7 +5539,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
                 <li class="listitem">
                Le numéro de ligne dans les messages d'erreur n'inclut plus de
                texte de
-               <a class="link" href="CommandUnifileParFile.html" title="Fichier de paramètres de ligne de commande (.csoundrc)"><em class="citetitle">.csoundrc</em></a>.
+               <a class="link" href="CommandUnifileParFile.html" title="Fichier de paramètres de ligne de commande (.csound6rc)"><em class="citetitle">.csoundrc</em></a>.
              </li>
                 <li class="listitem">
                <a class="link" href="p5gconnect.html" title="p5gconnect"><em class="citetitle">p5gconnect</em></a>
@@ -5245,7 +5595,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
  </p>
-      <h3><a id="idm46692680589248"></a>Nouveautés dans la version 5.11 (juin 2009)</h3>
+      <h3><a id="idm3761"></a>Nouveautés dans la version 5.11 (juin 2009)</h3>
       <p>
     </p>
       <div class="itemizedlist">
@@ -5415,7 +5765,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm46692680525344"></a>Nouveautés dans la version 5.10 (décembre 2008)</h3>
+      <h3><a id="idm3914"></a>Nouveautés dans la version 5.10 (décembre 2008)</h3>
       <p>
     </p>
       <div class="itemizedlist">
@@ -5510,7 +5860,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm46692680499872"></a>Nouveautés dans la version 5.09 (octobre 2008)</h3>
+      <h3><a id="idm3966"></a>Nouveautés dans la version 5.09 (octobre 2008)</h3>
       <p>
     </p>
       <div class="itemizedlist">
@@ -5660,7 +6010,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm46692680447776"></a>Nouveautés dans la version 5.08 (février 2008)</h3>
+      <h3><a id="idm4089"></a>Nouveautés dans la version 5.08 (février 2008)</h3>
       <p>
     </p>
       <div class="itemizedlist">
@@ -5800,7 +6150,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm46692680397296"></a>Nouveautés dans la version 5.07 (octobre 2007)</h3>
+      <h3><a id="idm4209"></a>Nouveautés dans la version 5.07 (octobre 2007)</h3>
       <p>
       </p>
       <div class="itemizedlist">
@@ -5903,7 +6253,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
     </p>
-      <h3><a id="idm46692680358496"></a>Nouveautés dans la version 5.06 (juin 2007)</h3>
+      <h3><a id="idm4303"></a>Nouveautés dans la version 5.06 (juin 2007)</h3>
       <p>
     </p>
       <div class="itemizedlist">
