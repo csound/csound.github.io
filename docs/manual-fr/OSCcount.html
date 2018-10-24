@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>OSCcount</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="OSCbundle.html" title="OSCbundle" />
+    <link rel="next" href="OSCinit.html" title="OSCinit" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">OSCcount</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="OSCbundle.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="OSCinit.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="OSCcount"></a>
+      <div class="titlepage"></div>
+      <a id="IndexOSCcount" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">OSCcount</span>
+        </h2>
+        <p>OSCcount — 
+      Donne le nombre de messages OSC pas encore lus.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm151013"></a>
+        <h2>Description</h2>
+        <p>Opcode de greffon dans osc.</p>
+        <p>
+      Donne le nombre de messages OSC pas encore lus mais reçus par les
+      récepteurs courants.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm151017"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">kans <span class="command"><strong>OSCcount</strong></span></pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm151021"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kans</em></span> -- contient le nombre de messages acceptés
+      par Csound sur n'importe quelle adresse mais pas encore présentés à
+      un appel à OSClisten.
+    </p>
+        <p>
+      On peut utiliser cet opcode lorqu'il y a plusieurs récepteurs et que
+      l'on décide de les tester pour savoir s'il y a des messages.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm151026"></a>
+        <h2>Example</h2>
+        <p>
+      Cet exemple montre une paire de nombres en virgule flottante reçus
+      sur le port 7770.
+    </p>
+        <div class="informalexample">
+          <pre class="programlisting">
+  <span class="ohdr">sr</span> <span class="op">=</span> 44100
+  <span class="ohdr">ksmps</span> <span class="op">=</span> 100
+  <span class="ohdr">nchnls</span> <span class="op">=</span> 2
+
+  gihandle <span class="opc">OSCinit</span> 7770
+
+  <span class="oblock">instr</span>   1
+    kf1 <span class="opc">init</span> 0
+    kf2 <span class="opc">init</span> 0
+    kk  <span class="opc">OSCcount</span>
+nxtmsg:
+
+if (kk <span class="opc">==</span> 0) goto ex
+  kr  <span class="opc">OSClisten</span> gihandle, "/foo/bar", "ff", kf1, kf2
+    <span class="opc">printk</span> 0,kf1
+    <span class="opc">printk</span> 0,kf2
+    kk -= 1
+    <span class="opc">kgoto</span> nxtmsg
+ex:
+  <span class="oblock">endin</span>
+        </pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm151048"></a>
+        <h2>Voir aussi</h2>
+        <p>
+        <a class="link" href="OSCsend.html" title="OSCsend"><em class="citetitle">OSCsend</em></a>,
+        <a class="link" href="OSCinit.html" title="OSCinit"><em class="citetitle">OSCinit</em></a>
+        <a class="link" href="OSClisten.html" title="OSClisten"><em class="citetitle">OSClisten</em></a>
+      </p>
+        <p>Pour plus d'information sur cet opcode : <a class="ulink" href="http://www.youtube.com/watch?v=JX1C3TqP_9Y" target="_top"><em class="citetitle">http://www.youtube.com/watch?v=JX1C3TqP_9Y</em></a>, par Andrés Cabrera </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm151060"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : John ffitch</td>
+          </tr>
+          <tr>
+            <td>2018 nouveau dans Csound 6.12</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="OSCbundle.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="OSCinit.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">OSCbundle </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> OSCinit</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
