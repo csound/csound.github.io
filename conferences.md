@@ -6,6 +6,11 @@ title: Conferences
 From time to time we gather the Csound community together to have some talks, performances, beers
 and things related.
 
+##### The 5th International Csound Conference
+
+2019, 27&ndash;29 September, Cagli (Pesaro-Urbino), Italy<br>
+Links: [Website](https://csound.com/icsc2019/)
+
 ##### The 4th International Csound Conference
 
 2017, September 29 &ndash; October 1, Montevideo, Uruguay<br>
