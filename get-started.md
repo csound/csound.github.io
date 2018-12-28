@@ -25,7 +25,7 @@ sidebar_toc:
 
 ## What is Csound?
 
-Csound can most accurately be described as a compiler. What is a compiler? A compiler is a software
+Csound is often referred to as as a sound compiler. A compiler is a software
 that takes textual instructions in the form of source code and converts them into object code. This
 object code then gets converted into some kind of executable binary in the form of a computer
 program. Csound works in more or less the same way, only its object code is a stream of numbers
