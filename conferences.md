@@ -16,7 +16,7 @@ Link: [Website](https://csound.com/icsc2019/)
 2017, September 29 &ndash; October 1, Montevideo, Uruguay<br>
 Links: [Website](http://csound.github.io/icsc2017/),
 [Photos](http://csound.github.io/icsc2017/photos.html),
-[Videos](https://www.youtube.com/playlist?list=PLuRqlaVXQNzsQupcaNwRz6pmlzhuM3uoG)
+[Videos](http://csound.github.io/icsc2017/videos.html)
 
 ##### Csound.30 &mdash; Csound's 30th anniversary celebration!
 
