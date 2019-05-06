@@ -9,4 +9,4 @@ Thanks to the concentrated efforts of Bernt Isak Wærstad, Victor Lazarini, Alex
 
 [https://blog.bela.io/2019/05/03/bela-learn-csound/](https://blog.bela.io/2019/05/03/bela-learn-csound/)
 
-![Bela COSMO](images/bela-COSMO.jpg)
+![Bela COSMO](http://csound.github.io/images/bela-COSMO.jpg)
