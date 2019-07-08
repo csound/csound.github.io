@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178049"></a>
+        <a id="idm45499713196080"></a>
         <h2>Description</h2>
         <p>
       Lit les données d'amplitude et/ou de fréquence depuis des tables de
@@ -48,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178052"></a>
+        <a id="idm45499713194688"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>pvsftr</strong></span> fsrc, ifna [, ifnf]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm178056"></a>
+        <a id="idm45499713192640"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifna</em></span> -- Une table d'une taille d'au moins
@@ -67,7 +67,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178066"></a>
+        <a id="idm45499713188176"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>fsrc</em></span> -- une source au format PVOC-EX.
@@ -121,23 +121,23 @@ fsig1 = fsig2<br />
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178089"></a>
+        <a id="idm45499713174624"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode pvsftr. Il utilise le fichier
       <a class="ulink" href="examples/pvsftr.csd" target="_top"><em class="citetitle">pvsftr.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm178094"></a>
+          <a id="idm45499713172752"></a>
           <p class="title">
-            <strong>Exemple 777. Exemple de l'opcode pvsftr.</strong>
+            <strong>Exemple 776. Exemple de l'opcode pvsftr.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm178101"></a>
+              <a id="idm45499528918864"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -163,19 +163,19 @@ i<span class="n">overlap</span> <span class="o">=</span> <span class="mi">256</s
 k<span class="n">newamp</span>  <span class="o">=</span> <span class="mi">0</span>				<span class="c1">;new value for amplitudes</span>
 
 <span class="c1">;create fsig stream from function table</span>
-<span class="n">fsrc</span>	<span class="nb">pvstanal</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> gi<span class="n">fil</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> i<span class="n">overlap</span><span class="p">,</span> <span class="mi">0</span>
+<span class="kt">f</span><span class="n">src</span>	<span class="nb">pvstanal</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> gi<span class="n">fil</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> i<span class="n">overlap</span><span class="p">,</span> <span class="mi">0</span>
 i<span class="n">fn</span>	<span class="nb">ftgen</span>	<span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> i<span class="n">fftsize</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span>	<span class="c1">;create empty function table</span>
-k<span class="n">flag</span>	<span class="nb">pvsftw</span>	<span class="n">fsrc</span><span class="p">,</span>i<span class="n">fn</span>		<span class="c1">;export amps to table	</span>
+k<span class="n">flag</span>	<span class="nb">pvsftw</span>	<span class="kt">f</span><span class="n">src</span><span class="p">,</span>i<span class="n">fn</span>		<span class="c1">;export amps to table	</span>
 <span class="c1">;overwrite the first 10 bins each time the table has been filled new</span>
 <span class="k">if</span> k<span class="n">flag</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">then</span>
 k<span class="n">ndx</span> <span class="o">=</span> <span class="mi">0</span>
 k<span class="n">maxbin</span> <span class="o">=</span> <span class="mi">10</span>
 <span class="nl">loop</span><span class="p">:</span>
 <span class="nb">tablew</span> k<span class="n">newamp</span><span class="p">,</span> k<span class="n">ndx</span><span class="p">,</span> i<span class="n">fn</span>
-<span class="k">loop_le</span> k<span class="n">ndx</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">maxbin</span><span class="p">,</span> <span class="nl">loop</span>
+<span class="kp">loop_le</span> k<span class="n">ndx</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">maxbin</span><span class="p">,</span> <span class="nl">loop</span>
 <span class="k">endif</span>
-	<span class="nb">pvsftr</span>	<span class="n">fsrc</span><span class="p">,</span>i<span class="n">fn</span>		<span class="c1">;read modified data back to fsrc</span>
-a<span class="n">out</span>	<span class="nb">pvsynth</span>	<span class="n">fsrc</span>			<span class="c1">;and resynth</span>
+	<span class="nb">pvsftr</span>	<span class="kt">f</span><span class="n">src</span><span class="p">,</span>i<span class="n">fn</span>		<span class="c1">;read modified data back to fsrc</span>
+a<span class="n">out</span>	<span class="nb">pvsynth</span>	<span class="kt">f</span><span class="n">src</span>			<span class="c1">;and resynth</span>
 	<span class="nb">outs</span>	a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
 
 <span class="kd">endin</span>
@@ -193,14 +193,14 @@ a<span class="n">out</span>	<span class="nb">pvsynth</span>	<span class="n">fsrc
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178250"></a>
+        <a id="idm45499713168384"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="pvsftw.html" title="pvsftw"><em class="citetitle">pvsftw</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178255"></a>
+        <a id="idm45499713166336"></a>
         <h2>Crédits</h2>
         <p>
       </p>

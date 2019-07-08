@@ -39,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm37149"></a>
+        <a id="idm45499764999072"></a>
         <h2>Description</h2>
         <p>
 
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm37152"></a>
+        <a id="idm45499764997920"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">kenv <span class="command"><strong>cepsinv</strong></span> keps[]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm37156"></a>
+        <a id="idm45499764995904"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>keps[]</em></span> -- le cepstre en entrée, un tableau de taille
@@ -63,7 +63,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm37162"></a>
+        <a id="idm45499764993136"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple d'utilisation de l'opcode <span class="emphasis"><em>cepsinv</em></span>.
@@ -71,7 +71,7 @@
       <a class="ulink" href="examples/cepsinv.csd" target="_top"><em class="citetitle">cepsinv.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm37168"></a>
+          <a id="idm45499764990832"></a>
           <p class="title">
             <strong>Exemple 117. Exemple de l'opcode <span class="emphasis"><em>cepsinv</em></span>.</strong>
           </p>
@@ -80,7 +80,7 @@
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm37176"></a>
+              <a id="idm45499591314720"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -92,13 +92,13 @@
 a<span class="n">1</span> <span class="nb">diskin</span> <span class="s">"fox.wav"</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
 k<span class="n">1</span> <span class="nb">randh</span>  <span class="mi">80</span><span class="p">,</span> <span class="mf">2.5</span>
 a<span class="n">2</span> <span class="nb">vco2</span>  <span class="mi">8</span><span class="p">,</span> <span class="mi">220</span><span class="o">+</span>k<span class="n">1</span>
-<span class="n">fsig</span> <span class="nb">pvsanal</span> a<span class="n">1</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">1</span>
-<span class="n">fsig2</span> <span class="nb">pvsanal</span> a<span class="n">2</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">1</span>
-k<span class="n">eps</span><span class="p">[]</span> <span class="nb">pvsceps</span> <span class="n">fsig</span><span class="p">,</span><span class="mi">30</span>
+<span class="kt">f</span><span class="n">sig</span> <span class="nb">pvsanal</span> a<span class="n">1</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">1</span>
+<span class="kt">f</span><span class="n">sig2</span> <span class="nb">pvsanal</span> a<span class="n">2</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">1</span>
+k<span class="n">eps</span><span class="p">[]</span> <span class="nb">pvsceps</span> <span class="kt">f</span><span class="n">sig</span><span class="p">,</span><span class="mi">30</span>
 k<span class="n">env</span><span class="p">[]</span> <span class="nb">cepsinv</span> k<span class="n">eps</span>
-<span class="n">fenv</span> <span class="nb">tab2pvs</span> <span class="nb">r2c</span><span class="p">(</span>k<span class="n">env</span><span class="p">)</span>
-<span class="n">fvoc</span> <span class="nb">pvsfilter</span> <span class="n">fsig2</span><span class="p">,</span> <span class="n">fenv</span><span class="p">,</span> <span class="mi">1</span>
-a<span class="n">sig</span> <span class="nb">pvsynth</span> <span class="n">fvoc</span>
+<span class="kt">f</span><span class="n">env</span> <span class="nb">tab2pvs</span> <span class="nb">r2c</span><span class="p">(</span>k<span class="n">env</span><span class="p">)</span>
+<span class="kt">f</span><span class="n">voc</span> <span class="nb">pvsfilter</span> <span class="kt">f</span><span class="n">sig2</span><span class="p">,</span> <span class="kt">f</span><span class="n">env</span><span class="p">,</span> <span class="mi">1</span>
+a<span class="n">sig</span> <span class="nb">pvsynth</span> <span class="kt">f</span><span class="n">voc</span>
 
     <span class="nb">out</span> a<span class="n">sig</span>
 <span class="kd">endin</span>
@@ -117,7 +117,7 @@ a<span class="n">sig</span> <span class="nb">pvsynth</span> <span class="n">fvoc
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm37264"></a>
+        <a id="idm45499764986064"></a>
         <h2>Crédits</h2>
         <p>
       </p>

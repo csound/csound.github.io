@@ -39,7 +39,7 @@
           </p>
       </div>
       <div class="refsect1">
-        <a id="idm156564"></a>
+        <a id="idm46190246529568"></a>
         <h2>Description</h2>
         <p>
       Implementation of Zoelzer's parametric equalizer filters, with some modifications by the author.
@@ -103,12 +103,12 @@ a2 =  1 - K/Q + K^2<br />
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm156573"></a>
+        <a id="idm46190246461424"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">ares <span class="command"><strong>pareq</strong></span> asig, kc, kv, kq [, imode] [, iskip]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm156577"></a>
+        <a id="idm46190246459168"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>imode</em></span> (optional, default: 0) -- operating mode
@@ -135,7 +135,7 @@ a2 =  1 - K/Q + K^2<br />
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm156590"></a>
+        <a id="idm46190246453552"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>kc</em></span> -- center frequency in peaking mode, corner frequency in shelving mode.
@@ -151,21 +151,21 @@ a2 =  1 - K/Q + K^2<br />
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm156600"></a>
+        <a id="idm46190246448784"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the pareq opcode. It uses the file <a class="ulink" href="examples/pareq.csd" target="_top"><em class="citetitle">pareq.csd</em></a>.
 
       </p>
         <div class="example">
-          <a id="idm156605"></a>
+          <a id="idm46190246447008"></a>
           <p class="title">
-            <strong>Example 676. Example of the pareq opcode.</strong>
+            <strong>Example 675. Example of the pareq opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm156612"></a>
+              <a id="idm46190069614272"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -183,11 +183,11 @@ a2 =  1 - K/Q + K^2<br />
 <span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 
 <span class="kd">instr</span> <span class="nf">15</span>
-  i<span class="n">fc</span>     <span class="o">=</span>       <span class="nb">p4</span>                       <span class="c1">; Center / Shelf</span>
-  k<span class="n">q</span>      <span class="o">=</span>       <span class="nb">p5</span>                       <span class="c1">; Quality factor sqrt(.5) is no resonance</span>
-  k<span class="n">v</span>      <span class="o">=</span>       <span class="nb">ampdb</span><span class="p">(</span><span class="nb">p6</span><span class="p">)</span>                <span class="c1">; Volume Boost/Cut</span>
-  i<span class="n">mode</span>   <span class="o">=</span>       <span class="nb">p7</span>                       <span class="c1">; Mode 0=Peaking EQ, 1=Low Shelf, 2=High Shelf</span>
-  k<span class="n">fc</span>     <span class="nb">linseg</span>  i<span class="n">fc</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="nb">p3</span><span class="p">,</span> i<span class="n">fc</span><span class="o">/</span><span class="mi">2</span>
+  i<span class="n">fc</span>     <span class="o">=</span>       <span class="vi">p4</span>                       <span class="c1">; Center / Shelf</span>
+  k<span class="n">q</span>      <span class="o">=</span>       <span class="vi">p5</span>                       <span class="c1">; Quality factor sqrt(.5) is no resonance</span>
+  k<span class="n">v</span>      <span class="o">=</span>       <span class="nb">ampdb</span><span class="p">(</span><span class="vi">p6</span><span class="p">)</span>                <span class="c1">; Volume Boost/Cut</span>
+  i<span class="n">mode</span>   <span class="o">=</span>       <span class="vi">p7</span>                       <span class="c1">; Mode 0=Peaking EQ, 1=Low Shelf, 2=High Shelf</span>
+  k<span class="n">fc</span>     <span class="nb">linseg</span>  i<span class="n">fc</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> i<span class="n">fc</span><span class="o">/</span><span class="mi">2</span>
   a<span class="n">sig</span>    <span class="nb">rand</span>    <span class="mi">5000</span>                     <span class="c1">; Random number source for testing</span>
   a<span class="n">out</span>    <span class="nb">pareq</span>   a<span class="n">sig</span><span class="p">,</span> k<span class="n">fc</span><span class="p">,</span> k<span class="n">v</span><span class="p">,</span> k<span class="n">q</span><span class="p">,</span> i<span class="n">mode</span> <span class="c1">; Parmetric equalization</span>
           <span class="nb">outs</span>    a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>               <span class="c1">; Output the results</span>
@@ -216,7 +216,7 @@ a2 =  1 - K/Q + K^2<br />
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm156730"></a>
+        <a id="idm46190246442752"></a>
         <h2>Credits</h2>
         <p>
       </p>

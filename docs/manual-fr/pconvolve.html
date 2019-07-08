@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm162205"></a>
+        <a id="idm45499719190832"></a>
         <h2>Description</h2>
         <p>
       Convolution basée sur un algorithme overlap-save à découpage uniforme.
@@ -65,12 +65,12 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm162221"></a>
+        <a id="idm45499719112880"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ar1 [, ar2] [, ar3] [, ar4] <span class="command"><strong>pconvolve</strong></span> ain, ifilcod [, ipartitionsize, ichannel]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm162225"></a>
+        <a id="idm45499719110736"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifilcod</em></span> -- entier ou chaîne de caractères définissant un
@@ -98,7 +98,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm162234"></a>
+        <a id="idm45499719105072"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ain</em></span> -- signal audio en entrée.
@@ -111,7 +111,7 @@
     ilatency = (ksmps &lt; ipartitionsize ? ipartitionsize + ksmps : ipartitionsize)/sr</pre>
       </div>
       <div class="refsect1">
-        <a id="idm162241"></a>
+        <a id="idm45499719101472"></a>
         <h2>Exemples</h2>
         <p>
       L'instrument 1 montre un exemple de convolution en temps réel.
@@ -144,16 +144,16 @@
       <a class="ulink" href="examples/pconvolve.csd" target="_top"><em class="citetitle">pconvolve.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm162251"></a>
+          <a id="idm45499719096704"></a>
           <p class="title">
-            <strong>Exemple 693. Exemple de l'opcode pconvolve.</strong>
+            <strong>Exemple 692. Exemple de l'opcode pconvolve.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm162258"></a>
+              <a id="idm45499536024640"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -177,15 +177,15 @@ k<span class="n">vol</span>  <span class="o">=</span> <span class="mf">.05</span
 		<span class="c1">; when wet/dry mix is changed, to avoid clipping.</span>
                      			
 <span class="c1">; do some safety checking to make sure we the parameters a good</span>
-k<span class="n">mix</span> <span class="o">=</span> <span class="p">(</span>k<span class="n">mix</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> k<span class="n">mix</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="p">?</span> <span class="mf">.5</span> <span class="p">:</span> k<span class="n">mix</span><span class="p">)</span>
-k<span class="n">vol</span>  <span class="o">=</span> <span class="p">(</span>k<span class="n">vol</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="p">?</span> <span class="mi">0</span> <span class="p">:</span> <span class="mf">.5</span><span class="o">*</span>k<span class="n">vol</span><span class="o">*</span>k<span class="n">mix</span><span class="p">)</span>
+k<span class="n">mix</span> <span class="o">=</span> <span class="p">(</span>k<span class="n">mix</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> k<span class="n">mix</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">?</span> <span class="mf">.5</span> <span class="o">:</span> k<span class="n">mix</span><span class="p">)</span>
+k<span class="n">vol</span>  <span class="o">=</span> <span class="p">(</span>k<span class="n">vol</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mf">.5</span><span class="o">*</span>k<span class="n">vol</span><span class="o">*</span>k<span class="n">mix</span><span class="p">)</span>
 
 <span class="c1">; size of each convolution partion -- for best performance, this parameter needs to be tweaked</span>
-i<span class="n">partitionsize</span> <span class="o">=</span> <span class="nb">p4</span>
+i<span class="n">partitionsize</span> <span class="o">=</span> <span class="vi">p4</span>
 
 <span class="c1">; calculate latency of pconvolve opcode</span>
-i<span class="n">del</span> <span class="o">=</span> <span class="p">(</span><span class="vg">ksmps</span> <span class="o">&lt;</span> i<span class="n">partitionsize</span> <span class="p">?</span> i<span class="n">partitionsize</span> <span class="o">+</span> <span class="vg">ksmps</span> <span class="p">:</span> i<span class="n">partitionsize</span><span class="p">)</span><span class="o">/</span><span class="vg">sr</span>
-<span class="nb">prints</span> <span class="s">"Convolving with a latency of %f seconds</span><span class="se">%n</span><span class="s">"</span><span class="p">,</span> i<span class="n">del</span>
+i<span class="n">del</span> <span class="o">=</span> <span class="p">(</span><span class="vg">ksmps</span> <span class="o">&lt;</span> i<span class="n">partitionsize</span> <span class="o">?</span> i<span class="n">partitionsize</span> <span class="o">+</span> <span class="vg">ksmps</span> <span class="o">:</span> i<span class="n">partitionsize</span><span class="p">)</span><span class="o">/</span><span class="vg">sr</span>
+<span class="nb">prints</span> <span class="s">"Convolving with a latency of </span><span class="si">%f</span><span class="s"> seconds</span><span class="se">%n</span><span class="s">"</span><span class="p">,</span> i<span class="n">del</span>
 
 <span class="c1">; actual processing</span>
 a<span class="n">l</span><span class="p">,</span> a<span class="n">r</span> <span class="nb">ins</span>	<span class="c1">;get live input</span>
@@ -203,14 +203,14 @@ i<span class="n">mix</span> <span class="o">=</span> <span class="mf">0.5</span>
 i<span class="n">vol</span> <span class="o">=</span> <span class="mf">.05</span><span class="o">*</span>i<span class="n">mix</span>     	<span class="c1">; Overall volume level of reverb. May need to adjust</span>
                 	<span class="c1">; when wet/dry mix is changed, to avoid clipping.</span>
 i<span class="n">partitionsize</span> <span class="o">=</span> <span class="mi">1024</span>	<span class="c1">; size of each convolution partion</span>
-i<span class="n">del</span> <span class="o">=</span> <span class="p">(</span><span class="vg">ksmps</span> <span class="o">&lt;</span> i<span class="n">partitionsize</span> <span class="p">?</span> i<span class="n">partitionsize</span> <span class="o">+</span> <span class="vg">ksmps</span> <span class="p">:</span> i<span class="n">partitionsize</span><span class="p">)</span><span class="o">/</span><span class="vg">sr</span>   <span class="c1">; latency of pconvolve opcode</span>
+i<span class="n">del</span> <span class="o">=</span> <span class="p">(</span><span class="vg">ksmps</span> <span class="o">&lt;</span> i<span class="n">partitionsize</span> <span class="o">?</span> i<span class="n">partitionsize</span> <span class="o">+</span> <span class="vg">ksmps</span> <span class="o">:</span> i<span class="n">partitionsize</span><span class="p">)</span><span class="o">/</span><span class="vg">sr</span>   <span class="c1">; latency of pconvolve opcode</span>
 
 k<span class="n">count</span>	<span class="nb">init</span>	i<span class="n">del</span><span class="o">*</span><span class="vg">kr</span>
 <span class="c1">; since we are using a soundin [instead of ins] we can</span>
 <span class="c1">; do a kind of "look ahead" by looping during one k-pass</span>
 <span class="c1">; without output, creating zero-latency</span>
 <span class="nl">loop</span><span class="p">:</span>
-    a<span class="n">sig</span> <span class="nb">soundin</span> <span class="nb">p4</span><span class="p">,</span> <span class="mi">0</span>
+    a<span class="n">sig</span> <span class="nb">soundin</span> <span class="vi">p4</span><span class="p">,</span> <span class="mi">0</span>
     a<span class="n">wetl</span><span class="p">,</span> a<span class="n">wetr</span> <span class="nb">pconvolve</span> i<span class="n">vol</span><span class="o">*</span><span class="p">(</span>a<span class="n">sig</span><span class="p">),</span><span class="s">"rv_stereo.wav"</span><span class="p">,</span> i<span class="n">partitionsize</span>
     a<span class="n">dry</span> <span class="nb">delay</span>	<span class="p">(</span><span class="mi">1</span><span class="o">-</span>i<span class="n">mix</span><span class="p">)</span><span class="o">*</span>a<span class="n">sig</span><span class="p">,</span>i<span class="n">del</span>  <span class="c1">; Delay dry signal, to align it with</span>
     k<span class="n">count</span> <span class="o">=</span> k<span class="n">count</span> <span class="o">-</span> <span class="mi">1</span>
@@ -237,14 +237,14 @@ k<span class="n">count</span>	<span class="nb">init</span>	i<span class="n">del<
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm162516"></a>
+        <a id="idm45499719092336"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="convolve.html" title="convolve"><em class="citetitle">convolve</em></a>, <a class="link" href="dconv.html" title="dconv"><em class="citetitle">dconv</em></a>.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm162523"></a>
+        <a id="idm45499719089328"></a>
         <h2>Crédits</h2>
         <p>
       </p>

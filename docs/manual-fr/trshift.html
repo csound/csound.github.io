@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm233293"></a>
+        <a id="idm45499690203648"></a>
         <h2>Description</h2>
         <p>
       L'opcode <span class="emphasis"><em>trshift</em></span> prend en entrée un flot de signal
@@ -51,12 +51,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm233298"></a>
+        <a id="idm45499690138624"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">fsig <span class="command"><strong>trshift</strong></span> fin, kpshift [, kgain]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm233302"></a>
+        <a id="idm45499690136576"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>fsig</em></span> -- flot pv de sortie au format TRACKS.
@@ -72,23 +72,23 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm233312"></a>
+        <a id="idm45499690132224"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode trshift. Il utilise le fichier
       <a class="ulink" href="examples/trshift.csd" target="_top"><em class="citetitle">trshift.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm233317"></a>
+          <a id="idm45499690130352"></a>
           <p class="title">
-            <strong>Exemple 1053. Exemple de l'opcode trshift.</strong>
+            <strong>Exemple 1051. Exemple de l'opcode trshift.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm233324"></a>
+              <a id="idm45499505413584"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -107,12 +107,12 @@
 
 <span class="kd">instr</span> <span class="nf">1</span>
 
-k<span class="n">psft</span>   <span class="o">=</span> <span class="nb">p4</span>
+k<span class="n">psft</span>   <span class="o">=</span> <span class="vi">p4</span>
 a<span class="n">in</span>	<span class="nb">diskin2</span>	  <span class="s">"fox.wav"</span><span class="p">,</span> <span class="mi">1</span>
-<span class="n">fs1</span><span class="p">,</span> <span class="n">fsi2</span> <span class="nb">pvsifd</span>  a<span class="n">in</span><span class="p">,</span> <span class="mi">2048</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">1</span>            <span class="c1">; ifd analysis</span>
-<span class="n">fst</span>     <span class="nb">partials</span>  <span class="n">fs1</span><span class="p">,</span> <span class="n">fsi2</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">500</span>  <span class="c1">; partial tracking</span>
-<span class="n">fscl</span>    <span class="nb">trshift</span>   <span class="n">fst</span><span class="p">,</span> k<span class="n">psft</span>                   <span class="c1">; frequency shift</span>
-a<span class="n">out</span>    <span class="nb">tradsyn</span>   <span class="n">fscl</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1</span>           <span class="c1">; resynthesis</span>
+<span class="kt">f</span><span class="n">s1</span><span class="p">,</span> <span class="kt">f</span><span class="n">si2</span> <span class="nb">pvsifd</span>  a<span class="n">in</span><span class="p">,</span> <span class="mi">2048</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">1</span>            <span class="c1">; ifd analysis</span>
+<span class="kt">f</span><span class="n">st</span>     <span class="nb">partials</span>  <span class="kt">f</span><span class="n">s1</span><span class="p">,</span> <span class="kt">f</span><span class="n">si2</span><span class="p">,</span> <span class="mf">0.003</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">500</span>  <span class="c1">; partial tracking</span>
+<span class="kt">f</span><span class="n">scl</span>    <span class="nb">trshift</span>   <span class="kt">f</span><span class="n">st</span><span class="p">,</span> k<span class="n">psft</span>                   <span class="c1">; frequency shift</span>
+a<span class="n">out</span>    <span class="nb">tradsyn</span>   <span class="kt">f</span><span class="n">scl</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">1</span>           <span class="c1">; resynthesis</span>
         <span class="nb">outs</span> a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
 
 <span class="kd">endin</span>
@@ -138,7 +138,7 @@ a<span class="n">out</span>    <span class="nb">tradsyn</span>   <span class="n"
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm233431"></a>
+        <a id="idm45499690125264"></a>
         <h2>Crédits</h2>
         <p>
       </p>

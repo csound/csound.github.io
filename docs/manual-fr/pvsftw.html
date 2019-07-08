@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178272"></a>
+        <a id="idm45499713120000"></a>
         <h2>Description</h2>
         <p>
       Ecrit les données d'amplitude et/ou de fréquence dans des tables de
@@ -48,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178275"></a>
+        <a id="idm45499713118640"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">kflag <span class="command"><strong>pvsftw</strong></span> fsrc, ifna [, ifnf]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm178279"></a>
+        <a id="idm45499713116624"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifna</em></span> -- Une table d'une taille d'au moins
@@ -67,7 +67,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178289"></a>
+        <a id="idm45499713112112"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kflag</em></span> -- Un indicateur qui prend la valeur 1 lorsque
@@ -125,23 +125,23 @@ fsig1 = fsig2<br />
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178314"></a>
+        <a id="idm45499713097488"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode pvsftw. Il utilise le fichier
       <a class="ulink" href="examples/pvsftw.csd" target="_top"><em class="citetitle">pvsftw.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm178319"></a>
+          <a id="idm45499713095616"></a>
           <p class="title">
-            <strong>Exemple 778. Exemple de l'opcode pvsftw.</strong>
+            <strong>Exemple 777. Exemple de l'opcode pvsftw.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm178326"></a>
+              <a id="idm45499528291952"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -162,8 +162,8 @@ fsig1 = fsig2<br />
 
 i<span class="n">nbins</span>	<span class="o">=</span>	<span class="mi">512</span>
 i<span class="n">fn</span>	<span class="nb">ftgen</span>	<span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span>i<span class="n">nbins</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span>		<span class="c1">; make ftable</span>
-<span class="n">fsrc</span>	<span class="nb">pvsdiskin</span> <span class="s">"fox.pvx"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">; read PVOCEX file</span>
-k<span class="n">flag</span>	<span class="nb">pvsftw</span>	<span class="n">fsrc</span><span class="p">,</span>i<span class="n">fn</span>		<span class="c1">; export amps to table,</span>
+<span class="kt">f</span><span class="n">src</span>	<span class="nb">pvsdiskin</span> <span class="s">"fox.pvx"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">; read PVOCEX file</span>
+k<span class="n">flag</span>	<span class="nb">pvsftw</span>	<span class="kt">f</span><span class="n">src</span><span class="p">,</span>i<span class="n">fn</span>		<span class="c1">; export amps to table,</span>
 k<span class="n">amp</span>	<span class="nb">init</span>	<span class="mi">0</span>
 <span class="k">if</span>      k<span class="n">flag</span><span class="o">==</span><span class="mi">0</span>   <span class="k">kgoto</span> <span class="nl">contin</span>		<span class="c1">; only proc when frame is ready							</span>
 	<span class="nb">tablew</span>	k<span class="n">amp</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span>i<span class="n">fn</span>		<span class="c1">; kill lowest bins, for obvious effect</span>
@@ -171,10 +171,10 @@ k<span class="n">amp</span>	<span class="nb">init</span>	<span class="mi">0</spa
 	<span class="nb">tablew</span>	k<span class="n">amp</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span>i<span class="n">fn</span>
 	<span class="nb">tablew</span>	k<span class="n">amp</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span>i<span class="n">fn</span>
 <span class="c1">; read modified data back to fsrc</span>
-	<span class="nb">pvsftr</span>	<span class="n">fsrc</span><span class="p">,</span>i<span class="n">fn</span>
+	<span class="nb">pvsftr</span>	<span class="kt">f</span><span class="n">src</span><span class="p">,</span>i<span class="n">fn</span>
 <span class="nl">contin</span><span class="p">:</span>
 <span class="c1">; and resynth</span>
-a<span class="n">out</span>	<span class="nb">pvsynth</span>	<span class="n">fsrc</span>
+a<span class="n">out</span>	<span class="nb">pvsynth</span>	<span class="kt">f</span><span class="n">src</span>
 	<span class="nb">outs</span>	a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
 
 <span class="kd">endin</span>
@@ -195,14 +195,14 @@ a<span class="n">out</span>	<span class="nb">pvsynth</span>	<span class="n">fsrc
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178440"></a>
+        <a id="idm45499713091248"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="pvsftr.html" title="pvsftr"><em class="citetitle">pvsftr</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178445"></a>
+        <a id="idm45499713089200"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm221001"></a>
+        <a id="idm45499694892624"></a>
         <h2>Description</h2>
         <p>
       Accède aux valeurs d'une table par indexation directe avec interpolation
@@ -48,14 +48,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm221004"></a>
+        <a id="idm45499694891216"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>tablei</strong></span> andx, ifn [, ixmode] [, ixoff] [, iwrap]</pre>
         <pre class="synopsis">ires <span class="command"><strong>tablei</strong></span> indx, ifn [, ixmode] [, ixoff] [, iwrap]</pre>
         <pre class="synopsis">kres <span class="command"><strong>tablei</strong></span> kndx, ifn [, ixmode] [, ixoff] [, iwrap]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm221012"></a>
+        <a id="idm45499694821920"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifn</em></span> -- numéro de la table de fonction. <span class="emphasis"><em>tablei</em></span>
@@ -102,7 +102,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm221036"></a>
+        <a id="idm45499694811600"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>tablei</em></span> est une unité avec interpolation dans laquelle la
@@ -118,25 +118,48 @@
       l'<a class="link" href="f.html" title="Instruction f (ou instruction de table de fonction)"><em class="citetitle">instruction f</em></a> de la
       partition).
     </p>
+        <p>
+      </p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Avertissement]" src="images/warning.png" />
+              </td>
+              <th align="left">Avertissement</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+        La lecture de tables contenant une information stéréo ou multicanaux
+        causera probablement du bruit non désiré car l'opcode interpole entre
+        des positions successives de la table sans tenir compte de l'origine de
+        son contenu. Habituellement seul le contenu d'un canal est attendu. Il
+        faut plutôt considérer l'utilisation de <span class="emphasis"><em>loscilx</em></span>.
+      </td>
+            </tr>
+          </table>
+        </div>
+        <p>
+    </p>
       </div>
       <div class="refsect1">
-        <a id="idm221047"></a>
+        <a id="idm45499694803568"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode tablei. Il utilise le fichier
       <a class="ulink" href="examples/tablei.csd" target="_top"><em class="citetitle">tablei.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm221052"></a>
+          <a id="idm45499694801696"></a>
           <p class="title">
-            <strong>Exemple 996. Exemple de l'opcode tablei.</strong>
+            <strong>Exemple 995. Exemple de l'opcode tablei.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm221059"></a>
+              <a id="idm45499510603152"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -157,8 +180,8 @@
 
 <span class="kd">instr</span> <span class="nf">1</span>
 
-i<span class="n">fn</span> <span class="o">=</span> <span class="nb">p4</span>
-i<span class="n">size</span> <span class="o">=</span> <span class="nb">p5</span>
+i<span class="n">fn</span> <span class="o">=</span> <span class="vi">p4</span>
+i<span class="n">size</span> <span class="o">=</span> <span class="vi">p5</span>
 i<span class="n">thresh</span> <span class="o">=</span> <span class="mf">0.5</span>
     
 i<span class="n">temp</span> <span class="nb">ftgen</span> i<span class="n">fn</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> i<span class="n">size</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">2</span>
@@ -175,23 +198,23 @@ i<span class="n">_index</span> <span class="o">=</span> <span class="mi">0</span
          i<span class="n">write_value</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
     <span class="k">endif</span>
 <span class="nb">tableiw</span> i<span class="n">write_value</span><span class="p">,</span> i<span class="n">_index</span><span class="p">,</span> i<span class="n">fn</span>
-<span class="k">loop_lt</span> i<span class="n">_index</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">size</span><span class="p">,</span> <span class="nl">loop_start</span>        
+<span class="kp">loop_lt</span> i<span class="n">_index</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">size</span><span class="p">,</span> <span class="nl">loop_start</span>        
     <span class="nb">turnoff</span>
 
 <span class="kd">endin</span>
 
 <span class="kd">instr</span> <span class="nf">2</span>
 
-i<span class="n">fn</span> <span class="o">=</span> <span class="nb">p4</span>
+i<span class="n">fn</span> <span class="o">=</span> <span class="vi">p4</span>
 i<span class="n">size</span> <span class="o">=</span> <span class="nb">ftlen</span><span class="p">(</span>i<span class="n">fn</span><span class="p">)</span>    
 <span class="nb">prints</span> <span class="s">"Index</span><span class="se">\t</span><span class="s">Value</span><span class="se">\n</span><span class="s">"</span>
     
 i<span class="n">_index</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="nl">loop_start</span><span class="p">:</span>
     i<span class="n">value</span> <span class="nb">tablei</span> i<span class="n">_index</span><span class="p">,</span> i<span class="n">fn</span>
-    <span class="nb">prints</span> <span class="s">"</span><span class="si">%d</span><span class="s">:</span><span class="se">\t</span><span class="s">%f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> i<span class="n">_index</span><span class="p">,</span> i<span class="n">value</span>
+    <span class="nb">prints</span> <span class="s">"</span><span class="si">%d</span><span class="s">:</span><span class="se">\t</span><span class="si">%f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> i<span class="n">_index</span><span class="p">,</span> i<span class="n">value</span>
 
-  <span class="k">loop_lt</span> i<span class="n">_index</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">size</span><span class="p">,</span> <span class="nl">loop_start</span>		<span class="c1">;read table 1 with our index</span>
+  <span class="kp">loop_lt</span> i<span class="n">_index</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">size</span><span class="p">,</span> <span class="nl">loop_start</span>		<span class="c1">;read table 1 with our index</span>
 
 a<span class="n">out</span> <span class="nb">oscili</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> i<span class="n">fn</span>			<span class="c1">;use table to play the polypulse</span>
      <span class="nb">outs</span>   a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
@@ -212,7 +235,7 @@ a<span class="n">out</span> <span class="nb">oscili</span> <span class="mf">.5</
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm221227"></a>
+        <a id="idm45499694797328"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="table.html" title="table"><em class="citetitle">table</em></a>,

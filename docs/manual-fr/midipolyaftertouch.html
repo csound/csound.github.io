@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm136061"></a>
+        <a id="idm45499729250944"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>midipolyaftertouch</em></span> est conçu pour simplifier
@@ -66,12 +66,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm136069"></a>
+        <a id="idm45499729245600"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>midipolyaftertouch</strong></span> xpolyaftertouch, xcontrollervalue [, ilow] [, ihigh]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm136073"></a>
+        <a id="idm45499729243520"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ilow</em></span> (facultatif) -- valeur basse facultative après
@@ -83,7 +83,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm136079"></a>
+        <a id="idm45499729240704"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>xpolyaftertouch</em></span> -- retourne l'aftertouch polyphonique
@@ -127,23 +127,23 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm136097"></a>
+        <a id="idm45499729231280"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode midipolyaftertouch. Il utilise le fichier
       <a class="ulink" href="examples/midipolyaftertouch.csd" target="_top"><em class="citetitle">midipolyaftertouch.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm136102"></a>
+          <a id="idm45499729229424"></a>
           <p class="title">
-            <strong>Exemple 569. Exemple de l'opcode midipolyaftertouch.</strong>
+            <strong>Exemple 567. Exemple de l'opcode midipolyaftertouch.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm136109"></a>
+              <a id="idm45499550693920"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -162,15 +162,15 @@
 
 <span class="kd">instr</span> <span class="nf">1</span><span class="c1">;midi keyboard and score are used</span>
 
-<span class="nb">midinoteoncps</span> <span class="nb">p4</span><span class="p">,</span> <span class="nb">p5</span>				<span class="c1">;puts MIDI key translated to cycles per second into p4, and MIDI velocity into p5</span>
+<span class="nb">midinoteoncps</span> <span class="vi">p4</span><span class="p">,</span> <span class="vi">p5</span>				<span class="c1">;puts MIDI key translated to cycles per second into p4, and MIDI velocity into p5</span>
 
 k<span class="n">after</span>  <span class="nb">init</span> <span class="mi">127</span>				<span class="c1">;full open				</span>
 <span class="nb">midipolyaftertouch</span>  k<span class="n">after</span><span class="p">,</span> <span class="mi">1</span>
 <span class="nb">printk2</span> k<span class="n">after</span>					<span class="c1">;display the key value when it changes and when key is pressed</span>
  
-k<span class="n">vel</span> <span class="o">=</span> <span class="nb">p5</span><span class="o">/</span><span class="mi">127</span>					<span class="c1">;scale midi velocity to 0-1</span>
+k<span class="n">vel</span> <span class="o">=</span> <span class="vi">p5</span><span class="o">/</span><span class="mi">127</span>					<span class="c1">;scale midi velocity to 0-1</span>
 k<span class="n">env</span> <span class="nb">madsr</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.5</span>			<span class="c1">;amplitude envelope multiplied by</span>
-a<span class="n">in</span>  <span class="nb">pluck</span> k<span class="n">env</span><span class="o">*</span>k<span class="n">vel</span><span class="p">,</span> <span class="nb">p4</span><span class="p">,</span> <span class="nb">p4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span>		<span class="c1">;velocity value			</span>
+a<span class="n">in</span>  <span class="nb">pluck</span> k<span class="n">env</span><span class="o">*</span>k<span class="n">vel</span><span class="p">,</span> <span class="vi">p4</span><span class="p">,</span> <span class="vi">p4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span>		<span class="c1">;velocity value			</span>
 a<span class="n">sig</span> <span class="nb">moogvcf2</span> a<span class="n">in</span><span class="p">,</span> <span class="mi">300</span><span class="o">+</span><span class="p">(</span>k<span class="n">after</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span> <span class="mf">.5</span>		<span class="c1">;use value of aftertouch to control frequency of filter</span>
      <span class="nb">outs</span>  a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>				<span class="c1">;base freq of filter = 300 Hz</span>
 
@@ -201,7 +201,7 @@ a<span class="n">sig</span> <span class="nb">moogvcf2</span> a<span class="n">in
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm136230"></a>
+        <a id="idm45499729224288"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="midichannelaftertouch.html" title="midichannelaftertouch"><em class="citetitle">midichannelaftertouch</em></a>, 
@@ -217,7 +217,7 @@ a<span class="n">sig</span> <span class="nb">moogvcf2</span> a<span class="n">in
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm136253"></a>
+        <a id="idm45499729213568"></a>
         <h2>Crédits</h2>
         <p>Auteur : Michael Gogins</p>
         <p>Nouveau dans la version 4.20</p>

@@ -39,20 +39,21 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm89213"></a>
+        <a id="idm45499745221776"></a>
         <h2>Description</h2>
         <p>
       Ecrit une table pré-allouée dans un fichier audio sous différents formats.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm89216"></a>
+        <a id="idm45499745220400"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ians <span class="command"><strong>ftaudio</strong></span> ifn, "filename", iformat</pre>
-        <pre class="synopsis">kans <span class="command"><strong>ftaudio</strong></span> ktrig, kfn, "filename", kformat [, isync]</pre>
+        <pre class="synopsis">kans <span class="command"><strong>ftaudio</strong></span> ktrig, kfn, "filename", \
+                                              kformat [, isync, kbeg, kend]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm89222"></a>
+        <a id="idm45499745154592"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifn, kfn</em></span> -- Numéro de la table à écrire.
@@ -131,13 +132,19 @@
       de continuer l'exécution.
     </p>
         <p>
+      <span class="emphasis"><em>ibeg</em></span>, <span class="emphasis"><em>iend</em></span>,
+      <span class="emphasis"><em>kbeg</em></span>,<span class="emphasis"><em>kenf</em></span> -- donnent le début et
+      la fin de la section de la table où écrire. La valeur par défaut de zéro
+      signifie du début à la fin de la table.
+    </p>
+        <p>
       <span class="emphasis"><em>ians, kans</em></span> -- retourne 0 en cas d'échec, 1 sinon.
       Dans le mode asynchrone c'est mis à jour à la fin de l'écriture, jusqu'à
       ce qu'il est la valeur -1.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm89261"></a>
+        <a id="idm45499745132656"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ktrig</em></span> -- la version de taux-k n'est active dans un
@@ -145,14 +152,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm89265"></a>
+        <a id="idm45499745130944"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode ftaudio. Il utilise le fichier
       <a class="ulink" href="examples/ftaudio.csd" target="_top"><em class="citetitle">ftaudio.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm89270"></a>
+          <a id="idm45499745129168"></a>
           <p class="title">
             <strong>Exemple 362. Exemple de l'opcode ftaudio.</strong>
           </p>
@@ -161,7 +168,7 @@
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm89277"></a>
+              <a id="idm45499569042016"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -184,16 +191,21 @@ gi<span class="n">Sine</span> <span class="nb">ftgen</span> <span class="mi">0</
 <span class="kd">instr</span> <span class="nf">1</span>
      k<span class="n">trig</span> <span class="nb">init</span>    <span class="mi">1</span>
      a<span class="n">sig</span>  <span class="nb">poscil3</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">880</span><span class="p">,</span> gi<span class="n">Sine</span>
-     k<span class="n">ans</span>  <span class="n">ftaudio</span> k<span class="n">trig</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s">"ccc.wav"</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span>
+     k<span class="n">ans</span>  <span class="nb">ftaudio</span> k<span class="n">trig</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s">"k_ftaudio.wav"</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">1</span>
      k<span class="n">trig</span> <span class="o">=</span>       <span class="mi">0</span>
            <span class="nb">outs</span>    a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+<span class="kd">endin</span>
 
+<span class="kd">instr</span> <span class="nf">2</span>
+     i<span class="n">ans</span>  <span class="nb">ftaudio</span> <span class="mi">100</span><span class="p">,</span> <span class="s">"i_ftaudio.wav"</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="vi">p4</span><span class="p">,</span> <span class="vi">p5</span>
+           <span class="nb">turnoff</span>
 <span class="kd">endin</span>
 
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
 <span class="nb">f</span><span class="mi">100</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">1</span> <span class="s">"beats.wav"</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
 <span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span>
+<span class="nb">i</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">11025</span> <span class="mi">33075</span><span class="c1">; 0.5 seconds cut</span>
 <span class="nb">e</span>
 <span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
@@ -205,7 +217,7 @@ gi<span class="n">Sine</span> <span class="nb">ftgen</span> <span class="mi">0</
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm89364"></a>
+        <a id="idm45499745124800"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="ftloadk.html" title="ftloadk"><em class="citetitle">ftloadk</em></a>,
@@ -214,11 +226,12 @@ gi<span class="n">Sine</span> <span class="nb">ftgen</span> <span class="mi">0</
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm89373"></a>
+        <a id="idm45499745120832"></a>
         <h2>Crédits</h2>
         <p>Auteur : John ffitch</p>
         <p>Exemple écrit par John ffitch.</p>
         <p>Nouveau dans la version 6.12</p>
+        <p>Limite à un intervalle ajoutée dans la 6.13</p>
       </div>
     </div>
     <div class="navfooter">

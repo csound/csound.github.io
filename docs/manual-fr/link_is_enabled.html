@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm115717"></a>
+        <a id="idm45499735850144"></a>
         <h2>Description</h2>
         <p>Opcode de greffon dans ableton_link_opcodes.</p>
         <p>
@@ -49,19 +49,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm115721"></a>
+        <a id="idm45499735785792"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">k_is_enabled <span class="command"><strong>link_is_enabled</strong></span> i_peer</pre>
       </div>
       <div class="refsect1">
-        <a id="idm115725"></a>
+        <a id="idm45499735783168"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>i_peer</em></span> -- L'objet pair Ableton Link.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm115729"></a>
+        <a id="idm45499735781168"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>k_is_enabled</em></span> -- Retourne 1 si ce pair est activé, 0
@@ -69,20 +69,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm115733"></a>
+        <a id="idm45499735779072"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode link_is_enabled. Il utilise le fichier
       <a class="ulink" href="examples/ableton_link.csd" target="_top"><em class="citetitle">ableton_link.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm115738"></a>
+          <a id="idm45499735776016"></a>
           <p class="title">
             <strong>Exemple 478. Exemple de l'opcode link_is_enabled.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm115740"></a>
+              <a id="idm45499555752528"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsLicense&gt;</span>
@@ -99,32 +99,32 @@ Ableton Link peer, while you run this CSD to see what happens.
 
 <span class="nb">alwayson</span> <span class="s">"LinkMonitor"</span>
 
-gi<span class="n">_peer</span> <span class="n">link_create</span> <span class="mi">72</span>
+gi<span class="n">_peer</span> <span class="nb">link_create</span> <span class="mi">72</span>
 gk<span class="n">_beat</span> <span class="nb">init</span> <span class="mi">0</span>
 
 <span class="kd">instr</span> <span class="nf">Beep</span>
-a<span class="n">signal</span> <span class="nb">oscils</span> <span class="mi">20000</span><span class="p">,</span> <span class="nb">p4</span><span class="p">,</span> <span class="mi">0</span>
+a<span class="n">signal</span> <span class="nb">oscils</span> <span class="mi">20000</span><span class="p">,</span> <span class="vi">p4</span><span class="p">,</span> <span class="mi">0</span>
 <span class="nb">outs</span> a<span class="n">signal</span><span class="p">,</span> a<span class="n">signal</span>
 <span class="kd">endin</span>
 
 <span class="kd">instr</span> <span class="nf">TempoChange</span>
-<span class="n">link_tempo_set</span> gi<span class="n">_peer</span><span class="p">,</span> <span class="mi">80</span>
+<span class="nb">link_tempo_set</span> gi<span class="n">_peer</span><span class="p">,</span> <span class="mi">80</span>
 <span class="kd">endin</span>
 
 <span class="kd">instr</span> <span class="nf">LinkEnable</span>
-i<span class="n">_enabled</span> <span class="o">=</span> <span class="nb">p4</span>
-<span class="n">link_enable</span> gi<span class="n">_peer</span><span class="p">,</span> i<span class="n">_enabled</span>
+i<span class="n">_enabled</span> <span class="o">=</span> <span class="vi">p4</span>
+<span class="nb">link_enable</span> gi<span class="n">_peer</span><span class="p">,</span> i<span class="n">_enabled</span>
 <span class="kd">endin</span>
 
 <span class="kd">instr</span> <span class="nf">LinkMonitor</span>
 i<span class="n">_kperiod_seconds</span> <span class="o">=</span> <span class="vg">ksmps</span> <span class="o">/</span> <span class="vg">sr</span>
-<span class="nb">printf_i</span> <span class="s">"kperiod: %9.6f seconds.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">_kperiod_seconds</span>
-<span class="nb">printf_i</span> <span class="s">"gi_peer: %g</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> gi<span class="n">_peer</span>
-<span class="n">link_enable</span> gi<span class="n">_peer</span><span class="p">,</span> <span class="mi">1</span>
-k<span class="n">_trigger</span><span class="p">,</span> gk<span class="n">_beat</span><span class="p">,</span> k<span class="n">_phase</span><span class="p">,</span> k<span class="n">_time</span> <span class="n">link_metro</span> gi<span class="n">_peer</span><span class="p">,</span> <span class="mi">1</span>
-k<span class="n">_peers</span> <span class="n">link_peers</span> gi<span class="n">_peer</span>
-k<span class="n">_tempo</span> <span class="n">link_tempo_get</span> gi<span class="n">_peer</span>
-k<span class="n">_enabled</span> <span class="n">link_is_enabled</span> gi<span class="n">_peer</span>
+<span class="nb">printf_i</span> <span class="s">"kperiod: </span><span class="si">%9.6f</span><span class="s"> seconds.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">_kperiod_seconds</span>
+<span class="nb">printf_i</span> <span class="s">"gi_peer: </span><span class="si">%g</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> gi<span class="n">_peer</span>
+<span class="nb">link_enable</span> gi<span class="n">_peer</span><span class="p">,</span> <span class="mi">1</span>
+k<span class="n">_trigger</span><span class="p">,</span> gk<span class="n">_beat</span><span class="p">,</span> k<span class="n">_phase</span><span class="p">,</span> k<span class="n">_time</span> <span class="nb">link_metro</span> gi<span class="n">_peer</span><span class="p">,</span> <span class="mi">1</span>
+k<span class="n">_peers</span> <span class="nb">link_peers</span> gi<span class="n">_peer</span>
+k<span class="n">_tempo</span> <span class="nb">link_tempo_get</span> gi<span class="n">_peer</span>
+k<span class="n">_enabled</span> <span class="nb">link_is_enabled</span> gi<span class="n">_peer</span>
 k<span class="n">_hz</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="k">if</span> <span class="nb">floor</span><span class="p">(</span>gk<span class="n">_beat</span> <span class="o">%</span> <span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">then</span>
 k<span class="n">_hz</span> <span class="o">=</span> <span class="mi">3000</span>
@@ -132,7 +132,7 @@ k<span class="n">_hz</span> <span class="o">=</span> <span class="mi">3000</span
 k<span class="n">_hz</span> <span class="o">=</span> <span class="mi">2000</span>
 <span class="k">endif</span>
 <span class="nb">schedkwhen</span> k<span class="n">_trigger</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"Beep"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> k<span class="n">_hz</span>
-<span class="nb">printf</span> <span class="s">"LinkMonitor: gi_peer: %g k_enabled: %9.4f k_trigger: %9.4f beat: %9.4f k_phase: %9.4f time: %9.4f tempo: %9.4f peers: </span><span class="si">%3d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">_trigger</span><span class="p">,</span> gi<span class="n">_peer</span><span class="p">,</span> k<span class="n">_enabled</span><span class="p">,</span> k<span class="n">_trigger</span><span class="p">,</span> gk<span class="n">_beat</span><span class="p">,</span> k<span class="n">_phase</span><span class="p">,</span> k<span class="n">_time</span><span class="p">,</span> k<span class="n">_tempo</span><span class="p">,</span> k<span class="n">_peers</span>
+<span class="nb">printf</span> <span class="s">"LinkMonitor: gi_peer: </span><span class="si">%g</span><span class="s"> k_enabled: </span><span class="si">%9.4f</span><span class="s"> k_trigger: </span><span class="si">%9.4f</span><span class="s"> beat: </span><span class="si">%9.4f</span><span class="s"> k_phase: </span><span class="si">%9.4f</span><span class="s"> time: </span><span class="si">%9.4f</span><span class="s"> tempo: </span><span class="si">%9.4f</span><span class="s"> peers: </span><span class="si">%3d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">_trigger</span><span class="p">,</span> gi<span class="n">_peer</span><span class="p">,</span> k<span class="n">_enabled</span><span class="p">,</span> k<span class="n">_trigger</span><span class="p">,</span> gk<span class="n">_beat</span><span class="p">,</span> k<span class="n">_phase</span><span class="p">,</span> k<span class="n">_time</span><span class="p">,</span> k<span class="n">_tempo</span><span class="p">,</span> k<span class="n">_peers</span>
 <span class="kd">endin</span>
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
@@ -150,14 +150,14 @@ k<span class="n">_hz</span> <span class="o">=</span> <span class="mi">2000</span
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm115923"></a>
+        <a id="idm45499735774160"></a>
         <h2>Voir aussi</h2>
         <p>Voir la section <a class="link" href="OSCNetwork.html#AbletonLink" title="Opcodes Ableton Link"><em class="citetitle">Ableton Link
       Opcodes</em></a> pour plus d'information.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm115928"></a>
+        <a id="idm45499735771568"></a>
         <h2>Crédits</h2>
         <p>Par : Michael Gogins 2017</p>
       </div>
