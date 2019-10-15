@@ -155,6 +155,8 @@ giSeries[] fillarray 7, 3, 1, 5, 6
 giStart randEl giSeries
 ```
 
+___
+
 
 ``` csound
 
@@ -243,7 +245,7 @@ gSFiles[] directory "."
 ```
 
 ### Tables
-Loading function tables with [*ftgen*](https://csound.com/docs/manual/ftgen.html) in the orchestra usually makes code more readable than loading tables in the score section. This is because one can choose meaningful variable names for them rather than assigning a number. For example, consider the following two version of the same thing:
+Loading function tables with [*ftgen*](https://csound.com/docs/manual/ftgen.html) in the orchestra usually makes code more readable than loading tables in the score section. This is because one can choose meaningful variable names for them rather than assigning a number. For example, consider the following two versions of the same thing:
 
 ``` csound
 
@@ -256,6 +258,7 @@ instr Synthesis
  out aOut, aOut
 endin
 ```
+___
 
 
 ``` csound
@@ -307,6 +310,8 @@ i "Sequence" 0 10
 </CsScore>
 </CsoundSynthesizer>
 ```
+
+___
 
 
 ``` csound
