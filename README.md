@@ -31,7 +31,7 @@ the post by using standard HTML content (i.e. for images, use the image tag).
 The actual image should be placed in the images folder. If you have a question,
 it may help to look at one of the existing posts to use as a reference. 
 
-## Modifying Pages 
+## Modifying and Creating Pages 
 
 Pages are also Markdown files. They require headers that specify the layout
 (most should use "default") and title.  Top-level pages are found in the root
@@ -40,7 +40,9 @@ be linked to in some way for users to access them.  This is generally done by
 modifying one of the templates in the \_templates or \_includes folder. 
 
 New pages can be made by copying one of the existing pages and updating it for
-the new content.  Existing pages may be modified locally and pushed to the
+the new content.  Add an item at \_data/cms.yaml.
+
+Existing pages may be modified locally and pushed to the
 repository, or submitted as a change via pull request.  Pages may also be
 modified directly through the GitHub project site, which allows modifying the
 page within the browser. Users can navigate to the file in the project, select
