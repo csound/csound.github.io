@@ -7,7 +7,7 @@ title: Coding Tips
 The following are a list of suggestions to help write readable Csound code, and encourage good coding culture. They are by no means exhaustive, but might be particularly important for anyone learning Csound.
 
 ### Variable names
-Variables carry a meaning. This meaning should be mirrored in their names. An uppercase character after the type-specifying leading *i|k|a|f* can lead to more readable code:
+Variables carry a meaning. This meaning should be mirrored in their names. An uppercase character after the type-specifying leading *i|k|a|f* can improve the readability:
 
 ``` csound
 
@@ -155,6 +155,7 @@ giSeries[] fillarray 7, 3, 1, 5, 6
 giStart randEl giSeries
 ```
 
+
 ``` csound
 
 //all in one (shorter but less readable)
@@ -164,7 +165,7 @@ giStart = giSeries[int(random(0,lenarray(giSeries-0.00001)))]
 ```
 
 ### Order of instruments
-If named instruments are used, Csound executes the instruments exactly in the order they are written in the program. It's a good idea to try to group the instruments as much as possible to coincide with this order.
+If named instruments are used, Csound executes the instruments exactly in the order they are written in the program. Try to group the instruments as much as possible to coincide with this order.
 
 ``` csound
 
@@ -227,7 +228,7 @@ The sr, ksmps and nchnls will change according to the situation. 0dbfs should al
 
 ### Globals
 
-Global variables and arrays should be declared on top of your program, after the header and before the first instrument:
+Global variables and arrays should be declared on top of the Csoound program, after the header and before the first instrument:
 
 ``` csound
 
@@ -255,6 +256,8 @@ instr Synthesis
  out aOut, aOut
 endin
 ```
+
+
 ``` csound
 
 instr Synthesis
@@ -304,6 +307,7 @@ i "Sequence" 0 10
 </CsScore>
 </CsoundSynthesizer>
 ```
+
 
 ``` csound
 
