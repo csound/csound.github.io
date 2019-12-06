@@ -50,7 +50,7 @@ interface.
 <img src="http://floss.booktype.pro/csound/winxound/static/WinXound_linux.jpg"
      alt="WinXound" style="width: 400px;"/>
 
-[WinXound](http://winxound.codeplex.com) is a simple but solid front-end for
+[WinXound](https://mnt.conts.it/winxound) is a simple but solid front-end for
 Csound. Unlike the other front-ends listed here, WinXound does not embed Csound.
 Therefore it will forever work with every single version of Csound from the very
 first to the very last without any need to update or reinstall. You will need
