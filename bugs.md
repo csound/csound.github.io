@@ -7,15 +7,15 @@ Csound consists of different parts. Depending on the subject, your bug report sh
 
 ## A bug on this site (csound.com)
 (e.g. a broken link) should be reported 
-[here](https://github.com/csound/csound.github.io/issues)
+**[here]**(https://github.com/csound/csound.github.io/issues)
 
 ## A bug in the Csound Reference Manual
 should be reported 
-[here](https://github.com/csound/manual/issues)
+**[here]**(https://github.com/csound/manual/issues)
 
 ## A bug in the Csound core
 (e.g. an opcode is not working) should be reported 
-[here](https://github.com/csound/csound/issues).  
+**[here]**(https://github.com/csound/csound/issues).  
 Please tell the developers:
 - Which version of Csound are you using?
 - What is your operating system?
