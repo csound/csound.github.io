@@ -202,7 +202,7 @@ Single line comments can be added using **;** or **//**. Multi-line comments are
 
 Now that the basics of the Csound language have been outlined, it's time to look at creating a
 simple instrument. The opcodes used in this simple instrument are [vco2](docs/manual/vco2.html),
-[madsr](docs/manual/madsr.html), [moogladder](docs/manual/moog.html) and [out](docs/manual/out.html).
+[madsr](docs/manual/madsr.html), [moogladder](docs/manual/moogladder.html) and [out](docs/manual/out.html).
 
 The vco2 opcode models a voltage controlled oscillator. It provides users with an effective way of
 generating band-limited waveforms and can be the building blocks of many a synthesiser. Its syntax,
