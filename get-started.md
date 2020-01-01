@@ -201,8 +201,8 @@ Single line comments can be added using **;** or **//**. Multi-line comments are
 ## Your first synthesiser
 
 Now that the basics of the Csound language have been outlined, it's time to look at creating a
-simple instrument. The opcodes used in this simple instrument are [vco2](vco2.html),
-[madsr](madsr.html), [moogladder](moog.html) and [out](out.html).
+simple instrument. The opcodes used in this simple instrument are [vco2](docs/manual/vco2.html),
+[madsr](docs/manual/madsr.html), [moogladder](docs/manual/moog.html) and [out](docs/manual/out.html).
 
 The vco2 opcode models a voltage controlled oscillator. It provides users with an effective way of
 generating band-limited waveforms and can be the building blocks of many a synthesiser. Its syntax,
@@ -212,8 +212,14 @@ taken from the Csound reference manual, is given as:
 ares vco2 kamp, kcps [, imode] [, kpw] [, kphs] [, inyx]
 </code></pre>
 
-It outputs an a-rate signal and accepts several different input arguments. An x before an input
-argument indicates that i, k or a-rate variables can be used. Square brackets around an input
+It outputs an a-rate signal and accepts several different input arguments. An x before an input argument indicates that i, k or a-rate variables can be used. This is not the case in the vco2 opcode but in 
+[vco](docs/manual/vco.html) which has two x-input arguments:
+
+<pre><code data-language="csound">
+ares vco xamp, xcps, iwave, kpw
+</code></pre>
+
+Square brackets around an input
 argument means that argument is optional and can be left out. **kamp** determines the amplitude of
 the signal, while **kcps** sets the frequency of the signal. The default type of waveform created by
 a **vco2** is a sawtooth waveform. The simplest instrument that can be written to use a **vco2** is
