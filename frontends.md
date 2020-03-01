@@ -71,7 +71,7 @@ performance. Csound-Mode can be installed from within Emacs via MELPA-stable and
 MELPA-unstable.
 
 
-### `csound-vim`
+### csound-vim
 <img src="/images/csound-vim.gif" alt="csound-vim"
 	style="width: 400px;"/>
 [csound-vim](https://github.com/luisjure/csound-vim) is a plugin that turns the
