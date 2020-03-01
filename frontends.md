@@ -71,6 +71,19 @@ performance. Csound-Mode can be installed from within Emacs via MELPA-stable and
 MELPA-unstable.
 
 
+### `csound-vim`
+<img src="/images/csound-vim.gif" alt="csound-vim"
+	style="width: 400px;"/>
+[csound-vim](https://github.com/luisjure/csound-vim) is a plugin that turns the
+powerful text editor [Vim](https://www.vim.org/) into a simple but productive
+Csound development environment. It provides several functionalities for editing
+Csound files (`.orc`, `.sco`, `.csd`, `.udo`), like syntax recognition and
+highlighting, folding, autocompletion, on-line reference and templates, as well
+as macros for compiling the `.csd` file and listening to the results, without
+leaving the editor.  `csound-vim` can be combined with Steven Yi's
+[csound-repl](https://github.com/kunstmusik/csound-repl) for live coding.
+
+
 ### RunloopSound
 <img src="/images/RunloopSound-icon.svg" alt="" style="width: 400px;"/>
 RunloopSound is a Csound frontend for iOS devices. It supports most cloud
