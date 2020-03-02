@@ -77,10 +77,11 @@ MELPA-unstable.
 [csound-vim](https://github.com/luisjure/csound-vim) is a plugin that turns the
 powerful text editor [Vim](https://www.vim.org/) into a simple but productive
 Csound development environment. It provides several functionalities for editing
-Csound files (`.orc`, `.sco`, `.csd`, `.udo`), like syntax recognition and
+Csound files (.orc, .sco, .csd, .udo), like syntax recognition and
 highlighting, folding, autocompletion, on-line reference and templates, as well
-as macros for compiling the `.csd` file and listening to the results, without
-leaving the editor.  `csound-vim` can be combined with Steven Yi's
+as macros for compiling the .csd file and listening to the results, without
+leaving the editor.
+csound-vim can be combined with Steven Yi's
 [csound-repl](https://github.com/kunstmusik/csound-repl) for live coding.
 
 
