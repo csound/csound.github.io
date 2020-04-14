@@ -9,7 +9,8 @@ and things related.
 ##### The 5th International Csound Conference
 
 2019, 27&ndash;29 September, Cagli (Pesaro-Urbino), Italy<br>
-Link: [Website](https://csound.com/icsc2019/)
+Link: [Website](https://csound.com/icsc2019/),
+[Videos](https://www.youtube.com/channel/UC7Vs4qhE-wbaBkwucoqUZMA)
 
 ##### The 4th International Csound Conference
 
