@@ -39,20 +39,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499764505952"></a>
+        <a id="idm38002"></a>
         <h2>Description</h2>
-        <p>Opcode de greffon dans control.</p>
+        <p>Opcode du greffon control.</p>
         <p>
       Case à cocher sur l'écran. Nécessite Winsound ou Tcl/Tk.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499764504256"></a>
+        <a id="idm38006"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">kres <span class="command"><strong>checkbox</strong></span> knum</pre>
       </div>
       <div class="refsect1">
-        <a id="idm45499764502144"></a>
+        <a id="idm38010"></a>
         <h2>Exécution</h2>
         <p>
       Noter que cet opcode n'est pas disponible sous Windows à cause de
@@ -68,7 +68,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499764498624"></a>
+        <a id="idm38017"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode checkbox. Il utilise le fichier
@@ -76,16 +76,16 @@
 
       </p>
         <div class="example">
-          <a id="idm45499764496752"></a>
+          <a id="idm38022"></a>
           <p class="title">
-            <strong>Exemple 125. Simple exemple de l'opcode checkbox.</strong>
+            <strong>Exemple 126. Simple exemple de l'opcode checkbox.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm45499590737056"></a>
+              <a id="idm38029"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -102,6 +102,7 @@
 <span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
  
 <span class="kd">instr</span> <span class="nf">1</span>
+  k<span class="n">q</span> <span class="nb">init</span> <span class="mi">0</span>
   <span class="c1">; Get the value from the checkbox.</span>
   k<span class="n">1</span> <span class="nb">checkbox</span> <span class="mi">1</span>
 
@@ -111,9 +112,11 @@
   a<span class="n">1</span> <span class="nb">oscil</span> <span class="mi">10000</span><span class="p">,</span> k<span class="n">2</span><span class="p">,</span> <span class="mi">1</span>
   <span class="nb">outs</span> a<span class="n">1</span><span class="p">,</span> a<span class="n">1</span>
   k<span class="n">q</span> <span class="nb">button</span> <span class="mi">1</span>
-  <span class="k">if</span> k<span class="n">q</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">then</span>
-     <span class="nb">exitnow</span>
-  <span class="k">endif</span>
+  <span class="nb">schedkwhen</span> k<span class="n">q</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="kd">endin</span>
+
+<span class="kd">instr</span> <span class="nf">2</span>
+  <span class="nb">exitnow</span>
 <span class="kd">endin</span>
 
 <span class="nt">&lt;/CsInstruments&gt;</span>
@@ -135,14 +138,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499764492384"></a>
+        <a id="idm38117"></a>
         <h2>Voir aussi</h2>
         <p>
         <a class="link" href="button.html" title="button"><em class="citetitle">button</em></a>
       </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499764490336"></a>
+        <a id="idm38122"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -40,7 +40,7 @@ pvoc stream, with dynamic scaling.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46190239808896"></a>
+        <a id="idm176166"></a>
         <h2>Description</h2>
         <p>
       Multiply amplitudes of a pvoc stream by those of a second
@@ -48,12 +48,12 @@ pvoc stream, with dynamic scaling.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46190239807616"></a>
+        <a id="idm176169"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">fsig <span class="command"><strong>pvsfilter</strong></span> fsigin, fsigfil, kdepth[, igain]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm46190239805456"></a>
+        <a id="idm176173"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>fsig</em></span> -- output pv stream
@@ -95,14 +95,14 @@ pvoc stream, with dynamic scaling.
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm46190239798864"></a>
+        <a id="idm176188"></a>
         <h2>Examples</h2>
         <p>
       </p>
         <div class="example">
-          <a id="idm46190239797936"></a>
+          <a id="idm176191"></a>
           <p class="title">
-            <strong>Example 771. Example</strong>
+            <strong>Example 774. Example</strong>
           </p>
           <div class="example-contents">
             <pre class="programlisting">
@@ -130,14 +130,14 @@ it will be equivalent to a narrowband band-pass filter.</p>
       Here is an example of the use of the <span class="emphasis"><em>pvsfilter</em></span> opcode. It uses the file <a class="ulink" href="examples/pvsfilter.csd" target="_top"><em class="citetitle">pvsfilter.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm46190239783504"></a>
+          <a id="idm176214"></a>
           <p class="title">
-            <strong>Example 772. Example of the <span class="emphasis"><em>pvsfilter</em></span> opcode.</strong>
+            <strong>Example 775. Example of the <span class="emphasis"><em>pvsfilter</em></span> opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm46190059959936"></a>
+              <a id="idm176222"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -166,14 +166,14 @@ a<span class="n">in1</span>		<span class="nb">soundin</span>	S<span class="n">fi
 k<span class="n">freq</span>		<span class="nb">randomi</span>	<span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">3</span>
 a<span class="n">in2</span>		<span class="nb">oscili</span>		<span class="mf">.2</span><span class="p">,</span> k<span class="n">freq</span><span class="p">,</span> gi<span class="n">Bell</span>
 <span class="c1">;ain2		oscili		.2, kfreq, giSine; try also this </span>
-<span class="kt">f</span><span class="n">ftin1</span>		<span class="nb">pvsanal</span>	a<span class="n">in1</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> i<span class="n">overlap</span><span class="p">,</span> i<span class="n">winsize</span><span class="p">,</span> i<span class="n">winshape</span><span class="c1">; fft-analysis of file 1</span>
-<span class="kt">f</span><span class="n">ftin2</span>		<span class="nb">pvsanal</span>	a<span class="n">in2</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> i<span class="n">overlap</span><span class="p">,</span> i<span class="n">winsize</span><span class="p">,</span> i<span class="n">winshape</span><span class="c1">; fft-analysis of file 2</span>
+f<span class="n">ftin1</span>		<span class="nb">pvsanal</span>	a<span class="n">in1</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> i<span class="n">overlap</span><span class="p">,</span> i<span class="n">winsize</span><span class="p">,</span> i<span class="n">winshape</span><span class="c1">; fft-analysis of file 1</span>
+f<span class="n">ftin2</span>		<span class="nb">pvsanal</span>	a<span class="n">in2</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> i<span class="n">overlap</span><span class="p">,</span> i<span class="n">winsize</span><span class="p">,</span> i<span class="n">winshape</span><span class="c1">; fft-analysis of file 2</span>
 <span class="k">if</span> i<span class="n">permut</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">then</span>
-<span class="kt">f</span><span class="n">cross</span>		<span class="nb">pvsfilter</span>	<span class="kt">f</span><span class="n">ftin2</span><span class="p">,</span> <span class="kt">f</span><span class="n">ftin1</span><span class="p">,</span> <span class="mi">1</span>
+f<span class="n">cross</span>		<span class="nb">pvsfilter</span>	f<span class="n">ftin2</span><span class="p">,</span> f<span class="n">ftin1</span><span class="p">,</span> <span class="mi">1</span>
 <span class="k">else</span>
-<span class="kt">f</span><span class="n">cross</span>		<span class="nb">pvsfilter</span>	<span class="kt">f</span><span class="n">ftin1</span><span class="p">,</span> <span class="kt">f</span><span class="n">ftin2</span><span class="p">,</span> <span class="mi">1</span>
+f<span class="n">cross</span>		<span class="nb">pvsfilter</span>	f<span class="n">ftin1</span><span class="p">,</span> f<span class="n">ftin2</span><span class="p">,</span> <span class="mi">1</span>
 <span class="k">endif</span>
-a<span class="n">out</span>		<span class="nb">pvsynth</span>	<span class="kt">f</span><span class="n">cross</span>
+a<span class="n">out</span>		<span class="nb">pvsynth</span>	f<span class="n">cross</span>
 		<span class="nb">out</span>		a<span class="n">out</span> <span class="o">*</span> <span class="mi">20</span>
 <span class="kd">endin</span>
 
@@ -192,7 +192,7 @@ a<span class="n">out</span>		<span class="nb">pvsynth</span>	<span class="kt">f<
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46190239778784"></a>
+        <a id="idm176440"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>,
@@ -201,7 +201,7 @@ a<span class="n">out</span>		<span class="nb">pvsynth</span>	<span class="kt">f<
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46190239774816"></a>
+        <a id="idm176449"></a>
         <h2>Credits</h2>
         <p>
       </p>

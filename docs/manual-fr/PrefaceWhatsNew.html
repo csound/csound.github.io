@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Les nouveautés de Csound 6.13.0</title>
+    <title>Les nouveautés de Csound 6.14.0</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -16,7 +16,7 @@
     <div class="navheader">
       <table width="100%" summary="Navigation header">
         <tr>
-          <th colspan="3" align="center">Les nouveautés de Csound 6.13.0</th>
+          <th colspan="3" align="center">Les nouveautés de Csound 6.14.0</th>
         </tr>
         <tr>
           <td width="20%" align="left"><a accesskey="p" href="PrefaceGettingStarted.html">Précédent</a> </td>
@@ -30,11 +30,396 @@
       <div class="titlepage">
         <div>
           <div>
-            <h2 class="title" style="clear: both"><a id="PrefaceWhatsNew"></a>Les nouveautés de Csound 6.13.0</h2>
+            <h2 class="title" style="clear: both"><a id="PrefaceWhatsNew"></a>Les nouveautés de Csound 6.14.0</h2>
           </div>
         </div>
       </div>
-      <h3><a id="idm45499793686352"></a>Notes de parution de Csound 6.13 (juillet 2019)</h3>
+      <h3><a id="idm327"></a>Notes de parution de Csound 6.14 (janvier 2020)</h3>
+      <p>
+    Un certain nombre de corrections de bogues et d'améliorations, mais aussi
+    des changements potentiellement significatifs ont été ajoutés.
+  </p>
+      <p>
+    Pour les codeurs en direct, les macros d'orchestre sont conservées entre les
+    appels à compilerstr. Ca ne change pas le comportement des orchestres
+    actuellement valides mais pourra être utile pour le codage en direct.
+  </p>
+      <p>
+    Les périphériques MIDI incluent maintenant l'association de périphériques
+    multiples à des canaux de numéros supérieurs. Les détails sont dans la
+    section MIDI du manuel.  
+  </p>
+      <p>
+    </p>
+      <div class="itemizedlist">
+        <ul class="itemizedlist" style="list-style-type: disc; ">
+          <li class="listitem">
+            <p>Nouveaux opcodes :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                randc est comme randi mais il utilise une interpolation cubique.
+              </li>
+                <li class="listitem">
+                  <p class="simpara">
+                mp3out est une implémentation expérimentale d'écriture d'un
+                fichier mp3. Il pourra être remplacé par le travail développé
+                actuellement dans libsndfile pour traiter les fichiers MPEG.
+              </p>
+                  <p class="simpara">
+                Exemple simple :
+</p>
+                  <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer</span>
+<span class="nt">&lt;CsInstruments</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+  aa <span class="nb">diskin</span> "fox.wav", 1
+  <span class="nb">mp3out</span>  aa, aa, "test.mp3"
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span>
+<span class="nb">e</span>     
+<span class="nt">&lt;/CsScore</span>
+<span class="nt">&lt;/CsoundSynthesizer</span>
+</pre>
+                  <p class="simpara">
+                La syntaxe est "mp3out aleft, aright, Sfilename" avec trois arguments
+                facultatifs "mode" (0=stéréo, 1=stéréo entrelacé (par défault), 3=Mono),
+                "bitrate" 256 par défaut, et "quality" (entre 1 et 7), 2 par défaut
+                (qualité élevée).
+              </p>
+                </li>
+                <li class="listitem">
+                <a class="link" href="metro2.html" title="metro2"><em class="citetitle">metro2</em></a> est
+                comme metro mais avec l'ajout d'un rubato contrôlable.
+              </li>
+                <li class="listitem">
+                <a class="link" href="ftexists.html" title="ftexists"><em class="citetitle">ftexists</em></a>
+                reports whether a numbered ftable exists.
+              </li>
+                <li class="listitem">
+                <a class="link" href="schedulek.html" title="schedulek"><em class="citetitle">schedulek</em></a>
+                est un opcode de taux-k identique à schedule.
+              </li>
+                <li class="listitem">
+                Nouveaux opcodes de canaux basés sur des tableaux :
+                <a class="link" href="chnget.html" title="chnget">
+                <em class="citetitle">chngeti, chngetk, chngeta, chngets</em></a>,
+                <a class="link" href="chnset.html" title="chnset">
+                <em class="citetitle">chnseti, chnsetk, chnseta, chnsets</em></a>.
+              </li>
+                <li class="listitem">
+                <a class="link" href="lastcycle.html" title="lastcycle"><em class="citetitle">lastcycle</em></a>
+                identifie le dernier k-cycle d'une intance d'instrument.
+              </li>
+                <li class="listitem">
+                <a class="link" href="strstrip.html" title="strstrip"><em class="citetitle">strstrip</em></a>
+                supprime les espaces aux deux extrémités d'une chaîne de
+                caractères.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Orchestre :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                L'expression conditionnelle a?b:c calculait toujours b et c
+                avant de choisir lequel retourner. Cela pouvait donner des
+                erreurs de division par 0 ou causer des évaluations multiples
+                d'opcodes inattendues. Elle implémente maintenant la
+                sémantique commune du langage C.
+              </li>
+                <li class="listitem">
+                Les macros de l'orchestre sont maintenant persistantes, si bien
+                qu'elles s'appliquent à chaque compilation suivant leur définition
+                jusqu'à ce qu'elles soient explicitement indéfinies. Ce
+                changement a été effectué en particulier pour le codage en
+                direct. Les orchestres valides ne devraient pas être affectés.
+              </li>
+                <li class="listitem">
+                Après une erreur de syntaxe, il y avait des cas où Csound
+                donnait une erreur de segmentation. C'est maintenant corrigé.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Options :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                La nouvelle option simple-sorted-score crée le fichier score.srt
+                dans un  format plus agréable.
+              </li>
+                <li class="listitem">
+                Traitement de CsOptions revu avec les guillemets et les espaces
+                qui doivent être échappés.
+              </li>
+                <li class="listitem">
+                En positionnant le bit 1024 dans -m, on supprime l'affichage
+                des messages sur l'utilisation d'opcodes obsolètes. Cette
+                option est elle-même obsolète.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Opcodes et Gens modifiés :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                squinewave traite maintenant un argument facultatif de
+                taux-a ou -k.
+              </li>
+                <li class="listitem">
+                L'opcode pindex traite des champs chaîne de caractères ou
+                numériques.
+              </li>
+                <li class="listitem">
+                sflooper a été modifié pour éviter un plantage et donne des
+                avertissements.
+              </li>
+                <li class="listitem">event_i etd schedule acceptent un p1 fractionnaire.</li>
+                <li class="listitem">
+                Meilleurs tests dans les opcodes soundfont. De plus ils ne
+                chargent plus plusieurs copies d'un soundfont, mais ils
+                réutilisent celui qui est déjà chargé.
+              </li>
+                <li class="listitem">
+                fluidControl a un nouvel argument facultatif pour contrôler
+                l'affichaged de messages.
+              </li>
+                <li class="listitem">bpf a une version audio maintenant.</li>
+                <li class="listitem">
+                stsend/strecv peuvent travailler avec des taux-k différents.
+              </li>
+                <li class="listitem">pvstrace a de nouveaux arguments facultatifs.</li>
+                <li class="listitem">lpfreson verifie le nombre de pôles.</li>
+                <li class="listitem">
+                syncloop avait une petite erreur de frappe qui provoquait des
+                plantages.
+              </li>
+                <li class="listitem">bpfcs a de nouvelles versions avec tableaux.</li>
+                <li class="listitem">
+                On peut omettre le second argument de zacl, ce qui par défaut
+                n'efface que le canal donné.
+              </li>
+                <li class="listitem">
+                outvalue essayait d'utiliser une valeur de taux-k qui pouvait
+                ne pas être valide à cet instant. C'est avant tout un petit
+                problème d'exécution et il est maintenant supprimé.
+              </li>
+                <li class="listitem">
+                Les noms de canal pour les opcodes chnget et chnset peuvent
+                maintenant être changés au taux-k si bien qu'on peut les
+                appeler depuis une boucle.
+              </li>
+                <li class="listitem">
+                copya2ftab a maintenant un argument facultatif supplémentaire
+                qui est un décalage dans la ftable dans laquelle on copie le
+                tableau.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Utilités :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                lpanal vérifie maintenant que suffisamment de pôles sont requis.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Frontaux :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                CsoundQt : à paraitre en même temps que Csound 6.14, il y a CsoundQt 0.9.7.
+                Voir les notes de parution
+                <a class="ulink" href="https://github.com/CsoundQt/CsoundQt/blob/master/release_notes/Release%20notes%200.9.7.md" target="_top">
+                <em class="citetitle">https://github.com/CsoundQt/CsoundQt/blob/master/release_notes/Release%20notes%200.9.7.md</em></a>.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Usage général :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                Les commentaires // en début de ligne sont maintenant acceptés
+                dans la section CsOptions d'un fichier csd.
+              </li>
+                <li class="listitem">
+                L'option --orc a été corrigée pour fonctionner sans partition :
+                l'exécution dure indéfiniment jusqu'à ce que soit rencontrée
+                une condition de sortie.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Boques corrigés :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">shiftin corrigé.</li>
+                <li class="listitem">
+                exitnow donne le code de retour correspondant à la documentation.
+              </li>
+                <li class="listitem">
+                Boque corrigé dans beosc, où le générateur de bruit gaussien
+                n'était pas initialisé.
+              </li>
+                <li class="listitem">OSCraw corrigé.</li>
+                <li class="listitem">
+                ftkloadk pouvait sélectionner un code interne incorrect causant
+                un plantage.
+              </li>
+                <li class="listitem">
+                GEN01 lorsqu'il était utilisé pour lire un seul canal d'un
+                fichier multi-canaux donnait une longueur incorrecte.
+              </li>
+                <li class="listitem">
+                ftgenonce avait un problème de dépassemente qui pouvait causer
+                l'écriture dans une table déjà active.
+              </li>
+                <li class="listitem">
+                Une situation de compétition dans les opcodes Jacko a été
+                améliorée (issue #1182).
+              </li>
+                <li class="listitem">
+                syncloop avait une petite erreur de frappe qui causait des
+                plantages.
+              </li>
+                <li class="listitem">
+                lowresx était incomplet et ne fonctionnait pas comme prévu :
+                réécrit (issue #1199).
+              </li>
+                <li class="listitem">
+                Si outch recevait de manière incorrecte un nombre impair de
+                paramètres, il donnait une erreur de segmentation. Cela produit
+                maintenant un message d'erreur.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Changements système :
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                Une nouvelle classe de greffon pour des opcodes sans sortie a
+                été écrite. Les erreurs d'exécution et d'initialisation sont
+                aussi retournées dans le code de retour du système en ligne de
+                commande. La nouvelle fonction de l'API GetErrorCnt est
+                disponible pour faire quelque chose de similaire sous d'autres
+                variantes.
+              </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>API:
+          </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                La fonction GetErrorCnt donne le numéro des erreurs d'exécution
+                et ajoute les erreurs d'initialisation à la fin du rendu.
+              </li>
+                <li class="listitem">
+                La fonction FTnp2Find n'affiche plus de messages si la table
+                n'est pas trouvée, mais retoure NULL. Le comportement précédent
+                est fourni par FTnp2Finde.
+              </li>
+                <li class="listitem">csoundGetInstrument() a été ajoutée.</li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+          <li class="listitem">
+            <p>Changements sur les plates-formes :
+        </p>
+            <div class="itemizedlist">
+              <ul class="itemizedlist" style="list-style-type: circle; ">
+                <li class="listitem">
+                  <p>WebAudio :
+            </p>
+                  <div class="itemizedlist">
+                    <ul class="itemizedlist" style="list-style-type: square; ">
+                      <li class="listitem">
+                  csoundCompile() a été ajoutée à CsoundObj, qui ajoute des args
+                  de ligne de commande ce qui permet de remplacer les valeurs
+                  de CsOptions dans les CSDs.
+                </li>
+                      <li class="listitem">
+                  getPlayState(), addPlayStateListener() et d'autres méthodes
+                  ont été ajoutées à CsoundObj pour demander et tracer les
+                  changements d'état de l'exécution.
+                </li>
+                    </ul>
+                  </div>
+                  <p>
+            </p>
+                </li>
+                <li class="listitem">
+                  <p>Windows :
+            </p>
+                  <div class="itemizedlist">
+                    <ul class="itemizedlist" style="list-style-type: square; ">
+                      <li class="listitem">
+                  stsend retravaillé pour la bibliothèque winsock.
+                </li>
+                    </ul>
+                  </div>
+                  <p>
+            </p>
+                </li>
+              </ul>
+            </div>
+            <p>
+        </p>
+          </li>
+        </ul>
+      </div>
+      <p>
+  </p>
+      <h3><a id="idm513"></a>Notes de parution de Csound 6.13 (juillet 2019)</h3>
       <p>
     Peu de nouveaux opcodes, mais un nombre significatif d'opcodes ont été
     étendus pour utiliser les tableaux de différentes manières, élargissant les
@@ -277,7 +662,7 @@
         </p>
           </li>
           <li class="listitem">
-            <p>changements système :
+            <p>Changements système :
           </p>
             <div class="itemizedlist">
               <ul class="itemizedlist" style="list-style-type: circle; ">
@@ -342,7 +727,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45499793573040"></a>Notes de parution de Csound 6.12 (novembre 2018)</h3>
+      <h3><a id="idm685"></a>Notes de parution de Csound 6.12 (novembre 2018)</h3>
       <p>
     De nombreux changements comprenant la suppression de la fonctionnalité
     vst2cs à cause d'un problème de copyright.
@@ -719,7 +1104,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45499793481616"></a>Notes de parution de Csound 6.11 (mai 2018)</h3>
+      <h3><a id="idm875"></a>Notes de parution de Csound 6.11 (mai 2018)</h3>
       <p>
     Il y a eu une importante réoganisation en interne qui ne devrait pas affecter
     la plupart des utilisateurs. Certains composants sont maintenant gérés
@@ -1003,7 +1388,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45499793430800"></a>Notes de parution de Csound 6.10 (décembre 2017)</h3>
+      <h3><a id="idm974"></a>Notes de parution de Csound 6.10 (décembre 2017)</h3>
       <p>
     C'est principalement une distribution de correction de bogues, incluant un
     bogue important introduit récemment dans loscil. Il y a aussi de nouveaux
@@ -1368,7 +1753,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45499793347712"></a>Notes de parution de Csound 6.09 (mai 2017)</h3>
+      <h3><a id="idm1140"></a>Notes de parution de Csound 6.09 (mai 2017)</h3>
       <p>De nouveaux opcodes et plusieurs corrections et améliorations.</p>
       <p>
     Il y a comme d'habitude un certain nombres de changement internes, y compris
@@ -1806,7 +2191,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45499793225184"></a>Notes de parution de Csound 6.08 (novembre 2016)</h3>
+      <h3><a id="idm1408"></a>Notes de parution de Csound 6.08 (novembre 2016)</h3>
       <p>
     Comme d'habitude, il y a un certain nombre de corrections et d'améliorations
     des opcodes, mais les changements les plus importants apparaissent dans les
@@ -2176,7 +2561,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45499793130080"></a>Notes de parution de Csound 6.07 (mars 2016)</h3>
+      <h3><a id="idm1612"></a>Notes de parution de Csound 6.07 (mars 2016)</h3>
       <p>
     De nombreux bogues corrigés, dont certains importants, des éléments internes
     sont inclus, ainsi que de nouvelles fonctionnalités et extensions. Comme
@@ -2737,7 +3122,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45499792971984"></a>Notes de parution de Csound 6.06 (septembre 2015)</h3>
+      <h3><a id="idm1962"></a>Notes de parution de Csound 6.06 (septembre 2015)</h3>
       <p>De nombreux bogues, certains assez importants, ont été corrigés et de
   nouvelles facilités et extensions ont été ajoutées.</p>
       <p>
@@ -2969,7 +3354,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45499792911424"></a>Notes de parution de Csound 6.05 (Avril 2015)</h3>
+      <h3><a id="idm2098"></a>Notes de parution de Csound 6.05 (Avril 2015)</h3>
       <p>Comme toujours il y a de nouvelles facilités et de nombreuses
   corrections de bogues. Une grande partie de cette livraison consiste en la
   suppression de nombreuses fuites et de saturation de mémoire. Naturellement
@@ -3246,7 +3631,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45499792840400"></a>Notes de parution de Csound 6.04 (novembre 2014)</h3>
+      <h3><a id="idm2258"></a>Notes de parution de Csound 6.04 (novembre 2014)</h3>
       <p>Cette nouvelle version comprend de nombreuses extensions et corrections ;
   de nouveaux opcodes et un nombre important de réorganisations internes. Il y a
   un nouveau frontal et les versions iOS et Android présentent de nombreuses
@@ -3516,7 +3901,7 @@
       </div>
       <p>
   </p>
-      <h3><a id="idm45499792753040"></a>Notes de parution de Csound 6.03 (mai 2014)</h3>
+      <h3><a id="idm2452"></a>Notes de parution de Csound 6.03 (mai 2014)</h3>
       <p>
     Cette nouvelle version corrige de nombreux bogues, comprenant la résolution
     de tickets sur SourceForge et sur GitHub. Elle apporte également des
@@ -3864,7 +4249,7 @@ void csoundDebugFreeVariables(CSOUND *csound, debug_variable_t *varHead);</pre>
       </div>
       <p>
   </p>
-      <h3><a id="idm45499792671616"></a>Notes de parution de Csound 6.02</h3>
+      <h3><a id="idm2628"></a>Notes de parution de Csound 6.02</h3>
       <p>
     Cette nouvelle version comporte de nombreuses corrections de bogues
     (y compris la résolution générale de tous les tickets sur SourceForge).
@@ -4111,7 +4496,7 @@ void csoundDebugFreeVariables(CSOUND *csound, debug_variable_t *varHead);</pre>
       </div>
       <p>
   </p>
-      <h3><a id="idm45499792594000"></a>Notes de parution de Csound6</h3>
+      <h3><a id="idm2800"></a>Notes de parution de Csound6</h3>
       <p>
   Csound6 est une réécriture significative d'une grande partie du code. En
   particulier, l'API n'est plus compatible, mais tous les anciens fichiers
@@ -4621,7 +5006,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
 </p>
-      <h3><a id="idm45499792449952"></a>Nouveautés dans la version 5.19 (7 janvier 2013)</h3>
+      <h3><a id="idm3057"></a>Nouveautés dans la version 5.19 (7 janvier 2013)</h3>
       <p>
   C'est principalement une distribution de correction de bogues avec cependant
   de nouveaux opcodes et des améliorations.
@@ -4921,7 +5306,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
 </p>
-      <h3><a id="idm45499792379488"></a>Nouveautés dans la version 5.18 (29 août 2012)</h3>
+      <h3><a id="idm3221"></a>Nouveautés dans la version 5.18 (29 août 2012)</h3>
       <p>
   C'est principalement une distribution de correction de bogues avec cependant
   de nouveaux opcodes et des améliorations.
@@ -5073,7 +5458,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45499792329264"></a>Nouveautés dans la version 5.17 (mars 2012)</h3>
+      <h3><a id="idm3341"></a>Nouveautés dans la version 5.17 (mars 2012)</h3>
       <p>
     C'est principalement une distribution sans changement majeur mais avec de
     nombreuses corrections.
@@ -5200,7 +5585,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45499792292752"></a>Nouveautés dans la version 5.16 (février 2012)</h3>
+      <h3><a id="idm3425"></a>Nouveautés dans la version 5.16 (février 2012)</h3>
       <p>
     Le changement principal est que le nouveau parseur est maintenant employé
     par défaut. L'ancien parseur est toujours disponible en cas de difficultés,
@@ -5362,7 +5747,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45499792238560"></a>Nouveautés dans la version 5.15 (décembre 2011)</h3>
+      <h3><a id="idm3539"></a>Nouveautés dans la version 5.15 (décembre 2011)</h3>
       <p>
   </p>
       <div class="itemizedlist">
@@ -5502,7 +5887,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45499792181024"></a>Nouveautés dans la version 5.14 (octobre 2011)</h3>
+      <h3><a id="idm3679"></a>Nouveautés dans la version 5.14 (octobre 2011)</h3>
       <p>
   </p>
       <div class="itemizedlist">
@@ -5638,7 +6023,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45499792106208"></a>Nouveautés dans la version 5.13 (janvier 2011)</h3>
+      <h3><a id="idm3858"></a>Nouveautés dans la version 5.13 (janvier 2011)</h3>
       <p>
     </p>
       <div class="itemizedlist">
@@ -5772,7 +6157,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45499792041424"></a>Nouveautés dans la version 5.12 (janvier 2010)</h3>
+      <h3><a id="idm4017"></a>Nouveautés dans la version 5.12 (janvier 2010)</h3>
       <p>
    </p>
       <div class="itemizedlist">
@@ -5903,7 +6288,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
  </p>
-      <h3><a id="idm45499791999744"></a>Nouveautés dans la version 5.11 (juin 2009)</h3>
+      <h3><a id="idm4114"></a>Nouveautés dans la version 5.11 (juin 2009)</h3>
       <p>
     </p>
       <div class="itemizedlist">
@@ -6073,7 +6458,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45499791935840"></a>Nouveautés dans la version 5.10 (décembre 2008)</h3>
+      <h3><a id="idm4267"></a>Nouveautés dans la version 5.10 (décembre 2008)</h3>
       <p>
     </p>
       <div class="itemizedlist">
@@ -6168,7 +6553,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45499791910368"></a>Nouveautés dans la version 5.09 (octobre 2008)</h3>
+      <h3><a id="idm4319"></a>Nouveautés dans la version 5.09 (octobre 2008)</h3>
       <p>
     </p>
       <div class="itemizedlist">
@@ -6318,7 +6703,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45499791858272"></a>Nouveautés dans la version 5.08 (février 2008)</h3>
+      <h3><a id="idm4442"></a>Nouveautés dans la version 5.08 (février 2008)</h3>
       <p>
     </p>
       <div class="itemizedlist">
@@ -6458,7 +6843,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
   </p>
-      <h3><a id="idm45499791807792"></a>Nouveautés dans la version 5.07 (octobre 2007)</h3>
+      <h3><a id="idm4562"></a>Nouveautés dans la version 5.07 (octobre 2007)</h3>
       <p>
       </p>
       <div class="itemizedlist">
@@ -6561,7 +6946,7 @@ int perf_myopcode(CSOUND *csound, MYOPCODE *p)
       </div>
       <p>
     </p>
-      <h3><a id="idm45499791768992"></a>Nouveautés dans la version 5.06 (juin 2007)</h3>
+      <h3><a id="idm4656"></a>Nouveautés dans la version 5.06 (juin 2007)</h3>
       <p>
     </p>
       <div class="itemizedlist">

@@ -664,13 +664,14 @@ csound5:output2             (reproduction droite)</pre>
           <dd>
             <p>
           Lire les évènements MIDI à partir du périphérique <span class="emphasis"><em>PERIPHERIQUE</em></span>. Si l'on utilise
-          ALSA MIDI (<a class="link" href="CommandFlagsCategory.html#FlagsCatMinusPlusRtmidi"><em class="citetitle">-+rtmidi</em></a>=alsa),
-          les périphériques sont sélectionnés par leur nom et pas par un numéro. Ainsi,
-          il faut utiliser une option comme -M hw:CARTE,PERIPHERIQUE où CARTE et PERIPHERIQUE sont les numéros de
-          la carte et du périphérique (par exemple -M hw:1,0). Dans le cas de PortMidi et de MME, PERIPHERIQUE
+          ALSA MIDI (-+rtmidi=alsa), les périphériques sont sélectionnés par leur nom et pas par un numéro. Ainsi,
+          il faut utiliser une option comme -M hw:CARTE,PERIPHERIQUE où CARTE et PERIPHERIQUE sont les numéros de
+          la carte et du périphérique (par exemple -M hw:1,0). Dans le cas de CoreMidi et de MME, PERIPHERIQUE
           doit être un nombre, et s'il est en-dehors de l'intervalle permis, une erreur est levée et les numéros
-          de périphérique valides sont imprimés. Avec PortMidi, on peut utiliser '-Ma' pour
-          activer tous les périphériques. Cela marche aussi lorsqu'il n'y a pas de périphérique
+          de périphérique valides sont imprimés. Avec PortMidi, PERIPHERIQUE est soit un nombre pour une entrée sur
+          un seul port, soit 'a' pour écouter sur tous les ports, ou bien 'm' pour associer les ports à des canaux
+          MIDI au-delà de 16. Dans ce cas, le périphérique 0 utilise 1-16, le périphérique 1 utilise 17-32, ...
+          Les options 'a' et 'm' conviennent aussi lorsqu'il n'y a pas de périphérique
           car aucune erreur n'est générée.
         </p>
           </dd>
@@ -917,6 +918,9 @@ csound5:output2             (reproduction droite)</pre>
                 <li class="listitem">
                   <p>128 = impression d'information de tests de référence</p>
                 </li>
+                <li class="listitem">
+                  <p>1024 = suppression des messages d'obsolescence</p>
+                </li>
               </ul>
             </div>
             <p>
@@ -947,7 +951,8 @@ csound5:output2             (reproduction droite)</pre>
             <p>
           La valeur par défaut est 135 (128+4+2+1), ce qui signifie tous les messages, valeurs d'amplitude
           brutes, et impression du temps écoulé à la fin de l'exécution. La coloration des amplitudes
-          brutes fut introduite dans la version 5.04.
+          brutes fut introduite dans la version 5.04. La suppression des messages
+          d'obsolescence a été ajoutée dans la version 6.14.
         </p>
           </dd>
           <dt>
@@ -1244,7 +1249,7 @@ csound5:output2             (reproduction droite)</pre>
           <dd>
             <p>
           Détermine un port UDP pour recevoir des commandes et/ou du code
-          d'instruments ou d'orchestre (implique --daemon) 
+          d'instruments ou d'orchestre (implique --daemon) Voir <a class="link" href="udpserver.html" title="Serveur UDP"><em class="citetitle">serveur UDP</em></a>.
         </p>
           </dd>
           <dt>
@@ -1720,11 +1725,12 @@ csound5:output2             (reproduction droite)</pre>
           </dd>
           <dt>
             <a id="FlagsCatMinusLowerT0"></a>
-            <span class="term">-t0<a id="IndexCatMinusLowerT0" class="indexterm"></a>, --keep-sorted-score<a id="IndexCatMinusKeepsortedscore" class="indexterm"></a></span>
+            <span class="term">--simple-sorted-score<a id="IndexCatMinusSimplesortedscore" class="indexterm"></a></span>
           </dt>
           <dd>
             <p>
-          Empêche Csound d'effacer le fichier de la partition triée, <span class="emphasis"><em>score.srt</em></span>, lors de la sortie.
+          Conserve le fichier de partition trié score.srt dans un format simple
+          et lisible lors de la sortie. (Nouveau dans la version 6.14).
         </p>
           </dd>
           <dt>

@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46190240330480"></a>
+        <a id="idm174912"></a>
         <h2>Description</h2>
         <p>
       This opcode reads from a circular buffer of length ilen (secs),
@@ -50,12 +50,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46190240328432"></a>
+        <a id="idm174916"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">fsig <span class="command"><strong>pvsbufread2</strong></span>  ktime, khandle, ift1, ift2 </pre>
       </div>
       <div class="refsect1">
-        <a id="idm46190240326208"></a>
+        <a id="idm174920"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>ift1</em></span> -- function table with at least fftisze/2+1 points where delays (in secs) for bin amplitudes are
@@ -67,7 +67,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46190240323424"></a>
+        <a id="idm174926"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>fsig</em></span> -- output pv stream
@@ -117,20 +117,20 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm46190240313728"></a>
+        <a id="idm174949"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the pvsbufread2 opcode. It uses the file <a class="ulink" href="examples/pvsbufread2.csd" target="_top"><em class="citetitle">pvsbufread2.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm46190240311856"></a>
+          <a id="idm174954"></a>
           <p class="title">
-            <strong>Example 762. Example of the pvsbufread2 opcode.</strong>
+            <strong>Example 765. Example of the pvsbufread2 opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm46190060305200"></a>
+              <a id="idm174961"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -148,14 +148,14 @@ i<span class="n">hop</span>     <span class="o">=</span>            i<span class
 
 a<span class="n">1</span>       <span class="nb">diskin2</span>      <span class="s">"beats.wav"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
 a<span class="n">1</span>       <span class="o">=</span>            a<span class="n">1</span><span class="o">*</span><span class="mf">0.5</span>
-<span class="kt">f</span><span class="n">sig1</span>    <span class="nb">pvsanal</span>      a<span class="n">1</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> i<span class="n">hop</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> <span class="mi">1</span>
-i<span class="n">h</span><span class="p">,</span> k<span class="n">t</span>   <span class="nb">pvsbuffer</span>    <span class="kt">f</span><span class="n">sig1</span><span class="p">,</span> <span class="mi">10</span>
+f<span class="n">sig1</span>    <span class="nb">pvsanal</span>      a<span class="n">1</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> i<span class="n">hop</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> <span class="mi">1</span>
+i<span class="n">h</span><span class="p">,</span> k<span class="n">t</span>   <span class="nb">pvsbuffer</span>    f<span class="n">sig1</span><span class="p">,</span> <span class="mi">10</span>
 
-<span class="kt">f</span><span class="n">sig2</span>    <span class="nb">pvsbufread2</span>  k<span class="n">t</span><span class="p">,</span> i<span class="n">h</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
-<span class="kt">f</span><span class="n">sig3</span>    <span class="nb">pvsbufread2</span>  k<span class="n">t</span><span class="p">,</span> i<span class="n">h</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
+f<span class="n">sig2</span>    <span class="nb">pvsbufread2</span>  k<span class="n">t</span><span class="p">,</span> i<span class="n">h</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+f<span class="n">sig3</span>    <span class="nb">pvsbufread2</span>  k<span class="n">t</span><span class="p">,</span> i<span class="n">h</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
 
-a<span class="n">2</span>       <span class="nb">pvsynth</span>      <span class="kt">f</span><span class="n">sig3</span>
-a<span class="n">3</span>       <span class="nb">pvsynth</span>      <span class="kt">f</span><span class="n">sig2</span>
+a<span class="n">2</span>       <span class="nb">pvsynth</span>      f<span class="n">sig3</span>
+a<span class="n">3</span>       <span class="nb">pvsynth</span>      f<span class="n">sig2</span>
 
          <span class="nb">outs</span>         a<span class="n">2</span><span class="p">,</span> a<span class="n">3</span>
 <span class="kd">endin</span>
@@ -176,7 +176,7 @@ a<span class="n">3</span>       <span class="nb">pvsynth</span>      <span class
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46190240307568"></a>
+        <a id="idm175092"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>,
@@ -186,7 +186,7 @@ a<span class="n">3</span>       <span class="nb">pvsynth</span>      <span class
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm46190240302640"></a>
+        <a id="idm175103"></a>
         <h2>Credits</h2>
         <p>
       </p>

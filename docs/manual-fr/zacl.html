@@ -39,25 +39,27 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499680375472"></a>
+        <a id="idm258587"></a>
         <h2>Description</h2>
         <p>
       Efface une ou plusieurs variables dans l'espace za.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499680309280"></a>
+        <a id="idm258590"></a>
         <h2>Syntaxe</h2>
-        <pre class="synopsis"><span class="command"><strong>zacl</strong></span> kfirst, klast</pre>
+        <pre class="synopsis"><span class="command"><strong>zacl</strong></span> kfirst [, klast]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm45499680307264"></a>
+        <a id="idm258594"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kfirst</em></span> -- Première position za de l'intervalle à effacer.
     </p>
         <p>
-      <span class="emphasis"><em>klast</em></span> -- Dernière position za de l'intervalle à effacer.
+      <span class="emphasis"><em>klast</em></span> -- Dernière position za de l'intervalle à
+      effacer. Si elle n'est pas donnée, seule la position
+      <span class="emphasis"><em>kfirst</em></span> est effacée.
     </p>
         <p>
       <span class="emphasis"><em>zacl</em></span> efface une ou plusieurs variables dans l'espace za. Ceci est utile
@@ -66,7 +68,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499680303280"></a>
+        <a id="idm258603"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode zacl. Il utilise le fichier
@@ -74,22 +76,22 @@
 
       </p>
         <div class="example">
-          <a id="idm45499680301424"></a>
+          <a id="idm258608"></a>
           <p class="title">
-            <strong>Exemple 1156. Exemple de l'opcode zacl.</strong>
+            <strong>Exemple 1160. Exemple de l'opcode zacl.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm45499495738720"></a>
+              <a id="idm258615"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
 <span class="c1">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+-odac         -iadc       -d     <span class="c1">;;;RT audio I/O</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o zacl.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
@@ -97,9 +99,9 @@
 
 <span class="c1">; Initialize the global variables.</span>
 <span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
 <span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="c1">; Initialize the ZAK space.</span>
 <span class="c1">; Create 1 a-rate variable and 1 k-rate variable.</span>
@@ -108,7 +110,10 @@
 <span class="c1">; Instrument #1 -- a simple waveform.</span>
 <span class="kd">instr</span> <span class="nf">1</span>
   <span class="c1">; Generate a simple sine waveform.</span>
-  a<span class="n">sin</span> <span class="nb">oscil</span> <span class="mi">20000</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">1</span>
+  a<span class="n">sin</span> <span class="nb">oscili</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">440</span>
+
+  <span class="c1">; Declick</span>
+  a<span class="n">sin</span> <span class="o">*=</span> <span class="nb">linsegr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
   <span class="c1">; Send the sine waveform to za variable #1.</span>
   <span class="nb">zaw</span> a<span class="n">sin</span><span class="p">,</span> <span class="mi">1</span>
@@ -116,10 +121,8 @@
 
 <span class="c1">; Instrument #2 -- generates audio output.</span>
 <span class="kd">instr</span> <span class="nf">2</span>
-  <span class="c1">; Read za variable #1.</span>
+  <span class="c1">; Send za location #1 to channel 1</span>
   a<span class="n">1</span> <span class="nb">zar</span> <span class="mi">1</span>
-
-  <span class="c1">; Generate the audio output.</span>
   <span class="nb">out</span> a<span class="n">1</span>
 
   <span class="c1">; Clear the za variables, get them ready for </span>
@@ -131,15 +134,11 @@
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
 
-<span class="c1">; Table #1, a sine wave.</span>
-<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
-
 <span class="c1">; Play Instrument #1 for one second.</span>
 <span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
-<span class="c1">; Play Instrument #2 for one second.</span>
-<span class="nb">i</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">1</span>
-<span class="nb">e</span>
-
+<span class="c1">; Play Instrument #2 until end of performance</span>
+<span class="nb">i</span> <span class="mi">2</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nb">e</span> <span class="mf">1.5</span>
 
 <span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
@@ -151,7 +150,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499680297056"></a>
+        <a id="idm258708"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="zamod.html" title="zamod"><em class="citetitle">zamod</em></a>,
@@ -163,7 +162,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499680290368"></a>
+        <a id="idm258723"></a>
         <h2>Crédits</h2>
         <p>
       </p>

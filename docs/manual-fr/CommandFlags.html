@@ -37,20 +37,20 @@
         <p>csound</p>
       </div>
       <div class="refsect1">
-        <a id="idm45499787536160"></a>
+        <a id="idm4884"></a>
         <h2>Description</h2>
         <p>
         La commande <span class="emphasis"><em>csound</em></span> exécute Csound.
       </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499787459520"></a>
+        <a id="idm4888"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>csound</strong></span>  [<code class="option">options</code>]  [nomorch]  [nompartition]</pre>
         <pre class="synopsis"><span class="command"><strong>csound</strong></span>  [<code class="option">options</code>]  [nomfichiercsd]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm45499787451648"></a>
+        <a id="idm4901"></a>
         <h2>Options de la ligne de commande de Csound</h2>
         <p>
     Ci-dessous la liste par ordre alphabétique des options de ligne de commande disponibles dans Csound 6.
@@ -814,10 +814,12 @@ csound5:output2             (reproduction droite)</pre>
           Lire les évènements MIDI à partir du périphérique <span class="emphasis"><em>PERIPHERIQUE</em></span>. Si l'on utilise
           ALSA MIDI (-+rtmidi=alsa), les périphériques sont sélectionnés par leur nom et pas par un numéro. Ainsi,
           il faut utiliser une option comme -M hw:CARTE,PERIPHERIQUE où CARTE et PERIPHERIQUE sont les numéros de
-          la carte et du périphérique (par exemple -M hw:1,0). Dans le cas de PortMidi et de MME, PERIPHERIQUE
+          la carte et du périphérique (par exemple -M hw:1,0). Dans le cas de CoreMidi et de MME, PERIPHERIQUE
           doit être un nombre, et s'il est en-dehors de l'intervalle permis, une erreur est levée et les numéros
-          de périphérique valides sont imprimés. Avec PortMidi, on peut utiliser '-Ma' pour
-          activer tous les périphériques. Cela marche aussi lorsqu'il n'y a pas de périphérique
+          de périphérique valides sont imprimés. Avec PortMidi, PERIPHERIQUE est soit un nombre pour une entrée sur
+          un seul port, soit 'a' pour écouter sur tous les ports, ou bien 'm' pour associer les ports à des canaux
+          MIDI au-delà de 16. Dans ce cas, le périphérique 0 utilise 1-16, le périphérique 1 utilise 17-32, ...
+          Les options 'a' et 'm' conviennent aussi lorsqu'il n'y a pas de périphérique
           car aucune erreur n'est générée.
         </p>
             </dd>
@@ -844,6 +846,9 @@ csound5:output2             (reproduction droite)</pre>
                   </li>
                   <li class="listitem">
                     <p>128 = impression d'information de tests de référence</p>
+                  </li>
+                  <li class="listitem">
+                    <p>1024 = suppression des messages d'obsolescence</p>
                   </li>
                 </ul>
               </div>
@@ -878,7 +883,8 @@ csound5:output2             (reproduction droite)</pre>
 
           La valeur par défaut est 135 (128+4+2+1), ce qui signifie tous les messages, valeurs d'amplitude
           brutes, et impression du temps écoulé à la fin de l'exécution. La mise en couleur des amplitudes
-          brutes fut introduite dans la version 5.04.
+          brutes fut introduite dans la version 5.04. La suppression des messages
+          d'obsolescence a été ajoutée dans la version 6.14.
 
         </p>
             </dd>
@@ -1281,7 +1287,7 @@ csound5:output2             (reproduction droite)</pre>
             <dd>
               <p>
           Détermine un port UDP pour recevoir des commandes et/ou du code
-          d'instruments ou d'orchestre (implique --daemon) 
+          d'instruments ou d'orchestre (implique --daemon). Voir <a class="link" href="udpserver.html" title="Serveur UDP"><em class="citetitle">serveur UDP</em></a>.
         </p>
             </dd>
             <dt>
@@ -1470,6 +1476,16 @@ csound5:output2             (reproduction droite)</pre>
             <dd>
               <p>
           Nom du serveur pulseaudio.
+        </p>
+            </dd>
+            <dt>
+              <a id="FlagsSimpleScore"></a>
+              <span class="term">--simple-sorted-score<a id="IndexMinusSimplesortedscore" class="indexterm"></a></span>
+            </dt>
+            <dd>
+              <p>
+          Conserve le fichier de partition trié score.srt dans un format simple
+          et lisible lors de la sortie. (Nouveau dans la version 6.14).
         </p>
             </dd>
             <dt>

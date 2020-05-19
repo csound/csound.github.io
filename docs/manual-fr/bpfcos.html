@@ -40,9 +40,9 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499766277872"></a>
+        <a id="idm33968"></a>
         <h2>Description</h2>
-        <p>Opcode de greffon dans emugens.</p>
+        <p>Opcode du greffon emugens.</p>
         <p>
       Fonction à points charnière avec interpolation par cosinus. Etant données
       une valeur x et une série de paires (x, y), elle retourne la valeur de y
@@ -51,13 +51,17 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499766275648"></a>
+        <a id="idm33972"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ky <span class="command"><strong>bpfcos</strong></span> kx, kx1, ky1, kx2, ..., kxn, kyn</pre>
         <pre class="synopsis">kys[] <span class="command"><strong>bpfcos</strong></span> kxs[], kx1, ky1, kx2, ..., kxn, kyn</pre>
+        <pre class="synopsis">ky <span class="command"><strong>bpfcos</strong></span> kx, kxs[], kys[]</pre>
+        <pre class="synopsis">ky <span class="command"><strong>bpfcos</strong></span> kx, ixs[], iys[]</pre>
+        <pre class="synopsis">ky, kz <span class="command"><strong>bpfcos</strong></span> kx, kxs[], kys[], kzs[] </pre>
+        <pre class="synopsis">ky, kz <span class="command"><strong>bpfcos</strong></span> kx, ixs[], iys[], izs[] </pre>
       </div>
       <div class="refsect1">
-        <a id="idm45499766192112"></a>
+        <a id="idm33986"></a>
         <h2>Exécution</h2>
         <p>
       <span class="strong"><strong>kx</strong></span> -- Valeur en entrée. Peut également
@@ -75,6 +79,38 @@
       et +inf, si bien que si kx &lt; kx1 alors ky = ky1 et pareillement à
       l'autre extrémité.
     </p>
+        <div class="refsect2">
+          <a id="idm33995"></a>
+          <h3>Variantes avec tableaux</h3>
+          <p>
+        </p>
+          <pre class="synopsis">kys[] <span class="command"><strong>bpfcos</strong></span> kxs[], kx1, ky1, kx2, ..., kxn, kyn</pre>
+          <p>
+      </p>
+          <p>
+        Pour chaque x dans kxs, la valeur y définié par les points (kx1, ky1),
+        ... (kxn, kyn) est calculée.
+      </p>
+          <p>
+        </p>
+          <pre class="synopsis">ky <span class="command"><strong>bpfcos</strong></span> kx, ixs[], iys[]</pre>
+          <p>
+      </p>
+          <p>
+        Dans cette variante les points sont définis par des tableaux. ixs contient
+        toutes les valeurs de x, iys contient toutes les valeurs de y.
+      </p>
+          <p>
+        </p>
+          <pre class="synopsis">ky, kz <span class="command"><strong>bpfcos</strong></span> kx, kxs[], kys[], kzs[] </pre>
+          <p>
+      </p>
+          <p>
+        Semblable à la variante ci-dessus, mais pour des points multidimensionnels.
+        Etant données deux courbes partageant les mêmes points x, calcule la valeur
+        pour x dans les deux dimensions simultanément. (Voir exemple)
+      </p>
+        </div>
         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
           <table border="0" summary="Note">
             <tr>
@@ -95,23 +131,24 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm45499766186048"></a>
+        <a id="idm34011"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode bpfcos. Il utilise le fichier
       <a class="ulink" href="examples/bpfcos.csd" target="_top"><em class="citetitle">bpfcos.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm45499766184176"></a>
+          <a id="idm34016"></a>
           <p class="title">
-            <strong>Exemple 100. Exemple de l'opcode bpfcos.</strong>
+            <strong>Exemple 101. Exemple de l'opcode bpfcos.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm45499592813008"></a>
+              <a id="idm34018"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
+-odac
 <span class="nt">&lt;/CsOptions&gt;</span>
 <span class="nt">&lt;CsInstruments&gt;</span>
 
@@ -127,15 +164,17 @@
 
   It works both at i- and k- time
 
-  ky    bpfcos kx,    kx0, ky0, kx1, ky1, kx2, ky2, ...
-  kys[] bpfcos kxs[], kx0, ky0, kx1, ky1, kx2, ky2, ...
+  ky     bpfcos kx,    kx0, ky0, kx1, ky1, kx2, ky2, ...
+  kys[]  bpfcos kxs[], kx0, ky0, kx1, ky1, kx2, ky2, ...
+  ky     bpfcos kx, kxs[], kys[]
+  ky, kz bpfcos kx, kxs[], kys[], kzs[]
 
   NB: x values must be ordered (kx0 &lt; kx1 &lt; kx2 etc)
 
   See also: bpf, linlin, lincos
-    
-*/</span>
   
+*/</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
 <span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">64</span>
 <span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
@@ -159,14 +198,16 @@
 <span class="kd">endin</span>
 
 <span class="kd">instr</span> <span class="nf">3</span>
-  <span class="c1">; bpfcos also works with arrays</span>
-  k<span class="n">x</span><span class="p">[]</span> <span class="nb">fillarray</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">,</span> <span class="mf">0.6</span>
-  k<span class="n">y</span><span class="p">[]</span> <span class="nb">bpfcos</span> k<span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span><span class="mi">50</span>
-  <span class="nb">printarray</span> k<span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="s">"ky="</span>
+  <span class="c1">; bpfcos also works with arrays. For each kx value in kxs, </span>
+  <span class="c1">; calculate the corresponding ky </span>
+  k<span class="n">xs</span><span class="p">[]</span> <span class="nb">fillarray</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">,</span> <span class="mf">0.6</span>
+  k<span class="n">ys</span><span class="p">[]</span> <span class="nb">bpfcos</span> k<span class="n">xs</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span><span class="mi">50</span>
+  <span class="nb">printarray</span> k<span class="n">ys</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="s">"kys="</span>
   <span class="nb">turnoff</span>
 <span class="kd">endin</span>
 
 <span class="kd">instr</span> <span class="nf">4</span>
+  <span class="c1">; bpfcos is useful to implement envelopes with ease-in/out shape</span>
   k<span class="n">pitch</span> <span class="nb">bpfcos</span> <span class="nb">timeinsts</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mi">60</span>
   a<span class="n">0</span> <span class="nb">oscili</span> <span class="mf">0.5</span><span class="p">,</span> <span class="nb">mtof</span><span class="p">(</span>k<span class="n">pitch</span><span class="p">)</span>
   k<span class="n">env0</span> <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="vi">p3</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span>
@@ -175,13 +216,31 @@
   <span class="nb">outch</span> <span class="mi">1</span><span class="p">,</span> a<span class="n">0</span>
 <span class="kd">endin</span>
 
-    <span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">3</span> 
-<span class="nb">i</span> <span class="mi">2</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">1</span>
-<span class="nb">i</span> <span class="mi">3</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">1</span>
-<span class="nb">i</span> <span class="mi">4</span> <span class="mi">0</span> <span class="mi">5</span>
+<span class="kd">instr</span> <span class="nf">5</span>
+  <span class="c1">; arrays can also be used to define the points of a break-point-function</span>
+  <span class="c1">; multiple arrays can be used simultaneously</span>
+  <span class="c1">; In this case, we define a line and for each point in the line a </span>
+  <span class="c1">; corresponding pitch (midinote) and amplitude</span>
+  <span class="c1">; NB: kTimes uses absolute times</span>
+  k<span class="n">Times</span><span class="p">[]</span> <span class="nb">fillarray</span>    <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>   <span class="mi">3</span><span class="p">,</span>  <span class="mi">5</span>
+  k<span class="n">Pitches</span><span class="p">[]</span> <span class="nb">fillarray</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span>  <span class="mi">64</span><span class="p">,</span> <span class="mi">69</span><span class="p">,</span>  <span class="mi">60</span><span class="p">,</span> <span class="mi">61</span>
+  k<span class="n">Amps</span><span class="p">[]</span> <span class="nb">fillarray</span>     <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span>  <span class="mi">1</span>
+  <span class="c1">; play the envelopes at half speed</span>
+  k<span class="n">pitch</span><span class="p">,</span> k<span class="n">amp</span> <span class="nb">bpfcos</span> <span class="nb">timeinsts</span><span class="p">()</span><span class="o">*</span><span class="mf">0.5</span><span class="p">,</span> k<span class="n">Times</span><span class="p">,</span> k<span class="n">Pitches</span><span class="p">,</span> k<span class="n">Amps</span>
+  a<span class="n">out</span> <span class="nb">oscili</span> <span class="nb">a</span><span class="p">(</span>k<span class="n">amp</span><span class="p">),</span> <span class="nb">a</span><span class="p">(</span><span class="nb">mtof</span><span class="p">:</span><span class="kt">k</span><span class="p">(</span>k<span class="n">pitch</span><span class="p">))</span>
+  <span class="c1">; declick</span>
+  a<span class="n">out</span> <span class="o">*=</span> <span class="nb">linsegr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="nb">outch</span> <span class="mi">1</span><span class="p">,</span> a<span class="n">out</span>
+<span class="kd">endin</span>
 
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="c1">; i 1 1 3 </span>
+<span class="c1">; i 2 0 -1</span>
+<span class="c1">; i 3 0 -1</span>
+<span class="c1">; i 4 0 5</span>
+<span class="nb">i</span> <span class="mi">5</span> <span class="mi">0</span> <span class="mi">10</span>
+<span class="nb">e</span> <span class="mi">12</span>
 <span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
@@ -192,7 +251,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499766182256"></a>
+        <a id="idm34371"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="bpf.html" title="bpf"><em class="citetitle">bpf</em></a>, 
@@ -205,10 +264,11 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499766174496"></a>
+        <a id="idm34388"></a>
         <h2>Crédits</h2>
         <p>Auteur : Eduardo Moguillansky 2018</p>
         <p>Nouveau greffon dans la version 6.12</p>
+        <p>Variantes avec tableaux dans la version 6.14</p>
       </div>
     </div>
     <div class="navfooter">

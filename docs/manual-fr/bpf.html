@@ -39,23 +39,28 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499766261312"></a>
+        <a id="idm33586"></a>
         <h2>Description</h2>
-        <p>Opcode de greffon dans emugens.</p>
+        <p>Opcode du greffon emugens.</p>
         <p>
       Fonction à points charnière avec interpolation linéaire.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499766259616"></a>
+        <a id="idm33590"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ky <span class="command"><strong>bpf</strong></span> kx, kx1, ky1, kx2, ..., kxn, kyn</pre>
         <pre class="synopsis">iy <span class="command"><strong>bpf</strong></span> ix, ix1, iy1, ix2, ..., ixn, iyn</pre>
         <pre class="synopsis">kys[] <span class="command"><strong>bpf</strong></span> kxs[], kx1, ky1, kx2, ..., kxn, kyn</pre>
         <pre class="synopsis">iys[] <span class="command"><strong>bpf</strong></span> ixs[], ix1, iy1, ix2, ..., ixn, iyn</pre>
+        <pre class="synopsis">ky <span class="command"><strong>bpf</strong></span> kx, kxs[], kys[]</pre>
+        <pre class="synopsis">iy <span class="command"><strong>bpf</strong></span> ix, ixs[], iys[]</pre>
+        <pre class="synopsis">ay <span class="command"><strong>bpf</strong></span> ax, kx1, ky1, kx2, ..., kxn, kyn</pre>
+        <pre class="synopsis">ay <span class="command"><strong>bpf</strong></span> ax, kxs[], kys[]</pre>
+        <pre class="synopsis">ky, kw <span class="command"><strong>bpf</strong></span> kx, kxs[], kys[], kws[]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm45499766253408"></a>
+        <a id="idm33610"></a>
         <h2>Exécution</h2>
         <p>
       <span class="strong"><strong>kx</strong></span> -- Valeur d'entrée.
@@ -99,23 +104,24 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm45499766246096"></a>
+        <a id="idm33623"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode bpf. Il utilise le fichier
       <a class="ulink" href="examples/bpf.csd" target="_top"><em class="citetitle">bpf.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm45499766244320"></a>
+          <a id="idm33628"></a>
           <p class="title">
-            <strong>Exemple 99. Exemple de l'opcode bpf.</strong>
+            <strong>Exemple 100. Exemple de l'opcode bpf.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm45499592748800"></a>
+              <a id="idm33630"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
+-odac
 <span class="nt">&lt;/CsOptions&gt;</span>
 <span class="nt">&lt;CsInstruments&gt;</span>
 
@@ -139,9 +145,11 @@
   See also: bpfcos, linlin, lincos
     
 */</span>
-  
+
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
 <span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">64</span>
 <span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="kd">instr</span> <span class="nf">1</span>
   k<span class="n">x</span> <span class="nb">line</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mf">2.5</span>
@@ -168,12 +176,26 @@
   <span class="nb">printarray</span> k<span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="s">"ky="</span>
   <span class="nb">turnoff</span>
 <span class="kd">endin</span>
+
+<span class="kd">instr</span> <span class="nf">4</span>
+  <span class="c1">; bpf as an envelope generator, like linsegb but driven by external phase</span>
+  <span class="c1">; bpf + rms can also be used as compressor</span>
+
+  a<span class="n">time</span> <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span> <span class="vi">p3</span><span class="o">*</span><span class="mf">0.62</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="vi">p3</span><span class="o">*</span><span class="mf">0.38</span><span class="p">,</span> <span class="mi">0</span>
+  a<span class="n">env</span> <span class="o">=</span> <span class="nb">bpf</span><span class="p">(</span>a<span class="n">time</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span> <span class="o">^</span> <span class="mi">2</span>
+  k<span class="n">bw</span>  <span class="o">=</span> <span class="nb">bpf</span><span class="p">(</span><span class="nb">timeinsts</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="vi">p3</span><span class="o">*</span><span class="mf">0.62</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">^</span> <span class="mi">3</span>
+  a<span class="n">sig</span> <span class="o">=</span> <span class="p">(</span><span class="nb">beosc</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> k<span class="n">bw</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">rnd</span><span class="p">(</span><span class="mf">6.28</span><span class="p">))</span> <span class="o">+</span> <span class="nb">beosc</span><span class="p">(</span><span class="mi">1012</span><span class="p">,</span> k<span class="n">bw</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">rnd</span><span class="p">(</span><span class="mf">6.28</span><span class="p">)))</span> <span class="o">*</span> <span class="mf">0.3</span>
+  k<span class="n">ratio</span> <span class="nb">bpf</span> <span class="nb">dbamp</span><span class="p">(</span><span class="nb">rms</span><span class="p">:</span><span class="kt">k</span><span class="p">(</span>a<span class="n">sig</span><span class="p">)),</span> <span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">100</span>
+  a<span class="n">sig</span> <span class="o">*=</span> a<span class="n">env</span> <span class="o">*</span> <span class="nb">interp</span><span class="p">(</span><span class="nb">sc_lagud</span><span class="p">(</span>k<span class="n">ratio</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">))</span>
+  <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+<span class="kd">endin</span>
     
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">3</span> 
-<span class="nb">i</span> <span class="mi">2</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">1</span>
-<span class="nb">i</span> <span class="mi">3</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">1</span>
+<span class="c1">; i 1 0 3 </span>
+<span class="c1">; i 2 0 -1</span>
+<span class="c1">; i 3 0 -1</span>
+<span class="nb">i</span> <span class="mi">4</span> <span class="mi">0</span> <span class="mi">3</span>
 
 <span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
@@ -185,7 +207,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499766242400"></a>
+        <a id="idm33942"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="bpfcos.html" title="bpfcos"><em class="citetitle">bpfcos</em></a>, 
@@ -196,7 +218,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499766236512"></a>
+        <a id="idm33955"></a>
         <h2>Crédits</h2>
         <p>Auteur : Eduardo Moguillansky 2017</p>
       </div>

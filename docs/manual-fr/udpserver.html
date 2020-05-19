@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>UDP Server</title>
+    <title>Serveur UDP</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -16,7 +16,7 @@
     <div class="navheader">
       <table width="100%" summary="Navigation header">
         <tr>
-          <th colspan="3" align="center">UDP Server</th>
+          <th colspan="3" align="center">Serveur UDP</th>
         </tr>
         <tr>
           <td width="20%" align="left"><a accesskey="p" href="functional.html">Précédent</a> </td>
@@ -30,7 +30,7 @@
       <div class="titlepage">
         <div>
           <div>
-            <h2 class="title" style="clear: both"><a id="udpserver"></a>UDP Server</h2>
+            <h2 class="title" style="clear: both"><a id="udpserver"></a>Serveur UDP</h2>
           </div>
         </div>
       </div>
@@ -38,7 +38,7 @@
     Csound 6 comprend un serveur UDP pleinement fonctionnel, qui peut accepter
     un ensemble de commandes et/ou d'orchestres.
   </p>
-      <h3><a id="idm45499782021584"></a>Vue d'ensemble</h3>
+      <h3><a id="idm8429"></a>Vue d'ensemble</h3>
       <p>
     On peut démarrer le serveur UDP avec l'option suivante :
   </p>
@@ -52,7 +52,7 @@
     nécessaire de donner à Csound un CSD ou un orchestre, mais on peut aussi le
     faire.
   </p>
-      <h3><a id="idm45499782048832"></a>Commandes</h3>
+      <h3><a id="idm8433"></a>Commandes</h3>
       <p>
     Les commandes sont formées d'un opcode suivi d'un ou de plusieurs arguments.
     Le serveur accepte les commandes suivantes :
@@ -85,6 +85,8 @@
       </div>
       <p>
     Donne la valeur [value] au canal de contrôle [channel_name].
+    Exemple : si le csd contient la ligne ' chn_k "freq", 440' alors
+    '@freq 330' fixe "freq" à 330.
   </p>
       <div class="literallayout">
         <p><br />
@@ -116,12 +118,13 @@
     le port [port]. La chaîne de caractères contiendra le nom du canal suivi de
     deux double-points (::) et de sa valeur courante.
   </p>
-      <h3><a id="idm45499781986608"></a>Code d'orchestre</h3>
+      <h3><a id="idm8447"></a>Code d'orchestre</h3>
       <p>
     En plus des commandes ci-dessus, le serveur UDP accepte aussi une chaîne de
     caractères contenant le code d'un orchestre, qui est compilé immédiatement.
     Cette chaîne de caractères n'est préfixée par aucun opcode de commande
     spécial. Cette chaîne de caractères doit être envoyée en un seul message UDP.
+    Par exemple : scoreline_i "i 2 0 1 550 60"
   </p>
       <p>
     Si le code de l'orchestre dépasse le nombre de caractères que peut contenir
@@ -131,7 +134,7 @@
     par le serveur et l'accolade fermante (}) envoie le code pour compilation.
     De cette manière, le code peut être envoyé en plusieurs messages.
   </p>
-      <h3><a id="idm45499781984048"></a>Fermeture du serveur</h3>
+      <h3><a id="idm8450"></a>Fermeture du serveur</h3>
       <p>
     On peut fermer le serveur (et Csound) avec une des commandes suivantes :
   </p>

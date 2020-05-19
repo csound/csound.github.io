@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499763689936"></a>
+        <a id="idm40699"></a>
         <h2>Description</h2>
         <p>
       Coupe un signal de taux-a à une limite prédéfinie, de manière
@@ -48,12 +48,12 @@
    </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499763688000"></a>
+        <a id="idm40703"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>clip</strong></span> asig, imeth, ilimit [, iarg]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm45499763612256"></a>
+        <a id="idm40707"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>imeth</em></span> -- choisit la méthode de coupure. La valeur par
@@ -85,7 +85,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499763604688"></a>
+        <a id="idm40724"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>asig</em></span> -- signal de taux-a en entrée
@@ -147,7 +147,7 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm45499763572720"></a>
+        <a id="idm40794"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode clip. Il utilise le fichier
@@ -155,16 +155,16 @@
 
       </p>
         <div class="example">
-          <a id="idm45499763570912"></a>
+          <a id="idm40799"></a>
           <p class="title">
-            <strong>Exemple 136. Exemple de l'opcode clip.</strong>
+            <strong>Exemple 137. Exemple de l'opcode clip.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm45499590823360"></a>
+              <a id="idm40806"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -185,7 +185,7 @@
 
 a<span class="n">rnd</span> <span class="nb">rand</span> <span class="mi">1</span>	<span class="c1">; full amlitude</span>
 <span class="c1">; Clip the noisy waveform's amplitude to 0.5</span>
-a<span class="n">1</span> <span class="nb">clip</span> a<span class="n">rnd</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span>
+a<span class="n">1</span> <span class="nb">clip</span> a<span class="n">rnd</span><span class="p">,</span> <span class="vi">p4</span><span class="p">,</span> <span class="mf">0.5</span>
    <span class="nb">outs</span> a<span class="n">1</span><span class="p">,</span> a<span class="n">1</span>
 
 <span class="kd">endin</span>
@@ -194,7 +194,7 @@ a<span class="n">1</span> <span class="nb">clip</span> a<span class="n">rnd</spa
 
 a<span class="n">rnd</span> <span class="nb">rand</span> <span class="mi">1</span>	<span class="c1">; full amlitude</span>
 <span class="c1">; Clip the noisy waveform's amplitude to 0.1</span>
-a<span class="n">1</span> <span class="nb">clip</span> a<span class="n">rnd</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.1</span>
+a<span class="n">1</span> <span class="nb">clip</span> a<span class="n">rnd</span><span class="p">,</span> <span class="vi">p4</span><span class="p">,</span> <span class="mf">0.1</span>
    <span class="nb">outs</span> a<span class="n">1</span><span class="p">,</span> a<span class="n">1</span>
 
 <span class="kd">endin</span>
@@ -203,9 +203,19 @@ a<span class="n">1</span> <span class="nb">clip</span> a<span class="n">rnd</spa
 <span class="nt">&lt;CsScore&gt;</span>
 
 <span class="c1">; Play Instrument #1 for one second.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span>
 <span class="c1">; Play Instrument #2 for one second.</span>
-<span class="nb">i</span> <span class="mi">2</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="nb">i</span> <span class="mi">2</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">2</span>
+<span class="nb">s</span> <span class="mi">3</span>
+<span class="c1">; Play Instrument #1 for one second.</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span>
+<span class="c1">; Play Instrument #2 for one second.</span>
+<span class="nb">i</span> <span class="mi">2</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span>
+<span class="nb">s</span> <span class="mi">3</span>
+<span class="c1">; Play Instrument #1 for one second.</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span>
+<span class="c1">; Play Instrument #2 for one second.</span>
+<span class="nb">i</span> <span class="mi">2</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span>
 <span class="nb">e</span>
 
 <span class="nt">&lt;/CsScore&gt;</span>
@@ -218,7 +228,7 @@ a<span class="n">1</span> <span class="nb">clip</span> a<span class="n">rnd</spa
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm45499763566816"></a>
+        <a id="idm40914"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -38,46 +38,31 @@
     Csound supporte les entrées et les sorties MIDI en temps réel, ainsi que les entrées depuis les fichiers
     MIDI. L'entrée MIDI en temps réel est activée au moyen de l'option de ligne de commande
     <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusUpperM"><em class="citetitle">-M</em></a>
-    (ou <span class="emphasis"><em>--midi-device</em></span>=PERIPHERIQUE). Vous devez spécifier le numéro ou le nom de
-    périphérique après le <span class="emphasis"><em>-M</em></span>. Par exemple, pour utiliser le périphérique numéro 2,
-    vous utiliserez quelque chose comme :
+    (ou <span class="emphasis"><em>--midi-device</em></span>=PERIPHERIQUE). Pour une entrée sur un seul port,
+    il faut spécifier le numéro ou le nom de périphérique après le <span class="emphasis"><em>-M</em></span>.
+    Pour une entrée sur plusieurs ports (actuellement seulement avec le module PortMidi),
+    il faut utiliser 'a' ou 'm'. Par exemple, pour utiliser le périphérique numéro 2,
+    on utilisera quelque chose comme :
   </p>
       <div class="literallayout">
         <p>csound -M2 monmiditr.csd</p>
       </div>
       <p>
-    Vous pouvez trouver les périphériques disponibles en utilisant un numéro trop grand :
+    On peut trouver les périphériques disponibles en lançant Csound avec l'option --midi-devices :
   </p>
       <div class="literallayout">
-        <p>csound -M99 monmiditr.csd</p>
+        <p>csound --midi-devices</p>
       </div>
-      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
-        <table border="0" summary="Note">
-          <tr>
-            <td rowspan="2" align="center" valign="top" width="25">
-              <img alt="[Note]" src="images/note.png" />
-            </td>
-            <th align="left">Note</th>
-          </tr>
-          <tr>
-            <td align="left" valign="top">
-              <p>
-      Ceci ne fonctionnera que si le module MIDI peut être atteint par numéro de périphérique. Pour alsa,
-      il faut d'abord trouver le nom du périphérique en utilisant :
-    </p>
-              <div class="literallayout">
-                <p>cat /proc/asound/cards</p>
-              </div>
-              <p>
-      Il faut alors taper quelque chose comme :
-    </p>
-              <div class="literallayout">
-                <p>csound -+rtmidi=alsa -M hw:3 monmiditr.csd</p>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
+      <p>
+    A partir de la version 6.14, le module PortMidi (voir ci-dessous pour une
+    liste de tous les modules) permet d'associer des ports multiples à des
+    canaux d'ordre plus élevé. En utilisant le nom de périphérique 'm', Csound
+    prend ses entrées des périphériques MIDI existants dans le système et les
+    associera à (N+1)*canal, où N est le numéro de périphérique dans la liste de
+    PortMidi et canal est le canal d'entrée d'origine du périphérique.
+    Alternativement, le nom de périphérique 'a' écoute sur toutes les entrées
+    mais ne fait pas d'association avec des canaux d'ordre plus élevé.
+  </p>
       <p>
     La sortie MIDI en temps réel est activée au moyen de
     <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusUpperQ"><em class="citetitle">-Q</em></a>, avec un numéro ou un nom de
@@ -105,7 +90,7 @@
     instruments numérotés de 1 à 16, alors par défaut instr 1 -&gt; canal 1, instr 2
     -&gt; canal 2, à moins que l'on change la répartition (voir <a class="link" href="massign.html" title="massign"><em class="citetitle">massign</em></a> et
     <a class="link" href="pgmassign.html" title="pgmassign"><em class="citetitle">pgmassign</em></a> pour changer
-    ce comportement). Si l'on a plusieurs instruments, mais que instr N manque
+    ce comportement). Pour un sel port en entrée, si l'on a plusieurs instruments, mais que instr N manque
     entre 1 et 16, canal N sera dirigé par défaut sur l'instrument ayant le numéro
     le plus bas.
   </p>
@@ -128,6 +113,11 @@
       <div class="itemizedlist">
         <ul class="itemizedlist" style="list-style-type: disc; ">
           <li class="listitem">
+            <p><span class="emphasis"><em>portmidi</em></span> - Pour utiliser le système portmidi (sur toutes les
+      plates-formes). C'est le réglage par défaut et il permet les entrées multi-ports
+      (avec 'm' ou 'a' comme nom de périphérique.</p>
+          </li>
+          <li class="listitem">
             <p><span class="emphasis"><em>alsa</em></span> - Pour utiliser le système midi ALSA (seulement sur
       Linux).</p>
           </li>
@@ -137,10 +127,6 @@
           <li class="listitem">
             <p><span class="emphasis"><em>winmme</em></span> - Pour utiliser le système windows MME (seulement sur
       Windows).</p>
-          </li>
-          <li class="listitem">
-            <p><span class="emphasis"><em>portmidi</em></span> - Pour utiliser le système portmidi (sur toutes les
-      plates-formes). C'est le réglage par défaut.</p>
           </li>
           <li class="listitem">
             <p><span class="emphasis"><em>virtual</em></span> - Pour utiliser un clavier virtuel graphique (voir ci-dessous)
@@ -159,10 +145,11 @@
           <tr>
             <td align="left" valign="top">
               <p>Lors de son exécution, Csound traite la partition puis se termine. S'il n'y a pas
-      d'évènements dans la partition, Csound se termine immédiatement. Si l'on désire n'utiliser
-      que des évèments MIDI au lieu des évènements de partition, il faut demander à Csound
-      de s'exécuter pendant un certain temps au moyen d'une
-      <a class="link" href="f.html" title="Instruction f (ou instruction de table de fonction)"><em class="citetitle">instruction f</em></a> comme "f 0 3600".
+      d'évènements dans la partition, Csound s'exécute indéfiniment. Si l'on désire n'utiliser
+      que des évèments MIDI au lieu des évènements de partition et que l'on connaît la durée
+      d'exécution désirée, il faut demander à Csound
+      de s'exécuter pendant cette durée au moyen d'une
+      <a class="link" href="f.html" title="Instruction f (ou instruction de table de fonction)"><em class="citetitle">instruction f</em></a> comme "f 0 360".
     </p>
             </td>
           </tr>
@@ -273,7 +260,7 @@
     est donnée dans la table suivante.
   </p>
         <div class="table">
-          <a id="idm45499774844752"></a>
+          <a id="idm14375"></a>
           <p class="title">
             <strong>Tableau 5. Valeurs des notes MIDI du clavier ASCII</strong>
           </p>
@@ -416,7 +403,7 @@
       <a class="ulink" href="examples/virtual.csd" target="_top"><em class="citetitle">virtual.csd</em></a>.
  </p>
         <div class="refsect1">
-          <a id="idm45499600333392"></a>
+          <a id="idm14473"></a>
           <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span><span class="c1">; Select audio/midi flags here according to platform</span>
