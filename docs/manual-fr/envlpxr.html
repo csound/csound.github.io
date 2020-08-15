@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm59498"></a>
+        <a id="idm62126"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>envlpxr</em></span> est le même que
@@ -49,13 +49,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm59504"></a>
+        <a id="idm62132"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>envlpxr</strong></span> xamp, irise, idec, ifn, iatss, iatdec [, ixmod] [,irind]</pre>
         <pre class="synopsis">kres <span class="command"><strong>envlpxr</strong></span> kamp, irise, idec, ifn, iatss, iatdec [, ixmod] [,irind]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm59510"></a>
+        <a id="idm62138"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>irise</em></span> -- durée de l'attaque en secondes. Une valeur nulle ou négative signifie pas
@@ -69,20 +69,18 @@
       dans laquelle la forme de l'attaque est stockée.
     </p>
         <p>
-      <span class="emphasis"><em>iatss</em></span> -- facteur d'atténuation par lequel la dernière valeur de
-      l'attaque d'<span class="emphasis"><em>envlpxr</em></span> évolue pendant le pseudo entretien de la
-      note. Un facteur supérieur à 1 provoque une montée exponentielle tandis qu'un facteur
+      <span class="emphasis"><em>iatss</em></span> -- facteur d'atténuation déterminant le changement
+      exponentiel de la valeur durant la période de pseudo entretien entre la fin
+      de l'attaque et le début de la chute (au relachement de la note). Un facteur
+      supérieur à 1 provoque une montée exponentielle tandis qu'un facteur
       inférieur à 1 crée une descente exponentielle. Un facteur égal à 1 maintient un véritable
-      entretien de la note sur la dernière valeur de l'attaque. Il faut noter que cette
-      atténuation n'évolue pas à vitesse constante (comme dans le cas du piano), mais qu'elle
-      dépend de la durée de la note. Cependant, si <span class="emphasis"><em>iatss</em></span> est négatif (ou
-      si l'entretien &lt; 4 périodes-k) une vitesse d'atténuation de
-      <span class="emphasis"><em>abs</em></span>(<span class="emphasis"><em>iatss</em></span>) par seconde sera utilisée. 0 est
-      interdit.
+      entretien de la note sur la dernière valeur de l'attaque. 0 est interdit.
+      La valeur changera de <span class="emphasis"><em>abs</em></span>(<span class="emphasis"><em>iatss</em></span>)
+      par seconde.
     </p>
         <p>
-      <span class="emphasis"><em>iatdec</em></span> -- facteur d'atténuation par lequel la dernière valeur de
-      l'entretien diminue exponentiellement pendant la chute. Cette valeur doit être positive
+      <span class="emphasis"><em>iatdec</em></span> -- le rapport entre la dernière valeur de la chute
+      et sa première valeur (au relachement de la note). Cette valeur doit être positive
       et elle est normalement de l'ordre de 0,01. Une valeur trop longue ou excessivement courte
       peut produire une coupure audible. Les valeurs nulles ou négatives sont interdites.
     </p>
@@ -102,7 +100,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm59533"></a>
+        <a id="idm62159"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kamp, xamp</em></span> -- amplitude du signal d'entrée.
@@ -126,12 +124,6 @@
       nécessaire d'utiliser <a class="link" href="xtratim.html" title="xtratim"><em class="citetitle">xtratim</em></a> avec
       <span class="emphasis"><em>envlpxr</em></span>, car la durée est allongée automatiquement.
     </p>
-        <p>
-      Ces unités <span class="quote">« <span class="quote">r</span> »</span> peuvent être modifiées également par des évènements MIDI note-off
-      provoqués par une vélocité nulle. Si l'indicateur <span class="emphasis"><em>irind</em></span> est positionné
-      (différent de zéro), la durée d'exécution totale n'est pas affectée par les données de note-off
-      ou de vélocité nulle.
-    </p>
         <p><strong> Unités <span class="quote">« <span class="quote">r</span> »</span> multiples. </strong>
         Quand plusieurs unités <span class="quote">« <span class="quote">r</span> »</span> sont présentes dans le même instrument, il
         est habituel qu'une seule d'entre elle influence la durée totale de la note. C'est
@@ -148,7 +140,7 @@
       </p>
       </div>
       <div class="refsect1">
-        <a id="idm59567"></a>
+        <a id="idm62190"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode envlpxr. Il utilise le fichier
@@ -156,13 +148,13 @@
 
       </p>
         <div class="example">
-          <a id="idm59572"></a>
+          <a id="idm62195"></a>
           <p class="title">
-            <strong>Exemple 249. Exemple de l'opcode envlpxr.</strong>
+            <strong>Exemple 259. Exemple de l'opcode envlpxr.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm59574"></a>
+              <a id="idm62197"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -206,7 +198,7 @@ a<span class="n">sig</span>	<span class="nb">pluck</span>	k<span class="n">env</
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm59657"></a>
+        <a id="idm62280"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="envlpx.html" title="envlpx"><em class="citetitle">envlpx</em></a>,
@@ -215,7 +207,7 @@ a<span class="n">sig</span>	<span class="nb">pluck</span>	k<span class="n">env</
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm59666"></a>
+        <a id="idm62289"></a>
         <h2>Crédits</h2>
         <p>Merci à Luis Jure pour avoir signalé une erreur avec <span class="emphasis"><em>iatss</em></span>.</p>
       </div>

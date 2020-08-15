@@ -8,9 +8,9 @@
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
-    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
-    <link rel="prev" href="filter2.html" title="filter2" />
-    <link rel="next" href="fini.html" title="fini" />
+    <link rel="up" href="DeprecatedTop.html" title="Opcodes de l'orchestre et routines GEN obsolètes" />
+    <link rel="prev" href="clock.html" title="clock" />
+    <link rel="next" href="hrtfer.html" title="hrtfer" />
   </head>
   <body>
     <div class="navheader">
@@ -19,9 +19,9 @@
           <th colspan="3" align="center">fin</th>
         </tr>
         <tr>
-          <td width="20%" align="left"><a accesskey="p" href="filter2.html">Précédent</a> </td>
-          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
-          <td width="20%" align="right"> <a accesskey="n" href="fini.html">Suivant</a></td>
+          <td width="20%" align="left"><a accesskey="p" href="clock.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes de l'orchestre et routines GEN obsolètes</th>
+          <td width="20%" align="right"> <a accesskey="n" href="hrtfer.html">Suivant</a></td>
         </tr>
       </table>
       <hr />
@@ -39,20 +39,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm65297"></a>
+        <a id="idm286293"></a>
         <h2>Description</h2>
         <p>
       Lit des signaux depuis un fichier au taux-a.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm65300"></a>
+        <a id="idm286296"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>fin</strong></span> ifilename, iskipframes, iformat, ain1 [, ain2] [, ain3] [,...]</pre>
         <pre class="synopsis"><span class="command"><strong>fin</strong></span> ifilename, iskipframes, iformat, arr[]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm65306"></a>
+        <a id="idm286302"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifilename</em></span> -- nom du fichier d'entrée (peut être une
@@ -65,16 +65,18 @@
     </p>
         <p>
       <span class="emphasis"><em>iformat</em></span> -- un nombre spécifiant le format du fichier
-      d'entrée pour les fichiers sans en-tête. Si un en-tête est trouvé, cet argument
-      est ignoré.
+      d'entrée pour les fichiers sans en-tête.
       </p>
         <div class="itemizedlist">
           <ul class="itemizedlist" style="list-style-type: disc; ">
             <li class="listitem">
-              <p>0 - flottants sur 32 bit sans en-tête</p>
+              <p>-2 - flottants sur 32 bit sans en-tête</p>
             </li>
             <li class="listitem">
-              <p>1 - entiers sur 16 bit sans en-tête</p>
+              <p>-1 - entiers sur 16 bit sans en-tête</p>
+            </li>
+            <li class="listitem">
+              <p>0 - prend les valeurs de l'en-tête</p>
             </li>
           </ul>
         </div>
@@ -82,7 +84,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm65321"></a>
+        <a id="idm286319"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>fin</em></span> (file input) est le complément de
@@ -112,7 +114,7 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm65332"></a>
+        <a id="idm286330"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode fin. Il utilise les fichiers
@@ -120,16 +122,16 @@
       <a class="ulink" href="examples/fox.wav" target="_top"><em class="citetitle">fox.wav</em></a>.
       </p>
         <div class="example">
-          <a id="idm65339"></a>
+          <a id="idm286337"></a>
           <p class="title">
-            <strong>Exemple 286. Exemple de l'opcode fin.</strong>
+            <strong>Exemple 1282. Exemple de l'opcode fin.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm65346"></a>
+              <a id="idm286344"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -146,15 +148,15 @@
 <span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="kd">instr</span> <span class="nf">1</span> 
+<span class="kd">instr</span> <span class="nf">1</span>
 
 a<span class="n">snd</span> <span class="nb">init</span> <span class="mi">0</span> 			<span class="c1">;input of fin must be initialized</span>
      <span class="nb">fin</span>  <span class="s">"fox.wav"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> a<span class="n">snd</span>	<span class="c1">;read audiofile</span>
 a<span class="n">env</span> <span class="nb">follow</span> a<span class="n">snd</span><span class="p">,</span> <span class="mf">0.01</span>		<span class="c1">;envelope follower</span>
 k<span class="n">env</span> <span class="nb">downsamp</span> a<span class="n">env</span>
 a<span class="n">sig</span> <span class="nb">rand</span> k<span class="n">env</span>			<span class="c1">;gate the noise with audiofile</span>
-     <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span> 
-<span class="kd">endin</span> 
+     <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+<span class="kd">endin</span>
 
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
@@ -172,7 +174,7 @@ a<span class="n">sig</span> <span class="nb">rand</span> k<span class="n">env</s
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm65411"></a>
+        <a id="idm286409"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="fini.html" title="fini"><em class="citetitle">fini</em></a>,
@@ -180,7 +182,7 @@ a<span class="n">sig</span> <span class="nb">rand</span> k<span class="n">env</s
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm65418"></a>
+        <a id="idm286416"></a>
         <h2>Crédits</h2>
         <p>
       </p>
@@ -205,24 +207,25 @@ a<span class="n">sig</span> <span class="nb">rand</span> k<span class="n">env</s
     </p>
         <p>Nouveau dans la version 3.56 de Csound</p>
         <p>Variante pour tableau ajoutée dans la version 6.01</p>
+        <p>Signification du paramètre de format changée dans la 6.15</p>
       </div>
     </div>
     <div class="navfooter">
       <hr />
       <table width="100%" summary="Navigation footer">
         <tr>
-          <td width="40%" align="left"><a accesskey="p" href="filter2.html">Précédent</a> </td>
+          <td width="40%" align="left"><a accesskey="p" href="clock.html">Précédent</a> </td>
           <td width="20%" align="center">
-            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+            <a accesskey="u" href="DeprecatedTop.html">Niveau supérieur</a>
           </td>
-          <td width="40%" align="right"> <a accesskey="n" href="fini.html">Suivant</a></td>
+          <td width="40%" align="right"> <a accesskey="n" href="hrtfer.html">Suivant</a></td>
         </tr>
         <tr>
-          <td width="40%" align="left" valign="top">filter2 </td>
+          <td width="40%" align="left" valign="top">clock </td>
           <td width="20%" align="center">
             <a accesskey="h" href="index.html">Sommaire</a>
           </td>
-          <td width="40%" align="right" valign="top"> fini</td>
+          <td width="40%" align="right" valign="top"> hrtfer</td>
         </tr>
       </table>
     </div>

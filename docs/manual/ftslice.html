@@ -9,8 +9,8 @@
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
-    <link rel="prev" href="ftsavek.html" title="ftsavek" />
-    <link rel="next" href="ftsr.html" title="ftsr" />
+    <link rel="prev" href="ftset.html" title="ftset" />
+    <link rel="next" href="ftslicei.html" title="ftslicei" />
   </head>
   <body>
     <div class="navheader">
@@ -19,9 +19,9 @@
           <th colspan="3" align="center">ftslice</th>
         </tr>
         <tr>
-          <td width="20%" align="left"><a accesskey="p" href="ftsavek.html">Prev</a> </td>
+          <td width="20%" align="left"><a accesskey="p" href="ftset.html">Prev</a> </td>
           <th width="60%" align="center">Orchestra Opcodes and Operators</th>
-          <td width="20%" align="right"> <a accesskey="n" href="ftsr.html">Next</a></td>
+          <td width="20%" align="right"> <a accesskey="n" href="ftslicei.html">Next</a></td>
         </tr>
       </table>
       <hr />
@@ -35,26 +35,28 @@
           <span class="refentrytitle">ftslice</span>
         </h2>
         <p>ftslice — 
-      Copy a slice from an f-table to another f-table
+      Copy a slice from an f-table to another f-table at performance
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm92206"></a>
+        <a id="idm94948"></a>
         <h2>Description</h2>
         <p>Plugin opcode in emugens.</p>
         <p>
-      The <span class="emphasis"><em>ftslice</em></span> opcode takes an f-table and
-      copies a slice to a second f-table (similar to tab2array, but
-      between tables)
-	</p>
+      The <span class="emphasis"><em>ftslice</em></span> opcode takes an f-table and copies a slice to a second
+      f-table (similar to tab2array, but between tables). This action is done at performance
+      (every cycle), so that it can be placed inside a k-time if clause / loop / etc.
+      For an init-only version, see <a class="link" href="ftslicei.html" title="ftslicei"><em class="citetitle">ftslicei</em></a>
+	  </p>
       </div>
       <div class="refsect1">
-        <a id="idm92211"></a>
+        <a id="idm94955"></a>
         <h2>Syntax</h2>
         <pre class="synopsis"><span class="command"><strong>ftslice</strong></span> ifnsource, ifndest [, kstart, kend, kstep ]</pre>
+        <pre class="synopsis"><span class="command"><strong>ftslice</strong></span> kfnsource, kfndest [, kstart, kend, kstep ]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm92215"></a>
+        <a id="idm94961"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>ifnsource</em></span> -- The table number to copy data from
@@ -64,33 +66,33 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm92221"></a>
+        <a id="idm94967"></a>
         <h2>Performance</h2>
         <p>
-	  <span class="emphasis"><em>kstart</em></span> -- The index to start copying from. <span class="emphasis"><em>Defaults to 0</em></span>
-	</p>
+	    <span class="emphasis"><em>kstart</em></span> -- The index to start copying from. <span class="emphasis"><em>Defaults to 0</em></span>
+	  </p>
         <p>
-	  <span class="emphasis"><em>kend</em></span> -- The end index to stop copying.
+	    <span class="emphasis"><em>kend</em></span> -- The end index to stop copying.
       This is NOT inclusive. 0 means copy to the end of the table. <span class="emphasis"><em>Defaults to end of table</em></span>
-	</p>
+	  </p>
         <p>
-	  <span class="emphasis"><em>kstep</em></span> -- How many elements to skip. <span class="emphasis"><em>Defaults to 1</em></span>
-	</p>
+	    <span class="emphasis"><em>kstep</em></span> -- How many elements to skip. <span class="emphasis"><em>Defaults to 1</em></span>
+	  </p>
       </div>
       <div class="refsect1">
-        <a id="idm92232"></a>
+        <a id="idm94978"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the ftslice opcode. It uses the file <a class="ulink" href="examples/ftslice.csd" target="_top"><em class="citetitle">ftslice.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm92237"></a>
+          <a id="idm94983"></a>
           <p class="title">
-            <strong>Example 380. Example of the ftslice opcode.</strong>
+            <strong>Example 390. Example of the ftslice opcode.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm92239"></a>
+              <a id="idm94985"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -150,19 +152,21 @@ See also: tablecopy, tableicopy, tab2array
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm92331"></a>
+        <a id="idm95077"></a>
         <h2>See Also</h2>
         <p>
+      <a class="link" href="ftslicei.html" title="ftslicei"><em class="citetitle">ftslicei</em></a>,
+      <a class="link" href="ftset.html" title="ftset"><em class="citetitle">ftset</em></a>,
       <a class="link" href="slicearray.html" title="slicearray"><em class="citetitle">slicearray</em></a>,
       <a class="link" href="copyf2array.html" title="copyf2array"><em class="citetitle">copyf2array</em></a>,
-	  <a class="link" href="tab2array.html" title="tab2array"><em class="citetitle">tab2array</em></a>,
+	    <a class="link" href="tab2array.html" title="tab2array"><em class="citetitle">tab2array</em></a>,
       <a class="link" href="tablecopy.html" title="tablecopy"><em class="citetitle">tablecopy</em></a>,
       <a class="link" href="tableicopy.html" title="tableicopy"><em class="citetitle">tableicopy</em></a>,
       <a class="link" href="ftprint.html" title="ftprint"><em class="citetitle">ftprint</em></a>
-	</p>
+	  </p>
       </div>
       <div class="refsect1">
-        <a id="idm92346"></a>
+        <a id="idm95096"></a>
         <h2>Credits</h2>
         <p>By: Eduardo Moguillansky 2018</p>
         <p>New plugin in version 6.12</p>
@@ -172,18 +176,18 @@ See also: tablecopy, tableicopy, tab2array
       <hr />
       <table width="100%" summary="Navigation footer">
         <tr>
-          <td width="40%" align="left"><a accesskey="p" href="ftsavek.html">Prev</a> </td>
+          <td width="40%" align="left"><a accesskey="p" href="ftset.html">Prev</a> </td>
           <td width="20%" align="center">
             <a accesskey="u" href="OpcodesTop.html">Up</a>
           </td>
-          <td width="40%" align="right"> <a accesskey="n" href="ftsr.html">Next</a></td>
+          <td width="40%" align="right"> <a accesskey="n" href="ftslicei.html">Next</a></td>
         </tr>
         <tr>
-          <td width="40%" align="left" valign="top">ftsavek </td>
+          <td width="40%" align="left" valign="top">ftset </td>
           <td width="20%" align="center">
             <a accesskey="h" href="index.html">Home</a>
           </td>
-          <td width="40%" align="right" valign="top"> ftsr</td>
+          <td width="40%" align="right" valign="top"> ftslicei</td>
         </tr>
       </table>
     </div>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>bob</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="birnd.html" title="birnd" />
+    <link rel="next" href="bpf.html" title="bpf" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">bob</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="birnd.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="bpf.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="bob"></a>
+      <div class="titlepage"></div>
+      <a id="IndexBob" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">bob</span>
+        </h2>
+        <p>bob — 
+      Simulation numérique de Runge-Kutte du filtre analogique résonant de Moog.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm35123"></a>
+        <h2>Description</h2>
+        <p>
+       bob est un portage du bob~ de Miller Puckette dans Pure Data. Sa
+       conception est basée sur les articles de Tim Stilson,
+       Timothy E. Stinchcombe et Antti Huovilainen.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm35126"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">asig <span class="command"><strong>bob</strong></span> ain, xcf, xres, xsat [, iosamps, istor]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm35130"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>iosamps</em></span> -- nombre de fois que le suréchantillonnage
+      est utilisé dans le processus de filtrage. Cela détermine la raideur
+      maximale de la résonance du filtre (Q). Plus de suréchantillonnage autorise
+      des Q plus importants, moins de suréchantillonnage limite la résonance.
+      La valeur par défaut est 2 fois (iosamps=0).
+    </p>
+        <p>
+      <span class="emphasis"><em>istor</em></span> -- disposition initiale de l'espace interne des
+      données. Comme le filtrage comprend une boucle de rétroaction de la sortie,
+      l'état initial de l'espace de stockage est significatif. Une valeur nulle
+      efface le contenu de cet espace ; une valeur non nulle permet de garder
+      l'information précédente. La valeur par défaut est 0.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm35136"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>asig</em></span> -- signal d'entrée.
+    </p>
+        <p>
+      <span class="emphasis"><em>xcf</em></span> -- fréquence de coupure du filtre.
+    </p>
+        <p>
+      <span class="emphasis"><em>xres</em></span> -- résonance du filtre. Nominalement, une valeur
+      de 4 est la limite de stabilité -- au-delà, le filtre oscille.
+    </p>
+        <p>
+      <span class="emphasis"><em>xsat</em></span> -- saturation. Ce paramètre détermine à quel
+      niveau du signal les "transistors" du modèle saturent. L'amplitude
+      maximale de sortie vaut environ 2/3 de cette valeur.
+    </p>
+        <p>
+      Selon la page de manuel de bob~, "Par défaut bob~ effectue un pas de
+      l'intégration de Runge-Kutte du 4ème ordre par échantillon audio. Ceci
+      fonctionne parfaitement pour des fréquences de résonance/coupure jusqu'à
+      environ 1/2 Nyquist. Pour améliorer la précision et/ou augmenter l'étendue
+      du filtre vers des fréquences de coupure plus hautes on peut
+      suréchantillonner par n'importe quel facteur - mais il faut noter que le
+      temps de calcul augmente en conséquence. Aux fréquences de
+      coupure/résonances élevées, l'approximation RK peut devenir instable. On
+      peut contrer cela en élevant le facteur de suréchantillonnage. Le
+      paramètre de saturation détermine à quel niveau du signal les
+      "transistors" du modèle saturent. L'amplitude maximale de sortie vaut
+      environ 2/3 de cette valeur."
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm35147"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode bob. Il utilise le fichier
+      <a class="ulink" href="examples/bob.csd" target="_top"><em class="citetitle">bob.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm35152"></a>
+          <p class="title">
+            <strong>Exemple 105. Exemple de l'opcode bob.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm35159"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac   <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o bob.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+
+ga<span class="n">1</span> <span class="nb">init</span> <span class="mi">0</span>
+ga<span class="n">2</span> <span class="nb">init</span> <span class="mi">0</span>
+
+    <span class="nb">seed</span> <span class="mi">777</span>
+
+<span class="kd">instr</span> <span class="nf">7</span>
+a<span class="n">0</span>  <span class="nb">vco2</span>     <span class="mi">1</span><span class="p">,</span> <span class="nb">cpsmidinn</span><span class="p">(</span><span class="vi">p4</span><span class="p">)</span> <span class="c1">; a saw wave to be filtered</span>
+k<span class="n">1</span>  <span class="nb">jspline</span>  <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mf">0.7</span><span class="c1">; add some jitter to filter resonance</span>
+k<span class="n">A</span>  <span class="nb">linseg</span>   <span class="mi">0</span><span class="p">,</span>        <span class="vi">p3</span><span class="o">/</span><span class="mi">17</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>     <span class="p">(</span><span class="mi">17</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="vi">p3</span><span class="o">/</span><span class="mi">17</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>   <span class="vi">p3</span><span class="o">/</span><span class="mi">17</span><span class="p">,</span> <span class="mi">0</span><span class="c1">; overal amplitude envelope</span>
+k<span class="n">7</span>  <span class="nb">linseg</span>   <span class="mi">70</span><span class="p">,</span>       <span class="vi">p3</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span>  <span class="mi">700</span><span class="p">,</span>   <span class="vi">p3</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span>     <span class="mi">700</span><span class="p">,</span>     <span class="vi">p3</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span>  <span class="mi">70</span><span class="c1">; filter cutoff envelope</span>
+k<span class="n">77</span> <span class="nb">expseg</span>   <span class="nb">sqrt</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span>  <span class="vi">p3</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>  <span class="mf">7.7</span><span class="p">,</span>   <span class="vi">p3</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>     <span class="nb">sqrt</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="c1">; filter resonance modulation</span>
+a<span class="n">1</span>  <span class="n">bob</span>      a<span class="n">0</span> <span class="o">*</span> k<span class="n">A</span><span class="p">,</span> k<span class="n">7</span> <span class="o">-</span> k<span class="n">1</span> <span class="o">*</span> <span class="mi">70</span><span class="p">,</span> k<span class="n">77</span> <span class="o">+</span> k<span class="n">1</span><span class="p">,</span> <span class="mi">3</span><span class="c1">; PD bob~ ported</span>
+a<span class="n">1</span>           <span class="o">/=</span> <span class="mi">7</span><span class="c1">; some normalization to avoid overload</span>
+a<span class="n">L</span>           <span class="o">=</span> <span class="vi">p5</span> <span class="o">*</span> a<span class="n">1</span><span class="c1">; and then panning</span>
+a<span class="n">R</span>           <span class="o">=</span> a<span class="n">1</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="vi">p5</span><span class="p">)</span>
+    <span class="nb">outs</span>     a<span class="n">L</span><span class="p">,</span> a<span class="n">R</span>
+
+ga<span class="n">1</span>          <span class="o">+=</span>  a<span class="n">L</span><span class="o">/</span><span class="mi">7</span><span class="c1">; AUX send</span>
+ga<span class="n">2</span>          <span class="o">+=</span>  a<span class="n">R</span><span class="o">/</span><span class="mi">7</span>
+<span class="kd">endin</span>
+
+<span class="kd">instr</span> <span class="nf">77</span> <span class="c1">; What a sound without some good reverb??</span>
+a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span>  <span class="nb">reverbsc</span> ga<span class="n">1</span><span class="p">,</span>ga<span class="n">2</span><span class="p">,</span> <span class="mf">0.97</span><span class="o">+</span><span class="mf">.1</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7777</span>
+    <span class="nb">outs</span>     a<span class="n">1</span><span class="p">,</span> a<span class="n">2</span>
+ga<span class="n">1</span>          <span class="o">=</span> <span class="mi">0</span>
+ga<span class="n">2</span>          <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">7</span>  <span class="mi">0</span> <span class="mi">30</span> <span class="mi">70</span> <span class="mf">0.7</span><span class="c1">; Perfect 7th</span>
+<span class="nb">i</span> <span class="mi">7</span>  <span class="mi">0</span> <span class="mi">30</span> <span class="mi">77</span> <span class="mf">0.7</span>
+<span class="nb">i</span> <span class="mi">77</span> <span class="mi">0</span> <span class="mi">40</span>
+<span class="c1">; In text editor try Find and Replace to substitute all 7 numbers for 3...8 )</span>
+<span class="c1">; all 8s is a bit too high, all 3s is a bit too low, 4 sounds great!</span>
+<span class="c1">; Do such replacement in initial 7 file, otherwise avoid accidental changes in the header...</span>
+
+<span class="c1">; Tired of numerology? Try this:</span>
+<span class="c1">; i 7  0 30 60 0.6</span>
+<span class="c1">; i 7  0 32 45 0.4</span>
+
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm35392"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="moogladder.html" title="moogladder"><em class="citetitle">moogladder</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm35397"></a>
+        <h2>Crédits</h2>
+        <p>Par : Gleb Rogozinsky 2020</p>
+        <p>Nouveau dans la version 6.15</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="birnd.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="bpf.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">birnd </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> bpf</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -39,46 +39,69 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm190289"></a>
+        <a id="idm194623"></a>
         <h2>Description</h2>
         <p>
       Scales incoming value to user-definable range. Similar to scale object found in popular dataflow languages.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm190292"></a>
+        <a id="idm194626"></a>
         <h2>Syntax</h2>
-        <pre class="synopsis">kscl <span class="command"><strong>scale</strong></span> kinput, kmax, kmin</pre>
+        <pre class="synopsis">kscl <span class="command"><strong>scale</strong></span> kinput, kmax, kmin[, kimax, kimin]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm190296"></a>
+        <a id="idm194630"></a>
         <h2>Performance</h2>
         <p>
-      <span class="emphasis"><em>kin</em></span> -- Input value. Can originate from any k-rate source as long as that source's output is in range 0-1. 
+      <span class="emphasis"><em>kin</em></span> -- Input value. Can originate from any
+      k-rate source as long as that source's output is in range
+      <span class="emphasis"><em>kimin</em></span> to <span class="emphasis"><em>kimax</em></span>.
     </p>
         <p>
-      <span class="emphasis"><em>kmin</em></span> -- Minimum value of the resultant scale operation. 
+      <span class="emphasis"><em>kmin</em></span> -- Minimum value of the resultant scale operation.
     </p>
         <p>
       <span class="emphasis"><em>kmax</em></span> -- Maximum value of the resultant scale operation.
     </p>
+        <p>
+      <span class="emphasis"><em>kimin</em></span> -- Optional; Minimum of the incoming
+      value range, defaulting to zero.
+    </p>
+        <p>
+      <span class="emphasis"><em>kimax</em></span> -- Optional; Maximum of the incoming
+      value range, defaulting to one.
+    </p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Warning]" src="images/warning.png" />
+              </td>
+              <th align="left">Warning</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top"> Take care with the order of the arguments which has maximum
+     before minimum</td>
+            </tr>
+          </table>
+        </div>
       </div>
       <div class="refsect1">
-        <a id="idm190304"></a>
+        <a id="idm194646"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the scale opcode. It uses the file <a class="ulink" href="examples/scale.csd" target="_top"><em class="citetitle">scale.csd</em></a>.
-      
       </p>
         <div class="example">
-          <a id="idm190309"></a>
+          <a id="idm194651"></a>
           <p class="title">
-            <strong>Example 868. Example of the scale opcode.</strong>
+            <strong>Example 891. Example of the scale opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm190316"></a>
+              <a id="idm194658"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -121,7 +144,7 @@ k<span class="n">out</span>	<span class="nb">scale</span>	k<span class="n">mod</
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm190370"></a>
+        <a id="idm194712"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="gainslider.html" title="gainslider"><em class="citetitle">gainslider</em></a>,
@@ -130,7 +153,7 @@ k<span class="n">out</span>	<span class="nb">scale</span>	k<span class="n">mod</
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm190379"></a>
+        <a id="idm194721"></a>
         <h2>Credits</h2>
         <p>
       </p>
@@ -143,6 +166,12 @@ k<span class="n">out</span>	<span class="nb">scale</span>	k<span class="n">mod</
           </tr>
           <tr>
             <td>2006</td>
+          </tr>
+          <tr>
+            <td>John ffitch</td>
+          </tr>
+          <tr>
+            <td>Modified to add input range vaue in 2020</td>
           </tr>
         </table>
         <p>

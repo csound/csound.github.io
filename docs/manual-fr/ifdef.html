@@ -40,17 +40,24 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm17634"></a>
+        <a id="idm18028"></a>
         <h2>Description</h2>
         <p>
-      Si une macro est définie alors <span class="emphasis"><em>#ifdef</em></span> peut incorporer du texte dans un
-      orchestre jusqu'au prochain <span class="emphasis"><em>#end</em></span>. C'est similaire, tout en étant
+      Les macros sont des substitutions de texte qui sont faites dans
+      l'orchestre lors de sa lecture. Le <a class="link" href="OrchMacros.html" title="Macros de l'orchestre"><em class="citetitle">système de macro de l'orchestre</em></a>
+      de Csound est très simple, et il utilise les caractères # et $ pour
+      définir et appeler les macros. Il permet d'économiser de la frappe et peut
+      conduire à une structure cohérente dans un style consistant. Il est similaire, tout en étant
       indépendant, au <a class="link" href="ScoreMacros.html" title="Macros de partition"><em class="citetitle">système de macros du langage de
       partition</em></a>.
     </p>
+        <p>
+      Si une macro est définie alors <span class="emphasis"><em>#ifdef</em></span> peut incorporer du texte dans un
+      orchestre jusqu'au prochain <span class="emphasis"><em>#end</em></span>.
+    </p>
       </div>
       <div class="refsect1">
-        <a id="idm17641"></a>
+        <a id="idm18038"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>#ifdef</strong></span> NOM</pre>
         <pre class="synopsis">....</pre>
@@ -59,7 +66,7 @@
         <pre class="synopsis"><span class="command"><strong>#end</strong></span> </pre>
       </div>
       <div class="refsect1">
-        <a id="idm17651"></a>
+        <a id="idm18048"></a>
         <h2>Exécution</h2>
         <p>
       Noter que l'on peut imbriquer les <span class="emphasis"><em>#ifdef</em></span>, comme dans le langage du
@@ -67,14 +74,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm17655"></a>
+        <a id="idm18052"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple simple de cette insertion conditionnelle.
 
       </p>
         <div class="example">
-          <a id="idm17658"></a>
+          <a id="idm18055"></a>
           <p class="title">
             <strong>Exemple 16. Exemple simple de la forme #ifdef.</strong>
           </p>
@@ -91,20 +98,94 @@
           </div>
         </div>
         <p><br class="example-break" />
-
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm17669"></a>
+        <a id="idm18066"></a>
+        <p>
+      Voici un autre exemple de l'insertion conditionnelle #ifdef.
+      Il utilise le fichier
+      <a class="ulink" href="examples/ifdef.csd" target="_top"><em class="citetitle">ifdef.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm18070"></a>
+          <p class="title">
+            <strong>Exemple 17. Exemple détaillé de la forme #ifdef.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm18077"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o oscil.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">; Determines which instrument outputs debug statements with defines:</span>
+<span class="c1">; Change which one is commented out to alter behavior before execution</span>
+<span class="cp">#define</span> <span class="cp">debug1</span> <span class="p">##</span>
+<span class="c1">; #define debug2 ##</span>
+
+ <span class="kd">instr</span> <span class="nf">1</span>
+ 	i<span class="n">Freq</span> <span class="o">=</span> <span class="vi">p4</span>
+	<span class="c1">; Outputs text if debug1 is defined</span>
+	<span class="c1">; This one should print by default</span>
+	<span class="cp">#ifdef</span> <span class="cp">debug1</span>
+	     <span class="nb">prints</span> <span class="s">"instr 1 debug called</span><span class="se">\n</span><span class="s">"</span>
+	<span class="cp">#end</span>
+     a<span class="n">1</span>   <span class="nb">vco2</span> <span class="mf">.25</span><span class="p">,</span> i<span class="n">Freq</span>
+     <span class="nb">outs</span>  a<span class="n">1</span><span class="p">,</span> a<span class="n">1</span>
+ <span class="kd">endin</span>
+
+ <span class="kd">instr</span> <span class="nf">2</span>
+ 	i<span class="n">Freq</span> <span class="o">=</span> <span class="vi">p4</span>
+	<span class="c1">; Outputs text if debug2 is defined</span>
+	<span class="c1">; This one should not print by default</span>
+	<span class="cp">#ifdef</span> <span class="cp">debug2</span>
+	     <span class="nb">prints</span> <span class="s">"instr 2 debug called</span><span class="se">\n</span><span class="s">"</span>
+	<span class="cp">#end</span>
+     a<span class="n">1</span>   <span class="nb">vco2</span> <span class="mf">.25</span><span class="p">,</span> i<span class="n">Freq</span>
+     <span class="nb">outs</span>  a<span class="n">1</span><span class="p">,</span> a<span class="n">1</span>
+ <span class="kd">endin</span>
+
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span> <span class="mi">440</span>
+<span class="nb">i</span><span class="mi">2</span> <span class="mi">0</span> <span class="mi">2</span> <span class="mi">660</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm18168"></a>
         <h2>Voir aussi</h2>
         <p>
-      <a class="link" href="dollar.html" title="$NOM"><em class="citetitle">$NOM</em></a>, 
-      <a class="link" href="define.html" title="#define"><em class="citetitle">#define</em></a>, 
-      <a class="link" href="ifndef.html" title="#ifndef"><em class="citetitle">#ifndef</em></a>.
+      <a class="link" href="define.html" title="#define"><em class="citetitle">#define</em></a>,
+      <a class="link" href="dollar.html" title="$NOM"><em class="citetitle">$NAME</em></a>,
+      <a class="link" href="ifndef.html" title="#ifndef"><em class="citetitle">#ifndef</em></a>,
+      <a class="link" href="include.html" title="#include"><em class="citetitle">#include</em></a>,
+      <a class="link" href="undef.html" title="#undef"><em class="citetitle">#undef</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm17678"></a>
+        <a id="idm18181"></a>
         <h2>Crédits</h2>
         <p>
       </p>

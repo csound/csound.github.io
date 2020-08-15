@@ -40,34 +40,48 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm93190"></a>
+        <a id="idm96101"></a>
         <h2>Description</h2>
         <p>
       Générateur de nombres aléatoires de distribution gaussienne. C'est un générateur de bruit de classe x. 
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm93193"></a>
+        <a id="idm96104"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>gauss</strong></span> krange</pre>
-        <pre class="synopsis">ires <span class="command"><strong>gauss</strong></span> krange</pre>
+        <pre class="synopsis">ires <span class="command"><strong>gauss</strong></span> irange</pre>
         <pre class="synopsis">kres <span class="command"><strong>gauss</strong></span> krange</pre>
+        <pre class="synopsis">ares <span class="command"><strong>gauss</strong></span> kmean, ksdev</pre>
+        <pre class="synopsis">ires <span class="command"><strong>gauss</strong></span> imean, isdev</pre>
+        <pre class="synopsis">kres <span class="command"><strong>gauss</strong></span> kmean, ksdev</pre>
       </div>
       <div class="refsect1">
-        <a id="idm93201"></a>
+        <a id="idm96118"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>krange</em></span> -- l'intervalle des nombres aléatoires (-<span class="emphasis"><em>krange</em></span> à
       +<span class="emphasis"><em>krange</em></span>). Produit des nombres positifs et négatifs.
     </p>
         <p>
-      <span class="emphasis"><em>gauss</em></span>  retourne des nombres aléatoires suivant une
-      distribution normale centrée sur 0 (mu = 0.0) avec une variance (sigma) de
-      <span class="emphasis"><em>krange</em></span> / 3.83. Ainsi plus de 99.99% des valeurs
-      aléatoires générées sont comprises entre -<span class="emphasis"><em>krange</em></span> et
-      +<span class="emphasis"><em>krange</em></span>. Si l'on veut une valeur moyenne différente
-      de 0.0, il faut ajouter cette valeur moyenne à chaque nombre généré (voir
-      l'exemple ci-dessous).
+      <span class="emphasis"><em>kmean</em></span> -- moyenne de la distribution normale.
+    </p>
+        <p>
+      <span class="emphasis"><em>ksdev</em></span> -- écart-type de la distribution normale.
+    </p>
+        <p>
+      La première version de <span class="emphasis"><em>gauss</em></span> retourne des nombres
+      aléatoires suivant une distribution normale centrée sur 0 (mu = 0.0) avec
+      une variance (sigma) de <span class="emphasis"><em>krange</em></span> / 3.83. Ainsi plus de
+      99.99% des valeurs aléatoires générées sont comprises entre
+      -<span class="emphasis"><em>krange</em></span> et +<span class="emphasis"><em>krange</em></span>. Si l'on
+      veut une valeur moyenne différente de 0.0, il faut ajouter cette valeur
+      moyenne à chaque nombre généré (voir l'exemple ci-dessous).
+    </p>
+        <p>
+      La seconde version prend la moyenne et l'écart-type en paramètres. Elle
+      utilise l'algorithme de Box-Muller, plus solide mathématiquement, pour
+      calculer la distribution normale.
     </p>
         <p>
       Pour des explications plus détaillées sur ces distributions, consulter :
@@ -86,7 +100,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm93218"></a>
+        <a id="idm96140"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode gauss. Il utilise le fichier
@@ -94,16 +108,16 @@
 
       </p>
         <div class="example">
-          <a id="idm93223"></a>
+          <a id="idm96145"></a>
           <p class="title">
-            <strong>Exemple 384. Exemple de l'opcode gauss.</strong>
+            <strong>Exemple 395. Exemple de l'opcode gauss.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm93230"></a>
+              <a id="idm96152"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 
@@ -159,7 +173,7 @@ mean = 2.700, std = 1.497, samples inside the given range: 100.000%</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm93384"></a>
+        <a id="idm96306"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="seed.html" title="seed"><em class="citetitle">seed</em></a>,
@@ -176,19 +190,28 @@ mean = 2.700, std = 1.497, samples inside the given range: 100.000%</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm93409"></a>
+        <a id="idm96331"></a>
         <h2>Crédits</h2>
         <p>
       </p>
         <table border="0" summary="Simple list" class="simplelist">
           <tr>
-            <td>Auteur : Paris Smaragdis</td>
+            <td>Auteur (première version) : Paris Smaragdis</td>
           </tr>
           <tr>
             <td>MIT, Cambridge</td>
           </tr>
           <tr>
             <td>1995</td>
+          </tr>
+          <tr>
+            <td>Auteur (seconde version) : Victor Lazzarini</td>
+          </tr>
+          <tr>
+            <td>Université de Maynooth, Irelande</td>
+          </tr>
+          <tr>
+            <td>2020</td>
           </tr>
         </table>
         <p>

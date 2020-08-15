@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm59022"></a>
+        <a id="idm61649"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>envlpx</em></span> -- apply an envelope consisting of 3 segments:
@@ -61,13 +61,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm59033"></a>
+        <a id="idm61660"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">ares <span class="command"><strong>envlpx</strong></span> xamp, irise, idur, idec, ifn, iatss, iatdec [, ixmod]</pre>
         <pre class="synopsis">kres <span class="command"><strong>envlpx</strong></span> kamp, irise, idur, idec, ifn, iatss, iatdec [, ixmod]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm59039"></a>
+        <a id="idm61666"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>irise</em></span> -- rise time in seconds. A zero or negative value signifies no rise modification.
@@ -82,25 +82,26 @@
       <span class="emphasis"><em>ifn</em></span> -- function table number of stored rise shape with extended guard point.
     </p>
         <p>
-      <span class="emphasis"><em>iatss</em></span> -- attenuation factor, by which the
-      last value of the <span class="emphasis"><em>envlpx</em></span> rise is modified
-      during the note's pseudo steady state. A factor greater than 1
-      causes an exponential growth and a factor less than 1 creates an
-      exponential decay. A factor of 1 will maintain a true steady
-      state at the last rise value. Note that this attenuation is not
-      by fixed rate (as in a piano), but is sensitive to a note's
-      duration. However, if <span class="emphasis"><em>iatss</em></span> is negative (or
+      <span class="emphasis"><em>iatss</em></span> -- the ratio of the final value
+      of the pseudo-steady-state period to the value at its beginning
+      (i.e the attenuation from the end of the rise segment
+      to the start of the decay).
+      A ratio greater than 1 causes an exponential growth and 
+      a ratio less than 1 creates an exponential decay. A ratio of 1
+      will maintain a true steady state at the last rise value.
+      Note that this attenuation is not at a fixed rate (as in a piano),
+      but is sensitive to a note's duration. 
+      However, if <span class="emphasis"><em>iatss</em></span> is negative (or
       if steady state &lt; 4 k-periods) a fixed attenuation rate of
       <span class="emphasis"><em>abs</em></span>(<span class="emphasis"><em>iatss</em></span>) per second
       will be used. 0 is illegal. 
     </p>
         <p>
-      <span class="emphasis"><em>iatdec</em></span> -- attenuation factor by which the
-      closing steady state value is reduced exponentially over the
-      decay period. This value must be positive and is normally of the
-      order of .01. A large or excessively small value is apt to
-      produce a cutoff which is audible. A zero or negative value is
-      illegal.
+      <span class="emphasis"><em>iatdec</em></span> --  the ratio of the value
+      at the end of the decay period to the value at its beginning (the end
+      of the steady-state segment) . It must be positive and is normally of the
+      order of .01. A large or excessively small value is apt to produce a cutoff
+      which is audible. A zero or negative value is illegal.
     </p>
         <p>
       <span class="emphasis"><em>ixmod</em></span> (optional, between +- .9 or so) --
@@ -113,7 +114,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm59062"></a>
+        <a id="idm61688"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>kamp, xamp</em></span> -- input amplitude signal.
@@ -133,21 +134,21 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm59071"></a>
+        <a id="idm61697"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the envlpx opcode. It uses the file <a class="ulink" href="examples/envlpx.csd" target="_top"><em class="citetitle">envlpx.csd</em></a>.
 
       </p>
         <div class="example">
-          <a id="idm59076"></a>
+          <a id="idm61702"></a>
           <p class="title">
-            <strong>Example 248. Example of the envlpx opcode.</strong>
+            <strong>Example 258. Example of the envlpx opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm59083"></a>
+              <a id="idm61709"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -203,7 +204,7 @@ a<span class="n">sig</span> <span class="nb">moogvcf</span> a<span class="n">sig
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm59215"></a>
+        <a id="idm61841"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="envlpxr.html" title="envlpxr"><em class="citetitle">envlpxr</em></a>, 
@@ -212,7 +213,7 @@ a<span class="n">sig</span> <span class="nb">moogvcf</span> a<span class="n">sig
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm59224"></a>
+        <a id="idm61850"></a>
         <h2>Credits</h2>
         <p>Thanks goes to Luis Jure for pointing out a mistake with <span class="emphasis"><em>iatss</em></span>.</p>
       </div>
