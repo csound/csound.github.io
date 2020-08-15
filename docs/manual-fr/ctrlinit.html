@@ -39,20 +39,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm48667"></a>
+        <a id="idm51236"></a>
         <h2>Description</h2>
         <p>
       Initialise les valeurs pour un groupe de contrôleurs MIDI.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm48670"></a>
+        <a id="idm51239"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>ctrlinit</strong></span> ichnl, ictlno1, ival1 [, ictlno2] [, ival2] [, ictlno3] \
       [, ival3] [,...ival32]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm48674"></a>
+        <a id="idm51243"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ichnl</em></span> -- numéro de canal MIDI (1-16)
@@ -61,25 +61,91 @@
       <span class="emphasis"><em>ictlno1</em></span>, <span class="emphasis"><em>ictlno1</em></span>, etc. -- numéros de contrôleurs MIDI (0-127)
     </p>
         <p>
-      <span class="emphasis"><em>ival1</em></span>, <span class="emphasis"><em>ival2</em></span>, etc. -- valeur initiale pour le contrôleur MIDI de numéro correspondant
+      <span class="emphasis"><em>ival1</em></span>, <span class="emphasis"><em>ival2</em></span>, etc. -- valeur 
+      initiale pour le contrôleur MIDI de numéro correspondant dans l'intervalle
+      0 -127.
     </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>Si cet opcode doit être utilisé avec un opcode de mise à l'échelle
+    tel que ctrl7, les ival1... doivent valoir 127*(initial-min)/(max-min)</p>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
       <div class="refsect1">
-        <a id="idm48684"></a>
+        <a id="idm51255"></a>
         <h2>Exécution</h2>
         <p>
       Initialise les valeurs pour un groupe de contrôleurs MIDI.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm48687"></a>
+        <a id="idm51258"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="massign.html" title="massign"><em class="citetitle">massign</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm48692"></a>
+        <a id="idm51263"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode ctrlinit. Il utilise le fichier
+      <a class="ulink" href="examples/ctrlinit.csd" target="_top"><em class="citetitle">ctrlinit.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm51268"></a>
+          <p class="title">
+            <strong>Exemple 192. Exemple de l'opcode ctrlinit.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm51275"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+-d
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+	
+<span class="nb">ctrlinit</span> <span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">64</span> <span class="c1">; init control to 64.</span>
+
+<span class="kd">instr</span> <span class="nf">1</span>
+ k<span class="n">val</span> <span class="nb">ctrl7</span> <span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>  <span class="c1">; read in the range 0-1</span>
+ <span class="nb">printk2</span> k<span class="n">val</span>   <span class="c1">; prints 0.50394</span>
+<span class="kd">endin</span>
+
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm51321"></a>
         <h2>Crédits</h2>
         <p>
       </p>
