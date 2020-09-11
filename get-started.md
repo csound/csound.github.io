@@ -304,7 +304,7 @@ i1 2 1 300 .7
 Another issue in the instrument presented above is that the notes will click each time they sound.
 To avoid this, an amplitude envelope should be applied to the output signal. The most common
 envelope used in synthesisers is the ubiquitous ADSR envelope. ADSR stands for Attack, Decay,
-Sustain and Release. The attack, decay and sustain sections are given in seconds as they relate to
+Sustain and Release. The attack, decay and release sections are given in seconds as they relate to
 time values. The sustain value describes the sustain level which kicks in after the attack and decay
 have passed. The note's amplitude will rest at this sustain level until it is released.
 
@@ -449,7 +449,7 @@ f0 3600
 
 ## Your first effect
 
-Two things are required in order to create an audio affect in Csound. First, audio must be sent from
+Two things are required in order to create an audio effect in Csound. First, audio must be sent from
 the analogue digital converter to Csound, and second, that audio needs to be accessed within an
 instrument block. Csound can be instructed to open the ADC using the **-iadc** command line option
 in the &lt;CsOptions&gt; section of the source code.
