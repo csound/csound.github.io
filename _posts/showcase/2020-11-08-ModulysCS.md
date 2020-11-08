@@ -1,9 +1,9 @@
 ---
 title: ModulysCS
 layout: project
-website: www.raxntrax.com/modulys/modulyscs
+website: https://www.raxntrax.com/modulys/modulyscs
 categories: showcase
-tags: [music composition, ModulysCS]
+tags: [VST plugin, ModulysCS]
 ---
 
 
