@@ -21,7 +21,7 @@ Alternatively, older archives are also found on nabble:
 * [Csound-General](http://csound.1045644.n5.nabble.com/Csound-General-f1093014.html)
 * [Csound-Dev](http://csound.1045644.n5.nabble.com/Csound-Dev-f1123218.html)
 
-As of January 2021, user have access to an online forum, which also provides a readonly mirror to the long established mailing lists mentioned above. 
+As of January 2021 users have access to an online forum, which also provides a readonly mirror to the long established mailing lists mentioned above. 
 * [Csound forum](http://forum.csound.com)
 
 This forum can be set up to act like a traditional mailing list by enabled 'mailing list mode' in your user preferences. This forum also features a 'newbie' section for anyone starting out with Csound.  
