@@ -36,7 +36,7 @@ Although questions about the main frontends are frequently discussed on Csound l
 
 The Csound Discord server is a good place to chat and share ideas in real time. 
 
-* [Csound Discord](https://discord.com/channels/784849854270537790)
+* [Csound Discord](https://discord.gg/kp92qyHkjq)
 
 Chat is available on Slack at csound.slack.com. Users can subscribe to join the slack channel at:
 
