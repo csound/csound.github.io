@@ -485,6 +485,35 @@
         anchor.parent('li').trigger( "click" );
     }
 
+    /*-------------------------------------------------*/
+    /*   consistent side-bar on desktop*/
+    /*--------------------------------------------------*/
+    var sidebar = document.getElementsByClassName("links-sidebar")[0];
+    var scrollMaxY = window.scrollMaxY || (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+    
+    if(window.innerWidth>972 && scrollMaxY>1000){    
+        document.addEventListener('scroll',()=>{
+            let curPos =sidebar.getBoundingClientRect();
+            
+            if(curPos.top<=100 && window.scrollY>300){
+                sidebar.style.position="fixed";
+                sidebar.style.top='100px';
+                
+            }
+            else if(window.scrollY<300){
+                sidebar.style.position="relative";
+            }
+            
+            if(scrollMaxY- window.scrollY<200){
+                sidebar.style.position="relative";
+            }
+            
+
+        
+        })
+    }
+    
+
 // ------------------ End Document ------------------ //
 });
 
