@@ -439,13 +439,13 @@ endin
 
 &lt;/CsInstruments&gt;
 &lt;CsScore&gt;
-f0 3600
+
 &lt;/CsScore&gt;
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
 
 Note that most frontends offer their own MIDI handling. Once this is set up, the user can omit
-the `-Ma` option.
+the *-Ma* option.
 
 
 ## Your first effect
