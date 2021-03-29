@@ -34,19 +34,20 @@ Analogue Converter. The DAC converts each of the sequenced numbers to a voltage 
 speakers to move and vibrate, thus creating sound.
 
 ## Csound Editors
-Csound text can be written using any source code editor. Csound ships with an editor called CsoundQT
-which provides syntax highlighting of text, as well as a vast array of useful functions. While
-CsoundQT is the default editor for Csound it is not the only Csound-based editor available to users.
+Csound text can be written using any source code editor. After a decade in which Csound shipped 
+with CsoundQt as default IDE, starting from Csound 6.15, no third-party graphic frontends are shipped 
+with the installation packages on MacOs and Windows. Users should install their choice of frontend separately. 
 The following is a list of editors and extensions written specifically for editing Csound source
 files.
 
+* <a href="https://csoundqt.github.io/" target="_blank">CsoundQt</a>
+* <a href="https://blue.kunstmusik.com" target="_blank">Blue</a>
+* <a href="https://cabbageaudio.com/" target="_blank">Cabbage</a>
 * <a href="http://winxound.codeplex.com/" target="_blank">WinXound</a>
-* <a href="http://www.zogotounga.net/comp/csoundx.html" target="_blank">Csound for Emacs</a>
-* <a href="http://blue.kunstmusik.com" target="_blank">Blue</a>
-* <a href="http://cabbageaudio.com/" target="_blank">Cabbage</a>
 * <a href="https://appsto.re/us/9GV8db.i">RunloopSound</a>
 * <a href="https://atom.io/packages/language-csound">Csound for Atom</a>
 * <a href="https://github.com/hlolli/csound-mode">Csound-Mode for Emacs</a>
+* <a href="http://www.zogotounga.net/comp/csoundx.html" target="_blank">Csound for Emacs</a>
 
 
 ## Csound syntax
@@ -410,11 +411,7 @@ Consider the following example:
 
 Csound will open any available MIDI device. Every time a note is pressed, the note's frequency will
 be passed to p4, while the note's amplitude will be passed to p5. The previous i-statements used to
-trigger the instrument can now be removed from the score section and replaced with a single **f0
-3600** statement. This is a special statement that instructs Csound to wait and respond to incoming
-events for 3600 seconds. 3600 was chosen arbitrarily. Just remember that whatever value is used
-should be long enough to account for a full performance. The last thing you want is Csound stopping
-halfway through your final solo in front of 100,000 adoring fans! Below is the code for a fully
+trigger the instrument can now be removed from the score section. Below is the code for a fully
 functioning MIDI synth. A second, slightly out of tune vco2 has been added to provide a little
 warmth to the overall sound.
 
@@ -446,6 +443,10 @@ f0 3600
 &lt;/CsScore&gt;
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
+
+Note that most frontends offer their own MIDI handling. Once this is set up, the user can omit
+the `-Ma` option.
+
 
 ## Your first effect
 
