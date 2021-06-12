@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm190044"></a>
+        <a id="idm195392"></a>
         <h2>Description</h2>
         <p>
        <span class="emphasis"><em>repluck</em></span> est une implémentation du modèle physique de corde
@@ -49,12 +49,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm190050"></a>
+        <a id="idm195398"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>repluck</strong></span> iplk, kamp, icps, kpick, krefl, axcite</pre>
       </div>
       <div class="refsect1">
-        <a id="idm190054"></a>
+        <a id="idm195402"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iplk</em></span> -- Le point d'excitation est <span class="emphasis"><em>iplk</em></span>,
@@ -66,7 +66,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm190062"></a>
+        <a id="idm195410"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kamp</em></span> -- Amplitude de la note.
@@ -82,14 +82,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm190070"></a>
+        <a id="idm195418"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>axcite</em></span> -- Un signal d'excitation de la corde.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm190074"></a>
+        <a id="idm195422"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opdcode repluck. Il utilise le fichier
@@ -97,16 +97,16 @@
 
       </p>
         <div class="example">
-          <a id="idm190079"></a>
+          <a id="idm195427"></a>
           <p class="title">
-            <strong>Exemple 861. Exemple de l'opdcode repluck.</strong>
+            <strong>Exemple 879. Exemple de l'opdcode repluck.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm190086"></a>
+              <a id="idm195434"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -166,14 +166,97 @@ a<span class="n">sig</span> <span class="nb">dcblock2</span> a<span class="n">si
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm190223"></a>
+        <a id="idm195571"></a>
+        <p>
+      Voici un autre exemple de l'opdcode repluck. Il utilise le fichier
+      <a class="ulink" href="examples/repluck-advanced.csd" target="_top"><em class="citetitle">repluck-advanced.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm195575"></a>
+          <p class="title">
+            <strong>Exemple 880. Exemple avancé de l'opcode repluck.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm195582"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac   <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o repluck_advanced.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="c1">; By Stefano Cucchi 2020</span>
+
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span> 
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span> 
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>  
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="kd">instr</span> <span class="nf">1</span>
+
+
+i<span class="n">plk</span>  <span class="o">=</span> <span class="vi">p4</span>
+k<span class="n">amp</span>  <span class="o">=</span> <span class="vi">p5</span>
+i<span class="n">cps</span>  <span class="o">=</span> <span class="vi">p6</span>
+
+k<span class="n">refll</span> <span class="nb">randomi</span> <span class="mf">0.52</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.61</span>
+k<span class="n">pickl</span> <span class="nb">randomi</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">13</span>
+
+k<span class="n">reflr</span> <span class="o">=</span> <span class="vi">p7</span>
+k<span class="n">pickr</span> <span class="o">=</span> <span class="vi">p8</span>
+
+a<span class="n">in1</span> <span class="nb">diskin</span> <span class="s">"fox.wav"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+
+a<span class="n">sigl</span> <span class="nb">repluck</span> i<span class="n">plk</span><span class="p">,</span> k<span class="n">amp</span><span class="p">,</span> i<span class="n">cps</span><span class="p">,</span> k<span class="n">pickl</span><span class="p">,</span> k<span class="n">refll</span><span class="p">,</span> a<span class="n">in1</span>
+a<span class="n">sigl</span> <span class="nb">dcblock2</span> a<span class="n">sigl</span>	
+
+a<span class="n">sigr</span> <span class="nb">repluck</span> i<span class="n">plk</span><span class="p">,</span> k<span class="n">amp</span><span class="p">,</span> i<span class="n">cps</span><span class="p">,</span> k<span class="n">pickr</span><span class="p">,</span> k<span class="n">reflr</span><span class="p">,</span> a<span class="n">in1</span>
+a<span class="n">sigr</span> <span class="nb">dcblock2</span> a<span class="n">sigr</span>
+
+k<span class="n">declick</span> <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="vi">p3</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">0</span>
+
+<span class="nb">outch</span> <span class="mi">1</span><span class="p">,</span> a<span class="n">sigl</span> <span class="o">*</span> k<span class="n">declick</span>
+<span class="nb">outch</span> <span class="mi">2</span><span class="p">,</span> a<span class="n">sigr</span> <span class="o">*</span> k<span class="n">declick</span>
+<span class="kd">endin</span>
+
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">4</span> <span class="mf">0.11</span> <span class="mf">0.5</span> <span class="mi">69</span> <span class="mf">0.9</span> <span class="mf">0.11</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mf">0.11</span> <span class="mf">0.5</span> <span class="mi">12</span> <span class="mf">0.9</span> <span class="mf">0.11</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">6</span> <span class="mi">4</span> <span class="mf">0.41</span> <span class="mf">0.5</span> <span class="mi">1</span> <span class="mf">0.2</span> <span class="mf">0.11</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">9</span> <span class="mi">4</span> <span class="mf">0.11</span> <span class="mf">0.5</span> <span class="mi">300</span> <span class="mf">0.9</span> <span class="mf">0.99</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">12</span> <span class="mi">4</span> <span class="mf">0.11</span> <span class="mf">0.5</span> <span class="mi">182</span> <span class="mf">0.9</span> <span class="mf">0.99</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">15</span> <span class="mi">15</span> <span class="mf">0.99</span> <span class="mf">0.5</span> <span class="mf">12.039</span> <span class="mf">0.9</span> <span class="mf">0.11</span>
+
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm195765"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="wgpluck2.html" title="wgpluck2"><em class="citetitle">wgpluck2</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm190228"></a>
+        <a id="idm195770"></a>
         <h2>Crédits</h2>
         <p>
       </p>

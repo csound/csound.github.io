@@ -39,14 +39,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm63597"></a>
+        <a id="idm66513"></a>
         <h2>Description</h2>
         <p>
       Retourne e élevé à la puissance <span class="emphasis"><em>x</em></span>.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm63601"></a>
+        <a id="idm66517"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>exp</strong></span>(x) (pas de restriction de taux)</pre>
         <pre class="synopsis"><span class="command"><strong>exp</strong></span>(k/i[]) (k- ou i-tableau)</pre>
@@ -57,7 +57,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm63608"></a>
+        <a id="idm66524"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode exp. Il utilise le fichier
@@ -65,56 +65,49 @@
 
       </p>
         <div class="example">
-          <a id="idm63613"></a>
+          <a id="idm66529"></a>
           <p class="title">
-            <strong>Exemple 268. Exemple de l'opcode exp.</strong>
+            <strong>Exemple 272. Exemple de l'opcode exp.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm63620"></a>
+              <a id="idm66536"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
+
 <span class="nt">&lt;CsOptions&gt;</span>
+
 <span class="c1">; Select audio/midi flags here according to platform</span>
 -odac     <span class="c1">;;;realtime audio out</span>
 <span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
-<span class="c1">; -o exp.wav -W ;;; for file output any platform</span>
+
 <span class="nt">&lt;/CsOptions&gt;</span>
 <span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="c1">; By Stefano Cucchi 2020</span>
 
 <span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
 <span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
 <span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="vg">0dbfs</span> <span class="o">=</span><span class="mi">1</span>
 
-gi<span class="n">sine</span>    <span class="nb">ftgen</span>     <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">^</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">;table for a sine wave</span>
 
-<span class="kd">instr</span> <span class="nf">1</span> <span class="c1">;master instrument</span>
-k<span class="n">oct</span>      <span class="nb">linseg</span>    <span class="mi">6</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">12</span> <span class="c1">; octave register straight rising from 6 to 12</span>
-k<span class="n">exp</span>      <span class="nb">linseg</span>    <span class="mi">0</span><span class="p">,</span> <span class="vi">p3</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="vi">p3</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="vi">p3</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;exponent goes from 0 to 5 and back</span>
-k<span class="n">dens</span>     <span class="o">=</span>         <span class="nb">exp</span><span class="p">(</span>k<span class="n">exp</span><span class="p">)</span> <span class="c1">;density is e to the power of kexp</span>
-          <span class="nb">printks</span>   <span class="s">"Generated events per second: </span><span class="si">%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">dens</span>
-k<span class="n">trig</span>     <span class="nb">metro</span>     k<span class="n">dens</span> <span class="c1">;trigger single notes in kdens frequency</span>
- <span class="k">if</span> k<span class="n">trig</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">then</span>
-<span class="c1">;call instr 10 for 1/kdens duration, .5 amplitude and koct register</span>
-          <span class="nb">event</span>     <span class="s">"i"</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span>k<span class="n">dens</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> k<span class="n">oct</span>
- <span class="k">endif</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+i<span class="n">1</span> <span class="o">=</span> <span class="nb">exp</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> 
+<span class="c1">; BASE = e (2,71828 18284 59045 23536...)</span>
+<span class="c1">; EXPONENT = 2</span>
+<span class="nb">print</span> i<span class="n">1</span>
 <span class="kd">endin</span>
 
-<span class="kd">instr</span> <span class="nf">10</span> <span class="c1">;performs one tone</span>
-i<span class="n">oct</span>      <span class="nb">rnd31</span>     <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;random deviation maximum one octave plus/minus</span>
-a<span class="n">env</span>      <span class="nb">transeg</span>   <span class="vi">p4</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;fast decaying envelope for p4 amplitude</span>
-a<span class="n">sin</span>      <span class="nb">poscil</span>    a<span class="n">env</span><span class="p">,</span> <span class="nb">cpsoct</span><span class="p">(</span><span class="vi">p5</span><span class="o">+</span>i<span class="n">oct</span><span class="p">),</span> gi<span class="n">sine</span> <span class="c1">;sine for p5 octave register plus random deviation</span>
-          <span class="nb">outs</span>      a<span class="n">sin</span><span class="p">,</span> a<span class="n">sin</span>
-<span class="kd">endin</span>
+
 
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">30</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
 <span class="nb">e</span>
 <span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
@@ -123,7 +116,75 @@ a<span class="n">sin</span>      <span class="nb">poscil</span>    a<span class=
           </div>
         </div>
         <p><br class="example-break" />
+      Sa sortie contiendra des lignes comme celles-ci :
+      </p>
+        <pre class="screen">
+new alloc for instr 1:
+instr 1:  i1 = 7.389
+B  0.000 ..  1.000 T  1.000 TT  1.000 M:  0.00000  0.00000
+  .........</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm66582"></a>
+        <p>
+      Voici un autre exemple de l'opcode exp. Il utilise le fichier
+      <a class="ulink" href="examples/exp-musical.csd" target="_top"><em class="citetitle">exp-musical.csd</em></a>.
 
+      </p>
+        <div class="example">
+          <a id="idm66586"></a>
+          <p class="title">
+            <strong>Exemple 273. Exemple musical de l'opcode exp.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm66593"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+
+<span class="nt">&lt;CsOptions&gt;</span>
+
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="c1">; By Stefano Cucchi 2020</span>
+
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span><span class="mi">1</span>
+
+
+<span class="kd">instr</span> <span class="nf">1</span>
+i<span class="n">1</span> <span class="o">=</span> <span class="nb">exp</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> 
+<span class="c1">; BASE = e (2,71828 18284 59045 23536...)</span>
+<span class="c1">; EXPONENT = 2</span>
+<span class="nb">print</span> i<span class="n">1</span>
+<span class="kd">endin</span>
+
+
+
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
       Sa sortie contiendra des lignes comme celles-ci :
       </p>
         <pre class="screen">
@@ -146,7 +207,7 @@ Generated events per second: 4
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm63779"></a>
+        <a id="idm66639"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="abs.html" title="abs"><em class="citetitle">abs</em></a>,
@@ -159,7 +220,7 @@ Generated events per second: 4
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm63796"></a>
+        <a id="idm66656"></a>
         <p>Nouveau dans la version 4.21</p>
       </div>
     </div>

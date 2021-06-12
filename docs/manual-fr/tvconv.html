@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm239292"></a>
+        <a id="idm247297"></a>
         <h2>Description</h2>
         <p>
       Un opcode prenant deux signaux en entrée et interprétant l'un deux comme
@@ -51,13 +51,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm239295"></a>
+        <a id="idm247300"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>tvconv</strong></span> asig1, asig2, xfreez1,
     xfreez2, iparts, ifils</pre>
       </div>
       <div class="refsect1">
-        <a id="idm239299"></a>
+        <a id="idm247304"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iparts</em></span> -- taille de partition, pour des tailles
@@ -75,7 +75,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm239305"></a>
+        <a id="idm247310"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ares</em></span> -- sortie audio.
@@ -95,31 +95,36 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm239319"></a>
+        <a id="idm247324"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode tvconv. Il utilise le fichier
       <a class="ulink" href="examples/tvconv.csd" target="_top"><em class="citetitle">tvconv.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm239324"></a>
+          <a id="idm247329"></a>
           <p class="title">
-            <strong>Exemple 1088. Exemple de l'opcode tvconv.</strong>
+            <strong>Exemple 1121. Exemple de l'opcode tvconv.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm239331"></a>
+              <a id="idm247336"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 -odac 
 <span class="nt">&lt;/CsOptions&gt;</span>
 <span class="nt">&lt;CsInstruments&gt;</span>
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="kd">instr</span> <span class="nf">1</span>
+
  a<span class="n">sig</span> <span class="nb">diskin</span> <span class="s">"fox.wav"</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
  a<span class="n">ir</span> <span class="nb">diskin</span> <span class="s">"beats.wav"</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
  a<span class="n">ir</span> <span class="nb">buthp</span> a<span class="n">ir</span><span class="o">/</span><span class="vg">0dbfs</span><span class="p">,</span><span class="mi">1000</span>
@@ -128,13 +133,15 @@
  a<span class="n">2</span> <span class="nb">oscili</span> k<span class="n">1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mi">1</span>
  a<span class="n">sig</span> <span class="nb">tvconv</span> a<span class="n">sig</span><span class="p">,</span>a<span class="n">ir</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span>a<span class="n">2</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span>a<span class="n">1</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">1024</span>
  a<span class="n">sig</span> <span class="nb">clip</span> a<span class="n">sig</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="vg">0dbfs</span>
-   <span class="nb">out</span> a<span class="n">sig</span>
+ <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+   
 <span class="kd">endin</span>
 
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
 <span class="nb">f</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1024</span> <span class="mi">7</span> <span class="mi">0</span> <span class="mi">512</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">511</span> <span class="mi">1</span>
 <span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">30</span>
+<span class="nb">e</span>
 <span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
@@ -145,7 +152,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm239446"></a>
+        <a id="idm247466"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="pconvolve.html" title="pconvolve"><em class="citetitle">pconvolve</em></a>,
@@ -154,7 +161,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm239455"></a>
+        <a id="idm247475"></a>
         <h2>Crédits</h2>
         <p>
       </p>

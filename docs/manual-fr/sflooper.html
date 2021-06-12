@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm203751"></a>
+        <a id="idm210294"></a>
         <h2>Description</h2>
         <p>
       Joue un preset d'échantillons SoundFont2 (SF2), générant un son stéréo, comme
@@ -48,17 +48,20 @@
       points de boucle fixés dans le fichier SF2 et les remplace par une boucle en
       fondu-enchainé définie par l'utilisateur. C'est un mélange de
       <a class="link" href="sfplay.html" title="sfplay"><em class="citetitle">sfplay</em></a> et de
-      <a class="link" href="flooper2.html" title="flooper2"><em class="citetitle">flooper2</em></a>.
+      <a class="link" href="flooper2.html" title="flooper2"><em class="citetitle">flooper2</em></a>. Afin de
+      comprendre l'utilisation de ces opcodes, on doit connaître le format SF2,
+      dont une brève description peut être trouvée dans la section
+      <a class="link" href="SiggenSample.html" title="Reproduction de sons échantillonnés"><em class="citetitle">format de fichier SoundFont2</em></a>.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm203759"></a>
+        <a id="idm210304"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ar1, ar2 <span class="command"><strong>sflooper</strong></span> ivel, inotenum, kamp, kpitch, ipreindex, kloopstart, kloopend, kcrossfade \
-      [, istart, imode, ifenv, iskip] </pre>
+      [, istart, imode, ifenv, iskip, iflag] </pre>
       </div>
       <div class="refsect1">
-        <a id="idm203763"></a>
+        <a id="idm210308"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ivel</em></span> -- vélocité.
@@ -87,15 +90,32 @@
       dans la boucle où la note précédente s'est terminée. Avec la valeur par
       défaut de 0, l'initialisation a lieu.
     </p>
+        <p>
+      <span class="emphasis"><em>iflag</em></span> -- indicateur en rapport avec le comportement
+      de <span class="emphasis"><em>kpitch</em></span> et de <span class="emphasis"><em>inotenum</em></span>.
+    </p>
       </div>
       <div class="refsect1">
-        <a id="idm203779"></a>
+        <a id="idm210328"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kamp</em></span> -- contrôle de l'amplitude </p>
         <p>
-      <span class="emphasis"><em>kpitch</em></span> -- contrôle de la hauteur (rapport de transposition) ;
-      les valeurs négatives sont interdites.
+      <span class="emphasis"><em>kpitch</em></span> -- contrôle de la hauteur (rapport de
+      transposition, les valeurs négatives sont interdites.)
+      ou multiplicateur de fréquence, dépendant de iflag. Lorsque iflag = 0,
+      kpitch est un multiplicateur de la fréquence par défaut assignée par le
+      préréglage de SF2 à la valeur inotenum. Lorque iflag = 1, kpitch est la
+      fréquence absolue du son en sortie, en Hz. 0 par défaut.
+
+      Lorsque iflag = 0, inotenum fixe la fréquence de la sortie selon le numéro
+      de note MIDI utilisé, et kpitch est utilisé comme un multiplicateur. Lorsque
+      iflag = 1, la fréquence de la sortie est directement fixée par kpitch. Cela
+      permet l'utilisation de toutes sortes d'échelles basées sur les micro-tons.
+      Cependant cette méthode est conçue pour ne fonctionner correctement qu'avec
+      les préréglages fixés sur le tempérament égal. L'utilisation de cette
+      méthode avec un préréglage comportant déjà une échelle non standard ou
+      avec un préréglage basé sur un drum-kit peut donner des résultats imprévisibles.
     </p>
         <p>
       <span class="emphasis"><em>kloopstart</em></span> -- début de la boucle (en secondes). Noter que
@@ -114,7 +134,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm203791"></a>
+        <a id="idm210340"></a>
         <p>
       <span class="emphasis"><em>sflooper</em></span> joue un preset, générant un son stéréo. 
     </p>
@@ -139,29 +159,29 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm203800"></a>
+        <a id="idm210349"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode sflooper. Il utilise le fichier
       <a class="ulink" href="examples/sflooper.csd" target="_top"><em class="citetitle">sflooper.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm203805"></a>
+          <a id="idm210354"></a>
           <p class="title">
-            <strong>Exemple 931. Exemple de l'opcode sflooper.</strong>
+            <strong>Exemple 954. Exemple de l'opcode sflooper.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm203812"></a>
+              <a id="idm210361"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
 <span class="c1">; Audio out   Audio in    No messages</span>
--odac -+rtmidi=virtual  -M0     <span class="c1">;;;realtime audio in, midi in</span>
+-odac   <span class="c1">;;;realtime audio in</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o sflooper.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
@@ -172,36 +192,50 @@
 <span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
+<span class="c1">; by  Menno Knevel - 2021</span>
 
 i<span class="n">sf</span>   <span class="nb">sfload</span> <span class="s">"07AcousticGuitar.sf2"</span>
       <span class="nb">sfpassign</span> <span class="mi">0</span><span class="p">,</span> i<span class="n">sf</span>
 
-<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">; play from score and midi keyboard</span>
+<span class="kd">instr</span> <span class="nf">1</span>	
 
-      <span class="nb">mididefault</span>   <span class="mi">60</span><span class="p">,</span> <span class="vi">p3</span>
-      <span class="nb">midinoteonkey</span> <span class="vi">p4</span><span class="p">,</span> <span class="vi">p5</span>
-i<span class="n">num</span>  <span class="nb">init</span> <span class="vi">p4</span>
-i<span class="n">vel</span>  <span class="nb">init</span> <span class="vi">p5</span>
-<span class="nb">print</span> i<span class="n">vel</span>
-
-i<span class="n">vel</span>  <span class="nb">init</span>    i<span class="n">vel</span><span class="o">/</span><span class="mi">127</span>		<span class="c1">;velocity dependent</span>
-k<span class="n">amp</span>  <span class="nb">linsegr</span> <span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">.1</span><span class="p">,</span><span class="mi">0</span>	<span class="c1">;envelope</span>
-k<span class="n">amp</span>  <span class="o">=</span> k<span class="n">amp</span> <span class="o">*</span> <span class="mf">.0002</span>		<span class="c1">;scale amplitude (= kamp/5000)</span>
-k<span class="n">freq</span> <span class="nb">init</span> <span class="mi">1</span>			<span class="c1">;do not change freq from sf</span>
+i<span class="n">num</span>  <span class="o">=</span> <span class="vi">p4</span>
+i<span class="n">vel</span>  <span class="o">=</span> <span class="vi">p5</span>
+k<span class="n">amp</span>  <span class="nb">linsegr</span> <span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">.1</span><span class="p">,</span><span class="mi">0</span>	<span class="c1">; declick envelope</span>
+k<span class="n">amp</span>  <span class="o">=</span> k<span class="n">amp</span> <span class="o">*</span> <span class="mf">.0000015</span>		<span class="c1">;scale amplitude</span>
+i<span class="n">freq</span> <span class="o">=</span> <span class="mi">1</span>			<span class="c1">;do not change freq from sf</span>
 <span class="c1">;"07AcousticGuitar.sf2" contains 2 samples, on notes E1 and C#4</span>
 <span class="c1">;start loop from beginning, loop .2 seconds - on the root key of these samples</span>
-a<span class="n">L</span><span class="p">,</span>a<span class="n">R</span> <span class="nb">sflooper</span> i<span class="n">vel</span><span class="p">,</span> i<span class="n">num</span><span class="p">,</span> k<span class="n">amp</span><span class="o">*</span>i<span class="n">vel</span><span class="p">,</span> k<span class="n">freq</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">.05</span>
+a<span class="n">L</span><span class="p">,</span>a<span class="n">R</span> <span class="nb">sflooper</span> i<span class="n">vel</span><span class="p">,</span> i<span class="n">num</span><span class="p">,</span> k<span class="n">amp</span><span class="o">*</span>i<span class="n">vel</span><span class="p">,</span> i<span class="n">freq</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">.05</span>  <span class="c1">; make amp velocity dependent</span>
       <span class="nb">outs</span> a<span class="n">L</span><span class="p">,</span> a<span class="n">R</span>
-	
+<span class="kd">endin</span>
+
+<span class="kd">instr</span> <span class="nf">2</span>	
+
+i<span class="n">freq</span>  <span class="o">=</span> <span class="vi">p4</span>
+i<span class="n">vel</span>  <span class="o">=</span> <span class="vi">p5</span>
+k<span class="n">amp</span>  <span class="nb">linsegr</span> <span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">.1</span><span class="p">,</span><span class="mi">0</span>	<span class="c1">; declick envelope</span>
+k<span class="n">amp</span>  <span class="o">=</span> k<span class="n">amp</span> <span class="o">*</span> <span class="mf">.0000015</span>		<span class="c1">;scale amplitude</span>
+i<span class="n">num</span> <span class="o">=</span> <span class="mi">60</span>			<span class="c1">;take soundfont samples belonging to midi index 60</span>
+
+<span class="c1">;nearly identical instr, but now takes midi note sound 60 as reference, set iflag to 1</span>
+a<span class="n">L</span><span class="p">,</span>a<span class="n">R</span> <span class="nb">sflooper</span> i<span class="n">vel</span><span class="p">,</span> i<span class="n">num</span><span class="p">,</span> k<span class="n">amp</span><span class="o">*</span>i<span class="n">vel</span><span class="p">,</span> i<span class="n">freq</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">.05</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>  <span class="c1">; &amp; use ifreq for frequency</span>
+      <span class="nb">outs</span> a<span class="n">L</span><span class="p">,</span> a<span class="n">R</span>
+
 <span class="kd">endin</span>
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">f</span><span class="mi">0</span>  <span class="mi">60</span>		<span class="c1">; stay active for 1 minute</span>
 
-<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">60</span> <span class="mi">100</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">60</span> <span class="mi">120</span>   <span class="c1">; p4 = midi note</span>
 <span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="mi">62</span> <span class="o">&lt;</span>
 <span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="mi">65</span> <span class="o">&lt;</span>
 <span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="mi">69</span> <span class="mi">10</span>
+
+
+<span class="nb">i</span><span class="mi">2</span> <span class="mi">5</span> <span class="mi">1</span> <span class="mi">200</span> <span class="mi">120</span>  <span class="c1">; p4 = frequency</span>
+<span class="nb">i</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="mi">261</span> <span class="o">&lt;</span>
+<span class="nb">i</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="mi">300</span> <span class="o">&lt;</span>
+<span class="nb">i</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span> <span class="mi">1000</span> <span class="mi">10</span>
 <span class="nb">e</span>
 <span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
@@ -213,7 +247,7 @@ a<span class="n">L</span><span class="p">,</span>a<span class="n">R</span> <span
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm203950"></a>
+        <a id="idm210574"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="sfilist.html" title="sfilist"><em class="citetitle">sfilist</em></a>,
@@ -227,7 +261,7 @@ a<span class="n">L</span><span class="p">,</span>a<span class="n">R</span> <span
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm203969"></a>
+        <a id="idm210593"></a>
         <h2>Crédits</h2>
         <p>
       </p>

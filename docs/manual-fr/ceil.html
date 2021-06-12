@@ -39,14 +39,14 @@
      </p>
       </div>
       <div class="refsect1">
-        <a id="idm37878"></a>
+        <a id="idm38089"></a>
         <h2>Description</h2>
         <p>
-	    Retourne le plus petit entier supérieur ou égal à <span class="emphasis"><em>x</em></span>.
+      Retourne le plus petit entier supérieur ou égal à <span class="emphasis"><em>x</em></span>.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm37882"></a>
+        <a id="idm38093"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>ceil</strong></span>(x) (argument au taux d'initialisation, de contrôle ou audio)</pre>
         <pre class="synopsis"><span class="command"><strong>ceil</strong></span>(k/i[]) (k- ou i-tableau)</pre>
@@ -57,7 +57,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm37889"></a>
+        <a id="idm38100"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode ceil. Il utilise le fichier
@@ -65,16 +65,16 @@
 
       </p>
         <div class="example">
-          <a id="idm37894"></a>
+          <a id="idm38105"></a>
           <p class="title">
-            <strong>Exemple 119. Exemple de l'opcode ceil.</strong>
+            <strong>Exemple 116. Exemple de l'opcode ceil.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm37901"></a>
+              <a id="idm38112"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span> 
 <span class="nt">&lt;CsOptions&gt;</span> 
@@ -128,10 +128,134 @@ instr 1:  iceil = 0.000
 instr 1:  iceil = 0.000
 instr 1:  iceil = 0.000</pre>
         <p>
+      Voici un autre exemple de l'opcode ceil. Il utilise le fichier
+      <a class="ulink" href="examples/ceil-2.csd" target="_top"><em class="citetitle">ceil-2.csd</em></a>. 
+      </p>
+        <div class="example">
+          <a id="idm38191"></a>
+          <p class="title">
+            <strong>Exemple 117. Un second exemple de l'opcode ceil.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm38193"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o ceil-2.wav -W ;;; for file output any platform</span>
+
+<span class="c1">; By Stefano Cucchi - 2020</span>
+
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+
+<span class="kd">instr</span> <span class="nf">1</span>
+
+k<span class="n">cps</span> <span class="o">=</span> <span class="mi">100</span>
+k<span class="n">car</span> <span class="o">=</span> <span class="mi">1</span>
+k<span class="n">mod</span> <span class="o">=</span> <span class="vi">p4</span>
+
+k<span class="n">ndx</span> <span class="nb">oscil</span> <span class="mi">30</span><span class="p">,</span> <span class="mf">.25</span><span class="o">/</span><span class="vi">p3</span><span class="p">,</span> <span class="mi">1</span>
+k<span class="n">ndx</span> <span class="nb">ceil</span> k<span class="n">ndx</span>
+
+a<span class="n">sig</span> <span class="nb">foscili</span> <span class="mf">.5</span><span class="p">,</span> k<span class="n">cps</span><span class="p">,</span> k<span class="n">car</span><span class="p">,</span> k<span class="n">mod</span><span class="p">,</span> k<span class="n">ndx</span><span class="p">,</span> <span class="mi">1</span>
+     <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
+
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span> <span class="mf">1.5</span>	
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+      Voici un exemple de groupe d'arrondis, comparant les différents opcodes
+      d'arrondi. Il utilise le fichier
+      <a class="ulink" href="examples/rounding-group.csd" target="_top"><em class="citetitle">rounding-group.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm38276"></a>
+          <p class="title">
+            <strong>Exemple 118. Exemple de groupe d'arrondis.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm38278"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+-odac       <span class="c1">;   </span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+
+<span class="c1">; by tgrey 2020</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+
+i<span class="n">LoopStart</span> <span class="o">=</span> <span class="vi">p4</span>
+i<span class="n">LoopEnd</span>   <span class="o">=</span> <span class="vi">p5</span>
+i<span class="n">Offset</span>    <span class="o">=</span> <span class="vi">p6</span>
+
+i<span class="n">Count</span> <span class="nb">init</span> i<span class="n">LoopStart</span>
+
+	
+<span class="k">if</span><span class="p">(</span>i<span class="n">LoopStart</span><span class="o">&lt;</span>i<span class="n">LoopEnd</span><span class="p">)</span> <span class="k">then</span>		<span class="c1">; loop going up</span>
+	<span class="k">while</span> i<span class="n">Count</span> <span class="o">&lt;=</span> i<span class="n">LoopEnd</span> <span class="k">do</span>
+		i<span class="n">Val</span> <span class="o">=</span> i<span class="n">Count</span><span class="o">+</span>i<span class="n">Offset</span>
+		i<span class="n">Round</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>i<span class="n">Val</span><span class="p">)</span>
+		i<span class="n">Int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>i<span class="n">Val</span><span class="p">)</span>
+		i<span class="n">Floor</span> <span class="o">=</span> <span class="nb">floor</span><span class="p">(</span>i<span class="n">Val</span><span class="p">)</span>
+		i<span class="n">Ceil</span> <span class="o">=</span> <span class="nb">ceil</span><span class="p">(</span>i<span class="n">Val</span><span class="p">)</span>
+		<span class="nb">print</span> i<span class="n">Val</span><span class="p">,</span> i<span class="n">Round</span><span class="p">,</span> i<span class="n">Int</span><span class="p">,</span> i<span class="n">Floor</span><span class="p">,</span> i<span class="n">Ceil</span>
+		i<span class="n">Count</span> <span class="o">=</span> i<span class="n">Count</span> <span class="o">+</span> <span class="mi">1</span>		
+	<span class="k">od</span>
+	
+<span class="k">elseif</span><span class="p">(</span>i<span class="n">LoopEnd</span><span class="o">&lt;</span>i<span class="n">LoopStart</span><span class="p">)</span> <span class="k">then</span>	<span class="c1">; loop going down</span>
+	<span class="k">while</span> i<span class="n">Count</span> <span class="o">&gt;=</span> i<span class="n">LoopEnd</span> <span class="k">do</span>
+		i<span class="n">Val</span> <span class="o">=</span> i<span class="n">Count</span><span class="o">+</span>i<span class="n">Offset</span>
+		i<span class="n">Round</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>i<span class="n">Val</span><span class="p">)</span>
+		i<span class="n">Int</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>i<span class="n">Val</span><span class="p">)</span>
+		i<span class="n">Floor</span> <span class="o">=</span> <span class="nb">floor</span><span class="p">(</span>i<span class="n">Val</span><span class="p">)</span>
+		i<span class="n">Ceil</span> <span class="o">=</span> <span class="nb">ceil</span><span class="p">(</span>i<span class="n">Val</span><span class="p">)</span>
+		<span class="nb">print</span> i<span class="n">Val</span><span class="p">,</span> i<span class="n">Round</span><span class="p">,</span> i<span class="n">Int</span><span class="p">,</span> i<span class="n">Floor</span><span class="p">,</span> i<span class="n">Ceil</span>
+		i<span class="n">Count</span> <span class="o">=</span> i<span class="n">Count</span> <span class="o">-</span> <span class="mi">1</span>		
+	<span class="k">od</span>
+<span class="k">endif</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mf">.1</span> <span class="mi">0</span> <span class="mi">10</span> <span class="mf">.5</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mf">.2</span> <span class="mf">.1</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">10</span> <span class="mf">.5</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm37978"></a>
+        <a id="idm38444"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="abs.html" title="abs"><em class="citetitle">abs</em></a>,
@@ -144,7 +268,7 @@ instr 1:  iceil = 0.000</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm37995"></a>
+        <a id="idm38461"></a>
         <h2>Crédits</h2>
         <p>
       </p>

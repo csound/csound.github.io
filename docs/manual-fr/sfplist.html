@@ -39,24 +39,24 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm205365"></a>
+        <a id="idm211937"></a>
         <h2>Description</h2>
         <p>
       Imprime une liste de tous les presets d'un fichier d'échantillons SoundFont2
       (SF2) préalablement chargé en mémoire.
       Ces opcodes permettent la gestion de la structure d'échantillon des fichiers
       SF2. Afin de comprendre l'utilisation de ces opcodes, il faut connaître le
-      format SF2 dont on peut trouver une brève description dans l'annexe
-      <a class="link" href="MiscSf2.html" title="Annexe G. Format de fichier SoundFont2"><em class="citetitle">Format de Fichier SoundFont2</em></a>.
+      format SF2 dont on peut trouver une brève description dans la section
+      <a class="link" href="SiggenSample.html" title="Reproduction de sons échantillonnés"><em class="citetitle">format de fichier SoundFont2</em></a>.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm205370"></a>
+        <a id="idm211942"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>sfplist</strong></span> ifilhandle</pre>
       </div>
       <div class="refsect1">
-        <a id="idm205374"></a>
+        <a id="idm211946"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifilhandle</em></span> -- nombre unique généré par l'opcode
@@ -65,7 +65,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm205379"></a>
+        <a id="idm211951"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>sfplist</em></span> imprime sur la console une liste de tous les
@@ -80,33 +80,35 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm205384"></a>
+        <a id="idm211956"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode sfplist. Il utilise le fichier
       <a class="ulink" href="examples/sfplist.csd" target="_top"><em class="citetitle">sfplist.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm205389"></a>
+          <a id="idm211961"></a>
           <p class="title">
-            <strong>Exemple 936. Exemple de l'opcode sfplist.</strong>
+            <strong>Exemple 959. Exemple de l'opcode sfplist.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm205396"></a>
+              <a id="idm211968"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
--odac -+rtmidi=virtual -M0  <span class="c1">;;;realtime audio out, virtual midi in</span>
+-odac  <span class="c1">;;;realtime audio out</span>
 <span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o sfplist.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
 <span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="c1">; By  Menno Knevel - 2020</span>
 
 <span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
 <span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
@@ -114,27 +116,23 @@
 <span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
 gi<span class="n">sf</span>	<span class="nb">sfload</span>	 <span class="s">"sf_GMbank.sf2"</span>
-	<span class="nb">sfplist</span>	 gi<span class="n">sf</span>					<span class="c1">;list all presets</span>
-gi<span class="n">r</span>	<span class="nb">sfpreset</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> gi<span class="n">sf</span><span class="p">,</span> <span class="mi">0</span> 			<span class="c1">;preset = Car Pass</span>
+	<span class="nb">sfplist</span>	 gi<span class="n">sf</span>					<span class="c1">;list all 329 presets of Soundfont</span>
+gi<span class="n">r</span>	<span class="nb">sfpreset</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> gi<span class="n">sf</span><span class="p">,</span> <span class="mi">0</span> 			<span class="c1">;choose preset 125 = Car Pass</span>
 
-<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">; play from score and midi keyboard</span>
+<span class="kd">instr</span> <span class="nf">1</span>
 
-	<span class="nb">mididefault</span>	<span class="mi">60</span><span class="p">,</span> <span class="vi">p3</span>
-	<span class="nb">midinoteonkey</span>	<span class="vi">p4</span><span class="p">,</span> <span class="vi">p5</span>
-i<span class="n">num</span>	<span class="nb">init</span>	<span class="vi">p4</span>
-i<span class="n">vel</span>	<span class="nb">init</span>	<span class="vi">p5</span>
-i<span class="n">vel</span>	<span class="nb">init</span>	i<span class="n">vel</span><span class="o">/</span><span class="mi">127</span>				<span class="c1">;make velocity dependent</span>
+i<span class="n">num</span>	<span class="o">=</span>	<span class="vi">p4</span>
+i<span class="n">vel</span>	<span class="o">=</span>	<span class="vi">p5</span>
 k<span class="n">amp</span>	<span class="nb">linsegr</span>	<span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mi">0</span>
-k<span class="n">amp</span>	<span class="o">=</span> k<span class="n">amp</span><span class="o">/</span><span class="mi">6000</span>					<span class="c1">;scale amplitude</span>
-k<span class="n">freq</span>	<span class="nb">init</span>	<span class="mi">1</span>					<span class="c1">;do not change freq from sf</span>
-a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span>	<span class="nb">sfplay3</span>	i<span class="n">vel</span><span class="p">,</span> i<span class="n">num</span><span class="p">,</span> k<span class="n">amp</span><span class="p">,</span> k<span class="n">freq</span><span class="p">,</span> gi<span class="n">r</span>
+k<span class="n">amp</span>	<span class="o">=</span> k<span class="n">amp</span><span class="o">/</span><span class="mi">700000</span>					<span class="c1">;scale amplitude</span>
+k<span class="n">freq</span>	<span class="o">=</span>	<span class="mi">1</span>					<span class="c1">;do not change freq from sf</span>
+a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span>	<span class="nb">sfplay3</span>	i<span class="n">vel</span><span class="p">,</span> i<span class="n">num</span><span class="p">,</span> k<span class="n">amp</span><span class="o">*</span>i<span class="n">vel</span><span class="p">,</span> k<span class="n">freq</span><span class="p">,</span> gi<span class="n">r</span>       <span class="c1">; make amp velocity dependent</span>
 	<span class="nb">outs</span>	a<span class="n">1</span><span class="p">,</span> a<span class="n">2</span>
 	
 <span class="kd">endin</span>
 	
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">f</span><span class="mi">0</span>  <span class="mi">60</span>				<span class="c1">; stay active for 1 minute</span>
 
 <span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">60</span> <span class="mi">127</span>
 <span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="mi">62</span> <span class="o">&lt;</span>
@@ -167,7 +165,7 @@ Preset list of "sf_GMbank.sf2"
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm205531"></a>
+        <a id="idm212088"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="sfilist.html" title="sfilist"><em class="citetitle">sfilist</em></a>,
@@ -181,7 +179,7 @@ Preset list of "sf_GMbank.sf2"
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm205550"></a>
+        <a id="idm212107"></a>
         <h2>Crédits</h2>
         <p>
       </p>

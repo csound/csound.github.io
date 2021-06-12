@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm199907"></a>
+        <a id="idm206657"></a>
         <h2>Description</h2>
         <p>
       Retourne le code ASCII d'une touche enfoncée ou -1 si aucune touche n'a été
@@ -47,12 +47,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm199910"></a>
+        <a id="idm206660"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">kres[, kkeydown] <span class="command"><strong>sensekey</strong></span></pre>
       </div>
       <div class="refsect1">
-        <a id="idm199914"></a>
+        <a id="idm206664"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kres</em></span> - retourne la valeur ASCII d'une touche qui a été
@@ -96,7 +96,7 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm199933"></a>
+        <a id="idm206683"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode sensekey. Il utilise le fichier
@@ -104,191 +104,62 @@
 
       </p>
         <div class="example">
-          <a id="idm199938"></a>
+          <a id="idm206688"></a>
           <p class="title">
-            <strong>Exemple 914. Exemple de l'opcode sensekey.</strong>
+            <strong>Exemple 939. Exemple de l'opcode sensekey.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm199945"></a>
+              <a id="idm206695"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
-<span class="c1">; Audio out   Audio in</span>
--odac           -iadc    <span class="c1">;;;RT audio I/O</span>
-<span class="c1">; For Non-realtime ouput leave only the line below:</span>
-<span class="c1">; -o sensekey.wav -W ;;; for file output any platform</span>
+-odac -d   <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
 <span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="c1">; By Stefano Cucchi - 2020</span>
 
 <span class="c1">; Initialize the global variables.</span>
 <span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="c1">; Instrument #1.</span>
+
 <span class="kd">instr</span> <span class="nf">1</span>
-  k<span class="n">1</span> <span class="nb">sensekey</span>
-  <span class="nb">printk2</span> k<span class="n">1</span>
+
+<span class="c1">; Instr 1 trigger instr 2: every time you press any key, instr 2 produce a note.</span>
+<span class="c1">; The pitch of the tone produced by instr 2 is equal to the ASCII code of the key pressed.</span>
+
+gk<span class="n">Number</span><span class="p">,</span> gk<span class="n">Press</span> <span class="nb">sensekey</span> 
+ 
+<span class="k">if</span> <span class="nb">changed</span><span class="p">(</span>gk<span class="n">Press</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">then</span>
+      <span class="k">if</span> <span class="p">(</span>gk<span class="n">Press</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
+          <span class="nb">event</span> <span class="s">"i"</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span>
+      <span class="k">endif</span> 
+<span class="k">endif</span>      
 <span class="kd">endin</span>
 
+<span class="kd">instr</span> <span class="nf">2</span>
+  
+i<span class="n">Cps</span> <span class="nb">init</span> <span class="nb">i</span><span class="p">(</span>gk<span class="n">Number</span><span class="p">)</span>
+<span class="nb">print</span> i<span class="n">Cps</span>
+a<span class="n">sig</span> <span class="nb">oscili</span> <span class="mf">0.2</span><span class="p">,</span> i<span class="n">Cps</span><span class="p">,</span> <span class="mi">1</span> 
+k<span class="n">envelope</span> <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">0</span>
+<span class="nb">outs</span> a<span class="n">sig</span><span class="o">*</span>k<span class="n">envelope</span><span class="p">,</span> a<span class="n">sig</span><span class="o">*</span>k<span class="n">envelope</span>
+<span class="kd">endin</span>
 
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">4096</span> <span class="mi">10</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mf">0.3</span> <span class="mi">0</span> <span class="mf">0.2</span> <span class="mf">0.3</span> <span class="mf">0.5</span>
 
-<span class="c1">; Play Instrument #1 for thirty seconds.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">30</span>
-<span class="nb">e</span>
-
-
-<span class="nt">&lt;/CsScore&gt;</span>
-<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
-</pre>
-            </div>
-          </div>
-        </div>
-        <p><br class="example-break" />
-
-      Voici à quoi devrait ressembler la sortie si la touche "q" est enfoncée...
-      </p>
-        <pre class="screen">
-q i1   113.00000</pre>
-        <p>
-    </p>
-        <p>
-      Voici un exemple de l'opcode sensekey en conjonction avec
-      <a class="link" href="FLpanel.html" title="FLpanel"><em class="citetitle">FLpanel</em></a>.
-      Il utilise le fichier
-      <a class="ulink" href="examples/FLpanel-sensekey.csd" target="_top"><em class="citetitle">FLpanel-sensekey.csd</em></a>.
-      </p>
-        <div class="example">
-          <a id="idm199993"></a>
-          <p class="title">
-            <strong>Exemple 915. Exemple de l'opcode sensekey utilisant la capture clavier depuis
-        un FLpanel.</strong>
-          </p>
-          <div class="example-contents">
-            <div class="refsect1">
-              <a id="idm199995"></a>
-              <pre class="programlisting">
-<span class="nt">&lt;CsoundSynthesizer&gt;</span>
-
-<span class="nt">&lt;CsOptions&gt;</span>
-<span class="c1">; Select audio/midi flags here according to platform</span>
-<span class="c1">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
-<span class="c1">; For Non-realtime ouput leave only the line below:</span>
-<span class="c1">; -o FLpanel-sensekey.wav -W ;;; for file output any platform</span>
-<span class="nt">&lt;/CsOptions&gt;</span>
-
-<span class="nt">&lt;CsInstruments&gt;</span>
-<span class="c1">; Example by Johnathan Murphy</span>
-
-  <span class="vg">sr</span>	    <span class="o">=</span>  <span class="mi">44100</span>
-  <span class="vg">ksmps</span>	    <span class="o">=</span>  <span class="mi">128</span>
-  <span class="vg">nchnls</span>    <span class="o">=</span>  <span class="mi">2</span>
-
-
-	<span class="c1">; ikbdcapture flag set to 1</span>
-  i<span class="n">key</span>	    <span class="nb">init</span>      <span class="mi">1</span> 		
- 
-	    <span class="nb">FLpanel</span>   <span class="s">"sensekey"</span><span class="p">,</span> <span class="mi">740</span><span class="p">,</span> <span class="mi">340</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> i<span class="n">key</span>
-  gk<span class="n">asc</span><span class="p">,</span> gi<span class="n">asc</span>	<span class="nb">FLbutBank</span>	<span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span>
-	    <span class="nb">FLpanelEnd</span>
-	    <span class="nb">FLrun</span>
-
-    <span class="kd">instr</span> <span class="nf">1</span>
-
-  k<span class="n">key</span>	    <span class="nb">sensekey</span>
-  k<span class="n">print</span>    <span class="nb">changed</span>   k<span class="n">key</span>
-	    <span class="nb">FLsetVal</span>  k<span class="n">print</span><span class="p">,</span> k<span class="n">key</span><span class="p">,</span> gi<span class="n">asc</span>
-
-    <span class="kd">endin</span>
-
-<span class="nt">&lt;/CsInstruments&gt;</span>
-
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">60</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
-
-<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
-</pre>
-            </div>
-          </div>
-        </div>
-        <p><br class="example-break" />
-      Le bouton allumé dans la fenêtre <span class="emphasis"><em>FLpanel</em></span> montre la
-      dernière touche enfoncée.
-    </p>
-        <p>
-      Voici une exemple plus complexe de l'opcode sensekey en conjonction avec
-      <a class="link" href="FLpanel.html" title="FLpanel"><em class="citetitle">FLpanel</em></a>.
-      Il utilise le fichier
-      <a class="ulink" href="examples/FLpanel-sensekey.csd" target="_top"><em class="citetitle">FLpanel-sensekey2.csd</em></a>.
-      </p>
-        <div class="example">
-          <a id="idm200085"></a>
-          <p class="title">
-            <strong>Exemple 916. Exemple de l'opcode sensekey utilisant la capture clavier depuis
-        un FLpanel.</strong>
-          </p>
-          <div class="example-contents">
-            <div class="refsect1">
-              <a id="idm200087"></a>
-              <pre class="programlisting">
-<span class="nt">&lt;CsoundSynthesizer&gt;</span>
-<span class="nt">&lt;CsOptions&gt;</span>
-<span class="c1">; Select audio/midi flags here according to platform</span>
-<span class="c1">; Audio out   Audio in    No messages</span>
--odac         <span class="c1">; -iadc     -d     ;;;RT audio I/O</span>
-<span class="c1">; For Non-realtime ouput leave only the line below:</span>
-<span class="c1">; -o FLpanel-sensekey2.wav -W ;;; for file output any platform</span>
-<span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
-<span class="vg">sr</span> <span class="o">=</span>  <span class="mi">48000</span>
-<span class="vg">ksmps</span> <span class="o">=</span>  <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span>  <span class="mi">1</span>
-<span class="c1">; Example by Istvan Varga</span>
-<span class="c1">; if the FLTK opcodes are commented out, sensekey will read keyboard</span>
-<span class="c1">; events from stdin</span>
-        <span class="nb">FLpanel</span> <span class="s">""</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
-        <span class="nb">FLlabel</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
-        <span class="nb">FLgroup</span> <span class="s">"Keyboard Input"</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
-        <span class="nb">FLgroupEnd</span>
-        <span class="nb">FLpanelEnd</span>
-
-        <span class="nb">FLrun</span>
-
-        <span class="kd">instr</span> <span class="nf">1</span>
-
-k<span class="n">trig1</span> <span class="nb">init</span> <span class="mi">1</span>
-k<span class="n">trig2</span> <span class="nb">init</span> <span class="mi">1</span>
-<span class="nl">nxtKey1</span><span class="p">:</span>
-k<span class="n">1</span><span class="p">,</span> k<span class="n">2</span> <span class="nb">sensekey</span>
-        <span class="k">if</span> <span class="p">(</span>k<span class="n">1</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">||</span> k<span class="n">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
-        <span class="nb">printf</span> <span class="s">"Key code = </span><span class="si">%02X</span><span class="s">, state = </span><span class="si">%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">trig1</span><span class="p">,</span> k<span class="n">1</span><span class="p">,</span> k<span class="n">2</span>
-k<span class="n">trig1</span> <span class="o">=</span>  <span class="mi">3</span> <span class="o">-</span> k<span class="n">trig1</span>
-        <span class="k">kgoto</span> <span class="nl">nxtKey1</span>
-        <span class="k">endif</span>
-<span class="nl">nxtKey2</span><span class="p">:</span>
-k<span class="n">3</span> <span class="nb">sensekey</span>
-        <span class="k">if</span> <span class="p">(</span>k<span class="n">3</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
-        <span class="nb">printf</span> <span class="s">"Character = '</span><span class="si">%c</span><span class="s">'</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">trig2</span><span class="p">,</span> k<span class="n">3</span>
-k<span class="n">trig2</span> <span class="o">=</span>  <span class="mi">3</span> <span class="o">-</span> k<span class="n">trig2</span>
-        <span class="k">kgoto</span> <span class="nl">nxtKey2</span>
-        <span class="k">endif</span>
-
-        <span class="kd">endin</span>
-
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3600</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2000</span>
 <span class="nb">e</span>
 <span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
@@ -297,34 +168,10 @@ k<span class="n">trig2</span> <span class="o">=</span>  <span class="mi">3</span
           </div>
         </div>
         <p><br class="example-break" />
-      La sortie console ressemblera à ceci :
-</p>
-        <div class="literallayout">
-          <p><br />
-new alloc for instr 1:<br />
-Key code = 65, state = 1<br />
-Character = 'e'<br />
-Key code = 65, state = 0<br />
-Key code = 72, state = 1<br />
-Character = 'r'<br />
-Key code = 72, state = 0<br />
-Key code = 61, state = 1<br />
-Character = 'a'<br />
-Key code = 61, state = 0</p>
-        </div>
-        <p>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm200239"></a>
-        <h2>Voir aussi</h2>
-        <p>
-      <a class="link" href="FLpanel.html" title="FLpanel"><em class="citetitle">FLpanel</em></a>,
-      <a class="link" href="FLkeyIn.html" title="FLkeyIn"><em class="citetitle">FLkeyIn</em></a>
-    </p>
-      </div>
-      <div class="refsect1">
-        <a id="idm200246"></a>
+        <a id="idm206814"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -10,7 +10,7 @@
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="ScoregensTop.html" title="Instructions de partition et routines GEN" />
     <link rel="prev" href="GEN42.html" title="GEN42" />
-    <link rel="next" href="GEN49.html" title="GEN49" />
+    <link rel="next" href="GEN44.html" title="GEN44" />
   </head>
   <body>
     <div class="navheader">
@@ -21,7 +21,7 @@
         <tr>
           <td width="20%" align="left"><a accesskey="p" href="GEN42.html">Précédent</a> </td>
           <th width="60%" align="center">Instructions de partition et routines GEN</th>
-          <td width="20%" align="right"> <a accesskey="n" href="GEN49.html">Suivant</a></td>
+          <td width="20%" align="right"> <a accesskey="n" href="GEN44.html">Suivant</a></td>
         </tr>
       </table>
       <hr />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm280906"></a>
+        <a id="idm289676"></a>
         <h2>Description</h2>
         <p>
       Ce sous-programme charge un fichier PVOCEX contenant l'analyse VP (amp-fréq) d'un fichier son et 
@@ -48,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm280909"></a>
+        <a id="idm289679"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>f</strong></span> # date taille 43 codfic canal</pre>
       </div>
       <div class="refsect1">
-        <a id="idm280913"></a>
+        <a id="idm289683"></a>
         <h2>Initialisation</h2>
         <p>
     <span class="emphasis"><em>taille</em></span> -- nombre de points dans la table, puissance de deux ou
@@ -91,25 +91,103 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm280929"></a>
+        <a id="idm289699"></a>
         <h2>Exemples</h2>
         <p>
-       </p>
+      <span class="phrase">C'est une sélection de réverb et de bruit du fichier son. La
+        sélection a une durée de 0.8 secondes. Il faut cette durée pour que
+        pvanal analyse et crée le fichier pvocex.</span>
+    </p>
+        <div class="mediaobject">
+          <img src="images/reverbnoise_selection.png" />
+        </div>
+        <p>
+	  Voici un exemple de l'opcode GEN43. Il utilise le fichier
+	  <a class="ulink" href="examples/gen43.csd" target="_top"><em class="citetitle">gen43.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm289710"></a>
+          <p class="title">
+            <strong>Exemple 1301. Exemple de l'opcode GEN43.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm289712"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o GEN43.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="c1">; by Menno Knevel 2021</span>
+
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">; Audacity shows the selection of reverb and noise- see image above</span>
+
+<span class="kd">instr</span> <span class="nf">1</span> <span class="c1">; analyze this selection and output result to pvx file</span>
+i<span class="n">res</span> <span class="nb">system_i</span> <span class="mi">1</span><span class="p">,</span><span class="s">{{     
+    pvanal -b1.04 -d0.8 finneganswake1.flac reverbnoise.pvx
+        }}</span>
+<span class="kd">endin</span>
+
+<span class="kd">instr</span> <span class="nf">2</span> <span class="c1">; untreated signal, contains some reverb and noise</span>
+a<span class="n">sig</span>    <span class="nb">diskin2</span>   <span class="s">"finneganswake1.flac"</span><span class="p">,</span> <span class="mi">1</span>
+<span class="nb">outs</span>    a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+<span class="kd">endin</span>
+
+<span class="kd">instr</span> <span class="nf">3</span> <span class="c1">; use .pvx file from instr. 1 to remove reverb and noise</span>
+<span class="c1">; pvanal created 1 frame of size 1024, so size of table for GEN 43 = 512 (fftsize/2)</span>
+i<span class="n">pvx</span>    <span class="nb">ftgen</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="o">-</span><span class="mi">43</span><span class="p">,</span> <span class="s">"reverbnoise.pvx"</span><span class="p">,</span> <span class="mi">0</span>    <span class="c1">; can be found in examples folder</span>
+a<span class="n">sig</span>    <span class="nb">diskin2</span>   <span class="s">"finneganswake1.flac"</span><span class="p">,</span> <span class="mi">1</span>  
+f<span class="n">sig</span>    <span class="nb">pvsanal</span>   a<span class="n">sig</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1</span>
+f<span class="n">clean</span>  <span class="nb">pvstencil</span> f<span class="n">sig</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">pvx</span> <span class="c1">; maximum cleaning</span>
+a<span class="n">clean</span>  <span class="nb">pvsynth</span>   f<span class="n">clean</span>
+<span class="nb">outs</span>    a<span class="n">clean</span><span class="p">,</span> a<span class="n">clean</span>
+<span class="kd">endin</span>
+
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span>   <span class="mi">2</span>       <span class="c1">; first analyze</span>
+<span class="nb">i</span><span class="mi">2</span> <span class="mi">5</span>  <span class="mf">12.7</span>     <span class="c1">; untreated signal</span>
+<span class="nb">i</span><span class="mi">3</span> <span class="mi">20</span> <span class="mf">12.7</span>     <span class="c1">; denoised gignal</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+        <p>
+      On peut utiliser cette table comme table de masquage pour
+      <span class="emphasis"><em>pvstencil</em></span> et <span class="emphasis"><em>pvsmaska</em></span>.
+      </p>
         <pre class="programlisting">
 <span class="stamnt">f</span>1 0   512  43 "viola.pvx" 1
 <span class="stamnt">f</span>1 0 -1024 -43 "noiseprint.pvx" 0</pre>
         <p>
-</p>
+    </p>
         <p>
-  On peut utiliser cette table comme table de masquage pour <span class="emphasis"><em>pvstencil</em></span> et
-  <span class="emphasis"><em>pvsmaska</em></span>. Le premier exemple utilise un fichier d'analyse de vocodeur de phase par
-  TFR à 1024 points duquel on utilise le premier canal. Le second utilise tous les canaux d'un fichier de
-  2048 points, sans post-normalisation. Pour les applications à la réduction de bruit avec
-  <span class="emphasis"><em>pvstencil</em></span>, il est mieux de ne pas normaliser la table (code GEN négatif).
-</p>
+      Le premier exemple utilise un fichier d'analyse de vocodeur de phase par
+      TFR à 1024 points duquel on utilise le premier canal. Le second utilise
+      tous les canaux d'un fichier de 2048 points, sans post-normalisation.
+      Pour les applications à la réduction de bruit avec
+      <span class="emphasis"><em>pvstencil</em></span>, il est mieux de ne pas normaliser la
+      table (code GEN négatif).
+    </p>
       </div>
       <div class="refsect1">
-        <a id="idm280939"></a>
+        <a id="idm289840"></a>
         <h2>Crédits</h2>
         <p>Auteur : Victor Lazzarini</p>
       </div>
@@ -122,14 +200,14 @@
           <td width="20%" align="center">
             <a accesskey="u" href="ScoregensTop.html">Niveau supérieur</a>
           </td>
-          <td width="40%" align="right"> <a accesskey="n" href="GEN49.html">Suivant</a></td>
+          <td width="40%" align="right"> <a accesskey="n" href="GEN44.html">Suivant</a></td>
         </tr>
         <tr>
           <td width="40%" align="left" valign="top">GEN42 </td>
           <td width="20%" align="center">
             <a accesskey="h" href="index.html">Sommaire</a>
           </td>
-          <td width="40%" align="right" valign="top"> GEN49</td>
+          <td width="40%" align="right" valign="top"> GEN44</td>
         </tr>
       </table>
     </div>

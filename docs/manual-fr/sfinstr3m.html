@@ -40,24 +40,24 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm202885"></a>
+        <a id="idm209487"></a>
         <h2>Description</h2>
         <p>
       Joue un instrument échantillonné SoundFont2 (SF2), produisant un son mono avec
       interpolation cubique. Ces opcodes permettent la gestion de la structure d'échantillon
       des fichiers SF2. Afin de comprendre l'utilisation de ces opcodes, il faut connaître
-      le format SF2 dont on peut trouver une brève description dans l'annexe
-      <a class="link" href="MiscSf2.html" title="Annexe G. Format de fichier SoundFont2"><em class="citetitle">Format de Fichier SoundFont2</em></a>.
+      le format SF2 dont on peut trouver une brève description dans la section
+      <a class="link" href="SiggenSample.html" title="Reproduction de sons échantillonnés"><em class="citetitle">format de fichier SoundFont2</em></a>.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm202890"></a>
+        <a id="idm209492"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>sfinstr3m</strong></span> ivel, inotenum, xamp, xfreq, instrnum, ifilhandle \
       [, iflag] [, ioffset]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm202894"></a>
+        <a id="idm209496"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ivel</em></span> -- vélocité.
@@ -83,7 +83,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm202911"></a>
+        <a id="idm209513"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>xamp</em></span> -- facteur de correction de l'amplitude.
@@ -136,28 +136,28 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm202938"></a>
+        <a id="idm209540"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode sfinstr3m. Il utilise le fichier
       <a class="ulink" href="examples/sfinstr3m.csd" target="_top"><em class="citetitle">sfinstr3m.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm202943"></a>
+          <a id="idm209545"></a>
           <p class="title">
-            <strong>Exemple 928. Exemple de l'opcode sfinstr3m.</strong>
+            <strong>Exemple 951. Exemple de l'opcode sfinstr3m.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm202950"></a>
+              <a id="idm209552"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
--odac -+rtmidi=virtual -M0 <span class="c1">;;;realtime audio out</span>
+-odac <span class="c1">;;;realtime audio out</span>
 <span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o sfinstr3m.wav -W ;;; for file output any platform</span>
@@ -169,28 +169,24 @@
 <span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span> 
 
+<span class="c1">; By  Menno Knevel - 2020</span>
 
 gi<span class="n">sf</span>	<span class="nb">sfload</span>	<span class="s">"07AcousticGuitar.sf2"</span>
-	<span class="nb">sfilist</span>	i<span class="n">sf</span>
+	<span class="nb">sfilist</span>	gi<span class="n">sf</span>
 
-<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">; play from score and midi keyboard</span>
+<span class="kd">instr</span> <span class="nf">1</span>	
 
-	<span class="nb">mididefault</span>	<span class="mi">60</span><span class="p">,</span> <span class="vi">p3</span>
-	<span class="nb">midinoteonkey</span>	<span class="vi">p4</span><span class="p">,</span> <span class="vi">p5</span>
-i<span class="n">num</span>	<span class="nb">init</span>	<span class="vi">p4</span>
-i<span class="n">vel</span>	<span class="nb">init</span>	<span class="vi">p5</span>
-i<span class="n">vel</span>	<span class="nb">init</span>	i<span class="n">vel</span><span class="o">/</span><span class="mi">127</span>					<span class="c1">;make velocity dependent</span>
+i<span class="n">num</span>	<span class="o">=</span>	<span class="vi">p4</span>
+i<span class="n">vel</span>	<span class="o">=</span>	<span class="vi">p5</span>
 k<span class="n">amp</span>	<span class="nb">linsegr</span>	<span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mi">0</span>
-k<span class="n">amp</span>	<span class="o">=</span> k<span class="n">amp</span><span class="o">/</span><span class="mi">7000</span>						<span class="c1">;scale amplitude</span>
-k<span class="n">freq</span>	<span class="nb">init</span>	<span class="mi">1</span>						<span class="c1">;do not change freq from sf</span>
+k<span class="n">amp</span>	<span class="o">=</span> k<span class="n">amp</span><span class="o">/</span><span class="mi">900000</span>						<span class="c1">;scale amplitude, small value because of 0dbfs  = 1 </span>
+k<span class="n">freq</span>	<span class="o">=</span>	<span class="mi">1</span>						<span class="c1">;do not change freq from sf</span>
 a<span class="n">out</span>	<span class="nb">sfinstr3m</span> i<span class="n">vel</span><span class="p">,</span> i<span class="n">num</span><span class="p">,</span> k<span class="n">amp</span><span class="o">*</span>i<span class="n">vel</span><span class="p">,</span> k<span class="n">freq</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> gi<span class="n">sf</span>
 	<span class="nb">outs</span>	a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
-	
 	<span class="kd">endin</span>
 	
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">f</span><span class="mi">0</span>  <span class="mi">60</span>				<span class="c1">; stay active for 1 minute</span>
 
 <span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">60</span> <span class="mi">127</span>
 <span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="mi">62</span> <span class="o">&lt;</span>
@@ -208,7 +204,7 @@ a<span class="n">out</span>	<span class="nb">sfinstr3m</span> i<span class="n">v
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm203075"></a>
+        <a id="idm209659"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="sfilist.html" title="sfilist"><em class="citetitle">sfilist</em></a>,
@@ -226,7 +222,7 @@ a<span class="n">out</span>	<span class="nb">sfinstr3m</span> i<span class="n">v
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm203102"></a>
+        <a id="idm209686"></a>
         <h2>Crédits</h2>
         <p>
       </p>

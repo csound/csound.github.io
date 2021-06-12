@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm263203"></a>
+        <a id="idm271548"></a>
         <h2>Description</h2>
         <p>Opcode du greffon scansyn.</p>
         <p>
@@ -51,13 +51,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm263209"></a>
+        <a id="idm271554"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>xscanu</strong></span> init, irate, ifnvel, ifnmass, ifnstif, ifncentr, ifndamp, kmass, \
       kstif, kcentr, kdamp, ileft, iright, kpos, kstrngth, ain, idisp, id</pre>
       </div>
       <div class="refsect1">
-        <a id="idm263213"></a>
+        <a id="idm271558"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>init</em></span> -- la position initiale des masses. Si c'est un
@@ -127,7 +127,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm263252"></a>
+        <a id="idm271597"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kmass</em></span> -- pondère les masses
@@ -157,7 +157,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm263272"></a>
+        <a id="idm271617"></a>
         <h2>Format de Matrice</h2>
         <p>
       Le nouveau format de matrice est une liste de connexions, une par ligne reliant
@@ -194,28 +194,28 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm263278"></a>
+        <a id="idm271623"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode xscanu. Il utilise le fichier
       <a class="ulink" href="examples/xscanu.csd" target="_top"><em class="citetitle">xscanu.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm263283"></a>
+          <a id="idm271628"></a>
           <p class="title">
-            <strong>Exemple 1187. Exemple de l'opcode xscanu.</strong>
+            <strong>Exemple 1222. Exemple de l'opcode xscanu.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm263290"></a>
+              <a id="idm271635"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
--odac    <span class="c1">;;;realtime audio out</span>
+-odac  --limiter=0.95  <span class="c1">;;;realtime audio out &amp; limit loud sounds</span>
 <span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o xscanu.wav -W ;;; for file output any platform</span>
@@ -231,7 +231,7 @@
 <span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">; Plain scanned syntnesis</span>
 	<span class="c1">; Note Also that I am using quadratic interpolation on these.</span>
   a<span class="n">0</span>	<span class="o">=</span>           <span class="mi">0</span>
-	<span class="nb">xscanu</span>      <span class="mi">1</span><span class="p">,</span> <span class="mf">.01</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">"128,8-gridX"</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">.01</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> a<span class="n">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+	<span class="nb">xscanu</span>      <span class="mi">1</span><span class="p">,</span> <span class="mf">.01</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">"128,8-grid.XmatrxT"</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">.01</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> a<span class="n">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
   a<span class="n">1</span>	<span class="nb">xscans</span>      <span class="mf">.5</span><span class="p">,</span> <span class="nb">cpspch</span><span class="p">(</span><span class="vi">p4</span><span class="p">),</span> <span class="mi">333</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="vi">p6</span>			<span class="c1">; NOTE LEFT RIGHT TRAJECTORY (f333) IS CLEAN!</span>
   a<span class="n">1</span>	<span class="nb">dcblock</span> a<span class="n">1</span>
 	<span class="nb">outs</span>        a<span class="n">1</span><span class="p">,</span> a<span class="n">1</span>
@@ -243,7 +243,7 @@
   a<span class="n">0</span>  <span class="nb">diskin2</span>       <span class="s">"fox.wav"</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>	
  <span class="c1">; a0,aa	    ins</span>
   a<span class="n">0</span>	<span class="o">=</span>           a<span class="n">0</span><span class="o">/</span><span class="mf">.8</span>
-	<span class="nb">xscanu</span>      <span class="mi">1</span><span class="p">,</span> <span class="mf">.01</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">"128,8-torusX"</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">.01</span><span class="p">,</span> <span class="mf">.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">.05</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> a<span class="n">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+	<span class="nb">xscanu</span>      <span class="mi">1</span><span class="p">,</span> <span class="mf">.01</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">"128,8-torus.XmatrxT"</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">.01</span><span class="p">,</span> <span class="mf">.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">.05</span><span class="p">,</span> <span class="mf">.1</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> a<span class="n">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
   a<span class="n">1</span>	<span class="nb">xscans</span>      <span class="mf">.3</span><span class="p">,</span> <span class="nb">cpspch</span><span class="p">(</span><span class="mf">7.00</span><span class="p">),</span> <span class="mi">333</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span>			<span class="c1">; NOTE LEFT RIGHT TRAJECTORY (f333) IS CLEAN!</span>
   a<span class="n">2</span>	<span class="nb">xscans</span>      <span class="mf">.3</span><span class="p">,</span> <span class="nb">cpspch</span><span class="p">(</span><span class="mf">6.00</span><span class="p">),</span> <span class="mi">77</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span>
   a<span class="n">1</span>	<span class="nb">dcblock</span> a<span class="n">1</span>
@@ -273,16 +273,16 @@
 
 <span class="c1">; Trajectories</span>
 <span class="nb">f</span><span class="mi">7</span> <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">5</span> <span class="mf">.001</span> <span class="mi">128</span> <span class="mi">128</span>
-<span class="nb">f</span><span class="mi">77</span> <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128-spiral-8,16,128,2,1over2"</span>
-<span class="nb">f</span><span class="mi">777</span> <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128,8-torusX"</span>
+<span class="nb">f</span><span class="mi">77</span> <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128-spiral-8,16,128,2,1over2.traj"</span>
+<span class="nb">f</span><span class="mi">777</span> <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128,8-torus.XmatrxT"</span>
 
 <span class="c1">; Spring matrices</span>
-<span class="nb">f</span><span class="mi">3</span> <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128-stringX"</span>
-<span class="nb">f</span><span class="mi">33</span> <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128-stringcircularX"</span>
-<span class="nb">f</span><span class="mi">333</span>  <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128-left_rightX"</span>
-<span class="nb">f</span><span class="mi">3333</span> <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128,8-torusX"</span>
-<span class="nb">f</span><span class="mi">33333</span> <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128,8-cylinderX"</span>
-<span class="nb">f</span><span class="mi">333333</span> <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128,8-gridX"</span>
+<span class="nb">f</span><span class="mi">3</span> <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128-string.XmatrxT"</span>
+<span class="nb">f</span><span class="mi">33</span> <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128-stringcircular.XmatrxT"</span>
+<span class="nb">f</span><span class="mi">333</span>  <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128-left_right.XmatrxT"</span>
+<span class="nb">f</span><span class="mi">3333</span> <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128,8-torus.XmatrxT"</span>
+<span class="nb">f</span><span class="mi">33333</span> <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128,8-cylinder.XmatrxT"</span>
+<span class="nb">f</span><span class="mi">333333</span> <span class="mi">0</span> <span class="mi">128</span> <span class="o">-</span><span class="mi">23</span> <span class="s">"128,8-grid.XmatrxT"</span>
 
 <span class="c1">; Sine</span>
 <span class="nb">f</span><span class="mi">9</span> <span class="mi">0</span> <span class="mi">1024</span> <span class="mi">10</span> <span class="mi">1</span>
@@ -323,7 +323,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm263875"></a>
+        <a id="idm272220"></a>
         <h2>Voir aussi</h2>
         <p>
        On peut trouver plus d'information sur la synthèse par balayage (de même
@@ -342,7 +342,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm263888"></a>
+        <a id="idm272233"></a>
         <h2>Crédits</h2>
         <p>Ecrit par John ffitch.</p>
         <p>Nouveau dans la version 4.20</p>

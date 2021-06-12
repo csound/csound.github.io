@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm193900"></a>
+        <a id="idm199442"></a>
         <h2>Description</h2>
         <p>
       Détermine la valeur efficace d'un signal audio. La valeur instantanée
@@ -48,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm193903"></a>
+        <a id="idm199445"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">kres <span class="command"><strong>rms</strong></span> asig [, ihp] [, iskip]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm193907"></a>
+        <a id="idm199449"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ihp</em></span> (facultatif, 10 par défaut) -- point à mi-puissance (en Hz) d'un
@@ -67,7 +67,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm193915"></a>
+        <a id="idm199457"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>asig</em></span> -- signal audio en entrée
@@ -97,7 +97,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm193933"></a>
+        <a id="idm199475"></a>
         <h2>Exemples</h2>
         <p>
       </p>
@@ -114,16 +114,74 @@ arms <span class="opc">rms</span>    asig <span class="comment">; get rms value 
 
       </p>
         <div class="example">
-          <a id="idm193943"></a>
+          <a id="idm199485"></a>
           <p class="title">
-            <strong>Exemple 880. Exemple de l'opcode rms.</strong>
+            <strong>Exemple 899. Exemple de l'opcode rms.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm193950"></a>
+              <a id="idm199492"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o rms.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="c1">; By Stefano Cucchi 2020</span>
+
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+
+<span class="kd">instr</span> <span class="nf">1</span>
+
+a<span class="n">reference</span> <span class="nb">diskin</span> <span class="s">"fox.wav"</span>
+k<span class="n">rms</span> <span class="nb">rms</span>  a<span class="n">reference</span>       <span class="c1">; take the RMS of "fox.wav"</span>
+a<span class="n">sound</span> <span class="nb">oscili</span> k<span class="n">rms</span><span class="p">,</span> <span class="mi">440</span> <span class="c1">; use RMS as amplitude of sine wave     </span>
+<span class="nb">outch</span> <span class="mi">1</span><span class="p">,</span> a<span class="n">reference</span>
+<span class="nb">outch</span> <span class="mi">2</span><span class="p">,</span> a<span class="n">sound</span>
+<span class="kd">endin</span>
+
+
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">4</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm199549"></a>
+        <p>
+      Voici un autre exemple de l'opdcode rms. Il utilise le fichier
+      <a class="ulink" href="examples/rms-FLTK.csd" target="_top"><em class="citetitle">rms-FLTK.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm199553"></a>
+          <p class="title">
+            <strong>Exemple 900. Exemple avancé de l'opcode rms.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm199560"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -192,7 +250,7 @@ arms <span class="opc">rms</span>    asig <span class="comment">; get rms value 
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm194129"></a>
+        <a id="idm199739"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="balance.html" title="balance"><em class="citetitle">balance</em></a>,

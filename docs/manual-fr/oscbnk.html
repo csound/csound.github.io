@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm151121"></a>
+        <a id="idm155788"></a>
         <h2>Description</h2>
         <p>
       Ce générateur unitaire mélange la sortie de n'importe quel nombre d'oscillateurs. La fréquence, la
@@ -61,7 +61,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm151127"></a>
+        <a id="idm155794"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>oscbnk</strong></span>  kcps, kamd, kfmd, kpmd, iovrlap, iseed, kl1minf, kl1maxf, \
       kl2minf, kl2maxf, ilfomode, keqminf, keqmaxf, keqminl, keqmaxl, \
@@ -69,7 +69,7 @@
       [, ieqlfn] [, ieqqfn] [, itabl] [, ioutfn]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm151131"></a>
+        <a id="idm155798"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iovrlap</em></span> -- Nombre d'oscillateurs.
@@ -200,7 +200,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm151194"></a>
+        <a id="idm155861"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ares</em></span> -- Signal de sortie.
@@ -272,7 +272,7 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm151230"></a>
+        <a id="idm155897"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode oscbnk. Il utilise le fichier
@@ -280,22 +280,102 @@
 
       </p>
         <div class="example">
-          <a id="idm151235"></a>
+          <a id="idm155902"></a>
           <p class="title">
-            <strong>Exemple 653. Exemple de l'opcode oscbnk.</strong>
+            <strong>Exemple 668. Exemple de l'opcode oscbnk.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm151242"></a>
+              <a id="idm155909"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
 <span class="c1">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+-odac       <span class="c1">;;    -iadc     -d     ;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o oscbnk.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="vg">sr</span>     <span class="o">=</span>   <span class="mi">44100</span>
+<span class="vg">ksmps</span>  <span class="o">=</span>   <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span>   <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">; By Stefano Cucchi 2020</span>
+
+
+<span class="kd">instr</span> <span class="nf">1</span>
+
+k<span class="n">cps</span> <span class="o">=</span> <span class="mi">300</span>
+k<span class="n">amd</span> <span class="o">=</span> <span class="mi">3</span>
+k<span class="n">fmd</span> <span class="o">=</span> <span class="mi">2</span>
+k<span class="n">pmd</span> <span class="o">=</span> <span class="mf">2.3</span>
+i<span class="n">ovrlap</span> <span class="o">=</span> <span class="vi">p4</span>
+i<span class="n">seed</span> <span class="o">=</span> <span class="mf">0.2</span>
+k<span class="n">l1minf</span> <span class="o">=</span> <span class="mf">1.1</span>
+k<span class="n">l1maxf</span> <span class="o">=</span> <span class="mf">2.3</span>
+k<span class="n">l2minf</span> <span class="o">=</span> <span class="mf">0.2</span>
+k<span class="n">l2maxf</span> <span class="o">=</span> <span class="mf">1.5</span>
+i<span class="n">lfomode</span> <span class="o">=</span> <span class="mi">64</span> <span class="o">+</span> <span class="mi">16</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">+</span> <span class="mi">2</span> <span class="c1">; LFO1 to amplitude + LFO1 to EQ + LFO2 to frequency + LFO2 to phase </span>
+k<span class="n">eqminf</span> <span class="o">=</span> <span class="mi">20</span>
+k<span class="n">eqmaxf</span> <span class="o">=</span> <span class="mi">12000</span>
+k<span class="n">eqminl</span> <span class="o">=</span> <span class="mf">0.1</span>
+k<span class="n">eqmaxl</span> <span class="o">=</span> <span class="mi">23</span>
+k<span class="n">eqminq</span> <span class="o">=</span> <span class="mf">0.2</span>
+k<span class="n">eqmaxq</span> <span class="o">=</span> <span class="mi">2</span>
+i<span class="n">eqmode</span> <span class="o">=</span> <span class="mi">1</span>
+k<span class="n">fn</span> <span class="o">=</span> <span class="mi">1</span>
+
+a<span class="n">1</span> <span class="nb">oscbnk</span> k<span class="n">cps</span><span class="p">,</span> k<span class="n">amd</span><span class="p">,</span> k<span class="n">fmd</span><span class="p">,</span> k<span class="n">pmd</span><span class="p">,</span> i<span class="n">ovrlap</span><span class="p">,</span> i<span class="n">seed</span><span class="p">,</span> k<span class="n">l1minf</span><span class="p">,</span> k<span class="n">l1maxf</span><span class="p">,</span> k<span class="n">l2minf</span><span class="p">,</span> k<span class="n">l2maxf</span><span class="p">,</span> i<span class="n">lfomode</span><span class="p">,</span> k<span class="n">eqminf</span><span class="p">,</span> k<span class="n">eqmaxf</span><span class="p">,</span> k<span class="n">eqminl</span><span class="p">,</span> k<span class="n">eqmaxl</span><span class="p">,</span> k<span class="n">eqminq</span><span class="p">,</span> k<span class="n">eqmaxq</span><span class="p">,</span> i<span class="n">eqmode</span><span class="p">,</span> k<span class="n">fn</span><span class="p">,</span> <span class="mi">2</span> <span class="p">,</span><span class="mi">2</span> <span class="p">,</span><span class="mi">2</span> <span class="p">,</span><span class="mi">2</span> <span class="p">,</span><span class="mi">2</span> 
+k<span class="n">declick</span> <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="vi">p3</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">0</span>
+<span class="nb">outs</span> a<span class="n">1</span><span class="o">*</span><span class="mf">0.003</span><span class="o">*</span>k<span class="n">declick</span><span class="p">,</span> a<span class="n">1</span><span class="o">*</span><span class="mf">0.003</span><span class="o">*</span>k<span class="n">declick</span>
+<span class="kd">endin</span>
+
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">4096</span> <span class="mi">10</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="nb">f</span><span class="mi">2</span> <span class="mi">0</span> <span class="mi">4096</span> <span class="mi">10</span> <span class="mi">1</span> 
+
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">4</span> <span class="mi">3</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">5</span> <span class="mi">4</span> <span class="mi">32</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm156121"></a>
+        <p>
+      Voici un exemple avancé de l'opcode oscbnk. Il utilise le fichier
+      <a class="ulink" href="examples/oscbnk-advanced.csd" target="_top"><em class="citetitle">oscbnk-advanced.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm156125"></a>
+          <p class="title">
+            <strong>Exemple 669. Exemple avancé de l'opcode oscbnk.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm156132"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac         <span class="c1">;  -iadc     -d     ;;;RT audio I/O</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o oscbnk.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
@@ -457,7 +537,7 @@ a<span class="n">Rl</span>	<span class="nb">butterlp</span> a<span class="n">Rl<
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm152195"></a>
+        <a id="idm157085"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm126790"></a>
+        <a id="idm129690"></a>
         <h2>Description</h2>
         <p>
       Cet opcode réalise l'analyse par prédiction linéaire sur un flux. Deux
@@ -48,7 +48,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm126793"></a>
+        <a id="idm129693"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">kCoef[], krms, kerr, kcps <span class="command"><strong>lpcanal</strong></span> asrc, kflg,
     kprd, isiz, iord[,iwin] </pre>
@@ -58,7 +58,7 @@
     ifn, isiz, iord[,iwin] </pre>
       </div>
       <div class="refsect1">
-        <a id="idm126801"></a>
+        <a id="idm129701"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>isiz</em></span> -- taille d'une trame d'entrée lpc en
@@ -77,7 +77,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm126811"></a>
+        <a id="idm129711"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kCoef[]</em></span> -- coefficients du filtre tout-pôle
@@ -113,7 +113,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm126829"></a>
+        <a id="idm129729"></a>
         <p>
       Cet opcode fait partie d'une suite d'opcodes de prédiction linéaire sur
       un flux. Il analyse un signal d'entrée, soit une entrée audio, ou stocké
@@ -169,7 +169,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm126844"></a>
+        <a id="idm129744"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode lpcanal qui utilise un signal d'entrée audio
@@ -177,16 +177,16 @@
       <a class="ulink" href="examples/lpcanal.csd" target="_top"><em class="citetitle">lpcanal.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm126849"></a>
+          <a id="idm129749"></a>
           <p class="title">
-            <strong>Exemple 524. Exemple de l'opcode lpcanal.</strong>
+            <strong>Exemple 533. Exemple de l'opcode lpcanal.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm126856"></a>
+              <a id="idm129756"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -203,12 +203,12 @@ gi<span class="n">fw</span> <span class="nb">ftgen</span> <span class="mi">0</sp
 
 <span class="kd">instr</span> <span class="nf">1</span>
 a<span class="n">1</span> <span class="nb">diskin</span> <span class="s">"fox.wav"</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
-k<span class="n">cfs</span><span class="p">[],</span>k<span class="n">rms</span><span class="p">,</span>k<span class="n">err</span><span class="p">,</span>k<span class="n">cps</span> <span class="n">lpcanal</span> a<span class="n">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span>gi<span class="n">fw</span>
+k<span class="n">cfs</span><span class="p">[],</span>k<span class="n">rms</span><span class="p">,</span>k<span class="n">err</span><span class="p">,</span>k<span class="n">cps</span> <span class="nb">lpcanal</span> a<span class="n">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span>gi<span class="n">fw</span>
 <span class="k">if</span> k<span class="n">cps</span> <span class="o">&gt;</span> <span class="mi">180</span> <span class="k">then</span>
   k<span class="n">cps</span> <span class="o">=</span> <span class="mi">180</span>
 <span class="k">endif</span>
 a<span class="n">2</span> <span class="nb">buzz</span> <span class="vg">0dbfs</span><span class="p">,</span> k<span class="n">cps</span><span class="p">,</span> <span class="vg">sr</span><span class="o">/</span><span class="p">(</span>k<span class="n">cps</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span>
-a<span class="n">3</span> a<span class="n">llpole</span> a<span class="n">2</span><span class="o">*</span>k<span class="n">rms</span><span class="o">*</span>k<span class="n">err</span><span class="p">,</span>k<span class="n">cfs</span>
+a<span class="n">3</span> <span class="nb">allpole</span> a<span class="n">2</span><span class="o">*</span>k<span class="n">rms</span><span class="o">*</span>k<span class="n">err</span><span class="p">,</span>k<span class="n">cfs</span>
 a<span class="n">3</span> <span class="nb">dcblock</span> a<span class="n">3</span>
 <span class="nb">out</span> a<span class="n">3</span>
 <span class="kd">endin</span>
@@ -230,16 +230,16 @@ a<span class="n">3</span> <span class="nb">dcblock</span> a<span class="n">3</sp
       <a class="ulink" href="examples/lpcanal-2.csd" target="_top"><em class="citetitle">lpcanal-2.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm126967"></a>
+          <a id="idm129867"></a>
           <p class="title">
-            <strong>Exemple 525. Un autre exemple de l'opcode lpcanal.</strong>
+            <strong>Exemple 534. Un autre exemple de l'opcode lpcanal.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm126974"></a>
+              <a id="idm129874"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -258,12 +258,12 @@ gi<span class="n">fw</span> <span class="nb">ftgen</span> <span class="mi">0</sp
 <span class="kd">instr</span> <span class="nf">1</span>
 k<span class="n">1</span> <span class="nb">init</span> <span class="mi">0</span>
 k<span class="n">ts</span> <span class="o">=</span> <span class="vi">p4</span>
-k<span class="n">cfs</span><span class="p">[],</span>k<span class="n">rms</span><span class="p">,</span>k<span class="n">err</span><span class="p">,</span>k<span class="n">cps</span> <span class="n">lpcanal</span> k<span class="n">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span>gi<span class="n">fn</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="vg">ksmps</span><span class="p">,</span>gi<span class="n">fw</span>
+k<span class="n">cfs</span><span class="p">[],</span>k<span class="n">rms</span><span class="p">,</span>k<span class="n">err</span><span class="p">,</span>k<span class="n">cps</span> <span class="nb">lpcanal</span> k<span class="n">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span>gi<span class="n">fn</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="vg">ksmps</span><span class="p">,</span>gi<span class="n">fw</span>
 <span class="k">if</span> k<span class="n">cps</span> <span class="o">&gt;</span> <span class="mi">180</span> <span class="k">then</span>
   k<span class="n">cps</span> <span class="o">=</span> <span class="mi">180</span>
 <span class="k">endif</span>
 a<span class="n">1</span> <span class="nb">buzz</span> <span class="vg">0dbfs</span><span class="p">,</span> k<span class="n">cps</span><span class="p">,</span> <span class="vg">sr</span><span class="o">/</span><span class="p">(</span>k<span class="n">cps</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span>
-a<span class="n">3</span> a<span class="n">llpole</span> a<span class="n">1</span><span class="o">*</span>k<span class="n">rms</span><span class="o">*</span>k<span class="n">err</span><span class="p">,</span>k<span class="n">cfs</span>
+a<span class="n">3</span> <span class="nb">allpole</span> a<span class="n">1</span><span class="o">*</span>k<span class="n">rms</span><span class="o">*</span>k<span class="n">err</span><span class="p">,</span>k<span class="n">cfs</span>
 k<span class="n">1</span> <span class="o">+=</span> <span class="vg">ksmps</span><span class="o">*</span>k<span class="n">ts</span>
 <span class="k">if</span> k<span class="n">1</span> <span class="o">&gt;</span> <span class="nb">ftlen</span><span class="p">(</span>gi<span class="n">fn</span><span class="p">)</span> <span class="k">then</span>
  k<span class="n">1</span> <span class="o">=</span> <span class="mi">0</span>
@@ -287,7 +287,7 @@ a<span class="n">3</span> <span class="nb">dcblock</span> a<span class="n">3</sp
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm127124"></a>
+        <a id="idm130024"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="lpcfilter.html" title="lpcfilter"><em class="citetitle">lpcfilter</em></a>,

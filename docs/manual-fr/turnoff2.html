@@ -10,7 +10,7 @@
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="turnoff.html" title="turnoff" />
-    <link rel="next" href="turnon.html" title="turnon" />
+    <link rel="next" href="turnoff3.html" title="turnoff3" />
   </head>
   <body>
     <div class="navheader">
@@ -21,7 +21,7 @@
         <tr>
           <td width="20%" align="left"><a accesskey="p" href="turnoff.html">Précédent</a> </td>
           <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
-          <td width="20%" align="right"> <a accesskey="n" href="turnon.html">Suivant</a></td>
+          <td width="20%" align="right"> <a accesskey="n" href="turnoff3.html">Suivant</a></td>
         </tr>
       </table>
       <hr />
@@ -39,20 +39,62 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm238946"></a>
+        <a id="idm246270"></a>
         <h2>Description</h2>
         <p>
       Arrête une ou des instances d'autres instruments pendant la phase d'exécution.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm238949"></a>
+        <a id="idm246273"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>turnoff2</strong></span> kinsno, kmode, krelease
     </pre>
+        <pre class="synopsis"><span class="command"><strong>turnoff2_i</strong></span> insno, imode, irelease
+    </pre>
       </div>
       <div class="refsect1">
-        <a id="idm238953"></a>
+        <a id="idm246279"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>insno</em></span>  -- instrument à arrêter (peut-être fractionnaire).
+      S'il vaut zéro ou est négatif, aucun instrument n'est arrêté.
+    </p>
+        <p>
+      <span class="emphasis"><em>imode</em></span> -- somme des valeurs suivantes :
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>
+            0, 1, ou 2 : arrête toutes les instances (0), seulement les plus
+            anciennes (1), ou seulement les plus récentes (2)
+          </p>
+            </li>
+            <li class="listitem">
+              <p>
+            4 : n'arrête que les notes dont la partie fractionnaire du numéro
+            d'instrument correspond à <span class="emphasis"><em>insno</em></span>, plutôt que
+            d'ignorer la partie fractionnaire.
+          </p>
+            </li>
+            <li class="listitem">
+              <p>
+            8 : n'arrête que les notes dont la durée est indéfinie (p3 &lt; 0 ou MIDI).
+          </p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+        <p>
+      <span class="emphasis"><em>irelease</em></span> -- s'il est non nul, les instances arrêtées
+      peuvent avoir une période d'extinction (release), sinon elles sont désactivées
+      immédiatement (avec possible émission de clics).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm246295"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kinsno</em></span> -- instrument à arrêter (peut-être fractionnaire).
@@ -97,22 +139,22 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm238971"></a>
+        <a id="idm246313"></a>
         <h2>Exemples</h2>
         <p>
       L'exemple suivant, écrit par Lou Cohen, utilise l'opcode <span class="emphasis"><em>turnoff2</em></span>.
       </p>
         <div class="example">
-          <a id="idm238975"></a>
+          <a id="idm246317"></a>
           <p class="title">
-            <strong>Exemple 1087. Exemple de l'opcode turnoff2.</strong>
+            <strong>Exemple 1118. Exemple de l'opcode turnoff2.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm238982"></a>
+              <a id="idm246324"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -194,14 +236,14 @@ a<span class="n">r</span>      <span class="nb">oscil</span>    k<span class="n"
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm239230"></a>
+        <a id="idm246572"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="turnoff.html" title="turnoff"><em class="citetitle">turnoff</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm239235"></a>
+        <a id="idm246577"></a>
         <h2>Crédits</h2>
         <p>
       </p>
@@ -226,14 +268,14 @@ a<span class="n">r</span>      <span class="nb">oscil</span>    k<span class="n"
           <td width="20%" align="center">
             <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
           </td>
-          <td width="40%" align="right"> <a accesskey="n" href="turnon.html">Suivant</a></td>
+          <td width="40%" align="right"> <a accesskey="n" href="turnoff3.html">Suivant</a></td>
         </tr>
         <tr>
           <td width="40%" align="left" valign="top">turnoff </td>
           <td width="20%" align="center">
             <a accesskey="h" href="index.html">Sommaire</a>
           </td>
-          <td width="40%" align="right" valign="top"> turnon</td>
+          <td width="40%" align="right" valign="top"> turnoff3</td>
         </tr>
       </table>
     </div>

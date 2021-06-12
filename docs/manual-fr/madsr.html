@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm130328"></a>
+        <a id="idm133406"></a>
         <h2>Description</h2>
         <p>
       Calcule l'enveloppe ADSR classique en utilisant le mécanisme de
@@ -47,13 +47,13 @@
    </p>
       </div>
       <div class="refsect1">
-        <a id="idm130333"></a>
+        <a id="idm133411"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>madsr</strong></span> iatt, idec, islev, irel [, idel] [, ireltim]</pre>
         <pre class="synopsis">kres <span class="command"><strong>madsr</strong></span> iatt, idec, islev, irel [, idel] [, ireltim]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm130339"></a>
+        <a id="idm133417"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iatt</em></span> -- durée de l'attaque (attack)
@@ -85,7 +85,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm130357"></a>
+        <a id="idm133435"></a>
         <h2>Exécution</h2>
         <p>
       L'enveloppe évolue dans l'intervalle de 0 à 1 et peut être changée d'échelle par
@@ -138,7 +138,7 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm130390"></a>
+        <a id="idm133468"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode madsr. Il utilise le fichier
@@ -146,16 +146,16 @@
 
       </p>
         <div class="example">
-          <a id="idm130395"></a>
+          <a id="idm133473"></a>
           <p class="title">
-            <strong>Exemple 543. Exemple de l'opcode madsr.</strong>
+            <strong>Exemple 553. Exemple de l'opcode madsr.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm130402"></a>
+              <a id="idm133480"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -220,19 +220,18 @@
       
       </p>
         <div class="example">
-          <a id="idm130491"></a>
+          <a id="idm133569"></a>
           <p class="title">
-            <strong>Exemple 544. Second exemple de l'opcode madsr</strong>
+            <strong>Exemple 554. Second exemple de l'opcode madsr</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm130493"></a>
+              <a id="idm133571"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
--odac  -+rtmidi=virtual -M0   <span class="c1">;;;realtime audio out and realtime midi in</span>
-<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+-odac  -m0  --midi-key=4 --midi-velocity-amp=5 <span class="c1">; treat p4 and p5 as midi data</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o madsr-2.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
@@ -243,21 +242,119 @@
 <span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
-<span class="kd">instr</span> <span class="nf">1</span>
- 	 
-i<span class="n">cps</span>	<span class="nb">cpsmidi</span>	 	 
-i<span class="n">amp</span>	<span class="nb">ampmidi</span>	<span class="mf">.5</span>	 
- 	 	 	 
-k<span class="n">env</span>	<span class="nb">madsr</span>	<span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span>
-a<span class="n">sig</span>	<span class="nb">pluck</span>	k<span class="n">env</span><span class="p">,</span> i<span class="n">cps</span><span class="p">,</span> i<span class="n">cps</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span>	 
-	<span class="nb">outs</span>	a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
-	 
+<span class="c1">; by Menno Knevel - 2021</span>
+
+<span class="kd">instr</span> <span class="nf">1</span>	                              <span class="c1">; use score and treat p4 and p5 as midi data</span>
+i<span class="n">cps</span>    <span class="o">=</span> <span class="nb">cpsmidinn</span><span class="p">(</span><span class="vi">p4</span><span class="p">)</span>               <span class="c1">; take midi note (p4) from score</span>
+i<span class="n">veloc</span>  <span class="nb">ampmidid</span> <span class="vi">p5</span><span class="p">,</span> <span class="mi">92</span>               <span class="c1">; take velocity (p5) from score</span>
+<span class="c1">;               att, dec, lvl, release</span>
+k<span class="n">env</span>    <span class="nb">madsr</span>  <span class="mf">.001</span><span class="p">,</span> <span class="mf">.2</span><span class="p">,</span>   <span class="mi">1</span><span class="p">,</span>    <span class="vi">p6</span> 
+<span class="nb">prints</span>  <span class="s">"duration of note (</span><span class="si">%d</span><span class="s">s) + release (</span><span class="si">%2.1f</span><span class="s">s)</span><span class="se">\\n</span><span class="s">"</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="vi">p6</span>                <span class="c1">; </span>
+a<span class="n">sig</span>    <span class="nb">vco2</span>    i<span class="n">veloc</span><span class="p">,</span> i<span class="n">cps</span>
+a<span class="n">sig</span>    <span class="nb">butlp</span>   a<span class="n">sig</span><span class="p">,</span> <span class="mi">2000</span> 
+        <span class="nb">outs</span>    a<span class="n">sig</span><span class="o">*</span>k<span class="n">env</span><span class="p">,</span> a<span class="n">sig</span><span class="o">*</span>k<span class="n">env</span>
 <span class="kd">endin</span>
+
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">f</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">4096</span> <span class="mi">10</span> <span class="mi">1</span>	
+<span class="c1">;      note vel release	</span>
+<span class="nb">s</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">62</span>  <span class="mi">60</span>  <span class="mi">0</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">1</span> <span class="mi">62</span>  <span class="mi">80</span>  <span class="mi">0</span>	
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">4</span> <span class="mi">1</span> <span class="mi">62</span>  <span class="mi">100</span> <span class="mi">0</span>	
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">6</span> <span class="mi">1</span> <span class="mi">58</span>  <span class="mi">50</span>  <span class="mi">0</span>
+<span class="nb">s</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">62</span>  <span class="mi">60</span>  <span class="mi">0</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mi">1</span> <span class="mi">62</span>  <span class="mi">80</span>  <span class="mf">.5</span>	
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">5</span> <span class="mi">1</span> <span class="mi">62</span>  <span class="mi">100</span> <span class="mf">1.5</span>	
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">7</span> <span class="mi">1</span> <span class="mi">58</span>  <span class="mi">50</span>  <span class="mi">3</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+        <p>
+      Voici un exemple pour le groupe adsr, comparant les différents opcodes
+      adsr. Il utilise le fichier
+      <a class="ulink" href="examples/adsr-group.csd" target="_top"><em class="citetitle">adsr-group.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm133719"></a>
+          <p class="title">
+            <strong>Exemple 555. Exemple du groupe adsr.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm133721"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac    <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o adsr-group.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
 
-<span class="nb">f</span><span class="mi">0</span> <span class="mi">30</span>	<span class="c1">;runs 30 seconds</span>
+<span class="c1">; by Menno Knevel - 2021</span>
+
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">; both amplitude and filter use same ADSR curves </span>
+<span class="kd">instr</span> <span class="nf">1</span>		 	 
+k<span class="n">env</span>	<span class="nb">adsr</span>	<span class="mf">.01</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="vi">p4</span>    	<span class="c1">; linear envelope </span>
+a<span class="n">sig</span>	<span class="nb">vco2</span>	k<span class="n">env</span><span class="p">,</span> <span class="mi">110</span>			<span class="c1">; A+D+S+R = p3 	</span>
+a<span class="n">sig</span>	<span class="nb">rezzy</span>	a<span class="n">sig</span><span class="p">,</span> <span class="mi">500</span><span class="o">+</span><span class="p">(</span>k<span class="n">env</span><span class="o">*</span><span class="mi">1000</span><span class="p">),</span> <span class="mi">10</span>	<span class="c1">; same curve but scaled </span>
+		<span class="nb">outs</span>	a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>	 
+<span class="kd">endin</span>
+
+<span class="kd">instr</span> <span class="nf">2</span>	<span class="c1">; midi behavior	 	 	 </span>
+k<span class="n">env</span>	<span class="nb">madsr</span>	<span class="mf">.01</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="vi">p4</span>		<span class="c1">; linear envelope</span>
+a<span class="n">sig</span>	<span class="nb">vco2</span>	k<span class="n">env</span><span class="p">,</span> <span class="mi">110</span>			<span class="c1">; A+D+S = p3, then go into Release stage 		</span>
+a<span class="n">sig</span>	<span class="nb">rezzy</span>	a<span class="n">sig</span><span class="p">,</span> <span class="mi">500</span><span class="o">+</span><span class="p">(</span>k<span class="n">env</span><span class="o">*</span><span class="mi">1000</span><span class="p">),</span> <span class="mi">10</span>	<span class="c1">; same curve but scaled  </span>
+		<span class="nb">outs</span>	a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>			
+<span class="kd">endin</span>
+
+<span class="kd">instr</span> <span class="nf">3</span> 	 	 
+k<span class="n">env</span>	<span class="nb">xadsr</span>	<span class="mf">.01</span><span class="p">,</span> <span class="mf">.5</span> <span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="vi">p4</span>    <span class="c1">; exponential envelope</span>
+a<span class="n">sig</span>	<span class="nb">vco2</span>	k<span class="n">env</span><span class="p">,</span> <span class="mi">110</span>			<span class="c1">; A+D+S+R = p3 	 </span>
+a<span class="n">sig</span>	<span class="nb">rezzy</span>	a<span class="n">sig</span><span class="p">,</span> <span class="mi">500</span><span class="o">+</span><span class="p">(</span>k<span class="n">env</span><span class="o">*</span><span class="mi">1000</span><span class="p">),</span> <span class="mi">10</span>	<span class="c1">; same curve but scaled </span>
+		<span class="nb">outs</span>	a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+<span class="kd">endin</span>
+
+<span class="kd">instr</span> <span class="nf">4</span>	<span class="c1">; midi behavior 	 </span>
+k<span class="n">env</span>	<span class="nb">mxadsr</span>	<span class="mf">.01</span><span class="p">,</span> <span class="mf">.5</span> <span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="vi">p4</span>	<span class="c1">; exponential envelope</span>
+a<span class="n">sig</span>	<span class="nb">vco2</span>	k<span class="n">env</span><span class="p">,</span> <span class="mi">110</span>			<span class="c1">; A+D+S = p3, then go into Release stage 	 </span>
+a<span class="n">sig</span>	<span class="nb">rezzy</span>	a<span class="n">sig</span><span class="p">,</span> <span class="mi">500</span><span class="o">+</span><span class="p">(</span>k<span class="n">env</span><span class="o">*</span><span class="mi">1000</span><span class="p">),</span> <span class="mi">10</span>	<span class="c1">; same curve but scaled </span>
+		<span class="nb">outs</span>	a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>			
+<span class="kd">endin</span>
+
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">s</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mf">.01</span>	<span class="c1">; same notes for everyone!</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">5</span> <span class="o">.</span> <span class="mf">.5</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">9</span> <span class="o">.</span> <span class="mf">1.5</span>
+<span class="nb">s</span>
+<span class="nb">i</span><span class="mi">2</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mf">.01</span>
+<span class="nb">i</span><span class="mi">2</span> <span class="mi">5</span> <span class="o">.</span> <span class="mf">.5</span>
+<span class="nb">i</span><span class="mi">2</span> <span class="mi">9</span> <span class="o">.</span> <span class="mf">1.5</span>
+<span class="nb">s</span>
+<span class="nb">i</span><span class="mi">3</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mf">.01</span>
+<span class="nb">i</span><span class="mi">3</span> <span class="mi">5</span> <span class="o">.</span> <span class="mf">.5</span>
+<span class="nb">i</span><span class="mi">3</span> <span class="mi">9</span> <span class="o">.</span> <span class="mf">1.5</span>
+<span class="nb">s</span>
+<span class="nb">i</span><span class="mi">4</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mf">.01</span>
+<span class="nb">i</span><span class="mi">4</span> <span class="mi">5</span> <span class="o">.</span> <span class="mf">.5</span>
+<span class="nb">i</span><span class="mi">4</span> <span class="mi">9</span> <span class="o">.</span> <span class="mf">1.5</span>
 <span class="nb">e</span>
 <span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
@@ -269,7 +366,7 @@ a<span class="n">sig</span>	<span class="nb">pluck</span>	k<span class="n">env</
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm130563"></a>
+        <a id="idm133962"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="expsegr.html" title="expsegr"><em class="citetitle">linsegr</em></a>,
@@ -287,7 +384,7 @@ a<span class="n">sig</span>	<span class="nb">pluck</span>	k<span class="n">env</
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm130590"></a>
+        <a id="idm133989"></a>
         <h2>Crédits</h2>
         <p>Auteur : John ffitch</p>
         <p>Novembre 2002. Merci à Rasmus Ekman pour avoir documenté le paramètre <span class="emphasis"><em>ireltim</em></span>.</p>

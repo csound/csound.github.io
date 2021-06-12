@@ -39,20 +39,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm135489"></a>
+        <a id="idm138961"></a>
         <h2>Description</h2>
         <p>
       Permet un signal MIDI sur 21 bit en nombres décimaux selon une échelle entre des limites minimale et maximale.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm135492"></a>
+        <a id="idm138964"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">idest <span class="command"><strong>midic21</strong></span> ictlno1, ictlno2, ictlno3, imin, imax [, ifn]</pre>
         <pre class="synopsis">kdest <span class="command"><strong>midic21</strong></span> ictlno1, ictlno2, ictlno3, kmin, kmax [, ifn]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm135498"></a>
+        <a id="idm138970"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>idest</em></span> -- signal de sortie
@@ -79,7 +79,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm135516"></a>
+        <a id="idm138988"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kdest</em></span> -- signal de sortie
@@ -117,7 +117,80 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm135531"></a>
+        <a id="idm139003"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode midic21. Il utilise le fichier
+      <a class="ulink" href="examples/midic21.csd" target="_top"><em class="citetitle">midic21.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm139008"></a>
+          <p class="title">
+            <strong>Exemple 579. Exemple de l'opcode midic21.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm139015"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac -M0 --midi-key-cps=4 --midi-velocity-amp=5   <span class="c1">;;;realtime audio out and realtime midi in, midi key cps is routed to p4 and velocity to p5</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o midic21.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="c1">; by tgrey - 2020</span>
+
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+
+<span class="kd">instr</span> <span class="nf">1</span>
+	<span class="c1">; This example expects MIDI controller input on channel 1</span>
+	<span class="c1">; run, play a note and move your midi controllers 1, 7, and 10 to see results</span>
+	i<span class="n">ctlno1</span><span class="o">=</span> <span class="mi">1</span> 	<span class="c1">; = cc #1 midi mod wheel (course tuning)</span>
+	i<span class="n">ctlno2</span><span class="o">=</span> <span class="mi">7</span> 	<span class="c1">; = cc #7 midi volume (fine tuning)</span>
+	i<span class="n">ctlno3</span><span class="o">=</span> <span class="mi">10</span> <span class="c1">; = cc #10 midi pan (extremely fine tuning)</span>
+
+	<span class="c1">; max range is 4 octaves: (2^4) = 16</span>
+	i<span class="n">max</span>  <span class="o">=</span> <span class="mi">16</span>
+
+	<span class="c1">; read all 3 controllers, scaling them between 1 and imax</span>
+	k<span class="n">Tune</span> <span class="nb">midic21</span> i<span class="n">ctlno1</span><span class="p">,</span> i<span class="n">ctlno2</span><span class="p">,</span> i<span class="n">ctlno3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">max</span>	
+	<span class="nb">printk2</span>	k<span class="n">Tune</span>
+
+	<span class="c1">; generate tones</span>
+	a<span class="n">sig</span> <span class="nb">oscili</span> <span class="vi">p5</span><span class="p">,</span> <span class="vi">p4</span><span class="o">*</span>k<span class="n">Tune</span>
+	a<span class="n">ref</span> <span class="nb">oscili</span> <span class="vi">p5</span><span class="p">,</span> <span class="vi">p4</span>
+
+	<span class="c1">; combine detuned tone and reference tone</span>
+	<span class="c1">; creates a beat effect from the detune</span>
+	a<span class="n">sig</span><span class="o">=</span><span class="p">(</span>a<span class="n">sig</span><span class="o">+</span>a<span class="n">ref</span><span class="p">)</span><span class="o">*</span><span class="mf">.5</span>
+
+	<span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+<span class="kd">endin</span>
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="c1">; run for 60 seconds</span>
+<span class="nb">f</span><span class="mi">0</span> <span class="mi">60</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm139110"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="ctrl7.html" title="ctrl7"><em class="citetitle">ctrl7</em></a>,
@@ -131,7 +204,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm135550"></a>
+        <a id="idm139129"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -158,33 +158,79 @@
             </div>
           </div>
         </div>
+        <p>
+    A partir de la version 4.07, Csound supporte le format de fichier
+    d'échantillons de SoundFont2. SoundFont2 (ou SF2) est
+    un standard très répandu qui permet l'encodage de banques de sons basés sur
+    des forme d'onde dans un fichier binaire. Afin de comprendre l'utilisation
+    de ces opcodes, l'utilisateur doit avoir une certaine connaissance du format
+    SF2, dont une brève description suit ci-dessous.
+  </p>
+        <p>
+    Le format SF2 comprend des objets générateurs et modulateurs. Tous les
+    opcodes actuels de Csound concernant SF2 ne supportent que la fonction
+    générateur.
+  </p>
+        <p>
+    Il y a plusieurs niveaux de générateurs ayant une structure hiérarchique.
+    Le type de générateur le plus basique est un échantillon. Les échantillons
+    peuvent être bouclés ou non, et sont associés avec un numéro de note MIDI,
+    appelé la touche de base. Lorsqu'un échantillon est associé avec un
+    intervalle de numéros de note MIDI, un intervalle de vélocités, une
+    transposition (accord grossier et fin), une échelle d'accord et un facteur
+    de pondération de niveau, l'échantillon et ses associations forment un
+    <span class="quote">« <span class="quote">split</span> »</span>. Un ensemble de splits, associé à un nom, font un
+    <span class="quote">« <span class="quote">instrument</span> »</span>. Lorsqu'un instrument est associé à un intervalle
+    de touches, un intervalle de vélocités, un facteur de pondération de niveau
+    et une transposition, l'instrument est ses associations forment un
+    <span class="quote">« <span class="quote">layer</span> »</span>. Un ensemble de layers, associé à un nom, font un
+    <span class="quote">« <span class="quote">preset</span> »</span>. Les presets sont normalement la structure finale de
+    génération de son prête à l'usage. Ils génèrent du son selon les réglages
+    de leurs composants des niveaux inférieurs.
+  </p>
+        <div class="mediaobject">
+          <img src="images/SF.png" />
+        </div>
+        <p>
+    Les données d'échantillon ainsi que les données de structure sont inclus
+    dans le même fichier binaire SF2. Un seul fichier SF2 peut contenir au
+    maximum 128 banques de 128 programmes de preset, soit un total de 16384
+    presets dans un fichier SF2. Le nombre maximum de layers, instruments,
+    splits et échantillons n'est pas défini et se trouve sans doute limité par
+    la mémoire de l'ordinateur.
+  </p>
+        <p>
+    On peut voir et éditer les SoundFonts avec des programmes comme Polyphone
+    (GPL3, <a class="ulink" href=" https://www.polyphone-soundfonts.com/" target="_top">https://www.polyphone-soundfonts.com/</a>)
+    ou Swami (GPL2, <a class="ulink" href=" http://www.swamiproject.org/" target="_top">http://www.swamiproject.org/</a>).
+  </p>
         <div class="simplesect">
           <div class="titlepage">
             <div>
               <div>
-                <h4 class="title"><a id="idm10123"></a>Opcodes Fluid</h4>
+                <h4 class="title"><a id="idm10406"></a>Opcodes Fluid</h4>
               </div>
             </div>
           </div>
           <p>La famille des opcodes fluid encapsule le lecteur SoundFont 2 de Peter Hannape, FluidSynth :
-	  <a class="link" href="fluidEngine.html" title="fluidEngine"><em class="citetitle">fluidEngine</em></a> pour instancier un moteur
-	  FluidSynth,
+    <a class="link" href="fluidEngine.html" title="fluidEngine"><em class="citetitle">fluidEngine</em></a> pour instancier un moteur
+    FluidSynth,
     <a class="link" href="fluidSetInterpMethod.html" title="fluidSetInterpMethod"><em class="citetitle">fluidSetInterpMethod</em></a> pour fixer
     la méthode d'interpolation d'un canal dans un moteur FluidSynth,
-	  <a class="link" href="fluidLoad.html" title="fluidLoad"><em class="citetitle">fluidLoad</em></a> pour charger des SoundFonts,
-	  <a class="link" href="fluidProgramSelect.html" title="fluidProgramSelect"><em class="citetitle">fluidProgramSelect</em></a> pour assigner des
+    <a class="link" href="fluidLoad.html" title="fluidLoad"><em class="citetitle">fluidLoad</em></a> pour charger des SoundFonts,
+    <a class="link" href="fluidProgramSelect.html" title="fluidProgramSelect"><em class="citetitle">fluidProgramSelect</em></a> pour assigner des
     presets d'un SoundFont à un canal MIDI d'un moteur FluidSynth,
-	  <a class="link" href="fluidNote.html" title="fluidNote"><em class="citetitle">fluidNote</em></a> pour jouer une note sur un canal
+    <a class="link" href="fluidNote.html" title="fluidNote"><em class="citetitle">fluidNote</em></a> pour jouer une note sur un canal
     MIDI d'un moteur FluidSynth,
-	  <a class="link" href="fluidCCi.html" title="fluidCCi"><em class="citetitle">fluidCCi</em></a> pour envoyer un message de contrôleur
+    <a class="link" href="fluidCCi.html" title="fluidCCi"><em class="citetitle">fluidCCi</em></a> pour envoyer un message de contrôleur
     au temps-i sur un canal MIDI d'un moteur FluidSynth,
-	  <a class="link" href="fluidCCk.html" title="fluidCCk"><em class="citetitle">fluidCCk</em></a> pour envoyer un message de contrôleur
+    <a class="link" href="fluidCCk.html" title="fluidCCk"><em class="citetitle">fluidCCk</em></a> pour envoyer un message de contrôleur
     au taux k sur un canal MIDI d'un moteur FluidSynth. 
-	  <a class="link" href="fluidControl.html" title="fluidControl"><em class="citetitle">fluidControl</em></a> pour jouer et contrôler les
-	  Soundfonts chargés (en utilisant des messages MIDI 'bruts'),
-	  <a class="link" href="fluidOut.html" title="fluidOut"><em class="citetitle">fluidOut</em></a> pour recevoir de l'audio depuis un
+    <a class="link" href="fluidControl.html" title="fluidControl"><em class="citetitle">fluidControl</em></a> pour jouer et contrôler les
+    Soundfonts chargés (en utilisant des messages MIDI 'bruts'),
+    <a class="link" href="fluidOut.html" title="fluidOut"><em class="citetitle">fluidOut</em></a> pour recevoir de l'audio depuis un
     seul moteur FluidSynth, et
-	  <a class="link" href="fluidAllOut.html" title="fluidAllOut"><em class="citetitle">fluidAllOut</em></a> pour recevoir de l'audio depuis
+    <a class="link" href="fluidAllOut.html" title="fluidAllOut"><em class="citetitle">fluidAllOut</em></a> pour recevoir de l'audio depuis
     tous les moteurs FluidSynth.
   </p>
           <div class="itemizedlist">
@@ -266,16 +312,16 @@
           <div class="titlepage">
             <div>
               <div>
-                <h4 class="title"><a id="idm10187"></a>"Anciens" opcodes Soundfont</h4>
+                <h4 class="title"><a id="idm10470"></a>Opcodes Soundfont "originaux"</h4>
               </div>
             </div>
           </div>
           <p>Ces opcodes peuvent aussi employer des soundfonts pour générer du son.
-	    <span class="emphasis"><em>sfplay</em></span>, etc. ont été créés dans un but -- utiliser les
-	    échantillons dans les SoundFonts. Les opcodes fluid ont été créés dans un autre
-	    but -- utiliser les SoundFonts plus ou moins comme ils ont été conçus, c'est-à-dire
-	    en utilisant des mappages de clavier, des couches, un traitement interne, etc.
-	  </p>
+      <span class="emphasis"><em>sfplay</em></span>, etc. ont été créés dans un but -- accéder
+      aux instruments et aux échantillons dans les SoundFonts. Les opcodes fluid ont été créés dans un autre
+      but -- utiliser les SoundFonts plus ou moins comme ils ont été conçus, c'est-à-dire
+      en utilisant des mappages de clavier, des couches, un traitement interne, etc.
+    </p>
           <div class="itemizedlist">
             <ul class="itemizedlist" style="list-style-type: disc; ">
               <li class="listitem">

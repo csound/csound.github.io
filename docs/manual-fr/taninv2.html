@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm231922"></a>
+        <a id="idm238733"></a>
         <h2>Description</h2>
         <p>
       Retourne arctangente de <span class="emphasis"><em>iy/ix</em></span>, <span class="emphasis"><em>ky/kx</em></span>, ou
@@ -47,11 +47,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm231928"></a>
+        <a id="idm238739"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>taninv2</strong></span> ay, ax</pre>
         <pre class="synopsis">ires <span class="command"><strong>taninv2</strong></span> iy, ix</pre>
         <pre class="synopsis">kres <span class="command"><strong>taninv2</strong></span> ky, kx</pre>
+        <pre class="synopsis">...<span class="command"><strong>taninv2</strong></span>(ky, kx)... (pas de restriction de taux)</pre>
         <p>
       Retourne arctangente de <span class="emphasis"><em>iy/ix</em></span>, <span class="emphasis"><em>ky/kx</em></span>, ou
       <span class="emphasis"><em>ay/ax</em></span>. Si <span class="emphasis"><em>y</em></span> vaut zéro, <span class="emphasis"><em>taninv2</em></span>
@@ -75,14 +76,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm231957"></a>
+        <a id="idm238770"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iy, ix</em></span> -- valeurs à transformer
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm231961"></a>
+        <a id="idm238774"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ky, kx</em></span> -- signaux de taux de contrôle à transformer
@@ -92,7 +93,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm231967"></a>
+        <a id="idm238780"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode taninv2. Il utilise le fichier
@@ -100,16 +101,16 @@
 
       </p>
         <div class="example">
-          <a id="idm231972"></a>
+          <a id="idm238785"></a>
           <p class="title">
-            <strong>Exemple 1051. Exemple de l'opcode taninv2.</strong>
+            <strong>Exemple 1079. Exemple de l'opcode taninv2.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
         <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm231979"></a>
+              <a id="idm238792"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -159,14 +160,81 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm232026"></a>
+        <a id="idm238839"></a>
+        <p>
+      Voici un autre exemple de l'opcode taninv2. Il utilise le fichier
+      <a class="ulink" href="examples/taninv2-advanced.csd" target="_top"><em class="citetitle">taninv2-advanced.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm238843"></a>
+          <p class="title">
+            <strong>Exemple 1080. Exemple avancé de l'opcode taninv2.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm238850"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+-odac -d
+<span class="c1">; By Stefano Cucchi 2020</span>
+
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="kd">instr</span> <span class="nf">1</span>
+
+a<span class="n">1</span> <span class="nb">oscili</span> <span class="mf">0.1</span><span class="p">,</span> <span class="vi">p4</span>
+a<span class="n">2</span> <span class="nb">oscili</span> <span class="mf">0.1</span><span class="p">,</span> <span class="vi">p5</span>
+a<span class="n">shape</span> <span class="nb">taninv2</span> a<span class="n">1</span><span class="p">,</span> a<span class="n">2</span>
+k<span class="n">declick</span> <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="vi">p3</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">0</span>
+<span class="nb">outs</span> a<span class="n">shape</span><span class="o">*</span>k<span class="n">declick</span><span class="p">,</span> a<span class="n">shape</span><span class="o">*</span>k<span class="n">declick</span>
+<span class="kd">endin</span>
+
+<span class="kd">instr</span> <span class="nf">2</span>
+
+a<span class="n">1</span> <span class="nb">diskin</span>  <span class="vi">p4</span><span class="p">,</span> <span class="mi">1</span>
+a<span class="n">2</span> <span class="o">=</span> a<span class="n">1</span>
+a<span class="n">shape</span> <span class="nb">taninv2</span> a<span class="n">1</span><span class="p">,</span> a<span class="n">2</span>
+k<span class="n">declick</span> <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="vi">p3</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">0</span>
+<span class="nb">outs</span> a<span class="n">shape</span><span class="o">*</span>k<span class="n">declick</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span> a<span class="n">shape</span><span class="o">*</span>k<span class="n">declick</span><span class="o">*</span><span class="mf">.5</span>
+<span class="kd">endin</span>
+
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mi">440</span> <span class="mi">300</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mi">3</span> <span class="mi">200</span> <span class="mi">210</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">6</span> <span class="mi">3</span> <span class="mi">50</span> <span class="mi">40</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">9</span> <span class="mi">3</span> <span class="mi">50</span> <span class="mi">3000</span>
+<span class="nb">i</span> <span class="mi">2</span> <span class="mi">12</span> <span class="mi">3</span> <span class="s">"fox.wav"</span>
+
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm238990"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="taninv.html" title="taninv"><em class="citetitle">taninv</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm232031"></a>
+        <a id="idm238995"></a>
         <h2>Crédits</h2>
         <p>
       </p>
@@ -189,6 +257,7 @@
         <p>Exemple écrit par Kevin Conder.</p>
         <p>Nouveau dans la version 3.48 de Csound</p>
         <p>Corrigé en mai 2002, grâce à Istvan Varga.</p>
+        <p>Disponible comme fonction dans la version 6.00</p>
       </div>
     </div>
     <div class="navfooter">
