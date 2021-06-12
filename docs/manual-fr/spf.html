@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>spf</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="spdist.html" title="spdist" />
+    <link rel="next" href="splitrig.html" title="splitrig" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">spf</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="spdist.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="splitrig.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="spf"></a>
+      <div class="titlepage"></div>
+      <a id="IndexSpf" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">spf</span>
+        </h2>
+        <p>spf — 
+      Filtre de Steiner-Parker.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm219940"></a>
+        <h2>Description</h2>
+        <p>
+      Spf est une implémentation numérique d'un filtre analogique linéaire de
+      Steiner-Parker, qui est un filtre multimodal du second ordre avec trois
+      entrées séparées pour le passe-bas, le passe-haut et le passe-bande et
+      une sortie.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm219943"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">asig <span class="command"><strong>spf</strong></span> alp, ahp, abp, xcf, xR[, istor]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm219947"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>istor</em></span> -- disposition initiale de l'espace de données
+        interne. Comme ce filtre comprend une boucle de rétroaction de la sortie
+        antérieure, l'état initial de l'espace de stockage utilisé est pris en
+        compte. Une valeur nulle efface cet espace ; une valeur non nulle retient
+        l'information antérieure. 0 par défaut.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm219951"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>alp, ahp, abp</em></span> -- signaux passe-bas, passe-haut et
+      passe-bande en entrée. On peut utiliser différents signaux en entrée ;
+      si le même signal est placé sur les entrées passe-bas et passe-haut, le
+      résultat est une sortie à réjection de bande pour ce signal. Si le même
+      signal est utilisé sur toutes les entrées, cela produit un filtre
+      passe-tout.
+    </p>
+        <p>
+      <span class="emphasis"><em>xcf</em></span> -- fréquence de coupure du filtre (taux-a ou -k).
+    </p>
+        <p>
+      <span class="emphasis"><em>xR</em></span> -- facteur d'atténuation du filtre, qui contrôle
+      la crête (en passe-bande, R = 1/Q, où Q est le rapport entre la fréquence
+      centrale et la largeur de bande). Une valeur de racine de 2 
+      (approximativement 1.414) supprime la crête (réponse de Butterworth), et
+      des valeurs inférieures donnent un filtre à crête et résonnant. Une valeur
+      de 0 transforme le filtre en oscillateur sinusoïdal. Les valeurs admises
+      sont comprise entre 0 et 2. A 2, le filtre a des pôles réels et est ainsi
+      équivalent à deux filtres du premier ordre en série.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm219959"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opode spf. Il utilise le fichier
+      <a class="ulink" href="examples/spf.csd" target="_top"><em class="citetitle">spf.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm219964"></a>
+          <p class="title">
+            <strong>Exemple 985. Exemple de l'opode spf.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm219971"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+-odac -d
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">// three different inputs</span>
+<span class="kd">instr</span> <span class="nf">1</span>
+ a<span class="n">lp</span> <span class="o">=</span> <span class="nb">diskin</span><span class="p">:</span><span class="kt">a</span><span class="p">(</span><span class="s">"fox.wav"</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">3</span>
+ a<span class="n">hp</span> <span class="nb">rand</span> <span class="vi">p4</span><span class="o">/</span><span class="mi">3</span>
+ a<span class="n">bp</span> <span class="nb">vco2</span> <span class="vi">p4</span><span class="p">,</span><span class="mi">100</span> 
+ a<span class="n">f</span> <span class="nb">expon</span> <span class="mi">100</span><span class="p">,</span><span class="vi">p3</span><span class="p">,</span><span class="mi">10000</span>
+ a<span class="n">3</span> <span class="n">spf</span> a<span class="n">lp</span><span class="p">,</span>a<span class="n">hp</span><span class="p">,</span>a<span class="n">bp</span><span class="p">,</span>a<span class="n">f</span><span class="p">,</span><span class="mf">0.707</span>
+ <span class="nb">out</span> a<span class="n">3</span>
+ a<span class="n">1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">endin</span>
+
+<span class="c1">// band-reject</span>
+<span class="kd">instr</span> <span class="nf">2</span>
+ a<span class="n">0</span> <span class="nb">init</span> <span class="mi">0</span>
+ a<span class="n">noi</span> <span class="nb">rand</span> <span class="vi">p4</span>
+ a<span class="n">f</span> <span class="nb">expon</span> <span class="mi">100</span><span class="p">,</span><span class="vi">p3</span><span class="p">,</span><span class="mi">10000</span>
+ a<span class="n">s</span> <span class="n">spf</span> a<span class="n">noi</span><span class="p">,</span>a<span class="n">noi</span><span class="p">,</span>a<span class="n">0</span><span class="p">,</span>a<span class="n">f</span><span class="p">,</span><span class="mf">0.3</span>
+ <span class="nb">out</span> a<span class="n">s</span>
+<span class="kd">endin</span>
+
+<span class="c1">// self-oscillation</span>
+<span class="kd">instr</span> <span class="nf">3</span>
+ a<span class="n">0</span> <span class="nb">init</span> <span class="mi">0</span>
+ a<span class="n">noi</span> <span class="nb">rand</span> <span class="vi">p4</span>
+ a<span class="n">f</span> <span class="nb">expon</span> <span class="mi">100</span><span class="p">,</span><span class="vi">p3</span><span class="p">,</span><span class="mi">10000</span>
+ a<span class="n">s</span> <span class="n">spf</span> a<span class="n">noi</span><span class="p">,</span>a<span class="n">0</span><span class="p">,</span>a<span class="n">0</span><span class="p">,</span>a<span class="n">f</span><span class="p">,</span><span class="mi">0</span>
+ <span class="nb">out</span> a<span class="n">s</span>
+<span class="kd">endin</span>
+
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span> <span class="mf">0.2</span>
+<span class="nb">i</span><span class="mi">2</span> <span class="mi">10</span> <span class="mi">10</span> <span class="mf">0.5</span>
+<span class="nb">i</span><span class="mi">3</span> <span class="mi">20</span> <span class="mi">10</span> <span class="mf">0.004</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm220112"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Victor Lazzarini</td>
+          </tr>
+          <tr>
+            <td>Février 2021</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="spdist.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="splitrig.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">spdist </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> splitrig</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
