@@ -10,7 +10,7 @@
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="spat3dt.html" title="spat3dt" />
-    <link rel="next" href="specaddm.html" title="specaddm" />
+    <link rel="next" href="spf.html" title="spf" />
   </head>
   <body>
     <div class="navheader">
@@ -21,7 +21,7 @@
         <tr>
           <td width="20%" align="left"><a accesskey="p" href="spat3dt.html">Prev</a> </td>
           <th width="60%" align="center">Orchestra Opcodes and Operators</th>
-          <td width="20%" align="right"> <a accesskey="n" href="specaddm.html">Next</a></td>
+          <td width="20%" align="right"> <a accesskey="n" href="spf.html">Next</a></td>
         </tr>
       </table>
       <hr />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm211864"></a>
+        <a id="idm218852"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>spdist</em></span> uses the same xy data as <a class="link" href="space.html" title="space"><em class="citetitle">space</em></a>, also either from a text file using <a class="link" href="GEN28.html" title="GEN28"><em class="citetitle">Gen28</em></a> or from x and y arguments given to the unit directly. The purpose of this unit is to make available the values for distance that are calculated from the xy coordinates. 
@@ -49,12 +49,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm211877"></a>
+        <a id="idm218865"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">k1 <span class="command"><strong>spdist</strong></span> ifn, ktime, kx, ky</pre>
       </div>
       <div class="refsect1">
-        <a id="idm211881"></a>
+        <a id="idm218869"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>ifn</em></span> -- number of the stored function created using <a class="link" href="GEN28.html" title="GEN28"><em class="citetitle">Gen28</em></a>. This function generator reads a text file which contains sets of three values representing the xy coordinates and a time-tag for when the signal should be placed at that location. The file should look like:
@@ -80,14 +80,34 @@
         <p>
     </p>
         <p>
-      <span class="emphasis"><em>Gen28</em></span> takes 0 as the size and automatically allocates memory. It creates values to 10 milliseconds of resolution. So in this case there will be 500 values created by interpolating X1 to X2 to X3 and so on, and Y1 to Y2 to Y3 and so on, over the appropriate number of values that are stored in the function table. In the above example, the sound will begin in the left front, over 1 second it will move to the right front, over another second it move further into the distance but still in the right front, then in just 1/10th of a second it moves to the left rear, a bit distant. Finally over the last .9 seconds the sound will move to the right rear, moderately distant, and it comes to rest between the two left channels (due west!), quite distant. Since the values in the table are accessed through the use of a time-pointer in the <span class="emphasis"><em>space</em></span> unit, the actual timing can be made to follow the file's timing exactly or it can be made to go faster or slower through the same trajectory. If you have access to the GUI that allows one to draw and edit the files, there is no need to create the text files manually. But as long as the file is ASCII and in the format shown above, it doesn't matter how it is made!
+      <span class="emphasis"><em>Gen28</em></span> takes 0 as the size and automatically
+      allocates memory. It creates values to 10 milliseconds of
+      resolution. So in this case there will be 500 values created by
+      interpolating X1 to X2 to X3 and so on, and Y1 to Y2 to Y3 and
+      so on, over the appropriate number of values that are stored in
+      the function table. In the above example, the sound will begin
+      in the left front, over 1 second it will move to the right
+      front, over another second it move further into the distance but
+      still in the right front, then in just 1/10th of a second it
+      moves to the left rear, a bit distant. Finally over the last .9
+      seconds the sound will move to the right rear, moderately
+      distant, and it comes to rest between the two left channels (due
+      west!), quite distant. Since the values in the table are
+      accessed through the use of a time-pointer in the
+      <span class="emphasis"><em>space</em></span> unit, the actual timing can be made
+      to follow the file's timing exactly or it can be made to go
+      faster or slower through the same trajectory. If you have access
+      to the GUI that allows one to draw and edit the files, there is
+      no need to create the text files manually. But as long as the
+      file is ASCII and in the format shown above, it does not matter
+      how it is made! 
     </p>
         <p>
       IMPORTANT: If <span class="emphasis"><em>ifn</em></span> is 0 then <span class="emphasis"><em>spdist</em></span> will take its values for the xy coordinates from <span class="emphasis"><em>kx</em></span> and <span class="emphasis"><em>ky</em></span>.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm211899"></a>
+        <a id="idm218887"></a>
         <h2>Performance</h2>
         <p>
       The configuration of the xy coordinates in space places the signal in the following way:
@@ -162,20 +182,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm211935"></a>
+        <a id="idm218923"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the spdist opcode. It uses the file <a class="ulink" href="examples/spdist.csd" target="_top"><em class="citetitle">spdist.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm211940"></a>
+          <a id="idm218928"></a>
           <p class="title">
-            <strong>Example 960. Example of the spdist opcode.</strong>
+            <strong>Example 985. Example of the spdist opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm211947"></a>
+              <a id="idm218935"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -252,7 +272,7 @@ ga<span class="n">4</span><span class="o">=</span><span class="mi">0</span>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm212175"></a>
+        <a id="idm219163"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="space.html" title="space"><em class="citetitle">space</em></a>,
@@ -260,7 +280,7 @@ ga<span class="n">4</span><span class="o">=</span><span class="mi">0</span>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm212182"></a>
+        <a id="idm219170"></a>
         <h2>Credits</h2>
         <p>
       </p>
@@ -288,14 +308,14 @@ ga<span class="n">4</span><span class="o">=</span><span class="mi">0</span>
           <td width="20%" align="center">
             <a accesskey="u" href="OpcodesTop.html">Up</a>
           </td>
-          <td width="40%" align="right"> <a accesskey="n" href="specaddm.html">Next</a></td>
+          <td width="40%" align="right"> <a accesskey="n" href="spf.html">Next</a></td>
         </tr>
         <tr>
           <td width="40%" align="left" valign="top">spat3dt </td>
           <td width="20%" align="center">
             <a accesskey="h" href="index.html">Home</a>
           </td>
-          <td width="40%" align="right" valign="top"> specaddm</td>
+          <td width="40%" align="right" valign="top"> spf</td>
         </tr>
       </table>
     </div>

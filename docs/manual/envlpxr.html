@@ -39,20 +39,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm61865"></a>
+        <a id="idm64869"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>envlpxr</em></span> is the same as <a class="link" href="envlpx.html" title="envlpx"><em class="citetitle">envlpx</em></a> except that the final segment is entered only on sensing a MIDI note release. The note is then extended by the decay time.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm61871"></a>
+        <a id="idm64875"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">ares <span class="command"><strong>envlpxr</strong></span> xamp, irise, idec, ifn, iatss, iatdec [, ixmod] [,irind]</pre>
         <pre class="synopsis">kres <span class="command"><strong>envlpxr</strong></span> kamp, irise, idec, ifn, iatss, iatdec [, ixmod] [,irind]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm61877"></a>
+        <a id="idm64881"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>irise</em></span> -- rise time in seconds. A zero or negative value signifies no rise modification.
@@ -88,7 +88,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm61898"></a>
+        <a id="idm64902"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>kamp, xamp</em></span> -- input amplitude signal.
@@ -97,27 +97,32 @@
       <span class="emphasis"><em>envlpxr</em></span> is an example of the special Csound <span class="quote">“<span class="quote">r</span>”</span> units that contain a note-off sensor and release time extender. When each senses a score event termination or a MIDI noteoff, it will immediately extend the performance time of the current instrument by <span class="emphasis"><em>idec</em></span> seconds unless it is made independent by <span class="emphasis"><em>irind</em></span>. Then it will begin a decay from wherever it was at the time. 
     </p>
         <p>
-      You can use other pre-made envelopes which start a release segment upon receiving a note off message, like <a class="link" href="linsegr.html" title="linsegr"><em class="citetitle">linsegr</em></a> and <a class="link" href="expsegr.html" title="expsegr"><em class="citetitle">expsegr</em></a>, or you can construct more complex envelopes using <a class="link" href="xtratim.html" title="xtratim"><em class="citetitle">xtratim</em></a> and <a class="link" href="release.html" title="release"><em class="citetitle">release</em></a>. Note that you don't need to use <a class="link" href="xtratim.html" title="xtratim"><em class="citetitle">xtratim</em></a> if you are using <span class="emphasis"><em>envlpxr</em></span>, since the time is extended automatically.
+      You can use other pre-made envelopes which start a release
+      segment upon receiving a note off message, like <a class="link" href="linsegr.html" title="linsegr"><em class="citetitle">linsegr</em></a> and
+      <a class="link" href="expsegr.html" title="expsegr"><em class="citetitle">expsegr</em></a>,
+      or you can construct more complex envelopes using <a class="link" href="xtratim.html" title="xtratim"><em class="citetitle">xtratim</em></a> and
+      <a class="link" href="release.html" title="release"><em class="citetitle">release</em></a>. Note
+      that you do not need to use <a class="link" href="xtratim.html" title="xtratim"><em class="citetitle">xtratim</em></a> if you are using <span class="emphasis"><em>envlpxr</em></span>, since the time is extended automatically.
     </p>
         <p><strong>Multiple <span class="quote">“<span class="quote">r</span>”</span> units. </strong>
          When two or more <span class="quote">“<span class="quote">r</span>”</span> units occur in the same instrument it is usual to have only one of them influence the overall note duration. This is normally the master amplitude unit. Other units controlling, say, filter motion can still be sensitive to note-off commands while not affecting the duration by making them independent (<span class="emphasis"><em>irind</em></span> non-zero). Depending on their own <span class="emphasis"><em>idec</em></span> (release time) values, independent <span class="quote">“<span class="quote">r</span>”</span> units may or may not reach their final destinations before the instrument terminates. If they do, they will simply hold their target values until termination. If two or more <span class="quote">“<span class="quote">r</span>”</span> units are simultaneously master, note extension is by the greatest <span class="emphasis"><em>idec</em></span>.
       </p>
       </div>
       <div class="refsect1">
-        <a id="idm61929"></a>
+        <a id="idm64933"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the envlpxr opcode. It uses the file <a class="ulink" href="examples/envlpxr.csd" target="_top"><em class="citetitle">envlpxr.csd</em></a>.
 
       </p>
         <div class="example">
-          <a id="idm61934"></a>
+          <a id="idm64938"></a>
           <p class="title">
-            <strong>Example 259. Example of the envlpxr opcode.</strong>
+            <strong>Example 263. Example of the envlpxr opcode.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm61936"></a>
+              <a id="idm64940"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -161,7 +166,7 @@ a<span class="n">sig</span>	<span class="nb">pluck</span>	k<span class="n">env</
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm62019"></a>
+        <a id="idm65023"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="envlpx.html" title="envlpx"><em class="citetitle">envlpx</em></a>,
@@ -170,7 +175,7 @@ a<span class="n">sig</span>	<span class="nb">pluck</span>	k<span class="n">env</
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm62028"></a>
+        <a id="idm65032"></a>
         <h2>Credits</h2>
         <p>Thanks goes to Luis Jure for pointing out a mistake with <span class="emphasis"><em>iatss</em></span>.</p>
       </div>

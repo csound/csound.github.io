@@ -10,7 +10,7 @@
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="apoleparams.html" title="apoleparams" />
-    <link rel="next" href="arduinoStart.html" title="arduinoStart" />
+    <link rel="next" href="arduinoReadF.html" title="arduinoReadF" />
   </head>
   <body>
     <div class="navheader">
@@ -21,7 +21,7 @@
         <tr>
           <td width="20%" align="left"><a accesskey="p" href="apoleparams.html">Prev</a> </td>
           <th width="60%" align="center">Orchestra Opcodes and Operators</th>
-          <td width="20%" align="right"> <a accesskey="n" href="arduinoStart.html">Next</a></td>
+          <td width="20%" align="right"> <a accesskey="n" href="arduinoReadF.html">Next</a></td>
         </tr>
       </table>
       <hr />
@@ -39,20 +39,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm25831"></a>
+        <a id="idm26299"></a>
         <h2>Description</h2>
         <p>Plugin opcode in serial.</p>
         <p>
-      Read data from an arduino port with CsoundArduino protocol.
+      Read integer data from an arduino port with CsoundArduino protocol.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm25835"></a>
+        <a id="idm26303"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">kval <span class="command"><strong>arduinoRead</strong></span> iPort, iStream[, iSmooth]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm25839"></a>
+        <a id="idm26307"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>iPort</em></span> -- port number obtained from a
@@ -71,22 +71,21 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm25850"></a>
+        <a id="idm26318"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the arduinoRead opcode. It uses the file <a class="ulink" href="examples/arduinoRead.csd" target="_top"><em class="citetitle">arduinoRead.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm25855"></a>
+          <a id="idm26323"></a>
           <p class="title">
-            <strong>Example 61. Example of the arduinoRead opcode.</strong>
+            <strong>Example 58. Example of the arduinoRead opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm25862"></a>
+              <a id="idm26330"></a>
               <pre class="programlisting">
-<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 Arduino-Joystick2Csound1g-fm1-port (version with smoothing)
 
 - Push Joystick button to turn on note
@@ -108,13 +107,13 @@ gi<span class="n">port</span> <span class="nb">init</span> <span class="mi">0</s
 
 <span class="c1">// NOTE: change USB port "/dev/cu.usbmodem1414301" to correspond</span>
 <span class="c1">//       with USB port used by Arduino on your system</span>
-gi<span class="n">port</span> a<span class="n">rduinoStart</span>  <span class="s">"/dev/cu.usbmodem1414301"</span><span class="p">,</span> <span class="mi">9600</span>
+gi<span class="n">port</span> <span class="nb">arduinoStart</span>  <span class="s">"//dev/ttyACM0"</span><span class="p">,</span> <span class="mi">9600</span>    <span class="c1">// for GNULinux</span>
 
 <span class="kd">instr</span> <span class="nf">1</span>
 
- k<span class="n">Y</span>  a<span class="n">rduinoRead</span> gi<span class="n">port</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">; Joystick Y</span>
- k<span class="n">X</span>  a<span class="n">rduinoRead</span> gi<span class="n">port</span><span class="p">,</span> <span class="mi">2</span> <span class="c1">; Joystick X</span>
- k<span class="n">SW</span> a<span class="n">rduinoRead</span> gi<span class="n">port</span><span class="p">,</span> <span class="mi">3</span> <span class="c1">; Joystick Button/Switch</span>
+ k<span class="n">Y</span>  <span class="nb">arduinoRead</span> gi<span class="n">port</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">; Joystick Y</span>
+ k<span class="n">X</span>  <span class="nb">arduinoRead</span> gi<span class="n">port</span><span class="p">,</span> <span class="mi">2</span> <span class="c1">; Joystick X</span>
+ k<span class="n">SW</span> <span class="nb">arduinoRead</span> gi<span class="n">port</span><span class="p">,</span> <span class="mi">3</span> <span class="c1">; Joystick Button/Switch</span>
 
 k<span class="n">Amp</span>  <span class="nb">init</span> <span class="mi">0</span>
 k<span class="n">Freq</span> <span class="nb">init</span> <span class="mi">0</span>
@@ -218,13 +217,13 @@ void put_val(int senChan, int senVal)
 {       <span class="c1">// The packing of the data is sssssvvv 0vvvvvvv where s is a</span>
         <span class="c1">// senChan bit, v a senVal bit and 0 is zero` bit</span>
   int low = senVal&amp;0x7f<span class="c1">;</span>
-  int hi = ((senVal&gt;&gt;7)&amp;0x0f) | ((senChan&amp;0x0F)<span class="err">&lt;</span><span class="nt">&lt;4</span><span class="err">);</span>
+  int hi = ((senVal&gt;&gt;7)&amp;0x0f) | ((senChan&amp;0x0f)<span class="err">&lt;</span><span class="nt">&lt;4</span><span class="err">);</span>
   <span class="err">Serial.write(low);</span> <span class="err">Serial.write(hi);</span>
 <span class="err">}</span>
 
 <span class="err">void</span> <span class="err">loop()</span> <span class="err">{</span>
 
-   <span class="err">Serial.write(0xf0);</span>
+   <span class="err">Serial.write(0xf8);</span>
 
    <span class="err">int</span> <span class="na">currentState_SW_pin =</span> <span class="s">digitalRead(SW_pin);</span> <span class="err">//</span> <span class="err">reading</span> <span class="err">digital</span>
                                                   <span class="err">//</span> <span class="err">input</span> <span class="err">2</span> <span class="err">and</span>
@@ -272,7 +271,7 @@ void put_val(int senChan, int senVal)
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm26255"></a>
+        <a id="idm26723"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="arduinoStart.html" title="arduinoStart"><em class="citetitle"></em>arduinoStart</a>,
@@ -280,7 +279,7 @@ void put_val(int senChan, int senVal)
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm26262"></a>
+        <a id="idm26730"></a>
         <h2>Credits</h2>
         <p>
       </p>
@@ -308,14 +307,14 @@ void put_val(int senChan, int senVal)
           <td width="20%" align="center">
             <a accesskey="u" href="OpcodesTop.html">Up</a>
           </td>
-          <td width="40%" align="right"> <a accesskey="n" href="arduinoStart.html">Next</a></td>
+          <td width="40%" align="right"> <a accesskey="n" href="arduinoReadF.html">Next</a></td>
         </tr>
         <tr>
           <td width="40%" align="left" valign="top">apoleparams </td>
           <td width="20%" align="center">
             <a accesskey="h" href="index.html">Home</a>
           </td>
-          <td width="40%" align="right" valign="top"> arduinoStart</td>
+          <td width="40%" align="right" valign="top"> arduinoReadF</td>
         </tr>
       </table>
     </div>

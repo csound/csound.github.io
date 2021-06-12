@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm41276"></a>
+        <a id="idm41746"></a>
         <h2>Description</h2>
         <p>Plugin opcode in chua</p>
         <p>
@@ -47,12 +47,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm41280"></a>
+        <a id="idm41750"></a>
         <h2>Syntax</h2>
-        <pre class="synopsis">aI3, aV2, aV1 <span class="command"><strong>chuap</strong></span> kL, kR0, kC1, kG, kGa, kGb, kE, kC2, iI3, iV2, iV1, ktime_step</pre>
+        <pre class="synopsis">aI3, aV2, aV1 <span class="command"><strong>chuap</strong></span> kL, kR0, kC2, kG, kGa, kGb, kE, kC1, iI3, iV2, iV1, ktime_step</pre>
       </div>
       <div class="refsect1">
-        <a id="idm41284"></a>
+        <a id="idm41754"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>iI3</em></span> -- Initial current at G
@@ -65,28 +65,32 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm41292"></a>
+        <a id="idm41762"></a>
         <h2>Performance</h2>
         <p>
-      <span class="emphasis"><em>kL</em></span> -- Inductor L
+      <span class="emphasis"><em>kL</em></span> -- Inductor L (L1 in the diagram)
     </p>
         <p>
-      <span class="emphasis"><em>kR0</em></span> -- Resistor R0
+      <span class="emphasis"><em>kR0</em></span> -- Resistor R0 (R0 in the diagram)
     </p>
         <p>
       <span class="emphasis"><em>kC1</em></span> -- Capacitor C1
     </p>
         <p>
-      <span class="emphasis"><em>kG</em></span> -- Resistor G
+      <span class="emphasis"><em>kC2</em></span> -- Capacitor C2
     </p>
         <p>
-      <span class="emphasis"><em>kGa</em></span> -- Resistor V (nonlinearity term)
+      <span class="emphasis"><em>kG</em></span> -- Resistor G (part of the active resistor, R1 in the diagram). The G parameter is the time step, which is needed to get the same slope of
+the piecewise discontinuity from Ga and Gb for all sampling rates.
     </p>
         <p>
-      <span class="emphasis"><em>kGb</em></span> -- Resistor V (nonlinearity term)
+      <span class="emphasis"><em>kGa</em></span> -- Resistor V (nonlinearity term of the active resistor, one of the R2's in the diagram)
     </p>
         <p>
-      <span class="emphasis"><em>kGb</em></span> -- Resistor V (nonlinearity term)
+      <span class="emphasis"><em>kGb</em></span> -- Resistor V (nonlinearity term of the active resistor, one of the R2's in the diagram)
+    </p>
+        <p>
+      <span class="emphasis"><em>kE</em></span> -- Size of the piecewise discontinuity simulating the active resistor
     </p>
         <p>
       <span class="emphasis"><em>ktime_step</em></span> -- Delta time in the difference equation, can be used to more or less control pitch.
@@ -96,7 +100,7 @@
       into period bifurcation, and thus to chaos, because of the nonlinear response of the active resistor. 
     </p>
         <div class="mediaobject">
-          <img src="images/600px-Chua's_circuit.svg.png" />
+          <img src="images/Chua_circuit.png" />
           <div class="caption">
             <p>Diagram of Chua's Oscillator Circuit</p>
           </div>
@@ -165,19 +169,19 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm41329"></a>
+        <a id="idm41801"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the chuap opcode. It uses the file <a class="ulink" href="examples/chuap.csd" target="_top"><em class="citetitle">chuap.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm41334"></a>
+          <a id="idm41806"></a>
           <p class="title">
-            <strong>Example 137. Example of the chuap opcode.</strong>
+            <strong>Example 136. Example of the chuap opcode.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm41336"></a>
+              <a id="idm41808"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -185,7 +189,7 @@
 -odac     <span class="c1">;;;RT audio out</span>
 <span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
-<span class="c1">; -o chuas_oscillator.wav.wav -W ;;; for file output any platform</span>
+<span class="c1">; -o chuap.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
 <span class="nt">&lt;CsInstruments&gt;</span>
 
@@ -196,44 +200,47 @@
 
 gi<span class="n">buzztable</span> <span class="nb">ftgen</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">16384</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span>
 
-<span class="kd">instr</span> <span class="nf">1</span>
-<span class="c1">; sys_variables = system_vars(5:12); % L,R0,C2,G,Ga,Gb,E,C1 or p8:p15</span>
-<span class="c1">; integ_variables = [system_vars(14:16),system_vars(1:2)]; % x0,y0,z0,dataset_size,step_size or p17:p19, p4:p5</span>
-i<span class="n">step_size</span>    <span class="o">=</span>       <span class="vi">p5</span>
-i<span class="n">L</span>            <span class="o">=</span>       <span class="vi">p8</span>
-i<span class="n">R0</span>           <span class="o">=</span>       <span class="vi">p9</span>
-i<span class="n">C2</span>           <span class="o">=</span>       <span class="vi">p10</span>
-i<span class="n">G</span>            <span class="o">=</span>       <span class="vi">p11</span>
-i<span class="n">Ga</span>           <span class="o">=</span>       <span class="vi">p12</span>
-i<span class="n">Gb</span>           <span class="o">=</span>       <span class="vi">p13</span>
-i<span class="n">E</span>            <span class="o">=</span>       <span class="vi">p14</span>
-i<span class="n">C1</span>           <span class="o">=</span>       <span class="vi">p15</span>
-i<span class="n">I3</span>           <span class="o">=</span>       <span class="vi">p17</span>
-i<span class="n">V2</span>           <span class="o">=</span>       <span class="vi">p18</span>
-i<span class="n">V1</span>           <span class="o">=</span>       <span class="vi">p19</span>
-i<span class="n">gnore</span>        <span class="o">=</span>       <span class="vi">p21</span>
-i<span class="n">gnore</span>        <span class="o">=</span>       <span class="vi">p22</span>
-i<span class="n">gnore</span>        <span class="o">=</span>       <span class="vi">p23</span>
-i<span class="n">gnore</span>        <span class="o">=</span>       <span class="vi">p24</span>
-i<span class="n">gnore</span>        <span class="o">=</span>       <span class="vi">p25</span>
-i<span class="n">attack</span>       <span class="o">=</span>       <span class="mf">0.02</span>
-i<span class="n">sustain</span>      <span class="o">=</span>       <span class="vi">p3</span>
-i<span class="n">release</span>      <span class="o">=</span>       <span class="mf">0.02</span>
-<span class="vi">p3</span>            <span class="o">=</span>       i<span class="n">attack</span> <span class="o">+</span> i<span class="n">sustain</span> <span class="o">+</span> i<span class="n">release</span>
-i<span class="n">scale</span>        <span class="o">=</span>       <span class="mf">1.0</span>
-a<span class="n">damping</span>      <span class="nb">linseg</span>  <span class="mf">0.0</span><span class="p">,</span> i<span class="n">attack</span><span class="p">,</span> i<span class="n">scale</span><span class="p">,</span> i<span class="n">sustain</span><span class="p">,</span> i<span class="n">scale</span><span class="p">,</span> i<span class="n">release</span><span class="p">,</span> <span class="mf">0.0</span>
-a<span class="n">guide</span>        <span class="nb">buzz</span>    <span class="mf">0.5</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="vg">sr</span><span class="o">/</span><span class="mi">440</span><span class="p">,</span> gi<span class="n">buzztable</span>
-a<span class="n">I3</span><span class="p">,</span> a<span class="n">V2</span><span class="p">,</span> a<span class="n">V1</span> <span class="nb">chuap</span>   i<span class="n">L</span><span class="p">,</span> i<span class="n">R0</span><span class="p">,</span> i<span class="n">C2</span><span class="p">,</span> i<span class="n">G</span><span class="p">,</span> i<span class="n">Ga</span><span class="p">,</span> i<span class="n">Gb</span><span class="p">,</span> i<span class="n">E</span><span class="p">,</span> i<span class="n">C1</span><span class="p">,</span> i<span class="n">I3</span><span class="p">,</span> i<span class="n">V2</span><span class="p">,</span> i<span class="n">V1</span><span class="p">,</span> i<span class="n">step_size</span> 
-a<span class="n">signal</span>       <span class="nb">balance</span> a<span class="n">V2</span><span class="p">,</span> a<span class="n">guide</span>
-              <span class="nb">outs</span>    a<span class="n">damping</span> <span class="o">*</span> a<span class="n">signal</span><span class="p">,</span> a<span class="n">damping</span> <span class="o">*</span> a<span class="n">signal</span>
+<span class="kd">instr</span> <span class="nf">1</span>	
+	
+    i<span class="n">step_size</span>    <span class="o">=</span>       <span class="vi">p4</span>
+    i<span class="n">L</span>            <span class="o">=</span>       <span class="vi">p5</span>
+    i<span class="n">R0</span>           <span class="o">=</span>       <span class="vi">p6</span>
+    i<span class="n">C2</span>           <span class="o">=</span>       <span class="vi">p7</span>
+    i<span class="n">G</span>            <span class="o">=</span>       <span class="vi">p8</span>
+    i<span class="n">Ga</span>           <span class="o">=</span>       <span class="vi">p9</span>
+    i<span class="n">Gb</span>           <span class="o">=</span>       <span class="vi">p10</span>
+    i<span class="n">E</span>            <span class="o">=</span>       <span class="vi">p11</span>
+    i<span class="n">C1</span>           <span class="o">=</span>       <span class="vi">p12</span>
+    i<span class="n">I3</span>           <span class="o">=</span>       <span class="vi">p13</span>
+    i<span class="n">V2</span>           <span class="o">=</span>       <span class="vi">p14</span>
+    i<span class="n">V1</span>           <span class="o">=</span>       <span class="vi">p15</span>
+
+    i<span class="n">attack</span>       <span class="o">=</span>       <span class="mf">0.02</span>
+    i<span class="n">sustain</span>      <span class="o">=</span>       <span class="vi">p3</span>
+    i<span class="n">release</span>      <span class="o">=</span>       <span class="mf">0.02</span>
+    <span class="vi">p3</span>            <span class="o">=</span>       i<span class="n">attack</span> <span class="o">+</span> i<span class="n">sustain</span> <span class="o">+</span> i<span class="n">release</span>
+    i<span class="n">scale</span>        <span class="o">=</span>       <span class="mf">1.0</span>
+    a<span class="n">damping</span>      <span class="nb">linseg</span>  <span class="mf">0.0</span><span class="p">,</span> i<span class="n">attack</span><span class="p">,</span> i<span class="n">scale</span><span class="p">,</span> i<span class="n">sustain</span><span class="p">,</span> i<span class="n">scale</span><span class="p">,</span> i<span class="n">release</span><span class="p">,</span> <span class="mf">0.0</span>
+    a<span class="n">guide</span>        <span class="nb">buzz</span>    <span class="mf">0.5</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="vg">sr</span><span class="o">/</span><span class="mi">440</span><span class="p">,</span> gi<span class="n">buzztable</span>
+    a<span class="n">I3</span><span class="p">,</span> a<span class="n">V2</span><span class="p">,</span> a<span class="n">V1</span> <span class="nb">chuap</span>   i<span class="n">L</span><span class="p">,</span> i<span class="n">R0</span><span class="p">,</span> i<span class="n">C2</span><span class="p">,</span> i<span class="n">G</span><span class="p">,</span> i<span class="n">Ga</span><span class="p">,</span> i<span class="n">Gb</span><span class="p">,</span> i<span class="n">E</span><span class="p">,</span> i<span class="n">C1</span><span class="p">,</span> i<span class="n">I3</span><span class="p">,</span> i<span class="n">V2</span><span class="p">,</span> i<span class="n">V1</span><span class="p">,</span> i<span class="n">step_size</span> 
+    a<span class="n">signal</span>       <span class="nb">balance</span> a<span class="n">V2</span><span class="p">,</span> a<span class="n">guide</span>
+
+    <span class="nb">outs</span> a<span class="n">signal</span><span class="o">*</span>a<span class="n">damping</span><span class="p">,</span> a<span class="n">signal</span><span class="o">*</span>a<span class="n">damping</span>
 <span class="kd">endin</span>
+
 <span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span> 
 <span class="c1">;        Adapted from ABC++ MATLAB example data.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">20</span> <span class="mi">1500</span> <span class="mf">.1</span>   <span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="mf">0.00707925</span> <span class="mf">0.00001647</span> <span class="mi">100</span>  <span class="mi">1</span> <span class="o">-</span><span class="mf">.99955324</span> <span class="o">-</span><span class="mf">1.00028375</span> <span class="mi">1</span> <span class="o">-</span><span class="mf">.00222159</span> <span class="mf">204.8</span> <span class="o">-</span><span class="mf">2.36201596260071</span> <span class="mf">3.08917625807226e-03</span> <span class="mf">3.87075614929199</span> <span class="mi">7</span> <span class="mf">.4</span> <span class="mf">.004</span> <span class="mi">1</span> <span class="mi">86</span> <span class="mi">30</span><span class="c1">; torus attractor ( gallery of attractors ) </span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">20</span> <span class="mi">1500</span> <span class="mf">.425</span>  <span class="mi">0</span> <span class="o">-</span><span class="mi">1</span>  <span class="mf">1.3506168</span>  <span class="mi">0</span>              <span class="o">-</span><span class="mf">4.50746268737</span> <span class="o">-</span><span class="mi">1</span> <span class="mf">2.4924</span> <span class="mf">.93</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="o">-</span><span class="mf">22.28662665</span> <span class="mf">.009506608</span> <span class="o">-</span><span class="mf">22.2861576</span> <span class="mi">32</span> <span class="mi">10</span> <span class="mi">2</span> <span class="mi">20</span> <span class="mi">86</span> <span class="mi">30</span> <span class="c1">; heteroclinic orbit</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">20</span> <span class="mi">1024</span> <span class="mf">.05</span>  <span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="mi">1</span>  <span class="mf">0.00667</span>    <span class="mf">0.000651</span>    <span class="mi">10</span> <span class="o">-</span><span class="mi">1</span> <span class="mf">.856</span> <span class="mf">1.1</span> <span class="mi">1</span> <span class="mf">.06</span> <span class="mf">51.2</span> <span class="o">-</span><span class="mf">20.200590133667</span> <span class="mf">.172539323568344</span> <span class="o">-</span><span class="mf">4.07686233520508</span> <span class="mf">2.5</span> <span class="mi">10</span> <span class="mf">.2</span> <span class="mi">1</span> <span class="mi">66</span> <span class="mi">81</span> <span class="c1">; periodic attractor (torus breakdown route)</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">20</span> <span class="mi">1024</span> <span class="mf">0.05</span> <span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="mi">1</span> <span class="mf">0.00667</span> <span class="mf">0.000651</span> <span class="mi">10</span> <span class="o">-</span><span class="mi">1</span> <span class="mf">0.856</span> <span class="mf">1.1</span> <span class="mi">1</span> <span class="mf">0.1</span> <span class="mf">153.6</span> <span class="mf">21.12496758</span> <span class="mf">0.03001749</span> <span class="mf">0.515828669</span> <span class="mf">2.5</span> <span class="mi">10</span> <span class="mf">0.2</span> <span class="mi">1</span> <span class="mi">66</span> <span class="mi">81</span>  <span class="c1">; torus attractor (torus breakdown route)'</span>
+<span class="c1">//             time_step      kL           kR0         kC2              kG            kGa           kGb          kE          kC1           iI3                     iV2                     iV1</span>
+<span class="c1">; torus attractor ( gallery of attractors ) </span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">20</span>       <span class="mf">.1</span>            <span class="o">-</span><span class="mf">0.00707925</span>   <span class="mf">0.00001647</span>  <span class="mi">100</span>              <span class="mi">1</span>             <span class="o">-</span><span class="mf">.99955324</span>    <span class="o">-</span><span class="mf">1.00028375</span>  <span class="mi">1</span>          <span class="o">-</span><span class="mf">.00222159</span>     <span class="o">-</span><span class="mf">2.36201596260071</span>       <span class="mf">3.08917625807226e-03</span>    <span class="mf">3.87075614929199</span>   
+<span class="c1">; heteroclinic orbit</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">20</span>       <span class="mf">.425</span>           <span class="mf">1.3506168</span>    <span class="mi">0</span>           <span class="o">-</span><span class="mf">4.50746268737</span>  <span class="o">-</span><span class="mi">1</span>             <span class="mf">2.4924</span>        <span class="mf">.93</span>          <span class="mi">1</span>           <span class="mi">1</span>             <span class="o">-</span><span class="mf">22.28662665</span>            <span class="mf">.009506608</span>              <span class="o">-</span><span class="mf">22.2861576</span>            
+<span class="c1">; periodic attractor (torus breakdown route)</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">20</span>       <span class="mf">.05</span>            <span class="mf">0.00667</span>      <span class="mf">0.000651</span>    <span class="mi">10</span>              <span class="o">-</span><span class="mi">1</span>             <span class="mf">.856</span>          <span class="mf">1.1</span>          <span class="mi">1</span>           <span class="mf">.06</span>           <span class="o">-</span><span class="mf">20.200590133667</span>        <span class="mf">.172539323568344</span>        <span class="o">-</span><span class="mf">4.07686233520508</span>      
+<span class="c1">; torus attractor (torus breakdown route)'</span>
+<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">20</span>       <span class="mf">0.05</span>           <span class="mf">0.00667</span>      <span class="mf">0.000651</span>    <span class="mi">10</span>              <span class="o">-</span><span class="mi">1</span>             <span class="mf">0.856</span>         <span class="mf">1.1</span>          <span class="mi">1</span>           <span class="mf">0.1</span>            <span class="mf">21.12496758</span>             <span class="mf">0.03001749</span>              <span class="mf">0.515828669</span>            
+
 <span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
@@ -244,7 +251,7 @@ a<span class="n">signal</span>       <span class="nb">balance</span> a<span clas
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm41646"></a>
+        <a id="idm42055"></a>
         <h2>Credits</h2>
         <p>
       </p>

@@ -39,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm175064"></a>
+        <a id="idm180334"></a>
         <h2>Description</h2>
         <p>
       Defines and initializes numeric arrays at orchestra load time.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm175067"></a>
+        <a id="idm180337"></a>
         <h2>Syntax</h2>
         <pre class="synopsis"><span class="command"><strong>pset</strong></span> icon1 [, icon2] [...]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm175071"></a>
+        <a id="idm180341"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>icon1, icon2, ...</em></span> -- preset values for a MIDI instrument
@@ -61,20 +61,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm175077"></a>
+        <a id="idm180347"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the pset opcode. It uses the file <a class="ulink" href="examples/pset.csd" target="_top"><em class="citetitle">pset.csd</em></a>
       </p>
         <div class="example">
-          <a id="idm175082"></a>
+          <a id="idm180352"></a>
           <p class="title">
-            <strong>Example 764. Example of the pset opcode.</strong>
+            <strong>Example 782. Example of the pset opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm175089"></a>
+              <a id="idm180359"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span> 
 <span class="nt">&lt;CsOptions&gt;</span> 
@@ -114,47 +114,49 @@ a<span class="n">sig</span> <span class="nb">poscil</span> <span class="vi">p5</
         </div>
         <p><br class="example-break" />
      </p>
-        <p> Here is another example of the pset opcode, using pset with midi. It uses the file <a class="ulink" href="examples/pset-midi.csd" target="_top"><em class="citetitle">pset-midi.csd</em></a></p>
-        <p>
+        <p> Here is another example of the pset opcode, using pset with a midi file. It uses the files <a class="ulink" href="examples/pset-midi.csd" target="_top"><em class="citetitle">pset-midi.csd</em></a> and <a class="ulink" href="examples/midiChords.mid" target="_top"><em class="citetitle">midiChords.mid</em></a></p>
+        <p>.
       </p>
         <div class="example">
-          <a id="idm175167"></a>
+          <a id="idm180439"></a>
           <p class="title">
-            <strong>Example 765. Second example of the pset opcode.</strong>
+            <strong>Example 783. Second example of the pset opcode.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm175169"></a>
+              <a id="idm180441"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span> 
 <span class="nt">&lt;CsOptions&gt;</span> 
 <span class="c1">; Select audio/midi flags here according to platform</span>
--odac -+rtmidi=virtual -M0 --midi-key-oct=4 --midi-velocity=5   <span class="c1">;;;realtime audio out and virtual midi keyboard</span>
+-odac    -m0d --midi-key-oct=4 --midi-velocity=5   -F midiChords.mid 
 <span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o pset-midi.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span> 
 <span class="nt">&lt;CsInstruments&gt;</span> 
 
+<span class="c1">; by Menno Knevel - 2021</span>
+
 <span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span> 
 <span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
 <span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span> 
 <span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span> 
 
+<span class="c1">; midiChords.mid can be found in examples folder</span>
+
 <span class="kd">instr</span> <span class="nf">1</span>
 
-            <span class="nb">pset</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3600</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
-i<span class="n">instrument</span> <span class="o">=</span> <span class="vi">p1</span>
+            <span class="nb">pset</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.1</span>
+
 i<span class="n">starttime</span>  <span class="o">=</span> <span class="vi">p2</span>
 i<span class="n">attack</span>     <span class="o">=</span> <span class="mf">0.005</span>
 i<span class="n">sustain</span>    <span class="o">=</span> <span class="vi">p3</span>
 i<span class="n">release</span>    <span class="o">=</span> <span class="mf">0.06</span>
 <span class="vi">p3</span>          <span class="o">=</span> i<span class="n">sustain</span> <span class="o">+</span> i<span class="n">attack</span> <span class="o">+</span> i<span class="n">release</span>
-k<span class="n">damping</span>    <span class="nb">linsegr</span> <span class="mf">0.0</span><span class="p">,</span> i<span class="n">attack</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> i<span class="n">sustain</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> i<span class="n">release</span><span class="p">,</span> <span class="mf">0.0</span>
 
-i<span class="n">octave</span>     <span class="o">=</span> <span class="vi">p4</span>
-i<span class="n">frequency</span>  <span class="o">=</span> <span class="nb">cpsoct</span><span class="p">(</span>i<span class="n">octave</span><span class="p">)</span>
-i<span class="n">amplitude</span>  <span class="o">=</span> <span class="vi">p5</span><span class="o">*</span><span class="mf">.15</span>			<span class="c1">;lower volume</span>
+i<span class="n">frequency</span> <span class="nb">cpsmidi</span>
+i<span class="n">amplitude</span>  <span class="o">=</span> <span class="vi">p5</span><span class="o">*</span><span class="mf">.2</span>			<span class="c1">;lower volume</span>
 
 <span class="nb">print</span> <span class="vi">p1</span><span class="p">,</span> <span class="vi">p2</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="vi">p4</span><span class="p">,</span> <span class="vi">p5</span>
 a<span class="n">sig</span> <span class="nb">STKBandedWG</span> i<span class="n">frequency</span><span class="p">,</span> i<span class="n">amplitude</span>
@@ -163,8 +165,7 @@ a<span class="n">sig</span> <span class="nb">STKBandedWG</span> i<span class="n"
 <span class="kd">endin</span>
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">f</span> <span class="mi">0</span> <span class="mi">60</span>	<span class="c1">; runs 69 seconds</span>
-<span class="nb">e</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">60</span>  <span class="c1">; runs for 1 minute, midifile time lasts for 35 seconds</span>
 <span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
@@ -175,7 +176,7 @@ a<span class="n">sig</span> <span class="nb">STKBandedWG</span> i<span class="n"
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm175287"></a>
+        <a id="idm180529"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="strset.html" title="strset"><em class="citetitle">strset</em></a>

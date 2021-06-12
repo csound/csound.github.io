@@ -39,35 +39,31 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm134763"></a>
+        <a id="idm138269"></a>
         <h2>Description</h2>
         <p>
       midiarp constructs arpeggios based currently held MIDI notes. The opcode will output notes in the form of MIDI note numbers, and a metronomic signal that can be used to sequence the notes. Users can choose the rate at which the notes are generated, and may also choose from a set of arpeggio patterns. 
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm134766"></a>
+        <a id="idm138272"></a>
         <h2>Syntax</h2>
-        <pre class="synopsis">kMidiNoteNum, kCounter <span class="command"><strong>midiarp</strong></span> kRate[, kMode]</pre>
+        <pre class="synopsis">kMidiNoteNum, kTrigger <span class="command"><strong>midiarp</strong></span> kRate[, kMode]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm134770"></a>
-        <h2>Initialization</h2>
+        <a id="idm138276"></a>
+        <h2>Performance</h2>
         <p>
-      <span class="emphasis"><em>kRate</em></span> -- sets the rate at which new notes will be generated and controls the frequency of the metronomic pulse signal.  
+      <span class="emphasis"><em>kRate</em></span> -- sets the rate in cycles per second at which new notes will be generated.  
     </p>
         <p>
       <span class="emphasis"><em>kMode</em></span> -- Optional. Sets the mode of the arpeggio. 0 for up and down, 1, for up, 2 for down, and 3 for random. If left out, it will default to mode 0, up and down.
     </p>
-      </div>
-      <div class="refsect1">
-        <a id="idm134776"></a>
-        <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>kMideNoteNum</em></span> -- the current note number in the arpeggio pattern. 
     </p>
         <p>
-      <span class="emphasis"><em>kCounter</em></span> -- a metronomic pulse that can be used to trigger playback of the notes in the arpeggio. This signal will output a 1 followed by 0s on each cycle. The frequency is set using the <span class="emphasis"><em>kRate</em></span> input parameter.   
+      <span class="emphasis"><em>kTrigger</em></span> -- a metronomic pulse that can be used to trigger playback of the notes in the arpeggio. This signal will output a 1 followed by 0s on each cycle. The frequency is set using the <span class="emphasis"><em>kRate</em></span> input parameter.   
     </p>
       </div>
       <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
@@ -88,60 +84,63 @@
         </table>
       </div>
       <div class="refsect1">
-        <a id="idm134786"></a>
+        <a id="idm138290"></a>
         <h2>Example</h2>
         <p>
       This example shows how midiarp can be used to trigger arpeggios using a secondary instrument for playback. Instrument 100 listens to incoming MIDI notes, and then triggers playback using instrument 200. <span class="emphasis"><em>massign</em></span> is used to prevent instrument 100 from being triggered each time a new MIDI note is pressed. This examples uses the file <a class="ulink" href="examples/midiarp.csd" target="_top"><em class="citetitle">midiarp.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm134792"></a>
+          <a id="idm138296"></a>
           <p class="title">
-            <strong>Example 566. Example of the midiarp opcode</strong>
+            <strong>Example 577. Example of the midiarp opcode</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm134794"></a>
+              <a id="idm138298"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
 <span class="c1">; Audio out   Audio in    No messages</span>
--odac 	-d    -m0d     -M0  -+rtmidi=virtual <span class="c1">;;;RT audio I/O with MIDI in</span>
+-odac 	-d    -m0d --midi-key-cps=4 --midi-velocity-amp=5  -F midiChords.mid
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o midiin.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
 <span class="nt">&lt;CsInstruments&gt;</span>
-
+<span class="c1">; Initialize the global variables. </span>
 <span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
 <span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
 <span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
 
 <span class="nb">massign</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="c1">; prevent triggering of instrument with MIDI</span>
 
-<span class="kd">instr</span> <span class="nf">100</span>
-k<span class="n">Mode</span> <span class="o">=</span> <span class="mi">3</span>
-k<span class="n">Tempo</span> <span class="o">=</span> <span class="mi">6</span>
-k<span class="n">Note</span><span class="p">,</span> k<span class="n">Counter</span> <span class="nb">midiarp</span> k<span class="n">Tempo</span>
+<span class="kd">instr</span> <span class="nf">200</span>
 
-k<span class="n">FilterFreq</span> <span class="nb">oscil</span> <span class="mi">2000</span><span class="p">,</span> <span class="mf">.05</span>
-<span class="c1">;if kCounter is 1 trigger instrument 2 to play</span>
-<span class="k">if</span> k<span class="n">Counter</span><span class="o">==</span><span class="mi">1</span> <span class="k">then</span> 	
-	<span class="nb">event</span> <span class="s">"i"</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> k<span class="n">Note</span><span class="p">,</span> k<span class="n">FilterFreq</span><span class="o">+</span><span class="mi">2200</span>
-<span class="k">endif</span>
+    k<span class="n">Mode</span> <span class="o">=</span> <span class="mi">0</span>
+    k<span class="n">Tempo</span> <span class="o">=</span> <span class="mi">8</span>
+    k<span class="n">Note</span><span class="p">,</span> k<span class="n">Trigger</span> <span class="nb">midiarp</span> k<span class="n">Tempo</span>
+    k<span class="n">FilterFreq</span> <span class="nb">lfo</span> <span class="mi">2000</span><span class="p">,</span> <span class="mf">.05</span><span class="p">,</span> <span class="mi">1</span>
+
+    <span class="c1">;if kTrigger is 1 trigger instrument 300 to play</span>
+    <span class="k">if</span> k<span class="n">Trigger</span><span class="o">==</span><span class="mi">1</span> <span class="k">then</span> 	
+        <span class="nb">event</span> <span class="s">"i"</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> k<span class="n">Note</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span>k<span class="n">FilterFreq</span><span class="p">)</span><span class="o">+</span><span class="mi">200</span>
+    <span class="k">endif</span>
 
 <span class="kd">endin</span>
 
-<span class="kd">instr</span> <span class="nf">200</span>
-k<span class="n">Env</span> <span class="nb">expon</span> <span class="mf">.4</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mf">.001</span>
-a<span class="n">Out</span> <span class="nb">vco2</span> k<span class="n">Env</span><span class="p">,</span> <span class="nb">cpsmidinn</span><span class="p">(</span><span class="vi">p4</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>		<span class="c1">;convert note number to cps</span>
-a<span class="n">Filter</span> <span class="nb">moogladder</span> a<span class="n">Out</span><span class="p">,</span> <span class="vi">p5</span><span class="p">,</span> <span class="mi">0</span>
-<span class="nb">outs</span> a<span class="n">Filter</span><span class="p">,</span> a<span class="n">Filter</span>
+<span class="kd">instr</span> <span class="nf">300</span>
+
+    k<span class="n">Env</span> <span class="nb">expon</span> <span class="vi">p4</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mf">.001</span>
+    a<span class="n">Out</span> <span class="nb">vco2</span> k<span class="n">Env</span><span class="p">,</span> <span class="nb">cpsmidinn</span><span class="p">(</span><span class="vi">p5</span><span class="p">)</span>		<span class="c1">;convert note number to cps</span>
+    a<span class="n">Filter</span> <span class="nb">moogladder</span> a<span class="n">Out</span><span class="p">,</span> <span class="vi">p6</span><span class="p">,</span> <span class="mf">.2</span>
+    <span class="nb">outs</span> a<span class="n">Filter</span><span class="p">,</span> a<span class="n">Filter</span>
+    
 <span class="kd">endin</span>
 
 <span class="nt">&lt;/CsInstruments&gt;</span>
 <span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span><span class="mi">100</span> <span class="mi">0</span> <span class="mi">1000</span>
+<span class="nb">i</span><span class="mi">200</span> <span class="mi">0</span> <span class="mi">60</span>
 <span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
@@ -152,7 +151,7 @@ a<span class="n">Filter</span> <span class="nb">moogladder</span> a<span class="
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm134903"></a>
+        <a id="idm138412"></a>
         <h2>Credits</h2>
         <p>
       </p>

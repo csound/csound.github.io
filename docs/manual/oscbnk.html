@@ -39,7 +39,7 @@
           </p>
       </div>
       <div class="refsect1">
-        <a id="idm150583"></a>
+        <a id="idm155385"></a>
         <h2>Description</h2>
         <p>
       This unit generator mixes the output of any number of oscillators. The frequency, phase, and amplitude of each oscillator can be modulated by two LFOs (all oscillators have a separate set of LFOs, with different phase and frequency); additionally, the output of each oscillator can be filtered through an optional parametric equalizer (also controlled by the LFOs).  This opcode is most useful for rendering ensemble (strings, choir, etc.) instruments.
@@ -52,7 +52,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm150588"></a>
+        <a id="idm155390"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">ares <span class="command"><strong>oscbnk</strong></span>  kcps, kamd, kfmd, kpmd, iovrlap, iseed, kl1minf, kl1maxf, \
       kl2minf, kl2maxf, ilfomode, keqminf, keqmaxf, keqminl, keqmaxl, \
@@ -60,7 +60,7 @@
       [, ieqlfn] [, ieqqfn] [, itabl] [, ioutfn]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm150592"></a>
+        <a id="idm155394"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>iovrlap</em></span> -- Number of oscillator units.
@@ -165,7 +165,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm150655"></a>
+        <a id="idm155457"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>ares</em></span> -- Output signal.
@@ -184,7 +184,7 @@
         </div>
         <p>
 
-      If <span class="emphasis"><em>ilfomode</em></span> isn't set to modulate the amplitude, then (AM output) = (AM input) regardless of the value of <span class="emphasis"><em>kamd</em></span>. That means that <span class="emphasis"><em>kamd</em></span> will have no effect.
+      If <span class="emphasis"><em>ilfomode</em></span> is not set to modulate the amplitude, then (AM output) = (AM input) regardless of the value of <span class="emphasis"><em>kamd</em></span>. That means that <span class="emphasis"><em>kamd</em></span> will have no effect.
     </p>
         <p>
       Note: Amplitude modulation is applied before the parametric equalizer. 
@@ -232,27 +232,104 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm150691"></a>
+        <a id="idm155493"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of oscbnk opcode. It uses the file <a class="ulink" href="examples/oscbnk.csd" target="_top"><em class="citetitle">oscbnk.csd</em></a>.
 
       </p>
         <div class="example">
-          <a id="idm150696"></a>
+          <a id="idm155498"></a>
           <p class="title">
-            <strong>Example 653. Example of the oscbnk opcode.</strong>
+            <strong>Example 668. Example of the oscbnk opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm150703"></a>
+              <a id="idm155505"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
 <span class="c1">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+-odac       <span class="c1">;;    -iadc     -d     ;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o oscbnk.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span>
+
+<span class="vg">sr</span>     <span class="o">=</span>   <span class="mi">44100</span>
+<span class="vg">ksmps</span>  <span class="o">=</span>   <span class="mi">32</span>
+<span class="vg">nchnls</span> <span class="o">=</span>   <span class="mi">2</span>
+<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1">; By Stefano Cucchi 2020</span>
+
+
+<span class="kd">instr</span> <span class="nf">1</span>
+
+k<span class="n">cps</span> <span class="o">=</span> <span class="mi">300</span>
+k<span class="n">amd</span> <span class="o">=</span> <span class="mi">3</span>
+k<span class="n">fmd</span> <span class="o">=</span> <span class="mi">2</span>
+k<span class="n">pmd</span> <span class="o">=</span> <span class="mf">2.3</span>
+i<span class="n">ovrlap</span> <span class="o">=</span> <span class="vi">p4</span>
+i<span class="n">seed</span> <span class="o">=</span> <span class="mf">0.2</span>
+k<span class="n">l1minf</span> <span class="o">=</span> <span class="mf">1.1</span>
+k<span class="n">l1maxf</span> <span class="o">=</span> <span class="mf">2.3</span>
+k<span class="n">l2minf</span> <span class="o">=</span> <span class="mf">0.2</span>
+k<span class="n">l2maxf</span> <span class="o">=</span> <span class="mf">1.5</span>
+i<span class="n">lfomode</span> <span class="o">=</span> <span class="mi">64</span> <span class="o">+</span> <span class="mi">16</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">+</span> <span class="mi">2</span> <span class="c1">; LFO1 to amplitude + LFO1 to EQ + LFO2 to frequency + LFO2 to phase </span>
+k<span class="n">eqminf</span> <span class="o">=</span> <span class="mi">20</span>
+k<span class="n">eqmaxf</span> <span class="o">=</span> <span class="mi">12000</span>
+k<span class="n">eqminl</span> <span class="o">=</span> <span class="mf">0.1</span>
+k<span class="n">eqmaxl</span> <span class="o">=</span> <span class="mi">23</span>
+k<span class="n">eqminq</span> <span class="o">=</span> <span class="mf">0.2</span>
+k<span class="n">eqmaxq</span> <span class="o">=</span> <span class="mi">2</span>
+i<span class="n">eqmode</span> <span class="o">=</span> <span class="mi">1</span>
+k<span class="n">fn</span> <span class="o">=</span> <span class="mi">1</span>
+
+a<span class="n">1</span> <span class="nb">oscbnk</span> k<span class="n">cps</span><span class="p">,</span> k<span class="n">amd</span><span class="p">,</span> k<span class="n">fmd</span><span class="p">,</span> k<span class="n">pmd</span><span class="p">,</span> i<span class="n">ovrlap</span><span class="p">,</span> i<span class="n">seed</span><span class="p">,</span> k<span class="n">l1minf</span><span class="p">,</span> k<span class="n">l1maxf</span><span class="p">,</span> k<span class="n">l2minf</span><span class="p">,</span> k<span class="n">l2maxf</span><span class="p">,</span> i<span class="n">lfomode</span><span class="p">,</span> k<span class="n">eqminf</span><span class="p">,</span> k<span class="n">eqmaxf</span><span class="p">,</span> k<span class="n">eqminl</span><span class="p">,</span> k<span class="n">eqmaxl</span><span class="p">,</span> k<span class="n">eqminq</span><span class="p">,</span> k<span class="n">eqmaxq</span><span class="p">,</span> i<span class="n">eqmode</span><span class="p">,</span> k<span class="n">fn</span><span class="p">,</span> <span class="mi">2</span> <span class="p">,</span><span class="mi">2</span> <span class="p">,</span><span class="mi">2</span> <span class="p">,</span><span class="mi">2</span> <span class="p">,</span><span class="mi">2</span> 
+k<span class="n">declick</span> <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="vi">p3</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">0</span>
+<span class="nb">outs</span> a<span class="n">1</span><span class="o">*</span><span class="mf">0.003</span><span class="o">*</span>k<span class="n">declick</span><span class="p">,</span> a<span class="n">1</span><span class="o">*</span><span class="mf">0.003</span><span class="o">*</span>k<span class="n">declick</span>
+<span class="kd">endin</span>
+
+<span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span>
+<span class="nb">f</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">4096</span> <span class="mi">10</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+<span class="nb">f</span><span class="mi">2</span> <span class="mi">0</span> <span class="mi">4096</span> <span class="mi">10</span> <span class="mi">1</span> 
+
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">4</span> <span class="mi">3</span>
+<span class="nb">i</span><span class="mi">1</span> <span class="mi">5</span> <span class="mi">4</span> <span class="mi">32</span>
+<span class="nb">e</span>
+<span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm155717"></a>
+        <p>
+      Here is an advanced example of oscbnk opcode. It uses the file <a class="ulink" href="examples/oscbnk-advanced.csd" target="_top"><em class="citetitle">oscbnk-advanced.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm155721"></a>
+          <p class="title">
+            <strong>Example 669. Advanced example of the oscbnk opcode.</strong>
+          </p>
+          <div class="example-contents">
+            <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
+            <div class="refsect1">
+              <a id="idm155728"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac         <span class="c1">;  -iadc     -d     ;;;RT audio I/O</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o oscbnk.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
@@ -414,7 +491,7 @@ a<span class="n">Rl</span>	<span class="nb">butterlp</span> a<span class="n">Rl<
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm151656"></a>
+        <a id="idm156681"></a>
         <h2>Credits</h2>
         <p>
       </p>
