@@ -26,8 +26,8 @@ https://github.com/csound/csound.github.io/blob/master/_data/
 	<a href="{{ site.data.download.windows_64_full.link }}">64bit Full Installer v{{ site.data.download.windows_64_full.ver }}</a><br/>
 	<a href="{{ site.data.download.windows_64.link }}">64bit Binaries
     v{{ site.data.download.windows_64.ver }}</a><br/>
-    <a href="{{ site.data.download.windows_64_beta.link }}">Windows 64
-    (latest beta) v{{ site.data.download.windows_64_beta.ver }}</a><br/>
+    <a href="{{ site.data.download.windows_64_beta.link }}">64bit 
+    Latest (beta) v{{ site.data.download.windows_64_beta.ver }}</a><br/>
     <a href="{{ site.data.download.windows_XP64.link }}">Windows XP 64bit binaries v{{ site.data.download.windows_X64.ver }}</a><br/>
 	<a href="{{ site.data.download.windows_XP32.link }}">Windows XP
     32bit binaries v{{ site.data.download.windows_XP32.ver }}</a><br/>
