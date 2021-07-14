@@ -28,7 +28,7 @@ https://github.com/csound/csound.github.io/blob/master/_data/
     v{{ site.data.download.windows_64.ver }}</a><br/>
     <a href="{{ site.data.download.windows_64_beta.link }}">64bit 
     Latest (beta) v{{ site.data.download.windows_64_beta.ver }}</a><br/>
-    <a href="{{ site.data.download.windows_XP64.link }}">Windows XP 64bit binaries v{{ site.data.download.windows_X64.ver }}</a><br/>
+    <a href="{{ site.data.download.windows_XP64.link }}">Windows XP 64bit binaries v{{ site.data.download.windows_XP64.ver }}</a><br/>
 	<a href="{{ site.data.download.windows_XP32.link }}">Windows XP
     32bit binaries v{{ site.data.download.windows_XP32.ver }}</a><br/>
     </div>
