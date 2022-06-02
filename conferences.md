@@ -6,6 +6,11 @@ title: Conferences
 From time to time we gather the Csound community together to have some talks, performances, beers
 and things related.
 
+##### The 6th International Csound Conference
+
+2022, 4&ndash;6 November, Athlone, Ireland<br>
+Link: [Website](https://csound.com/icsc2022/),
+
 ##### The 5th International Csound Conference
 
 2019, 27&ndash;29 September, Cagli (Pesaro-Urbino), Italy<br>
