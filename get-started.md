@@ -259,19 +259,33 @@ all instances of p4 with the value from the i-statement. Here is a full example 
 3 notes, all with a unique pitch and starting time.
 
 <pre><code data-language="csound">
+&lt;CsOptions&gt;
+; uncomment the next line if you want to play through speakers
+; -odac
+&lt;/CsOptions&gt;
 &lt;CsoundSynthesizer&gt;
 &lt;CsInstruments&gt;
 
+; the next line sets the volume scale 0-1
+; by default this value is 32767
+0dbfs = 1
+
+; defines the first instrument
 instr 1
-aOut vco2 1, p4
+; variable for output,  instrument type,  amplitude,  pitch input 
+;                                                     as parameter 4 in the score
+  aOut                  vco2              1,          p4
+; routes the instrument to default output
 out aOut
 endin
 
 &lt;/CsInstruments&gt;
 &lt;CsScore&gt;
-i1 0 1 100
-i1 1 1 200
-i1 2 1 300
+; plays three notes in succession
+; instrument  time to play at   length to play  frequency to play
+  i1          0                 1               100
+  i1          1                 1               200
+  i1          2                 1               300
 &lt;/CsScore&gt;
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
