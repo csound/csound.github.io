@@ -47,8 +47,15 @@ files.
 * <a href="https://appsto.re/us/9GV8db.i">RunloopSound</a>
 * <a href="https://atom.io/packages/language-csound">Csound for Atom</a>
 * <a href="https://github.com/hlolli/csound-mode">Csound-Mode for Emacs</a>
-* <a href="http://www.zogotounga.net/comp/csoundx.html" target="_blank">Csound for Emacs</a>
+* <a href="http://www.zogotounga.net/comp/csoundx.html"
+  target="_blank">Csound for Emacs</a>
+  
+The Csound Web IDE can be used natively inside browsers to run Csound projects,
+  
+  * <a href="https://ide.csound.com/" target="_blank">Csound Web IDE</a>
 
+and is a convenient, installation-free, cross-platform way of working
+with Csound. 
 
 ## Csound syntax
 

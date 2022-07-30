@@ -17,12 +17,19 @@ Csound in a more user-friendly graphical environment. Listed below are some of
 the more popular solutions. Each of these applications are supported, developed
 and promoted by members of the Csound community.
 
+### Csound Web IDE
+
+The [Web IDE](https://ide.csound.com) runs on most modern browsers
+using the technologies of Web Audio, Web MIDI, and Web Assembly. It
+allows users to run Csound on various platforms without the need of
+any software installation.
+
 ### CsoundQT
-<img src="http://qutecsound.sourceforge.net/images/CsoundQt090.png"
+<img src="https://i.imgur.com/dStJTsQ.png"
      alt="CsoundQT" style="width: 400px;"/>
 
-[CsoundQT](http://qutecsound.sourceforge.net/) This is the default editor for
-Csound and ships with most of the Csound installer. It has nice tools for
+[CsoundQT](https://csoundqt.github.io). This is a standard IDE for
+editing and running Csound. It has nice tools for
 editing Csound files, comes with easy editable widgets and a huge example
 collection.
 
