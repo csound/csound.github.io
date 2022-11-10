@@ -6,11 +6,11 @@
     <title>lag</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
-    <link rel="prev" href="sc_lag.html" title="sc_lag" />
-    <link rel="next" href="sc_lagud.html" title="sc_lagud" />
+    <link rel="prev" href="ksmps.html" title="ksmps" />
+    <link rel="next" href="lagud.html" title="lagud" />
   </head>
   <body>
     <div class="navheader">
@@ -19,9 +19,9 @@
           <th colspan="3" align="center">lag</th>
         </tr>
         <tr>
-          <td width="20%" align="left"><a accesskey="p" href="sc_lag.html">Prev</a> </td>
+          <td width="20%" align="left"><a accesskey="p" href="ksmps.html">Prev</a> </td>
           <th width="60%" align="center">Orchestra Opcodes and Operators</th>
-          <td width="20%" align="right"> <a accesskey="n" href="sc_lagud.html">Next</a></td>
+          <td width="20%" align="right"> <a accesskey="n" href="lagud.html">Next</a></td>
         </tr>
       </table>
       <hr />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm204177"></a>
+        <a id="idm172030"></a>
         <h2>Description</h2>
         <p>Plugin opcode in scugens.</p>
         <p>
@@ -50,13 +50,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm204181"></a>
+        <a id="idm172034"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">aout <span class="command"><strong>lag</strong></span> ain, klagtime [, initialvalue]</pre>
         <pre class="synopsis">kout <span class="command"><strong>lag</strong></span> kin, klagtime [, initialvalue]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm204187"></a>
+        <a id="idm172040"></a>
         <h2>Initialization</h2>
         <p>
 	  <span class="emphasis"><em>initialvalue</em></span> If given, sets the internal state. It defaults to the
@@ -64,7 +64,7 @@
 	</p>
       </div>
       <div class="refsect1">
-        <a id="idm204191"></a>
+        <a id="idm172044"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>ain</em></span> -- input signal
@@ -77,55 +77,55 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm204199"></a>
+        <a id="idm172052"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the lag opcode. It uses the file <a class="ulink" href="examples/lag.csd" target="_top"><em class="citetitle">lag.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm204204"></a>
+          <a id="idm172057"></a>
           <p class="title">
-            <strong>Example 929. Example of the lag opcode.</strong>
+            <strong>Example 495. Example of the lag opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm204211"></a>
+              <a id="idm172064"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">128</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mf">1.0</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">128</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
-  <span class="c1">; smooth a krate signal  </span>
-  k<span class="n">x</span> <span class="o">=</span> <span class="nb">floor</span><span class="p">(</span><span class="nb">line</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-  k<span class="n">x2</span> <span class="o">=</span> <span class="nb">lag</span><span class="p">(</span>k<span class="n">x</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
-  <span class="nb">printk2</span> k<span class="n">x2</span>
-<span class="kd">endin</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span><span class="c1">; smooth a krate signal  </span><span class="w">
+  </span>k<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">floor</span><span class="p">(</span><span class="nb">line</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">))</span><span class="w">
+  </span>k<span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">lag</span><span class="p">(</span>k<span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">)</span><span class="w">
+  </span><span class="nb">printk2</span><span class="w"> </span>k<span class="n">x2</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">2</span>
-  <span class="c1">; smooth an audio signal</span>
-  k<span class="n">midi</span> <span class="o">=</span> <span class="nb">floor</span><span class="p">(</span><span class="nb">line</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">72</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span>
-  a<span class="n">freq</span> <span class="o">=</span> <span class="nb">upsamp</span><span class="p">(</span><span class="nb">mtof</span><span class="p">(</span>k<span class="n">midi</span><span class="p">))</span>
-  a<span class="n">freqsmooth</span> <span class="o">=</span> <span class="nb">lag</span><span class="p">(</span>a<span class="n">freq</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-  a<span class="n">1</span> <span class="o">=</span> <span class="nb">oscili</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> a<span class="n">freq</span><span class="p">)</span>
-  a<span class="n">2</span> <span class="o">=</span> <span class="nb">oscili</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> a<span class="n">freqsmooth</span><span class="p">)</span>
-  <span class="nb">outch</span> <span class="mi">1</span><span class="p">,</span> a<span class="n">1</span>
-  <span class="nb">outch</span> <span class="mi">2</span><span class="p">,</span> a<span class="n">2</span> 
-<span class="kd">endin</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+  </span><span class="c1">; smooth an audio signal</span><span class="w">
+  </span>k<span class="n">midi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">floor</span><span class="p">(</span><span class="nb">line</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">72</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="w">
+  </span>a<span class="n">freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">upsamp</span><span class="p">(</span><span class="nb">mtof</span><span class="p">(</span>k<span class="n">midi</span><span class="p">))</span><span class="w">
+  </span>a<span class="n">freqsmooth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">lag</span><span class="p">(</span>a<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">
+  </span>a<span class="n">1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">oscili</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">freq</span><span class="p">)</span><span class="w">
+  </span>a<span class="n">2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">oscili</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">freqsmooth</span><span class="p">)</span><span class="w">
+  </span><span class="nb">outch</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="w">
+  </span><span class="nb">outch</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span>a<span class="n">2</span><span class="w"> 
+</span><span class="kd">endin</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">5</span>
-<span class="nb">i</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">10</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w">
 
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -135,7 +135,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm204328"></a>
+        <a id="idm172248"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="lagud.html" title="lagud"><em class="citetitle">lagud</em></a>, 
@@ -145,7 +145,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm204337"></a>
+        <a id="idm172257"></a>
         <h2>Credits</h2>
         <p>By: Eduardo Moguillansky 2017</p>
       </div>
@@ -154,18 +154,18 @@
       <hr />
       <table width="100%" summary="Navigation footer">
         <tr>
-          <td width="40%" align="left"><a accesskey="p" href="sc_lag.html">Prev</a> </td>
+          <td width="40%" align="left"><a accesskey="p" href="ksmps.html">Prev</a> </td>
           <td width="20%" align="center">
             <a accesskey="u" href="OpcodesTop.html">Up</a>
           </td>
-          <td width="40%" align="right"> <a accesskey="n" href="sc_lagud.html">Next</a></td>
+          <td width="40%" align="right"> <a accesskey="n" href="lagud.html">Next</a></td>
         </tr>
         <tr>
-          <td width="40%" align="left" valign="top">sc_lag </td>
+          <td width="40%" align="left" valign="top">ksmps </td>
           <td width="20%" align="center">
             <a accesskey="h" href="index.html">Home</a>
           </td>
-          <td width="40%" align="right" valign="top"> sc_lagud</td>
+          <td width="40%" align="right" valign="top"> lagud</td>
         </tr>
       </table>
     </div>

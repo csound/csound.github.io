@@ -4,7 +4,8 @@
 -odac      ;;;realtime audio out
 ;-iadc    ;;;uncomment -iadc if realtime audio input is needed too
 ; For Non-realtime ouput leave only the line below:
-; -o pvslock.wav -W ;;; for file output any platform
+; 
+; By Stefano Cucchi - 2021
 </CsOptions>
 <CsInstruments>
 
@@ -13,23 +14,28 @@ ksmps = 32
 nchnls = 2
 0dbfs  = 1
 
-gifil ftgen 0, 0, 0, 1, "fox.wav", 0, 0, 1
+giOSC1 OSCinit 8020
 
-instr 1
+instr 3 ; OSC send
 
-klock	= p4
-fsig    pvstanal 1, 1, 1, gifil	; no further transformations		
-fsigout	pvslock  fsig, klock	; lock frequency 
-aout    pvsynth  fsigout
-        outs     aout, aout
+krandom randomh -50, 50, 4
+iport = 8020
+OSCsend krandom, "localhost", iport, "/boulevard", "f", krandom
 
 endin
+
+instr 4 ; OSC receive
+
+kvaluefrom3 init 0
+kdata1 OSClisten giOSC1, "/boulevard", "f", kvaluefrom3 
+printk2 kvaluefrom3
+
+endin 
+
 </CsInstruments>
 <CsScore>
-          
-i 1 0 2.6 1	; locked
-i 1 3 2.6 0	; not locked     
-
+i 3 0 5 
+i 4 0 5
 e
 </CsScore>
 </CsoundSynthesizer>
