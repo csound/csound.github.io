@@ -6,7 +6,7 @@
     <title>trlowest</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="trirand.html" title="trirand" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm245371"></a>
+        <a id="idm357568"></a>
         <h2>Description</h2>
         <p>
       L'opcode <span class="emphasis"><em>trlowest</em></span> prend en entrée un flot de signal
@@ -50,12 +50,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm245376"></a>
+        <a id="idm357573"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">fsig, kfr, kamp <span class="command"><strong>trlowest</strong></span> fin1, kscal</pre>
       </div>
       <div class="refsect1">
-        <a id="idm245380"></a>
+        <a id="idm357577"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>fsig</em></span> -- flot pv de sortie au format TRACKS.
@@ -75,23 +75,23 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm245392"></a>
+        <a id="idm357589"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode trlowest. Il utilise le fichier
       <a class="ulink" href="examples/trlowest.csd" target="_top"><em class="citetitle">trlowest.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm245397"></a>
+          <a id="idm357594"></a>
           <p class="title">
-            <strong>Exemple 1112. Exemple de l'opcode trlowest.</strong>
+            <strong>Exemple 1124. Exemple de l'opcode trlowest.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm245404"></a>
+              <a id="idm357601"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -101,30 +101,30 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o trlowest.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-a<span class="n">in</span>     <span class="nb">diskin2</span> <span class="s">"beats.wav"</span><span class="p">,</span> <span class="mi">1</span>
-f<span class="n">s1</span><span class="p">,</span>f<span class="n">si2</span> <span class="nb">pvsifd</span> a<span class="n">in</span><span class="p">,</span> <span class="mi">2048</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">; ifd analysis</span>
-f<span class="n">st</span> <span class="nb">partials</span> f<span class="n">s1</span><span class="p">,</span> f<span class="n">si2</span><span class="p">,</span> <span class="mf">.003</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">500</span> <span class="c1">; partial tracking</span>
-f<span class="n">low</span><span class="p">,</span>k<span class="n">fr</span><span class="p">,</span>k<span class="n">amp</span> <span class="nb">trlowest</span> f<span class="n">st</span><span class="p">,</span> <span class="mi">1</span>		<span class="c1">; lowest freq-track </span>
-a<span class="n">out</span>	<span class="nb">tradsyn</span>	f<span class="n">low</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">; resynthesis of lowest frequency</span>
-	<span class="nb">outs</span>	a<span class="n">out</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> a<span class="n">out</span><span class="o">*</span><span class="mi">2</span>
+</span>a<span class="n">in</span><span class="w">     </span><span class="nb">diskin2</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>f<span class="n">s1</span><span class="p">,</span>f<span class="n">si2</span><span class="w"> </span><span class="nb">pvsifd</span><span class="w"> </span>a<span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="mi">2048</span><span class="p">,</span><span class="w"> </span><span class="mi">512</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">	</span><span class="c1">; ifd analysis</span><span class="w">
+</span>f<span class="n">st</span><span class="w"> </span><span class="nb">partials</span><span class="w"> </span>f<span class="n">s1</span><span class="p">,</span><span class="w"> </span>f<span class="n">si2</span><span class="p">,</span><span class="w"> </span><span class="mf">.003</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="c1">; partial tracking</span><span class="w">
+</span>f<span class="n">low</span><span class="p">,</span>k<span class="n">fr</span><span class="p">,</span>k<span class="n">amp</span><span class="w"> </span><span class="nb">trlowest</span><span class="w"> </span>f<span class="n">st</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">		</span><span class="c1">; lowest freq-track </span><span class="w">
+</span>a<span class="n">out</span><span class="w">	</span><span class="nb">tradsyn</span><span class="w">	</span>f<span class="n">low</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">	</span><span class="c1">; resynthesis of lowest frequency</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">out</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span>a<span class="n">out</span><span class="o">*</span><span class="mi">2</span><span class="w">
 
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">f</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">8192</span> <span class="mi">10</span> <span class="mi">1</span>	<span class="c1">;sine wave</span>
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8192</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">	</span><span class="c1">;sine wave</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -139,7 +139,7 @@ a<span class="n">out</span>	<span class="nb">tradsyn</span>	f<span class="n">low
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm245508"></a>
+        <a id="idm357769"></a>
         <h2>Crédits</h2>
         <p>
       </p>

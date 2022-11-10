@@ -6,7 +6,7 @@
     <title>lpanal</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="UtilitySoundfile.html#UtilityAnalysis" title="Génération d'un fichier d'analyse (ATSA, CVANAL, HETRO, LPANAL, PVANAL)" />
     <link rel="prev" href="hetro.html" title="hetro" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm300986"></a>
+        <a id="idm441459"></a>
         <h2>Description</h2>
         <p>
       Analyse par prédiction linéaire pour les opcodes de Csound
@@ -47,13 +47,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm300991"></a>
+        <a id="idm441464"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>csound -U lpanal</strong></span> [options] nomfichier_entree nomfichier_sortie</pre>
         <pre class="synopsis"><span class="command"><strong>lpanal</strong></span> [options] nomfichier_entree nomfichier_sortie</pre>
       </div>
       <div class="refsect1">
-        <a id="idm300997"></a>
+        <a id="idm441470"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>lpanal</em></span> effectue à la fois une analyse par lpc et par détection de hauteur sur
@@ -131,8 +131,23 @@
       indépendant de la machine.
     </p>
       </div>
+      <div class="refsect2">
+        <a id="idm441511"></a>
+        <h3>Format de fichier</h3>
+        <p>
+        La sortie est un fichier comprenant un en-tête identifiable suivi d'un
+        ensemble de trames de données d'analyse en virgule flottante. Chaque
+        trame contient quatre valeurs d'information de hauteur et de gain,
+        suivies par les coefficients d'un filtre à <span class="emphasis"><em>n pôles</em></span>.
+        Le fichier est lisible par l'opcode <a class="link" href="lpread.html" title="lpread"><em class="citetitle">lpread</em></a> de Csound.
+      </p>
+        <p>
+        <span class="emphasis"><em>lpanal</em></span> est une version très modifiée du programme
+        d'analyse par prédiction linéaire de Paul Lanksy.
+      </p>
+      </div>
       <div class="refsect1">
-        <a id="idm301038"></a>
+        <a id="idm441519"></a>
         <h2>Exemples</h2>
         <p>
 
@@ -146,20 +161,78 @@
       à 26 pôles et une estimation de hauteur entre 100 et 400 Hz. La sortie stabilisée
       (<span class="emphasis"><em>-a</em></span>) sera placée dans "lpfil22" dans le répertoire courant.
     </p>
-        <div class="refsect2">
-          <a id="idm301045"></a>
-          <h3>Format de Fichier</h3>
-          <p>
-        La sortie est un fichier constitué d'un en-tête identifiable plus un ensemble de trames de données
-        d'analyse en virgule flottante. Chaque trame contient quatre valeurs d'information de hauteur et
-        de gain, suivies par <span class="emphasis"><em>npoles</em></span> coefficients de filtre. Le fichier est lisible
-        par l'opcode <a class="link" href="lpread.html" title="lpread"><em class="citetitle">lpread</em></a> de Csound.
+        <p>
+      Voici un exemple de l'utilitaire lpanal. Il utilise le fichier
+      <a class="ulink" href="examples/lpanal.csd" target="_top"><em class="citetitle">lpanal.csd</em></a>.
       </p>
-          <p>
-        <span class="emphasis"><em>lpanal</em></span> est une modification importante des programmes d'analyse lpc de Paul
-        Lanksy.
-      </p>
+        <div class="example">
+          <a id="idm441529"></a>
+          <p class="title">
+            <strong>Exemple 1354. Exemple de l'utilitaire lpanal.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm441536"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o lpanal.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; by Menno Knevel 2021</span><span class="w">
+
+</span>i<span class="n">res</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ lpanal -p34 -h200 -P50 -Q500 -v1 finneganswake1.flac finneganswake11.lpc }}</span><span class="w">       </span><span class="c1">; filter coefficient file</span><span class="w">
+</span>i<span class="n">res</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ lpanal -a -p50 -h300 -P70 -Q100 -v1 finneganswake1.flac finneganswake12.lpc }}</span><span class="w">    </span><span class="c1">; create pole file</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> </span><span class="c1">; untreated signal</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">    </span><span class="nb">diskin2</span><span class="w">   </span><span class="s">"finneganswake1.flac"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">outs</span><span class="w">    </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+</span>i<span class="n">len</span><span class="w">  </span><span class="nb">filelen</span><span class="w"> </span><span class="s">"finneganswake1.flac"</span><span class="w">	    </span><span class="c1">; get length of soundfile</span><span class="w">
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">finneganswake1.flac = </span><span class="si">%f</span><span class="s"> seconds</span><span class="se">\\n</span><span class="s">"</span><span class="p">,</span>i<span class="n">len</span><span class="w">
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">---***YOU NOW HEAR THE RESULT OF THIS ANALYZED FILE:***---</span><span class="se">\n</span><span class="s">"</span><span class="w">
+</span>k<span class="n">time</span><span class="w"> </span><span class="nb">line</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span>i<span class="n">len</span><span class="o">-</span><span class="mf">0.1</span><span class="w">                  </span><span class="c1">; timepointer</span><span class="w">
+</span>k<span class="n">rmsr</span><span class="p">,</span>k<span class="n">rmso</span><span class="p">,</span>k<span class="n">err</span><span class="p">,</span>k<span class="n">cps</span><span class="w"> </span><span class="nb">lpread</span><span class="w"> </span>k<span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>k<span class="n">rmso</span><span class="w"> </span><span class="o">*=</span><span class="mf">.00005</span><span class="w">			                </span><span class="c1">; lower volume</span><span class="w">
+</span>a<span class="n">out</span><span class="w">  </span><span class="nb">foscil</span><span class="w"> </span>k<span class="n">rmso</span><span class="p">,</span><span class="w"> </span>k<span class="n">cps</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>a<span class="n">out</span><span class="w">  </span><span class="nb">butlp</span><span class="w"> </span>a<span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="mi">5000</span><span class="w">                  </span><span class="c1">; filter low pass</span><span class="w">
+</span>k<span class="n">rmsr</span><span class="w"> </span><span class="o">*=</span><span class="mf">.0003</span><span class="w">			                </span><span class="c1">; lower volume</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">rand</span><span class="w"> </span>k<span class="n">rmsr</span><span class="w">                        </span><span class="c1">; use residual for the noise </span><span class="w">
+      </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">out</span><span class="o">+</span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">out</span><span class="o">+</span>a<span class="n">sig</span><span class="w">	        </span><span class="c1">; add saw wave and noise</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="mf">12.7</span><span class="w">       </span><span class="c1">; original sample</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="mf">12.7</span><span class="w"> </span><span class="s">"finneganswake11.lpc"</span><span class="w">	</span><span class="c1">; whole sentence</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="mf">12.7</span><span class="w"> </span><span class="s">"finneganswake12.lpc"</span><span class="w">	</span><span class="c1">; whole sentence, pole file</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
         </div>
+        <p><br class="example-break" />
+    </p>
       </div>
     </div>
     <div class="navfooter">

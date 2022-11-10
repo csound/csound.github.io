@@ -6,7 +6,7 @@
     <title>faustdsp</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="faustctl.html" title="faustctl" />
@@ -39,20 +39,25 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm68387"></a>
+        <a id="idm97113"></a>
         <h2>Description</h2>
-        <p>Opcode du greffon faustcsound.</p>
+        <p>
+      Opcode du greffon faustcsound. Ce greffon se trouve dans le
+      répertoire des greffons et il doit être installé séparément. Le répertoire
+      des greffons est ici : <a class="ulink" href="https://github.com/csound/plugins" target="_top">
+      <em class="citetitle">https://github.com/csound/plugins</em></a>
+    </p>
         <p>
       Faustdsp instancie un programme Faust compilé avec faustcompile.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm68391"></a>
+        <a id="idm97119"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>ihandle faustdsp</strong></span> ifac</pre>
       </div>
       <div class="refsect1">
-        <a id="idm68395"></a>
+        <a id="idm97123"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em><span class="quote">« <span class="quote">ifac</span> »</span></em></span> -- identifiant d'un programme
@@ -65,32 +70,32 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm68403"></a>
+        <a id="idm97131"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode faustdsp. Il utilise le fichier
       <a class="ulink" href="examples/faustdsp.csd" target="_top"><em class="citetitle">faustdsp.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm68408"></a>
+          <a id="idm97136"></a>
           <p class="title">
-            <strong>Exemple 286. Exemple de l'opcode faustdsp.</strong>
+            <strong>Exemple 290. Exemple de l'opcode faustdsp.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm68415"></a>
+              <a id="idm97143"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 -d -odac
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
-<span class="vg">nchnls</span><span class="o">=</span> <span class="mi">1</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+</span><span class="vg">nchnls</span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-gi<span class="n">ph</span> <span class="nb">faustcompile</span> <span class="s">{{
+</span>gi<span class="n">ph</span><span class="w"> </span><span class="nb">faustcompile</span><span class="w"> </span><span class="s">{{
 SR = 44100;
 decimal(a) = a - floor(a);
 freq = hslider("freq", 0, -20000, 20000, 1);
@@ -98,21 +103,21 @@ incr(fr) =  fr / float(SR);
 phasor(fr,ph) =  incr(fr) : (+ : decimal) ~ _ :
 +(ph) : decimal;
 process = phasor(freq,0);
-}}</span><span class="p">,</span> <span class="s">"-vec -lv 1"</span>
+}}</span><span class="p">,</span><span class="w"> </span><span class="s">"-vec -lv 1"</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
-k<span class="n">b1</span> <span class="o">=</span> <span class="vi">p5</span>
-i<span class="n">b</span> <span class="nb">faustdsp</span> gi<span class="n">ph</span>
-<span class="nb">faustctl</span> i<span class="n">b</span><span class="p">,</span><span class="s">"freq"</span><span class="p">,</span>k<span class="n">b1</span>
-a<span class="n">sig</span> <span class="nb">faustplay</span> i<span class="n">b</span>
-<span class="nb">out</span> <span class="nb">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="cp">$M_PI</span><span class="o">*</span>a<span class="n">sig</span><span class="p">)</span><span class="o">*</span><span class="vi">p4</span><span class="o">*</span><span class="vg">0dbfs</span>
-<span class="kd">endin</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span>k<span class="n">b1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+</span>i<span class="n">b</span><span class="w"> </span><span class="nb">faustdsp</span><span class="w"> </span>gi<span class="n">ph</span><span class="w">
+</span><span class="nb">faustctl</span><span class="w"> </span>i<span class="n">b</span><span class="p">,</span><span class="s">"freq"</span><span class="p">,</span>k<span class="n">b1</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">faustplay</span><span class="w"> </span>i<span class="n">b</span><span class="w">
+</span><span class="nb">out</span><span class="w"> </span><span class="nb">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="cp">$M_PI</span><span class="o">*</span>a<span class="n">sig</span><span class="p">)</span><span class="o">*</span><span class="vi">p4</span><span class="o">*</span><span class="vg">0dbfs</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mf">0.5</span> <span class="mi">150</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="mi">150</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -122,7 +127,7 @@ a<span class="n">sig</span> <span class="nb">faustplay</span> i<span class="n">b
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm68470"></a>
+        <a id="idm97227"></a>
         <h2>Crédits</h2>
         <p>Auteur : Victor Lazzarini, 2018 </p>
       </div>

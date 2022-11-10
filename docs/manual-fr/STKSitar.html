@@ -6,7 +6,7 @@
     <title>STKSitar</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="STKSimple.html" title="STKSimple" />
@@ -39,21 +39,26 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm226529"></a>
+        <a id="idm330027"></a>
         <h2>Description</h2>
-        <p>Opcode du greffon stkopd.</p>
+        <p>
+      Opcode du greffon stkopd. Ce greffon se trouve dans le
+      répertoire des greffons et il doit être installé séparément. Le répertoire
+      des greffons est ici : <a class="ulink" href="https://github.com/csound/plugins" target="_top">
+      <em class="citetitle">https://github.com/csound/plugins</em></a>
+    </p>
         <p>
       <span class="emphasis"><em>STKSitar</em></span> utilise un modèle physique de corde pincée
       basé sur l'algorithme de Karplus-Strong.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm226534"></a>
+        <a id="idm330034"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">asignal <span class="command"><strong>STKSitar</strong></span> ifrequency, iamplitude</pre>
       </div>
       <div class="refsect1">
-        <a id="idm226538"></a>
+        <a id="idm330038"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifrequency</em></span> -- Fréquence de la note jouée, en Hz.
@@ -63,7 +68,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm226544"></a>
+        <a id="idm330044"></a>
         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
           <table border="0" summary="Note: Note">
             <tr>
@@ -88,20 +93,20 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm226551"></a>
+        <a id="idm330051"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode STKSitar. Il utilise le fichier
       <a class="ulink" href="examples/STKSitar.csd" target="_top"><em class="citetitle">STKSitar.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm226556"></a>
+          <a id="idm330056"></a>
           <p class="title">
-            <strong>Exemple 1019. Exemple de l'opcode STKSitar.</strong>
+            <strong>Exemple 1029. Exemple de l'opcode STKSitar.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm226558"></a>
+              <a id="idm330058"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -111,30 +116,30 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o STKSitar.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>  <span class="c1">;STKSitar - has no controllers</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">  </span><span class="c1">;STKSitar - has no controllers</span><span class="w">
 
-i<span class="n">frq</span>	<span class="o">=</span>	<span class="vi">p4</span>
+</span>i<span class="n">frq</span><span class="w">	</span><span class="o">=</span><span class="w">	</span><span class="vi">p4</span><span class="w">
 
-a<span class="n">sig</span>	<span class="nb">STKSitar</span> <span class="nb">cpspch</span><span class="p">(</span><span class="vi">p4</span><span class="p">),</span> <span class="mi">1</span>
-a<span class="n">sig</span>	<span class="o">=</span>	a<span class="n">sig</span> <span class="o">*</span> <span class="mi">2</span>			<span class="c1">;amplify</span>
-	<span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
-<span class="kd">endin</span>
+</span>a<span class="n">sig</span><span class="w">	</span><span class="nb">STKSitar</span><span class="w"> </span><span class="nb">cpspch</span><span class="p">(</span><span class="vi">p4</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="o">=</span><span class="w">	</span>a<span class="n">sig</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w">			</span><span class="c1">;amplify</span><span class="w">
+	</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">4</span> <span class="mf">6.00</span> 
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="mf">7.05</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">7</span> <span class="mf">5.05</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mf">6.00</span><span class="w"> 
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">7.05</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="mf">5.05</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -144,7 +149,7 @@ a<span class="n">sig</span>	<span class="o">=</span>	a<span class="n">sig</span>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm226625"></a>
+        <a id="idm330175"></a>
         <h2>Crédits</h2>
         <p>
       </p>

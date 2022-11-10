@@ -6,7 +6,7 @@
     <title>birnd</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="biquada.html" title="biquada" />
@@ -39,14 +39,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm35213"></a>
+        <a id="idm46588"></a>
         <h2>Description</h2>
         <p>
       Retourne un nombre aléatoire dans un intervalle bipolaire.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm35216"></a>
+        <a id="idm46591"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>birnd</strong></span>(x) (taux-i ou -k seulement)</pre>
         <p>
@@ -56,7 +56,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm35222"></a>
+        <a id="idm46597"></a>
         <h2>Exécution</h2>
         <p>
       Retourne un nombre aléatoire dans l'intervalle bipolaire allant de
@@ -68,7 +68,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm35229"></a>
+        <a id="idm46604"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode birnd. Il utilise le fichier
@@ -76,51 +76,50 @@
 
       </p>
         <div class="example">
-          <a id="idm35234"></a>
+          <a id="idm46609"></a>
           <p class="title">
-            <strong>Exemple 101. Exemple de l'opcode birnd.</strong>
+            <strong>Exemple 105. Exemple de l'opcode birnd.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
         <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm35241"></a>
+              <a id="idm46616"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
-<span class="c1">; Audio out   Audio in</span>
--odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+-odac    <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">;-o birnd.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>		<span class="c1">; Generate a random number from -1 to 1.</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">		</span><span class="c1">; Generate a random number from -1 to 1.</span><span class="w">
   
-k<span class="n">bin</span> <span class="o">=</span>	<span class="nb">birnd</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-	<span class="nb">printk</span> <span class="mf">.2</span><span class="p">,</span> k<span class="n">bin</span>
+</span>k<span class="n">bin</span><span class="w"> </span><span class="o">=</span><span class="w">	</span><span class="nb">birnd</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">
+	</span><span class="nb">printk</span><span class="w"> </span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span>k<span class="n">bin</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="kd">endin</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span>
-
-<span class="nb">e</span>
-
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -142,14 +141,14 @@ instr 1:  i1 = 0.43364</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm35310"></a>
+        <a id="idm46740"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="rnd.html" title="rnd"><em class="citetitle">rnd</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm35315"></a>
+        <a id="idm46745"></a>
         <h2>Crédits</h2>
         <p>
       </p>

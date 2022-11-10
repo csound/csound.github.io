@@ -6,7 +6,7 @@
     <title>vtablewk</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="vtablewi.html" title="vtablewi" />
@@ -39,26 +39,26 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm265195"></a>
+        <a id="idm386116"></a>
         <h2>Description</h2>
         <p>
       Cet opcode écrit des vecteurs dans des tables au taux-k.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm265198"></a>
+        <a id="idm386119"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>vtablewk</strong></span>  kndx, kfn, ixmode, kinarg1 [, kinarg2, kinarg3 , .... , kinargN ]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm265202"></a>
+        <a id="idm386123"></a>
         <h2>Initialisation</h2>
         <p><span class="emphasis"><em>ixmode</em></span> - mode d'indexation. La valeur par défaut est 0.</p>
         <p>            == 0, l'index est traité comme une position brute dans la table,</p>
         <p>            == 1, l'index est normalisé (entre 0 et 1).</p>
       </div>
       <div class="refsect1">
-        <a id="idm265208"></a>
+        <a id="idm386129"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kndx</em></span> - Index dans la ftable, soit un nombre positif
@@ -99,54 +99,54 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm265229"></a>
+        <a id="idm386150"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode vtablewk. Il utilise le fichier
       <a class="ulink" href="examples/vtablewk.csd" target="_top"><em class="citetitle">vtablewk.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm265234"></a>
+          <a id="idm386155"></a>
           <p class="title">
-            <strong>Exemple 1195. Exemple de l'opcode vtablewk.</strong>
+            <strong>Exemple 1207. Exemple de l'opcode vtablewk.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm265236"></a>
+              <a id="idm386157"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">;-ovtablewa.wav -W -b441 -B441</span>
 -odac -b441 -B441
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
 
-<span class="vg">sr</span><span class="o">=</span><span class="mi">44100</span>
-<span class="vg">kr</span><span class="o">=</span><span class="mi">441</span>
-<span class="vg">ksmps</span><span class="o">=</span><span class="mi">100</span>
-<span class="vg">nchnls</span><span class="o">=</span><span class="mi">2</span>
+</span><span class="vg">sr</span><span class="o">=</span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="o">=</span><span class="mi">441</span><span class="w">
+</span><span class="vg">ksmps</span><span class="o">=</span><span class="mi">100</span><span class="w">
+</span><span class="vg">nchnls</span><span class="o">=</span><span class="mi">2</span><span class="w">
 
-	<span class="kd">instr</span> <span class="nf">1</span>
-i<span class="n">len</span> <span class="o">=</span> <span class="nb">ftlen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+	</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span>i<span class="n">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ftlen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">
 
-k<span class="n">new1</span> <span class="nb">oscil</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">3</span>
-k<span class="n">new2</span> <span class="nb">oscil</span> <span class="mi">15000</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.5</span>
-k<span class="n">index</span> <span class="nb">phasor</span> <span class="mf">0.3</span>
-a<span class="n">sig</span> <span class="nb">oscil</span> <span class="mi">1</span><span class="p">,</span> <span class="vg">sr</span><span class="o">/</span>i<span class="n">len</span> <span class="p">,</span> <span class="mi">1</span>
-<span class="nb">vtablewk</span> k<span class="n">index</span><span class="o">*</span>i<span class="n">len</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> k<span class="n">new1</span><span class="p">,</span> k<span class="n">new2</span>
-<span class="nb">out</span> a<span class="n">sig</span><span class="p">,</span>a<span class="n">sig</span>
-	<span class="kd">endin</span>    
+</span>k<span class="n">new1</span><span class="w"> </span><span class="nb">oscil</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w"> </span><span class="mi">440</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span>k<span class="n">new2</span><span class="w"> </span><span class="nb">oscil</span><span class="w"> </span><span class="mi">15000</span><span class="p">,</span><span class="w"> </span><span class="mi">440</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="w">
+</span>k<span class="n">index</span><span class="w"> </span><span class="nb">phasor</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">oscil</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vg">sr</span><span class="o">/</span>i<span class="n">len</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">vtablewk</span><span class="w"> </span>k<span class="n">index</span><span class="o">*</span>i<span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>k<span class="n">new1</span><span class="p">,</span><span class="w"> </span>k<span class="n">new2</span><span class="w">
+</span><span class="nb">out</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span>a<span class="n">sig</span><span class="w">
+	</span><span class="kd">endin</span><span class="w">    
 
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">f</span><span class="mi">1</span>  <span class="mi">0</span> <span class="mi">262144</span>   <span class="o">-</span><span class="mi">1</span> <span class="s">"beats.wav"</span> <span class="mi">0</span> <span class="mi">4</span> <span class="mi">0</span>
-<span class="nb">f</span><span class="mi">2</span>  <span class="mi">0</span> <span class="mi">262144</span>   <span class="mi">2</span>  <span class="mi">0</span>
-<span class="nb">f</span><span class="mi">3</span>  <span class="mi">0</span> <span class="mi">1024</span>  <span class="mi">10</span> <span class="mi">1</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="mi">1</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">262144</span><span class="w">   </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">f</span><span class="mi">2</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">262144</span><span class="w">   </span><span class="mi">2</span><span class="w">  </span><span class="mi">0</span><span class="w">
+</span><span class="nb">f</span><span class="mi">3</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">1024</span><span class="w">  </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -156,7 +156,7 @@ a<span class="n">sig</span> <span class="nb">oscil</span> <span class="mi">1</sp
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm265338"></a>
+        <a id="idm386320"></a>
         <h2>Crédits</h2>
         <p>Ecrit par Gabriel Maldonado.</p>
         <p>Exemple écrit par Andrés Cabrera.</p>

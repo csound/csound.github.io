@@ -6,7 +6,7 @@
     <title>ATSinterpread</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="ATSinfo.html" title="ATSinfo" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm29423"></a>
+        <a id="idm37521"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>ATSinterpread</em></span> permet de déterminer l'enveloppe de
@@ -48,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm29429"></a>
+        <a id="idm37527"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">kamp <span class="command"><strong>ATSinterpread</strong></span> kfreq</pre>
       </div>
       <div class="refsect1">
-        <a id="idm29433"></a>
+        <a id="idm37531"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kfreq</em></span> - une valeur de fréquence (en Hz) utilisée par
@@ -76,7 +76,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm29450"></a>
+        <a id="idm37548"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode ATSinterpread. Il utilise le fichier
@@ -84,13 +84,13 @@
 
       </p>
         <div class="example">
-          <a id="idm29455"></a>
+          <a id="idm37553"></a>
           <p class="title">
-            <strong>Exemple 73. Exemple de l'opcode ATSinterpread.</strong>
+            <strong>Exemple 77. Exemple de l'opcode ATSinterpread.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm29457"></a>
+              <a id="idm37555"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -100,32 +100,40 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o ATSinterpread.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">; "beats.ats" is created by atsa</span>
+</span><span class="c1">; by Menno Knevel - 2021</span><span class="w">
 
-k<span class="n">time</span>	<span class="nb">line</span>	<span class="mi">0</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mf">1.8</span>
-	<span class="nb">ATSbufread</span> k<span class="n">time</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"beats.ats"</span><span class="p">,</span> <span class="mi">42</span>
-k<span class="n">amp</span>	<span class="nb">ATSinterpread</span> 	<span class="vi">p4</span>
-a<span class="n">osc</span>	<span class="nb">oscili</span>	k<span class="n">amp</span><span class="p">,</span> <span class="vi">p4</span><span class="p">,</span> <span class="mi">1</span>
-	<span class="nb">outs</span>	a<span class="n">osc</span> <span class="o">*</span> <span class="mi">25</span><span class="p">,</span> a<span class="n">osc</span> <span class="o">*</span><span class="mi">25</span>
+</span>i<span class="n">res</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ atsa fox.wav fox.ats }}</span><span class="w"> </span><span class="c1">; ATSA wants a mono file!</span><span class="w">
 
-<span class="kd">endin</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="c1">; sine wave.</span>
-<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
+</span>k<span class="n">time</span><span class="w">	</span><span class="nb">line</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mf">2.65</span><span class="w">
+	</span><span class="nb">ATSbufread</span><span class="w"> </span>k<span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"fox.ats"</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>k<span class="n">amp</span><span class="w">	</span><span class="nb">ATSinterpread</span><span class="w"> 	</span><span class="vi">p5</span><span class="w">  </span><span class="c1">; get envelope from partial</span><span class="w">
+</span>a<span class="n">osc</span><span class="w">	</span><span class="nb">poscil3</span><span class="w">	</span>k<span class="n">amp</span><span class="p">,</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">osc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span>a<span class="n">osc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">8</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span> <span class="mi">100</span>
-<span class="nb">e</span>
+</span><span class="kd">endin</span><span class="w">
 
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">;              partial     index         </span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">2.65</span><span class="w">      </span><span class="mi">12</span><span class="w">          </span><span class="mi">1000</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mf">2.65</span><span class="w">      </span><span class="mi">12</span><span class="w">          </span><span class="mi">150</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mf">2.65</span><span class="w">      </span><span class="mi">12</span><span class="w">          </span><span class="mi">10000</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">2.65</span><span class="w">      </span><span class="mi">72</span><span class="w">          </span><span class="mi">1000</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mf">2.65</span><span class="w">      </span><span class="mi">72</span><span class="w">          </span><span class="mi">150</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mf">2.65</span><span class="w">      </span><span class="mi">72</span><span class="w">          </span><span class="mi">10000</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -135,7 +143,7 @@ a<span class="n">osc</span>	<span class="nb">oscili</span>	k<span class="n">amp<
     </p>
         <p>
       Cet exemple montre comment utiliser <span class="emphasis"><em>ATSinterpread</em></span>.
-      Ici une fréquence est fournie par la partition (p4) et cette fréquence est
+      Ici une fréquence est fournie par la partition (p5) et cette fréquence est
       passée à un <span class="emphasis"><em>ATSinterpread</em></span> (avec un
       <a class="link" href="ATSbufread.html" title="ATSbufread"><em class="citetitle">ATSbufread</em></a>)
       correspondant. L'<span class="emphasis"><em>ATSinterpread</em></span> utilise cette
@@ -143,7 +151,7 @@ a<span class="n">osc</span>	<span class="nb">oscili</span>	k<span class="n">amp<
       ATS donné par le
       <a class="link" href="ATSbufread.html" title="ATSbufread"><em class="citetitle">ATSbufread</em></a>
       (beats.ats dans ce cas). Nous utilisons ensuite cette amplitude pour
-      pondérer une onde sinus qui est synthétisée avec la même fréquence (p4).
+      pondérer une onde sinus qui est synthétisée avec la même fréquence (p5).
       On peut étendre ceci pour inclure plusieurs ondes sinus. De cette manière
       il est possible de synthétiser n'importe quelle fréquence raisonnable
       (comprise entre la fréquence basse et la fréquence haute du fichier ATS
@@ -152,7 +160,7 @@ a<span class="n">osc</span>	<span class="nb">oscili</span>	k<span class="n">amp<
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm29544"></a>
+        <a id="idm37761"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="ATSread.html" title="ATSread"><em class="citetitle">ATSread</em></a>, 
@@ -166,7 +174,7 @@ a<span class="n">osc</span>	<span class="nb">oscili</span>	k<span class="n">amp<
       <a class="link" href="ATSaddnz.html" title="ATSaddnz"><em class="citetitle">ATSaddnz</em></a></p>
       </div>
       <div class="refsect1">
-        <a id="idm29565"></a>
+        <a id="idm37782"></a>
         <h2>Crédits</h2>
         <p>
       </p>

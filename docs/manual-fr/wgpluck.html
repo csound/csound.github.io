@@ -6,7 +6,7 @@
     <title>wgpluck</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="wgflute.html" title="wgflute" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm267116"></a>
+        <a id="idm388707"></a>
         <h2>Description</h2>
         <p>
       Une simulation haute fidélité de corde pincée, utilisant des lignes à retard
@@ -47,12 +47,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm267119"></a>
+        <a id="idm388710"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>wgpluck</strong></span> icps, iamp, kpick, iplk, idamp, ifilt, axcite</pre>
       </div>
       <div class="refsect1">
-        <a id="idm267123"></a>
+        <a id="idm388714"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>icps</em></span> -- fréquence de la corde pincée
@@ -77,7 +77,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm267136"></a>
+        <a id="idm388727"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kpick</em></span> -- Fraction de la longueur de la corde où sera lue
@@ -96,135 +96,77 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm267150"></a>
-        <h2>Exemples</h2>
+        <a id="idm388741"></a>
+        <h2>Exemple</h2>
         <p>
-      L'exemple suivant produit une note moyennement longue avec une décroissance
-      rapide des partiels supérieurs. Il utilise le fichier
+      Voici un exemple de l'opcode wgpluck. Il utilise le fichier
       <a class="ulink" href="examples/wgpluck.csd" target="_top"><em class="citetitle">wgpluck.csd</em></a>. 
 
       </p>
         <div class="example">
-          <a id="idm267155"></a>
+          <a id="idm388746"></a>
           <p class="title">
-            <strong>Exemple 1205. Un exemple de l'opcode wgpluck.</strong>
+            <strong>Exemple 1217. Un exemple de l'opcode wgpluck.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm267162"></a>
+              <a id="idm388753"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
-<span class="c1">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac             <span class="c1">;;;RT audio out</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o wgpluck.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="c1">; Initialize the global variables.</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="c1">; by Menno Knevel 2021</span><span class="w">
 
-<span class="c1">; Instrument #1.</span>
-<span class="kd">instr</span> <span class="nf">1</span>
-  i<span class="n">cps</span> <span class="o">=</span> <span class="mi">220</span>
-  i<span class="n">amp</span> <span class="o">=</span> <span class="mi">20000</span>
-  k<span class="n">pick</span> <span class="o">=</span> <span class="mf">0.5</span>
-  i<span class="n">plk</span> <span class="o">=</span> <span class="mi">0</span>
-  i<span class="n">damp</span> <span class="o">=</span> <span class="mi">10</span>
-  i<span class="n">filt</span> <span class="o">=</span> <span class="mi">1000</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-  a<span class="n">xcite</span> <span class="nb">oscil</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
-  a<span class="n">pluck</span> <span class="nb">wgpluck</span> i<span class="n">cps</span><span class="p">,</span> i<span class="n">amp</span><span class="p">,</span> k<span class="n">pick</span><span class="p">,</span> i<span class="n">plk</span><span class="p">,</span> i<span class="n">damp</span><span class="p">,</span> i<span class="n">filt</span><span class="p">,</span> a<span class="n">xcite</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-  <span class="nb">out</span> a<span class="n">pluck</span>
-<span class="kd">endin</span>
+</span>i<span class="n">cps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">220</span><span class="w">
+</span>i<span class="n">amp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>k<span class="n">pick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="w">
+</span>i<span class="n">plk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>i<span class="n">damp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">filt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+</span>i<span class="n">choice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p6</span><span class="w">
 
+</span><span class="k">if</span><span class="w"> </span>i<span class="n">choice</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">then</span><span class="w">
+    </span>a<span class="n">xcite</span><span class="w"> </span><span class="o">=</span><span class="w">    </span><span class="mi">0</span><span class="w">                   </span><span class="c1">; no exciter signal</span><span class="w">
+</span><span class="k">else</span><span class="w">
+    </span>a<span class="n">xcite</span><span class="w"> </span><span class="nb">diskin2</span><span class="w">  </span><span class="s">"fox.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">; use the fox as exciter</span><span class="w">
+    </span>a<span class="n">xcite</span><span class="w"> </span><span class="o">*=</span><span class="w">   </span><span class="mf">.15</span><span class="w">                 </span><span class="c1">; but lower amplitude</span><span class="w">
+</span><span class="k">endif</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span>a<span class="n">pluck</span><span class="w"> </span><span class="nb">wgpluck</span><span class="w"> </span>i<span class="n">cps</span><span class="p">,</span><span class="w"> </span>i<span class="n">amp</span><span class="p">,</span><span class="w"> </span>k<span class="n">pick</span><span class="p">,</span><span class="w"> </span>i<span class="n">plk</span><span class="p">,</span><span class="w"> </span>i<span class="n">damp</span><span class="p">,</span><span class="w"> </span>i<span class="n">filt</span><span class="p">,</span><span class="w"> </span>a<span class="n">xcite</span><span class="w">
+</span>a<span class="n">pluck</span><span class="w">  </span><span class="nb">dcblock2</span><span class="w">    </span>a<span class="n">pluck</span><span class="w">          </span><span class="c1">; gets rid of DC offset</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">pluck</span><span class="p">,</span><span class="w"> </span>a<span class="n">pluck</span><span class="w">
 
-<span class="c1">; Table #1, a sine wave.</span>
-<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
+</span><span class="kd">endin</span><span class="w">
 
-<span class="c1">; Play Instrument #1 for two seconds.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span>
-<span class="nb">e</span>
-
-
-<span class="nt">&lt;/CsScore&gt;</span>
-<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
-</pre>
-            </div>
-          </div>
-        </div>
-        <p><br class="example-break" />
-    </p>
-        <p>
-     L'exemple suivant produit une note plus courte et plus brillante. Il utilise le fichier
-     file <a class="ulink" href="examples/wgpluck_brighter.csd" target="_top"><em class="citetitle">wgpluck_brighter.csd</em></a>. 
-
-      </p>
-        <div class="example">
-          <a id="idm267252"></a>
-          <p class="title">
-            <strong>Exemple 1206. Un exemple de l'opcode wgpluck avec une note plus courte et plus brillante.</strong>
-          </p>
-          <div class="example-contents">
-            <div class="refsect1">
-              <a id="idm267254"></a>
-              <pre class="programlisting">
-<span class="nt">&lt;CsoundSynthesizer&gt;</span>
-<span class="nt">&lt;CsOptions&gt;</span>
-<span class="c1">; Select audio/midi flags here according to platform</span>
-<span class="c1">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
-<span class="c1">; For Non-realtime ouput leave only the line below:</span>
-<span class="c1">; -o wgpluck_brighter.wav -W ;;; for file output any platform</span>
-<span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
-
-<span class="c1">; Initialize the global variables.</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
-
-<span class="c1">; Instrument #1.</span>
-<span class="kd">instr</span> <span class="nf">1</span>
-  i<span class="n">cps</span> <span class="o">=</span> <span class="mi">220</span>
-  i<span class="n">amp</span> <span class="o">=</span> <span class="mi">20000</span>
-  k<span class="n">pick</span> <span class="o">=</span> <span class="mf">0.5</span>
-  i<span class="n">plk</span> <span class="o">=</span> <span class="mi">0</span>
-  i<span class="n">damp</span> <span class="o">=</span> <span class="mi">30</span>
-  i<span class="n">filt</span> <span class="o">=</span> <span class="mi">10</span>
-
-  a<span class="n">xcite</span> <span class="nb">oscil</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
-  a<span class="n">pluck</span> <span class="nb">wgpluck</span> i<span class="n">cps</span><span class="p">,</span> i<span class="n">amp</span><span class="p">,</span> k<span class="n">pick</span><span class="p">,</span> i<span class="n">plk</span><span class="p">,</span> i<span class="n">damp</span><span class="p">,</span> i<span class="n">filt</span><span class="p">,</span> a<span class="n">xcite</span>
-
-  <span class="nb">out</span> a<span class="n">pluck</span>
-<span class="kd">endin</span>
-
-
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-
-<span class="c1">; Table #1, a sine wave.</span>
-<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
-
-<span class="c1">; Play Instrument #1 for two seconds.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span>
-<span class="nb">e</span>
-
-
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">        </span><span class="c1">; sine wave.</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="c1">;          damp     filter  choice           </span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8</span><span class="w">     </span><span class="mi">10</span><span class="w">      </span><span class="mi">1000</span><span class="w">      </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">8</span><span class="w">     </span><span class="mi">30</span><span class="w">      </span><span class="mi">10</span><span class="w">        </span><span class="mi">1</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8</span><span class="w">     </span><span class="mi">10</span><span class="w">      </span><span class="mi">1000</span><span class="w">      </span><span class="mi">2</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">8</span><span class="w">     </span><span class="mi">30</span><span class="w">      </span><span class="mi">10</span><span class="w">        </span><span class="mi">2</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -234,7 +176,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm267341"></a>
+        <a id="idm389002"></a>
         <h2>Crédits</h2>
         <p>
       </p>

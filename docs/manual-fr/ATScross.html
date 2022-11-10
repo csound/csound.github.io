@@ -6,7 +6,7 @@
     <title>ATScross</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="ATSbufread.html" title="ATSbufread" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm28917"></a>
+        <a id="idm36848"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>ATScross</em></span> utilise les données d'un fichier d'analyse
@@ -49,13 +49,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm28923"></a>
+        <a id="idm36854"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ar <span class="command"><strong>ATScross</strong></span> ktimepnt, kfmod, iatsfile, ifn, kmylev, kbuflev, ipartials \
           [, ipartialoffset, ipartialincr]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm28927"></a>
+        <a id="idm36858"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iatsfile</em></span> – entier ou chaîne de caractères dénotant
@@ -86,7 +86,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm28940"></a>
+        <a id="idm36871"></a>
         <h2>Exécution</h2>
         <p><span class="emphasis"><em>ktimepnt</em></span> – Le pointeur de temps en secondes utilisé
       comme indice sur le fichier ATS. Est utilisé pour
@@ -149,57 +149,67 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm29003"></a>
+        <a id="idm36934"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode ATScross. Il utilise le fichier
       <a class="ulink" href="examples/ATScross.csd" target="_top"><em class="citetitle">ATScross.csd</em></a>.
-
       </p>
         <div class="example">
-          <a id="idm29008"></a>
+          <a id="idm36939"></a>
           <p class="title">
-            <strong>Exemple 70. Exemple de l'opcode ATScross.</strong>
+            <strong>Exemple 75. Exemple de l'opcode ATScross.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm29010"></a>
+              <a id="idm36941"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
--odac     <span class="c1">;;;RT audio out</span>
+-odac  <span class="c1">;;;RT audio out</span>
 <span class="c1">;-iadc    ;;;uncomment -iadc for RT audio input is needed too</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o ATScross.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">; "beats.ats" and  "fox.ats" are created by atsa</span>
+</span><span class="c1">; by Menno Knevel - 2021</span><span class="w">
 
-k<span class="n">time</span>	<span class="nb">line</span>	<span class="mi">0</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">4</span>
-k<span class="n">time2</span>	<span class="nb">line</span>	<span class="mi">0</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">4</span>
-k<span class="n">line</span>	<span class="nb">expseg</span>	<span class="mf">0.001</span><span class="p">,</span> <span class="mf">.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="vi">p3</span><span class="o">-</span><span class="mf">.3</span><span class="p">,</span> <span class="mi">1</span>
-k<span class="n">line2</span>	<span class="nb">expseg</span>	<span class="mf">0.001</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">3</span>
-  	<span class="nb">ATSbufread</span> k<span class="n">time2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"fox.ats"</span><span class="p">,</span> <span class="mi">20</span>
-a<span class="n">out</span>	<span class="nb">ATScross</span>   k<span class="n">time</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s">"beats.ats"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">line</span><span class="p">,</span> <span class="mf">0.001</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">-</span> k<span class="n">line2</span><span class="p">),</span> <span class="mi">180</span>
-	<span class="nb">outs</span> a<span class="n">out</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> a<span class="n">out</span><span class="o">*</span><span class="mi">2</span>
+</span><span class="c1">;ATSA wants a mono file!</span><span class="w">
+</span><span class="c1">;it takes a while to analyze these files...</span><span class="w">
+</span>i<span class="n">res1</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ atsa finneganswake1.flac finneganswake.ats }}</span><span class="w"> 
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">***1st analyzed file is ready***</span><span class="se">\n\n</span><span class="s">"</span><span class="w">
+</span>i<span class="n">res2</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ atsa beats.wav beats.ats }}</span><span class="w"> 
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">***2nd analyzed file is ready***</span><span class="se">\n\n</span><span class="s">"</span><span class="w">
 
-<span class="kd">endin</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span>i<span class="n">pr</span><span class="w"> </span><span class="nb">ATSinfo</span><span class="w"> </span><span class="s">"finneganswake.ats"</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w">                  </span><span class="c1">; get number of partials</span><span class="w">
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">***number of partials = </span><span class="si">%d</span><span class="s">***</span><span class="se">\n\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span>i<span class="n">pr</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="c1">; sine wave.</span>
-<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
+</span>k<span class="n">time1</span><span class="w">	</span><span class="nb">line</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mf">12.67</span><span class="w">
+</span>k<span class="n">time2</span><span class="w">	</span><span class="nb">line</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span>k<span class="n">line</span><span class="w">	</span><span class="nb">line</span><span class="w">    </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="vi">p5</span><span class="w">                            
+        </span><span class="nb">ATSbufread</span><span class="w"> </span>k<span class="n">time1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"finneganswake.ats"</span><span class="p">,</span><span class="w"> </span>i<span class="n">pr</span><span class="w">
+</span>a<span class="n">out</span><span class="w">	</span><span class="nb">ATScross</span><span class="w">   </span>k<span class="n">time2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"beats.ats"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>k<span class="n">line</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">pr</span><span class="w"> </span><span class="c1">; cross from p4 to p5</span><span class="w">
+	</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">out</span><span class="o">*</span><span class="mf">1.7</span><span class="p">,</span><span class="w"> </span>a<span class="n">out</span><span class="o">*</span><span class="mf">1.7</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">4</span> 
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">; sine wave.</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">;          start    end</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">12.7</span><span class="w">   </span><span class="mi">0</span><span class="w">       </span><span class="mi">1</span><span class="w"> </span><span class="c1">; voice --&gt; beats</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="mf">12.7</span><span class="w">  </span><span class="mi">1</span><span class="w">       </span><span class="mi">0</span><span class="w"> </span><span class="c1">; beats --&gt; voice</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -207,21 +217,9 @@ a<span class="n">out</span>	<span class="nb">ATScross</span>   k<span class="n">
         </div>
         <p><br class="example-break" />
     </p>
-        <p>
-      Cet exemple exécute une synthèse croisée à partir des deux fichiers ATS
-      "fox.ats" et "beats.ats". Le résultat sera un son qui débute avec le profil
-      (en fréquence) de fox.ats et se termine avec le profil de beats.ats. Toutes
-      les fréquences d'onde sinusoïdale viennent de beats.ats. La valeur de
-      <span class="emphasis"><em>kbuflev</em></span> est pondérée parce que l'énergie produite en
-      appliquant le spectre de fréquence de fox.ats aux partiels de beats.ats est
-      très importante. Noter également que les pointeurs de temps
-      d'<span class="emphasis"><em>ATSbufread</em></span> (fox.atds) et d'<span class="emphasis"><em>ATScross</em></span> (beats.ats) n'ont
-      pas nécessairement la même valeur, ce qui permet de lire les deux fichiers ATS
-      à des vitesses différentes.
-    </p>
       </div>
       <div class="refsect1">
-        <a id="idm29127"></a>
+        <a id="idm37182"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="ATSread.html" title="ATSread"><em class="citetitle">ATSread</em></a>, 
@@ -236,7 +234,7 @@ a<span class="n">out</span>	<span class="nb">ATScross</span>   k<span class="n">
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm29148"></a>
+        <a id="idm37203"></a>
         <h2>Crédits</h2>
         <p>
       </p>

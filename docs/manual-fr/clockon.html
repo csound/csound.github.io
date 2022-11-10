@@ -6,7 +6,7 @@
     <title>clockon</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="clockoff.html" title="clockoff" />
@@ -39,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm43309"></a>
+        <a id="idm58327"></a>
         <h2>Description</h2>
         <p>
       Démarre l'une des horloges internes.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm43312"></a>
+        <a id="idm58330"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>clockon</strong></span> inum</pre>
       </div>
       <div class="refsect1">
-        <a id="idm43316"></a>
+        <a id="idm58334"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>inum</em></span> -- le numéro d'une horloge. Il y a 32 horloges
@@ -60,7 +60,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm43320"></a>
+        <a id="idm58338"></a>
         <h2>Exécution</h2>
         <p>
       Entre deux opcodes <span class="emphasis"><em>clockon</em></span> et
@@ -72,7 +72,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm43328"></a>
+        <a id="idm58346"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode clockon. Il utilise le fichier
@@ -80,13 +80,13 @@
 
       </p>
         <div class="example">
-          <a id="idm43333"></a>
+          <a id="idm58351"></a>
           <p class="title">
-            <strong>Exemple 144. Exemple de l'opcode clockon.</strong>
+            <strong>Exemple 148. Exemple de l'opcode clockon.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm43335"></a>
+              <a id="idm58353"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -96,46 +96,46 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o clockon.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="c1">; Initialize the global variables.</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="c1">; Initialize the global variables.</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="c1">; Instrument #1.</span>
-<span class="kd">instr</span> <span class="nf">1</span>
-  <span class="c1">; Start clock #1.</span>
-  <span class="nb">clockon</span> <span class="mi">1</span>
-  <span class="c1">; Do something that keeps Csound busy.</span>
-  a<span class="n">1</span> <span class="nb">oscili</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> <span class="mi">1</span>
-  <span class="nb">out</span> a<span class="n">1</span>
-  <span class="c1">; Stop clock #1.</span>
-  <span class="nb">clockoff</span> <span class="mi">1</span>
-  <span class="c1">; Print the time accumulated in clock #1.</span>
-  i<span class="n">1</span> <span class="nb">readclock</span> <span class="mi">1</span>
-  <span class="nb">print</span> i<span class="n">1</span>
-<span class="kd">endin</span>
-
-
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-
-<span class="c1">; Initialize the function tables.</span>
-<span class="c1">; Table 1: an ordinary sine wave.</span>
-<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">32768</span> <span class="mi">10</span> <span class="mi">1</span>
-
-<span class="c1">; Play Instrument #1 for one second starting at 0:00.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
-<span class="c1">; Play Instrument #1 for one second starting at 0:01.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span>
-<span class="c1">; Play Instrument #1 for one second starting at 0:02.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">1</span>
-<span class="nb">e</span>
+</span><span class="c1">; Instrument #1.</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span><span class="c1">; Start clock #1.</span><span class="w">
+  </span><span class="nb">clockon</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="c1">; Do something that keeps Csound busy.</span><span class="w">
+  </span>a<span class="n">1</span><span class="w"> </span><span class="nb">oscili</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w"> </span><span class="mi">440</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="nb">out</span><span class="w"> </span>a<span class="n">1</span><span class="w">
+  </span><span class="c1">; Stop clock #1.</span><span class="w">
+  </span><span class="nb">clockoff</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="c1">; Print the time accumulated in clock #1.</span><span class="w">
+  </span>i<span class="n">1</span><span class="w"> </span><span class="nb">readclock</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="nb">print</span><span class="w"> </span>i<span class="n">1</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
 
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="c1">; Initialize the function tables.</span><span class="w">
+</span><span class="c1">; Table 1: an ordinary sine wave.</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">32768</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; Play Instrument #1 for one second starting at 0:00.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">; Play Instrument #1 for one second starting at 0:01.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">; Play Instrument #1 for one second starting at 0:02.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -145,7 +145,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm43413"></a>
+        <a id="idm58494"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="clockoff.html" title="clockoff"><em class="citetitle">clockoff</em></a>,
@@ -153,7 +153,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm43420"></a>
+        <a id="idm58501"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -6,7 +6,7 @@
     <title>vmap</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="vlowres.html" title="vlowres" />
@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm259712"></a>
+        <a id="idm378029"></a>
         <h2>Description</h2>
         <p>
       Transfert les éléments d'un vecteur vers un autre selon les indices
@@ -48,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm259715"></a>
+        <a id="idm378032"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>vmap</strong></span>  ifn1, ifn2, ielements [,idstoffset, isrcoffset]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm259719"></a>
+        <a id="idm378036"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifn1</em></span> - numéro de la table dans laquelle le signal
@@ -76,7 +76,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm259733"></a>
+        <a id="idm378050"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>vmap</em></span> permute les éléments de <span class="emphasis"><em>ifn2</em></span>
@@ -113,23 +113,23 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm259773"></a>
+        <a id="idm378090"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode vmap. Il utilise le fichier
       <a class="ulink" href="examples/vmap.csd" target="_top"><em class="citetitle">vmap.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm259778"></a>
+          <a id="idm378095"></a>
           <p class="title">
-            <strong>Exemple 1175. Exemple de l'opcode vmap.</strong>
+            <strong>Exemple 1187. Exemple de l'opcode vmap.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm259785"></a>
+              <a id="idm378102"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 
@@ -141,51 +141,51 @@
 <span class="c1">; -o vmap.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
 
-<span class="nt">&lt;CsInstruments&gt;</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">256</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-gi<span class="n">size</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">256</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span>gi<span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="w">
 
-gi<span class="n">table</span> <span class="nb">ftgen</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> gi<span class="n">size</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span>  <span class="c1">;Table to be processed</span>
-gi<span class="n">map1</span> <span class="nb">ftgen</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> gi<span class="n">size</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span> gi<span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> gi<span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">; Mapping function to reverse table</span>
-gi<span class="n">map2</span> <span class="nb">ftgen</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> gi<span class="n">size</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> gi<span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> gi<span class="n">size</span><span class="o">-</span><span class="mi">1</span>  <span class="c1">; Mapping function for PWM</span>
-gi<span class="n">map3</span> <span class="nb">ftgen</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> gi<span class="n">size</span><span class="p">,</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span>gi<span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> gi<span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span>gi<span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> gi<span class="n">size</span><span class="o">-</span><span class="mi">1</span>  <span class="c1">; Double frequency</span>
+</span>gi<span class="n">table</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="c1">;Table to be processed</span><span class="w">
+</span>gi<span class="n">map1</span><span class="w"> </span><span class="nb">ftgen</span><span class="w">  </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c1">; Mapping function to reverse table</span><span class="w">
+</span>gi<span class="n">map2</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="w">  </span><span class="c1">; Mapping function for PWM</span><span class="w">
+</span>gi<span class="n">map3</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">(</span>gi<span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="p">(</span>gi<span class="n">size</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="w">  </span><span class="c1">; Double frequency</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>  <span class="c1">;Hear an oscillator using gitable</span>
-a<span class="n">sig</span> <span class="nb">oscil</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">440</span><span class="p">,</span> gi<span class="n">table</span>
-<span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span>a<span class="n">sig</span>
-<span class="kd">endin</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">  </span><span class="c1">;Hear an oscillator using gitable</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">oscil</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w"> </span><span class="mi">440</span><span class="p">,</span><span class="w"> </span>gi<span class="n">table</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">2</span>  <span class="c1">;Reverse the table (no sound change, except for a single click</span>
-<span class="nb">vmap</span> gi<span class="n">map1</span><span class="p">,</span> gi<span class="n">table</span><span class="p">,</span> gi<span class="n">size</span>
-<span class="nb">vcopy_i</span> gi<span class="n">table</span><span class="p">,</span> gi<span class="n">map1</span><span class="p">,</span> gi<span class="n">size</span>
-<span class="nb">turnoff</span>
-<span class="kd">endin</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">  </span><span class="c1">;Reverse the table (no sound change, except for a single click</span><span class="w">
+</span><span class="nb">vmap</span><span class="w"> </span>gi<span class="n">map1</span><span class="p">,</span><span class="w"> </span>gi<span class="n">table</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="w">
+</span><span class="nb">vcopy_i</span><span class="w"> </span>gi<span class="n">table</span><span class="p">,</span><span class="w"> </span>gi<span class="n">map1</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="w">
+</span><span class="nb">turnoff</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">3</span>  <span class="c1">;Non-interpolated PWM (or phase waveshaping)</span>
-<span class="nb">vmap</span> gi<span class="n">map2</span><span class="p">,</span> gi<span class="n">table</span><span class="p">,</span> gi<span class="n">size</span>
-<span class="nb">vcopy_i</span> gi<span class="n">table</span><span class="p">,</span> gi<span class="n">map2</span><span class="p">,</span> gi<span class="n">size</span>
-<span class="nb">turnoff</span>
-<span class="kd">endin</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">3</span><span class="w">  </span><span class="c1">;Non-interpolated PWM (or phase waveshaping)</span><span class="w">
+</span><span class="nb">vmap</span><span class="w"> </span>gi<span class="n">map2</span><span class="p">,</span><span class="w"> </span>gi<span class="n">table</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="w">
+</span><span class="nb">vcopy_i</span><span class="w"> </span>gi<span class="n">table</span><span class="p">,</span><span class="w"> </span>gi<span class="n">map2</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="w">
+</span><span class="nb">turnoff</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">4</span>  <span class="c1">;Double frequency</span>
-<span class="nb">vmap</span> gi<span class="n">map3</span><span class="p">,</span> gi<span class="n">table</span><span class="p">,</span> gi<span class="n">size</span>
-<span class="nb">vcopy_i</span> gi<span class="n">table</span><span class="p">,</span> gi<span class="n">map3</span><span class="p">,</span> gi<span class="n">size</span>
-<span class="nb">turnoff</span>
-<span class="kd">endin</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">4</span><span class="w">  </span><span class="c1">;Double frequency</span><span class="w">
+</span><span class="nb">vmap</span><span class="w"> </span>gi<span class="n">map3</span><span class="p">,</span><span class="w"> </span>gi<span class="n">table</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="w">
+</span><span class="nb">vcopy_i</span><span class="w"> </span>gi<span class="n">table</span><span class="p">,</span><span class="w"> </span>gi<span class="n">map3</span><span class="p">,</span><span class="w"> </span>gi<span class="n">size</span><span class="w">
+</span><span class="nb">turnoff</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
 
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">8</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">1</span>
-<span class="nb">i</span> <span class="mi">3</span> <span class="mi">4</span> <span class="mi">1</span>
-<span class="nb">i</span> <span class="mi">4</span> <span class="mi">6</span> <span class="mi">1</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
@@ -196,7 +196,7 @@ a<span class="n">sig</span> <span class="nb">oscil</span> <span class="mi">10000
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm259987"></a>
+        <a id="idm378424"></a>
         <h2>Crédits</h2>
         <p>Ecrit par Gabriel Maldonado.</p>
         <p>Nouveau dans Csound 5 (Auparavant seulement disponible dans CsoundAV)</p>

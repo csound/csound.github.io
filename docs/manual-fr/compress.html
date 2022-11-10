@@ -6,7 +6,7 @@
     <title>compress</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="combinv.html" title="combinv" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm44487"></a>
+        <a id="idm60087"></a>
         <h2>Description</h2>
         <p> Cette unité fonctionne comme un compresseur audio, un limiteur, un
     expander ou un noise gate, avec un coude arrondi ou non et des caractéristiques
@@ -69,12 +69,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm44499"></a>
+        <a id="idm60099"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ar <span class="command"><strong>compress</strong></span> aasig, acsig, kthresh, kloknee, khiknee, kratio, katt, krel, ilook</pre>
       </div>
       <div class="refsect1">
-        <a id="idm44503"></a>
+        <a id="idm60103"></a>
         <h2>Initialisation</h2>
         <p>
     <span class="emphasis"><em>ilook</em></span> -- temps de prospection en secondes, pendant
@@ -86,7 +86,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm44508"></a>
+        <a id="idm60108"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kthresh</em></span> -- fixe le niveau le plus bas en décibels qui
@@ -127,20 +127,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm44522"></a>
+        <a id="idm60122"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode compress. Il utilise le fichier
       <a class="ulink" href="examples/compress.csd" target="_top"><em class="citetitle">compress.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm44527"></a>
+          <a id="idm60127"></a>
           <p class="title">
-            <strong>Exemple 150. Exemple de l'opcode compress.</strong>
+            <strong>Exemple 154. Exemple de l'opcode compress.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm44529"></a>
+              <a id="idm60129"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -149,47 +149,47 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o compress.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-
-
-<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">; uncompressed signal</span>
-
-a<span class="n">sig</span> <span class="nb">diskin2</span> <span class="s">"beats.wav"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
-     <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
-<span class="kd">endin</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
 
 
-<span class="kd">instr</span> <span class="nf">2</span>	<span class="c1">; compressed signal.</span>
-<span class="c1">; Use the "beats.wav" audio file and a mic</span>
-a<span class="n">voice</span> <span class="nb">in</span>
-a<span class="n">sig</span>   <span class="nb">diskin2</span> <span class="s">"beats.wav"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	</span><span class="c1">; uncompressed signal</span><span class="w">
 
-<span class="c1">; duck the audio signal "beats.wav" with your voice.</span>
-  k<span class="n">thresh</span> <span class="o">=</span> <span class="mi">0</span>
-  k<span class="n">loknee</span> <span class="o">=</span> <span class="mi">40</span>
-  k<span class="n">hiknee</span> <span class="o">=</span> <span class="mi">60</span>
-  k<span class="n">ratio</span>  <span class="o">=</span> <span class="mi">3</span>
-  k<span class="n">att</span>    <span class="o">=</span> <span class="mf">0.1</span>
-  k<span class="n">rel</span>    <span class="o">=</span> <span class="mf">.5</span>
-  i<span class="n">look</span>   <span class="o">=</span> <span class="mf">.02</span>
-a<span class="n">sig</span>  <span class="nb">compress</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">voice</span><span class="p">,</span> k<span class="n">thresh</span><span class="p">,</span> k<span class="n">loknee</span><span class="p">,</span> k<span class="n">hiknee</span><span class="p">,</span> k<span class="n">ratio</span><span class="p">,</span> k<span class="n">att</span><span class="p">,</span> k<span class="n">rel</span><span class="p">,</span> i<span class="n">look</span>	<span class="c1">; voice-activated compressor</span>
-      <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">diskin2</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="kd">endin</span>
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">	</span><span class="c1">; compressed signal.</span><span class="w">
+</span><span class="c1">; Use the "beats.wav" audio file and a mic</span><span class="w">
+</span>a<span class="n">voice</span><span class="w"> </span><span class="nb">in</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">   </span><span class="nb">diskin2</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">5</span>
+</span><span class="c1">; duck the audio signal "beats.wav" with your voice.</span><span class="w">
+  </span>k<span class="n">thresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span>k<span class="n">loknee</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="w">
+  </span>k<span class="n">hiknee</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="w">
+  </span>k<span class="n">ratio</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w">
+  </span>k<span class="n">att</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+  </span>k<span class="n">rel</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">.5</span><span class="w">
+  </span>i<span class="n">look</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mf">.02</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">compress</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">voice</span><span class="p">,</span><span class="w"> </span>k<span class="n">thresh</span><span class="p">,</span><span class="w"> </span>k<span class="n">loknee</span><span class="p">,</span><span class="w"> </span>k<span class="n">hiknee</span><span class="p">,</span><span class="w"> </span>k<span class="n">ratio</span><span class="p">,</span><span class="w"> </span>k<span class="n">att</span><span class="p">,</span><span class="w"> </span>k<span class="n">rel</span><span class="p">,</span><span class="w"> </span>i<span class="n">look</span><span class="w">	</span><span class="c1">; voice-activated compressor</span><span class="w">
+      </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">2</span> <span class="mi">6</span> <span class="mi">21</span>
+</span><span class="kd">endin</span><span class="w">
 
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">5</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">21</span><span class="w">
+
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -199,7 +199,7 @@ a<span class="n">sig</span>  <span class="nb">compress</span> a<span class="n">s
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm44640"></a>
+        <a id="idm60323"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="dam.html" title="dam"><em class="citetitle">dam</em></a>
@@ -209,7 +209,7 @@ a<span class="n">sig</span>  <span class="nb">compress</span> a<span class="n">s
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm44648"></a>
+        <a id="idm60331"></a>
         <h2>Crédits</h2>
         <p>Ecrit par Barry L. Vercoe pour Extended Csound et introduit dans
     Csound 5.02.

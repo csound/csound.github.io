@@ -6,7 +6,7 @@
     <title>pvscent</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="pvscale.html" title="pvscale" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm185046"></a>
+        <a id="idm270031"></a>
         <h2>Description</h2>
         <p>
       Calcule le centroïde spectral d'un signal à partir de sa transformée de
@@ -47,13 +47,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm185049"></a>
+        <a id="idm270034"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">kcent <span class="command"><strong>pvscent</strong></span> fsig</pre>
         <pre class="synopsis">acent <span class="command"><strong>pvscent</strong></span> fsig</pre>
       </div>
       <div class="refsect1">
-        <a id="idm185055"></a>
+        <a id="idm270040"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kcent</em></span> -- le centroïde spectral
@@ -66,7 +66,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm185063"></a>
+        <a id="idm270048"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'utilisation de l'opcode <span class="emphasis"><em>pvscent</em></span>.
@@ -74,58 +74,62 @@
       <a class="ulink" href="examples/pvscent.csd" target="_top"><em class="citetitle">pvscent.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm185069"></a>
+          <a id="idm270054"></a>
           <p class="title">
-            <strong>Exemple 806. Exemple de l'opcode <span class="emphasis"><em>pvscent</em></span>.</strong>
+            <strong>Exemple 819. Exemple de l'opcode <span class="emphasis"><em>pvscent</em></span>.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm185077"></a>
+              <a id="idm270062"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
--odac
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o pvscent.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">16</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="c1">;; example written by joachim heintz 2009</span>
+</span><span class="c1">;; example written by joachim heintz 2009</span><span class="w">
 
-gi<span class="n">Sine</span>		<span class="nb">ftgen</span>		<span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4096</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span>
+</span>gi<span class="n">Sine</span><span class="w">		</span><span class="nb">ftgen</span><span class="w">		</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4096</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
-i<span class="n">refrtm</span>	<span class="o">=</span>		<span class="vi">p4</span><span class="c1">; time for generating new values for the spectral centroid</span>
-i<span class="n">fftsize</span>	<span class="o">=</span>		<span class="mi">1024</span>
-i<span class="n">overlap</span>	<span class="o">=</span>		i<span class="n">fftsize</span> <span class="o">/</span> <span class="mi">4</span>
-i<span class="n">winsize</span>	<span class="o">=</span>		i<span class="n">fftsize</span>
-i<span class="n">winshape</span>	<span class="o">=</span>		<span class="mi">1</span><span class="c1">; von-Hann window</span>
-<span class="c1">;Sfile		=		"flute-C-octave0.wav"</span>
-S<span class="n">file</span>		<span class="o">=</span>		<span class="s">"fox.wav"</span>
-a<span class="n">in</span>		<span class="nb">soundin</span>	S<span class="n">file</span>
-f<span class="n">ftin</span>		<span class="nb">pvsanal</span>	a<span class="n">in</span><span class="p">,</span> i<span class="n">fftsize</span><span class="p">,</span> i<span class="n">overlap</span><span class="p">,</span> i<span class="n">winsize</span><span class="p">,</span> i<span class="n">winshape</span><span class="c1">; fft-analysis of the audio-signal</span>
-k<span class="n">trig</span>		<span class="nb">metro</span>		<span class="mi">1</span> <span class="o">/</span> i<span class="n">refrtm</span>
-<span class="k">if</span> k<span class="n">trig</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">then</span>
-k<span class="n">center</span>	<span class="nb">pvscent</span>	f<span class="n">ftin</span><span class="c1">; spectral center</span>
-<span class="k">endif</span>
-a<span class="n">out</span>		<span class="nb">oscil</span>		<span class="mf">.2</span><span class="p">,</span> k<span class="n">center</span><span class="p">,</span> gi<span class="n">Sine</span>
-		<span class="nb">out</span>		a<span class="n">out</span>
-<span class="kd">endin</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span>i<span class="n">refrtm</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="c1">; time for generating new values for the spectral centroid</span><span class="w">
+</span>i<span class="n">fftsize</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="w">
+</span>i<span class="n">overlap</span><span class="w">	</span><span class="o">=</span><span class="w"> </span>i<span class="n">fftsize</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">4</span><span class="w">
+</span>i<span class="n">winsize</span><span class="w">	</span><span class="o">=</span><span class="w"> </span>i<span class="n">fftsize</span><span class="w">
+</span>i<span class="n">winshape</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="c1">; von-Hann window</span><span class="w">
+</span><span class="c1">;Sfile		= "flute-C-octave0.wav"</span><span class="w">
+</span>S<span class="n">file</span><span class="w">		</span><span class="o">=</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w">
+</span>a<span class="n">in</span><span class="w">		</span><span class="nb">soundin</span><span class="w">	</span>S<span class="n">file</span><span class="w">
+</span>f<span class="n">ftin</span><span class="w">		</span><span class="nb">pvsanal</span><span class="w">	</span>a<span class="n">in</span><span class="p">,</span><span class="w"> </span>i<span class="n">fftsize</span><span class="p">,</span><span class="w"> </span>i<span class="n">overlap</span><span class="p">,</span><span class="w"> </span>i<span class="n">winsize</span><span class="p">,</span><span class="w"> </span>i<span class="n">winshape</span><span class="c1">; fft-analysis of the audio-signal</span><span class="w">
+</span>k<span class="n">trig</span><span class="w">		</span><span class="nb">metro</span><span class="w">	</span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span>i<span class="n">refrtm</span><span class="w">
+</span><span class="k">if</span><span class="w"> </span>k<span class="n">trig</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">then</span><span class="w">
+</span>k<span class="n">center</span><span class="w">	</span><span class="nb">pvscent</span><span class="w">	</span>f<span class="n">ftin</span><span class="c1">; spectral center</span><span class="w">
+</span><span class="k">endif</span><span class="w">
+</span>a<span class="n">out</span><span class="w">		</span><span class="nb">oscil</span><span class="w">	</span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span>k<span class="n">center</span><span class="p">,</span><span class="w"> </span>gi<span class="n">Sine</span><span class="w">
+</span><span class="nb">outs</span><span class="w">		</span>a<span class="n">out</span><span class="p">,</span><span class="w"> </span>a<span class="n">out</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">2.757</span> <span class="mf">.3</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">3</span> <span class="mf">2.757</span> <span class="mf">.05</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">6</span> <span class="mf">2.757</span> <span class="mf">.005</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">9</span> <span class="mf">2.757</span> <span class="mf">.001</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">2.757</span><span class="w"> </span><span class="mf">.3</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mf">2.757</span><span class="w"> </span><span class="mf">.05</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mf">2.757</span><span class="w"> </span><span class="mf">.005</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="mf">2.757</span><span class="w"> </span><span class="mf">.001</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -135,7 +139,7 @@ a<span class="n">out</span>		<span class="nb">oscil</span>		<span class="mf">.2<
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm185197"></a>
+        <a id="idm270288"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>,
@@ -145,7 +149,7 @@ a<span class="n">out</span>		<span class="nb">oscil</span>		<span class="mf">.2<
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm185208"></a>
+        <a id="idm270299"></a>
         <h2>Crédits</h2>
         <p>
       </p>

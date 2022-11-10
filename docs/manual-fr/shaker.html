@@ -6,7 +6,7 @@
     <title>shaker</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="sfpreset.html" title="sfpreset" />
@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm212381"></a>
+        <a id="idm310210"></a>
         <h2>Description</h2>
         <p>
       La sortie audio produit un son comme si l'on secouait des maracas ou un instrument
@@ -49,12 +49,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm212384"></a>
+        <a id="idm310213"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>shaker</strong></span> kamp, kfreq, kbeans, kdamp, ktimes [, idecay]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm212388"></a>
+        <a id="idm310217"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>idecay</em></span> -- S'il est présent, indique la durée d'amortissement du
@@ -62,7 +62,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm212392"></a>
+        <a id="idm310221"></a>
         <h2>Exécution</h2>
         <p>
       Une note jouée sur un instrument de type maracas, avec les arguments suivants.
@@ -103,7 +103,7 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm212409"></a>
+        <a id="idm310238"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode shaker. Il utilise le fichier
@@ -111,49 +111,52 @@
 
       </p>
         <div class="example">
-          <a id="idm212414"></a>
+          <a id="idm310243"></a>
           <p class="title">
-            <strong>Exemple 961. Exemple de l'opcode shaker.</strong>
+            <strong>Exemple 971. Exemple de l'opcode shaker.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm212421"></a>
+              <a id="idm310250"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
-<span class="c1">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac             <span class="c1">;;;RT audio out</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o shaker.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="c1">; Initialize the global variables.</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="c1">; by Menno Knevel</span><span class="w">
 
-<span class="c1">; Instrument #1</span>
-<span class="kd">instr</span> <span class="nf">1</span>
-k<span class="n">freq</span>	<span class="nb">line</span> <span class="vi">p4</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">440</span>
-   a<span class="n">1</span> <span class="nb">shaker</span> <span class="mi">10000</span><span class="p">,</span> k<span class="n">freq</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span>
-   <span class="nb">out</span> a<span class="n">1</span>
-<span class="kd">endin</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span>k<span class="n">num</span><span class="w">  </span><span class="o">=</span><span class="w">   </span><span class="vi">p5</span><span class="w">
+</span>k<span class="n">freq</span><span class="w">	</span><span class="nb">line</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">440</span><span class="w">
+</span>a<span class="n">1</span><span class="w"> </span><span class="nb">shaker</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mf">0.999</span><span class="p">,</span><span class="w"> </span>k<span class="n">num</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">440</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span> <span class="mi">4000</span>
+</span><span class="kd">endin</span><span class="w">
 
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">;       frq     #</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">440</span><span class="w">     </span><span class="mi">3</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">440</span><span class="w">    </span><span class="mi">300</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">440</span><span class="w">    </span><span class="mi">3000</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">4000</span><span class="w">    </span><span class="mi">100</span><span class="w">
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -163,7 +166,7 @@ k<span class="n">freq</span>	<span class="nb">line</span> <span class="vi">p4</s
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm212486"></a>
+        <a id="idm310392"></a>
         <h2>Crédits</h2>
         <p>
       </p>
@@ -181,7 +184,6 @@ k<span class="n">freq</span>	<span class="nb">line</span> <span class="vi">p4</s
         <p>
     </p>
         <p>Nouveau dans la version 3.47 de Csound</p>
-        <p>Exemple corrigé grâce à un message de Istvan Varga.</p>
       </div>
     </div>
     <div class="navfooter">

@@ -6,7 +6,7 @@
     <title>hilbert</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="hdf5write.html" title="hdf5write" />
@@ -39,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm105359"></a>
+        <a id="idm150742"></a>
         <h2>Description</h2>
         <p>
       Une implémentation RII de la transformée de Hilbert.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm105362"></a>
+        <a id="idm150745"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ar1, ar2 <span class="command"><strong>hilbert</strong></span> asig</pre>
       </div>
       <div class="refsect1">
-        <a id="idm105366"></a>
+        <a id="idm150749"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>asig</em></span> -- signal d'entrée.
@@ -98,7 +98,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm105390"></a>
+        <a id="idm150773"></a>
         <h2>Exemples</h2>
         <p>
       Le premier example implémente un décalage de fréquence, ou modulation
@@ -118,16 +118,16 @@
 
       </p>
         <div class="example">
-          <a id="idm105398"></a>
+          <a id="idm150781"></a>
           <p class="title">
-            <strong>Exemple 431. Exemple de l'opcode hilbert implmentant le décalage de fréquence.</strong>
+            <strong>Exemple 437. Exemple de l'opcode hilbert implmentant le décalage de fréquence.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
         <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm105405"></a>
+              <a id="idm150788"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -137,72 +137,72 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o hilbert.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
   
-<span class="kd">instr</span> <span class="nf">1</span>
-  i<span class="n">dur</span> <span class="o">=</span> <span class="vi">p3</span>
-  <span class="c1">; Initial amount of frequency shift.</span>
-  <span class="c1">; It can be positive or negative.</span>
-  i<span class="n">begshift</span> <span class="o">=</span> <span class="vi">p4</span> 
-  <span class="c1">; Final amount of frequency shift.</span>
-  <span class="c1">; It can be positive or negative.</span>
-  i<span class="n">endshift</span> <span class="o">=</span> <span class="vi">p5</span> 
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span>i<span class="n">dur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p3</span><span class="w">
+  </span><span class="c1">; Initial amount of frequency shift.</span><span class="w">
+  </span><span class="c1">; It can be positive or negative.</span><span class="w">
+  </span>i<span class="n">begshift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w"> 
+  </span><span class="c1">; Final amount of frequency shift.</span><span class="w">
+  </span><span class="c1">; It can be positive or negative.</span><span class="w">
+  </span>i<span class="n">endshift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w"> 
   
-  <span class="c1">; A simple envelope for determining the </span>
-  <span class="c1">; amount of frequency shift.</span>
-  k<span class="n">freq</span> <span class="nb">linseg</span> i<span class="n">begshift</span><span class="p">,</span> i<span class="n">dur</span><span class="p">,</span> i<span class="n">endshift</span>
+  </span><span class="c1">; A simple envelope for determining the </span><span class="w">
+  </span><span class="c1">; amount of frequency shift.</span><span class="w">
+  </span>k<span class="n">freq</span><span class="w"> </span><span class="nb">linseg</span><span class="w"> </span>i<span class="n">begshift</span><span class="p">,</span><span class="w"> </span>i<span class="n">dur</span><span class="p">,</span><span class="w"> </span>i<span class="n">endshift</span><span class="w">
  
-  <span class="c1">; Use the sound of your choice.</span>
-  a<span class="n">in</span> <span class="nb">diskin2</span> <span class="s">"beats.wav"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+  </span><span class="c1">; Use the sound of your choice.</span><span class="w">
+  </span>a<span class="n">in</span><span class="w"> </span><span class="nb">diskin2</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
  
-  <span class="c1">; Phase quadrature output derived from input signal.</span>
-  a<span class="n">real</span><span class="p">,</span> a<span class="n">imag</span> <span class="nb">hilbert</span> a<span class="n">in</span>
+  </span><span class="c1">; Phase quadrature output derived from input signal.</span><span class="w">
+  </span>a<span class="n">real</span><span class="p">,</span><span class="w"> </span>a<span class="n">imag</span><span class="w"> </span><span class="nb">hilbert</span><span class="w"> </span>a<span class="n">in</span><span class="w">
  
-  <span class="c1">; Quadrature oscillator.</span>
-  a<span class="n">sin</span> <span class="nb">oscili</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">freq</span><span class="p">,</span> <span class="mi">1</span>
-  a<span class="n">cos</span> <span class="nb">oscili</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">freq</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.25</span>
+  </span><span class="c1">; Quadrature oscillator.</span><span class="w">
+  </span>a<span class="n">sin</span><span class="w"> </span><span class="nb">oscili</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span>a<span class="n">cos</span><span class="w"> </span><span class="nb">oscili</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.25</span><span class="w">
  
-  <span class="c1">; Use a trigonometric identity. </span>
-  <span class="c1">; See the references for further details.</span>
-  a<span class="n">mod1</span> <span class="o">=</span> a<span class="n">real</span> <span class="o">*</span> a<span class="n">cos</span>
-  a<span class="n">mod2</span> <span class="o">=</span> a<span class="n">imag</span> <span class="o">*</span> a<span class="n">sin</span>
+  </span><span class="c1">; Use a trigonometric identity. </span><span class="w">
+  </span><span class="c1">; See the references for further details.</span><span class="w">
+  </span>a<span class="n">mod1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">real</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>a<span class="n">cos</span><span class="w">
+  </span>a<span class="n">mod2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">imag</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>a<span class="n">sin</span><span class="w">
 
-  <span class="c1">; Both sum and difference frequencies can be </span>
-  <span class="c1">; output at once.</span>
-  <span class="c1">; aupshift corresponds to the sum frequencies.</span>
-  a<span class="n">upshift</span> <span class="o">=</span> <span class="p">(</span>a<span class="n">mod1</span> <span class="o">-</span> a<span class="n">mod2</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.7</span>
-  <span class="c1">; adownshift corresponds to the difference frequencies. </span>
-  a<span class="n">downshift</span> <span class="o">=</span> <span class="p">(</span>a<span class="n">mod1</span> <span class="o">+</span> a<span class="n">mod2</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.7</span>
+  </span><span class="c1">; Both sum and difference frequencies can be </span><span class="w">
+  </span><span class="c1">; output at once.</span><span class="w">
+  </span><span class="c1">; aupshift corresponds to the sum frequencies.</span><span class="w">
+  </span>a<span class="n">upshift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>a<span class="n">mod1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span>a<span class="n">mod2</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.7</span><span class="w">
+  </span><span class="c1">; adownshift corresponds to the difference frequencies. </span><span class="w">
+  </span>a<span class="n">downshift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>a<span class="n">mod1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>a<span class="n">mod2</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.7</span><span class="w">
 
-  <span class="c1">; Notice that the adding of the two together is</span>
-  <span class="c1">; identical to the output of ring modulation.</span>
+  </span><span class="c1">; Notice that the adding of the two together is</span><span class="w">
+  </span><span class="c1">; identical to the output of ring modulation.</span><span class="w">
 
-  <span class="nb">outs</span> a<span class="n">upshift</span><span class="p">,</span> a<span class="n">upshift</span>
-<span class="kd">endin</span>
-
-
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-
-<span class="c1">; Sine table for quadrature oscillator.</span>
-<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
-
-<span class="c1">; Starting with no shift, ending with all</span>
-<span class="c1">; frequencies shifted up by 2000 Hz.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">6</span> <span class="mi">0</span> <span class="mi">2000</span>
-
-<span class="c1">; Starting with no shift, ending with all</span>
-<span class="c1">; frequencies shifted down by 250 Hz.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">7</span> <span class="mi">6</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">250</span>
-<span class="nb">e</span>
+  </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">upshift</span><span class="p">,</span><span class="w"> </span>a<span class="n">upshift</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
 
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="c1">; Sine table for quadrature oscillator.</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; Starting with no shift, ending with all</span><span class="w">
+</span><span class="c1">; frequencies shifted up by 2000 Hz.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2000</span><span class="w">
+
+</span><span class="c1">; Starting with no shift, ending with all</span><span class="w">
+</span><span class="c1">; frequencies shifted down by 250 Hz.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="mi">250</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -225,9 +225,9 @@
 
       </p>
         <div class="example">
-          <a id="idm105562"></a>
+          <a id="idm151065"></a>
           <p class="title">
-            <strong>Exemple 432. Exemple de l'opcode hilbert sonnant comme une <span class="quote">« <span class="quote">enseigne de
+            <strong>Exemple 438. Exemple de l'opcode hilbert sonnant comme une <span class="quote">« <span class="quote">enseigne de
         coiffeur</span> »</span>.</strong>
           </p>
           <div class="example-contents">
@@ -235,7 +235,7 @@
         <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm105570"></a>
+              <a id="idm151073"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -245,72 +245,72 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o hilbert_barberpole.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="c1">; Initialize the global variables.</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="c1">; kr must equal sr for the barberpole effect to work.</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span class="c1">; Initialize the global variables.</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="c1">; kr must equal sr for the barberpole effect to work.</span><span class="w">
+</span><span class="vg">kr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
 
-<span class="c1">; Instrument #1</span>
-<span class="kd">instr</span> <span class="nf">1</span>
-  i<span class="n">dur</span> <span class="o">=</span> <span class="vi">p3</span>
-  i<span class="n">begshift</span> <span class="o">=</span> <span class="vi">p4</span>
-  i<span class="n">endshift</span> <span class="o">=</span> <span class="vi">p5</span>
+</span><span class="c1">; Instrument #1</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span>i<span class="n">dur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p3</span><span class="w">
+  </span>i<span class="n">begshift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+  </span>i<span class="n">endshift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">
 
-  <span class="c1">; sawtooth wave, not bandlimited</span>
-  a<span class="n">saw</span>   <span class="nb">phasor</span> <span class="mi">100</span>
-  <span class="c1">; add offset to center phasor amplitude between -.5 and .5</span>
-  a<span class="n">saw</span> <span class="o">=</span> a<span class="n">saw</span> <span class="o">-</span> <span class="mf">.5</span>
-  <span class="c1">; sawtooth wave, with amplitude of 10000</span>
-  a<span class="n">in</span> <span class="o">=</span> a<span class="n">saw</span> <span class="o">*</span> <span class="mi">20000</span>
+  </span><span class="c1">; sawtooth wave, not bandlimited</span><span class="w">
+  </span>a<span class="n">saw</span><span class="w">   </span><span class="nb">phasor</span><span class="w"> </span><span class="mi">100</span><span class="w">
+  </span><span class="c1">; add offset to center phasor amplitude between -.5 and .5</span><span class="w">
+  </span>a<span class="n">saw</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">saw</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">.5</span><span class="w">
+  </span><span class="c1">; sawtooth wave, with amplitude of 10000</span><span class="w">
+  </span>a<span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">saw</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">20000</span><span class="w">
   
-  <span class="c1">; The envelope of the frequency shift.</span>
-  k<span class="n">freq</span> <span class="nb">linseg</span> i<span class="n">begshift</span><span class="p">,</span> i<span class="n">dur</span><span class="p">,</span> i<span class="n">endshift</span>
+  </span><span class="c1">; The envelope of the frequency shift.</span><span class="w">
+  </span>k<span class="n">freq</span><span class="w"> </span><span class="nb">linseg</span><span class="w"> </span>i<span class="n">begshift</span><span class="p">,</span><span class="w"> </span>i<span class="n">dur</span><span class="p">,</span><span class="w"> </span>i<span class="n">endshift</span><span class="w">
 
-  <span class="c1">; Phase quadrature output derived from input signal.</span>
-  a<span class="n">real</span><span class="p">,</span> a<span class="n">imag</span> <span class="nb">hilbert</span> a<span class="n">in</span>
+  </span><span class="c1">; Phase quadrature output derived from input signal.</span><span class="w">
+  </span>a<span class="n">real</span><span class="p">,</span><span class="w"> </span>a<span class="n">imag</span><span class="w"> </span><span class="nb">hilbert</span><span class="w"> </span>a<span class="n">in</span><span class="w">
 
-  <span class="c1">; The quadrature oscillator.</span>
-  a<span class="n">sin</span> <span class="nb">oscili</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">freq</span><span class="p">,</span> <span class="mi">1</span>
-  a<span class="n">cos</span> <span class="nb">oscili</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">freq</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.25</span>
+  </span><span class="c1">; The quadrature oscillator.</span><span class="w">
+  </span>a<span class="n">sin</span><span class="w"> </span><span class="nb">oscili</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span>a<span class="n">cos</span><span class="w"> </span><span class="nb">oscili</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.25</span><span class="w">
 
-  <span class="c1">; Based on trignometric identities.</span>
-  a<span class="n">mod1</span> <span class="o">=</span> a<span class="n">real</span> <span class="o">*</span> a<span class="n">cos</span>
-  a<span class="n">mod2</span> <span class="o">=</span> a<span class="n">imag</span> <span class="o">*</span> a<span class="n">sin</span>
+  </span><span class="c1">; Based on trignometric identities.</span><span class="w">
+  </span>a<span class="n">mod1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">real</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>a<span class="n">cos</span><span class="w">
+  </span>a<span class="n">mod2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">imag</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>a<span class="n">sin</span><span class="w">
 
-  <span class="c1">; Calculate the up-shift and down-shift.</span>
-  a<span class="n">upshift</span> <span class="o">=</span> <span class="p">(</span>a<span class="n">mod1</span> <span class="o">+</span> a<span class="n">mod2</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.7</span>
-  a<span class="n">downshift</span> <span class="o">=</span> <span class="p">(</span>a<span class="n">mod1</span> <span class="o">-</span> a<span class="n">mod2</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.7</span>
+  </span><span class="c1">; Calculate the up-shift and down-shift.</span><span class="w">
+  </span>a<span class="n">upshift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>a<span class="n">mod1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>a<span class="n">mod2</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.7</span><span class="w">
+  </span>a<span class="n">downshift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>a<span class="n">mod1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span>a<span class="n">mod2</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.7</span><span class="w">
 
-  <span class="c1">; Mix in the original signal to achieve the barberpole effect.</span>
-  a<span class="n">mix1</span> <span class="o">=</span> a<span class="n">upshift</span> <span class="o">+</span> a<span class="n">in</span>
-  a<span class="n">mix2</span> <span class="o">=</span> a<span class="n">upshift</span> <span class="o">+</span> a<span class="n">in</span>
+  </span><span class="c1">; Mix in the original signal to achieve the barberpole effect.</span><span class="w">
+  </span>a<span class="n">mix1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">upshift</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>a<span class="n">in</span><span class="w">
+  </span>a<span class="n">mix2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">upshift</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>a<span class="n">in</span><span class="w">
   
-  <span class="c1">; Make sure the output doesn't get louder than the original signal.</span>
-  a<span class="n">out1</span> <span class="nb">balance</span> a<span class="n">mix1</span><span class="p">,</span> a<span class="n">in</span>
-  a<span class="n">out2</span> <span class="nb">balance</span> a<span class="n">mix2</span><span class="p">,</span> a<span class="n">in</span>
+  </span><span class="c1">; Make sure the output doesn't get louder than the original signal.</span><span class="w">
+  </span>a<span class="n">out1</span><span class="w"> </span><span class="nb">balance</span><span class="w"> </span>a<span class="n">mix1</span><span class="p">,</span><span class="w"> </span>a<span class="n">in</span><span class="w">
+  </span>a<span class="n">out2</span><span class="w"> </span><span class="nb">balance</span><span class="w"> </span>a<span class="n">mix2</span><span class="p">,</span><span class="w"> </span>a<span class="n">in</span><span class="w">
 
-  <span class="nb">outs</span> a<span class="n">out1</span><span class="p">,</span> a<span class="n">out2</span>
-<span class="kd">endin</span>
-
-
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-
-<span class="c1">; Table 1: A sine wave for the quadrature oscillator.</span>
-<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
-
-<span class="c1">; The score.</span>
-<span class="c1">; p4 = frequency shifter, starting frequency.</span>
-<span class="c1">; p5 = frequency shifter, ending frequency.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">6</span> <span class="o">-</span><span class="mi">10</span> <span class="mi">10</span>
-<span class="nb">e</span>
+  </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">out1</span><span class="p">,</span><span class="w"> </span>a<span class="n">out2</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
 
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="c1">; Table 1: A sine wave for the quadrature oscillator.</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; The score.</span><span class="w">
+</span><span class="c1">; p4 = frequency shifter, starting frequency.</span><span class="w">
+</span><span class="c1">; p5 = frequency shifter, ending frequency.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="o">-</span><span class="mi">10</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -320,7 +320,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm105733"></a>
+        <a id="idm151370"></a>
         <h2>Historique Technique</h2>
         <p>
       L'utilisation de réseaux déphaseurs dans le décalage de fréquence fut
@@ -336,7 +336,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm105740"></a>
+        <a id="idm151377"></a>
         <h2>Références</h2>
         <p>
       </p>
@@ -374,7 +374,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm105756"></a>
+        <a id="idm151393"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -6,7 +6,7 @@
     <title>sr</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="squinewave.html" title="squinewave" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm222066"></a>
+        <a id="idm323644"></a>
         <h2>Description</h2>
         <p>
       Ces instructions sont des <a class="link" href="assign.html" title="="><em class="citetitle">affectations</em></a> de
@@ -51,12 +51,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm222073"></a>
+        <a id="idm323651"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>sr</strong></span> = iarg</pre>
       </div>
       <div class="refsect1">
-        <a id="idm222077"></a>
+        <a id="idm323655"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>sr</em></span>  = (facultatif) -- fixe le taux d'échantillonnage à <span class="emphasis"><em>iarg</em></span>
@@ -82,7 +82,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm222094"></a>
+        <a id="idm323672"></a>
         <h2>Exemples</h2>
         <p>
       </p>
@@ -102,16 +102,16 @@ itranspose <span class="op">=</span> <span class="opc">octpch</span>(.0l)</pre>
       <a class="ulink" href="examples/sr.csd" target="_top"><em class="citetitle">sr.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm222114"></a>
+          <a id="idm323692"></a>
           <p class="title">
-            <strong>Exemple 992. Exemple de l'opcode sr.</strong>
+            <strong>Exemple 1002. Exemple de l'opcode sr.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm222121"></a>
+              <a id="idm323699"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -121,31 +121,31 @@ itranspose <span class="op">=</span> <span class="opc">octpch</span>(.0l)</pre>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o sr.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">;use sr to find maximum harmonics</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	</span><span class="c1">;use sr to find maximum harmonics</span><span class="w">
 
-i<span class="n">har</span>	<span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="vg">sr</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="vi">p4</span><span class="p">)</span>		<span class="c1">; maximum possible number of harmonics w/o aliasing</span>
-<span class="nb">prints</span>  <span class="s">"maximum number of harmonics = </span><span class="si">%d</span><span class="s"> </span><span class="se">\\n</span><span class="s">"</span><span class="p">,</span> i<span class="n">har</span>
-k<span class="n">env</span>	<span class="nb">linen</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mf">.2</span>	<span class="c1">; envelope</span>
-a<span class="n">sig</span>	<span class="nb">buzz</span>  k<span class="n">env</span><span class="p">,</span> <span class="vi">p4</span><span class="p">,</span> i<span class="n">har</span><span class="p">,</span> <span class="mi">1</span>
-	<span class="nb">outs</span>  a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+</span>i<span class="n">har</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="vg">sr</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="vi">p4</span><span class="p">)</span><span class="w">		</span><span class="c1">; maximum possible number of harmonics w/o aliasing</span><span class="w">
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"maximum number of harmonics = </span><span class="si">%d</span><span class="s"> </span><span class="se">\\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span>i<span class="n">har</span><span class="w">
+</span>k<span class="n">env</span><span class="w">	</span><span class="nb">linen</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mf">.2</span><span class="w">	</span><span class="c1">; envelope</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="nb">buzz</span><span class="w">  </span>k<span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span>i<span class="n">har</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">  </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
 
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">f</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">4096</span> <span class="mi">10</span> <span class="mi">1</span>	<span class="c1">;sine wave</span>
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4096</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">	</span><span class="c1">;sine wave</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mi">100</span>	<span class="c1">;different frequencies</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="mi">1000</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="mi">10000</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">100</span><span class="w">	</span><span class="c1">;different frequencies</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">1000</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">10000</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -162,7 +162,7 @@ maximum number of harmonics = 2</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm222219"></a>
+        <a id="idm323861"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="kr.html" title="kr"><em class="citetitle">kr</em></a>,

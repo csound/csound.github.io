@@ -6,7 +6,7 @@
     <title>GEN14</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="ScoregensTop.html" title="Instructions de partition et routines GEN" />
     <link rel="prev" href="GEN13.html" title="GEN13" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm284249"></a>
+        <a id="idm411195"></a>
         <h2>Description</h2>
         <p>
       Utilise les coefficients de Tchebychev pour générer des fonctions polynomiales stockées qui, dans le
@@ -47,12 +47,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm284252"></a>
+        <a id="idm411198"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>f</strong></span> # date taille 14 xint xamp h0 h1 h2 ...</pre>
       </div>
       <div class="refsect1">
-        <a id="idm284256"></a>
+        <a id="idm411202"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>taille</em></span> -- nombre de points dans la table. Doit être une puissance de 2 ou une
@@ -129,23 +129,23 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm284294"></a>
+        <a id="idm411240"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de la routine GEN14. Il utilise le fichier
       <a class="ulink" href="examples/gen14.csd" target="_top"><em class="citetitle">gen14.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm284299"></a>
+          <a id="idm411245"></a>
           <p class="title">
-            <strong>Exemple 1280. Exemple de la routine GEN14.</strong>
+            <strong>Exemple 1288. Exemple de la routine GEN14.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm284306"></a>
+              <a id="idm411252"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -155,51 +155,51 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o gen14.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span> 
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span> 
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span> 
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span> 
-<span class="c1">;after the example from The Csound Book, page 83</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w"> 
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w"> 
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> 
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+</span><span class="c1">;after the example from The Csound Book, page 83</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">;compare results from GEN13 &amp; GEN14</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	</span><span class="c1">;compare results from GEN13 &amp; GEN14</span><span class="w">
 		
-i<span class="n">wshpfn</span>	<span class="o">=</span> <span class="vi">p6</span>	
-i<span class="n">nrmfn</span>	<span class="o">=</span> <span class="vi">p7</span>	
-a<span class="n">swp</span>	<span class="nb">linseg</span>	<span class="mf">0.01</span><span class="p">,</span> <span class="vi">p3</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">.49</span><span class="p">,</span> <span class="vi">p3</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">0.01</span>		<span class="c1">;index sweep function</span>
-a<span class="n">index</span>	<span class="nb">poscil</span>	a<span class="n">swp</span><span class="p">,</span> <span class="vi">p5</span><span class="p">,</span> <span class="mi">2</span>				<span class="c1">;sound to waveshape</span>
-a<span class="n">table</span>	<span class="nb">tablei</span>	a<span class="n">index</span><span class="p">,</span> i<span class="n">wshpfn</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.5</span>			<span class="c1">;waveshape index</span>
-a<span class="n">nrm</span>	<span class="nb">tablei</span>	a<span class="n">swp</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> i<span class="n">nrmfn</span><span class="p">,</span> <span class="mi">1</span>			<span class="c1">;normalization </span>
-a<span class="n">env</span>	<span class="nb">linen</span>	<span class="vi">p4</span><span class="p">,</span> <span class="mf">.01</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mf">.02</span>			<span class="c1">;amplitude envelope</span>
-a<span class="n">sig</span>	<span class="o">=</span> <span class="p">(</span>a<span class="n">table</span><span class="o">*</span>a<span class="n">nrm</span><span class="p">)</span><span class="o">*</span>a<span class="n">env</span>				<span class="c1">;normalize and impose envelope</span>
-a<span class="n">sig</span>    <span class="nb">dcblock2</span> a<span class="n">sig</span>					<span class="c1">;get rid of DC</span>
-	<span class="nb">outs</span>    a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+</span>i<span class="n">wshpfn</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="vi">p6</span><span class="w">	
+</span>i<span class="n">nrmfn</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="vi">p7</span><span class="w">	
+</span>a<span class="n">swp</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	</span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mf">.49</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="w">		</span><span class="c1">;index sweep function</span><span class="w">
+</span>a<span class="n">index</span><span class="w">	</span><span class="nb">poscil</span><span class="w">	</span>a<span class="n">swp</span><span class="p">,</span><span class="w"> </span><span class="vi">p5</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">				</span><span class="c1">;sound to waveshape</span><span class="w">
+</span>a<span class="n">table</span><span class="w">	</span><span class="nb">tablei</span><span class="w">	</span>a<span class="n">index</span><span class="p">,</span><span class="w"> </span>i<span class="n">wshpfn</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.5</span><span class="w">			</span><span class="c1">;waveshape index</span><span class="w">
+</span>a<span class="n">nrm</span><span class="w">	</span><span class="nb">tablei</span><span class="w">	</span>a<span class="n">swp</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span>i<span class="n">nrmfn</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">			</span><span class="c1">;normalization </span><span class="w">
+</span>a<span class="n">env</span><span class="w">	</span><span class="nb">linen</span><span class="w">	</span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="mf">.01</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mf">.02</span><span class="w">			</span><span class="c1">;amplitude envelope</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="p">(</span>a<span class="n">table</span><span class="o">*</span>a<span class="n">nrm</span><span class="p">)</span><span class="o">*</span>a<span class="n">env</span><span class="w">				</span><span class="c1">;normalize and impose envelope</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">    </span><span class="nb">dcblock2</span><span class="w"> </span>a<span class="n">sig</span><span class="w">					</span><span class="c1">;get rid of DC</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">    </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
 
-<span class="kd">endin</span>		
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="kd">endin</span><span class="w">		
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
 
-<span class="nb">f</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">8192</span> <span class="mi">10</span> <span class="mi">1</span>			<span class="c1">;sine wave</span>
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8192</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">			</span><span class="c1">;sine wave</span><span class="w">
 
-<span class="nb">f</span> <span class="mi">28</span>  <span class="mi">0</span>   <span class="mi">4097</span> <span class="mi">13</span>  <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">.8</span> <span class="mi">0</span> <span class="mf">.5</span> <span class="mi">0</span> <span class="mf">.2</span>		<span class="c1">;waveshaping function: GEN13 - odd harmonics</span>
-<span class="nb">f</span> <span class="mi">280</span> <span class="mi">0</span>   <span class="mi">2049</span> <span class="mi">4</span>   <span class="mi">28</span> <span class="mi">1</span>				<span class="c1">;normalization function for f28</span>
-<span class="nb">f</span> <span class="mi">29</span>  <span class="mi">0</span>   <span class="mi">4097</span> <span class="mi">14</span>  <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">.8</span> <span class="mi">0</span> <span class="mf">.5</span> <span class="mi">0</span> <span class="mf">.2</span>		<span class="c1">;waveshaping function: GEN14 - same harmonics</span>
-<span class="nb">f</span> <span class="mi">290</span> <span class="mi">0</span>   <span class="mi">2049</span> <span class="mi">4</span>   <span class="mi">29</span> <span class="mi">1</span>				<span class="c1">;normalization function for f29</span>
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">28</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="mi">4097</span><span class="w"> </span><span class="mi">13</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.8</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.2</span><span class="w">		</span><span class="c1">;waveshaping function: GEN13 - odd harmonics</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">280</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="mi">2049</span><span class="w"> </span><span class="mi">4</span><span class="w">   </span><span class="mi">28</span><span class="w"> </span><span class="mi">1</span><span class="w">				</span><span class="c1">;normalization function for f28</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">29</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="mi">4097</span><span class="w"> </span><span class="mi">14</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.8</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.2</span><span class="w">		</span><span class="c1">;waveshaping function: GEN14 - same harmonics</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">290</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="mi">2049</span><span class="w"> </span><span class="mi">4</span><span class="w">   </span><span class="mi">29</span><span class="w"> </span><span class="mi">1</span><span class="w">				</span><span class="c1">;normalization function for f29</span><span class="w">
 
 
-<span class="nb">f</span> <span class="mi">30</span>  <span class="mi">0</span>   <span class="mi">4097</span> <span class="mi">13</span>  <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">.6</span> <span class="mi">0</span> <span class="mf">.4</span> <span class="mi">0</span> <span class="mf">.1</span>	<span class="c1">;waveshaping function: GEN13 - even harmonics</span>
-<span class="nb">f</span> <span class="mi">301</span> <span class="mi">0</span>   <span class="mi">2049</span> <span class="mi">4</span>   <span class="mi">30</span> <span class="mi">1</span>				<span class="c1">;normalization function for f30</span>
-<span class="nb">f</span> <span class="mi">31</span>  <span class="mi">0</span>   <span class="mi">4097</span> <span class="mi">14</span>  <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">.6</span> <span class="mi">0</span> <span class="mf">.4</span> <span class="mi">0</span> <span class="mf">.1</span>	<span class="c1">;waveshaping function: GEN13 - even harmonics</span>
-<span class="nb">f</span> <span class="mi">310</span> <span class="mi">0</span>   <span class="mi">2049</span> <span class="mi">4</span>   <span class="mi">31</span> <span class="mi">1</span>				<span class="c1">;normalization function for 31</span>
-<span class="nb">s</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span>   <span class="mi">3</span>   <span class="mf">.7</span>   <span class="mi">440</span> <span class="mi">28</span>  <span class="mi">280</span> 
-<span class="nb">i</span><span class="mi">1</span> <span class="mi">4</span>   <span class="o">.</span>   <span class="mf">.7</span>    <span class="o">.</span>  <span class="mi">29</span>  <span class="mi">290</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="mi">8</span>   <span class="o">.</span>   <span class="mf">.7</span>    <span class="o">.</span>  <span class="mi">30</span>  <span class="mi">301</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="mi">12</span>  <span class="mi">3</span>   <span class="mf">.7</span>    <span class="o">.</span>  <span class="mi">31</span>  <span class="mi">310</span>
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">30</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="mi">4097</span><span class="w"> </span><span class="mi">13</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.6</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.4</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.1</span><span class="w">	</span><span class="c1">;waveshaping function: GEN13 - even harmonics</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">301</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="mi">2049</span><span class="w"> </span><span class="mi">4</span><span class="w">   </span><span class="mi">30</span><span class="w"> </span><span class="mi">1</span><span class="w">				</span><span class="c1">;normalization function for f30</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">31</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="mi">4097</span><span class="w"> </span><span class="mi">14</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.6</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.4</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.1</span><span class="w">	</span><span class="c1">;waveshaping function: GEN13 - even harmonics</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">310</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="mi">2049</span><span class="w"> </span><span class="mi">4</span><span class="w">   </span><span class="mi">31</span><span class="w"> </span><span class="mi">1</span><span class="w">				</span><span class="c1">;normalization function for 31</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="mi">3</span><span class="w">   </span><span class="mf">.7</span><span class="w">   </span><span class="mi">440</span><span class="w"> </span><span class="mi">28</span><span class="w">  </span><span class="mi">280</span><span class="w"> 
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">4</span><span class="w">   </span><span class="o">.</span><span class="w">   </span><span class="mf">.7</span><span class="w">    </span><span class="o">.</span><span class="w">  </span><span class="mi">29</span><span class="w">  </span><span class="mi">290</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">8</span><span class="w">   </span><span class="o">.</span><span class="w">   </span><span class="mf">.7</span><span class="w">    </span><span class="o">.</span><span class="w">  </span><span class="mi">30</span><span class="w">  </span><span class="mi">301</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">12</span><span class="w">  </span><span class="mi">3</span><span class="w">   </span><span class="mf">.7</span><span class="w">    </span><span class="o">.</span><span class="w">  </span><span class="mi">31</span><span class="w">  </span><span class="mi">310</span><span class="w">
 
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -248,7 +248,7 @@ a<span class="n">sig</span>    <span class="nb">dcblock2</span> a<span class="n"
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm284581"></a>
+        <a id="idm411728"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="GEN03.html" title="GEN03"><em class="citetitle">GEN03</em></a>,
