@@ -44,15 +44,6 @@ There are several different ways of using Csound in a DAW.
 <img src="/images/cabbage.png" alt="Cabbage" style="width: 400px;"/>
 Cabbage is a framework for developing audio plugins that use Csound as their processing engine. All the power of Csound can be wrapped into a VST plugin that can then be loaded in a variety of different host software. Cabbage provides users with a fully integrated IDE that allows drag and drop editing of GUI interfaces, real-time compilation, Csound debugger. Cabbage also ships with over 100 ready made audio effects and synthesisers. More information about Cabbage can be found [here](http://cabbageaudio.com) 
 
-#### Csound for Live
-![Csound4Live](/images/csound4live.jpg)
-Csound For Live is a suite of audio plugins that combines the real time performance capabilities of Ableton Live, the stable and customizable interface design of Max/MSP (through Max For Live), and the synthesis power of Csound. More information can be found [here](http://csoundforlive.com/). Note: users must have Max4Live. 
-
-At the core of Csound4Live is the Max/MSP csound~ object which is distributed free with the OSX and Windows installers of Csound. Although not as extensive as the above mentioned csound4Live packages, it does provide a set of simple examples to get you started. You can read more about it [here](http://floss.booktype.pro/csound/b-csound-in-maxmsp/)  
-
-#### csLADSPA
-<img src="/images/csLADSPA.jpg" alt="Cabbage" style="width: 400px;"/>
-csLADSPA is a simple interface that lets users run Csound as a LADSPA plugin. csLADSPA come pre-built with Csound and can be used with any software that can load LADSPA plugins. Note that it does not offer any real-time control of processes.  
 
 #### Jack
 [Jack](http://www.jackaudio.org/) is an API that enables complex routing of audio signals across applications. It can be used to route out of Csound and into any number of digital audio workstations. Jack runs on Linux, OSX and Windows. More information on using Csound and Jack can be found [here](http://csound.github.io/docs/manual/JackoOpcodes.html) 
@@ -120,9 +111,6 @@ Link 4: This could be you!
 
 Csound has been used successfully on a host different iOS software. You can check out examples of these apps in the [Projects](projects.html) page. See the links below for details on how best to start creating apps. 
 
-#### AudioKit
-The quickest entry to Csound on iOS is through AudioKit, an open-source audio synthesis, processing, and analysis platform developed with Csound at its core. Users don't need to know Csound in order to start developing with AudioKit. It ships with a host of tools to aid in the creation of iOS based audio software. Check out their website for more details and great demos. [AudioKit](http://audiokit.io/)
-[![IMAGE ALT TEXT](http://img.youtube.com/vi/oJkGgQKUCmM/0.jpg)](https://youtu.be/oJkGgQKUCmM "Video Title")
 
 #### RunloopSound
 <img src="/images/RunloopSound-icon.svg" alt="" style="width: 400px;"/>
@@ -147,7 +135,6 @@ Andrew Ikenberry and Jason Lim, whom you can read more about in the [Projects](p
 
 This article by Ricahrd van Bemmelen, otherwise known as Zappfinger, describes how a web server can be set up to take control of an instance of Csound running on a Raspberry PI.  
 
-
 [The COSMO Project (Csound On Stage Music Operator](http://cosmoproject.github.io/) 
 
 <img src="/images/COSMO-box-small.png" alt="a COSMO Box" style="width: 400px;"/>
@@ -170,11 +157,6 @@ If you wish to use an audio middlware like FMOD, you can use Cabbage to export C
 <br>
 <h2 id="webapps">Web Applications</h2>
 
-Csound can be run through a browser in two different ways. The first is through the Csound PNaCl interface. Portable Native Client is a technology developed by Google that allows C/C++ modules to run natively through Google's Chrome browser. This is a very efficient way of running Csound in a browser, but must be done using Google Chrome. 
-
-The other method for running Csound in a browser is [CsoundEmscripten](http://eddyc.github.io/CsoundEmscripten/). Emscripten is a tool that allows C/C++ programs to be more or less converted into Javascript. CsoundEmscripten takes advantage of this and provides a Csound Javascript library that can be embedded directly into any browser. CsoundEmscripten does not perform as well as the PNaCl interface, but has the advantage of being able to run in any browser, on any platform. 
-
-You can find out more about both of these interfaces in a paper presented at the Linux Audio Conference in 2014, titled [Csound on the Web](http://lac.linuxaudio.org/2014/papers/23.pdf)
-
+Csound can be run through a browser using Csound WASM. For more details check out the [tutorial](http://kunstmusik.github.io/icsc2022-csound-web) presented at the ICSC 2022.
 <br>
 <br>
