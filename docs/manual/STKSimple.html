@@ -6,7 +6,7 @@
     <title>STKSimple</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="STKShakers.html" title="STKShakers" />
@@ -39,21 +39,22 @@
       </p>
       </div>
       <div class="refsect1">
-        <a id="idm225531"></a>
+        <a id="idm329186"></a>
         <h2>Description</h2>
-        <p>Plugin opcode in stkopd.</p>
+        <p>Plugin opcode in stkopd. This opcode is part of the plugin repository and has to be installed separately. 
+    The plugin repository can be found here: <a class="ulink" href="https://github.com/csound/plugins" target="_top"><em class="citetitle">https://github.com/csound/plugins</em></a></p>
         <p>
       STKSimple is a wavetable/noise instrument.
       It combines a looped wave, a noise source, a biquad resonance filter, a one-pole filter, and an ADSR envelope to create some interesting sounds.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm225535"></a>
+        <a id="idm329192"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">asignal <span class="command"><strong>STKSimple</strong></span> ifrequency, iamplitude, [kpos, kv1[, kcross, kv2[, kenv, kv3[, kgain, kv4]]]]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm225539"></a>
+        <a id="idm329196"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>ifrequency</em></span> -- Frequency of note played, in Hertz.
@@ -63,7 +64,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm225545"></a>
+        <a id="idm329202"></a>
         <h2>Performance</h2>
         <p><span class="emphasis"><em>kpos</em></span> -- controller 2, position of filter pole. Value range of kv1 is 0-127.</p>
         <p><span class="emphasis"><em>kcross</em></span> -- controller 4, noise/pitched cross-fade. Value range of kv2 is 0-127.</p>
@@ -71,7 +72,7 @@
         <p><span class="emphasis"><em>kgain</em></span> -- controller 128, gain. Value range of kv4 is 0-127.</p>
       </div>
       <div class="refsect1">
-        <a id="idm225555"></a>
+        <a id="idm329212"></a>
         <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
           <table border="0" summary="Note: Note">
             <tr>
@@ -97,20 +98,20 @@ The order of the controller pair is arbitrary, as long as they are after <span c
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm225564"></a>
+        <a id="idm329221"></a>
         <h2>Examples</h2>
         <p>
       Here is an example of the STKSimple opcode. It uses the file <a class="ulink" href="examples/STKSimple.csd" target="_top"><em class="citetitle">STKSimple.csd</em></a>.
      
       </p>
         <div class="example">
-          <a id="idm225569"></a>
+          <a id="idm329226"></a>
           <p class="title">
-            <strong>Example 1019. Example of the STKSimple opcode.</strong>
+            <strong>Example 1030. Example of the STKSimple opcode.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm225571"></a>
+              <a id="idm329228"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -120,32 +121,32 @@ The order of the controller pair is arbitrary, as long as they are after <span c
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o STKSimple.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-i<span class="n">frq</span>	<span class="o">=</span>	<span class="vi">p4</span>
-k<span class="n">v1</span>	<span class="nb">line</span>	<span class="vi">p5</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="vi">p6</span>				<span class="c1">;Filter Pole Position</span>
-k<span class="n">v2</span>	<span class="nb">line</span>	<span class="mi">20</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">90</span>				<span class="c1">;Noise/Pitched Cross-Fade</span>
+</span>i<span class="n">frq</span><span class="w">	</span><span class="o">=</span><span class="w">	</span><span class="vi">p4</span><span class="w">
+</span>k<span class="n">v1</span><span class="w">	</span><span class="nb">line</span><span class="w">	</span><span class="vi">p5</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="vi">p6</span><span class="w">				</span><span class="c1">;Filter Pole Position</span><span class="w">
+</span>k<span class="n">v2</span><span class="w">	</span><span class="nb">line</span><span class="w">	</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="w">				</span><span class="c1">;Noise/Pitched Cross-Fade</span><span class="w">
 
-a<span class="n">sig</span>	<span class="nb">STKSimple</span> <span class="nb">cpspch</span><span class="p">(</span><span class="vi">p4</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> k<span class="n">v1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> k<span class="n">v2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">120</span>
-	<span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
-<span class="kd">endin</span>
+</span>a<span class="n">sig</span><span class="w">	</span><span class="nb">STKSimple</span><span class="w"> </span><span class="nb">cpspch</span><span class="p">(</span><span class="vi">p4</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span>k<span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span>k<span class="n">v2</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w"> </span><span class="mi">120</span><span class="w">
+	</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">5</span> <span class="mf">7.00</span> <span class="mi">100</span> <span class="mi">0</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span>  <span class="mf">7.05</span> <span class="mi">10</span> <span class="mi">127</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span>  <span class="mf">8.03</span> <span class="mi">100</span> <span class="mi">0</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span>  <span class="mf">5.00</span> <span class="mi">10</span> <span class="mi">10</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mf">7.00</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w">  </span><span class="mf">7.05</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">127</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w">  </span><span class="mf">8.03</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w">  </span><span class="mf">5.00</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -155,14 +156,14 @@ a<span class="n">sig</span>	<span class="nb">STKSimple</span> <span class="nb">c
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm225676"></a>
+        <a id="idm329409"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="STKClarinet.html" title="STKClarinet"><em class="citetitle">STKClarinet</em></a>.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm225681"></a>
+        <a id="idm329414"></a>
         <h2>Credits</h2>
         <p>
       </p>

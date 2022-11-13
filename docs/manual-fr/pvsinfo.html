@@ -6,7 +6,7 @@
     <title>pvsinfo</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="pvsifd.html" title="pvsifd" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm187706"></a>
+        <a id="idm274629"></a>
         <h2>Description</h2>
         <p>
       Retourne de l'information sur le format de <span class="emphasis"><em>fsrc</em></span>, que
@@ -52,12 +52,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm187714"></a>
+        <a id="idm274637"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ioverlap, inumbins, iwinsize, iformat <span class="command"><strong>pvsinfo</strong></span> fsrc</pre>
       </div>
       <div class="refsect1">
-        <a id="idm187718"></a>
+        <a id="idm274641"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ioverlap</em></span> -- La taille de recouvrement du flot.
@@ -81,23 +81,23 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm187734"></a>
+        <a id="idm274657"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode pvsinfo. Il utilise le fichier
       <a class="ulink" href="examples/pvsinfo.csd" target="_top"><em class="citetitle">pvsinfo.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm187739"></a>
+          <a id="idm274662"></a>
           <p class="title">
-            <strong>Exemple 825. Exemple de l'opcode pvsinfo.</strong>
+            <strong>Exemple 840. Exemple de l'opcode pvsinfo.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm187746"></a>
+              <a id="idm274669"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -107,32 +107,49 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o pvsinfo.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
-<span class="c1">; create a PVOC-EX (*.pvx) file with PVANAL first</span>
-i<span class="n">dur</span> <span class="nb">filelen</span>  <span class="s">"fox.pvx"</span>		<span class="c1">;find duration of analysis file</span>
-k<span class="n">pos</span> <span class="nb">line</span>     <span class="mi">0</span><span class="p">,</span><span class="vi">p3</span><span class="p">,</span>i<span class="n">dur</span>		<span class="c1">;to ensure we process whole file</span>
-f<span class="n">src</span> <span class="nb">pvsfread</span> k<span class="n">pos</span><span class="p">,</span> <span class="s">"fox.pvx"</span>	<span class="c1">;create fsig from (mono) file</span>
+</span><span class="c1">; by Menno Knevel 2021</span><span class="w">
 
-i<span class="n">ovl</span><span class="p">,</span>i<span class="n">nb</span><span class="p">,</span>i<span class="n">ws</span><span class="p">,</span>i<span class="n">fmt</span> <span class="nb">pvsinfo</span> f<span class="n">src</span>	<span class="c1">;get info</span>
-<span class="nb">print</span> i<span class="n">ovl</span><span class="p">,</span>i<span class="n">nb</span><span class="p">,</span>i<span class="n">ws</span><span class="p">,</span>i<span class="n">fmt</span>		<span class="c1">;print info</span>
+</span><span class="c1">; analyze sound file and output result to pvoc-ex file</span><span class="w">
+</span>i<span class="n">res</span><span class="w">  </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ pvanal fox.wav fox.pvx }}</span><span class="w">          </span><span class="c1">; default settings</span><span class="w">
+</span>i<span class="n">res1</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ pvanal -n256 MSjungleMid.wav MSjungleMid.pvx }}</span><span class="w">    </span><span class="c1">; different frame size</span><span class="w">
 
-a<span class="n">out</span> <span class="nb">pvsynth</span> f<span class="n">src</span>
-     <span class="nb">outs</span> a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="k">if</span><span class="w"> </span><span class="vi">p4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">then</span><span class="w">
+    </span>i<span class="n">dur</span><span class="w"> </span><span class="nb">filelen</span><span class="w">  </span><span class="s">"fox.pvx"</span><span class="w">		</span><span class="c1">;find duration of analysis file</span><span class="w">
+    </span>k<span class="n">pos</span><span class="w"> </span><span class="nb">line</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="vi">p3</span><span class="p">,</span>i<span class="n">dur</span><span class="w">		</span><span class="c1">;to ensure we process whole file</span><span class="w">
+    </span>f<span class="n">src</span><span class="w"> </span><span class="nb">pvsfread</span><span class="w"> </span>k<span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="s">"fox.pvx"</span><span class="w">	</span><span class="c1">;create fsig from (mono) file</span><span class="w">
+    </span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">---***you now hear the analyzed file fox.pvx***---"</span><span class="w">
+</span><span class="k">else</span><span class="w">
+    </span>i<span class="n">dur</span><span class="w"> </span><span class="nb">filelen</span><span class="w">  </span><span class="s">"MSjungleMid.pvx"</span><span class="w">		</span><span class="c1">;find duration of analysis file</span><span class="w">
+    </span>k<span class="n">pos</span><span class="w"> </span><span class="nb">line</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="vi">p3</span><span class="p">,</span>i<span class="n">dur</span><span class="w">		</span><span class="c1">;to ensure we process whole file</span><span class="w">
+    </span>f<span class="n">src</span><span class="w"> </span><span class="nb">pvsfread</span><span class="w"> </span>k<span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="s">"MSjungleMid.pvx"</span><span class="w">	</span><span class="c1">;create fsig from (mono) file</span><span class="w">
+    </span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">---***you now hear the analyzed file MSjungleMid.pvx***---"</span><span class="w">
+</span><span class="k">endif</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span>i<span class="n">ovl</span><span class="p">,</span>i<span class="n">nb</span><span class="p">,</span>i<span class="n">ws</span><span class="p">,</span>i<span class="n">fmt</span><span class="w"> </span><span class="nb">pvsinfo</span><span class="w"> </span>f<span class="n">src</span><span class="w">	</span><span class="c1">;get info</span><span class="w">
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">          Overlap size   = </span><span class="si">%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span>i<span class="n">ovl</span><span class="w">  </span><span class="c1">;print info</span><span class="w">
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"          Number of bins = </span><span class="si">%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>i<span class="n">nb</span><span class="w">
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"          Window size    = </span><span class="si">%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>i<span class="n">ws</span><span class="w">
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"          Frame Format   = </span><span class="si">%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>i<span class="n">fmt</span><span class="w">
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="w">
+</span>a<span class="n">out</span><span class="w"> </span><span class="nb">pvsynth</span><span class="w"> </span>f<span class="n">src</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">out</span><span class="p">,</span><span class="w"> </span>a<span class="n">out</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="mi">3</span><span class="w">     </span><span class="mi">0</span><span class="w">  </span><span class="c1">; the fox</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">13</span><span class="w">     </span><span class="mi">1</span><span class="w">  </span><span class="c1">; the jungle</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -149,7 +166,7 @@ instr 1:  iovl = 256.000  inb = 513.000  iws = 2048.000  ifmt = 0.000</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm187828"></a>
+        <a id="idm274930"></a>
         <h2>Crédits</h2>
         <p>
       </p>

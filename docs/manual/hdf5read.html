@@ -6,7 +6,7 @@
     <title>hdf5read</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="harmon2.html" title="harmon2" />
@@ -39,20 +39,21 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm104809"></a>
+        <a id="idm150125"></a>
         <h2>Description</h2>
-        <p>Plugin opcode in hdf5ops.</p>
+        <p>Plugin opcode in hdf5ops. This opcode is part of the plugin repository and has to be installed separately. 
+    The plugin repository can be found here: <a class="ulink" href="https://github.com/csound/plugins" target="_top"><em class="citetitle">https://github.com/csound/plugins</em></a></p>
         <p>
       <span class="emphasis"><em>hdf5read</em></span> reads <span class="emphasis"><em>N</em></span> signals and arrays from a specified hdf5 file.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm104815"></a>
+        <a id="idm150133"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">xout1[, xout2, xout3, ..., xoutN] <span class="command"><strong>hdf5read</strong></span> ifilename, ivariablename1[, ivariablename2, ivariablename3, ..., ivariablenameN]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm104819"></a>
+        <a id="idm150137"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>ifilename</em></span> -- the hdf5 file's name (in double-quotes).
@@ -62,55 +63,55 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm104825"></a>
+        <a id="idm150143"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>xout1,... xoutN</em></span> -- The specified types of variables that the hdf5 datasets are to be read  as. Datasets with a rank larger than 1 must be read as arrays, i-rate signals must also be read as i-rate signals. Other than these restrictions datasets may be read as any type of array or signal. When reading has reached the end of a dataset it no longer outputs any new values.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm104829"></a>
+        <a id="idm150147"></a>
         <h2>Examples</h2>
         <p>
       Here is a simple example of the hdf5read opcode. It uses the file <a class="ulink" href="examples/hdf5read.csd" target="_top"><em class="citetitle">hdf5read.csd</em></a>.
 
       </p>
         <div class="example">
-          <a id="idm104834"></a>
+          <a id="idm150152"></a>
           <p class="title">
-            <strong>Example 429. Example of the hdf5read opcode.</strong>
+            <strong>Example 435. Example of the hdf5read opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm104841"></a>
+              <a id="idm150159"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 -odac
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">8</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">hdf5read</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">hdf5read</span><span class="w">
 
-    a<span class="n">Array</span><span class="p">[],</span> a<span class="n">Var</span><span class="p">,</span> k<span class="n">Var</span> <span class="nb">hdf5read</span> <span class="s">"example.h5"</span><span class="p">,</span> <span class="s">"aArray"</span><span class="p">,</span> <span class="s">"aVar"</span><span class="p">,</span> <span class="s">"kVar"</span> <span class="c1">; Open hdf5 file and read variables</span>
+    </span>a<span class="n">Array</span><span class="p">[],</span><span class="w"> </span>a<span class="n">Var</span><span class="p">,</span><span class="w"> </span>k<span class="n">Var</span><span class="w"> </span><span class="nb">hdf5read</span><span class="w"> </span><span class="s">"example.h5"</span><span class="p">,</span><span class="w"> </span><span class="s">"aArray"</span><span class="p">,</span><span class="w"> </span><span class="s">"aVar"</span><span class="p">,</span><span class="w"> </span><span class="s">"kVar"</span><span class="w"> </span><span class="c1">; Open hdf5 file and read variables</span><span class="w">
 
-    a<span class="n">Left</span> <span class="o">=</span> <span class="p">(</span>a<span class="n">Array</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> a<span class="n">Array</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> a<span class="n">Var</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span> <span class="c1">; Add audio signals together for stereo out</span>
-    a<span class="n">Right</span> <span class="o">=</span> <span class="p">(</span>a<span class="n">Array</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> a<span class="n">Array</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> a<span class="n">Var</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span>
+    </span>a<span class="n">Left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>a<span class="n">Array</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>a<span class="n">Array</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>a<span class="n">Var</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="c1">; Add audio signals together for stereo out</span><span class="w">
+    </span>a<span class="n">Right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>a<span class="n">Array</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>a<span class="n">Array</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>a<span class="n">Var</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="w">
 
-    <span class="nb">outs</span> a<span class="n">Left</span> <span class="o">*</span> k<span class="n">Var</span><span class="p">,</span> a<span class="n">Right</span> <span class="o">*</span> k<span class="n">Var</span> <span class="c1">; Multiply audio signals by k-rate signal</span>
-<span class="kd">endin</span>
+    </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">Left</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>k<span class="n">Var</span><span class="p">,</span><span class="w"> </span>a<span class="n">Right</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>k<span class="n">Var</span><span class="w"> </span><span class="c1">; Multiply audio signals by k-rate signal</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
 
-<span class="nb">i</span> <span class="s">"hdf5read"</span> <span class="mi">0</span> <span class="mi">1</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="s">"hdf5read"</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -120,14 +121,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm104936"></a>
+        <a id="idm150311"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="hdf5write.html" title="hdf5write"><em class="citetitle">hdf5write</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm104941"></a>
+        <a id="idm150316"></a>
         <h2>Credits</h2>
         <p>
       </p>

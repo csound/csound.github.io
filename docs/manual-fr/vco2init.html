@@ -6,7 +6,7 @@
     <title>vco2init</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="vco2ift.html" title="vco2ift" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm254419"></a>
+        <a id="idm370563"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>vco2init</em></span> calcule des tables à utiliser par l'opcode
@@ -83,12 +83,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm254442"></a>
+        <a id="idm370586"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ifn <span class="command"><strong>vco2init</strong></span> iwave [, ibasfn] [, ipmul] [, iminsiz] [, imaxsiz] [, isrcft]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm254446"></a>
+        <a id="idm370590"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifn</em></span> -- le premier numéro de table libre après les tables allouées. Si
@@ -212,23 +212,23 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm254516"></a>
+        <a id="idm370660"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode vco2init. Il utilise le fichier
       <a class="ulink" href="examples/vco2init.csd" target="_top"><em class="citetitle">vco2init.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm254521"></a>
+          <a id="idm370665"></a>
           <p class="title">
-            <strong>Exemple 1151. Exemple de l'opcode vco2init.</strong>
+            <strong>Exemple 1163. Exemple de l'opcode vco2init.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm254528"></a>
+              <a id="idm370672"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -238,35 +238,35 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o vco2init.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span><span class="o">=</span><span class="mi">44100</span>
-<span class="vg">ksmps</span><span class="o">=</span><span class="mi">1</span>
-<span class="vg">nchnls</span><span class="o">=</span><span class="mi">2</span>
+</span><span class="vg">sr</span><span class="o">=</span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="o">=</span><span class="mi">1</span><span class="w">
+</span><span class="vg">nchnls</span><span class="o">=</span><span class="mi">2</span><span class="w">
 
-<span class="c1">; create waveform with discontinuities, so it has a lot of high freq content</span>
-gi<span class="n">table</span> <span class="nb">ftgen</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">^</span><span class="mi">16</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">^</span><span class="mi">14</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">^</span><span class="mi">14</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">^</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1</span>
-<span class="c1">; make bandlimited tables of the waveform</span>
-gi<span class="n">_nextfree</span> <span class="nb">vco2init</span> <span class="o">-</span>gi<span class="n">table</span><span class="p">,</span> gi<span class="n">table</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">2</span><span class="o">^</span><span class="mi">16</span><span class="p">,</span> gi<span class="n">table</span>
-gi<span class="n">table_bl</span> <span class="o">=</span> <span class="o">-</span>gi<span class="n">table</span>
+</span><span class="c1">; create waveform with discontinuities, so it has a lot of high freq content</span><span class="w">
+</span>gi<span class="n">table</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">^</span><span class="mi">16</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">^</span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">^</span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">^</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">; make bandlimited tables of the waveform</span><span class="w">
+</span>gi<span class="n">_nextfree</span><span class="w"> </span><span class="nb">vco2init</span><span class="w"> </span><span class="o">-</span>gi<span class="n">table</span><span class="p">,</span><span class="w"> </span>gi<span class="n">table</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.05</span><span class="p">,</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">^</span><span class="mi">16</span><span class="p">,</span><span class="w"> </span>gi<span class="n">table</span><span class="w">
+</span>gi<span class="n">table_bl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span>gi<span class="n">table</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-k<span class="n">freq</span>  <span class="nb">expon</span> <span class="mi">14000</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">500</span>
-k<span class="n">fn</span>    <span class="nb">vco2ft</span> k<span class="n">freq</span><span class="p">,</span> gi<span class="n">table_bl</span>
-a<span class="n">sig</span>   <span class="nb">oscilikt</span> <span class="mi">5000</span><span class="p">,</span> k<span class="n">freq</span><span class="p">,</span> k<span class="n">fn</span>
-<span class="nb">printk</span> <span class="mf">0.1</span><span class="p">,</span> k<span class="n">fn</span>
+</span>k<span class="n">freq</span><span class="w">  </span><span class="nb">expon</span><span class="w"> </span><span class="mi">14000</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="w">
+</span>k<span class="n">fn</span><span class="w">    </span><span class="nb">vco2ft</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span>gi<span class="n">table_bl</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">   </span><span class="nb">oscilikt</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span>k<span class="n">fn</span><span class="w">
+</span><span class="nb">printk</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span>k<span class="n">fn</span><span class="w">
 
-<span class="c1">; remove semicolon on next line to hear original waveform, demonstrating the aliasing</span>
-<span class="c1">;asig   oscili 5000, kfreq, gitable</span>
-       <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+</span><span class="c1">; remove semicolon on next line to hear original waveform, demonstrating the aliasing</span><span class="w">
+</span><span class="c1">;asig   oscili 5000, kfreq, gitable</span><span class="w">
+       </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
 
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">5</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -294,7 +294,7 @@ a<span class="n">sig</span>   <span class="nb">oscilikt</span> <span class="mi">
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm254661"></a>
+        <a id="idm370869"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="vco2ft.html" title="vco2ft"><em class="citetitle">vco2ft</em></a>,
@@ -303,7 +303,7 @@ a<span class="n">sig</span>   <span class="nb">oscilikt</span> <span class="mi">
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm254670"></a>
+        <a id="idm370878"></a>
         <h2>Crédits</h2>
         <p>Auteur : Istvan Varga</p>
         <p>Nouveau dans la version 4.22</p>

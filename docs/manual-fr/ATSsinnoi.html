@@ -6,7 +6,7 @@
     <title>ATSsinnoi</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="ATSpartialtap.html" title="ATSpartialtap" />
@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm30609"></a>
+        <a id="idm39481"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>ATSsinnoi</em></span> lit les données d'un fichier ATS et
@@ -49,36 +49,36 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm30613"></a>
+        <a id="idm39485"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ar <span class="command"><strong>ATSsinnoi</strong></span> ktimepnt, ksinlev, knzlev, kfmod, iatsfile, ipartials \
           [, ipartialoffset, ipartialincr]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm30617"></a>
+        <a id="idm39489"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iatsfile</em></span> – le numéro ATS (n dans ats.n) ou le nom
       entre guillemets du fichier d'analyse créé avec
-      <a class="ulink" href="http://www-ccrma.stanford.edu/~juan/ATS.html" target="_top"><em class="citetitle">ATS</em></a>.
+      <a class="link" href="UtilityAtsa.html" title="atsa"><em class="citetitle">ATSA</em></a>.
     </p>
         <p>
       <span class="emphasis"><em>ipartials</em></span> – nombre de partiels qui seront utilisés
       dans la resynthèse (le bruit a un maximum de 25 bandes).
     </p>
         <p>
-      <span class="emphasis"><em>ipartialoffset</em></span> (optional) – (facultatif) – le premier
+      <span class="emphasis"><em>ipartialoffset</em></span> (facultatif) – le premier
       partiel utilisé (0 par défaut).
     </p>
         <p>
-      <span class="emphasis"><em>ipartialincr</em></span> (optional) – (facultatif) – fixe le pas
+      <span class="emphasis"><em>ipartialincr</em></span> (facultatif) – fixe le pas
       d'incrémentation que ces opcodes de synthèse utilisent pour compter les
       composants bins à partir de <span class="emphasis"><em>ipartialoffset</em></span> dans la
       resynthèse (1 par défaut).
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm30630"></a>
+        <a id="idm39502"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ktimepnt</em></span> – Le pointeur de temps en secondes utilisé
@@ -110,17 +110,15 @@
       synthétisé, avec sa composante de bruit. Chaque composante de bruit est
       ensuite modulée par le partiel correspondant pour être placée au bon endroit
       dans le spectre de fréquence. Les niveaux du bruit et des partiels sont
-      contrôlables individuellement. Voir la page web
-      <a class="ulink" href="http://www-ccrma.stanford.edu/~juan/ATS.html" target="_top"><em class="citetitle">ATS</em></a>
-      pour plus d'information sur la synthèse sinnoi. Une analyse ATS diffère
+      contrôlables individuellement. Une analyse ATS diffère
       d'une analyse pvanal du fait qu'ATS trace les partiels et calcule l'énergie
       du bruit dans le son étant analysé. Pour plus d'information sur l'analyse ATS,
       lire la description de Juan Pampin sur la page web
-      <a class="ulink" href="http://www-ccrma.stanford.edu/~juan/ATS.html" target="_top"><em class="citetitle">ATS</em></a>.
+      <a class="ulink" href="https://ccrma.stanford.edu/~juan/ATS_manual.html" target="_top"><em class="citetitle">ATS</em></a>.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm30651"></a>
+        <a id="idm39521"></a>
         <h2>Exemples</h2>
         <pre class="programlisting">
   ktime   <span class="opc">line</span>       0, p3, 2.5
@@ -131,17 +129,17 @@
       partiels sont inchangés (chacun est fixé à 1).
     </p>
         <p>
-      Voici un autre exemple de l'opcode ATSsinnoi. Il utilise le fichier
+      Voici un exemple complet de l'opcode ATSsinnoi. Il utilise le fichier
       <a class="ulink" href="examples/ATSsinnoi.csd" target="_top"><em class="citetitle">ATSsinnoi.csd</em></a>.
     </p>
         <div class="example">
-          <a id="idm30660"></a>
+          <a id="idm39530"></a>
           <p class="title">
-            <strong>Exemple 78. Exemple de l'opcode ATSsinnoi.</strong>
+            <strong>Exemple 82. Exemple de l'opcode ATSsinnoi.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm30662"></a>
+              <a id="idm39532"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -151,28 +149,42 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o ATSsinnoi.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="c1">; by Menno Knevel - 2021</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">; "beats.ats" is created by atsa</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-k<span class="n">time</span>	<span class="nb">line</span>	<span class="mi">0</span><span class="p">,</span>  <span class="vi">p3</span><span class="p">,</span> <span class="mi">2</span>
-k<span class="n">nzfade</span>	<span class="nb">expon</span>	<span class="mf">0.001</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">2</span>
-a<span class="n">out</span>	<span class="nb">ATSsinnoi</span> 	k<span class="n">time</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">nzfade</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"beats.ats"</span><span class="p">,</span> <span class="mi">150</span>
-	<span class="nb">outs</span>	a<span class="n">out</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> a<span class="n">out</span><span class="o">*</span><span class="mi">2</span>		<span class="c1">;amplify some more</span>
-<span class="kd">endin</span>
+</span>i<span class="n">res1</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ atsa -h.5 -c1 beats.wav beats1.ats }}</span><span class="w">
+</span>i<span class="n">res2</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ atsa  beats.wav beats2.ats }}</span><span class="w"> </span><span class="c1">; default settings -h.25 -c4</span><span class="w">
+ 
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span> 
-<span class="nb">e</span>
+</span>k<span class="n">time</span><span class="w">	</span><span class="nb">line</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w">  </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">
 
-<span class="nt">&lt;/CsScore&gt;</span>
+</span>a<span class="n">out</span><span class="w">	</span><span class="nb">ATSsinnoi</span><span class="w"> 	</span>k<span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">out</span><span class="o">*</span><span class="mf">.4</span><span class="p">,</span><span class="w"> </span>a<span class="n">out</span><span class="o">*</span><span class="mf">.4</span><span class="w">		
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="c1">;			atsfile		partial</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="s">"beats1.ats"</span><span class="w">		</span><span class="mi">3</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="s">"beats2.ats"</span><span class="w">		</span><span class="mi">3</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="s">"beats1.ats"</span><span class="w">		</span><span class="mi">13</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="s">"beats2.ats"</span><span class="w">		</span><span class="mi">13</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="s">"beats1.ats"</span><span class="w">		</span><span class="mi">30</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="s">"beats2.ats"</span><span class="w">		</span><span class="mi">30</span><span class="w">
+
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -180,14 +192,104 @@ a<span class="n">out</span>	<span class="nb">ATSsinnoi</span> 	k<span class="n">
         </div>
         <br class="example-break" />
         <p>
-      Cet exemple reprend le précédent mais en utilisant une enveloppe pour
-      contrôler <span class="emphasis"><em>knzlev</em></span> (le niveau de bruit). Cela donne
-      le son de "beats.wav" dont la composante de bruit apparaît progressivement
-      durant la durée de la note.
+      Voici un autre exemple de l'opcode ATSsinnoi. Il utilise le fichier
+      <a class="ulink" href="examples/ATSsinnoi-2.csd" target="_top"><em class="citetitle">ATSsinnoi-2.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm39728"></a>
+          <p class="title">
+            <strong>Exemple 83. Exemple 2 de l'opcode ATSsinnoi.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm39730"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+-odac -d -m128
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+</span><span class="c1">;example by joachim heintz (&amp; Menno Knevel)</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span>i<span class="n">res</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ atsa fox.wav fox.ats }}</span><span class="w"> </span><span class="c1">; default settings</span><span class="w">
+
+</span>gi<span class="n">Sine</span><span class="w">    </span><span class="nb">ftgen</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>gS<span class="n">file</span><span class="w">    </span><span class="o">=</span><span class="w">         </span><span class="s">"fox.ats"</span><span class="w">
+</span>gi<span class="n">NumParts</span><span class="w"> </span><span class="nb">ATSinfo</span><span class="w">  </span>gS<span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="c1">;overall number of partials</span><span class="w">
+</span>gi<span class="n">Dur</span><span class="w">     </span><span class="nb">ATSinfo</span><span class="w">   </span>gS<span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="c1">;duration </span><span class="w">
+          </span><span class="nb">seed</span><span class="w">      </span><span class="mi">0</span><span class="w">
+          
+
+  </span><span class="kd">instr</span><span class="w"> </span><span class="nf">PlayList</span><span class="w">
+</span><span class="nb">event_i</span><span class="w"> </span><span class="s">"i"</span><span class="p">,</span><span class="w"> </span><span class="s">"PlayAll"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="c1">;sine only, half speed</span><span class="w">
+</span><span class="nb">event_i</span><span class="w"> </span><span class="s">"i"</span><span class="p">,</span><span class="w"> </span><span class="s">"PlayAll"</span><span class="p">,</span><span class="w"> </span>gi<span class="n">Dur</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="c1">;noise only</span><span class="w">
+</span><span class="nb">event_i</span><span class="w"> </span><span class="s">"i"</span><span class="p">,</span><span class="w"> </span><span class="s">"PlayAll"</span><span class="p">,</span><span class="w"> </span>gi<span class="n">Dur</span><span class="o">*</span><span class="mi">4</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="c1">;half sine, half noise</span><span class="w">
+  </span><span class="kd">endin</span><span class="w">
+
+  </span><span class="kd">instr</span><span class="w"> </span><span class="nf">PlayAll</span><span class="w">
+</span>i<span class="n">SinAmnt</span><span class="w">  </span><span class="o">=</span><span class="w">         </span><span class="vi">p4</span><span class="w"> </span><span class="c1">;sinee amount (0-1)</span><span class="w">
+</span>i<span class="n">NzAmnt</span><span class="w">   </span><span class="o">=</span><span class="w">         </span><span class="vi">p5</span><span class="w"> </span><span class="c1">;noise amount (0-1)</span><span class="w">
+</span>i<span class="n">Speed</span><span class="w">    </span><span class="o">=</span><span class="w">         </span><span class="vi">p6</span><span class="w"> </span><span class="c1">;speed</span><span class="w">
+</span><span class="vi">p3</span><span class="w">        </span><span class="o">=</span><span class="w">         </span>gi<span class="n">Dur</span><span class="o">/</span>i<span class="n">Speed</span><span class="w">
+</span>k<span class="n">time</span><span class="w">     </span><span class="nb">line</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>gi<span class="n">Dur</span><span class="o">/</span>i<span class="n">Speed</span><span class="p">,</span><span class="w"> </span>gi<span class="n">Dur</span><span class="w">
+          </span><span class="nb">prints</span><span class="w">    </span><span class="s">"Resynthesizing all partials with tone = </span><span class="si">%.1f</span><span class="s"> and noise = </span><span class="si">%.1f</span><span class="s">.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span>i<span class="n">SinAmnt</span><span class="p">,</span><span class="w"> </span>i<span class="n">NzAmnt</span><span class="w">
+</span>a<span class="n">Out</span><span class="w">      </span><span class="nb">ATSsinnoi</span><span class="w"> </span>k<span class="n">time</span><span class="p">,</span><span class="w"> </span>i<span class="n">SinAmnt</span><span class="p">,</span><span class="w"> </span>i<span class="n">NzAmnt</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>gS<span class="n">file</span><span class="p">,</span><span class="w"> </span>gi<span class="n">NumParts</span><span class="w">
+          </span><span class="nb">outs</span><span class="w">      </span>a<span class="n">Out</span><span class="p">,</span><span class="w"> </span>a<span class="n">Out</span><span class="w">
+  </span><span class="kd">endin</span><span class="w">
+
+  </span><span class="kd">instr</span><span class="w"> </span><span class="nf">PlayBand</span><span class="w">
+</span>i<span class="n">Offset</span><span class="w">   </span><span class="o">=</span><span class="w">         </span><span class="vi">p4</span><span class="w"> </span><span class="c1">;offset in partials</span><span class="w">
+</span>i<span class="n">Speed</span><span class="w">    </span><span class="o">=</span><span class="w">         </span><span class="vi">p5</span><span class="w"> </span><span class="c1">;speed</span><span class="w">
+</span><span class="vi">p3</span><span class="w">        </span><span class="o">=</span><span class="w">         </span>gi<span class="n">Dur</span><span class="o">/</span>i<span class="n">Speed</span><span class="w">
+</span>k<span class="n">time</span><span class="w">     </span><span class="nb">line</span><span class="w">      </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>gi<span class="n">Dur</span><span class="o">/</span>i<span class="n">Speed</span><span class="p">,</span><span class="w"> </span>gi<span class="n">Dur</span><span class="w">
+          </span><span class="nb">prints</span><span class="w">    </span><span class="s">"Resynthesizing partials </span><span class="si">%d</span><span class="s"> to </span><span class="si">%d</span><span class="s"> with related noise.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span>i<span class="n">Offset</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">Offset</span><span class="o">+</span><span class="mi">10</span><span class="w">
+</span>a<span class="n">Out</span><span class="w">      </span><span class="nb">ATSsinnoi</span><span class="w"> </span>k<span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>gS<span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span>i<span class="n">Offset</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">; a bit less noise (.3)</span><span class="w">
+          </span><span class="nb">outs</span><span class="w">      </span>a<span class="n">Out</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span>a<span class="n">Out</span><span class="w">    </span><span class="c1">; left channel a bit louder</span><span class="w">
+</span><span class="c1">;call itself again</span><span class="w">
+ </span><span class="k">if</span><span class="w"> </span>i<span class="n">Offset</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span>gi<span class="n">NumParts</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">then</span><span class="w">
+          </span><span class="nb">event_i</span><span class="w">   </span><span class="s">"i"</span><span class="p">,</span><span class="w"> </span><span class="s">"PlayBand"</span><span class="p">,</span><span class="w"> </span>gi<span class="n">Dur</span><span class="o">/</span>i<span class="n">Speed</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">Offset</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span>i<span class="n">Speed</span><span class="w">
+ </span><span class="k">endif</span><span class="w">
+  </span><span class="kd">endin</span><span class="w">
+
+  </span><span class="kd">instr</span><span class="w"> </span><span class="nf">PlayWeighted</span><span class="w">
+  </span><span class="c1">;sine amount, noise amount and speeed are varying</span><span class="w">
+</span>k<span class="n">SinAmnt</span><span class="w">  </span><span class="nb">randomi</span><span class="w">   </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span>k<span class="n">NzAmnt</span><span class="w">   </span><span class="o">=</span><span class="w">         </span><span class="mi">1</span><span class="o">-</span>k<span class="n">SinAmnt</span><span class="w">
+</span>k<span class="n">Speed</span><span class="w">    </span><span class="nb">randomi</span><span class="w">   </span><span class="mf">.01</span><span class="p">,</span><span class="w"> </span><span class="mf">.3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span>a<span class="n">sync</span><span class="w">     </span><span class="nb">init</span><span class="w">      </span><span class="mi">0</span><span class="w">
+</span>a<span class="n">time</span><span class="p">,</span><span class="w"> </span>a<span class="n">End</span><span class="w"> </span><span class="nb">syncphasor</span><span class="w"> </span>k<span class="n">Speed</span><span class="o">/</span>gi<span class="n">Dur</span><span class="p">,</span><span class="w"> </span>a<span class="n">sync</span><span class="w">
+</span>k<span class="n">Trig</span><span class="w">     </span><span class="nb">metro</span><span class="w">     </span><span class="mi">100</span><span class="w">
+</span>k<span class="n">End</span><span class="w">      </span><span class="nb">max_k</span><span class="w">     </span>a<span class="n">End</span><span class="p">,</span><span class="w"> </span>k<span class="n">Trig</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">;1 if phasor signal crosses zero</span><span class="w">
+</span>k<span class="n">time</span><span class="w">     </span><span class="nb">downsamp</span><span class="w">  </span>a<span class="n">time</span><span class="w">
+</span>a<span class="n">Out</span><span class="w">      </span><span class="nb">ATSsinnoi</span><span class="w"> </span>k<span class="n">time</span><span class="o">*</span>gi<span class="n">Dur</span><span class="p">,</span><span class="w"> </span>k<span class="n">SinAmnt</span><span class="p">,</span><span class="w"> </span>k<span class="n">NzAmnt</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>gS<span class="n">file</span><span class="p">,</span><span class="w"> </span>gi<span class="n">NumParts</span><span class="w">
+          </span><span class="nb">outs</span><span class="w">      </span>a<span class="n">Out</span><span class="o">*</span><span class="mf">.6</span><span class="p">,</span><span class="w"> </span>a<span class="n">Out</span><span class="w">   </span><span class="c1">; pan a bit to the right</span><span class="w">
+  </span><span class="c1">;exit if file is at the end </span><span class="w">
+</span><span class="k">if</span><span class="w"> </span>k<span class="n">End</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">then</span><span class="w">
+           </span><span class="nb">event</span><span class="w">     </span><span class="s">"e"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="k">endif</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="s">"PlayList"</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="s">"PlayBand"</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.5</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="s">"PlayWeighted"</span><span class="w"> </span><span class="mi">110</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm30736"></a>
+        <a id="idm40335"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="ATSread.html" title="ATSread"><em class="citetitle">ATSread</em></a>, 
@@ -200,107 +302,9 @@ a<span class="n">out</span>	<span class="nb">ATSsinnoi</span> 	k<span class="n">
       <a class="link" href="ATSadd.html" title="ATSadd"><em class="citetitle">ATSadd</em></a>, 
       <a class="link" href="ATSaddnz.html" title="ATSaddnz"><em class="citetitle">ATSaddnz</em></a>
     </p>
-        <p>
-      Voici un autre exemple de l'opcode ATSsinnoi. Il utilise le fichier
-      <a class="ulink" href="examples/ATSsinnoi-2.csd" target="_top"><em class="citetitle">ATSsinnoi-2.csd</em></a>.
-      </p>
-        <div class="example">
-          <a id="idm30760"></a>
-          <p class="title">
-            <strong>Exemple 79. Exemple 2 de l'opcode ATSsinnoi.</strong>
-          </p>
-          <div class="example-contents">
-            <div class="refsect1">
-              <a id="idm30762"></a>
-              <pre class="programlisting">
-<span class="nt">&lt;CsoundSynthesizer&gt;</span>
-<span class="nt">&lt;CsOptions&gt;</span>
--odac -d -m128
-<span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
-<span class="c1">;example by joachim heintz</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
-
-gi<span class="n">Sine</span>    <span class="nb">ftgen</span>     <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span>
-gS<span class="n">file</span>    <span class="o">=</span>         <span class="s">"fox.ats"</span>
-gi<span class="n">NumParts</span> <span class="nb">ATSinfo</span>  gS<span class="n">file</span><span class="p">,</span> <span class="mi">3</span> <span class="c1">;overall number of partials</span>
-gi<span class="n">Dur</span>     <span class="nb">ATSinfo</span>   gS<span class="n">file</span><span class="p">,</span> <span class="mi">7</span> <span class="c1">;duration </span>
-          <span class="nb">seed</span>      <span class="mi">0</span>
-          
-
-  <span class="kd">instr</span> <span class="nf">PlayList</span>
-<span class="nb">event_i</span> <span class="s">"i"</span><span class="p">,</span> <span class="s">"PlayAll"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">.5</span> <span class="c1">;sine only, half speed</span>
-<span class="nb">event_i</span> <span class="s">"i"</span><span class="p">,</span> <span class="s">"PlayAll"</span><span class="p">,</span> gi<span class="n">Dur</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.5</span> <span class="c1">;noise only</span>
-<span class="nb">event_i</span> <span class="s">"i"</span><span class="p">,</span> <span class="s">"PlayAll"</span><span class="p">,</span> gi<span class="n">Dur</span><span class="o">*</span><span class="mi">4</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mf">.5</span> <span class="c1">;half sine, half noise</span>
-  <span class="kd">endin</span>
-
-  <span class="kd">instr</span> <span class="nf">PlayAll</span>
-i<span class="n">SinAmnt</span>  <span class="o">=</span>         <span class="vi">p4</span> <span class="c1">;sinee amount (0-1)</span>
-i<span class="n">NzAmnt</span>   <span class="o">=</span>         <span class="vi">p5</span> <span class="c1">;noise amount (0-1)</span>
-i<span class="n">Speed</span>    <span class="o">=</span>         <span class="vi">p6</span> <span class="c1">;speed</span>
-<span class="vi">p3</span>        <span class="o">=</span>         gi<span class="n">Dur</span><span class="o">/</span>i<span class="n">Speed</span>
-k<span class="n">time</span>     <span class="nb">line</span>      <span class="mi">0</span><span class="p">,</span> gi<span class="n">Dur</span><span class="o">/</span>i<span class="n">Speed</span><span class="p">,</span> gi<span class="n">Dur</span>
-          <span class="nb">prints</span>    <span class="s">"Resynthesizing all partials with tone = </span><span class="si">%.1f</span><span class="s"> and noise = </span><span class="si">%.1f</span><span class="s">.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> i<span class="n">SinAmnt</span><span class="p">,</span> i<span class="n">NzAmnt</span>
-a<span class="n">Out</span>      <span class="nb">ATSsinnoi</span> k<span class="n">time</span><span class="p">,</span> i<span class="n">SinAmnt</span><span class="p">,</span> i<span class="n">NzAmnt</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> gS<span class="n">file</span><span class="p">,</span> gi<span class="n">NumParts</span>
-          <span class="nb">outs</span>      a<span class="n">Out</span><span class="p">,</span> a<span class="n">Out</span>
-  <span class="kd">endin</span>
-
-  <span class="kd">instr</span> <span class="nf">PlayBand</span>
-i<span class="n">Offset</span>   <span class="o">=</span>         <span class="vi">p4</span> <span class="c1">;offset in partials</span>
-i<span class="n">Speed</span>    <span class="o">=</span>         <span class="vi">p5</span> <span class="c1">;speed</span>
-<span class="vi">p3</span>        <span class="o">=</span>         gi<span class="n">Dur</span><span class="o">/</span>i<span class="n">Speed</span>
-k<span class="n">time</span>     <span class="nb">line</span>      <span class="mi">0</span><span class="p">,</span> gi<span class="n">Dur</span><span class="o">/</span>i<span class="n">Speed</span><span class="p">,</span> gi<span class="n">Dur</span>
-          <span class="nb">prints</span>    <span class="s">"Resynthesizing partials </span><span class="si">%d</span><span class="s"> to </span><span class="si">%d</span><span class="s"> with related noise.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> i<span class="n">Offset</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> i<span class="n">Offset</span><span class="o">+</span><span class="mi">10</span>
-a<span class="n">Out</span>      <span class="nb">ATSsinnoi</span> k<span class="n">time</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> gS<span class="n">file</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> i<span class="n">Offset</span><span class="p">,</span> <span class="mi">1</span>
-          <span class="nb">outs</span>      a<span class="n">Out</span><span class="p">,</span> a<span class="n">Out</span>
-<span class="c1">;call itself again</span>
- <span class="k">if</span> i<span class="n">Offset</span> <span class="o">&lt;</span> gi<span class="n">NumParts</span> <span class="o">-</span> <span class="mi">20</span> <span class="k">then</span>
-          <span class="nb">event_i</span>   <span class="s">"i"</span><span class="p">,</span> <span class="s">"PlayBand"</span><span class="p">,</span> gi<span class="n">Dur</span><span class="o">/</span>i<span class="n">Speed</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">Offset</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> i<span class="n">Speed</span>
- <span class="k">endif</span>
-  <span class="kd">endin</span>
-
-  <span class="kd">instr</span> <span class="nf">PlayWeighted</span>
-  <span class="c1">;sine amount, noise amount and speeed are varying</span>
-k<span class="n">SinAmnt</span>  <span class="nb">randomi</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span>
-k<span class="n">NzAmnt</span>   <span class="o">=</span>         <span class="mi">1</span><span class="o">-</span>k<span class="n">SinAmnt</span>
-k<span class="n">Speed</span>    <span class="nb">randomi</span>   <span class="mf">.01</span><span class="p">,</span> <span class="mf">.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span>
-a<span class="n">sync</span>     <span class="nb">init</span>      <span class="mi">0</span>
-a<span class="n">time</span><span class="p">,</span> a<span class="n">End</span> <span class="nb">syncphasor</span> k<span class="n">Speed</span><span class="o">/</span>gi<span class="n">Dur</span><span class="p">,</span> a<span class="n">sync</span>
-k<span class="n">Trig</span>     <span class="nb">metro</span>     <span class="mi">100</span>
-k<span class="n">End</span>      <span class="nb">max_k</span>     a<span class="n">End</span><span class="p">,</span> k<span class="n">Trig</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">;1 if phasor signal crosses zero</span>
-k<span class="n">time</span>     <span class="nb">downsamp</span>  a<span class="n">time</span>
-a<span class="n">Out</span>      <span class="nb">ATSsinnoi</span> k<span class="n">time</span><span class="o">*</span>gi<span class="n">Dur</span><span class="p">,</span> k<span class="n">SinAmnt</span><span class="p">,</span> k<span class="n">NzAmnt</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> gS<span class="n">file</span><span class="p">,</span> gi<span class="n">NumParts</span>
-          <span class="nb">outs</span>      a<span class="n">Out</span><span class="p">,</span> a<span class="n">Out</span>
-  <span class="c1">;exit if file is at the end </span>
-  <span class="k">if</span> k<span class="n">End</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">then</span>
-          <span class="nb">event</span>     <span class="s">"i"</span><span class="p">,</span> <span class="s">"End"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
-  <span class="k">endif</span>
-  <span class="kd">endin</span>
-
-  <span class="kd">instr</span> <span class="nf">End</span>
-          <span class="nb">exitnow</span>
-  <span class="kd">endin</span>
-
-
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span> <span class="s">"PlayList"</span> <span class="mi">0</span> <span class="mi">1</span>
-<span class="nb">i</span> <span class="s">"PlayBand"</span> <span class="mi">20</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">.5</span>
-<span class="nb">i</span> <span class="s">"PlayWeighted"</span> <span class="mi">110</span> <span class="mi">100</span>
-<span class="nt">&lt;/CsScore&gt;</span>
-<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
-</pre>
-            </div>
-          </div>
-        </div>
-        <p><br class="example-break" />
-    </p>
       </div>
       <div class="refsect1">
-        <a id="idm31121"></a>
+        <a id="idm40356"></a>
         <h2>Crédits</h2>
         <p>
       </p>

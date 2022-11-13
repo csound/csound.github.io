@@ -6,7 +6,7 @@
     <title>fluidInfo</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="fluidEngine.html" title="fluidEngine" />
@@ -39,21 +39,27 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm84784"></a>
+        <a id="idm119926"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">SPrograms[] <span class="command"><strong>fluidInfo</strong></span> ienginenum</pre>
       </div>
       <div class="refsect1">
-        <a id="idm84788"></a>
+        <a id="idm119930"></a>
         <h2>Description</h2>
-        <p>Opcode du greffon fluidOpcodes.</p>
+        <p>
+      Opcode du greffon fluidOpcodes. Ce greffon se trouve dans le
+      répertoire des greffons et il doit être installé séparément.
+      Le répertoire des greffons est ici :
+      <a class="ulink" href="https://github.com/csound/plugins" target="_top">
+      <em class="citetitle">https://github.com/csound/plugins</em></a>
+    </p>
         <p>
       Parcourt le SoundFont courant pour en extraire l'information de programme.
       Cette information est retournée dans un tableau de chaînes de caractères.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm84792"></a>
+        <a id="idm119936"></a>
         <h2>Initialisation</h2>
         <p><span class="emphasis"><em>SPrograms[]</em></span> -- Tableau de chaînes de caractères
     contenant l'information de programme.</p>
@@ -61,58 +67,58 @@
     fluidEngine.</p>
       </div>
       <div class="refsect1">
-        <a id="idm84798"></a>
+        <a id="idm119942"></a>
         <h2>Exécution</h2>
         <p>fluidInfo ne fonctionne que durant l'initialisation.</p>
       </div>
       <div class="refsect1">
-        <a id="idm84801"></a>
+        <a id="idm119945"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode fluidInfo. Il utilise le fichier
       <a class="ulink" href="examples/fluidInfo.csd" target="_top"><em class="citetitle">fluidInfo.csd</em></a> and <a class="ulink" href="examples/sf_GMbank.sf2" target="_top"><em class="citetitle">sf_GMbank.sf2</em></a>.
       </p>
         <div class="example">
-          <a id="idm84808"></a>
+          <a id="idm119952"></a>
           <p class="title">
-            <strong>Exemple 336. Exemple de l'opcode fluidInfo.</strong>
+            <strong>Exemple 340. Exemple de l'opcode fluidInfo.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm84815"></a>
+              <a id="idm119959"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
 -odac    <span class="c1">;;;realtime audio out and realtime midi in</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-gi<span class="n">engine</span> <span class="nb">fluidEngine</span>
-i<span class="n">sfnum</span>	 <span class="nb">fluidLoad</span> <span class="s">"sf_GMbank.sf2"</span><span class="p">,</span> gi<span class="n">engine</span><span class="p">,</span> <span class="mi">1</span>
+</span>gi<span class="n">engine</span><span class="w"> </span><span class="nb">fluidEngine</span><span class="w">
+</span>i<span class="n">sfnum</span><span class="w">	 </span><span class="nb">fluidLoad</span><span class="w"> </span><span class="s">"sf_GMbank.sf2"</span><span class="p">,</span><span class="w"> </span>gi<span class="n">engine</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
-i<span class="n">Cnt</span> <span class="nb">init</span> <span class="mi">0</span>
-S<span class="n">SoundFontPrograms</span><span class="p">[]</span> <span class="nb">fluidInfo</span> gi<span class="n">engine</span>
-i<span class="n">NumberOfPrograms</span> <span class="nb">lenarray</span> S<span class="n">SoundFontPrograms</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span>i<span class="n">Cnt</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>S<span class="n">SoundFontPrograms</span><span class="p">[]</span><span class="w"> </span><span class="nb">fluidInfo</span><span class="w"> </span>gi<span class="n">engine</span><span class="w">
+</span>i<span class="n">NumberOfPrograms</span><span class="w"> </span><span class="nb">lenarray</span><span class="w"> </span>S<span class="n">SoundFontPrograms</span><span class="w">
 
-<span class="k">until</span> i<span class="n">Cnt</span><span class="o">&gt;=</span>i<span class="n">NumberOfPrograms</span> <span class="k">do</span>
-	<span class="nb">printf_i</span> <span class="s">"</span><span class="si">%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> S<span class="n">SoundFontPrograms</span><span class="p">[</span>i<span class="n">Cnt</span><span class="p">]</span>
-	i<span class="n">Cnt</span> <span class="o">=</span> i<span class="n">Cnt</span><span class="o">+</span><span class="mi">1</span>
-<span class="k">od</span>
-<span class="kd">endin</span>
+</span><span class="k">until</span><span class="w"> </span>i<span class="n">Cnt</span><span class="o">&gt;=</span>i<span class="n">NumberOfPrograms</span><span class="w"> </span><span class="k">do</span><span class="w">
+	</span><span class="nb">printf_i</span><span class="w"> </span><span class="s">"</span><span class="si">%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>S<span class="n">SoundFontPrograms</span><span class="p">[</span>i<span class="n">Cnt</span><span class="p">]</span><span class="w">
+	</span>i<span class="n">Cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>i<span class="n">Cnt</span><span class="o">+</span><span class="mi">1</span><span class="w">
+</span><span class="k">od</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -122,7 +128,7 @@ i<span class="n">NumberOfPrograms</span> <span class="nb">lenarray</span> S<span
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm84888"></a>
+        <a id="idm120079"></a>
         <h2>Voir aussi</h2>
         <p>
     <a class="link" href="fluidEngine.html" title="fluidEngine"><em class="citetitle">fluidEngine</em></a>, 
@@ -140,7 +146,7 @@ i<span class="n">NumberOfPrograms</span> <span class="nb">lenarray</span> S<span
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm84903"></a>
+        <a id="idm120094"></a>
         <h2>Crédits</h2>
         <p>Rory Walsh, basé sur l'opcode fluidLoad de Steven Yi.
     </p>

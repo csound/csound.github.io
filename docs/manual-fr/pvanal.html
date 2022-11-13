@@ -6,7 +6,7 @@
     <title>pvanal</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="UtilitySoundfile.html#UtilityAnalysis" title="Génération d'un fichier d'analyse (ATSA, CVANAL, HETRO, LPANAL, PVANAL)" />
     <link rel="prev" href="lpanal.html" title="lpanal" />
@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm301063"></a>
+        <a id="idm441799"></a>
         <h2>Description</h2>
         <p>
       Analyse de Fourier pour le générateur de Csound
@@ -48,13 +48,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm301068"></a>
+        <a id="idm441804"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>csound -U pvanal</strong></span> [options] nomfic_entree nomfic_sortie</pre>
         <pre class="synopsis"><span class="command"><strong>pvanal</strong></span> [options] nomfic_entree nomfic_sortie</pre>
       </div>
       <div class="refsect1">
-        <a id="idm301074"></a>
+        <a id="idm441810"></a>
         <h2>Extension de pvanal pour créer un fichier PVOC-EX.</h2>
         <p>
       L'utilitaire standard de Csound pvanal a été étendu pour permettre la création d'un
@@ -73,7 +73,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm301080"></a>
+        <a id="idm441816"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>pvanal</em></span> convertit un fichier son en une série de trames de
@@ -145,21 +145,9 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm301118"></a>
-        <h2>Exemples</h2>
-        <p>
-
-        </p>
-        <pre class="programlisting"><span class="emphasis"><em>pvanal</em></span> unson fichierpv</pre>
-        <p>
-
-      analysera le fichier son "unson" en utilisant les valeurs par défaut de
-      <span class="emphasis"><em>tailletrame</em></span> et de <span class="emphasis"><em>factfen</em></span> pour produire
-      le fichier "pvfile" approprié pour une utilisation avec
-      <span class="emphasis"><em>pvoc</em></span>.
-    </p>
+        <a id="idm441854"></a>
         <div class="refsect2">
-          <a id="idm301126"></a>
+          <a id="idm441855"></a>
           <h3>Fichiers</h3>
           <p>
         Le fichier de sortie a un en-tête spécial <span class="emphasis"><em>pvoc</em></span> contenant les
@@ -173,7 +161,7 @@
       </p>
         </div>
         <div class="refsect2">
-          <a id="idm301132"></a>
+          <a id="idm441861"></a>
           <h3>Diagnostiques</h3>
           <p>
         Imprime le nombre total de trames, et le nombre de trames complétées toutes les 20 trames.
@@ -181,7 +169,92 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm301135"></a>
+        <a id="idm441864"></a>
+        <h2>Exemples</h2>
+        <p>
+
+      </p>
+        <pre class="programlisting"><span class="emphasis"><em>pvanal</em></span> asound pvfile</pre>
+        <p>
+
+      analysera le fichier son "asound" en utilisant les valeurs par
+      défaut de tailletrame et de factfen pour produire le fichier
+      "pvfile" approprié pour une utilisation avec pvoc.
+    </p>
+        <p>
+      Voici un exemple de l'utilitaire pvanal. Il utilise le fichier
+      <a class="ulink" href="examples/pvanal.csd" target="_top"><em class="citetitle">pvanal.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm441872"></a>
+          <p class="title">
+            <strong>Exemple 1355. Exemple de l'utilitaire pvanal.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm441879"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac   -m0  --limiter=.95 <span class="c1">;;;realtime audio out, with limiter protection</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o pvanal.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; by Menno Knevel 2021</span><span class="w">
+
+</span>gi<span class="n">len</span><span class="w">  </span><span class="nb">filelen</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w">	    </span><span class="c1">; get length of impulse soundfile</span><span class="w">
+
+</span><span class="c1">; analyze sound file and output result to 3 pvoc-ex files</span><span class="w">
+</span>i<span class="n">res1</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ pvanal fox.wav fox1.pvx }}</span><span class="w">          </span><span class="c1">; default settings</span><span class="w">
+</span>i<span class="n">res2</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ pvanal -K -w1 fox.wav fox2.pvx }}</span><span class="w">   </span><span class="c1">; very low indow setting</span><span class="w">
+</span>i<span class="n">res3</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ pvanal -n256 fox.wav fox3.pvx }}</span><span class="w">    </span><span class="c1">; different frame size</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> </span><span class="c1">; untreated signal</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">    </span><span class="nb">diskin2</span><span class="w">   </span><span class="s">"fox.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">---***YOU NOW HEAR THE UNTREATED SOUND SAMPLE***---</span><span class="se">\n</span><span class="s">"</span><span class="w">
+</span><span class="nb">outs</span><span class="w">    </span>a<span class="n">sig</span><span class="o">*</span><span class="mf">.8</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="o">*</span><span class="mf">.8</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">---***YOU NOW HEAR THE RESULT OF THIS ANALYZED FILE:***---</span><span class="se">\n</span><span class="s">"</span><span class="w">
+</span>k<span class="n">time</span><span class="w"> </span><span class="nb">line</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span>gi<span class="n">len</span><span class="o">/</span><span class="mf">2.4</span><span class="w">     </span><span class="c1">; slow down to have a good listen at what happens</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">pvoc</span><span class="w"> </span>k<span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"(playback is slowed down &amp; limited to 'the quick brown fox')</span><span class="se">\n</span><span class="s">"</span><span class="w">
+      </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="o">*</span><span class="mf">.8</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="o">*</span><span class="mf">.8</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">2.76</span><span class="w">               </span><span class="c1">; original sample</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">2</span><span class="w">  </span><span class="mi">5</span><span class="w"> </span><span class="mi">10</span><span class="w">  </span><span class="s">"fox1.pvx"</span><span class="w">    </span><span class="c1">; default but slowed down</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="mi">10</span><span class="w">  </span><span class="s">"fox2.pvx"</span><span class="w">    </span><span class="c1">; low window setting</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">27</span><span class="w"> </span><span class="mi">10</span><span class="w">  </span><span class="s">"fox3.pvx"</span><span class="w">    </span><span class="c1">; smearing</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm442103"></a>
         <h2>Crédits</h2>
         <p>Auteur : Dan Ellis</p>
         <p>MIT Media Lab</p>

@@ -6,7 +6,7 @@
     <title>pvsinit</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="pvsinfo.html" title="pvsinfo" />
@@ -39,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm187845"></a>
+        <a id="idm274947"></a>
         <h2>Description</h2>
         <p>
       Réalise l'équivalent d'une opération d'initialisation sur une variable-f.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm187848"></a>
+        <a id="idm274950"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">fsig <span class="command"><strong>pvsinit</strong></span> isize[, iolap, iwinsize, iwintype, iformat]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm187852"></a>
+        <a id="idm274954"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>fsig</em></span> -- flot pv de sortie mis à zéro.
@@ -76,25 +76,73 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm187868"></a>
+        <a id="idm274970"></a>
         <h2>Exemples</h2>
         <p>
+      Voici un exemple de l'opcode pvsinit. Il utilise le fichier
+      <a class="ulink" href="examples/pvsinit.csd" target="_top"><em class="citetitle">pvsinit.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm187871"></a>
+          <a id="idm274975"></a>
           <p class="title">
-            <strong>Exemple 826. Exemples</strong>
+            <strong>Exemple 841. Exemple de l'opcode pvsinit.</strong>
           </p>
           <div class="example-contents">
-            <pre class="programlisting">
-fsig  <span class="opc">pvsinit</span>   1024</pre>
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm274982"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac    <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">;-o pvsinit.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; by Victor Lazzarini</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span>gf<span class="n">sig</span><span class="w"> </span><span class="nb">pvsinit</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>a<span class="n">1</span><span class="w">  </span><span class="nb">diskin</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>f<span class="n">s1</span><span class="w"> </span><span class="nb">pvsanal</span><span class="w"> </span>a<span class="n">1</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">1</span><span class="w">
+</span>gf<span class="n">sig</span><span class="w"> </span><span class="nb">pvsmix</span><span class="w"> </span>f<span class="n">s1</span><span class="p">,</span>gf<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+</span>a<span class="n">1</span><span class="w">  </span><span class="nb">pvsynth</span><span class="w"> </span>gf<span class="n">sig</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="w">
+</span><span class="c1">; clear fsig</span><span class="w">
+</span>gf<span class="n">sig</span><span class="w"> </span><span class="nb">pvsgain</span><span class="w"> </span>gf<span class="n">sig</span><span class="p">,</span><span class="mi">0</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="w">  </span><span class="s">"beats.wav"</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
           </div>
         </div>
         <p><br class="example-break" />
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm187875"></a>
+        <a id="idm275125"></a>
         <h2>Crédits</h2>
         <p>
       </p>

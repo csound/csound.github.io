@@ -6,7 +6,7 @@
     <title>ms2st</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="mrtmsg.html" title="mrtmsg" />
@@ -39,20 +39,27 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm148328"></a>
+        <a id="idm215202"></a>
         <h2>Description</h2>
         <p>
       Cet opcode implémente une conversion mid-side (MS) vers stéréo avec un
       contrôle de largeur. C'est une fonction pure sans effet de bord.
     </p>
+        <p>
+      L'opcode ms2st décode le signal stéréo, mais il offre aussi la
+      possibilité d'ajuster la largeur stéréo de <span class="emphasis"><em>chaque</em></span>
+      son stéréo. Un fichier stéréo peut être encodé par l'opcode st2ms puis
+      décodé avec ms2st. Il est ainsi possible d'ajuster la largeur du champ
+      stéréo. 
+    </p>
       </div>
       <div class="refsect1">
-        <a id="idm148331"></a>
+        <a id="idm215207"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">aleft, aright <span class="command"><strong>ms2st</strong></span> as, am, kwidth</pre>
       </div>
       <div class="refsect1">
-        <a id="idm148335"></a>
+        <a id="idm215211"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>aleft</em></span> -- sortie sur le canal gauche.
@@ -73,7 +80,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm148347"></a>
+        <a id="idm215223"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode ms2st. Il utilise les fichiers
@@ -83,16 +90,16 @@
       et <a class="ulink" href="examples/MSjungleSide.wav" target="_top"><em class="citetitle">MSjungleSide.wav</em></a>.
       </p>
         <div class="example">
-          <a id="idm148358"></a>
+          <a id="idm215234"></a>
           <p class="title">
-            <strong>Exemple 628. Exemple de l'opcode ms2st.</strong>
+            <strong>Exemple 639. Exemple de l'opcode ms2st.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm148365"></a>
+              <a id="idm215241"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -102,47 +109,47 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o ms2st.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="c1">; by  Menno Knevel - 2021</span>
-<span class="c1">; sample = ambient sound of waterfall + animals (monkey, birds)</span>
+</span><span class="c1">; by  Menno Knevel - 2021</span><span class="w">
+</span><span class="c1">; sample = ambient sound of waterfall + animals (monkey, birds)</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span> <span class="c1">; MS sample is interleaved</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> </span><span class="c1">; MS sample is interleaved</span><span class="w">
 
-a<span class="n">m</span><span class="p">,</span> a<span class="n">s</span>    <span class="nb">diskin2</span>    <span class="s">"MSjungle_interleaved.wav"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">; interleaved stereo, MS encoded</span>
-k<span class="n">width</span> <span class="o">=</span> <span class="vi">p4</span>                                              <span class="c1">; left = M, right = S</span>
-a<span class="n">l</span><span class="p">,</span> a<span class="n">r</span> <span class="n">ms2st</span>  a<span class="n">m</span><span class="p">,</span> a<span class="n">s</span><span class="p">,</span> k<span class="n">width</span>
-<span class="nb">outs</span> a<span class="n">l</span><span class="p">,</span> a<span class="n">r</span>
-<span class="kd">endin</span>
+</span>a<span class="n">m</span><span class="p">,</span><span class="w"> </span>a<span class="n">s</span><span class="w">    </span><span class="nb">diskin2</span><span class="w">    </span><span class="s">"MSjungle_interleaved.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">; interleaved stereo, MS encoded</span><span class="w">
+</span>k<span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">                                              </span><span class="c1">; left = M, right = S</span><span class="w">
+</span>a<span class="n">l</span><span class="p">,</span><span class="w"> </span>a<span class="n">r</span><span class="w"> </span><span class="nb">ms2st</span><span class="w">  </span>a<span class="n">m</span><span class="p">,</span><span class="w"> </span>a<span class="n">s</span><span class="p">,</span><span class="w"> </span>k<span class="n">width</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">l</span><span class="p">,</span><span class="w"> </span>a<span class="n">r</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">2</span> <span class="c1">; 2 separate samples </span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w"> </span><span class="c1">; 2 separate samples </span><span class="w">
 
-a<span class="n">m</span>    <span class="nb">diskin2</span>    <span class="s">"MSjungleMid.wav"</span><span class="p">,</span> <span class="mi">1</span>        <span class="c1">; M sound as a separate mono sound</span>
-a<span class="n">s</span>    <span class="nb">diskin2</span>    <span class="s">"MSjungleSide.wav"</span><span class="p">,</span> <span class="mi">1</span>       <span class="c1">; S sound as a separate mono sound</span>
-k<span class="n">width</span> <span class="o">=</span> <span class="vi">p4</span>     
-a<span class="n">l</span><span class="p">,</span> a<span class="n">r</span> <span class="n">ms2st</span>  a<span class="n">m</span><span class="p">,</span> a<span class="n">s</span><span class="p">,</span> k<span class="n">width</span>
-<span class="nb">outs</span> a<span class="n">l</span><span class="p">,</span> a<span class="n">r</span>
+</span>a<span class="n">m</span><span class="w">    </span><span class="nb">diskin2</span><span class="w">    </span><span class="s">"MSjungleMid.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">        </span><span class="c1">; M sound as a separate mono sound</span><span class="w">
+</span>a<span class="n">s</span><span class="w">    </span><span class="nb">diskin2</span><span class="w">    </span><span class="s">"MSjungleSide.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">       </span><span class="c1">; S sound as a separate mono sound</span><span class="w">
+</span>k<span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">     
+</span>a<span class="n">l</span><span class="p">,</span><span class="w"> </span>a<span class="n">r</span><span class="w"> </span><span class="nb">ms2st</span><span class="w">  </span>a<span class="n">m</span><span class="p">,</span><span class="w"> </span>a<span class="n">s</span><span class="p">,</span><span class="w"> </span>k<span class="n">width</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">l</span><span class="p">,</span><span class="w"> </span>a<span class="n">r</span><span class="w">
 
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
 
-<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mf">6.7</span> <span class="mi">0</span>          <span class="c1">; M only</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">6.7</span> <span class="mf">.3</span>         <span class="c1">; M and a bit of S</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">6.7</span> <span class="mf">.5</span>         <span class="c1">; M + S equal volume</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">6.7</span> <span class="mi">1</span>          <span class="c1">; S only </span>
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">6.7</span><span class="w"> </span><span class="mi">0</span><span class="w">          </span><span class="c1">; M only</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">6.7</span><span class="w"> </span><span class="mf">.3</span><span class="w">         </span><span class="c1">; M and a bit of S</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">6.7</span><span class="w"> </span><span class="mf">.5</span><span class="w">         </span><span class="c1">; M + S equal volume</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">6.7</span><span class="w"> </span><span class="mi">1</span><span class="w">          </span><span class="c1">; S only </span><span class="w">
 
-<span class="nb">i</span><span class="mi">2</span> <span class="mi">28</span> <span class="mf">6.7</span> <span class="mi">0</span>         <span class="c1">; M only</span>
-<span class="nb">i</span><span class="mi">2</span> <span class="o">+</span>  <span class="mf">6.7</span> <span class="mf">.3</span>        <span class="c1">; M and a bit of S</span>
-<span class="nb">i</span><span class="mi">2</span> <span class="o">+</span>  <span class="mf">6.7</span> <span class="mf">.5</span>        <span class="c1">; M + S equal volume</span>
-<span class="nb">i</span><span class="mi">2</span> <span class="o">+</span>  <span class="mf">6.7</span> <span class="mi">1</span>         <span class="c1">; S only</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">28</span><span class="w"> </span><span class="mf">6.7</span><span class="w"> </span><span class="mi">0</span><span class="w">         </span><span class="c1">; M only</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="mf">6.7</span><span class="w"> </span><span class="mf">.3</span><span class="w">        </span><span class="c1">; M and a bit of S</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="mf">6.7</span><span class="w"> </span><span class="mf">.5</span><span class="w">        </span><span class="c1">; M + S equal volume</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="mf">6.7</span><span class="w"> </span><span class="mi">1</span><span class="w">         </span><span class="c1">; S only</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -151,29 +158,33 @@ a<span class="n">l</span><span class="p">,</span> a<span class="n">r</span> <spa
         <p><br class="example-break" />
     </p>
       </div>
+      <p>
+     Dans l'instr 1 de l'example, le fichier stéréo encodé MS est entrelacé.
+     Le canal gauche du signal entrelacé sera décodé comme le signal M (=Mid).
+     Le canal droit sera décodé en gauche et droite. Dans l'instr 2 cependant,
+     deux canaux séparés sont utilisés. L'utilisateur décide lequel affecter
+     au signal médiant (M) et au signal latéral (S).
+  </p>
       <div class="mediaobject">
-        <img src="images/MSjungle_interleaved.png" alt="un fichier MS à encodage entrelacé : MSjungle_interleaved.wav utilisé dans instr 1" />
+        <img src="images/MS.png" alt="En haut le fichier entrelacé encodé MS (instr 1), en bas les deux fichiers séparés (instr 2)" />
         <div class="caption">
-          <p>un fichier MS à encodage entrelacé : MSjungle_interleaved.wav
-	  utilisé dans instr 1</p>
-        </div>
-      </div>
-      <div class="mediaobject">
-        <img src="images/MSjungle_separate.png" alt="deux fichiers séparés MSjungleMid.wav et MSjungleSide.wav utiisés dans instr 2" />
-        <div class="caption">
-          <p>deux fichiers séparés MSjungleMid.wav et MSjungleSide.wav utiisés
-	  dans instr 2</p>
+          <p>En haut le fichier entrelacé encodé MS (instr 1), en bas les
+	  deux fichiers séparés (instr 2)</p>
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm148522"></a>
+        <a id="idm215500"></a>
         <h2>Voir aussi</h2>
+        <p>
+      On peut trouver plus d'information sur MS stéréo sur la
+      <a class="ulink" href="https://en.wikipedia.org/wiki/Stereophonic_sound#M/S_technique:_mid/side_stereophony" target="_top"><em class="citetitle">page wikipedia</em></a>.
+    </p>
         <p>
       <a class="link" href="st2ms.html" title="st2ms"><em class="citetitle">st2ms</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm148527"></a>
+        <a id="idm215508"></a>
         <h2>Crédits</h2>
         <p>
       </p>

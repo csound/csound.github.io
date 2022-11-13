@@ -6,7 +6,7 @@
     <title>outrg</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="outq.html" title="outq" />
@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm163894"></a>
+        <a id="idm237179"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>outrg</em></span> sort les données audio dans un ensemble de canaux
@@ -48,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm163898"></a>
+        <a id="idm237183"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>outrg</strong></span> kstart, aout1 [,aout2, aout3, ..., aoutN]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm163902"></a>
+        <a id="idm237187"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kstart</em></span> - le numéro du premier canal du périphérique
@@ -74,23 +74,23 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm163914"></a>
+        <a id="idm237199"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode outrg. Il utilise le fichier
       <a class="ulink" href="examples/outrg.csd" target="_top"><em class="citetitle">outrg.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm163919"></a>
+          <a id="idm237204"></a>
           <p class="title">
-            <strong>Exemple 705. Exemple de l'opcode outrg.</strong>
+            <strong>Exemple 717. Exemple de l'opcode outrg.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm163926"></a>
+              <a id="idm237211"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -100,43 +100,43 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o outrg.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">4</span>        <span class="c1">;quad</span>
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="w">        </span><span class="c1">;quad</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-k<span class="n">left</span> <span class="nb">init</span> <span class="mi">1</span>
-a<span class="n">sig</span>  <span class="nb">vco2</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">220</span>			<span class="c1">;sawtooth</span>
-i<span class="n">dur</span> <span class="o">=</span> <span class="vi">p3</span><span class="o">/</span><span class="p">(</span><span class="vg">nchnls</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-k<span class="n">next</span> <span class="nb">init</span> i<span class="n">dur</span>
-k<span class="n">pos</span> <span class="nb">init</span> <span class="mi">0</span>
-k<span class="n">rate</span> <span class="nb">init</span> <span class="mi">1</span><span class="o">/</span>i<span class="n">dur</span>
-k<span class="n">base</span> <span class="nb">init</span> <span class="mi">0</span>
-k<span class="n">time</span> <span class="nb">timeinsts</span>
-<span class="k">if</span> k<span class="n">time</span><span class="o">&gt;=</span>k<span class="n">next</span> <span class="k">then</span>
-  k<span class="n">left</span> <span class="o">=</span> k<span class="n">left</span> <span class="o">+</span> <span class="mi">1</span>
-  k<span class="n">next</span> <span class="o">=</span> k<span class="n">next</span> <span class="o">+</span> i<span class="n">dur</span>
-  k<span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span>
-  k<span class="n">base</span> <span class="o">=</span> k<span class="n">time</span>
-<span class="k">else</span>
-  k<span class="n">pos</span> <span class="o">=</span> <span class="p">(</span>k<span class="n">time</span><span class="o">-</span>k<span class="n">base</span><span class="p">)</span><span class="o">/</span>i<span class="n">dur</span>
-<span class="k">endif</span>
-<span class="nb">printks</span> <span class="s">"speaker </span><span class="si">%d</span><span class="s"> position </span><span class="si">%f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> k<span class="n">left</span><span class="p">,</span> k<span class="n">pos</span>
-a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span> <span class="nb">pan2</span> a<span class="n">sig</span><span class="p">,</span> k<span class="n">pos</span>
-      <span class="nb">outrg</span>  k<span class="n">left</span><span class="p">,</span> a<span class="n">1</span><span class="p">,</span> a<span class="n">2</span>
-k<span class="n">pos</span> <span class="o">=</span> k<span class="n">base</span><span class="o">/</span>i<span class="n">dur</span>
-<span class="kd">endin</span>
+</span>k<span class="n">left</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">vco2</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">220</span><span class="w">			</span><span class="c1">;sawtooth</span><span class="w">
+</span>i<span class="n">dur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p3</span><span class="o">/</span><span class="p">(</span><span class="vg">nchnls</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span>k<span class="n">next</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span>i<span class="n">dur</span><span class="w">
+</span>k<span class="n">pos</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>k<span class="n">rate</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span>i<span class="n">dur</span><span class="w">
+</span>k<span class="n">base</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>k<span class="n">time</span><span class="w"> </span><span class="nb">timeinsts</span><span class="w">
+</span><span class="k">if</span><span class="w"> </span>k<span class="n">time</span><span class="o">&gt;=</span>k<span class="n">next</span><span class="w"> </span><span class="k">then</span><span class="w">
+  </span>k<span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>k<span class="n">left</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span>k<span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>k<span class="n">next</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>i<span class="n">dur</span><span class="w">
+  </span>k<span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span>k<span class="n">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>k<span class="n">time</span><span class="w">
+</span><span class="k">else</span><span class="w">
+  </span>k<span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>k<span class="n">time</span><span class="o">-</span>k<span class="n">base</span><span class="p">)</span><span class="o">/</span>i<span class="n">dur</span><span class="w">
+</span><span class="k">endif</span><span class="w">
+</span><span class="nb">printks</span><span class="w"> </span><span class="s">"speaker </span><span class="si">%d</span><span class="s"> position </span><span class="si">%f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>k<span class="n">left</span><span class="p">,</span><span class="w"> </span>k<span class="n">pos</span><span class="w">
+</span>a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span><span class="w"> </span><span class="nb">pan2</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>k<span class="n">pos</span><span class="w">
+      </span><span class="nb">outrg</span><span class="w">  </span>k<span class="n">left</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">2</span><span class="w">
+</span>k<span class="n">pos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>k<span class="n">base</span><span class="o">/</span>i<span class="n">dur</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">10</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -165,7 +165,7 @@ speaker 4 position 0.000000
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm164060"></a>
+        <a id="idm237433"></a>
         <h2>Crédits</h2>
         <p>Auteur : Gabriel Maldonado</p>
         <p>Nouveau dans la version 5.06</p>

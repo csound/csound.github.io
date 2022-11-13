@@ -6,7 +6,7 @@
     <title>loop_gt</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="loop_ge.html" title="loop_ge" />
@@ -39,20 +39,20 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm126496"></a>
+        <a id="idm182698"></a>
         <h2>Description</h2>
         <p>
       Construction d'opérations de boucle.
    </p>
       </div>
       <div class="refsect1">
-        <a id="idm126499"></a>
+        <a id="idm182701"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>loop_gt </strong></span>  indx, idecr, imin, label</pre>
         <pre class="synopsis"><span class="command"><strong>loop_gt </strong></span>  kndx, kdecr, kmin, label</pre>
       </div>
       <div class="refsect1">
-        <a id="idm126505"></a>
+        <a id="idm182707"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>indx</em></span> -- variable de taux-i, compteur de la boucle.
@@ -65,7 +65,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm126513"></a>
+        <a id="idm182715"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kndx</em></span> -- variable de taux-k, compteur de la boucle.
@@ -92,7 +92,92 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm126535"></a>
+        <a id="idm182737"></a>
+        <h2>Exemples</h2>
+        <p>
+      voici un exemple de l'opcode loop_gt. Il utilise le fichier
+      <a class="ulink" href="examples/loop_gt.csd" target="_top"><em class="citetitle">loop_gt.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm182742"></a>
+          <p class="title">
+            <strong>Exemple 529. Exemple de l'opcode loop_gt.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm182749"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o loop_gt.wav -W ;;; for file output any platform</span>
+
+<span class="c1">; By Stefano Cucchi - 2021</span>
+
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span>gi<span class="n">saw</span><span class="w">  </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">16384</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.4</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.6</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.8</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.8</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.6</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.4</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mf">.2</span><span class="w"> 
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> </span><span class="c1">;master instrument</span><span class="w">
+
+</span>i<span class="n">ndxFreq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+
+</span><span class="nl">loop</span><span class="p">:</span><span class="w">
+
+</span>i<span class="n">freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>i<span class="n">ndxFreq</span><span class="w">
+</span><span class="nb">print</span><span class="w"> </span>i<span class="n">freq</span><span class="w">
+</span>i<span class="n">amp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="o">/</span><span class="p">((</span><span class="vi">p5</span><span class="o">-</span><span class="vi">p7</span><span class="p">)</span><span class="o">/</span><span class="vi">p6</span><span class="p">)</span><span class="w">
+</span><span class="nb">event_i</span><span class="w"> </span><span class="s">"i"</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span>i<span class="n">amp</span><span class="p">,</span><span class="w"> </span>i<span class="n">freq</span><span class="w">
+</span><span class="kp">loop_gt</span><span class="w"> </span>i<span class="n">ndxFreq</span><span class="p">,</span><span class="w"> </span><span class="vi">p6</span><span class="p">,</span><span class="w"> </span><span class="vi">p7</span><span class="p">,</span><span class="w"> </span><span class="nl">loop</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">10</span><span class="w">
+
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">oscili</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="vi">p5</span><span class="p">,</span><span class="w"> </span>gi<span class="n">saw</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">butterhp</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="w">
+</span>k<span class="n">declick</span><span class="w"> </span><span class="nb">linseg</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>k<span class="n">declick</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>k<span class="n">declick</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mf">0.3</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="mi">55</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mf">0.2</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm183067"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="loop_ge.html" title="loop_ge"><em class="citetitle">loop_ge</em></a>,
@@ -107,7 +192,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm126549"></a>
+        <a id="idm183081"></a>
         <h2>Crédits</h2>
         <p>Istvan Varga.</p>
         <p>Nouveau dans la version 5.01 de Csound</p>

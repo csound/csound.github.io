@@ -6,7 +6,7 @@
     <title>hetro</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="UtilitySoundfile.html#UtilityAnalysis" title="Génération d'un fichier d'analyse (ATSA, CVANAL, HETRO, LPANAL, PVANAL)" />
     <link rel="prev" href="cvanal.html" title="cvanal" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm300905"></a>
+        <a id="idm441164"></a>
         <h2>Description</h2>
         <p>
       Analyse par filtre hétérodyne pour le générateur de Csound
@@ -47,13 +47,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm300910"></a>
+        <a id="idm441169"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>csound -U hetro</strong></span> [options] nomfichier_entree nomfichier_sortie</pre>
         <pre class="synopsis"><span class="command"><strong>hetro</strong></span> [options] nomfichier_entree nomfichier_sortie</pre>
       </div>
       <div class="refsect1">
-        <a id="idm300916"></a>
+        <a id="idm441175"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>hetro</em></span> prend un fichier son en entrée, le décompose en composantes sinusoïdales,
@@ -109,7 +109,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm300943"></a>
+        <a id="idm441202"></a>
         <h2>Exécution</h2>
         <p>
       A partir de Csound 4.08, <span class="emphasis"><em>hetro</em></span> peut écrire des fichiers de sortie SDIF si le
@@ -119,26 +119,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm300949"></a>
-        <h2>Exemples</h2>
-        <p>
-
-        </p>
-        <pre class="programlisting">
-<span class="emphasis"><em>hetro</em></span> -s44100 -b.5 -d2.5 -h16 -M24000 fichieraudio.test adsynfile7</pre>
-        <p>
-
-
-      Ceci analyse 2,5 secondes du canal 1 du fichier "fichieraudio.test", enregistré à
-      44,1 kHz, commençant 0,5 secondes après le début, et place le résultat dans le fichier
-      "adsynfile7". Nous ne voulons que les 16 premiers harmoniques du son, avec 256 points
-      charnière par piste d'amplitude ou de fréquence, et un pic de la somme des amplitudes de 24000. Le
-      fondamental est estimé au commencement  à 100 Hz. Le seuil d'amplitude est de 54 dB en-dessous
-      de l'échelle complète.
-    </p>
-        <p>
-      Le filtre passe-bas de Butterworth n'est pas activé.
-    </p>
+        <a id="idm441208"></a>
         <div class="refsect2">
           <a id="HetroFileFormat"></a>
           <h3>Format de Fichier</h3>
@@ -179,7 +160,98 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm300965"></a>
+        <a id="idm441219"></a>
+        <h2>Exemples</h2>
+        <p>
+
+        </p>
+        <pre class="programlisting">
+<span class="emphasis"><em>hetro</em></span> -s44100 -b.5 -d2.5 -h16 -M24000 fichieraudio.test adsynfile7</pre>
+        <p>
+
+
+      Ceci analyse 2,5 secondes du canal 1 du fichier "fichieraudio.test", enregistré à
+      44,1 kHz, commençant 0,5 secondes après le début, et place le résultat dans le fichier
+      "adsynfile7". Nous ne voulons que les 16 premiers harmoniques du son, avec 256 points
+      charnière par piste d'amplitude ou de fréquence, et un pic de la somme des amplitudes de 24000. Le
+      fondamental est estimé au commencement  à 100 Hz. Le seuil d'amplitude est de 54 dB en-dessous
+      de l'échelle complète.
+    </p>
+        <p>
+      Le filtre passe-bas de Butterworth n'est pas activé.
+    </p>
+        <p>
+      Voici un exemple de l'utilitaire hetro. Il utilise le fichier
+      <a class="ulink" href="examples/hetro.csd" target="_top"><em class="citetitle">hetro.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm441228"></a>
+          <p class="title">
+            <strong>Exemple 1353. Exemple de l'utilitaire hetro.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm441235"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac   -m0 --limiter=.95 <span class="c1">;;;realtime audio out, with limiter protection</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o hetro.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; by Menno Knevel 2021</span><span class="w">
+
+</span>gi<span class="n">len</span><span class="w">  </span><span class="nb">filelen</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w">	    </span><span class="c1">; get length of soundfile</span><span class="w">
+
+</span><span class="c1">; analyze sound file and output result to 3 hetro files</span><span class="w">
+</span>i<span class="n">res1</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ hetro fox.wav fox1.het }}</span><span class="w">           </span><span class="c1">; default settings</span><span class="w">
+</span>i<span class="n">res2</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ hetro -f250 fox.wav fox2.het }}</span><span class="w">     </span><span class="c1">; high starting frequency</span><span class="w">
+</span>i<span class="n">res3</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ hetro -f100 -h180 fox.wav fox3.het }}</span><span class="c1">; up to 18kHz!</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> </span><span class="c1">; untreated signal</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">    </span><span class="nb">diskin2</span><span class="w">   </span><span class="s">"fox.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">---***YOU NOW HEAR THE UNTREATED SOUND SAMPLE***---</span><span class="se">\n</span><span class="s">"</span><span class="w">
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"---*duration of soundfile is </span><span class="si">%f</span><span class="s"> seconds*---</span><span class="se">\\n</span><span class="s">"</span><span class="p">,</span>gi<span class="n">len</span><span class="w">
+</span><span class="nb">outs</span><span class="w">    </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">---***YOU NOW HEAR THE RESULT OF THIS ANALYZED FILE:***---</span><span class="se">\n</span><span class="s">"</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">      </span><span class="nb">adsyn</span><span class="w">     </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="w"> 
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">	    
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">2.76</span><span class="w">               </span><span class="c1">; original sample</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mf">2.76</span><span class="w">  </span><span class="s">"fox1.het"</span><span class="w">	</span><span class="c1">; whole sentence</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mf">2.76</span><span class="w"> </span><span class="s">"fox2.het"</span><span class="w">	</span><span class="c1">; whole sentence, but analyzed with different settings</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="mf">2.76</span><span class="w"> </span><span class="s">"fox3.het"</span><span class="w">	</span><span class="c1">; whole sentence, and again analyzed with different settings</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm441438"></a>
         <h2>Crédits</h2>
         <p>
         </p>

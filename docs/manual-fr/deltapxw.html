@@ -6,7 +6,7 @@
     <title>deltapxw</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="deltapx.html" title="deltapx" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm58519"></a>
+        <a id="idm82757"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>deltapxw</em></span> mélange le signal d'entrée dans une ligne à retard.
@@ -56,12 +56,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm58537"></a>
+        <a id="idm82775"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>deltapxw</strong></span> ain, adel, iwsize</pre>
       </div>
       <div class="refsect1">
-        <a id="idm58541"></a>
+        <a id="idm82779"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iwsize</em></span> -- taille de la fenêtre d'interpolation en
@@ -73,7 +73,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm58547"></a>
+        <a id="idm82785"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ain</em></span> -- Signal d'entrée.
@@ -135,23 +135,23 @@ adl3 &lt;= idlr - (1 + iws3/2)/sr              (permet une rétroaction)</pre>
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm58572"></a>
+        <a id="idm82810"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode deltapxw. Il utilise le fichier
       <a class="ulink" href="examples/deltapxw.csd" target="_top"><em class="citetitle">deltapxw.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm58577"></a>
+          <a id="idm82815"></a>
           <p class="title">
-            <strong>Exemple 227. Exemple de l'opcode deltapxw.</strong>
+            <strong>Exemple 231. Exemple de l'opcode deltapxw.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm58584"></a>
+              <a id="idm82822"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -161,36 +161,36 @@ adl3 &lt;= idlr - (1 + iws3/2)/sr              (permet une rétroaction)</pre>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o deltapxw.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span>     <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span>  <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-a<span class="n">1</span>      <span class="nb">phasor</span>   <span class="mi">300</span>
-a<span class="n">1</span>      <span class="o">=</span>  a<span class="n">1</span> <span class="o">-</span> <span class="mf">0.5</span>
-a<span class="n">_</span>      <span class="nb">delayr</span>   <span class="mi">1</span>
-a<span class="n">del</span>    <span class="nb">phasor</span>   <span class="mi">4</span>
-a<span class="n">del</span>    <span class="o">=</span>  <span class="nb">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mf">3.14159265</span> <span class="o">*</span> a<span class="n">del</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.01</span> <span class="o">+</span> <span class="mf">0.2</span>
-        <span class="nb">deltapxw</span> a<span class="n">1</span><span class="p">,</span> a<span class="n">del</span><span class="p">,</span> <span class="mi">32</span>
-a<span class="n">del</span>    <span class="nb">phasor</span>   <span class="mi">2</span>
-a<span class="n">del</span>    <span class="o">=</span>  <span class="nb">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mf">3.14159265</span> <span class="o">*</span> a<span class="n">del</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.01</span> <span class="o">+</span> <span class="mf">0.2</span>
-        <span class="nb">deltapxw</span> a<span class="n">1</span><span class="p">,</span> a<span class="n">del</span><span class="p">,</span> <span class="mi">32</span>
-a<span class="n">del</span>    <span class="o">=</span>  <span class="mf">0.3</span>
-a<span class="n">2</span>      <span class="nb">deltapx</span>  a<span class="n">del</span><span class="p">,</span> <span class="mi">32</span>
-a<span class="n">1</span>      <span class="o">=</span>  <span class="mi">0</span>
-        <span class="nb">delayw</span>   a<span class="n">1</span>
-        <span class="nb">outs</span>     a<span class="n">2</span><span class="o">*</span><span class="mf">.7</span><span class="p">,</span> a<span class="n">2</span><span class="o">*</span><span class="mf">.7</span>
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span>a<span class="n">1</span><span class="w">      </span><span class="nb">phasor</span><span class="w">   </span><span class="mi">300</span><span class="w">
+</span>a<span class="n">1</span><span class="w">      </span><span class="o">=</span><span class="w">  </span>a<span class="n">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">0.5</span><span class="w">
+</span>a<span class="n">_</span><span class="w">      </span><span class="nb">delayr</span><span class="w">   </span><span class="mi">1</span><span class="w">
+</span>a<span class="n">del</span><span class="w">    </span><span class="nb">phasor</span><span class="w">   </span><span class="mi">4</span><span class="w">
+</span>a<span class="n">del</span><span class="w">    </span><span class="o">=</span><span class="w">  </span><span class="nb">sin</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">3.14159265</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>a<span class="n">del</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.01</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.2</span><span class="w">
+        </span><span class="nb">deltapxw</span><span class="w"> </span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">del</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span>a<span class="n">del</span><span class="w">    </span><span class="nb">phasor</span><span class="w">   </span><span class="mi">2</span><span class="w">
+</span>a<span class="n">del</span><span class="w">    </span><span class="o">=</span><span class="w">  </span><span class="nb">sin</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">3.14159265</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>a<span class="n">del</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.01</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">0.2</span><span class="w">
+        </span><span class="nb">deltapxw</span><span class="w"> </span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">del</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span>a<span class="n">del</span><span class="w">    </span><span class="o">=</span><span class="w">  </span><span class="mf">0.3</span><span class="w">
+</span>a<span class="n">2</span><span class="w">      </span><span class="nb">deltapx</span><span class="w">  </span>a<span class="n">del</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span>a<span class="n">1</span><span class="w">      </span><span class="o">=</span><span class="w">  </span><span class="mi">0</span><span class="w">
+        </span><span class="nb">delayw</span><span class="w">   </span>a<span class="n">1</span><span class="w">
+        </span><span class="nb">outs</span><span class="w">     </span>a<span class="n">2</span><span class="o">*</span><span class="mf">.7</span><span class="p">,</span><span class="w"> </span>a<span class="n">2</span><span class="o">*</span><span class="mf">.7</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
 
-<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">5</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -200,14 +200,14 @@ a<span class="n">1</span>      <span class="o">=</span>  <span class="mi">0</spa
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm58697"></a>
+        <a id="idm83018"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="deltapx.html" title="deltapx"><em class="citetitle">deltapx</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm58702"></a>
+        <a id="idm83023"></a>
         <h2>Crédits</h2>
         <p>
       </p>

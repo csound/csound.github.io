@@ -6,7 +6,7 @@
     <title>filebit</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="ficlose.html" title="ficlose" />
@@ -39,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm69306"></a>
+        <a id="idm98363"></a>
         <h2>Description</h2>
         <p>
       Retourne le nombre de bit de chaque échantillon d'un fichier son.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm69309"></a>
+        <a id="idm98366"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ir <span class="command"><strong>filebit</strong></span> ifilcod [, iallowraw]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm69313"></a>
+        <a id="idm98370"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifilcod</em></span> -- fichier son à interroger.
@@ -62,7 +62,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm69319"></a>
+        <a id="idm98376"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>filebit</em></span> retourne le nombre de bit de chaque échantillon
@@ -73,7 +73,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm69324"></a>
+        <a id="idm98381"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode filebit. Il utilise les fichiers
@@ -82,51 +82,45 @@
 
       </p>
         <div class="example">
-          <a id="idm69331"></a>
+          <a id="idm98388"></a>
           <p class="title">
-            <strong>Exemple 291. Exemple de l'opcode filebit.</strong>
+            <strong>Exemple 295. Exemple de l'opcode filebit.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm69338"></a>
+              <a id="idm98395"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
 <span class="c1">; Audio out   Audio in</span>
--odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+-n   <span class="c1">; no sound</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o filebit.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="c1">; Initialize the global variables.</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="c1">; Instrument #1.</span>
-<span class="kd">instr</span> <span class="nf">1</span>
-  <span class="c1">; Print out the number of channels in the </span>
-  <span class="c1">; audio file "mary.wav".</span>
-  i<span class="n">bits</span> <span class="nb">filebit</span> <span class="s">"mary.wav"</span>
-  <span class="nb">print</span> i<span class="n">bits</span>
-<span class="kd">endin</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>i<span class="n">bits</span><span class="w"> </span><span class="nb">filebit</span><span class="w"> </span><span class="s">"stereoJungle.wav"</span><span class="w">
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">bit depth = </span><span class="si">%d</span><span class="s"> bit</span><span class="se">\n\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span>i<span class="n">bits</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
 
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-
-<span class="c1">; Play Instrument #1 for 1 second.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
-<span class="nb">e</span>
-
-
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -139,12 +133,12 @@
       celle-ci :
       </p>
         <pre class="screen">
-instr 1:  ibits = 16.000</pre>
+bit depth = 16 bit</pre>
         <p>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm69386"></a>
+        <a id="idm98474"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="filelen.html" title="filelen"><em class="citetitle">filelen</em></a>,
@@ -154,7 +148,7 @@ instr 1:  ibits = 16.000</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm69397"></a>
+        <a id="idm98485"></a>
         <h2>Crédits</h2>
         <p>
       </p>
@@ -168,7 +162,6 @@ instr 1:  ibits = 16.000</pre>
         </table>
         <p>
     </p>
-        <p>Exemple écrit par John ffitch.</p>
         <p>Nouveau dans la version 5.11 de Csound</p>
       </div>
     </div>

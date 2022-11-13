@@ -6,7 +6,7 @@
     <title>vco</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="vclpf.html" title="vclpf" />
@@ -39,7 +39,7 @@
           </p>
       </div>
       <div class="refsect1">
-        <a id="idm253456"></a>
+        <a id="idm369225"></a>
         <h2>Description</h2>
         <p>
       Implémentation de la modélisation d'un oscillateur analogique à bande de fréquence limitée, basée
@@ -48,13 +48,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm253460"></a>
+        <a id="idm369229"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>vco</strong></span> xamp, xcps, iwave, kpw [, ifn] [, imaxd] [, ileak] [, inyx] \
       [, iphs] [, iskip]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm253464"></a>
+        <a id="idm369233"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iwave</em></span> -- détermine la forme d'onde :
@@ -75,9 +75,9 @@
         <p>
     </p>
         <p>
-      <span class="emphasis"><em>ifn</em></span> (facultatif, par défaut 1) -- numéro de table d'une fonction sinus stockée.
-      Doit pointer sur une table valide qui contient une onde sinus. Csound rapportera une erreur si ce
-      paramètre n'est pas fixé et que la table n°1 n'existe pas.
+      <span class="emphasis"><em>ifn</em></span> (facultatif, = 1par défaut) -- Doit pointer sur
+      une table valide qui contient une onde sinus. Csound rapportera une erreur
+      si ce paramètre n'est pas fixé et que la table 1 n'existe pas.
     </p>
         <p>
       <span class="emphasis"><em>imaxd</em></span> (facultatif, par défaut 1) -- temps de retard maximum. Une durée de
@@ -116,7 +116,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm253507"></a>
+        <a id="idm369276"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kpw</em></span> -- détermine soit la largeur de la pulsation (si <span class="emphasis"><em>iwave</em></span>
@@ -134,95 +134,73 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm253520"></a>
+        <a id="idm369289"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode vco. Il utilise le fichier
       <a class="ulink" href="examples/vco.csd" target="_top"><em class="citetitle">vco.csd</em></a>.
-
       </p>
         <div class="example">
-          <a id="idm253525"></a>
+          <a id="idm369294"></a>
           <p class="title">
-            <strong>Exemple 1148. Exemple de l'opcode vco.</strong>
+            <strong>Exemple 1160. Exemple de l'opcode vco.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm253532"></a>
+              <a id="idm369301"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
-<span class="c1">; Audio out   Audio in</span>
--odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+-odac    <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
-<span class="c1">; -o vco.wav -W ;;; for file output any platform</span>
+<span class="c1">;-o vco.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="c1">; Initialize the global variables.</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="c1">; Instrument #1</span>
-<span class="kd">instr</span> <span class="nf">1</span>
-  <span class="c1">; Set the amplitude.</span>
-  k<span class="n">amp</span> <span class="o">=</span> <span class="vi">p4</span> 
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-  <span class="c1">; Set the frequency.</span>
-  k<span class="n">cps</span> <span class="o">=</span> <span class="nb">cpspch</span><span class="p">(</span><span class="vi">p5</span><span class="p">)</span> 
-
-  <span class="c1">; Select the wave form.</span>
-  i<span class="n">wave</span> <span class="o">=</span> <span class="vi">p6</span>
-
-  <span class="c1">; Set the pulse-width/saw-ramp character.</span>
-  k<span class="n">pw</span> <span class="nb">init</span> <span class="mf">0.5</span>
-
-  <span class="c1">; Use Table #1.</span>
-  i<span class="n">fn</span> <span class="o">=</span> <span class="mi">1</span>
-  
-  <span class="c1">; Generate the waveform.</span>
-  a<span class="n">sig</span> <span class="nb">vco</span> k<span class="n">amp</span><span class="p">,</span> k<span class="n">cps</span><span class="p">,</span> i<span class="n">wave</span><span class="p">,</span> k<span class="n">pw</span><span class="p">,</span> i<span class="n">fn</span>
-
-  <span class="c1">; Output and amplification.</span>
-  <span class="nb">out</span> a<span class="n">sig</span>
-<span class="kd">endin</span>
+</span>k<span class="n">amp</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mf">.4</span><span class="w"> 
+</span>k<span class="n">cps</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nb">cpspch</span><span class="p">(</span><span class="vi">p4</span><span class="p">)</span><span class="w"> 
+</span>i<span class="n">wave</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">                              </span><span class="c1">; Select the wave form</span><span class="w">
+</span>k<span class="n">pw</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mf">0.5</span><span class="w">                            </span><span class="c1">; Set the pulse-width/saw-ramp character.</span><span class="w">
+</span>i<span class="n">fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">vco</span><span class="w"> </span>k<span class="n">amp</span><span class="p">,</span><span class="w"> </span>k<span class="n">cps</span><span class="p">,</span><span class="w"> </span>i<span class="n">wave</span><span class="p">,</span><span class="w"> </span>k<span class="n">pw</span><span class="p">,</span><span class="w"> </span>i<span class="n">fn</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">65536</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">; a sine wave.</span><span class="w">
 
-<span class="c1">; Table #1, a sine wave.</span>
-<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">65536</span> <span class="mi">10</span> <span class="mi">1</span>
+</span><span class="c1">;           pitch-class waveform</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">00</span><span class="w"> </span><span class="mi">02</span><span class="w">       </span><span class="mf">05.00</span><span class="w">       </span><span class="mi">1</span><span class="w">   </span><span class="c1">; saw</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">02</span><span class="w"> </span><span class="mi">02</span><span class="w">       </span><span class="mf">05.00</span><span class="w">       </span><span class="mi">2</span><span class="w">   </span><span class="c1">; square</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">04</span><span class="w"> </span><span class="mi">02</span><span class="w">       </span><span class="mf">05.00</span><span class="w">       </span><span class="mi">3</span><span class="w">   </span><span class="c1">; tri/saw/ramp</span><span class="w">
 
-<span class="c1">; Define the score.</span>
-<span class="c1">; p4 = raw amplitude (0-32767)</span>
-<span class="c1">; p5 = frequency, in pitch-class notation.</span>
-<span class="c1">; p6 = the waveform (1=Saw, 2=Square/PWM, 3=Tri/Saw-Ramp-Mod)</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">00</span> <span class="mi">02</span> <span class="mi">20000</span> <span class="mf">05.00</span> <span class="mi">1</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">02</span> <span class="mi">02</span> <span class="mi">20000</span> <span class="mf">05.00</span> <span class="mi">2</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">04</span> <span class="mi">02</span> <span class="mi">20000</span> <span class="mf">05.00</span> <span class="mi">3</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">06</span><span class="w"> </span><span class="mi">02</span><span class="w">       </span><span class="mf">07.00</span><span class="w">       </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">08</span><span class="w"> </span><span class="mi">02</span><span class="w">       </span><span class="mf">07.00</span><span class="w">       </span><span class="mi">2</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">02</span><span class="w">       </span><span class="mf">07.00</span><span class="w">       </span><span class="mi">3</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">06</span> <span class="mi">02</span> <span class="mi">20000</span> <span class="mf">07.00</span> <span class="mi">1</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">08</span> <span class="mi">02</span> <span class="mi">20000</span> <span class="mf">07.00</span> <span class="mi">2</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">10</span> <span class="mi">02</span> <span class="mi">20000</span> <span class="mf">07.00</span> <span class="mi">3</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="mi">02</span><span class="w">       </span><span class="mf">09.00</span><span class="w">       </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">14</span><span class="w"> </span><span class="mi">02</span><span class="w">       </span><span class="mf">09.00</span><span class="w">       </span><span class="mi">2</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="mi">02</span><span class="w">       </span><span class="mf">09.00</span><span class="w">       </span><span class="mi">3</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">12</span> <span class="mi">02</span> <span class="mi">20000</span> <span class="mf">09.00</span> <span class="mi">1</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">14</span> <span class="mi">02</span> <span class="mi">20000</span> <span class="mf">09.00</span> <span class="mi">2</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">16</span> <span class="mi">02</span> <span class="mi">20000</span> <span class="mf">09.00</span> <span class="mi">3</span>
-
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">18</span> <span class="mi">02</span> <span class="mi">20000</span> <span class="mf">11.00</span> <span class="mi">1</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">20</span> <span class="mi">02</span> <span class="mi">20000</span> <span class="mf">11.00</span> <span class="mi">2</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">22</span> <span class="mi">02</span> <span class="mi">20000</span> <span class="mf">11.00</span> <span class="mi">3</span>
-<span class="nb">e</span>
-
-
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="mi">02</span><span class="w">       </span><span class="mf">11.00</span><span class="w">       </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="mi">02</span><span class="w">       </span><span class="mf">11.00</span><span class="w">       </span><span class="mi">2</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">22</span><span class="w"> </span><span class="mi">02</span><span class="w">       </span><span class="mf">11.00</span><span class="w">       </span><span class="mi">3</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -232,14 +210,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm253698"></a>
+        <a id="idm369578"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="vco2.html" title="vco2"><em class="citetitle">vco2</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm253703"></a>
+        <a id="idm369583"></a>
         <h2>Crédits</h2>
         <p>
       </p>

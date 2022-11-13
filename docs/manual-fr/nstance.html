@@ -6,7 +6,7 @@
     <title>nstance</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="nsamp.html" title="nsamp" />
@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm153311"></a>
+        <a id="idm222368"></a>
         <h2>Description</h2>
         <p>
       Programme une nouvelle instance d'instrument et retourne un descripteur
@@ -51,13 +51,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm153315"></a>
+        <a id="idm222372"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">iHandle <span class="command"><strong>nstance</strong></span> insnum, iwhen, idur [, ip4] [, ip5] [...]</pre>
         <pre class="synopsis">iHandle <span class="command"><strong>nstance</strong></span> "insname", iwhen, idur [, ip4] [, ip5] [...]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm153321"></a>
+        <a id="idm222378"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iHandle</em></span> -- cette variable reçoit un descripteur de
@@ -93,7 +93,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm153349"></a>
+        <a id="idm222406"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>nstance</em></span> ajoute un nouvel évènement de partition. Les
@@ -128,72 +128,64 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm153362"></a>
+        <a id="idm222419"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode nstance. Il utilise le fichier
       <a class="ulink" href="examples/nstance.csd" target="_top"><em class="citetitle">nstance.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm153367"></a>
+          <a id="idm222424"></a>
           <p class="title">
-            <strong>Exemple 654. Exemple de l'opcode nstance.</strong>
+            <strong>Exemple 665. Exemple de l'opcode nstance.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm153374"></a>
+              <a id="idm222431"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
 <span class="c1">; Audio out   Audio in</span>
--odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+-odac         <span class="c1">;;;RT audio out</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o nstance.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="c1">; Initialize the global variables.</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
-
-<span class="c1">; Instrument #1 - oscillator with a high note.</span>
-<span class="kd">instr</span> <span class="nf">1</span>
-  <span class="c1">; Play Instrument #2 at the same time.</span>
-  i<span class="n">Handle</span> <span class="nb">nstance</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="vi">p3</span>
-
-  <span class="c1">; Play a high note.</span>
-  a<span class="n">1</span> <span class="nb">oscils</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">880</span><span class="p">,</span> <span class="mi">1</span>
-  <span class="nb">out</span> a<span class="n">1</span>
-<span class="kd">endin</span>
-
-<span class="c1">; Instrument #2 - oscillator with a low note.</span>
-<span class="kd">instr</span> <span class="nf">2</span>
-  <span class="c1">; Play a low note.</span>
-  a<span class="n">1</span> <span class="nb">oscils</span> <span class="mi">10000</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">1</span>
-  <span class="nb">out</span> a<span class="n">1</span>
-<span class="kd">endin</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-
-<span class="c1">; Table #1, a sine wave.</span>
-<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
-
-<span class="c1">; Play Instrument #1 for half a second.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">0.5</span>
-<span class="c1">; Play Instrument #1 for half a second.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mf">0.5</span>
-<span class="nb">e</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> </span><span class="c1">; Instrument #1 - oscillator with a high note.</span><span class="w">
+  
+  </span>i<span class="n">Handle</span><span class="w"> </span><span class="nb">nstance</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mf">.3</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="w">     </span><span class="c1">; Play Instrument #2 0.3 seconds later</span><span class="w">
+  </span>a<span class="n">1</span><span class="w"> </span><span class="nb">oscils</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">880</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">          </span><span class="c1">; a high note</span><span class="w">
+  </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="w">              </span><span class="c1">; ... a bit to the right</span><span class="w">
+  </span><span class="nb">print</span><span class="w"> </span>i<span class="n">Handle</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
 
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w"> </span><span class="c1">; Instrument #2 - oscillator with a low note.</span><span class="w">
+  
+  </span>a<span class="n">1</span><span class="w"> </span><span class="nb">oscils</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">110</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">          </span><span class="c1">; a low note</span><span class="w">
+  </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">.5</span><span class="w">              </span><span class="c1">; ... a bit to the left</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">; a sine wave.</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">.5</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -203,14 +195,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm153456"></a>
-        <h2>See Also</h2>
-        <p>
-      <a class="link" href="schedwhen.html" title="schedwhen"><em class="citetitle">schedwhen</em></a>
-    </p>
-      </div>
-      <div class="refsect1">
-        <a id="idm153461"></a>
+        <a id="idm222592"></a>
         <h2>Voir aussi</h2>
         <p><a class="link" href="event.html" title="event"><em class="citetitle">event</em></a>,
     <a class="link" href="event_i.html" title="event_i"><em class="citetitle">event_i</em></a>,
@@ -223,7 +208,7 @@
     <a class="ulink" href="http://www.csoundjournal.com/issue15/phrase_loops.html" target="_top"><em class="citetitle">http://www.csoundjournal.com/issue15/phrase_loops.html</em></a>, écrit par Jim Aikin. </p>
       </div>
       <div class="refsect1">
-        <a id="idm153481"></a>
+        <a id="idm222612"></a>
         <h2>Crédits</h2>
         <p>
       </p>

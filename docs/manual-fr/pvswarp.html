@@ -6,11 +6,11 @@
     <title>pvswarp</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="pvsynth.html" title="pvsynth" />
-    <link rel="next" href="pvs2tab.html" title="pvs2tab" />
+    <link rel="next" href="pvs2array.html" title="pvs2array" />
   </head>
   <body>
     <div class="navheader">
@@ -21,7 +21,7 @@
         <tr>
           <td width="20%" align="left"><a accesskey="p" href="pvsynth.html">Précédent</a> </td>
           <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
-          <td width="20%" align="right"> <a accesskey="n" href="pvs2tab.html">Suivant</a></td>
+          <td width="20%" align="right"> <a accesskey="n" href="pvs2array.html">Suivant</a></td>
         </tr>
       </table>
       <hr />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm190540"></a>
+        <a id="idm279218"></a>
         <h2>Description</h2>
         <p>
       Déforme l'enveloppe spectrale d'un signal PVS par translation et
@@ -47,12 +47,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm190543"></a>
+        <a id="idm279221"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">fsig <span class="command"><strong>pvswarp</strong></span> fsigin, kscal, kshift[, klowest, kmeth, kgain, kcoefs]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm190547"></a>
+        <a id="idm279225"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>fsig</em></span> -- flot pv de sortie
@@ -108,23 +108,23 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm190568"></a>
+        <a id="idm279246"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode pvswarp. Il utilise le fichier
       <a class="ulink" href="examples/pvswarp.csd" target="_top"><em class="citetitle">pvswarp.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm190573"></a>
+          <a id="idm279251"></a>
           <p class="title">
-            <strong>Exemple 844. Exemple de l'opcode pvswarp.</strong>
+            <strong>Exemple 858. Exemple de l'opcode pvswarp.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm190580"></a>
+              <a id="idm279258"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -134,38 +134,38 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o pvswarp.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-k<span class="n">scal</span> <span class="o">=</span> <span class="vi">p4</span>
-k<span class="n">shift</span> <span class="o">=</span> <span class="vi">p5</span>
-a<span class="n">sig</span>  <span class="nb">soundin</span> <span class="s">"fox.wav"</span>			<span class="c1">; get the signal in</span>
-f<span class="n">sig</span>  <span class="nb">pvsanal</span> a<span class="n">sig</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1</span>	<span class="c1">; analyse it</span>
-f<span class="n">tps</span>  <span class="nb">pvswarp</span> f<span class="n">sig</span><span class="p">,</span> k<span class="n">scal</span><span class="p">,</span> k<span class="n">shift</span>		<span class="c1">; warp it</span>
-a<span class="n">tps</span>  <span class="nb">pvsynth</span> f<span class="n">tps</span>			<span class="c1">; synthesise it                      </span>
-      <span class="nb">outs</span> a<span class="n">tps</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> a<span class="n">tps</span><span class="o">/</span><span class="mi">2</span>
+</span>k<span class="n">scal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>k<span class="n">shift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">soundin</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w">			</span><span class="c1">; get the signal in</span><span class="w">
+</span>f<span class="n">sig</span><span class="w">  </span><span class="nb">pvsanal</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">	</span><span class="c1">; analyse it</span><span class="w">
+</span>f<span class="n">tps</span><span class="w">  </span><span class="nb">pvswarp</span><span class="w"> </span>f<span class="n">sig</span><span class="p">,</span><span class="w"> </span>k<span class="n">scal</span><span class="p">,</span><span class="w"> </span>k<span class="n">shift</span><span class="w">		</span><span class="c1">; warp it</span><span class="w">
+</span>a<span class="n">tps</span><span class="w">  </span><span class="nb">pvsynth</span><span class="w"> </span>f<span class="n">tps</span><span class="w">			</span><span class="c1">; synthesise it                      </span><span class="w">
+      </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">tps</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span>a<span class="n">tps</span><span class="o">/</span><span class="mi">2</span><span class="w">
 
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
- <span class="c1">;change scale</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mi">1</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span> <span class="mf">1.5</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span> <span class="mi">3</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span> <span class="mf">.25</span>
- <span class="c1">;change shift</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span> <span class="mi">1</span> <span class="mi">0</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span> <span class="o">.</span> <span class="mi">300</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span> <span class="o">.</span> <span class="mi">0</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="o">.</span> <span class="o">.</span> <span class="o">-</span><span class="mi">300</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+ </span><span class="c1">;change scale</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="mf">1.5</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="mf">.25</span><span class="w">
+ </span><span class="c1">;change shift</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="mi">300</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">-</span><span class="mi">300</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -180,7 +180,7 @@ a<span class="n">tps</span>  <span class="nb">pvsynth</span> f<span class="n">tp
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm190701"></a>
+        <a id="idm279474"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>,
@@ -189,7 +189,7 @@ a<span class="n">tps</span>  <span class="nb">pvsynth</span> f<span class="n">tp
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm190710"></a>
+        <a id="idm279483"></a>
         <h2>Crédits</h2>
         <p>
       </p>
@@ -215,14 +215,14 @@ a<span class="n">tps</span>  <span class="nb">pvsynth</span> f<span class="n">tp
           <td width="20%" align="center">
             <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
           </td>
-          <td width="40%" align="right"> <a accesskey="n" href="pvs2tab.html">Suivant</a></td>
+          <td width="40%" align="right"> <a accesskey="n" href="pvs2array.html">Suivant</a></td>
         </tr>
         <tr>
           <td width="40%" align="left" valign="top">pvsynth </td>
           <td width="20%" align="center">
             <a accesskey="h" href="index.html">Sommaire</a>
           </td>
-          <td width="40%" align="right" valign="top"> pvs2tab</td>
+          <td width="40%" align="right" valign="top"> pvs2array</td>
         </tr>
       </table>
     </div>

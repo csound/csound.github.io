@@ -6,7 +6,7 @@
     <title>turnoff2</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="turnoff.html" title="turnoff" />
@@ -39,14 +39,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm245262"></a>
+        <a id="idm358099"></a>
         <h2>Description</h2>
         <p>
       Turn off instance(s) of other instruments at performance time.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm245265"></a>
+        <a id="idm358102"></a>
         <h2>Syntax</h2>
         <pre class="synopsis"><span class="command"><strong>turnoff2</strong></span> kinsno, kmode, krelease
         </pre>
@@ -54,7 +54,7 @@
     </pre>
       </div>
       <div class="refsect1">
-        <a id="idm245271"></a>
+        <a id="idm358108"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>insno</em></span>
@@ -99,7 +99,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm245286"></a>
+        <a id="idm358123"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>kinsno</em></span>
@@ -164,22 +164,20 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm245303"></a>
+        <a id="idm358140"></a>
         <h2>Examples</h2>
         <p>
-      The following example uses the turnoff2 opcode, s written by Lou
-      Cohen..
-
+      Here is an example of the turnoff2 opcode. It uses the file <a class="ulink" href="examples/turnoff2.csd" target="_top"><em class="citetitle">turnoff2.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm245306"></a>
+          <a id="idm358145"></a>
           <p class="title">
-            <strong>Example 1119. Example of the turnoff2 opcode.</strong>
+            <strong>Example 1132. Example of the turnoff2 opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm245313"></a>
+              <a id="idm358152"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -187,71 +185,66 @@
 -odac     <span class="c1">;;;realtime audio out</span>
 <span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
-<span class="c1">; -o sin.wav -W ;;; for file output any platform</span>
+<span class="c1">; -o turnoff2.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span>        <span class="o">=</span>          <span class="mi">48000</span>    <span class="c1">;samples per second for sound</span>
-<span class="vg">kr</span>        <span class="o">=</span>        <span class="mi">4800</span>
-<span class="vg">nchnls</span>    <span class="o">=</span>        <span class="mi">1</span>
-<span class="vg">0dbfs</span>    <span class="o">=</span>        <span class="mi">32767</span>
+</span><span class="vg">sr</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">    </span><span class="c1">;samples per second for sound</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-gi<span class="n">sine</span>    <span class="nb">ftgen</span>    <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">131073</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>                <span class="c1">;single sine tone</span>
+</span><span class="c1">; example by Lou Cohen</span><span class="w">
 
-<span class="c1">;-----------------------------------------</span>
-<span class="kd">instr</span> <span class="nf">2</span> <span class="c1">;start</span>
-    k<span class="n">trigger</span>        <span class="nb">init</span>        <span class="mi">0</span>
-    <span class="k">if</span> <span class="p">(</span>k<span class="n">trigger</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">then</span>
-        k<span class="n">Multiple</span>    <span class="o">=</span>    <span class="mf">1.1</span>
-        k<span class="n">Hz</span>            <span class="o">=</span>    <span class="mi">440</span>
-        k<span class="n">Amp</span>            <span class="o">=</span>    <span class="p">(</span><span class="vg">0dbfs</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>
-<span class="c1">;startup four instances of instrument 200</span>
-        <span class="nb">event</span>    <span class="s">"i"</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> k<span class="n">Amp</span><span class="p">,</span> k<span class="n">Hz</span>
-        k<span class="n">Amp</span>    <span class="o">=</span>    k<span class="n">Amp</span> <span class="o">*</span> <span class="mf">0.75</span>
-        k<span class="n">Hz</span>    <span class="o">=</span>    k<span class="n">Hz</span> <span class="o">*</span> k<span class="n">Multiple</span>
+</span>gi<span class="n">sine</span><span class="w">    </span><span class="nb">ftgen</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">131073</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">                </span><span class="c1">;single sine tone</span><span class="w">
 
-        <span class="nb">event</span>    <span class="s">"i"</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> k<span class="n">Amp</span><span class="p">,</span> k<span class="n">Hz</span>
-        k<span class="n">Amp</span>    <span class="o">=</span>    k<span class="n">Amp</span> <span class="o">*</span> <span class="mf">0.75</span>
-        k<span class="n">Hz</span>    <span class="o">=</span>    k<span class="n">Hz</span> <span class="o">*</span> k<span class="n">Multiple</span>
-
-        <span class="nb">event</span>    <span class="s">"i"</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> k<span class="n">Amp</span><span class="p">,</span> k<span class="n">Hz</span>
-        k<span class="n">Amp</span>    <span class="o">=</span>    k<span class="n">Amp</span> <span class="o">*</span> <span class="mf">0.75</span>
-        k<span class="n">Hz</span>    <span class="o">=</span>    k<span class="n">Hz</span> <span class="o">*</span> k<span class="n">Multiple</span>
-
-        <span class="nb">event</span>    <span class="s">"i"</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> k<span class="n">Amp</span><span class="p">,</span> k<span class="n">Hz</span>
-        k<span class="n">Amp</span>    <span class="o">=</span>    k<span class="n">Amp</span> <span class="o">*</span> <span class="mf">0.75</span>
-        k<span class="n">Hz</span>    <span class="o">=</span>    k<span class="n">Hz</span> <span class="o">*</span> k<span class="n">Multiple</span>
-        k<span class="n">trigger</span>        <span class="o">=</span>    <span class="mi">1</span>
-    <span class="k">endif</span>
-<span class="kd">endin</span>
-<span class="c1">;---------------------------------------------</span>
-<span class="kd">instr</span> <span class="nf">3</span> <span class="c1">;after 10 seconds, turn off the instruments</span>
-    k<span class="n">trigger</span> <span class="nb">init</span> <span class="mi">1</span>
-   <span class="k">if</span> <span class="p">(</span>k<span class="n">trigger</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
-        <span class="nb">turnoff2</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>    <span class="c1">;turn off must recently started instrument instance</span>
-        k<span class="n">active</span> <span class="nb">active</span> <span class="mi">200</span>    <span class="c1">;find out how many are still active</span>
-        <span class="nb">printk2</span> k<span class="n">active</span>       <span class="c1">;print mainly to show progress</span>
-
-        <span class="nb">turnoff2</span>    <span class="mi">200</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>    <span class="c1">;turn off all the rest of the instruments</span>
-        k<span class="n">active</span>    <span class="nb">active</span> <span class="mi">200</span>    <span class="c1">;find out how many are still active</span>
-        <span class="nb">printk2</span>    k<span class="n">active</span><span class="p">,</span> <span class="mi">10</span>    <span class="c1">;print to show progress</span>
-<span class="k">endif</span>
-<span class="kd">endin</span>
-<span class="c1">;----------------------------------------------------</span>
-<span class="kd">instr</span> <span class="nf">200</span> <span class="c1">;play the tone</span>
-k<span class="n">Env</span>    <span class="nb">linen</span>    <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mf">0.1</span>
-a<span class="n">r</span>      <span class="nb">oscil</span>    k<span class="n">Env</span><span class="o">*</span><span class="vi">p4</span><span class="p">,</span> <span class="vi">p5</span><span class="p">,</span> <span class="mi">1</span>
-        <span class="nb">out</span>      a<span class="n">r</span>
-        <span class="nb">print</span>    <span class="vi">p4</span><span class="p">,</span> <span class="vi">p5</span>
-
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-
-<span class="nb">i</span><span class="mi">2</span> <span class="mi">0</span> <span class="mf">0.1</span> 
-<span class="nb">i</span><span class="mi">3</span> <span class="mi">10</span> <span class="mf">0.1</span>
-<span class="nt">&lt;/CsScore&gt;</span>
-
+</span><span class="c1">;-----------------------------------------</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w"> </span><span class="c1">;start</span><span class="w">
+    </span>k<span class="n">trigger</span><span class="w">        </span><span class="nb">init</span><span class="w">        </span><span class="mi">0</span><span class="w">
+    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span>k<span class="n">trigger</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+        </span>k<span class="n">Multiple</span><span class="w">    </span><span class="o">=</span><span class="w">    </span><span class="mf">1.1</span><span class="w">
+        </span>k<span class="n">Hz</span><span class="w">            </span><span class="o">=</span><span class="w">    </span><span class="mi">440</span><span class="w">
+        </span>k<span class="n">Amp</span><span class="w">            </span><span class="o">=</span><span class="w">    </span><span class="p">(</span><span class="vg">0dbfs</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span><span class="w">
+</span><span class="c1">;startup four instances of instrument 200</span><span class="w">
+        </span><span class="nb">event</span><span class="w">    </span><span class="s">"i"</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w"> </span>k<span class="n">Amp</span><span class="p">,</span><span class="w"> </span>k<span class="n">Hz</span><span class="w">
+        </span>k<span class="n">Amp</span><span class="w">    </span><span class="o">=</span><span class="w">    </span>k<span class="n">Amp</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.75</span><span class="w">
+        </span>k<span class="n">Hz</span><span class="w">    </span><span class="o">=</span><span class="w">    </span>k<span class="n">Hz</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>k<span class="n">Multiple</span><span class="w">
+        </span><span class="nb">event</span><span class="w">    </span><span class="s">"i"</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w"> </span>k<span class="n">Amp</span><span class="p">,</span><span class="w"> </span>k<span class="n">Hz</span><span class="w">
+        </span>k<span class="n">Amp</span><span class="w">    </span><span class="o">=</span><span class="w">    </span>k<span class="n">Amp</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.75</span><span class="w">
+        </span>k<span class="n">Hz</span><span class="w">    </span><span class="o">=</span><span class="w">    </span>k<span class="n">Hz</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>k<span class="n">Multiple</span><span class="w">
+        </span><span class="nb">event</span><span class="w">    </span><span class="s">"i"</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w"> </span>k<span class="n">Amp</span><span class="p">,</span><span class="w"> </span>k<span class="n">Hz</span><span class="w">
+        </span>k<span class="n">Amp</span><span class="w">    </span><span class="o">=</span><span class="w">    </span>k<span class="n">Amp</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.75</span><span class="w">
+        </span>k<span class="n">Hz</span><span class="w">    </span><span class="o">=</span><span class="w">    </span>k<span class="n">Hz</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>k<span class="n">Multiple</span><span class="w">
+        </span><span class="nb">event</span><span class="w">    </span><span class="s">"i"</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w"> </span>k<span class="n">Amp</span><span class="p">,</span><span class="w"> </span>k<span class="n">Hz</span><span class="w">
+        </span>k<span class="n">Amp</span><span class="w">    </span><span class="o">=</span><span class="w">    </span>k<span class="n">Amp</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.75</span><span class="w">
+        </span>k<span class="n">Hz</span><span class="w">    </span><span class="o">=</span><span class="w">    </span>k<span class="n">Hz</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>k<span class="n">Multiple</span><span class="w">
+        </span>k<span class="n">trigger</span><span class="w">        </span><span class="o">=</span><span class="w">    </span><span class="mi">1</span><span class="w">
+    </span><span class="k">endif</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+</span><span class="c1">;---------------------------------------------</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">3</span><span class="w"> </span><span class="c1">;after 10 seconds, turn off the instruments</span><span class="w">
+    </span>k<span class="n">trigger</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">1</span><span class="w">
+   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span>k<span class="n">trigger</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+        </span><span class="nb">turnoff2</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">       </span><span class="c1">;turn off must recently started instrument instance</span><span class="w">
+        </span>k<span class="n">active</span><span class="w"> </span><span class="nb">active</span><span class="w"> </span><span class="mi">200</span><span class="w">       </span><span class="c1">;find out how many are still active</span><span class="w">
+        </span><span class="nb">printk2</span><span class="w"> </span>k<span class="n">active</span><span class="w">          </span><span class="c1">;print mainly to show progress</span><span class="w">
+        </span><span class="nb">turnoff2</span><span class="w">    </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">;turn off all the rest of the instruments</span><span class="w">
+        </span>k<span class="n">active</span><span class="w">    </span><span class="nb">active</span><span class="w"> </span><span class="mi">200</span><span class="w">    </span><span class="c1">;find out how many are still active</span><span class="w">
+        </span><span class="nb">printk2</span><span class="w">    </span>k<span class="n">active</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w">   </span><span class="c1">;print to show progress</span><span class="w">
+</span><span class="k">endif</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+</span><span class="c1">;----------------------------------------------------</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">200</span><span class="w"> </span><span class="c1">;play the tone</span><span class="w">
+</span>k<span class="n">Env</span><span class="w">    </span><span class="nb">linen</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+</span>a<span class="n">r</span><span class="w">      </span><span class="nb">oscil</span><span class="w">    </span>k<span class="n">Env</span><span class="o">*</span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="vi">p5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="nb">outs</span><span class="w">     </span>a<span class="n">r</span><span class="p">,</span><span class="w"> </span>a<span class="n">r</span><span class="w">
+        </span><span class="nb">print</span><span class="w">    </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> 
+</span><span class="nb">i</span><span class="mi">3</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -261,14 +254,14 @@ a<span class="n">r</span>      <span class="nb">oscil</span>    k<span class="n"
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm245561"></a>
+        <a id="idm358589"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="turnoff.html" title="turnoff"><em class="citetitle">turnoff</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm245566"></a>
+        <a id="idm358594"></a>
         <h2>Credits</h2>
         <p>
       </p>

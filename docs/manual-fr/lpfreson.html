@@ -6,7 +6,7 @@
     <title>lpfreson</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="lpf18.html" title="lpf18" />
@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm130505"></a>
+        <a id="idm188703"></a>
         <h2>Description</h2>
         <p>
       Resynthétise un signal à partir des données passées en interne par un
@@ -48,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm130509"></a>
+        <a id="idm188707"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>lpfreson</strong></span> asig, kfrqratio</pre>
       </div>
       <div class="refsect1">
-        <a id="idm130513"></a>
+        <a id="idm188711"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>asig</em></span> -- une fonction audio pour piloter la resynthèse.
@@ -113,79 +113,81 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm130551"></a>
+        <a id="idm188749"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode lpfreson. Il utilise le fichier
       <a class="ulink" href="examples/lpfreson.csd" target="_top"><em class="citetitle">lpfreson.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm130556"></a>
+          <a id="idm188754"></a>
           <p class="title">
-            <strong>Exemple 538. Exemple de l'opcode lpfreson.</strong>
+            <strong>Exemple 548. Exemple de l'opcode lpfreson.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm130563"></a>
+              <a id="idm188761"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
--odac     <span class="c1">;;;realtime audio out</span>
+-odac  --limiter=0.95   <span class="c1">;;;realtime audio out, limit loud pops</span>
 <span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o lpfreson.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
-<span class="c1">;do not use -a option when analyzing "fox.wav" with lpfreson,</span>
-<span class="c1">;it needs a filter coefficient type of file</span>
-<span class="kd">instr</span> <span class="nf">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-i<span class="n">len</span>  <span class="nb">filelen</span> <span class="s">"fox.wav"</span>	<span class="c1">; length of soundfile</span>
-<span class="nb">prints</span> <span class="s">"fox.wav = </span><span class="si">%f</span><span class="s"> seconds</span><span class="se">\\n</span><span class="s">"</span><span class="p">,</span>i<span class="n">len</span>
+</span><span class="c1">; by Menno Knevel - 2021</span><span class="w">
+</span><span class="c1">;do not use -a option when analyzing "fox.wav" with lpfreson as</span><span class="w">
+</span><span class="c1">;it needs a filter coefficient type of file</span><span class="w">
+</span>i<span class="n">res</span><span class="w">  </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ lpanal -p50 -h200 -P50  -Q15000 -v1 fox.wav fox_coef.lpc }}</span><span class="w">
 
-k<span class="n">time</span> <span class="nb">line</span> <span class="mi">0</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="vi">p4</span>
-k<span class="n">rmsr</span><span class="p">,</span>k<span class="n">rmso</span><span class="p">,</span>k<span class="n">err</span><span class="p">,</span>k<span class="n">cps</span> <span class="nb">lpread</span> k<span class="n">time</span><span class="p">,</span><span class="s">"fox_nopoles.lpc"</span>
-k<span class="n">rmso</span> <span class="o">=</span> k<span class="n">rmso</span><span class="o">*</span><span class="mf">.00001</span>			<span class="c1">; low volume</span>
-a<span class="n">sig</span>  <span class="nb">buzz</span> k<span class="n">rmso</span><span class="p">,</span> k<span class="n">cps</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="vg">sr</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span>k<span class="n">cps</span><span class="p">),</span> <span class="mi">1</span> <span class="c1">; max harmonics without aliasing</span>
-a<span class="n">out</span>  <span class="nb">lpfreson</span> a<span class="n">sig</span><span class="p">,</span> <span class="mf">1.2</span>
-a<span class="n">sig</span>  <span class="nb">clip</span> a<span class="n">out</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>			<span class="c1">; prevents distortion</span>
-      <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="c1">; sine</span>
-<span class="nb">f</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">4096</span> <span class="mi">10</span> <span class="mi">1</span>
+</span>i<span class="n">len</span><span class="w">  </span><span class="nb">filelen</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w">	                  </span><span class="c1">; length of soundfile</span><span class="w">
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"fox.wav = </span><span class="si">%f</span><span class="s"> seconds</span><span class="se">\\n</span><span class="s">"</span><span class="p">,</span>i<span class="n">len</span><span class="w">
+</span>a<span class="n">ref</span><span class="w">  </span><span class="nb">diskin</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">                 </span><span class="c1">; don't play this, but use this as an amplitude reference</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mf">2.8</span> <span class="mi">1</span>	<span class="c1">; first words only</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">4</span> <span class="mf">2.8</span> <span class="mf">2.8</span>	<span class="c1">; whole sentence</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span>k<span class="n">time</span><span class="w"> </span><span class="nb">line</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>k<span class="n">rmsr</span><span class="p">,</span>k<span class="n">rmso</span><span class="p">,</span>k<span class="n">err</span><span class="p">,</span>k<span class="n">cps</span><span class="w"> </span><span class="nb">lpread</span><span class="w"> </span>k<span class="n">time</span><span class="p">,</span><span class="s">"fox_coef.lpc"</span><span class="w">
+</span>k<span class="n">rmso</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mf">.000007</span><span class="w">			              </span><span class="c1">; scale amplitude</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">buzz</span><span class="w"> </span>k<span class="n">rmso</span><span class="p">,</span><span class="w"> </span>k<span class="n">cps</span><span class="p">,</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span><span class="vg">sr</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span>k<span class="n">cps</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">; max harmonics without aliasing</span><span class="w">
+</span>a<span class="n">out</span><span class="w">  </span><span class="nb">lpfreson</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span><span class="vi">p5</span><span class="w">                   </span><span class="c1">; Pole file not supported!!</span><span class="w">
+</span>a<span class="n">bal</span><span class="w">  </span><span class="nb">balance2</span><span class="w"> </span>a<span class="n">out</span><span class="p">,</span><span class="w"> </span>a<span class="n">ref</span><span class="w">                 </span><span class="c1">; use amplitude of diskin as reference       </span><span class="w">
+      </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">bal</span><span class="p">,</span><span class="w"> </span>a<span class="n">bal</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">; sine</span><span class="w">
+</span><span class="nb">f</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4096</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">;          dur    ratio</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">2.8</span><span class="w">   </span><span class="mi">1</span><span class="w">       </span><span class="mi">1</span><span class="w">   </span><span class="c1">; first words   </span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mf">2.8</span><span class="w">   </span><span class="mi">1</span><span class="w">       </span><span class="mf">.5</span><span class="w">  </span><span class="c1">; same, but lower ratio</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mf">2.8</span><span class="w">   </span><span class="mf">2.756</span><span class="w">   </span><span class="mi">1</span><span class="w">   </span><span class="c1">; whole sentence</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="mf">2.8</span><span class="w">  </span><span class="mf">2.756</span><span class="w">   </span><span class="mi">2</span><span class="w">   </span><span class="c1">; same, but higher ratio</span><span class="w">
+
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
           </div>
         </div>
         <p><br class="example-break" />
-      Le fichier audio <span class="quote">« <span class="quote">fox.wav</span> »</span> dure 2.8 secondes. Ainsi la sortie
-      contiendra une ligne comme celle-ci :
-      </p>
-        <pre class="screen">
-fox.wav = 2.756667 seconds</pre>
-        <p>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm130686"></a>
+        <a id="idm189010"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="lpread.html" title="lpread"><em class="citetitle">lpread</em></a>,

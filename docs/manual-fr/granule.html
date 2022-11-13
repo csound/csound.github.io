@@ -6,7 +6,7 @@
     <title>granule</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="grain3.html" title="grain3" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm104214"></a>
+        <a id="idm149004"></a>
         <h2>Description</h2>
         <p>
       Le générateur unitaire <span class="emphasis"><em>granule</em></span> est plus complexe que <span class="emphasis"><em>grain</em></span>,
@@ -63,14 +63,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm104226"></a>
+        <a id="idm149016"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>granule</strong></span> xamp, ivoice, iratio, imode, ithd, ifn, ipshift, igskip, \
       igskip_os, ilength, kgap, igap_os, kgsize, igsize_os, iatt, idec \
       [, iseed] [, ipitch1] [, ipitch2] [, ipitch3] [, ipitch4] [, ifnenv]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm104230"></a>
+        <a id="idm149020"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ivoice</em></span> -- nombre de voix.
@@ -140,7 +140,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm104274"></a>
+        <a id="idm149064"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>xamp</em></span> -- amplitude.
@@ -153,63 +153,92 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm104282"></a>
+        <a id="idm149072"></a>
         <h2>Exemples</h2>
         <p>
+      <a class="ulink" href="examples/granule.csd" target="_top"><em class="citetitle">granule.csd</em></a>,
+      <a class="ulink" href="examples/marimba.aif" target="_top"><em class="citetitle">marimba.aif</em></a>
+      et <a class="ulink" href="examples/fox.wav" target="_top"><em class="citetitle">fox.wav</em></a>
       Voici un exemple de l'opcode granule. Il utilise les fichiers
-      <a class="ulink" href="examples/granule.csd" target="_top"><em class="citetitle">granule.csd</em></a>, et
-      <a class="ulink" href="examples/mary.wav" target="_top"><em class="citetitle">mary.wav</em></a>.
+      <a class="ulink" href="examples/granule.csd" target="_top"><em class="citetitle">granule.csd</em></a>,
+      <a class="ulink" href="examples/marimba.aif" target="_top"><em class="citetitle">marimba.aif</em></a>
+      et <a class="ulink" href="examples/fox.wav" target="_top"><em class="citetitle">fox.wav</em></a>.
 
       </p>
         <div class="example">
-          <a id="idm104289"></a>
+          <a id="idm149087"></a>
           <p class="title">
-            <strong>Exemple 424. Exemple de l'opcode granule.</strong>
+            <strong>Exemple 430. Exemple de l'opcode granule.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm104296"></a>
+              <a id="idm149094"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
 <span class="c1">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+-odac    <span class="c1">;;;RT audio out</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o granule.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="kd">instr</span> <span class="nf">1</span>
-<span class="c1">;</span>
-k<span class="n">1</span>      <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,(</span><span class="vi">p3</span><span class="o">-</span><span class="vi">p2</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">0</span>
-a<span class="n">1</span>      <span class="nb">granule</span> <span class="vi">p4</span><span class="o">*</span>k<span class="n">1</span><span class="p">,</span><span class="vi">p5</span><span class="p">,</span><span class="vi">p6</span><span class="p">,</span><span class="vi">p7</span><span class="p">,</span><span class="vi">p8</span><span class="p">,</span><span class="vi">p9</span><span class="p">,</span><span class="vi">p10</span><span class="p">,</span><span class="vi">p11</span><span class="p">,</span><span class="vi">p12</span><span class="p">,</span><span class="vi">p13</span><span class="p">,</span><span class="vi">p14</span><span class="p">,</span><span class="vi">p15</span><span class="p">,</span><span class="w">\</span>
-        <span class="vi">p16</span><span class="p">,</span><span class="vi">p17</span><span class="p">,</span><span class="vi">p18</span><span class="p">,</span><span class="vi">p19</span><span class="p">,</span><span class="vi">p20</span><span class="p">,</span><span class="vi">p21</span><span class="p">,</span><span class="vi">p22</span><span class="p">,</span><span class="vi">p23</span><span class="p">,</span><span class="vi">p24</span>
-a<span class="n">2</span>      <span class="nb">granule</span> <span class="vi">p4</span><span class="o">*</span>k<span class="n">1</span><span class="p">,</span><span class="vi">p5</span><span class="p">,</span><span class="vi">p6</span><span class="p">,</span><span class="vi">p7</span><span class="p">,</span><span class="vi">p8</span><span class="p">,</span><span class="vi">p9</span><span class="p">,</span><span class="vi">p10</span><span class="p">,</span><span class="vi">p11</span><span class="p">,</span><span class="vi">p12</span><span class="p">,</span><span class="vi">p13</span><span class="p">,</span><span class="vi">p14</span><span class="p">,</span><span class="vi">p15</span><span class="p">,</span><span class="w">\</span>
-        <span class="vi">p16</span><span class="p">,</span><span class="vi">p17</span><span class="p">,</span><span class="vi">p18</span><span class="p">,</span><span class="vi">p19</span><span class="p">,</span> <span class="vi">p20</span><span class="o">+</span><span class="mf">0.17</span><span class="p">,</span><span class="vi">p21</span><span class="p">,</span><span class="vi">p22</span><span class="p">,</span><span class="vi">p23</span><span class="p">,</span><span class="vi">p24</span>
-<span class="nb">outs</span> a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span>
-<span class="kd">endin</span>
+</span><span class="c1">; additions by Menno Knevel 2022</span><span class="w">
 
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-<span class="c1">; f statement read sound file mary.wav in the SFDIR </span>
-<span class="c1">; directory into f-table 1</span>
-<span class="nb">f</span><span class="mi">1</span>      <span class="mi">0</span> <span class="mi">262144</span> <span class="mi">1</span> <span class="s">"mary.wav"</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
-<span class="nb">i</span><span class="mi">1</span>      <span class="mi">0</span> <span class="mi">10</span> <span class="mi">2000</span> <span class="mi">64</span> <span class="mf">0.5</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">4</span> <span class="mi">0</span> <span class="mf">0.005</span> <span class="mi">5</span> <span class="mf">0.01</span> <span class="mi">50</span> <span class="mf">0.02</span> <span class="mi">50</span> <span class="mi">30</span> <span class="mi">30</span> <span class="mf">0.39</span> <span class="w">\</span>
-        <span class="mi">1</span> <span class="mf">1.42</span> <span class="mf">0.29</span> <span class="mi">2</span>
-<span class="nb">e</span>
+</span>k<span class="n">env</span><span class="w"> </span><span class="nb">linseg</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="p">,(</span><span class="vi">p3</span><span class="o">-</span><span class="mf">0.5</span><span class="p">),</span><span class="mi">1</span><span class="w">      </span><span class="c1">; envelope with attack time of .5 seconds</span><span class="w">
 
+</span>i<span class="n">amp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">voice</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+</span>i<span class="n">ratio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p6</span><span class="w">
+</span>i<span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p7</span><span class="w">
+</span>i<span class="n">thd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p8</span><span class="w">
+</span>i<span class="n">fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p9</span><span class="w">
+</span>i<span class="n">pshift</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p10</span><span class="w">
+</span>i<span class="n">gskip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p11</span><span class="w">
+</span>i<span class="n">gskipos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p12</span><span class="w">
+</span>i<span class="n">lenght</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p13</span><span class="w">
+</span>k<span class="n">gap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p14</span><span class="w">
+</span>i<span class="n">gapos</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p15</span><span class="w">
+</span>k<span class="n">gsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p16</span><span class="w">
+</span>i<span class="n">gsize_os</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p17</span><span class="w">
+</span>i<span class="n">att</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p18</span><span class="w">
+</span>i<span class="n">dec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p19</span><span class="w">
+</span>i<span class="n">seed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p20</span><span class="w">
+</span>i<span class="n">pitch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p21</span><span class="w">
+</span>i<span class="n">pitch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p22</span><span class="w">
+</span>i<span class="n">pitch3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p23</span><span class="w">
+</span>i<span class="n">pitch4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p24</span><span class="w">
 
-<span class="nt">&lt;/CsScore&gt;</span>
+</span>a<span class="n">1</span><span class="w">  </span><span class="nb">granule</span><span class="w"> </span>i<span class="n">amp</span><span class="o">*</span>k<span class="n">env</span><span class="p">,</span><span class="w"> </span>i<span class="n">voice</span><span class="p">,</span><span class="w"> </span>i<span class="n">ratio</span><span class="p">,</span><span class="w"> </span>i<span class="n">mode</span><span class="p">,</span><span class="w"> </span>i<span class="n">thd</span><span class="p">,</span><span class="w"> </span>i<span class="n">fn</span><span class="p">,</span><span class="w"> </span>i<span class="n">pshift</span><span class="w"> </span><span class="p">,</span>i<span class="n">gskip</span><span class="w"> </span><span class="p">,</span>i<span class="n">gskipos</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>i<span class="n">lenght</span><span class="p">,</span><span class="w"> </span>k<span class="n">gap</span><span class="w"> </span><span class="p">,</span>i<span class="n">gapos</span><span class="p">,</span><span class="w"> </span>k<span class="n">gsize</span><span class="p">,</span><span class="w"> </span>i<span class="n">gsize_os</span><span class="p">,</span><span class="w"> </span>i<span class="n">att</span><span class="p">,</span><span class="w"> </span>i<span class="n">dec</span><span class="p">,</span><span class="w"> </span>i<span class="n">seed</span><span class="p">,</span><span class="w">      </span>i<span class="n">pitch1</span><span class="p">,</span><span class="w"> </span>i<span class="n">pitch2</span><span class="p">,</span><span class="w"> </span>i<span class="n">pitch3</span><span class="p">,</span><span class="w"> </span>i<span class="n">pitch4</span><span class="w">
+</span>a<span class="n">2</span><span class="w">  </span><span class="nb">granule</span><span class="w"> </span>i<span class="n">amp</span><span class="o">*</span>k<span class="n">env</span><span class="p">,</span><span class="w"> </span>i<span class="n">voice</span><span class="p">,</span><span class="w"> </span>i<span class="n">ratio</span><span class="p">,</span><span class="w"> </span>i<span class="n">mode</span><span class="p">,</span><span class="w"> </span>i<span class="n">thd</span><span class="p">,</span><span class="w"> </span>i<span class="n">fn</span><span class="p">,</span><span class="w"> </span>i<span class="n">pshift</span><span class="w"> </span><span class="p">,</span>i<span class="n">gskip</span><span class="w"> </span><span class="p">,</span>i<span class="n">gskipos</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>i<span class="n">lenght</span><span class="p">,</span><span class="w"> </span>k<span class="n">gap</span><span class="w"> </span><span class="p">,</span>i<span class="n">gapos</span><span class="p">,</span><span class="w"> </span>k<span class="n">gsize</span><span class="p">,</span><span class="w"> </span>i<span class="n">gsize_os</span><span class="p">,</span><span class="w"> </span>i<span class="n">att</span><span class="p">,</span><span class="w"> </span>i<span class="n">dec</span><span class="p">,</span><span class="w"> </span>i<span class="n">seed</span><span class="o">+</span><span class="mf">0.17</span><span class="p">,</span><span class="w"> </span>i<span class="n">pitch1</span><span class="p">,</span><span class="w"> </span>i<span class="n">pitch2</span><span class="p">,</span><span class="w"> </span>i<span class="n">pitch3</span><span class="p">,</span><span class="w"> </span>i<span class="n">pitch4</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="mi">1</span><span class="w">      </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="s">"marimba.aif"</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">f</span><span class="mi">2</span><span class="w">      </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w">
+
+</span><span class="c1">; both samples are played back 2 x slower</span><span class="w">
+
+</span><span class="c1">;         p4 p5 p6 p7 p8 p9 p10 p11 p12  p13 p14  p15 p16   p17 p18 p19  [p20   p21 p22  p23  p24]</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="mi">10</span><span class="w"> </span><span class="mf">.25</span><span class="w"> </span><span class="mi">64</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="mi">0</span><span class="w">  </span><span class="mi">1</span><span class="w">   </span><span class="mi">4</span><span class="w">  </span><span class="mi">0</span><span class="w">  </span><span class="mf">0.005</span><span class="w">  </span><span class="mi">1</span><span class="w">  </span><span class="mf">0.01</span><span class="w">  </span><span class="mi">0</span><span class="w">  </span><span class="mf">0.02</span><span class="w">   </span><span class="mi">50</span><span class="w"> </span><span class="mi">25</span><span class="w">  </span><span class="mi">25</span><span class="w">    </span><span class="mf">0.39</span><span class="w">  </span><span class="mi">1</span><span class="w">  </span><span class="mf">1.42</span><span class="w"> </span><span class="mf">0.29</span><span class="w">  </span><span class="mi">2</span><span class="w"> </span><span class="c1">;part of marimba</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="mf">.37</span><span class="w"> </span><span class="mi">9</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="mi">0</span><span class="w">  </span><span class="mi">2</span><span class="w">   </span><span class="mi">0</span><span class="w">  </span><span class="mi">0</span><span class="w">  </span><span class="mf">0.005</span><span class="w">  </span><span class="mi">1</span><span class="w">  </span><span class="mf">0.01</span><span class="w">  </span><span class="mi">0</span><span class="w">  </span><span class="mf">0.02</span><span class="w">   </span><span class="mi">50</span><span class="w"> </span><span class="mi">25</span><span class="w">  </span><span class="mi">25</span><span class="w">    </span><span class="mf">0.39</span><span class="w">  </span><span class="mi">1</span><span class="w">  </span><span class="mf">1.42</span><span class="w"> </span><span class="mf">0.29</span><span class="w">  </span><span class="mi">2</span><span class="w"> </span><span class="c1">;part of fox</span><span class="w">
+      
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -218,18 +247,24 @@ a<span class="n">2</span>      <span class="nb">granule</span> <span class="vi">
         <p><br class="example-break" />
    </p>
         <p>
-     L'exemple ci-dessus lit un fichier son nommé <span class="emphasis"><em>mary.wav</em></span> dans la table de
-     fonction numéro 1 en gardant 262 144 échantillons. Il génère 10 secondes de sortie stéréo à
-     partir de la table de fonction. Dans le fichier orchestre, tous les paramètres nécessaires au
-     contrôle de la synthèse proviennent du fichier partition. Un générateur de fonction
+     L'exemple ci-dessus lit un fichier son nommé <span class="emphasis"><em>marimba.aif</em></span> dans la table de
+     fonction numéro 1, et un second nommé <span class="emphasis"><em>fox.wav</em></span> dans la table de fonction
+     numéro 2. La première note génère 10 secondes de sortie stéréo à
+     partir de la table de fonction. Dans le fichier de l'orchestre, tous les paramètres nécessaires au
+     contrôle de la synthèse proviennent du fichier de partition. Un générateur de fonction
      <span class="emphasis"><em>linseg</em></span> est utilisé pour produire une enveloppe avec une attaque et une
      chute linéaires de 0,5 secondes. On obtient un effet stéréo par l'utilisation de différentes
      graines pour les deux appels de la fonction <span class="emphasis"><em>granule</em></span>. Dans l'exemple, on
-     ajoute 0,17 à p20 avant de le passer au second appel de <span class="emphasis"><em>granule</em></span> pour
+     ajoute 0,17 à p20 (= iseed) avant de le passer au second appel de <span class="emphasis"><em>granule</em></span> pour
      s'assurer que toutes les fluctuations aléatoires seront différentes de celles du premier appel.
    </p>
         <p>
-     Voici la signification des paramètres dans le fichier partition :
+     La seconde note (table de fonction numéro 2) a des paramètres légèrement
+     différents.
+   </p>
+        <p>
+     Voici la signification des paramètres pour la première note dans le
+     fichier de partition :
 
      </p>
         <div class="informaltable">
@@ -278,7 +313,7 @@ a<span class="n">2</span>      <span class="nb">granule</span> <span class="vi">
               </tr>
               <tr>
                 <td>p13 (<span class="emphasis"><em>ilength</em></span>)</td>
-                <td>fixé à 5, on n'utilise que 5 secondes de la table d'onde</td>
+                <td>fixé à 1, on n'utilise que 1 seconde de la table d'onde</td>
               </tr>
               <tr>
                 <td>p14 (<span class="emphasis"><em>kgap</em></span>)</td>
@@ -292,7 +327,7 @@ a<span class="n">2</span>      <span class="nb">granule</span> <span class="vi">
               </tr>
               <tr>
                 <td>p18 (<span class="emphasis"><em>iatt</em></span>) et p19 (<span class="emphasis"><em>idec</em></span>)</td>
-                <td>fixés à 30, on applique une attaque et une chute linéaires de 30% au grain</td>
+                <td>fixés à 25, on applique une attaque et une chute linéaires de 25% au grain</td>
               </tr>
               <tr>
                 <td>p20 (<span class="emphasis"><em>iseed</em></span>)</td>
@@ -310,7 +345,7 @@ a<span class="n">2</span>      <span class="nb">granule</span> <span class="vi">
    </p>
       </div>
       <div class="refsect1">
-        <a id="idm104550"></a>
+        <a id="idm149645"></a>
         <h2>Crédits</h2>
         <p>Auteur : Allan Lee</p>
         <p>Belfast</p>

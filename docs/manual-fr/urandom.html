@@ -6,7 +6,7 @@
     <title>urandom</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="upsamp.html" title="upsamp" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm248541"></a>
+        <a id="idm362433"></a>
         <h2>Description</h2>
         <p>Opcode du greffon urandom.</p>
         <p>
@@ -49,14 +49,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm248545"></a>
+        <a id="idm362437"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ax <span class="command"><strong>urandom</strong></span> [imin, imax]</pre>
         <pre class="synopsis">ix <span class="command"><strong>urandom</strong></span> [imin, imax]</pre>
         <pre class="synopsis">kx <span class="command"><strong>urandom</strong></span> [imin, imax]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm248553"></a>
+        <a id="idm362445"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ix</em></span> -- valeur de sortie au taux-i.
@@ -92,7 +92,7 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm248565"></a>
+        <a id="idm362457"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ax</em></span> -- valeur de sortie au taux-a.
@@ -102,7 +102,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm248571"></a>
+        <a id="idm362463"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode urandom au taux-a. Il utilise le fichier
@@ -110,58 +110,47 @@
 
       </p>
         <div class="example">
-          <a id="idm248576"></a>
+          <a id="idm362468"></a>
           <p class="title">
-            <strong>Exemple 1126. Exemple de l'opcode urandom au taux-a.</strong>
+            <strong>Exemple 1138. Exemple de l'opcode urandom au taux-a.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm248583"></a>
+              <a id="idm362475"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
 <span class="c1">; Audio out   Audio in</span>
--odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+-odac      <span class="c1">;;;RT audio out</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
-<span class="c1">; -o rnd31.wav -W ;;; for file output any platform</span>
+<span class="c1">; -o urandom.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="c1">; Initialize the global variables.</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="c1">; Instrument #1.</span>
-<span class="kd">instr</span> <span class="nf">1</span>
-  <span class="c1">; Create random numbers at a-rate in the range -2 to 2</span>
-  a<span class="n">ur</span> <span class="nb">urandom</span>  <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">     </span><span class="c1">; Create random numbers at a-rate in the range -2 to 2</span><span class="w">
+  
+</span>a<span class="n">ur</span><span class="w">     </span><span class="nb">urandom</span><span class="w">  </span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span>a<span class="n">freq1</span><span class="w">  </span><span class="o">=</span><span class="w">   </span>a<span class="n">ur</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">100</span><span class="w">         </span><span class="c1">; Use the random numbers to choose a frequency.</span><span class="w">
+</span>a<span class="n">freq2</span><span class="w">  </span><span class="o">=</span><span class="w">   </span>a<span class="n">ur</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">200</span><span class="w">
+</span>a<span class="n">1</span><span class="w"> </span><span class="nb">oscil</span><span class="w"> </span><span class="mf">.3</span><span class="p">,</span><span class="w"> </span>a<span class="n">freq1</span><span class="w">
+</span>a<span class="n">2</span><span class="w"> </span><span class="nb">oscil</span><span class="w"> </span><span class="mf">.3</span><span class="p">,</span><span class="w"> </span>a<span class="n">freq2</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">2</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-  <span class="c1">; Use the random numbers to choose a frequency.</span>
-  a<span class="n">freq</span> <span class="o">=</span> a<span class="n">ur</span> <span class="o">*</span> <span class="mi">500</span> <span class="o">+</span> <span class="mi">100</span>
-
-  a<span class="n">1</span> <span class="nb">oscil</span> <span class="mi">30000</span><span class="p">,</span> a<span class="n">freq</span><span class="p">,</span> <span class="mi">1</span>
-  <span class="nb">out</span> a<span class="n">1</span>
-<span class="kd">endin</span>
-
-
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-
-<span class="c1">; Table #1, a sine wave.</span>
-<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
-
-<span class="c1">; Play Instrument #1 for one second.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
-<span class="nb">e</span>
-
-
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -175,49 +164,43 @@
 
       </p>
         <div class="example">
-          <a id="idm248655"></a>
+          <a id="idm362602"></a>
           <p class="title">
-            <strong>Exemple 1127. Exemple de l'opcode urandom au taux-k.</strong>
+            <strong>Exemple 1139. Exemple de l'opcode urandom au taux-k.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm248657"></a>
+              <a id="idm362604"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
 <span class="c1">; Audio out   Audio in</span>
--odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+-odac      <span class="c1">;;;RT audio out</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
-<span class="c1">; -o rnd31_krate.wav -W ;;; for file output any platform</span>
+<span class="c1">; -o urandom_krate.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="c1">; Initialize the global variables.</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="c1">; Instrument #1.</span>
-<span class="kd">instr</span> <span class="nf">1</span>
-  <span class="c1">; Create random numbers at k-rate in the range -1 to 1 </span>
-  <span class="c1">; with a uniform distribution.</span>
-  k<span class="n">1</span> <span class="nb">urandom</span>
-        
-  <span class="nb">printks</span> <span class="s">"k1=</span><span class="si">%f</span><span class="se">\\n</span><span class="s">"</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> k<span class="n">1</span>
-<span class="kd">endin</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> </span><span class="c1">; Create random numbers at k-rate in the range -1 to 1 at krate</span><span class="w">
+   
+</span>k<span class="n">1</span><span class="w"> </span><span class="nb">urandom</span><span class="w">                              </span><span class="c1">; with a uniform distribution.</span><span class="w">
+</span><span class="nb">printks</span><span class="w"> </span><span class="s">"k1=</span><span class="si">%f</span><span class="se">\\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span>k<span class="n">1</span><span class="w">
+</span>a<span class="n">sig1</span><span class="w">    </span><span class="nb">poscil</span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span>k<span class="n">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span>a<span class="n">sig2</span><span class="w">    </span><span class="nb">poscil</span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span>k<span class="n">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">200</span><span class="w">
+</span><span class="nb">outs</span><span class="w">    </span>a<span class="n">sig1</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig2</span><span class="w">    
+</span><span class="kd">endin</span><span class="w">
 
-
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-
-<span class="c1">; Play Instrument #1 for one second.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
-<span class="nb">e</span>
-
-
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -243,7 +226,7 @@ k1=-0.036276</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm248709"></a>
+        <a id="idm362722"></a>
         <h2>Crédits</h2>
         <p>Auteur : John ffitch</p>
         <p>Nouveau dans la version 5.13</p>

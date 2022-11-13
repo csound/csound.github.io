@@ -6,7 +6,7 @@
     <title>atsa</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="UtilitySoundfile.html#UtilityAnalysis" title="Analysis File Generation (ATSA, CVANAL, HETRO, LPANAL, PVANAL)" />
     <link rel="prev" href="UtilitySoundfile.html#UtilityAnalysis" title="Analysis File Generation (ATSA, CVANAL, HETRO, LPANAL, PVANAL)" />
@@ -39,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm299329"></a>
+        <a id="idm439201"></a>
         <h2>Description</h2>
         <p>
 	    ATS analysis for use with the Csound <a class="link" href="SpectralATS.html" title="ATS Spectral Processing"><em class="citetitle">ATS Resynthesis</em></a> opcodes.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm299334"></a>
+        <a id="idm439206"></a>
         <h2>Syntax</h2>
         <pre class="synopsis"><span class="command"><strong>csound -U atsa</strong></span> [flags] infilename outfilename</pre>
       </div>
       <div class="refsect1">
-        <a id="idm299338"></a>
+        <a id="idm439210"></a>
         <h2>Initialization</h2>
         <p>
       The following flags can be set for atsa (The default values are
@@ -116,7 +116,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm299359"></a>
+        <a id="idm439231"></a>
         <h2>Parameters</h2>
         <p>ATS analysis was devised by Juan Pampin. For complete
     information on ATS visit: <a class="ulink" href="https://ccrma.stanford.edu/~juan/ATS_manual.html" target="_top">https://ccrma.stanford.edu/~juan/ATS_manual.html</a>.
@@ -253,9 +253,26 @@
             </li>
           </ol>
         </div>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note: Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+          The soundfile file to analyze must be mono. Otherwise atsa will not work.
+        </p>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
       <div class="refsect1">
-        <a id="idm299397"></a>
+        <a id="idm439272"></a>
         <h2>Examples</h2>
         <p>
       The following command:
@@ -265,12 +282,77 @@
           <span class="emphasis"><em>atsa</em></span> -b0.1 -e1 -l100 -H10000 -w2 audiofile.wav audiofile.ats</pre>
         <p>
 
-      Generates the ATS analysis file 'audiofile.ats' from the
-    original 'audiofile.wav' file. It begins analysis from second 0.1
-    of the file and the analysis is performed for 1 second
-    thereafter. The lowest frequency stored is 100 Hz and the highest
+      Generates the ATS analysis file 'audiofile.ats' from the original 'audiofile.wav' file. It begins analysis from second 0.1
+    of the file and the analysis is performed for 1 second thereafter. The lowest frequency stored is 100 Hz and the highest
     is 10kHz. A Hamming window is used for each analysis frame.
+    </p>
+        <p>
+      Here is an example of the atsa utility. It uses the file <a class="ulink" href="examples/atsa.csd" target="_top"><em class="citetitle">atsa.csd</em></a>.
 
+      </p>
+        <div class="example">
+          <a id="idm439280"></a>
+          <p class="title">
+            <strong>Example 1352. Example of the atsa utility.</strong>
+          </p>
+          <div class="example-contents">
+            <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
+            <div class="refsect1">
+              <a id="idm439287"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac   -m0 --limiter=.95 <span class="c1">;;;realtime audio out, with limiter protection</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o atsa.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; by Menno Knevel 2021</span><span class="w">
+
+</span>gi<span class="n">len</span><span class="w">  </span><span class="nb">filelen</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w">	    </span><span class="c1">; get length of soundfile</span><span class="w">
+
+</span><span class="c1">; analyze sound file and output result to 3 ats files. ATSA wants a mono file!</span><span class="w">
+</span>i<span class="n">res1</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ atsa fox.wav fox1.ats }}</span><span class="w">            </span><span class="c1">; default settings</span><span class="w">
+</span>i<span class="n">res2</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ atsa -h.8 fox.wav fox2.ats }}</span><span class="w">       </span><span class="c1">; some smearing</span><span class="w">
+</span>i<span class="n">res3</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ atsa -h.1 -c2 fox.wav fox3.ats }}</span><span class="w">   </span><span class="c1">; only 2 cycles</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> </span><span class="c1">; untreated signal</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">    </span><span class="nb">diskin2</span><span class="w">   </span><span class="s">"fox.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">---***YOU NOW HEAR THE UNTREATED SOUND SAMPLE***---</span><span class="se">\n</span><span class="s">"</span><span class="w">
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"---*duration of soundfile is </span><span class="si">%f</span><span class="s"> seconds*---</span><span class="se">\\n</span><span class="s">"</span><span class="p">,</span>gi<span class="n">len</span><span class="w">
+</span><span class="nb">outs</span><span class="w">    </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">---***YOU NOW HEAR THE RESULT OF THIS ANALYZED FILE:***---</span><span class="se">\n</span><span class="s">"</span><span class="w">
+</span>k<span class="n">time</span><span class="w"> </span><span class="nb">line</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span>gi<span class="n">len</span><span class="w">                         </span><span class="c1">; timepointer = equal to soundfile duration</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">ATSsinnoi</span><span class="w"> </span>k<span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="mi">167</span><span class="w">         </span><span class="c1">; maximum # of partials = 167</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">	    
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">2.76</span><span class="w">               </span><span class="c1">; original sample</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mf">2.76</span><span class="w">  </span><span class="s">"fox1.ats"</span><span class="w">	</span><span class="c1">; whole sentence</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mf">2.76</span><span class="w"> </span><span class="s">"fox2.ats"</span><span class="w">	</span><span class="c1">; whole sentence, but analyzed with different settings</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="mf">2.76</span><span class="w"> </span><span class="s">"fox3.ats"</span><span class="w">	</span><span class="c1">; whole sentence, and again analyzed with different settings</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
     </p>
       </div>
     </div>

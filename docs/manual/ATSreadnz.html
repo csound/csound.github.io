@@ -6,7 +6,7 @@
     <title>ATSreadnz</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="ATSread.html" title="ATSread" />
@@ -38,29 +38,29 @@
         </p>
       </div>
       <div class="refsect1">
-        <a id="idm30080"></a>
+        <a id="idm38772"></a>
         <h2>Description</h2>
         <p>
             <span class="emphasis"><em>ATSreadnz</em></span> returns the energy (<span class="emphasis"><em>kenergy</em></span>) of a user specified noise band (1-25 bands) at the time indicated by the time pointer <span class="emphasis"><em>ktimepnt</em></span>.
         </p>
       </div>
       <div class="refsect1">
-        <a id="idm30086"></a>
+        <a id="idm38778"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">kenergy <span class="command"><strong>ATSreadnz</strong></span> ktimepnt, iatsfile, iband</pre>
       </div>
       <div class="refsect1">
-        <a id="idm30090"></a>
+        <a id="idm38782"></a>
         <h2>Initialization</h2>
         <p>
-            <span class="emphasis"><em>iatsfile</em></span> – the ATS number (n in ats.n) or the name in quotes of the analysis file made using <a class="ulink" href="http://www-ccrma.stanford.edu/~juan/ATS.html" target="_top"><em class="citetitle">ATS</em></a>.
+            <span class="emphasis"><em>iatsfile</em></span> – the ATS number (n in ats.n) or the name in quotes of the analysis file made using <a class="link" href="UtilityAtsa.html" title="atsa"><em class="citetitle">ATSA</em></a>.
         </p>
         <p>
             <span class="emphasis"><em>iband</em></span> – the number of the noise band to return the energy data.
         </p>
       </div>
       <div class="refsect1">
-        <a id="idm30098"></a>
+        <a id="idm38790"></a>
         <h2>Performance</h2>
         <p>
             <span class="emphasis"><em>kenergy</em></span> outputs the linearly interpolated energy of the noise band indicated in <span class="emphasis"><em>iband</em></span>. The output is dependent on the data in the analysis file and the <span class="emphasis"><em>ktimepnt</em></span>.
@@ -68,11 +68,11 @@
         <p><span class="emphasis"><em>ktimepnt</em></span> – The time pointer in seconds used to index the ATS file. Used for <span class="emphasis"><em>ATSreadnz</em></span> exactly the same as for <a class="link" href="pvoc.html" title="pvoc"><em class="citetitle">pvoc</em></a> and <a class="link" href="ATSadd.html" title="ATSadd"><em class="citetitle">ATSadd</em></a>.</p>
         <p><span class="emphasis"><em>ATSaddnz</em></span> reads from an ATS file and resynthesizes the noise from noise energy data contained in the ATS file. It uses a modified randi function to create band limited noise and modulates that with a user supplied wave table (one period of a cosine wave), to synthesize a user specified selection of frequency bands. Modulating the noise is required to put the band limited noise in the correct place in the frequency spectrum.
         </p>
-        <p>An ATS analysis differs from a pvanal in that ATS tracks the partials and computes the noise energy of the sound being analyzed. For more info about ATS analysis read Juan Pampin's description on the the <a class="ulink" href="http://www-ccrma.stanford.edu/~juan/ATS.html" target="_top"><em class="citetitle">ATS</em></a> web-page.
+        <p>An ATS analysis differs from a pvanal in that ATS tracks the partials and computes the noise energy of the sound being analyzed. For more info about ATS analysis read Juan Pampin's description on the the <a class="ulink" href="https://ccrma.stanford.edu/~juan/ATS_manual.html" target="_top"><em class="citetitle">ATS</em></a> web-page.
         </p>
       </div>
       <div class="refsect1">
-        <a id="idm30116"></a>
+        <a id="idm38808"></a>
         <h2>Examples</h2>
         <pre class="programlisting">
   ktime   <span class="opc">line</span>      2.5, p3, 0
@@ -93,22 +93,17 @@
         Hz, which is the center frequency of the 5th critical noise
         band. This is only an example, for synthesizing the noise you would be better off just using <a class="link" href="ATSaddnz.html" title="ATSaddnz"><em class="citetitle">ATSaddnz</em></a> unless you want to use your own noise synthesis algorithm. Maybe you could use the noise energy for something else like applying a small amount of jitter to specific partials or for controlling something totally unrelated to the source sound?
         </p>
-      </div>
-      <div class="refsect1">
-        <a id="idm30132"></a>
-        <h2>Examples</h2>
         <p>
-      Here is another example of the ATSreadnz opcode. It uses the file <a class="ulink" href="examples/ATSreadnz.csd" target="_top"><em class="citetitle">ATSreadnz.csd</em></a>.
-
+      Here is a complete example of the ATSreadnz opcode. It uses the file <a class="ulink" href="examples/ATSreadnz.csd" target="_top"><em class="citetitle">ATSreadnz.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm30137"></a>
+          <a id="idm38827"></a>
           <p class="title">
-            <strong>Example 76. Another example of the ATSreadnz opcode.</strong>
+            <strong>Example 80. Another example of the ATSreadnz opcode.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm30139"></a>
+              <a id="idm38829"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -118,32 +113,34 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o ATSreadnz.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">; "beats.ats" is created by atsa</span>
+</span><span class="c1">; by Menno Knevel - 2021</span><span class="w">
 
-k<span class="n">time</span>	<span class="nb">line</span>	<span class="mi">0</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">2</span>
-k<span class="n">energy</span>	<span class="nb">ATSreadnz</span> k<span class="n">time</span><span class="p">,</span> <span class="s">"beats.ats"</span><span class="p">,</span> <span class="mi">2</span>
-a<span class="n">noise</span>	<span class="nb">randi</span>	k<span class="n">energy</span><span class="p">,</span> <span class="mi">500</span>
-a<span class="n">out</span>	<span class="nb">oscili</span>	<span class="mf">0.005</span><span class="p">,</span> <span class="mi">455</span><span class="p">,</span> <span class="mi">1</span>
-a<span class="n">out</span>	<span class="o">=</span>	a<span class="n">out</span> <span class="o">*</span> a<span class="n">noise</span>
-	<span class="nb">outs</span>	a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span> 
-<span class="kd">endin</span>
+</span>i<span class="n">res</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ atsa beats.wav beats.ats }}</span><span class="w"> </span><span class="c1">; default settings</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="c1">; cosine wave</span>
-<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">11</span> <span class="mi">1</span> <span class="mi">1</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span> 
-<span class="nb">e</span>
+</span>k<span class="n">time</span><span class="w">	</span><span class="nb">line</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span>k<span class="n">energy</span><span class="w">	</span><span class="nb">ATSreadnz</span><span class="w"> </span>k<span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="s">"beats.ats"</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="w"> </span><span class="c1">; return energy from band p4</span><span class="w">
+</span>a<span class="n">noise</span><span class="w">	</span><span class="nb">randi</span><span class="w">	</span>k<span class="n">energy</span><span class="p">,</span><span class="w"> </span><span class="mi">1500</span><span class="w">          
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">noise</span><span class="w"> </span><span class="o">*</span><span class="mf">.7</span><span class="p">,</span><span class="w"> </span>a<span class="n">noise</span><span class="w"> </span><span class="o">*</span><span class="mf">.7</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">;           band</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w">      </span><span class="mi">6</span><span class="w">  </span><span class="c1">; 3 different energy bands</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">2</span><span class="w">      </span><span class="mi">12</span><span class="w"> 
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">2</span><span class="w">      </span><span class="mi">17</span><span class="w"> 
+</span><span class="nb">e</span><span class="w">
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -153,7 +150,7 @@ a<span class="n">out</span>	<span class="o">=</span>	a<span class="n">out</span>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm30218"></a>
+        <a id="idm38972"></a>
         <h2>See also</h2>
         <p><a class="link" href="ATSread.html" title="ATSread"><em class="citetitle">ATSread</em></a>, 
             <a class="link" href="ATSinfo.html" title="ATSinfo"><em class="citetitle">ATSinfo</em></a>, 
@@ -166,7 +163,7 @@ a<span class="n">out</span>	<span class="o">=</span>	a<span class="n">out</span>
             <a class="link" href="ATSsinnoi.html" title="ATSsinnoi"><em class="citetitle">ATSsinnoi</em></a></p>
       </div>
       <div class="refsect1">
-        <a id="idm30239"></a>
+        <a id="idm38993"></a>
         <h2>Credits</h2>
         <p>
             </p>

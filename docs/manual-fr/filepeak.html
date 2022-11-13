@@ -6,7 +6,7 @@
     <title>filepeak</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="filenchnls.html" title="filenchnls" />
@@ -39,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm69731"></a>
+        <a id="idm98950"></a>
         <h2>Description</h2>
         <p>
       Retourne la valeur absolue de la crête d'un fichier son.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm69734"></a>
+        <a id="idm98953"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ir <span class="command"><strong>filepeak</strong></span> ifilcod [, ichnl]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm69738"></a>
+        <a id="idm98957"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifilcod</em></span> -- fichier son à interroger
@@ -76,7 +76,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm69752"></a>
+        <a id="idm98971"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>filepeak</em></span> retourne la valeur absolue de la crête du
@@ -84,7 +84,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm69757"></a>
+        <a id="idm98976"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode filepeak. Il utilise les fichiers
@@ -93,16 +93,16 @@
 
       </p>
         <div class="example">
-          <a id="idm69764"></a>
+          <a id="idm98983"></a>
           <p class="title">
-            <strong>Exemple 294. Exemple de l'opcode filepeak.</strong>
+            <strong>Exemple 298. Exemple de l'opcode filepeak.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm69771"></a>
+              <a id="idm98990"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -112,43 +112,43 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o filepeak.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span> 
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> 
 
-i<span class="n">scaldb</span> <span class="o">=</span> <span class="vi">p4</span> <span class="c1">;set peak amplitude in dB</span>
-i<span class="n">peak</span>   <span class="nb">filepeak</span> <span class="s">"Church.wav"</span>
-i<span class="n">scal</span>   <span class="o">=</span> <span class="nb">ampdb</span><span class="p">(</span>i<span class="n">scaldb</span><span class="p">)</span><span class="o">/</span>i<span class="n">peak</span> <span class="c1">;calculate amp multiplier</span>
-<span class="nb">printf_i</span> <span class="s">"</span><span class="se">\n</span><span class="s">Peak value in file '</span><span class="si">%s</span><span class="s">' is </span><span class="si">%f</span><span class="s"> (</span><span class="si">%.3f</span><span class="s"> dB).</span><span class="se">\n\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"Church.wav"</span><span class="p">,</span> i<span class="n">peak</span><span class="p">,</span> <span class="nb">dbamp</span><span class="p">(</span>i<span class="n">peak</span><span class="p">)</span>
+</span>i<span class="n">scaldb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w"> </span><span class="c1">;set peak amplitude in dB</span><span class="w">
+</span>i<span class="n">peak</span><span class="w">   </span><span class="nb">filepeak</span><span class="w"> </span><span class="s">"Church.wav"</span><span class="w">
+</span>i<span class="n">scal</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="nb">ampdb</span><span class="p">(</span>i<span class="n">scaldb</span><span class="p">)</span><span class="o">/</span>i<span class="n">peak</span><span class="w"> </span><span class="c1">;calculate amp multiplier</span><span class="w">
+</span><span class="nb">printf_i</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">Peak value in file '</span><span class="si">%s</span><span class="s">' is </span><span class="si">%f</span><span class="s"> (</span><span class="si">%.3f</span><span class="s"> dB).</span><span class="se">\n\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"Church.wav"</span><span class="p">,</span><span class="w"> </span>i<span class="n">peak</span><span class="p">,</span><span class="w"> </span><span class="nb">dbamp</span><span class="p">(</span>i<span class="n">peak</span><span class="p">)</span><span class="w">
 
-a<span class="n">snd</span> <span class="nb">soundin</span> <span class="s">"Church.wav"</span>
-     <span class="nb">outs</span> a<span class="n">snd</span><span class="p">,</span> a<span class="n">snd</span>
-<span class="c1">; scale &amp; write file to disk</span>
-a<span class="n">sig</span> <span class="o">=</span> a<span class="n">snd</span><span class="o">*</span>i<span class="n">scal</span> <span class="c1">;scale to p4</span>
-<span class="nb">fout</span> <span class="s">"Church_norm.wav"</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> a<span class="n">sig</span>
+</span>a<span class="n">snd</span><span class="w"> </span><span class="nb">soundin</span><span class="w"> </span><span class="s">"Church.wav"</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">snd</span><span class="p">,</span><span class="w"> </span>a<span class="n">snd</span><span class="w">
+</span><span class="c1">; scale &amp; write file to disk</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">snd</span><span class="o">*</span>i<span class="n">scal</span><span class="w"> </span><span class="c1">;scale to p4</span><span class="w">
+</span><span class="nb">fout</span><span class="w"> </span><span class="s">"Church_norm.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
 
-<span class="kd">endin</span>
+</span><span class="kd">endin</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">2</span> <span class="c1">; play scaled file</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w"> </span><span class="c1">; play scaled file</span><span class="w">
 
-a<span class="n">out</span>   <span class="nb">soundin</span>  <span class="s">"Church_norm.wav"</span>
-i<span class="n">pknew</span> <span class="nb">filepeak</span> <span class="s">"Church_norm.wav"</span>
-<span class="nb">printf_i</span> <span class="s">"</span><span class="se">\n</span><span class="s">Peak value in file '</span><span class="si">%s</span><span class="s">' is </span><span class="si">%f</span><span class="s"> (</span><span class="si">%.3f</span><span class="s"> dB).</span><span class="se">\n\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"Church_norm.wav"</span><span class="p">,</span> i<span class="n">pknew</span><span class="p">,</span> <span class="nb">dbamp</span><span class="p">(</span>i<span class="n">pknew</span><span class="p">)</span>
-       <span class="nb">outs</span> a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
+</span>a<span class="n">out</span><span class="w">   </span><span class="nb">soundin</span><span class="w">  </span><span class="s">"Church_norm.wav"</span><span class="w">
+</span>i<span class="n">pknew</span><span class="w"> </span><span class="nb">filepeak</span><span class="w"> </span><span class="s">"Church_norm.wav"</span><span class="w">
+</span><span class="nb">printf_i</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">Peak value in file '</span><span class="si">%s</span><span class="s">' is </span><span class="si">%f</span><span class="s"> (</span><span class="si">%.3f</span><span class="s"> dB).</span><span class="se">\n\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"Church_norm.wav"</span><span class="p">,</span><span class="w"> </span>i<span class="n">pknew</span><span class="p">,</span><span class="w"> </span><span class="nb">dbamp</span><span class="p">(</span>i<span class="n">pknew</span><span class="p">)</span><span class="w">
+       </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">out</span><span class="p">,</span><span class="w"> </span>a<span class="n">out</span><span class="w">
 
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span> <span class="o">-</span><span class="mi">6</span> <span class="c1">; normalize audio to -6 dB</span>
-<span class="nb">i</span> <span class="mi">2</span> <span class="mi">2</span> <span class="mi">2</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="mi">6</span><span class="w"> </span><span class="c1">; normalize audio to -6 dB</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -165,7 +165,7 @@ Peak value in file 'Church_norm.wav' is 0.501190 (-6.000 dB).</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm69911"></a>
+        <a id="idm99209"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="filelen.html" title="filelen"><em class="citetitle">filelen</em></a>,
@@ -174,7 +174,7 @@ Peak value in file 'Church_norm.wav' is 0.501190 (-6.000 dB).</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm69920"></a>
+        <a id="idm99218"></a>
         <h2>Crédits</h2>
         <p>
       </p>

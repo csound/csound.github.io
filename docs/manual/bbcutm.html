@@ -6,7 +6,7 @@
     <title>bbcutm</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="barmodel.html" title="barmodel" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm32327"></a>
+        <a id="idm42283"></a>
         <h2>Description</h2>
         <p>
       The BreakBeat Cutter automatically generates cut-ups of a source audio stream in the style of drum and bass/jungle breakbeat manipulations.  There are two versions, for mono (<span class="emphasis"><em>bbcutm</em></span>) or stereo (<span class="emphasis"><em>bbcuts</em></span>) sources.  Whilst originally based on breakbeat cutting, the opcode can be applied to any type of source audio.
@@ -65,13 +65,13 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm32336"></a>
+        <a id="idm42292"></a>
         <h2>Syntax</h2>
         <pre class="synopsis">a1 <span class="command"><strong>bbcutm</strong></span> asource, ibps, isubdiv, ibarlength, iphrasebars, inumrepeats \
       [, istutterspeed] [, istutterchance] [, ienvchoice ]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm32340"></a>
+        <a id="idm42296"></a>
         <h2>Initialization</h2>
         <p>
       <span class="emphasis"><em>ibps</em></span> -- Tempo to cut at, in beats per second.
@@ -99,77 +99,74 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm32358"></a>
+        <a id="idm42314"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>asource</em></span> -- The audio signal to be cut up. This version runs in real-time without knowledge of future audio.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm32362"></a>
+        <a id="idm42318"></a>
         <h2>Examples</h2>
         <p>
       Here is a simple example of the bbcutm opcode. It uses the file <a class="ulink" href="examples/bbcutm.csd" target="_top"><em class="citetitle">bbcutm.csd</em></a>, and <a class="ulink" href="examples/beats.wav" target="_top"><em class="citetitle">beats.wav</em></a>.
       </p>
         <div class="example">
-          <a id="idm32369"></a>
+          <a id="idm42325"></a>
           <p class="title">
-            <strong>Example 87. A simple example of the bbcutm opcode.</strong>
+            <strong>Example 91. A simple example of the bbcutm opcode.</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm32376"></a>
+              <a id="idm42332"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
 <span class="c1">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+-odac             <span class="c1">;;;RT audio out</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o bbcutm.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="c1">; Initialize the global variables.</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="c1">; additions by Menno Knevel 2021</span><span class="w">
 
-<span class="c1">; Instrument #1 - Play an audio file normally.</span>
-<span class="kd">instr</span> <span class="nf">1</span>
-  a<span class="n">source</span> <span class="nb">soundin</span> <span class="s">"beats.wav"</span>
-  <span class="nb">out</span> a<span class="n">source</span>
-<span class="kd">endin</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="c1">; Instrument #2 - Cut-up an audio file.</span>
-<span class="kd">instr</span> <span class="nf">2</span>
-  a<span class="n">source</span> <span class="nb">soundin</span> <span class="s">"beats.wav"</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">     </span><span class="c1">; Play an audio file normally.</span><span class="w">
 
-  i<span class="n">bps</span> <span class="o">=</span> <span class="mi">4</span>
-  i<span class="n">subdiv</span> <span class="o">=</span> <span class="mi">8</span>
-  i<span class="n">barlength</span> <span class="o">=</span> <span class="mi">4</span>
-  i<span class="n">phrasebars</span> <span class="o">=</span> <span class="mi">1</span>
-  i<span class="n">numrepeats</span> <span class="o">=</span> <span class="mi">2</span>
+</span>a<span class="n">source</span><span class="w"> </span><span class="nb">soundin</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">source</span><span class="p">,</span><span class="w"> </span>a<span class="n">source</span><span class="w">
 
-  a<span class="n">1</span> <span class="nb">bbcutm</span> a<span class="n">source</span><span class="p">,</span> i<span class="n">bps</span><span class="p">,</span> i<span class="n">subdiv</span><span class="p">,</span> i<span class="n">barlength</span><span class="p">,</span> i<span class="n">phrasebars</span><span class="p">,</span> i<span class="n">numrepeats</span>
+</span><span class="kd">endin</span><span class="w">
 
-  <span class="nb">out</span> a<span class="n">1</span>
-<span class="kd">endin</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">     </span><span class="c1">; Cut-up an audio file</span><span class="w">
 
+</span>i<span class="n">bps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="w">
+</span>i<span class="n">subdiv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="w">
+</span>i<span class="n">barlength</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="w">
+</span>i<span class="n">phrasebars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>i<span class="n">numrepeats</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>a<span class="n">source</span><span class="w"> </span><span class="nb">diskin2</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">,</span><span class="mi">1</span><span class="w">
+</span>a<span class="n">1</span><span class="w"> </span><span class="nb">bbcutm</span><span class="w"> </span>a<span class="n">source</span><span class="p">,</span><span class="w"> </span>i<span class="n">bps</span><span class="p">,</span><span class="w"> </span>i<span class="n">subdiv</span><span class="p">,</span><span class="w"> </span>i<span class="n">barlength</span><span class="p">,</span><span class="w"> </span>i<span class="n">phrasebars</span><span class="p">,</span><span class="w"> </span>i<span class="n">numrepeats</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="kd">endin</span><span class="w">
 
-<span class="c1">; Play Instrument #1 for two seconds.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span>
-<span class="c1">; Play Instrument #2 for two seconds.</span>
-<span class="nb">i</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">2</span>
-<span class="nb">e</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
 
-
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="c1">;       repeats</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">8</span><span class="w">     </span><span class="mi">2</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="mi">8</span><span class="w">    </span><span class="mi">6</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -182,9 +179,9 @@
 
       </p>
         <div class="example">
-          <a id="idm32462"></a>
+          <a id="idm42510"></a>
           <p class="title">
-            <strong>Example 88. First steps- mono and stereo versions</strong>
+            <strong>Example 92. First steps- mono and stereo versions</strong>
           </p>
           <div class="example-contents">
             <pre class="programlisting">
@@ -231,9 +228,9 @@
         <p>
       </p>
         <div class="example">
-          <a id="idm32502"></a>
+          <a id="idm42550"></a>
           <p class="title">
-            <strong>Example 89. Multiple simultaneous synchronised breaks</strong>
+            <strong>Example 93. Multiple simultaneous synchronised breaks</strong>
           </p>
           <div class="example-contents">
             <pre class="programlisting">
@@ -271,9 +268,9 @@
         <p>
       </p>
         <div class="example">
-          <a id="idm32534"></a>
+          <a id="idm42582"></a>
           <p class="title">
-            <strong>Example 90. Cutting up any old audio- much more interesting noises than this should be possible!</strong>
+            <strong>Example 94. Cutting up any old audio- much more interesting noises than this should be possible!</strong>
           </p>
           <div class="example-contents">
             <pre class="programlisting">
@@ -306,9 +303,9 @@
         <p>
       </p>
         <div class="example">
-          <a id="idm32562"></a>
+          <a id="idm42610"></a>
           <p class="title">
-            <strong>Example 91. Constant stuttering- faked, not possible since can only stutter in last half bar could make extra stuttering option parameter</strong>
+            <strong>Example 95. Constant stuttering- faked, not possible since can only stutter in last half bar could make extra stuttering option parameter</strong>
           </p>
           <div class="example-contents">
             <pre class="programlisting">
@@ -342,14 +339,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm32589"></a>
+        <a id="idm42637"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="bbcuts.html" title="bbcuts"><em class="citetitle">bbcuts</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm32594"></a>
+        <a id="idm42642"></a>
         <h2>Credits</h2>
         <p>
       </p>

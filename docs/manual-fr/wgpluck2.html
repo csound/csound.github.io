@@ -6,7 +6,7 @@
     <title>wgpluck2</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="wgpluck.html" title="wgpluck" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm267360"></a>
+        <a id="idm389021"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>wgpluck2</em></span> est une implémentation du modèle physique de corde
@@ -48,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm267364"></a>
+        <a id="idm389025"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>wgpluck2</strong></span> iplk, kamp, icps, kpick, krefl</pre>
       </div>
       <div class="refsect1">
-        <a id="idm267368"></a>
+        <a id="idm389029"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>iplk</em></span> -- Le point d'excitation est <span class="emphasis"><em>iplk</em></span>,
@@ -65,7 +65,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm267376"></a>
+        <a id="idm389037"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>kamp</em></span> -- Amplitude de la note.
@@ -81,7 +81,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm267384"></a>
+        <a id="idm389045"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opdcode wgpluck2. Il utilise le fichier
@@ -89,56 +89,60 @@
 
       </p>
         <div class="example">
-          <a id="idm267389"></a>
+          <a id="idm389050"></a>
           <p class="title">
-            <strong>Exemple 1207. Exemple de l'opdcode wgpluck2.</strong>
+            <strong>Exemple 1218. Exemple de l'opdcode wgpluck2.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm267396"></a>
+              <a id="idm389057"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
-<span class="c1">; Audio out   Audio in    No messages</span>
--odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac             <span class="c1">;;;RT audio out</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o wgpluck2.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="c1">; Initialize the global variables.</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="c1">; by Menno Knevel 2021</span><span class="w">
 
-<span class="c1">; Instrument #1.</span>
-<span class="kd">instr</span> <span class="nf">1</span>
-  i<span class="n">plk</span> <span class="o">=</span> <span class="mf">0.75</span>
-  k<span class="n">amp</span> <span class="o">=</span> <span class="mi">30000</span>
-  i<span class="n">cps</span> <span class="o">=</span> <span class="mi">220</span>
-  k<span class="n">pick</span> <span class="o">=</span> <span class="mf">0.75</span>
-  k<span class="n">refl</span> <span class="o">=</span> <span class="mf">0.5</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-  a<span class="n">pluck</span> <span class="nb">wgpluck2</span> i<span class="n">plk</span><span class="p">,</span> k<span class="n">amp</span><span class="p">,</span> i<span class="n">cps</span><span class="p">,</span> k<span class="n">pick</span><span class="p">,</span> k<span class="n">refl</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-  <span class="nb">out</span> a<span class="n">pluck</span>
-<span class="kd">endin</span>
+</span>i<span class="n">plk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>k<span class="n">amp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">.7</span><span class="w">
+</span>i<span class="n">cps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">220</span><span class="w">
+</span>k<span class="n">pick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.75</span><span class="w">
+</span>k<span class="n">refl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">
 
+</span>a<span class="n">pluck</span><span class="w"> </span><span class="nb">wgpluck2</span><span class="w"> </span>i<span class="n">plk</span><span class="p">,</span><span class="w"> </span>k<span class="n">amp</span><span class="p">,</span><span class="w"> </span>i<span class="n">cps</span><span class="p">,</span><span class="w"> </span>k<span class="n">pick</span><span class="p">,</span><span class="w"> </span>k<span class="n">refl</span><span class="w">
+</span>a<span class="n">pluck</span><span class="w">  </span><span class="nb">dcblock2</span><span class="w">    </span>a<span class="n">pluck</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">pluck</span><span class="p">,</span><span class="w"> </span>a<span class="n">pluck</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="kd">endin</span><span class="w">
 
-<span class="c1">; Play Instrument #1 for two seconds.</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span>
-<span class="nb">e</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">;         pluck   reflection</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">     </span><span class="mi">0</span><span class="w">       </span><span class="mf">0.9</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">     </span><span class="o">&lt;</span><span class="w">       </span><span class="o">.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">     </span><span class="o">&lt;</span><span class="w">       </span><span class="o">.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">     </span><span class="mi">1</span><span class="w">       </span><span class="o">.</span><span class="w"> 
 
-
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">5</span><span class="w">     </span><span class="mf">.75</span><span class="w">     </span><span class="mf">0.7</span><span class="w"> 
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="w">     </span><span class="mf">.05</span><span class="w">     </span><span class="mf">0.7</span><span class="w"> 
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -148,14 +152,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm267462"></a>
+        <a id="idm389243"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="repluck.html" title="repluck"><em class="citetitle">repluck</em></a>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm267467"></a>
+        <a id="idm389248"></a>
         <h2>Crédits</h2>
         <p>
       </p>

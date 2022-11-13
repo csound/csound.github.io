@@ -6,7 +6,7 @@
     <title>ftchnls</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="ftaudio.html" title="ftaudio" />
@@ -39,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm95161"></a>
+        <a id="idm135416"></a>
         <h2>Description</h2>
         <p>
       Retourne le nombre de canaux dans un table de fonction en mémoire.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm95164"></a>
+        <a id="idm135419"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>ftchnls</strong></span>(x) (arg de taux-i seulement)</pre>
       </div>
       <div class="refsect1">
-        <a id="idm95168"></a>
+        <a id="idm135423"></a>
         <h2>Exécution</h2>
         <p>
       Retourne le nombre de canaux d'une table
@@ -62,69 +62,69 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm95175"></a>
+        <a id="idm135430"></a>
         <h2>Exemples</h2>
         <p>
-      Voici un exemple de l'opcode ftchnls. Il utilise les fichiers
+     Voici un exemple de l'opcode ftchnls. Il utilise les fichiers
       <a class="ulink" href="examples/ftchnls.csd" target="_top"><em class="citetitle">ftchnls.csd</em></a>,
-      <a class="ulink" href="examples/mary.wav" target="_top"><em class="citetitle">mary.wav</em></a> et
-      <a class="ulink" href="examples/kickroll.wav" target="_top"><em class="citetitle">kickroll.wav</em></a>.
-
+      <a class="ulink" href="examples/drumsMlp.wav" target="_top"><em class="citetitle">drumsMlp.wav</em></a>
+      et <a class="ulink" href="examples/drumsSlp.wav" target="_top"><em class="citetitle">drumsSlp.wav</em></a>.
+ 
       </p>
         <div class="example">
-          <a id="idm95184"></a>
+          <a id="idm135439"></a>
           <p class="title">
-            <strong>Exemple 380. Exemple de l'opcode ftchnls.</strong>
+            <strong>Exemple 384. Exemple de l'opcode ftchnls.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm95191"></a>
+              <a id="idm135446"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
-<span class="c1">;-odac     ;;;realtime audio out</span>
--iadc    <span class="c1">;;;uncomment -iadc if realtime audio input is needed too</span>
+-odac     <span class="c1">;;;realtime audio out</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o ftchnls.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+</span><span class="c1">; by Menno Knevel 2022</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-i<span class="n">chnls</span> <span class="o">=</span> <span class="nb">ftchnls</span><span class="p">(</span><span class="vi">p4</span><span class="p">)</span>
-<span class="nb">print</span> i<span class="n">chnls</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-<span class="k">if</span> <span class="p">(</span>i<span class="n">chnls</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">then</span>
-   a<span class="n">sigL</span> <span class="nb">loscil3</span> <span class="mf">.8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="vi">p4</span>
-   a<span class="n">sigR</span> <span class="o">=</span> 	a<span class="n">sigL</span>
-<span class="k">elseif</span> <span class="p">(</span>i<span class="n">chnls</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="k">then</span>
-   a<span class="n">sigL</span><span class="p">,</span> a<span class="n">sigR</span> <span class="nb">loscil3</span> <span class="mf">.8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="vi">p4</span>
-<span class="c1">;safety precaution if not mono or stereo</span>
-<span class="k">else</span>
-   a<span class="n">sigL</span> <span class="o">=</span> <span class="mi">0</span>
-   a<span class="n">sigR</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">endif</span>
-        <span class="nb">outs</span> a<span class="n">sigL</span><span class="p">,</span> a<span class="n">sigR</span>
+</span>i<span class="n">chnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ftchnls</span><span class="p">(</span><span class="vi">p4</span><span class="p">)</span><span class="w">
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">number of channels = </span><span class="si">%d</span><span class="se">\n\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span>i<span class="n">chnls</span><span class="w">
 
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="s">"mary.wav"</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
-<span class="nb">f</span> <span class="mi">2</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="s">"kickroll.wav"</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span>i<span class="n">chnls</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+   </span>a<span class="n">sigL</span><span class="w"> </span><span class="nb">loscil3</span><span class="w"> </span><span class="mf">.8</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">          </span><span class="c1">; sample loops between 1 and end loop point at 2 secs.</span><span class="w">
+   </span>a<span class="n">sigR</span><span class="w"> </span><span class="o">=</span><span class="w"> 	</span>a<span class="n">sigL</span><span class="w">
+</span><span class="k">elseif</span><span class="w"> </span><span class="p">(</span>i<span class="n">chnls</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+   </span>a<span class="n">sigL</span><span class="p">,</span><span class="w"> </span>a<span class="n">sigR</span><span class="w"> </span><span class="nb">loscil3</span><span class="w"> </span><span class="mf">.8</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="c1">; sample loops between 2 and end loop point at 3 secs.</span><span class="w">
+</span><span class="k">else</span><span class="w">                                   </span><span class="c1">; safety precaution if not mono or stereo</span><span class="w">
+   </span>a<span class="n">sigL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+   </span>a<span class="n">sigR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="k">endif</span><span class="w">
+        </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sigL</span><span class="p">,</span><span class="w"> </span>a<span class="n">sigR</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mi">1</span> <span class="c1">;mono file</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="mi">2</span> <span class="c1">;stereo file</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="s">"drumsMlp.wav"</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="s">"drumsSlp.wav"</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">;mono file</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="c1">;stereo file</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -132,18 +132,18 @@ i<span class="n">chnls</span> <span class="o">=</span> <span class="nb">ftchnls<
         </div>
         <p><br class="example-break" />
 
-      Le fichier audio <span class="quote">« <span class="quote">mary.wav</span> »</span> étant monophonique et le fichier
-      audio <span class="quote">« <span class="quote">kickroll.wav</span> »</span> étant stéréophonique, 
+      Le fichier audio <span class="quote">« <span class="quote">drumsMlp</span> »</span> étant monophonique et le fichier
+      audio <span class="quote">« <span class="quote">drumsSlp.wav</span> »</span> étant stéréophonique, 
       la sortie comprendra des lignes comme celles-ci :
       </p>
         <pre class="screen">
-instr 1:  ichnls = 1.000
-instr 1:  ichnls = 2.000</pre>
+number of channels = 1
+number of channels = 2</pre>
         <p>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm95309"></a>
+        <a id="idm135672"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="ftlen.html" title="ftlen"><em class="citetitle">ftlen</em></a>,
@@ -154,7 +154,7 @@ instr 1:  ichnls = 2.000</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm95322"></a>
+        <a id="idm135685"></a>
         <h2>Crédits</h2>
         <p>
       </p>

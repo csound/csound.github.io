@@ -6,7 +6,7 @@
     <title>filevalid</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="filesr.html" title="filesr" />
@@ -35,38 +35,43 @@
           <span class="refentrytitle">filevalid</span>
         </h2>
         <p>filevalid — 
-      Teste si un fichier peut être lu.
+      Teste si un fichier peut être lu à l'initialisation ou durant l'exécution.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm70219"></a>
+        <a id="idm99610"></a>
         <h2>Description</h2>
         <p>
       Retourne 1 si le fichier son existe et s'il est lisible, 0 sinon.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm70222"></a>
+        <a id="idm99613"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ir <span class="command"><strong>filevalid</strong></span> ifilcod</pre>
+        <pre class="synopsis">kr <span class="command"><strong>filevalid</strong></span> ifilcod</pre>
       </div>
       <div class="refsect1">
-        <a id="idm70226"></a>
+        <a id="idm99619"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifilcod</em></span> -- fichier son à tester
     </p>
-      </div>
-      <div class="refsect1">
-        <a id="idm70230"></a>
-        <h2>Exécution</h2>
         <p>
-      <span class="emphasis"><em>filevalid</em></span> retourne 1 si le fichier son
-      <span class="emphasis"><em>ifilcod</em></span> peut être lu.
+      <span class="emphasis"><em>ir</em></span> -- code de retour (1 si le fichier son
+      <span class="emphasis"><em>ifilcod</em></span> peut être lu).
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm70235"></a>
+        <a id="idm99626"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kr</em></span> -- code de retour (1 si le fichier son
+      <span class="emphasis"><em>ifilcod</em></span> peut être lu).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm99631"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode filevalid. Il utilise le fichier
@@ -74,16 +79,16 @@
 
       </p>
         <div class="example">
-          <a id="idm70240"></a>
+          <a id="idm99636"></a>
           <p class="title">
-            <strong>Exemple 297. Exemple de l'opcode filevalid.</strong>
+            <strong>Exemple 301. Exemple de l'opcode filevalid.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm70247"></a>
+              <a id="idm99643"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -93,33 +98,33 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">;-o filevalid.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
-S<span class="n">file</span>     <span class="nb">strget</span>    <span class="vi">p4</span>
-i<span class="n">vld</span>      <span class="nb">filevalid</span> S<span class="n">file</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span>S<span class="n">file</span><span class="w">     </span><span class="nb">strget</span><span class="w">    </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">vld</span><span class="w">      </span><span class="nb">filevalid</span><span class="w"> </span>S<span class="n">file</span><span class="w">
 
-<span class="k">if</span> i<span class="n">vld</span><span class="o">&gt;</span><span class="mi">0</span> <span class="k">then</span>
-a<span class="n">sig</span>      <span class="nb">diskin2</span>   S<span class="n">file</span><span class="p">,</span> <span class="mi">1</span>
-          <span class="nb">outs</span>      a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
-<span class="k">else</span>
-          <span class="nb">printf_i</span>  <span class="s">"Audiofile '</span><span class="si">%s</span><span class="s">' does not exist!</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> S<span class="n">file</span>
-<span class="k">endif</span>
-<span class="kd">endin</span>
+</span><span class="k">if</span><span class="w"> </span>i<span class="n">vld</span><span class="o">&gt;</span><span class="mi">0</span><span class="w"> </span><span class="k">then</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">      </span><span class="nb">diskin2</span><span class="w">   </span>S<span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+          </span><span class="nb">outs</span><span class="w">      </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="k">else</span><span class="w">
+          </span><span class="nb">printf_i</span><span class="w">  </span><span class="s">"Audiofile '</span><span class="si">%s</span><span class="s">' does not exist!</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>S<span class="n">file</span><span class="w">
+</span><span class="k">endif</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="s">"frox.wav"</span><span class="c1">;file does not exist!!!</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="s">"fox.wav"</span> <span class="c1">;but this one certainly does...</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="s">"frox.wav"</span><span class="c1">;file does not exist!!!</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w"> </span><span class="c1">;but this one certainly does...</span><span class="w">
 
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -134,7 +139,7 @@ Audiofile 'frox.wav' does not exist!</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm70323"></a>
+        <a id="idm99770"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="filebit.html" title="filebit"><em class="citetitle">filebit</em></a>,
@@ -145,7 +150,7 @@ Audiofile 'frox.wav' does not exist!</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm70336"></a>
+        <a id="idm99783"></a>
         <h2>Crédits</h2>
         <p>
       </p>

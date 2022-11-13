@@ -6,7 +6,7 @@
     <title>pvbufread</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="pvadd.html" title="pvadd" />
@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm181795"></a>
+        <a id="idm263952"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>pvbufread</em></span> lit depuis un fichier
@@ -57,12 +57,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm181810"></a>
+        <a id="idm263967"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>pvbufread</strong></span> ktimpnt, ifile</pre>
       </div>
       <div class="refsect1">
-        <a id="idm181814"></a>
+        <a id="idm263971"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifile</em></span> -- le numéro <span class="emphasis"><em>pvoc</em></span> (n dans
@@ -72,7 +72,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm181822"></a>
+        <a id="idm263979"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ktimpnt</em></span> -- l'écoulement du temps, en secondes, dans
@@ -82,7 +82,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm181827"></a>
+        <a id="idm263984"></a>
         <h2>Exemples</h2>
         <p>
       L'exemple ci-dessous montre une utilisation de <span class="emphasis"><em>pvbufread</em></span>
@@ -139,49 +139,71 @@ apv     <span class="opc">pvcross</span>   ktime2, 1, "clar.pvoc", 1<span class=
       <a class="ulink" href="examples/pvbufread.csd" target="_top"><em class="citetitle">pvbufread.csd</em></a>
       </p>
         <div class="example">
-          <a id="idm181872"></a>
+          <a id="idm264029"></a>
           <p class="title">
-            <strong>Exemple 787. Exemple de l'opcode pvbufread.</strong>
+            <strong>Exemple 799. Exemple de l'opcode pvbufread.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm181879"></a>
+              <a id="idm264036"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
--odac   <span class="c1">;;;realtime audio out</span>
+-odac  -m0  <span class="c1">;;;realtime audio out</span>
 <span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o pvbufread.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span> 
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span> 
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span> 
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w"> 
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w"> 
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
-<span class="c1">; analyze "fox.wav" and "flute.aiff" with PVANAL first</span>
-k<span class="n">time1</span> <span class="nb">line</span>  <span class="mi">0</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mf">.8</span>		<span class="c1">; use a part of "flute.pvx" file</span>
-k<span class="n">time2</span> <span class="nb">line</span>  <span class="mi">0</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mf">1.2</span>		<span class="c1">; use a part of "beats.pvx" file</span>
-k<span class="n">cross</span> <span class="nb">expon</span> <span class="mf">.03</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">1</span>
-       <span class="nb">pvbufread</span> k<span class="n">time1</span><span class="p">,</span> <span class="s">"flute.pvx"</span>
-a<span class="n">sig</span>   <span class="nb">pvcross</span>   k<span class="n">time2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"beats.pvx"</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span>k<span class="n">cross</span><span class="p">,</span> k<span class="n">cross</span>
-       <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+</span><span class="c1">; by Menno Knevel 2021</span><span class="w">
 
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">10</span>
+</span>gi<span class="n">len1</span><span class="w">  </span><span class="nb">filelen</span><span class="w"> </span><span class="s">"flute.aiff"</span><span class="w">    </span><span class="c1">; get length of soundfiles</span><span class="w">
+</span>gi<span class="n">len2</span><span class="w">  </span><span class="nb">filelen</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="w">
 
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="c1">; analyze sound files and output results to pvoc-ex files</span><span class="w">
+</span>i<span class="n">res1</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ pvanal flute.aiff flute.pvx }}</span><span class="w"> </span><span class="c1">; use default settings</span><span class="w">
+</span>i<span class="n">res2</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ pvanal beats.wav beats.pvx }}</span><span class="w">  
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> </span><span class="c1">; untreated signals</span><span class="w">
+
+</span>a<span class="n">sig</span><span class="w">    </span><span class="nb">diskin2</span><span class="w">   </span><span class="vi">p4</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">print</span><span class="w"> </span>gi<span class="n">len1</span><span class="w">
+</span><span class="nb">print</span><span class="w"> </span>gi<span class="n">len2</span><span class="w">
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">---***YOU NOW HEAR THE UNTREATED SOUND SAMPLES***---</span><span class="se">\n</span><span class="s">"</span><span class="w">
+    </span><span class="nb">outs</span><span class="w">    </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">---***YOU NOW HEAR THE RESULT OF THE ANALYZED FILES:***---</span><span class="se">\n</span><span class="s">"</span><span class="w">
+</span>k<span class="n">time1</span><span class="w"> </span><span class="nb">line</span><span class="w">  </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mf">.8</span><span class="w">		</span><span class="c1">; use a part of "flute.pvx" file</span><span class="w">
+</span>k<span class="n">time2</span><span class="w"> </span><span class="nb">line</span><span class="w">  </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">		</span><span class="c1">; use a part of "beats.pvx" file</span><span class="w">
+</span>k<span class="n">cross</span><span class="w"> </span><span class="nb">line</span><span class="w">  </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">       </span><span class="c1">; from flute to beats</span><span class="w">
+       </span><span class="nb">pvbufread</span><span class="w"> </span>k<span class="n">time1</span><span class="p">,</span><span class="w"> </span><span class="s">"flute.pvx"</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">   </span><span class="nb">pvcross</span><span class="w">   </span>k<span class="n">time2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"beats.pvx"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">-</span>k<span class="n">cross</span><span class="p">,</span><span class="w"> </span>k<span class="n">cross</span><span class="w">
+       </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">2.62</span><span class="w">   </span><span class="s">"flute.aiff"</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">2</span><span class="w">      </span><span class="s">"beats.wav"</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -191,7 +213,7 @@ a<span class="n">sig</span>   <span class="nb">pvcross</span>   k<span class="n"
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm181963"></a>
+        <a id="idm264282"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="pvcross.html" title="pvcross"><em class="citetitle">pvcross</em></a>,
@@ -202,7 +224,7 @@ a<span class="n">sig</span>   <span class="nb">pvcross</span>   k<span class="n"
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm181976"></a>
+        <a id="idm264295"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -6,7 +6,7 @@
     <title>pvsdisp</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="The Canonical Csound Reference Manual" />
     <link rel="up" href="OpcodesTop.html" title="Orchestra Opcodes and Operators" />
     <link rel="prev" href="pvsdiskin.html" title="pvsdiskin" />
@@ -39,25 +39,22 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm185211"></a>
+        <a id="idm271078"></a>
         <h2>Description</h2>
         <p>
-      This opcode will display a PVS signal fsig. Uses X11 or  FLTK windows if enabled, else 
+      This opcode will display a PVS signal fsig. It prints the frames every hopsize. Uses X11 or FLTK windows if enabled, else 
 	  (or if <a class="link" href="CommandFlags.html#FlagsMinusLowerG"><em class="citetitle">-g</em></a> flag is set) 
 	  displays are approximated in ASCII characters.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm185216"></a>
+        <a id="idm271083"></a>
         <h2>Syntax</h2>
         <pre class="synopsis"><span class="command"><strong>pvsdisp</strong></span> fsig[, ibins, iwtflg] </pre>
       </div>
       <div class="refsect1">
-        <a id="idm185220"></a>
+        <a id="idm271087"></a>
         <h2>Initialization</h2>
-        <p>
-      <span class="emphasis"><em>iprd</em></span> -- the period of pvsdisp in seconds.
-    </p>
         <p>
       <span class="emphasis"><em>ibins</em></span> (optional, default=all bins) -- optionally, display only ibins bins. 
 	  </p>
@@ -67,58 +64,62 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm185228"></a>
+        <a id="idm271093"></a>
         <h2>Performance</h2>
         <p>
       <span class="emphasis"><em>pvsdisp</em></span> -- displays the PVS signal frame-by-frame. 
 	</p>
+        <p>
+      Note:  when there is nothing to display (silences), messages like these will accompany each plot: 
+        </p>
+        <pre class="screen">instr 1, pvs-signal fsig:	10 points, scalemax 0.000</pre>
+        <p>
+	</p>
       </div>
       <div class="refsect1">
-        <a id="idm185232"></a>
+        <a id="idm271099"></a>
         <h2>Examples</h2>
         <p>
-      Here is an example of the pvsdisp opcode. It uses the file <a class="ulink" href="examples/pvsdisp.csd" target="_top"><em class="citetitle">pvsdisp.csd</em></a>. This example uses realtime input, but you can also use it for soundfile input.
+      Here is an example of the pvsdisp opcode. It uses the file <a class="ulink" href="examples/pvsdisp.csd" target="_top"><em class="citetitle">pvsdisp.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm185237"></a>
+          <a id="idm271104"></a>
           <p class="title">
-            <strong>Example 812. Example of the pvsdisp opcode</strong>
+            <strong>Example 827. Example of the pvsdisp opcode</strong>
           </p>
           <div class="example-contents">
             <p>See the sections <a class="link" href="UsingRealTime.html" title="Real-Time Audio"><em class="citetitle">Real-time Audio</em></a> and <a class="link" href="CommandFlags.html" title="Csound command line"><em class="citetitle">Command Line Flags</em></a> for more information on using command line flags.</p>
             <div class="refsect1">
-              <a id="idm185244"></a>
+              <a id="idm271111"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
 <span class="c1">; Audio out   Audio in</span>
--odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+-n  <span class="c1">;;;no sound</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o pvsdisp.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w"> 
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w"> 
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
-a<span class="n">sig</span> <span class="nb">inch</span> <span class="mi">1</span>
-<span class="c1">;a1   soundin "input.wav"  ;select a soundifle</span>
-f<span class="n">sig</span> <span class="nb">pvsanal</span> a<span class="n">sig</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1</span>
-<span class="nb">pvsdisp</span> f<span class="n">sig</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-<span class="kd">endin</span>
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">soundin</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w">  </span><span class="c1">;select a soundifle</span><span class="w">
+</span>f<span class="n">sig</span><span class="w"> </span><span class="nb">pvsanal</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+     </span><span class="nb">pvsdisp</span><span class="w"> </span>f<span class="n">sig</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="kd">endin</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">30</span>
-<span class="nb">e</span>
-
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">2.7</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -128,7 +129,7 @@ f<span class="n">sig</span> <span class="nb">pvsanal</span> a<span class="n">sig
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm185296"></a>
+        <a id="idm271201"></a>
         <h2>See Also</h2>
         <p>
       <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>,
@@ -139,7 +140,7 @@ f<span class="n">sig</span> <span class="nb">pvsanal</span> a<span class="n">sig
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm185309"></a>
+        <a id="idm271214"></a>
         <h2>Credits</h2>
         <p> Author: Victor Lazzarini, 2006 </p>
       </div>

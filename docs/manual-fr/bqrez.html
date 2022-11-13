@@ -6,7 +6,7 @@
     <title>bqrez</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="bpfcos.html" title="bpfcos" />
@@ -39,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm36450"></a>
+        <a id="idm48379"></a>
         <h2>Description</h2>
         <p>
       Un filtre multi-modes du second ordre.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm36453"></a>
+        <a id="idm48382"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>bqrez</strong></span> asig, xfco, xres [, imode] [, iskip]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm36457"></a>
+        <a id="idm48386"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>imode</em></span> (facultatif, 0 par défaut) -- Le mode du filtre.
@@ -85,7 +85,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm36474"></a>
+        <a id="idm48403"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ares</em></span> -- signal audio en sortie.
@@ -119,16 +119,16 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm36487"></a>
+        <a id="idm48416"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode bqrez. Il utilise le fichier
       <a class="ulink" href="examples/bqrez.csd" target="_top"><em class="citetitle">bqrez.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm36492"></a>
+          <a id="idm48421"></a>
           <p class="title">
-            <strong>Exemple 105. Exemple de l'opcode bqrez emprunté de l'opcode <span class="quote">« <span class="quote">rezzy</span> »</span>
+            <strong>Exemple 109. Exemple de l'opcode bqrez emprunté de l'opcode <span class="quote">« <span class="quote">rezzy</span> »</span>
         dans le manuel de Kevin Conder.</strong>
           </p>
           <div class="example-contents">
@@ -136,7 +136,7 @@
         <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm36500"></a>
+              <a id="idm48429"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -146,38 +146,38 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o bqrez.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>			<span class="c1">;sawtooth waveform.</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">			</span><span class="c1">;sawtooth waveform.</span><span class="w">
 
-k<span class="n">fco</span>  <span class="nb">line</span> <span class="mi">200</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">2000</span><span class="c1">;filter-cutoff frequency from .2 to 5 KHz.</span>
-k<span class="n">res</span>  <span class="o">=</span> <span class="vi">p4</span>		<span class="c1">;resonance</span>
-i<span class="n">mode</span> <span class="o">=</span> <span class="vi">p5</span>		<span class="c1">;mode</span>
-a<span class="n">sig</span>	<span class="nb">vco</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">1</span>
-a<span class="n">filt</span>	<span class="nb">bqrez</span> a<span class="n">sig</span><span class="p">,</span> k<span class="n">fco</span><span class="p">,</span> k<span class="n">res</span><span class="p">,</span> i<span class="n">mode</span>
-a<span class="n">sig</span>	<span class="nb">balance</span> a<span class="n">filt</span><span class="p">,</span> a<span class="n">sig</span>
-	<span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+</span>k<span class="n">fco</span><span class="w">  </span><span class="nb">line</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="c1">;filter-cutoff frequency from .2 to 5 KHz.</span><span class="w">
+</span>k<span class="n">res</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">		</span><span class="c1">;resonance</span><span class="w">
+</span>i<span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">		</span><span class="c1">;mode</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="nb">vco</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mi">220</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>a<span class="n">filt</span><span class="w">	</span><span class="nb">bqrez</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>k<span class="n">fco</span><span class="p">,</span><span class="w"> </span>k<span class="n">res</span><span class="p">,</span><span class="w"> </span>i<span class="n">mode</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="nb">balance</span><span class="w"> </span>a<span class="n">filt</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+	</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
 
-<span class="kd">endin</span>
+</span><span class="kd">endin</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="c1">;sine wave</span>
-<span class="nb">f</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">16384</span> <span class="mi">10</span> <span class="mi">1</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">;sine wave</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mi">1</span> <span class="mi">0</span>		<span class="c1">; low pass</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="mi">30</span> <span class="mi">0</span>		<span class="c1">; low pass</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="mi">1</span> <span class="mi">1</span>		<span class="c1">; high pass</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="mi">30</span> <span class="mi">1</span>		<span class="c1">; high pass</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">		</span><span class="c1">; low pass</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="mi">0</span><span class="w">		</span><span class="c1">; low pass</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w">		</span><span class="c1">; high pass</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="mi">1</span><span class="w">		</span><span class="c1">; high pass</span><span class="w">
 
-<span class="nb">e</span>
+</span><span class="nb">e</span><span class="w">
 
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -187,7 +187,7 @@ a<span class="n">sig</span>	<span class="nb">balance</span> a<span class="n">fil
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm36608"></a>
+        <a id="idm48622"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="biquad.html" title="biquad"><em class="citetitle">biquad</em></a>, 
@@ -196,7 +196,7 @@ a<span class="n">sig</span>	<span class="nb">balance</span> a<span class="n">fil
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm36617"></a>
+        <a id="idm48631"></a>
         <h2>Crédits</h2>
         <p>
       </p>

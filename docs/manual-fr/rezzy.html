@@ -6,7 +6,7 @@
     <title>rezzy</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="rewindscore.html" title="rewindscore" />
@@ -39,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm198640"></a>
+        <a id="idm290806"></a>
         <h2>Description</h2>
         <p>
       Un filtre passe-bas à résonance.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm198643"></a>
+        <a id="idm290809"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>rezzy</strong></span> asig, xfco, xres [, imode, iskip]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm198647"></a>
+        <a id="idm290813"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>imode</em></span> (facultatif, 0 par défaut) -- mode passe-haut ou
@@ -66,7 +66,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm198655"></a>
+        <a id="idm290821"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>asig</em></span> -- signal d'entrée
@@ -86,23 +86,23 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm198665"></a>
+        <a id="idm290831"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode rezzy. Il utilise le fichier
       <a class="ulink" href="examples/rezzy.csd" target="_top"><em class="citetitle">rezzy.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm198670"></a>
+          <a id="idm290836"></a>
           <p class="title">
-            <strong>Exemple 895. Exemple de l'opcode rezzy.</strong>
+            <strong>Exemple 909. Exemple de l'opcode rezzy.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
         <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm198677"></a>
+              <a id="idm290843"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -112,31 +112,31 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o rezzy.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-a<span class="n">saw</span> <span class="nb">vco2</span> <span class="mf">.3</span><span class="p">,</span> <span class="mi">110</span>	<span class="c1">;sawtooth</span>
-k<span class="n">cf</span>  <span class="nb">line</span> <span class="mi">1760</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">220</span>	<span class="c1">;vary cut-off frequency from 220 to 1280 Hz</span>
-k<span class="n">res</span> <span class="o">=</span> <span class="vi">p4</span>		<span class="c1">;vary resonance too</span>
-a<span class="n">res</span> <span class="nb">rezzy</span> a<span class="n">saw</span><span class="p">,</span> k<span class="n">cf</span><span class="p">,</span> k<span class="n">res</span>
-a<span class="n">sig</span> <span class="nb">balance</span> a<span class="n">res</span><span class="p">,</span> a<span class="n">saw</span>
-     <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+</span>a<span class="n">saw</span><span class="w"> </span><span class="nb">vco2</span><span class="w"> </span><span class="mf">.3</span><span class="p">,</span><span class="w"> </span><span class="mi">110</span><span class="w">	</span><span class="c1">;sawtooth</span><span class="w">
+</span>k<span class="n">cf</span><span class="w">  </span><span class="nb">line</span><span class="w"> </span><span class="mi">1760</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">220</span><span class="w">	</span><span class="c1">;vary cut-off frequency from 220 to 1280 Hz</span><span class="w">
+</span>k<span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">		</span><span class="c1">;vary resonance too</span><span class="w">
+</span>a<span class="n">res</span><span class="w"> </span><span class="nb">rezzy</span><span class="w"> </span>a<span class="n">saw</span><span class="p">,</span><span class="w"> </span>k<span class="n">cf</span><span class="p">,</span><span class="w"> </span>k<span class="n">res</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">balance</span><span class="w"> </span>a<span class="n">res</span><span class="p">,</span><span class="w"> </span>a<span class="n">saw</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
 
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">4</span> <span class="mi">10</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">4</span> <span class="mi">30</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">4</span> <span class="mi">120</span>	<span class="c1">;lots of resonance</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">30</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">120</span><span class="w">	</span><span class="c1">;lots of resonance</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -146,7 +146,7 @@ a<span class="n">sig</span> <span class="nb">balance</span> a<span class="n">res
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm198758"></a>
+        <a id="idm290985"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="biquad.html" title="biquad"><em class="citetitle">biquad</em></a>,
@@ -154,7 +154,7 @@ a<span class="n">sig</span> <span class="nb">balance</span> a<span class="n">res
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm198765"></a>
+        <a id="idm290992"></a>
         <h2>Crédits</h2>
         <p>
       </p>

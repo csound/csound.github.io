@@ -6,7 +6,7 @@
     <title>pvcross</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="pvbufread.html" title="pvbufread" />
@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm181993"></a>
+        <a id="idm264312"></a>
         <h2>Description</h2>
         <p>
       <span class="emphasis"><em>pvcross</em></span> applique les amplitudes d'un fichier d'analyse
@@ -62,12 +62,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm182007"></a>
+        <a id="idm264326"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">ares <span class="command"><strong>pvcross</strong></span> ktimpnt, kfmod, ifile, kampscale1, kampscale2 [, ispecwp]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm182011"></a>
+        <a id="idm264330"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifile</em></span> -- le numéro <span class="emphasis"><em>pvoc</em></span> (n dans
@@ -83,7 +83,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm182022"></a>
+        <a id="idm264341"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ktimpnt</em></span> -- l'écoulement du temps, en secondes, dans
@@ -114,7 +114,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm182036"></a>
+        <a id="idm264355"></a>
         <h2>Exemples</h2>
         <p>
       Ci-dessous un example de l'utilisation de
@@ -143,54 +143,88 @@ apv     <span class="opc">pvcross</span>   ktime2, 1, "clar.pvoc", 1<span class=
       <a class="ulink" href="examples/pvcross.csd" target="_top"><em class="citetitle">pvcross.csd</em></a>
       </p>
         <div class="example">
-          <a id="idm182058"></a>
+          <a id="idm264377"></a>
           <p class="title">
-            <strong>Exemple 788. Exemple de l'opcode pvcross.</strong>
+            <strong>Exemple 800. Exemple de l'opcode pvcross.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm182065"></a>
+              <a id="idm264384"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
--odac   <span class="c1">;;;realtime audio out</span>
+-odac  -m0  <span class="c1">;;;realtime audio out</span>
 <span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o pvcross.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span> 
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span> 
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span> 
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w"> 
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w"> 
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
-<span class="c1">; analyze "beats.wav", "flute.aiff" and "mary.wav" with PVANAL first</span>
-k<span class="n">time1</span> <span class="nb">line</span> <span class="mi">0</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">2</span>			<span class="c1">; used as index in the "beats.pvx" file</span>
-k<span class="n">time2</span> <span class="nb">line</span> <span class="mi">0</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mf">2.6</span>			<span class="c1">; used as index in the "flute.pvx" or "mary.pvx"	</span>
-       <span class="nb">pvbufread</span> k<span class="n">time1</span><span class="p">,</span> <span class="s">"beats.pvx"</span>	<span class="c1">;take only amplitude from "beats.pvx"</span>
-<span class="k">if</span> <span class="vi">p4</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span>
-a<span class="n">sig</span>   <span class="nb">pvcross</span>	k<span class="n">time2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"flute.pvx"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;and keep freqs of "flute.aiff"</span>
-a<span class="n">sig</span>   <span class="o">=</span> a<span class="n">sig</span><span class="o">*</span><span class="mf">.8</span>			<span class="c1">;scale output</span>
-<span class="k">else</span>
-a<span class="n">sig</span>   <span class="nb">pvcross</span>	k<span class="n">time2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s">"mary.pvx"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span> <span class="c1">;and keep freqs of "mary.wav"</span>
-a<span class="n">sig</span>   <span class="o">=</span> a<span class="n">sig</span><span class="o">*</span><span class="mf">.4</span>			<span class="c1">;scale output</span>
-<span class="k">endif</span>
-       <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>
+</span><span class="c1">; by Menno Knevel 2021</span><span class="w">
 
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="mi">0</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">3</span> <span class="mi">1</span>
+</span>gi<span class="n">len1</span><span class="w"> </span><span class="nb">filelen</span><span class="w"> </span><span class="s">"flutec3.wav"</span><span class="w">    </span><span class="c1">; get length of soundfiles</span><span class="w">
+</span>gi<span class="n">len2</span><span class="w">  </span><span class="nb">filelen</span><span class="w"> </span><span class="s">"flute.aiff"</span><span class="w">    </span><span class="c1">; these files are all</span><span class="w">
+</span>gi<span class="n">len3</span><span class="w">  </span><span class="nb">filelen</span><span class="w"> </span><span class="s">"wave.wav"</span><span class="w">      </span><span class="c1">; around 2.7 seconds...</span><span class="w">
 
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="c1">; analyze sound files and output results to pvoc-ex files</span><span class="w">
+</span>i<span class="n">res1</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ pvanal flutec3.wav flutec3.pvx }}</span><span class="w">   </span><span class="c1">; use default settings</span><span class="w">
+</span>i<span class="n">res2</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ pvanal flute.aiff flute.pvx }}</span><span class="w"> 
+</span>i<span class="n">res3</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ pvanal wave.wav wave.pvx }}</span><span class="w">  
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> </span><span class="c1">; untreated signals</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">    </span><span class="nb">diskin2</span><span class="w">   </span><span class="vi">p4</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">print</span><span class="w"> </span>gi<span class="n">len1</span><span class="w">
+</span><span class="nb">print</span><span class="w"> </span>gi<span class="n">len2</span><span class="w">
+</span><span class="nb">print</span><span class="w"> </span>gi<span class="n">len3</span><span class="w">
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">---***YOU NOW HEAR THE UNTREATED SOUND SAMPLES***---</span><span class="se">\n</span><span class="s">"</span><span class="w">
+    </span><span class="nb">outs</span><span class="w">    </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">---***YOU NOW HEAR THE RESULT OF THE ANALYZED FILES:***---</span><span class="se">\n</span><span class="s">"</span><span class="w">
+</span>k<span class="n">time1</span><span class="w"> </span><span class="nb">line</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span>gi<span class="n">len1</span><span class="w">		    </span><span class="c1">; timepointer in "flutec3.pvx" file</span><span class="w">
+</span>k<span class="n">cross</span><span class="w"> </span><span class="nb">expon</span><span class="w">     </span><span class="mf">0.001</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">pvbufread</span><span class="w"> </span>k<span class="n">time1</span><span class="p">,</span><span class="w"> </span><span class="s">"flutec3.pvx"</span><span class="w">	    </span><span class="c1">;take only amplitude from "flute3c.pvx"</span><span class="w">
+    
+</span><span class="k">if</span><span class="w"> </span><span class="vi">p4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">then</span><span class="w">
+    </span>k<span class="n">time2</span><span class="w"> </span><span class="nb">line</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span>gi<span class="n">len2</span><span class="w">		</span><span class="c1">; timepointer in "flute.pvx"</span><span class="w">
+    </span>k<span class="n">freq</span><span class="w"> </span><span class="nb">line</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">			</span><span class="c1">; frequency rise</span><span class="w">
+    </span>a<span class="n">sig</span><span class="w">   </span><span class="nb">pvcross</span><span class="w">	</span>k<span class="n">time2</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="s">"flute.pvx"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">-</span>k<span class="n">cross</span><span class="p">,</span><span class="w"> </span>k<span class="n">cross</span><span class="p">,</span><span class="w"> </span><span class="vi">p5</span><span class="w"> </span><span class="c1">;p5 = preserve spectral envelope</span><span class="w">
+    </span><span class="nb">prints</span><span class="w">  </span><span class="s">"--** preserve spectral envelope = </span><span class="si">%d</span><span class="s"> **--</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+</span><span class="k">else</span><span class="w">
+    </span>k<span class="n">time2</span><span class="w"> </span><span class="nb">line</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span>gi<span class="n">len3</span><span class="w">		</span><span class="c1">; timepointer in "wave.pvx"</span><span class="w">
+    </span>k<span class="n">freq</span><span class="w"> </span><span class="nb">line</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">			</span><span class="c1">; frequency rise</span><span class="w">
+    </span>a<span class="n">sig</span><span class="w">   </span><span class="nb">pvcross</span><span class="w">	</span>k<span class="n">time2</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="s">"wave.pvx"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">-</span>k<span class="n">cross</span><span class="p">,</span><span class="w"> </span>k<span class="n">cross</span><span class="p">,</span><span class="w"> </span><span class="vi">p5</span><span class="w">  </span><span class="c1">;p5 = preserve spectral envelope</span><span class="w">
+    </span><span class="nb">prints</span><span class="w">  </span><span class="s">"--** preserve spectral envelope = </span><span class="si">%d</span><span class="s"> **--</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+</span><span class="k">endif</span><span class="w">
+    </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">s</span><span class="w">                       
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">2.76</span><span class="w">   </span><span class="s">"flutec3.wav"</span><span class="w">   </span><span class="c1">; this is the file to cross with</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mf">2.62</span><span class="w">   </span><span class="s">"flute.aiff"</span><span class="w">    </span><span class="c1">; this one, or..</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">2</span><span class="w">      </span><span class="s">"wave.wav"</span><span class="w">      </span><span class="c1">; this one</span><span class="w">
+
+</span><span class="nb">s</span><span class="c1">;       sample  formant    ; all slowed down to have a good listen   </span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w">     </span><span class="mi">0</span><span class="w">       </span><span class="mi">0</span><span class="w">       </span><span class="c1">; cross flutec3 with the flute, do not preserve formants</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">10</span><span class="w">    </span><span class="mi">1</span><span class="w">       </span><span class="mi">0</span><span class="w">       </span><span class="c1">; cross flutec3 with wave, do not preserve formants</span><span class="w">
+</span><span class="nb">s</span><span class="c1">;       sample   formant</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w">     </span><span class="mi">0</span><span class="w">       </span><span class="mi">1</span><span class="w">       </span><span class="c1">; cross flutec3 with the flute &amp; preserve formants</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">10</span><span class="w">    </span><span class="mi">1</span><span class="w">       </span><span class="mi">1</span><span class="w">       </span><span class="c1">; cross flutec3 with wave &amp; preserve formants</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -200,7 +234,7 @@ a<span class="n">sig</span>   <span class="o">=</span> a<span class="n">sig</spa
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm182175"></a>
+        <a id="idm264817"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="pvbufread.html" title="pvbufread"><em class="citetitle">pvbufread</em></a>,
@@ -211,7 +245,7 @@ a<span class="n">sig</span>   <span class="o">=</span> a<span class="n">sig</spa
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm182188"></a>
+        <a id="idm264830"></a>
         <h2>Crédits</h2>
         <p>
       </p>

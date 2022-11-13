@@ -6,7 +6,7 @@
     <title>powoftwo</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="powershape.html" title="powershape" />
@@ -39,19 +39,19 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178510"></a>
+        <a id="idm259184"></a>
         <h2>Description</h2>
         <p>
       Calcule une puissance de deux.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178513"></a>
+        <a id="idm259187"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>powoftwo</strong></span>(x)  (argument au taux d'initialisation ou de contrôle seulement)</pre>
       </div>
       <div class="refsect1">
-        <a id="idm178517"></a>
+        <a id="idm259191"></a>
         <h2>Exécution</h2>
         <p>
       La fonction <span class="emphasis"><em>powoftwo</em></span>() retourne 2<sup><span class="emphasis"><em>x</em></span></sup>
@@ -67,7 +67,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178527"></a>
+        <a id="idm259201"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode powoftwo. Il utilise le fichier
@@ -75,16 +75,16 @@
 
       </p>
         <div class="example">
-          <a id="idm178532"></a>
+          <a id="idm259206"></a>
           <p class="title">
-            <strong>Exemple 767. Exemple de l'opcode powoftwo.</strong>
+            <strong>Exemple 779. Exemple de l'opcode powoftwo.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
         <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
         plus d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm178539"></a>
+              <a id="idm259213"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -94,36 +94,36 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o poweroftwo.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>	<span class="c1">; bit reduction for Lo-Fi sound</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	</span><span class="c1">; bit reduction for Lo-Fi sound</span><span class="w">
 
-i<span class="n">Bits</span>	  <span class="o">=</span> <span class="vi">p4</span>						<span class="c1">;bit depth</span>
-i<span class="n">Quantize</span> <span class="o">=</span> <span class="nb">powoftwo</span><span class="p">(</span>i<span class="n">Bits</span><span class="p">)</span>				<span class="c1">;find number of discrete steps for this bit depth</span>
-i<span class="n">Quantize</span> <span class="o">=</span> i<span class="n">Quantize</span><span class="o">*</span><span class="mf">0.5</span>				<span class="c1">;half the number of steps for each side of a bipolar signal</span>
-<span class="nb">print</span>	  i<span class="n">Quantize</span>
-a<span class="n">sig</span>	  <span class="nb">soundin</span> <span class="s">"fox.wav"</span>
-a<span class="n">sig</span>	  <span class="o">=</span> <span class="nb">round</span><span class="p">(</span>a<span class="n">sig</span> <span class="o">*</span> i<span class="n">Quantize</span><span class="p">)</span> <span class="o">/</span> i<span class="n">Quantize</span>		<span class="c1">;quantize audio signal (bit reduce)</span>
-	  <span class="nb">outs</span> a<span class="n">sig</span><span class="p">,</span> a<span class="n">sig</span>         
+</span>i<span class="n">Bits</span><span class="w">	  </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">						</span><span class="c1">;bit depth</span><span class="w">
+</span>i<span class="n">Quantize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">powoftwo</span><span class="p">(</span>i<span class="n">Bits</span><span class="p">)</span><span class="w">				</span><span class="c1">;find number of discrete steps for this bit depth</span><span class="w">
+</span>i<span class="n">Quantize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>i<span class="n">Quantize</span><span class="o">*</span><span class="mf">0.5</span><span class="w">				</span><span class="c1">;half the number of steps for each side of a bipolar signal</span><span class="w">
+</span><span class="nb">print</span><span class="w">	  </span>i<span class="n">Quantize</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	  </span><span class="nb">soundin</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	  </span><span class="o">=</span><span class="w"> </span><span class="nb">round</span><span class="p">(</span>a<span class="n">sig</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>i<span class="n">Quantize</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span>i<span class="n">Quantize</span><span class="w">		</span><span class="c1">;quantize audio signal (bit reduce)</span><span class="w">
+	  </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">         
 
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="c1">;        bits</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span>   <span class="mi">3</span>  <span class="mi">16</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="o">^+</span><span class="mi">3</span> <span class="o">.</span>  <span class="mi">12</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="o">^+</span><span class="mi">3</span> <span class="o">.</span>   <span class="mi">8</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="o">^+</span><span class="mi">3</span> <span class="o">.</span>   <span class="mi">4</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="o">^+</span><span class="mi">3</span> <span class="o">.</span>   <span class="mi">2</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="o">^+</span><span class="mi">3</span> <span class="o">.</span>   <span class="mi">1</span>
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">;        bits</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="mi">3</span><span class="w">  </span><span class="mi">16</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">^+</span><span class="mi">3</span><span class="w"> </span><span class="o">.</span><span class="w">  </span><span class="mi">12</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">^+</span><span class="mi">3</span><span class="w"> </span><span class="o">.</span><span class="w">   </span><span class="mi">8</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">^+</span><span class="mi">3</span><span class="w"> </span><span class="o">.</span><span class="w">   </span><span class="mi">4</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">^+</span><span class="mi">3</span><span class="w"> </span><span class="o">.</span><span class="w">   </span><span class="mi">2</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">^+</span><span class="mi">3</span><span class="w"> </span><span class="o">.</span><span class="w">   </span><span class="mi">1</span><span class="w">
 
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -144,7 +144,7 @@ instr 1:  iQuantize = 1.000</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178645"></a>
+        <a id="idm259391"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="logbtwo.html" title="logbtwo"><em class="citetitle">logbtwo</em></a>, 
@@ -152,7 +152,7 @@ instr 1:  iQuantize = 1.000</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm178652"></a>
+        <a id="idm259398"></a>
         <h2>Crédits</h2>
         <p>
       </p>

@@ -6,7 +6,7 @@
     <title>hrtfer</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="DeprecatedTop.html" title="Opcodes de l'orchestre et routines GEN obsolètes" />
     <link rel="prev" href="fin.html" title="fin" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm295616"></a>
+        <a id="idm428286"></a>
         <h2>Description</h2>
         <p>
       La sortie audio en 3D est binaurale (casque stéréo).
@@ -60,12 +60,12 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm295621"></a>
+        <a id="idm428291"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">aleft, aright <span class="command"><strong>hrtfer</strong></span> asig, kaz, kelev, <span class="quote">« <span class="quote">HRTFcompact</span> »</span></pre>
       </div>
       <div class="refsect1">
-        <a id="idm295626"></a>
+        <a id="idm428296"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>kAz</em></span> -- valeur d'azimut en degrés. Les valeurs positives
@@ -89,7 +89,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm295639"></a>
+        <a id="idm428309"></a>
         <h2>Exécution</h2>
         <p>
       Ces générateurs unitaires placent un signal d'entrée mono dans un espace 3D
@@ -125,7 +125,7 @@
         </div>
       </div>
       <div class="refsect1">
-        <a id="idm295649"></a>
+        <a id="idm428319"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode hrtfer. Il utilise les fichiers
@@ -134,16 +134,16 @@
       et <a class="ulink" href="examples/beats.wav" target="_top"><em class="citetitle">beats.wav</em></a>.
       </p>
         <div class="example">
-          <a id="idm295658"></a>
+          <a id="idm428328"></a>
           <p class="title">
-            <strong>Exemple 1322. Exemple de l'opcode hrtfer.</strong>
+            <strong>Exemple 1330. Exemple de l'opcode hrtfer.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
       et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
       d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm295665"></a>
+              <a id="idm428335"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -153,35 +153,35 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o hrtfer.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="c1">; Initialize the global variables.</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">4410</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span class="c1">; Initialize the global variables.</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4410</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
-  k<span class="n">az</span>          <span class="nb">linseg</span> <span class="mi">0</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="o">-</span><span class="mi">360</span>  <span class="c1">; move the sound in circle</span>
-  k<span class="n">el</span>          <span class="nb">linseg</span> <span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="vi">p3</span><span class="p">,</span> <span class="mi">45</span>  <span class="c1">; around the listener, changing</span>
-                                    <span class="c1">; elevation as its turning</span>
-  a<span class="n">src</span>         <span class="nb">soundin</span> <span class="s">"beats.wav"</span>
-  a<span class="n">left</span><span class="p">,</span>a<span class="n">right</span> <span class="nb">hrtfer</span> a<span class="n">src</span><span class="p">,</span> k<span class="n">az</span><span class="p">,</span> k<span class="n">el</span><span class="p">,</span> <span class="s">"HRTFcompact"</span>
-  a<span class="n">leftscale</span>   <span class="o">=</span> a<span class="n">left</span> <span class="o">*</span> <span class="mi">200</span>
-  a<span class="n">rightscale</span>  <span class="o">=</span> a<span class="n">right</span> <span class="o">*</span> <span class="mi">200</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span>k<span class="n">az</span><span class="w">          </span><span class="nb">linseg</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">360</span><span class="w">  </span><span class="c1">; move the sound in circle</span><span class="w">
+  </span>k<span class="n">el</span><span class="w">          </span><span class="nb">linseg</span><span class="w"> </span><span class="o">-</span><span class="mi">40</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="w">  </span><span class="c1">; around the listener, changing</span><span class="w">
+                                    </span><span class="c1">; elevation as its turning</span><span class="w">
+  </span>a<span class="n">src</span><span class="w">         </span><span class="nb">soundin</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="w">
+  </span>a<span class="n">left</span><span class="p">,</span>a<span class="n">right</span><span class="w"> </span><span class="nb">hrtfer</span><span class="w"> </span>a<span class="n">src</span><span class="p">,</span><span class="w"> </span>k<span class="n">az</span><span class="p">,</span><span class="w"> </span>k<span class="n">el</span><span class="p">,</span><span class="w"> </span><span class="s">"HRTFcompact"</span><span class="w">
+  </span>a<span class="n">leftscale</span><span class="w">   </span><span class="o">=</span><span class="w"> </span>a<span class="n">left</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">200</span><span class="w">
+  </span>a<span class="n">rightscale</span><span class="w">  </span><span class="o">=</span><span class="w"> </span>a<span class="n">right</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">200</span><span class="w">
 
-  <span class="nb">outs</span>         a<span class="n">leftscale</span><span class="p">,</span> a<span class="n">rightscale</span>
-<span class="kd">endin</span>        
-
-
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span>
-<span class="nb">e</span>
+  </span><span class="nb">outs</span><span class="w">         </span>a<span class="n">leftscale</span><span class="p">,</span><span class="w"> </span>a<span class="n">rightscale</span><span class="w">
+</span><span class="kd">endin</span><span class="w">        
 
 
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -191,7 +191,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm295748"></a>
+        <a id="idm428476"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="hrtfmove.html" title="hrtfmove"><em class="citetitle">hrtfmove</em></a>,
@@ -200,7 +200,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm295757"></a>
+        <a id="idm428485"></a>
         <h2>Crédits</h2>
         <p>
       </p>

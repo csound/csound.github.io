@@ -6,7 +6,7 @@
     <title>dumpk</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="dssilist.html" title="dssilist" />
@@ -40,7 +40,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm62487"></a>
+        <a id="idm88558"></a>
         <h2>Description</h2>
         <p>
       Ecrit périodiquement la valeur d'un signal de contrôle de l'orchestre dans un
@@ -48,12 +48,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm62490"></a>
+        <a id="idm88561"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>dumpk</strong></span>  ksig, ifilname, iformat, iprd</pre>
       </div>
       <div class="refsect1">
-        <a id="idm62494"></a>
+        <a id="idm88565"></a>
         <h2>Initialisation</h2>
         <p>
       <span class="emphasis"><em>ifilname</em></span> -- chaîne de caractères (entre guillemets,
@@ -102,7 +102,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm62517"></a>
+        <a id="idm88588"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>ksig</em></span> -- un signal au taux de contrôle
@@ -118,7 +118,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm62523"></a>
+        <a id="idm88594"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode dumpk. Il utilise le fichier
@@ -127,16 +127,16 @@
       l'écriture est autorisée.
       </p>
         <div class="example">
-          <a id="idm62528"></a>
+          <a id="idm88599"></a>
           <p class="title">
-            <strong>Exemple 249. Exemple de l'opcode dumpk.</strong>
+            <strong>Exemple 253. Exemple de l'opcode dumpk.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm62535"></a>
+              <a id="idm88606"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -146,40 +146,40 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o dumpk.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="c1">; Initialize the global variables.</span>
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">kr</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="c1">; Initialize the global variables.</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="c1">; By Andres Cabrera 2008</span>
+</span><span class="c1">; By Andres Cabrera 2008</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
-<span class="c1">; Write fibonacci numbers to file "fibonacci.txt"</span>
-<span class="c1">; as ascii long integers (mode 7), using the orchestra's</span>
-<span class="c1">; control rate (iprd = 0)</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span><span class="c1">; Write fibonacci numbers to file "fibonacci.txt"</span><span class="w">
+</span><span class="c1">; as ascii long integers (mode 7), using the orchestra's</span><span class="w">
+</span><span class="c1">; control rate (iprd = 0)</span><span class="w">
 
-k<span class="n">number</span> <span class="nb">init</span> <span class="mi">0</span>
-k<span class="n">oldnumber</span> <span class="nb">init</span> <span class="mi">1</span>
-k<span class="n">trans</span> <span class="nb">init</span> <span class="mi">1</span>
-k<span class="n">trans</span> <span class="o">=</span> k<span class="n">number</span>
-k<span class="n">number</span> <span class="o">=</span> k<span class="n">number</span> <span class="o">+</span> k<span class="n">oldnumber</span>
-k<span class="n">oldnumber</span> <span class="o">=</span> k<span class="n">trans</span>
-<span class="nb">dumpk</span>  k<span class="n">number</span><span class="p">,</span> <span class="s">"fibonacci.txt"</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span>
-<span class="nb">printk2</span> k<span class="n">number</span>
-<span class="kd">endin</span>
-
-
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-
-<span class="c1">;Write to the file for 1 second. Since control rate is 20, 20 values will be written</span>
- <span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">1</span>
+</span>k<span class="n">number</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>k<span class="n">oldnumber</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>k<span class="n">trans</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>k<span class="n">trans</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>k<span class="n">number</span><span class="w">
+</span>k<span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>k<span class="n">number</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>k<span class="n">oldnumber</span><span class="w">
+</span>k<span class="n">oldnumber</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>k<span class="n">trans</span><span class="w">
+</span><span class="nb">dumpk</span><span class="w">  </span>k<span class="n">number</span><span class="p">,</span><span class="w"> </span><span class="s">"fibonacci.txt"</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">printk2</span><span class="w"> </span>k<span class="n">number</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
 
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
 
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="c1">;Write to the file for 1 second. Since control rate is 20, 20 values will be written</span><span class="w">
+ </span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -192,13 +192,13 @@ k<span class="n">oldnumber</span> <span class="o">=</span> k<span class="n">tran
       <a class="ulink" href="examples/dumpk-2.csd" target="_top"><em class="citetitle">dumpk-2.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm62605"></a>
+          <a id="idm88727"></a>
           <p class="title">
-            <strong>Exemple 250. Exemple 2 de l'opcode dumpk.</strong>
+            <strong>Exemple 254. Exemple 2 de l'opcode dumpk.</strong>
           </p>
           <div class="example-contents">
             <div class="refsect1">
-              <a id="idm62607"></a>
+              <a id="idm88729"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -208,34 +208,34 @@ k<span class="n">oldnumber</span> <span class="o">=</span> k<span class="n">tran
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">; -o dumpk-2.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span>  <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-gi<span class="n">Sine</span> <span class="nb">ftgen</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">^</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span>
+</span>gi<span class="n">Sine</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">^</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span> <span class="c1">;writes a control signal to a file</span>
-k<span class="n">freq</span> <span class="nb">randh</span>  <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span> <span class="c1">;generates one random number between 400 and 600 per second</span>
-      <span class="nb">dumpk</span>  k<span class="n">freq</span><span class="p">,</span> <span class="s">"dumpk.txt"</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span> <span class="c1">;writes the control signal</span>
-      <span class="nb">printk</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">freq</span> 				 <span class="c1">;prints it</span>
-<span class="kd">endin</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> </span><span class="c1">;writes a control signal to a file</span><span class="w">
+</span>k<span class="n">freq</span><span class="w"> </span><span class="nb">randh</span><span class="w">  </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="c1">;generates one random number between 400 and 600 per second</span><span class="w">
+      </span><span class="nb">dumpk</span><span class="w">  </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="s">"dumpk.txt"</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">;writes the control signal</span><span class="w">
+      </span><span class="nb">printk</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="w"> 				 </span><span class="c1">;prints it</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">2</span> <span class="c1">;reads the file written by instr 1</span>
-k<span class="n">freq</span> <span class="nb">readk</span>  <span class="s">"dumpk.txt"</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span>
-      <span class="nb">printk</span> <span class="mi">1</span><span class="p">,</span> k<span class="n">freq</span> <span class="c1">;prints it</span>
-a<span class="n">out</span>  <span class="nb">poscil</span> <span class="mf">.2</span><span class="p">,</span> k<span class="n">freq</span><span class="p">,</span> gi<span class="n">Sine</span>
-      <span class="nb">outs</span>   a<span class="n">out</span><span class="p">,</span> a<span class="n">out</span>
-<span class="kd">endin</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w"> </span><span class="c1">;reads the file written by instr 1</span><span class="w">
+</span>k<span class="n">freq</span><span class="w"> </span><span class="nb">readk</span><span class="w">  </span><span class="s">"dumpk.txt"</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="nb">printk</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="w"> </span><span class="c1">;prints it</span><span class="w">
+</span>a<span class="n">out</span><span class="w">  </span><span class="nb">poscil</span><span class="w"> </span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span>gi<span class="n">Sine</span><span class="w">
+      </span><span class="nb">outs</span><span class="w">   </span>a<span class="n">out</span><span class="p">,</span><span class="w"> </span>a<span class="n">out</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
 
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">5</span>
-<span class="nb">i</span> <span class="mi">2</span> <span class="mi">5</span> <span class="mi">5</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -264,7 +264,7 @@ WARNING: Seeding from current time 683384022
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm62714"></a>
+        <a id="idm88909"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="dumpk2.html" title="dumpk2"><em class="citetitle">dumpk2</em></a>,
@@ -277,7 +277,7 @@ WARNING: Seeding from current time 683384022
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm62731"></a>
+        <a id="idm88926"></a>
         <h2>Crédits</h2>
         <p>Par : John ffitch et Barry L. Vercoe</p>
         <p>1999 ou avant</p>

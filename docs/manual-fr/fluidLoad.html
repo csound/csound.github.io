@@ -6,7 +6,7 @@
     <title>fluidLoad</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="fluidInfo.html" title="fluidInfo" />
@@ -39,20 +39,26 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm84917"></a>
+        <a id="idm120108"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis">isfnum <span class="command"><strong>fluidLoad</strong></span> soundfont, ienginenum[, ilistpresets]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm84921"></a>
+        <a id="idm120112"></a>
         <h2>Description</h2>
-        <p>Opcode du greffon fluidOpcodes.</p>
+        <p>
+      Opcode du greffon fluidOpcodes. Ce greffon se trouve dans le
+      répertoire des greffons et il doit être installé séparément.
+      Le répertoire des greffons est ici :
+      <a class="ulink" href="https://github.com/csound/plugins" target="_top">
+      <em class="citetitle">https://github.com/csound/plugins</em></a>
+    </p>
         <p>Charge un SoundFont dans une instance d'un fluidEngine, en listant éventuellement les banques
       et les presets du SoundFont.
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm84925"></a>
+        <a id="idm120118"></a>
         <h2>Initialisation</h2>
         <p><span class="emphasis"><em>isfnum </em></span> -- numéro affecté au soundfont qui vient d'être chargé.</p>
         <p><span class="emphasis"><em>soundfont </em></span> -- chaîne spécifiant le nom de fichier d'un SoundFont. Notez que
@@ -66,14 +72,14 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm84935"></a>
+        <a id="idm120128"></a>
         <h2>Exécution</h2>
         <p>Appelez fluidLoad dans l'en-tête de l'orchestre, autant de fois que vous voulez. Le même
       SoundFont peut être appelé pour affecter des programmes à des canaux MIDI autant de fois que
       l'on veut ; le SoundFont n'est chargé que la première fois.</p>
       </div>
       <div class="refsect1">
-        <a id="idm84938"></a>
+        <a id="idm120131"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode fluidLoad. Il utilise les fichiers
@@ -81,16 +87,16 @@
       et <a class="ulink" href="examples/07AcousticGuitar.sf2" target="_top"><em class="citetitle">07AcousticGuitar.sf2</em></a>.
       </p>
         <div class="example">
-          <a id="idm84945"></a>
+          <a id="idm120138"></a>
           <p class="title">
-            <strong>Exemple 337. Exemple de l'opcode fluidLoad.</strong>
+            <strong>Exemple 341. Exemple de l'opcode fluidLoad.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm84952"></a>
+              <a id="idm120145"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
@@ -100,43 +106,43 @@
 <span class="c1">; For Non-realtime ouput leave only the line below:</span>
 <span class="c1">;-o fluidLoad.wav -W ;;; for file output any platform</span>
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
 
-<span class="vg">sr</span> <span class="o">=</span> <span class="mi">44100</span>
-<span class="vg">ksmps</span> <span class="o">=</span> <span class="mi">32</span>
-<span class="vg">nchnls</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="vg">0dbfs</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
 
-gi<span class="n">engine</span> <span class="nb">fluidEngine</span>
-<span class="c1">; soundfont path to manual/examples</span>
-i<span class="n">sfnum</span>	 <span class="nb">fluidLoad</span> <span class="s">"07AcousticGuitar.sf2"</span><span class="p">,</span> gi<span class="n">engine</span><span class="p">,</span> <span class="mi">1</span>
-	 <span class="nb">fluidProgramSelect</span> gi<span class="n">engine</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">sfnum</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+</span>gi<span class="n">engine</span><span class="w"> </span><span class="nb">fluidEngine</span><span class="w">
+</span><span class="c1">; soundfont path to manual/examples</span><span class="w">
+</span>i<span class="n">sfnum</span><span class="w">	 </span><span class="nb">fluidLoad</span><span class="w"> </span><span class="s">"07AcousticGuitar.sf2"</span><span class="p">,</span><span class="w"> </span>gi<span class="n">engine</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+	 </span><span class="nb">fluidProgramSelect</span><span class="w"> </span>gi<span class="n">engine</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">sfnum</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
 
-	<span class="nb">mididefault</span>   <span class="mi">60</span><span class="p">,</span> <span class="vi">p3</span>
-	<span class="nb">midinoteonkey</span> <span class="vi">p4</span><span class="p">,</span> <span class="vi">p5</span>
-i<span class="n">key</span>	<span class="nb">init</span> <span class="vi">p4</span>
-i<span class="n">vel</span>	<span class="nb">init</span> <span class="vi">p5</span>
-	<span class="nb">fluidNote</span> gi<span class="n">engine</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> i<span class="n">key</span><span class="p">,</span> i<span class="n">vel</span>
+	</span><span class="nb">mididefault</span><span class="w">   </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="w">
+	</span><span class="nb">midinoteonkey</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+</span>i<span class="n">key</span><span class="w">	</span><span class="nb">init</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">vel</span><span class="w">	</span><span class="nb">init</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+	</span><span class="nb">fluidNote</span><span class="w"> </span>gi<span class="n">engine</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">key</span><span class="p">,</span><span class="w"> </span>i<span class="n">vel</span><span class="w">
 
-<span class="kd">endin</span>
+</span><span class="kd">endin</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">99</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">99</span><span class="w">
 
-i<span class="n">mvol</span>  <span class="nb">init</span> <span class="mi">7</span>
-a<span class="n">sigl</span><span class="p">,</span> a<span class="n">sigr</span> <span class="nb">fluidOut</span> gi<span class="n">engine</span>
-       <span class="nb">outs</span> a<span class="n">sigl</span><span class="o">*</span>i<span class="n">mvol</span><span class="p">,</span> a<span class="n">sigr</span><span class="o">*</span>i<span class="n">mvol</span>
+</span>i<span class="n">mvol</span><span class="w">  </span><span class="nb">init</span><span class="w"> </span><span class="mi">7</span><span class="w">
+</span>a<span class="n">sigl</span><span class="p">,</span><span class="w"> </span>a<span class="n">sigr</span><span class="w"> </span><span class="nb">fluidOut</span><span class="w"> </span>gi<span class="n">engine</span><span class="w">
+       </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sigl</span><span class="o">*</span>i<span class="n">mvol</span><span class="p">,</span><span class="w"> </span>a<span class="n">sigr</span><span class="o">*</span>i<span class="n">mvol</span><span class="w">
 
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
 
-<span class="nb">i</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">2</span> <span class="mi">60</span> <span class="mi">100</span> <span class="c1">;play one note from score and...</span>
-<span class="nb">i</span> <span class="mi">99</span> <span class="mi">0</span> <span class="mi">60</span>      <span class="c1">;play virtual keyboard for 60 sec.</span>
-<span class="nb">e</span>
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="c1">;play one note from score and...</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">99</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">60</span><span class="w">      </span><span class="c1">;play virtual keyboard for 60 sec.</span><span class="w">
+</span><span class="nb">e</span><span class="w">
 
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -151,7 +157,7 @@ SoundFont:   1  Bank:   0  Preset:   0  Seagul Acoustic Git</pre>
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm85057"></a>
+        <a id="idm120324"></a>
         <h2>Voir aussi</h2>
         <p><a class="link" href="fluidEngine.html" title="fluidEngine"><em class="citetitle">fluidEngine</em></a>,
     <a class="link" href="fluidNote.html" title="fluidNote"><em class="citetitle">fluidNote</em></a></p>
@@ -163,7 +169,7 @@ SoundFont:   1  Bank:   0  Preset:   0  Seagul Acoustic Git</pre>
     <a class="ulink" href="http://en.wikipedia.org/wiki/Soundfont" target="_top"><em class="citetitle">http://en.wikipedia.org/wiki/Soundfont</em></a></p>
       </div>
       <div class="refsect1">
-        <a id="idm85070"></a>
+        <a id="idm120337"></a>
         <h2>Crédits</h2>
         <p>Michael Gogins (gogins@pipeline.com), Steven Yi. Merci à Peter Hanappe pour Fluidsynth.
     </p>

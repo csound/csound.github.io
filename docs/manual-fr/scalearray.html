@@ -6,7 +6,7 @@
     <title>scalearray</title>
     <link rel="stylesheet" type="text/css" href="csound.css" />
     <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
-    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
     <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
     <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
     <link rel="prev" href="scale2.html" title="scale2" />
@@ -39,7 +39,7 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm201897"></a>
+        <a id="idm295482"></a>
         <h2>Description</h2>
         <p>
       L'opcode <span class="emphasis"><em>scalearray</em></span> met à l'échelle une partie d'un
@@ -47,12 +47,12 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm201901"></a>
+        <a id="idm295486"></a>
         <h2>Syntaxe</h2>
         <pre class="synopsis"><span class="command"><strong>scalearray</strong></span> tarray, kmin, kmax[, kleft, kright]</pre>
       </div>
       <div class="refsect1">
-        <a id="idm201905"></a>
+        <a id="idm295490"></a>
         <h2>Exécution</h2>
         <p>
       <span class="emphasis"><em>karray</em></span> -- tableau pour l'opération.
@@ -66,61 +66,61 @@
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm201913"></a>
+        <a id="idm295498"></a>
         <h2>Exemples</h2>
         <p>
       Voici un exemple de l'opcode scalearray. Il utilise le fichier
       <a class="ulink" href="examples/scalearray.csd" target="_top"><em class="citetitle">scalearray.csd</em></a>.
       </p>
         <div class="example">
-          <a id="idm201918"></a>
+          <a id="idm295503"></a>
           <p class="title">
-            <strong>Exemple 916. Exemple de l'opcode scalearray.</strong>
+            <strong>Exemple 930. Exemple de l'opcode scalearray.</strong>
           </p>
           <div class="example-contents">
             <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
         et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
         d'information sur l'utilisation des options de la ligne de commande.</p>
             <div class="refsect1">
-              <a id="idm201925"></a>
+              <a id="idm295510"></a>
               <pre class="programlisting">
 <span class="nt">&lt;CsoundSynthesizer&gt;</span>
 <span class="nt">&lt;CsOptions&gt;</span>
 <span class="c1">; Select audio/midi flags here according to platform</span>
 -n 
 <span class="nt">&lt;/CsOptions&gt;</span>
-<span class="nt">&lt;CsInstruments&gt;</span>
-<span class="c1">;example by joachim heintz</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+</span><span class="c1">;example by joachim heintz</span><span class="w">
 
-           <span class="nb">seed</span>       <span class="mi">0</span>
+           </span><span class="nb">seed</span><span class="w">       </span><span class="mi">0</span><span class="w">
 
-<span class="kd">instr</span> <span class="nf">1</span>
-<span class="c1">;create an array with 10 elements</span>
-k<span class="n">Arr</span><span class="p">[]</span>     <span class="nb">init</span>       <span class="mi">10</span>
-<span class="c1">;fill in random numbers and print them out</span>
-           <span class="nb">printks</span>    <span class="s">"kArr in maximum range 0..100:</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">0</span>
-k<span class="n">Indx</span>      <span class="o">=</span>          <span class="mi">0</span>
-  <span class="k">until</span> k<span class="n">Indx</span> <span class="o">==</span> <span class="mi">10</span> <span class="k">do</span>
-k<span class="n">Num</span>       <span class="nb">random</span>     <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span>
-k<span class="n">Arr</span><span class="p">[</span>k<span class="n">Indx</span><span class="p">]</span> <span class="o">=</span>         k<span class="n">Num</span>
-           <span class="nb">printf</span>     <span class="s">"kArr[</span><span class="si">%d</span><span class="s">] = </span><span class="si">%10f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">Indx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">Indx</span><span class="p">,</span> k<span class="n">Num</span>
-k<span class="n">Indx</span>      <span class="o">+=</span>         <span class="mi">1</span>
-  <span class="k">od</span>
-<span class="c1">;scale numbers 0...1 and print them out again</span>
-           <span class="nb">scalearray</span> k<span class="n">Arr</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
-k<span class="n">Indx</span>      <span class="o">=</span>          <span class="mi">0</span>
-           <span class="nb">printks</span>    <span class="s">"kArr in range 0..1</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="mi">0</span>
-  <span class="k">until</span> k<span class="n">Indx</span> <span class="o">==</span> <span class="mi">10</span> <span class="k">do</span>
-           <span class="nb">printf</span>     <span class="s">"kArr[</span><span class="si">%d</span><span class="s">] = </span><span class="si">%10f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> k<span class="n">Indx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> k<span class="n">Indx</span><span class="p">,</span> k<span class="n">Arr</span><span class="p">[</span>k<span class="n">Indx</span><span class="p">]</span>
-k<span class="n">Indx</span>      <span class="o">+=</span>         <span class="mi">1</span>
-  <span class="k">od</span>
-           <span class="nb">turnoff</span>
-<span class="kd">endin</span>
-<span class="nt">&lt;/CsInstruments&gt;</span>
-<span class="nt">&lt;CsScore&gt;</span>
-<span class="nb">i</span><span class="mi">1</span> <span class="mi">0</span> <span class="mf">0.1</span>
-<span class="nb">e</span>
-<span class="nt">&lt;/CsScore&gt;</span>
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span><span class="c1">;create an array with 10 elements</span><span class="w">
+</span>k<span class="n">Arr</span><span class="p">[]</span><span class="w">     </span><span class="nb">init</span><span class="w">       </span><span class="mi">10</span><span class="w">
+</span><span class="c1">;fill in random numbers and print them out</span><span class="w">
+           </span><span class="nb">printks</span><span class="w">    </span><span class="s">"kArr in maximum range 0..100:</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>k<span class="n">Indx</span><span class="w">      </span><span class="o">=</span><span class="w">          </span><span class="mi">0</span><span class="w">
+  </span><span class="k">until</span><span class="w"> </span>k<span class="n">Indx</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">do</span><span class="w">
+</span>k<span class="n">Num</span><span class="w">       </span><span class="nb">random</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span>k<span class="n">Arr</span><span class="p">[</span>k<span class="n">Indx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w">         </span>k<span class="n">Num</span><span class="w">
+           </span><span class="nb">printf</span><span class="w">     </span><span class="s">"kArr[</span><span class="si">%d</span><span class="s">] = </span><span class="si">%10f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span>k<span class="n">Indx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>k<span class="n">Indx</span><span class="p">,</span><span class="w"> </span>k<span class="n">Num</span><span class="w">
+</span>k<span class="n">Indx</span><span class="w">      </span><span class="o">+=</span><span class="w">         </span><span class="mi">1</span><span class="w">
+  </span><span class="k">od</span><span class="w">
+</span><span class="c1">;scale numbers 0...1 and print them out again</span><span class="w">
+           </span><span class="nb">scalearray</span><span class="w"> </span>k<span class="n">Arr</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>k<span class="n">Indx</span><span class="w">      </span><span class="o">=</span><span class="w">          </span><span class="mi">0</span><span class="w">
+           </span><span class="nb">printks</span><span class="w">    </span><span class="s">"kArr in range 0..1</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span><span class="k">until</span><span class="w"> </span>k<span class="n">Indx</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="k">do</span><span class="w">
+           </span><span class="nb">printf</span><span class="w">     </span><span class="s">"kArr[</span><span class="si">%d</span><span class="s">] = </span><span class="si">%10f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span>k<span class="n">Indx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>k<span class="n">Indx</span><span class="p">,</span><span class="w"> </span>k<span class="n">Arr</span><span class="p">[</span>k<span class="n">Indx</span><span class="p">]</span><span class="w">
+</span>k<span class="n">Indx</span><span class="w">      </span><span class="o">+=</span><span class="w">         </span><span class="mi">1</span><span class="w">
+  </span><span class="k">od</span><span class="w">
+           </span><span class="nb">turnoff</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
 <span class="nt">&lt;/CsoundSynthesizer&gt;</span>
 </pre>
             </div>
@@ -130,7 +130,7 @@ k<span class="n">Indx</span>      <span class="o">+=</span>         <span class=
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm202041"></a>
+        <a id="idm295696"></a>
         <h2>Voir aussi</h2>
         <p>
       <a class="link" href="maxarray.html" title="maxarray"><em class="citetitle">maxarray</em></a>, 
@@ -139,7 +139,7 @@ k<span class="n">Indx</span>      <span class="o">+=</span>         <span class=
     </p>
       </div>
       <div class="refsect1">
-        <a id="idm202050"></a>
+        <a id="idm295705"></a>
         <h2>Crédits</h2>
         <p>
       </p>
