@@ -43,9 +43,7 @@ files.
 * <a href="https://csoundqt.github.io/" target="_blank">CsoundQt</a>
 * <a href="https://blue.kunstmusik.com" target="_blank">Blue</a>
 * <a href="https://cabbageaudio.com/" target="_blank">Cabbage</a>
-* <a href="http://winxound.codeplex.com/" target="_blank">WinXound</a>
 * <a href="https://appsto.re/us/9GV8db.i">RunloopSound</a>
-* <a href="https://atom.io/packages/language-csound">Csound for Atom</a>
 * <a href="https://github.com/hlolli/csound-mode">Csound-Mode for Emacs</a>
 * <a href="http://www.zogotounga.net/comp/csoundx.html"
   target="_blank">Csound for Emacs</a>
