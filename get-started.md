@@ -451,8 +451,9 @@ iRel = 0.7
 iCutoff = 5000
 iRes = .4
 kEnv madsr iAtt, iDec, iSus, iRel 
-aVco vco2 iAmp, iFreq
-aLp moogladder aVco, iCutoff*kEnv, iRes
+aVco1 vco2 iAmp, iFreq
+aVco2 vco2 iAmp, iFreq*.99
+aLp moogladder (aVco1+aVco2)/2, iCutoff*kEnv, iRes
 out aLp*kEnv
 endin
 
