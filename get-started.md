@@ -32,6 +32,7 @@ program. Csound works in more or less the same way, only its object code is a st
 representing audio. In order for us to hear that audio we must play it back through a Digital to
 Analogue Converter. The DAC converts each of the sequenced numbers to a voltage that causes our
 speakers to move and vibrate, thus creating sound.
+Hello Csound!
 
 ## Csound Editors
 Csound text can be written using any source code editor. After a decade in which Csound shipped 
