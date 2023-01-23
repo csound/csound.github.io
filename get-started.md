@@ -25,14 +25,16 @@ sidebar_toc:
 
 ## What is Csound?
 
-Csound is often referred to as a sound compiler. A compiler is a software
-that takes textual instructions in the form of source code and converts them into object code. This
-object code then gets converted into some kind of executable binary in the form of a computer
-program. Csound works in more or less the same way, only its object code is a stream of numbers
-representing audio. In order for us to hear that audio we must play it back through a Digital to
-Analogue Converter. The DAC converts each of the sequenced numbers to a voltage that causes our
-speakers to move and vibrate, thus creating sound. 
-Hello Csound!!
+Csound is a complete software package for making computer music. Csound offers the opportunity to make basic 
+simple sounds, such as a simple sine wave and its spectra, up until the higher level of computer music composition 
+such as sound objects, notes, textures, harmony, etc. Therefore Csound is a compiler with which we can translate 
+source code into sound. A compiler is a software that takes textual instructions in the form of source 
+code and converts them into object code. This object code then gets converted into some kind of 
+executable binary in the form of a computer program. Csound works in more or less the same way, 
+only its object code is a stream of numbers representing audio. In order for us to hear that audio we 
+must play it back through a Digital to Analogue Converter. The DAC converts each of the sequenced numbers 
+to a voltage that causes our speakers to move and vibrate, thus creating sound. 
+
 
 ## Csound Editors
 Csound text can be written using any source code editor. After a decade in which Csound shipped 
@@ -58,11 +60,15 @@ with Csound.
 
 ## Csound syntax
 
-All Csound source code is made up of several sections which are defined in XML type tags. The most
-important sections are the **CsInstruments** and **CsScore** sections. These sections define how our
-instruments will sound, and when they start. All Csound code is case sensitive. That means upper-
-case letters are not the same as lower-case letters. Presented below is the typical document
-structures for a single unified Csound file.
+Csound Synthesizer includes three main sections: 
+- Csound Options: Source code that is enclosed within *<CsOptions>* and *</CsOptios>*. Includes the [Command Line flags](https://csound.com/docs/manual/CommandFlagsCategory.html) specific to this particular file. 
+- Csound instruments: Source code that is enclosed within *<CsInstruments>* and *</CsInstruments>*. Contains the instruments or processes available in the file.
+- Csound score: Source code that is enclosed within *<CsScore>* and *</CsScore>*. Contains the "notes" to be played, and optionally the definition of f-tables. 
+
+These sections define how our instruments will sound and when they start. Instruments are defined using the ***instr*** and ***endin*** opcodes. The *CsInstruments*
+section also  contains the [Orchestra Header](https://csound.com/docs/manual/OrchTop.html#OrchHeader), which defines things like [sample rate](https://csound.com/docs/manual/sr.html), the [number of samples in a control period](https://csound.com/docs/manual/ksmps.html), and the [number of output channels](https://csound.com/docs/manual/nchnls.html). Notes are created using the [i statement](https://csound.com/docs/manual/i.html), and f-tables are created using the [f statement](https://csound.com/docs/manual/f.html). Also several other [score statements](https://csound.com/docs/manual/ScoreStatements.html) are availeble.
+
+All Csound code is case sensitive. That means upper-case letters are not the same as lower-case letters. Presented below is the typical document structure for a single unified Csound file.
 
 <pre><code data-language="csound">
 &lt;CsoundSynthesizer&gt;
@@ -81,6 +87,7 @@ structures for a single unified Csound file.
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
 
+Better to delete this section below ???
 Csound code can be described in terms of its syntax and grammar. Each section uses a slightly
 different syntax. For instance, the syntax used to define an instrument is not the same as the
 simplified syntax used in the CsScore section. While the score section is made up of so-called i and
@@ -150,6 +157,18 @@ the different update rates? Performance. Each and every update to a variable for
 compute something. And each time it does it uses some of its CPU. By limiting the update rate of
 different variables users can improve the performance of their instruments and avoid unwanted audio
 dropouts.
+
+### i Statement
+
+With *i Statement* we can call an instrument with a specified time and duration. We define the *i statement* followed by the p-field parameter as follows:  
+
+i  p1  p2  p3  p4  p5  ...
+
+**p1:** the instrument name or number to be called  
+**p2:** the strting time of the specified instrument  
+**p3:** duration time in beats, usually a positive number. A negative value will initiate a held note (see also [ihold](https://csound.com/docs/manual/ihold.html)). 
+A negative value can also be used for 'always on' instruments like reverberation. A zero value will invoke an initialization pass without performance.  
+**p4, p5, ... :** parameters whose significance is determined by the instrument.
 
 ### Opcodes
 
