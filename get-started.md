@@ -137,18 +137,15 @@ endin
 Variables can be given any name so long as they start with an i, k or a. So what do the i, k and a
 mean?
 
-When Csound starts it begins looping very quickly through the code of each of its instruments. For
-the sake of simplicity we can say that it does this sampling rate times a second. So by default, it
-will read and process each instrument's code 44100 times a second. Each time it runs through the
-instrument code it will update its variables. How quickly it updates each of its variables is
-determined by the variable type.
+When Csound calls an instrument, it begins looping very quickly through its code. **i-rate** variables can only be updated
+in the **very first loop**, which is called the **initialization pass**. We cannot easily change their value afterwards.
+**k-rate** and **a-rate** variables, however, can be changed (and usually are) every loop. The crucial difference is that
+**k-rate** variables contain a single decimal number, whilst **a-rate** variables contain what we call an **audio vector**. 
 
-**a-rate** variables are updated each time Csound runs through the instrument code. **k-rate** variables
-are updated less often, and **i-rate** variables are only updated once just as an instrument starts. Why
-the different update rates? Performance. Each and every update to a variable forces the PC to
-compute something. And each time it does it uses some of its CPU. By limiting the update rate of
-different variables users can improve the performance of their instruments and avoid unwanted audio
-dropouts.
+Audio Vectors are simply a secuence of numbers that can be converted into sound. This is done by reading each of these numbers 
+in order at sampling-rate speed: so by default, the computer would 44100 numbers per second. However, we only cycle through the 
+instrument at "kontrol rate" speed, which is much slower than sampling-rate: but much easier for our machine to do and therefore much
+more efficient. To read the a-rate variables at sampling rate speed, we need to output them to a Digital Analog Converter. 
 
 A more in depth explanation of these different variable types can be found in the [Csound FLOSS Manual](https://flossmanual.csound.com/csound-language/initialization-and-performance-pass). 
 
@@ -234,7 +231,8 @@ ares vco2 kamp, kcps
 
 It outputs an a-rate signal and accepts several different input arguments. **kamp** determines the amplitude of
 the signal, while **kcps** sets the frequency of the signal. The default type of waveform created by
-a **vco2** is a sawtooth waveform. An x before an input argument indicates that i, k or a-rate variables can be used. This is not the case in the vco2 opcode but in 
+a **vco2** is a sawtooth waveform. An x before an input argument indicates that i, k or a-rate variables can be used. 
+This is not the case in the vco2 opcode but in 
 [vco](docs/manual/vco.html) which has two x-input arguments:
 
 <pre><code data-language="csound">
@@ -278,7 +276,7 @@ to address this problem is by adding an extra p-field to the i-statement.
 <pre><code data-language="csound">
 i1 0 100 500
 </code></pre>
-
+ 
 With the new p-field in place, the instrument block can be modified to access that value using a
 special i-rate variable named p4. Whenever Csound starts reading through the code, it will replace
 all instances of p4 with the value from the i-statement. Here is a full example that will play back
