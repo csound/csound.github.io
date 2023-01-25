@@ -149,6 +149,11 @@ more efficient. To read the a-rate variables at sampling rate speed, we need to 
 
 A more in depth explanation of these different variable types can be found in the [Csound FLOSS Manual](https://flossmanual.csound.com/csound-language/initialization-and-performance-pass). 
 
+Csound also has other types of variables such as 
+[Strings](https://flossmanual.csound.com/csound-language/local-and-global-variables#variable-types) and 
+[Arrays](https://flossmanual.csound.com/csound-language/arrays).
+However for the moment, we only need the variable types already described to continue this tutorial.
+
 ### Opcodes
 
 Opcodes can be compared to **functions** in other programming languages: they do things. 
