@@ -25,20 +25,18 @@ sidebar_toc:
 
 ## What is Csound?
 
-Csound is often referred to as a sound compiler. A compiler is a software
-that takes textual instructions in the form of source code and converts them into object code. This
-object code then gets converted into some kind of executable binary in the form of a computer
-program. Csound works in more or less the same way, only its object code is a stream of numbers
-representing audio. In order for us to hear that audio we must play it back through a Digital to
-Analogue Converter. The DAC converts each of the sequenced numbers to a voltage that causes our
-speakers to move and vibrate, thus creating sound. 
+Csound is a complete software package for making computer music. Csound offers the opportunity to produce 
+different sounds, such as a simple sine wave, a complex sprectrum, noise, or to work with sampled sounds.
+We write Csound code which is then compiled. When we run it, it creates a stream of numbers
+representing audio. In order for us to hear that audio we must send it to our sound card. 
+The Digital to Analog Converter (DAC) converts the stream of numbers to a varying voltage that causes our
+speakers to move and vibrate, thus creating sound.
 
 ## Csound Editors
 Csound text can be written using any source code editor. After a decade in which Csound shipped 
 with CsoundQt as default IDE, starting from Csound 6.15, no third-party graphic frontends are shipped 
 with the installation packages on MacOs and Windows. Users should install their choice of frontend separately. 
-The following is a list of editors and extensions written specifically for editing Csound source
-files.
+The following is a list of editors and extensions written specifically for editing Csound files (.csd).
 
 * <a href="https://csoundqt.github.io/" target="_blank">CsoundQt</a>
 * <a href="https://blue.kunstmusik.com" target="_blank">Blue</a>
@@ -52,11 +50,11 @@ The Csound Web IDE can be used natively inside browsers to run Csound projects,
   
   * <a href="https://ide.csound.com/" target="_blank">Csound Web IDE</a>
 
-and is a convenient, installation-free, cross-platform way of working
-with Csound. 
+and is a convenient, installation-free, cross-platform way of working with Csound. 
 
 ## Csound syntax
 
+All Csound code is case sensitive. That means upper-case letters are not the same as lower-case letters. Presented below is the typical document structure for a single unified Csound file.
 All Csound source code is made up of several sections which are defined in [XML](https://www.w3schools.com/xml/) type tags. The most
 important sections are the **CsInstruments** and **CsScore** sections. Simply put, **CsInstruments** defines how our instruments will sound,
 while **CsScore** defines when and how long they will sound . All Csound code is case sensitive. That means upper-
@@ -81,12 +79,14 @@ structures for a single unified Csound file.
 </code></pre>
 
 Csound code can be described in terms of its syntax and grammar. Each section uses a slightly
-different syntax. For instance, the syntax used to define an instrument in CsInstruments is not the same as the
-simplified syntax used in the CsScore section. We will begin by introducing the CsInstruments syntax, 
+different syntax. For instance, the syntax used to define an instrument in `<CsInstruments>` is not the same as the
+simplified syntax used in the `<CsScore>` section. We will begin by introducing the `<CsInstruments>` syntax, 
 which is made up of 6 different components: keywords, variables,
 constants, opcodes, operators and comments.
 
-### Keywords
+### Instrument code
+
+#### Keywords
 
 Keywords are special reserved words that have a unique function and meaning. The two most commonly
 used keywords in the Csound language are **instr** and **endin**. These two keywords define an
@@ -103,7 +103,10 @@ instr DoStuff
 endin
 </code></pre>
 
-Other common keywords are found in the CsInstruments *header section*. The *header section* appears
+
+#### Constants
+
+System constants are found in the CsInstruments *header section*. The *header section* appears
 before any instrument block and sets up vital information about things such as sampling rates,
 **sr**, the number of audio channels to use, **nchnls**, and decibels relative to full scale,
 **0dbfs**.
@@ -118,13 +121,13 @@ instr 1
 endin
 </code></pre>
 
-### Constants and variables
+#### Variables
 
 Constants are easy to spot in Csound code. They appear as fixed numbers. Their values cannot change
 at any stage during performance, or between performances. Variables on the other hand are temporary
-memory slots that can be used to store data; this means that we can change their value during performance. 
-The three simplest and most common types of variables in Csound are **i**, **k** and **a**-rate variables. 
-These types of variables are very easy to spot in Csound because they will always begin with an i, k or a.
+memory slots that can be used to store data. The three simplest and most common types of variables
+in Csound are **i**, **k** and **a**-rate variables. These types of variables are very easy to spot
+in Csound because they will always begin with an i, k or a.
 
 <pre><code data-language="csound">
 instr 1
@@ -154,18 +157,17 @@ Csound also has other types of variables such as
 [Arrays](https://flossmanual.csound.com/csound-language/arrays).
 However for the moment, we only need the variable types already described to continue this tutorial.
 
-### Opcodes
 
-Opcodes can be compared to **functions** in other programming languages: they do things. 
-They are the brains of each and every Csound instrument: we use opcodes to manipulate variables, generate and modify sound,
-output said sound to our speakers, and much more. What an opcode does is usually
-described by its name. For example, **reverb** applies reverberation to an audio signal while **random**
+#### Opcodes
+
+Opcodes do things. They are the brains of each and every Csound instrument. What they do is usually
+described by their name. **reverb** for example applies a reverb to an audio signal while **random**
 generates random numbers. Opcodes, like variables can be **a**, **k**, or **i**-rate.
 
-In their most common form, opcodes are given input arguments and output a result. The rate at which
+In their most common form, opcodes are given input arguments and they output a result. The rate at which
 an opcode operates is determined by the output variable name. Outputs always appear to the left of
 an opcode name, while inputs always appear to the right of the opcode name. The typical syntax for
-most opcodes in Csound is given as:
+most opcodes in Csound is given as
 
 <pre><code data-language="csound">
 aOutput opcode input1, input2, input3, ...
@@ -173,8 +175,8 @@ aOutput opcode input1, input2, input3, ...
 
 While most opcodes in Csound have outputs as well as inputs, some opcodes only have inputs, while
 others only have outputs. It should also be noted that not every opcode can operate at a, k and i
-rate. The simplest way to see what rates are supported by what opcode is by looking at the [Csound
-reference manual](https://csound.com/docs/manual/PartOpcodesOverview.html).
+rate. The simplest way to see what rates are supported by what opcode is by looking at the Csound
+reference manual.
 
 Lines of opcodes can be connected to create a signal graph which describes the flow of the signal
 from one place to another. We can see in the next code example how the signal generated by myOpcode1
@@ -190,10 +192,10 @@ a3 myOpcode3 a2
 endin
 </code></pre>
 
-Csound features almost 1500 opcodes, making it one of the world's most extensive audio programming
-languages. However, you only need to know a few to make great things!
+Csound features more than 1500 opcodes, making it one of the world's most extensive audio programming
+languages.
 
-### Operators
+#### Operators
 
 Mathematical operators are essential to all programming languages. Csound is no different. Any
 **a**, **k** or **i** rate variable can be operated on using the standard set of mathematical
@@ -205,12 +207,27 @@ kVal1 = 100
 kVal2 = kVal1*100
 </code></pre>
 
-### Comments
+#### Comments
 
-Comments are pieces of code that the computer doesn't read. They can be very useful, for example to explain
-what code does, clearly separate its sections, or leaving a reminder to fix/complelte things in the future.
 Single line comments can be added using **;** or **//**. Multi-line comments are be added using
 **/*** to start the comment, and **\*/** to end it.
+
+
+### Score statements
+
+#### i Statement
+
+With *i Statement* we can call an instrument with a specified time and duration. We define the *i statement* followed by the p-field parameter as follows:  
+
+i  p1  p2  p3  p4  p5  ...
+
+**p1:** the instrument name or number to be called  
+**p2:** the strting time of the specified instrument  
+**p3:** duration time in beats, usually a positive number. A negative value will initiate a held note (see also [ihold](https://csound.com/docs/manual/ihold.html)). 
+A negative value can also be used for 'always on' instruments like reverberation. A zero value will invoke an initialization pass without performance.  
+**p4, p5, ... :** parameters whose significance is determined by the instrument.
+
+
 
 ## Your first synthesiser
 
