@@ -140,15 +140,10 @@ endin
 Variables can be given any name so long as they start with an i, k or a. So what do the i, k and a
 mean?
 
-When Csound calls an instrument, it begins looping very quickly through its code. **i-rate** variables can only be updated
-in the **very first loop**, which is called the **initialization pass**. We cannot easily change their value afterwards.
+When Csound calls an instrument, it begins looping very quickly through its code. **i-rate** variables are set
+**before the very first loop**, which is called the **initialization pass**. We cannot easily change their value afterwards.
 **k-rate** and **a-rate** variables, however, can be changed (and usually are) every loop. The crucial difference is that
-**k-rate** variables contain a single decimal number, whilst **a-rate** variables contain what we call an **audio vector**. 
-
-Audio Vectors are simply a secuence of numbers that can be converted into sound. This is done by reading each of these numbers 
-in order at sampling-rate speed: so by default, the computer would 44100 numbers per second. However, we only cycle through the 
-instrument at "kontrol rate" speed, which is much slower than sampling-rate: but much easier for our machine to do and therefore much
-more efficient. To read the a-rate variables at sampling rate speed, we need to output them to a Digital Analog Converter. 
+**k-rate** variables contain a single number, whilst **a-rate** variables contain what we call an **audio vector**. 
 
 A more in depth explanation of these different variable types can be found in the [Csound FLOSS Manual](https://flossmanual.csound.com/csound-language/initialization-and-performance-pass). 
 
