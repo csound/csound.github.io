@@ -79,8 +79,8 @@ structures for a single unified Csound file.
 </code></pre>
 
 Csound code can be described in terms of its syntax and grammar. Each section uses a slightly
-different syntax. For instance, the syntax used to define an instrument in `<CsInstruments>` is not the same as the
-simplified syntax used in the `<CsScore>` section. We will begin by introducing the `<CsInstruments>` syntax, 
+different syntax. For instance, the syntax used to define an instrument in *CsInstruments* is not the same as the
+simplified syntax used in the *CsScore* section. We will begin by introducing the *CsInstruments* syntax, 
 which is made up of 6 different components: keywords, variables,
 constants, opcodes, operators and comments.
 
