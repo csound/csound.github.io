@@ -31,7 +31,7 @@ object code then gets converted into some kind of executable binary in the form 
 program. Csound works in more or less the same way, only its object code is a stream of numbers
 representing audio. In order for us to hear that audio we must play it back through a Digital to
 Analogue Converter. The DAC converts each of the sequenced numbers to a voltage that causes our
-speakers to move and vibrate, thus creating sound.
+speakers to move and vibrate, thus creating sound. 
 
 ## Csound Editors
 Csound text can be written using any source code editor. After a decade in which Csound shipped 
@@ -57,9 +57,9 @@ with Csound.
 
 ## Csound syntax
 
-All Csound source code is made up of several sections which are defined in XML type tags. The most
-important sections are the **CsInstruments** and **CsScore** sections. These sections define how our
-instruments will sound, and when they start. All Csound code is case sensitive. That means upper-
+All Csound source code is made up of several sections which are defined in [XML](https://www.w3schools.com/xml/) type tags. The most
+important sections are the **CsInstruments** and **CsScore** sections. Simply put, **CsInstruments** defines how our instruments will sound,
+while **CsScore** defines when and how long they will sound . All Csound code is case sensitive. That means upper-
 case letters are not the same as lower-case letters. Presented below is the typical document
 structures for a single unified Csound file.
 
@@ -81,9 +81,9 @@ structures for a single unified Csound file.
 </code></pre>
 
 Csound code can be described in terms of its syntax and grammar. Each section uses a slightly
-different syntax. For instance, the syntax used to define an instrument is not the same as the
-simplified syntax used in the CsScore section. While the score section is made up of so-called i and
-f statements, the CsInstruments syntax is made up of 6 different components: keywords, variables,
+different syntax. For instance, the syntax used to define an instrument in CsInstruments is not the same as the
+simplified syntax used in the CsScore section. We will begin by introducing the CsInstruments syntax, 
+which is made up of 6 different components: keywords, variables,
 constants, opcodes, operators and comments.
 
 ### Keywords
@@ -122,9 +122,9 @@ endin
 
 Constants are easy to spot in Csound code. They appear as fixed numbers. Their values cannot change
 at any stage during performance, or between performances. Variables on the other hand are temporary
-memory slots that can be used to store data. The three simplest and most common types of variables
-in Csound are **i**, **k** and **a**-rate variables. These types of variables are very easy to spot
-in Csound because they will always begin with an i, k or a.
+memory slots that can be used to store data; this means that we can change their value during performance. 
+The three simplest and most common types of variables in Csound are **i**, **k** and **a**-rate variables. 
+These types of variables are very easy to spot in Csound because they will always begin with an i, k or a.
 
 <pre><code data-language="csound">
 instr 1
@@ -137,29 +137,35 @@ endin
 Variables can be given any name so long as they start with an i, k or a. So what do the i, k and a
 mean?
 
-When Csound starts it begins looping very quickly through the code of each of its instruments. For
-the sake of simplicity we can say that it does this sampling rate times a second. So by default, it
-will read and process each instrument's code 44100 times a second. Each time it runs through the
-instrument code it will update its variables. How quickly it updates each of its variables is
-determined by the variable type.
+When Csound calls an instrument, it begins looping very quickly through its code. **i-rate** variables can only be updated
+in the **very first loop**, which is called the **initialization pass**. We cannot easily change their value afterwards.
+**k-rate** and **a-rate** variables, however, can be changed (and usually are) every loop. The crucial difference is that
+**k-rate** variables contain a single decimal number, whilst **a-rate** variables contain what we call an **audio vector**. 
 
-**a-rate** variables are updated each time Csound runs through the instrument code. **k-rate** variables
-are updated less often, and **i-rate** variables are only updated once just as an instrument starts. Why
-the different update rates? Performance. Each and every update to a variable forces the PC to
-compute something. And each time it does it uses some of its CPU. By limiting the update rate of
-different variables users can improve the performance of their instruments and avoid unwanted audio
-dropouts.
+Audio Vectors are simply a secuence of numbers that can be converted into sound. This is done by reading each of these numbers 
+in order at sampling-rate speed: so by default, the computer would 44100 numbers per second. However, we only cycle through the 
+instrument at "kontrol rate" speed, which is much slower than sampling-rate: but much easier for our machine to do and therefore much
+more efficient. To read the a-rate variables at sampling rate speed, we need to output them to a Digital Analog Converter. 
+
+A more in depth explanation of these different variable types can be found in the [Csound FLOSS Manual](https://flossmanual.csound.com/csound-language/initialization-and-performance-pass). 
+
+Csound also has other types of variables such as 
+[Strings](https://flossmanual.csound.com/csound-language/local-and-global-variables#variable-types) and 
+[Arrays](https://flossmanual.csound.com/csound-language/arrays).
+However for the moment, we only need the variable types already described to continue this tutorial.
 
 ### Opcodes
 
-Opcodes do things. They are the brains of each and every Csound instrument. What they do is usually
-described by their name. **reverb** for example applies a reverb to an audio signal while **random**
+Opcodes can be compared to **functions** in other programming languages: they do things. 
+They are the brains of each and every Csound instrument: we use opcodes to manipulate variables, generate and modify sound,
+output said sound to our speakers, and much more. What an opcode does is usually
+described by its name. For example, **reverb** applies reverberation to an audio signal while **random**
 generates random numbers. Opcodes, like variables can be **a**, **k**, or **i**-rate.
 
 In their most common form, opcodes are given input arguments and output a result. The rate at which
 an opcode operates is determined by the output variable name. Outputs always appear to the left of
 an opcode name, while inputs always appear to the right of the opcode name. The typical syntax for
-most opcodes in Csound is given as
+most opcodes in Csound is given as:
 
 <pre><code data-language="csound">
 aOutput opcode input1, input2, input3, ...
@@ -167,8 +173,8 @@ aOutput opcode input1, input2, input3, ...
 
 While most opcodes in Csound have outputs as well as inputs, some opcodes only have inputs, while
 others only have outputs. It should also be noted that not every opcode can operate at a, k and i
-rate. The simplest way to see what rates are supported by what opcode is by looking at the Csound
-reference manual.
+rate. The simplest way to see what rates are supported by what opcode is by looking at the [Csound
+reference manual](https://csound.com/docs/manual/PartOpcodesOverview.html).
 
 Lines of opcodes can be connected to create a signal graph which describes the flow of the signal
 from one place to another. We can see in the next code example how the signal generated by myOpcode1
@@ -185,7 +191,7 @@ endin
 </code></pre>
 
 Csound features almost 1500 opcodes, making it one of the world's most extensive audio programming
-languages.
+languages. However, you only need to know a few to make great things!
 
 ### Operators
 
@@ -201,6 +207,8 @@ kVal2 = kVal1*100
 
 ### Comments
 
+Comments are pieces of code that the computer doesn't read. They can be very useful, for example to explain
+what code does, clearly separate its sections, or leaving a reminder to fix/complelte things in the future.
 Single line comments can be added using **;** or **//**. Multi-line comments are be added using
 **/*** to start the comment, and **\*/** to end it.
 
@@ -211,24 +219,32 @@ simple instrument. The opcodes used in this simple instrument are [vco2](docs/ma
 [madsr](docs/manual/madsr.html), [moogladder](docs/manual/moogladder.html) and [out](docs/manual/out.html).
 
 The vco2 opcode models a voltage controlled oscillator. It provides users with an effective way of
-generating band-limited waveforms and can be the building blocks of many a synthesiser. Its syntax,
-taken from the Csound reference manual, is given as:
+generating band-limited waveforms and can be the building blocks of many a synthesiser. In simpler terms, 
+it produces a particular sound with a determined timbre, amplitude and frequency.
+Its syntax, taken from the Csound reference manual, is given as:
 
 <pre><code data-language="csound">
 ares vco2 kamp, kcps [, imode] [, kpw] [, kphs] [, inyx]
 </code></pre>
 
-It outputs an a-rate signal and accepts several different input arguments. An x before an input argument indicates that i, k or a-rate variables can be used. This is not the case in the vco2 opcode but in 
+Square brackets around an input argument means that argument is optional and can be left out. 
+This means that for learning purposes we can write this opcode in a simpler way:
+
+<pre><code data-language="csound">
+ares vco2 kamp, kcps
+</code></pre>
+
+It outputs an a-rate signal and accepts several different input arguments. **kamp** determines the amplitude of
+the signal, while **kcps** sets the frequency of the signal. The default type of waveform created by
+a **vco2** is a sawtooth waveform. An x before an input argument indicates that i, k or a-rate variables can be used. 
+This is not the case in the vco2 opcode but in 
 [vco](docs/manual/vco.html) which has two x-input arguments:
 
 <pre><code data-language="csound">
 ares vco xamp, xcps, iwave, kpw
 </code></pre>
 
-Square brackets around an input
-argument means that argument is optional and can be left out. **kamp** determines the amplitude of
-the signal, while **kcps** sets the frequency of the signal. The default type of waveform created by
-a **vco2** is a sawtooth waveform. The simplest instrument that can be written to use a **vco2** is
+The simplest instrument that can be written to use a **vco2** is
 given below. The **out** opcode is used to output an a-rate signal as audio.
 
 <pre><code data-language="csound">
@@ -238,17 +254,25 @@ out aOut
 endin
 </code></pre>
 
-
 In order to start the above instrument, an i-statement will need to be added to the Csound score
-section. A Csound score isn't all that different to a traditional musical score. In a traditional
+section like so:
+
+<pre><code data-language="csound">
+i 1 0 100
+</code></pre>
+
+A Csound score isn't all that different to a traditional musical score. In a traditional
 score, dots are used to provide information to the musician. In Csound the dots are replaced with
-i-statements, or instrument statements. Each i-statement must contain at least 3 so-called p-fields.
+i-statements, or instrument statements. Each i-statement must contain at least 3 so-called p-fields, 
+which are separated by spaces.
 The first 3 p-fields have a fixed meaning. They always give the instrument name or number, its start
 time in seconds, and its duration in seconds. The following i-statement instructs instrument 1 to
 start playing after 0 seconds and continue playing for 100 second.
 
 <pre><code data-language="csound">
-i1 0 100
+;p-fields:
+; 1 2 3 
+i 1 0 100
 </code></pre>
 
 One obvious limitation here is that the instrument always plays a frequency of 440. The simplest way
@@ -257,7 +281,7 @@ to address this problem is by adding an extra p-field to the i-statement.
 <pre><code data-language="csound">
 i1 0 100 500
 </code></pre>
-
+ 
 With the new p-field in place, the instrument block can be modified to access that value using a
 special i-rate variable named p4. Whenever Csound starts reading through the code, it will replace
 all instances of p4 with the value from the i-statement. Here is a full example that will play back
@@ -322,8 +346,9 @@ i1 2 1 300 .7
 </code></pre>
 
 Another issue in the instrument presented above is that the notes will click each time they sound.
-To avoid this, an amplitude envelope should be applied to the output signal. The most common
-envelope used in synthesisers is the ubiquitous ADSR envelope. ADSR stands for Attack, Decay,
+To avoid this, an amplitude envelope should be applied to the output signal. An envelope causes the 
+amplitude of a single to change over time to avoid instant jumps which produce undwanted clicking.
+The most common envelope used in synthesisers is the ubiquitous ADSR envelope. ADSR stands for Attack, Decay,
 Sustain and Release. The attack, decay and release sections are given in seconds as they relate to
 time values. The sustain value describes the sustain level which kicks in after the attack and decay
 have passed. The note's amplitude will rest at this sustain level until it is released.
