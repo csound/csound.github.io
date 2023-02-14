@@ -227,6 +227,32 @@ One can have a condition using logical operators:
 
 In this case a and b are Boolean expressions using comparison or logical operators.
 
+#### if Statement
+
+The Syntax to use the *if* statement is as follows: 
+
+<pre><code data-language="csound">
+if (a condition b) goto
+  ...code...
+endif
+</code></pre>
+
+In case one wants to determine different results for more than one condition, the syntax is as follows:
+
+<pre><code data-language="csound">
+if (a condition b) then
+  ...code...
+else if (a condition b) then
+  ...code...
+else if (a condition b) then
+  ...code...
+endif
+</code></pre>
+
+#### while Statement
+
+
+
 
 ### Score statements
 
