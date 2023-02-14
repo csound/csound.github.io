@@ -251,8 +251,14 @@ endif
 
 #### while Statement
 
+When the user wants something to be in a loop, repeated, then the *while* statement is suitable. The syntax is 
+as follows:
 
-
+<pre><code data-language="csound">
+while condition do
+  ...code...
+od
+</code></pre>
 
 ### Score statements
 
