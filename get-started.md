@@ -57,8 +57,7 @@ and is a convenient, installation-free, cross-platform way of working with Csoun
 All Csound code is case sensitive. That means upper-case letters are not the same as lower-case letters. Presented below is the typical document structure for a single unified Csound file.
 All Csound source code is made up of several sections which are defined in [XML](https://www.w3schools.com/xml/) type tags. The most
 important sections are the **CsInstruments** and **CsScore** sections. Simply put, **CsInstruments** defines how our instruments will sound,
-while **CsScore** defines when and how long they will sound . All Csound code is case sensitive. That means upper-
-case letters are not the same as lower-case letters. Presented below is the typical document
+while **CsScore** defines when and how long they will sound. Presented below is the typical document
 structures for a single unified Csound file.
 
 <pre><code data-language="csound">
@@ -204,9 +203,68 @@ kVal2 = kVal1*100
 
 #### Comments
 
-Single line comments can be added using **;** or **//**. Multi-line comments are be added using
+Single line comments can be added using **;** or **//**. Multi-line comments are added using
 **/*** to start the comment, and **\*/** to end it.
 
+#### Conditions
+
+If needed one can use specific conditions in order to control a statement or the flow in an instrument 
+(or in global space). One can check a variable against another, or against a constant, using a comparison
+operator, which can be *true* or *false* as a result.
+
+*a < b*: true if a is smaller than b\
+*a <= b*: true if a is smaller than or equal to b\
+*a > b*: true if a is bigger than b\
+*a >= b*: true if a is bigger than or equal to b\
+*a == b*: true if a is equal to b\
+*a != b*: true if a is not equal to b
+
+In this case a and b can be variables and/or constants.
+One can have a condition using logical operators:
+
+*a && b*: true only if a AND b are true, false otherwise\
+*a || b*: true only if a OR b is true, false otherwise
+
+In this case a and b are Boolean expressions using comparison or logical operators.
+
+#### if Statement
+
+The Syntax to use the *if* statement is as follows: 
+
+<pre><code data-language="csound">
+if (a condition b) then 
+  ...code...
+[else
+  ...code...]
+endif
+</code></pre>
+
+The code in square brackets is optional.  
+In case one wants to determine different results for more than one condition, the syntax is as follows:
+
+<pre><code data-language="csound">
+if (a condition b) then
+  ...code...
+elseif (a condition b) then
+  ...code...
+elseif (a condition b) then
+  ...code...
+else
+  ...code...
+endif
+</code></pre>
+
+
+#### while Statement
+
+When the user wants something to be in a loop, repeated, then the *while* statement is suitable. The syntax is 
+as follows:
+
+<pre><code data-language="csound">
+while condition do
+  ...code...
+od
+</code></pre>
 
 ### Score statements
 
@@ -217,9 +275,9 @@ With *i Statement* we can call an instrument with a specified time and duration.
 i  p1  p2  p3  p4  p5  ...
 
 **p1:** the instrument name or number to be called  
-**p2:** the strting time of the specified instrument  
+**p2:** the starting time of the specified instrument in beats (default bpm is 60)  
 **p3:** duration time in beats, usually a positive number. A negative value will initiate a held note (see also [ihold](https://csound.com/docs/manual/ihold.html)). 
-A negative value can also be used for 'always on' instruments like reverberation. A zero value will invoke an initialization pass without performance.  
+A negative value can also be used for 'always on' instruments like reverberation. 
 **p4, p5, ... :** parameters whose significance is determined by the instrument.
 
 
