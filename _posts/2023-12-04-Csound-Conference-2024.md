@@ -6,7 +6,7 @@ categories: site news
 ---
 
 The 7th international Csound Conference will take place in Vienna, Austria
-From November 17th to September 20th 2024.
+From September 17th to September 20th 2024.
 
 Webpage here: <https://mdw.ac.at/icsc2024/>
 
