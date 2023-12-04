@@ -13,7 +13,7 @@ Webpage here: <https://mdw.ac.at/icsc2024/>
 Important dates and deadlines (please check the website above for details and eventual updates):
 
 Conference:
-* Wednesday November 18 -— Friday November 20
+* Wednesday September 18 — Friday September 20
 * Opening Concert: Tuesday September 17
 
 Paper submissions
