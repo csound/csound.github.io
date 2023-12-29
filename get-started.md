@@ -441,6 +441,8 @@ the line with the **out** opcode. Both are valid approaches.
 &lt;CsoundSynthesizer&gt;
 &lt;CsInstruments&gt;
 
+0dbfs = 1
+
 instr 1
 iFreq = p4
 iAmp = p5
@@ -479,6 +481,8 @@ control the filter's cut-off frequency is trivial and can be seen in the next ex
 <pre><code data-language="csound">
 &lt;CsoundSynthesizer&gt;
 &lt;CsInstruments&gt;
+
+0dbfs = 1
 
 instr 1
 iFreq = p4
@@ -535,6 +539,8 @@ warmth to the overall sound.
 -odac -Ma --midi-key-cps=4 --midi-velocity-amp=5
 &lt;/CsOptions&gt;
 &lt;CsInstruments&gt;
+
+0dbfs = 1
 
 instr 1
 iFreq = p4
@@ -597,6 +603,8 @@ right output channels.
 -odac -iadc
 &lt;/CsOptions&gt;
 &lt;CsInstruments&gt;
+
+0dbfs = 1
 
 instr 1
 aInL inch 1
@@ -662,6 +670,8 @@ insure that all variables are defined before use.
 <pre><code data-language="csound">
 &lt;CsInstruments&gt;
 
+0dbfs = 1
+
 instr 1
 kAmp = 1
 a1 oscili kAmp, 440
@@ -680,7 +690,8 @@ capital letters. Remember that Csound is case sensitive; oscil is not the same a
 There are lots of great resources available to those wishing to learn more about Csound. The [Csound
 FLOSS Manual](https://flossmanual.csound.com/) is a comprehensive online textbook for
 learning and using Csound. It covers all aspects of the language and provides detailed code examples
-for you to follow.
+for you to follow. You also find another [Get Started](https://flossmanual.csound.com/get-started) there.
+It can be read and executed in any browser.
 
 The official [Csound Reference Manual](docs/manual/index.html) is available online as well as
 included with most Csound editors and frontends. It contains all information about the usage of the
