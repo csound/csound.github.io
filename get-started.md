@@ -7,8 +7,10 @@ alias:
 sidebar_toc:
   - url: '#what-is-csound'
     name: What is Csound?
-  - url: '#csound-editors'
-    name: 'Csound editors'
+  - url: '#try-csound-online'
+    name: 'Try Csound Online!'
+  - url: '#csound-frontends'
+    name: 'Csound Frontends'
   - url: '#csound-syntax'
     name: 'Csound syntax'
   - url: '#your-first-synthesiser'
@@ -25,36 +27,48 @@ sidebar_toc:
 
 ## What is Csound?
 
-Csound is a complete software package for making computer music. Csound offers the opportunity to produce 
+Csound is a complete software package for creating computer music. Csound offers the opportunity to produce 
 different sounds, such as a simple sine wave, a complex sprectrum, noise, or to work with sampled sounds.
 We write Csound code which is then compiled. When we run it, it creates a stream of numbers
 representing audio. In order for us to hear that audio we must send it to our sound card. 
 The Digital to Analog Converter (DAC) converts the stream of numbers to a varying voltage that causes our
 speakers to move and vibrate, thus creating sound.
 
-## Csound Editors
-Csound text can be written using any source code editor. After a decade in which Csound shipped 
-with CsoundQt as default IDE, starting from Csound 6.15, no third-party graphic frontends are shipped 
-with the installation packages on MacOs and Windows. Users should install their choice of frontend separately. 
-The following is a list of editors and extensions written specifically for editing Csound files (.csd).
+## Try Csound Online!
 
-* <a href="https://csoundqt.github.io/" target="_blank">CsoundQt</a>
-* <a href="https://blue.kunstmusik.com" target="_blank">Blue</a>
-* <a href="https://cabbageaudio.com/" target="_blank">Cabbage</a>
-* <a href="https://appsto.re/us/9GV8db.i">RunloopSound</a>
-* <a href="https://github.com/hlolli/csound-mode">Csound-Mode for Emacs</a>
-* <a href="http://www.zogotounga.net/comp/csoundx.html"
-  target="_blank">Csound for Emacs</a>
-  
-The Csound Web IDE can be used natively inside browsers to run Csound projects,
+Csound code can run in any browser without installing Csound. The main site for it is:
   
   * <a href="https://ide.csound.com/" target="_blank">Csound Web IDE</a>
 
-and is a convenient, installation-free, cross-platform way of working with Csound. 
+To try this, you can open any project, for instance Tarmo Johannes' 
+[Sound Synthesis 1](https://ide.csound.com/editor/sIMqAReULiTpKfY6otBv). Push the Play button, 
+and you should hear a tone. Change the code, for instance in line 14 replace "440" by "660",
+and you will hear 660 Hz as frequency of this tone.
+
+The [Csound FLOSS Manual](https://flossmanual.csound.com/introduction/preface) can also
+be used in this interactive way. Try out the [Getting Started](https://flossmanual.csound.com/get-started/GS-01)
+there, with examples and exercises.
+
+
+## Csound Frontends
+
+The classical way to use Csound is to install a "Frontend". By this, you have a Code Editor,
+and you can execute the code by running Csound. Note that Csound is running "inside"
+the Frontend, so usually you will have to install at first Csound via the
+[Download Page](https://csound.com/download.html), and then one of the Frontends.
+The most popular are:
+
+* <a href="https://cabbageaudio.com/" target="_blank">Cabbage</a>
+* <a href="https://csoundqt.github.io/" target="_blank">CsoundQt</a>
+* <a href="https://blue.kunstmusik.com" target="_blank">Blue</a>
+
+Some general installation instructions can be found [here](https://flossmanual.csound.com/how-to/installation).
+  
 
 ## Csound syntax
 
-All Csound code is case sensitive. That means upper-case letters are not the same as lower-case letters. Presented below is the typical document structure for a single unified Csound file.
+All Csound code is case sensitive. That means upper-case letters are not the same as lower-case letters.
+Presented below is the typical document structure for a single unified Csound file.
 All Csound source code is made up of several sections which are defined in [XML](https://www.w3schools.com/xml/) type tags. The most
 important sections are the **CsInstruments** and **CsScore** sections. Simply put, **CsInstruments** defines how our instruments will sound,
 while **CsScore** defines when and how long they will sound. Presented below is the typical document
@@ -126,7 +140,7 @@ Constants are easy to spot in Csound code. They appear as fixed numbers. Their v
 at any stage during performance, or between performances. Variables on the other hand are temporary
 memory slots that can be used to store data. The three simplest and most common types of variables
 in Csound are **i**, **k** and **a**-rate variables. These types of variables are very easy to spot
-in Csound because they will always begin with an i, k or a.
+in Csound because they will always begin with an **i**, **k** or **a**.
 
 <pre><code data-language="csound">
 instr 1
@@ -136,15 +150,18 @@ aSignal = 0
 endin
 </code></pre>
 
-Variables can be given any name so long as they start with an i, k or a. So what do the i, k and a
-mean?
+Variables can be given any name as long as they start with an **i**, **k** or **a**.
+So what do the **i**, **k** and **a** mean?
 
-When Csound calls an instrument, it begins looping very quickly through its code. **i-rate** variables are set
-**before the very first loop**, which is called the **initialization pass**. We cannot easily change their value afterwards.
-**k-rate** and **a-rate** variables, however, can be changed (and usually are) every loop. The crucial difference is that
-**k-rate** variables contain a single number, whilst **a-rate** variables contain what we call an **audio vector**. 
+When Csound executes an instrument code, it continuously updates the variables in the code.
+**i-rate** variables are set **once** at the beginning, which is called the **initialization pass**. 
+After this initialization, the **k-rate** and **a-rate** variables, are updated continuously.
+These updates are called **performance pass** or **performance loops**.
+The main difference is that **k-rate** variables contain a single number, 
+whilst **a-rate** variables contain what we call an **audio vector**. 
 
-A more in depth explanation of these different variable types can be found in the [Csound FLOSS Manual](https://flossmanual.csound.com/csound-language/initialization-and-performance-pass). 
+A more in depth explanation of these different variable types can be found in the
+[Csound FLOSS Manual](https://flossmanual.csound.com/csound-language/initialization-and-performance-pass). 
 
 Csound also has other types of variables such as 
 [Strings](https://flossmanual.csound.com/csound-language/local-and-global-variables#variable-types) and 
