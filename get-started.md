@@ -116,7 +116,7 @@ Basic components are:
 ### Instrument code
 
 All Csound code is case sensitive. 
-That means that `aSig` and `asig` are two different names.
+That means that *aSig* and *asig* are two different names.
 
 
 #### Keywords
@@ -140,12 +140,17 @@ endin
 #### Constants
 
 System constants are found in the CsInstruments *header section*. The *header section* appears
-before any instrument block and sets up vital information about things such as sampling rates,
-**sr**, the number of audio channels to use, **nchnls**, and decibels relative to full scale,
-**0dbfs**.
+before any instrument block and sets up vital information about: 
++ **sr**: the sample rate (number of audio samples per second)
++ **ksmps**: the number of samples in an audio vector or block of samples
++ **nchnls**: the number of audio channels to use
++ **0dbfs**: which number to be set as zero decibel full scale
+
+These are common settings:
 
 <pre><code data-language="csound">
 sr = 44100
+ksmps = 64
 nchnls = 2
 0dbfs = 1
 
@@ -254,14 +259,14 @@ instr 1
 endin
 </code></pre>
 
-The code line `iAmp = random:i(0,1)` means: "Variable *iAmp* equals a random value
+The code line *iAmp = random:i(0,1)* means: "Variable *iAmp* equals a random value
 at i-rate with the arguments 0 (mininum) and 1 (maximum)."
 
-The code line `kLine = line:k(1,p3,0)` means: "Variable *kLine* equals the result
+The code line *kLine = line:k(1,p3,0)* means: "Variable *kLine* equals the result
 of the line opcode at k-rate with the arguments 1 (start value), 2 (duration in
 seconds) and 0 (target value)."
 
-The code line `aSignal = poscil:a(0.2,440)` means: "Variable *aSignal* equals the result
+The code line *aSignal = poscil:a(0.2,440)* means: "Variable *aSignal* equals the result
 of the poscil opcode at a-rate with the arguments 0.2 (amplitude) and 440 (frequency)."
 
 You can choose which way of writing Csound code you prefer. We will follow the
@@ -288,9 +293,9 @@ Single line comments can be added using **;** or **//**. Multi-line comments are
 
 
 
-### Score statements
+### Score lines
 
-With an *i statement* in the *CsScore* section of the *.csd* file 
+With an *instrument event* in the *CsScore* section of the *.csd* file 
 we can call an instrument with a specified time and duration. 
 The first character of a score line is a lower-case *i*.
 Separated by spaces follow "parameter fields", like columns in a spread sheet.
@@ -358,75 +363,63 @@ i 1 0 3
 This will play for 3 seconds and then terminates.
 Try it [here](https://ide.csound.com/editor/ummJntzs5ciAX8wDTxJi) online.
 
-One obvious limitation here is that the instrument always plays a frequency of 440. The simplest way
-to address this problem is by adding an extra p-field to the i-statement.
+
+### New p-fields
+
+One obvious limitation here is that the instrument always plays a frequency of 440 Hz,
+and an amplitude of 0.1. The simplest way to address this problem is by adding 
+two extra p-fields to the score line. *p4* is meant to be the amplitude, and *p5*
+is meant to be the frequency.
 
 <pre><code data-language="csound">
-i1 0 100 500
+i 1 0 3 0.1 440
+i 1 3 3 0.2 550
 </code></pre>
  
-With the new p-field in place, the instrument block can be modified to access that value using a
-special i-rate variable named p4. Whenever Csound starts reading through the code, it will replace
-all instances of p4 with the value from the i-statement. Here is a full example that will play back
-3 notes, all with a unique pitch and starting time.
+With the new p-field in place, the instrument block can be modified to access that value using
+special i-rate variables named p4 and p5. Whenever Csound starts reading through the code,
+it will put as p4 and p5 the numbers from the score line. 
+
+We can use this feature to play notes in sequence, or simultaneously.
+Both is used in the next example. Try it online 
+[here](https://ide.csound.com/editor/KEJqT73vctEisvUdRcd7).
 
 <pre><code data-language="csound">
 &lt;CsOptions&gt;
-; uncomment the next line if you want to play through speakers
-; -odac
+-o dac // real-time output
 &lt;/CsOptions&gt;
 &lt;CsoundSynthesizer&gt;
 &lt;CsInstruments&gt;
+sr = 44100 // sample rate
+0dbfs = 1 // maximum amplitude (0 dB) is 1
+nchnls = 2 // number of channels is 2 (stereo)
+ksmps = 64 // number of samples in one control cycle (audio vector)
 
-; the next line sets the volume scale 0-1
-; by default this value is 32767
-0dbfs = 1
-
-; defines the first instrument
 instr 1
-; variable for output,  instrument type,  amplitude,  pitch input 
-;                                                     as parameter 4 in the score
-  aOut                  vco2              1,          p4
-; routes the instrument to default output
-out aOut
+  // get p4 from the score line as amplitude
+  iAmp = p4
+  // get p5 from the score line as frequency
+  iFreq = p5
+  // sawtooth tone with these amplitude and frequency values
+  aOut = vco2:a(iAmp,iFreq)
+  // output to all channels
+  outall(aOut)
 endin
 
 &lt;/CsInstruments&gt;
 &lt;CsScore&gt;
-; plays three notes in succession
-; instrument  time to play at   length to play  frequency to play
-  i1          0                 1               100
-  i1          1                 1               200
-  i1          2                 1               300
+// call instrument 1 in sequence
+i 1 0 3 0.1 440
+i 1 3 3 0.2 550
+// call instrument 1 simultaneously
+i 1 7 3 0.05 550
+i 1 7 3 0.05 660
 &lt;/CsScore&gt;
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
 
-i-statements may contain a huge number of p-fields and each one can be accessed in the instrument
-block using its associated p-field variable. Here is the same instrument, only this time both the
-amplitude and pitch are being controlled via the score. Named variables have been added to hold the
-values of p4 and p5. While not necessary, it is good to get into a habit of using clear and well
-defined variable names in your code.
 
-<pre><code data-language="csound">
-&lt;CsoundSynthesizer&gt;
-&lt;CsInstruments&gt;
-
-instr 1
-iFreq = p4
-iAmp = p5
-aOut vco2 iAmp, iFreq
-out aOut
-endin
-
-&lt;/CsInstruments&gt;
-&lt;CsScore&gt;
-i1 0 1 100 1
-i1 1 1 200 .2
-i1 2 1 300 .7
-&lt;/CsScore&gt;
-&lt;/CsoundSynthesizer&gt;
-</code></pre>
+### Envelope
 
 Another issue in the instrument presented above is that the notes will click each time they sound.
 To avoid this, an amplitude envelope should be applied to the output signal. An envelope causes the 
@@ -435,7 +428,6 @@ The most common envelope used in synthesisers is the ubiquitous ADSR envelope. A
 Sustain and Release. The attack, decay and release sections are given in seconds as they relate to
 time values. The sustain value describes the sustain level which kicks in after the attack and decay
 have passed. The note's amplitude will rest at this sustain level until it is released.
-
 
 ![ADSR](/images/ADSR.png)
 
@@ -448,34 +440,49 @@ kres madsr iatt, idec, islev, irel
 
 There are several places in the instrument code where the output of this opcode can be used. It
 could be applied directly to the first input argument of the **vco2** opcode, or it can be placed in
-the line with the **out** opcode. Both are valid approaches.
+the line with the **outall** opcode. Both are valid approaches.
 
 <pre><code data-language="csound">
 &lt;CsoundSynthesizer&gt;
+&lt;CsOptions&gt;
+-o dac // real-time output
+&lt;/CsOptions&gt;
 &lt;CsInstruments&gt;
-
-0dbfs = 1
+sr = 44100 // sample rate
+0dbfs = 1 // maximum amplitude (0 dB) is 1
+nchnls = 2 // number of channels is 2 (stereo)
+ksmps = 64 // number of samples in one control cycle (audio vector)
 
 instr 1
-iFreq = p4
-iAmp = p5
-iAtt = 0.1
-iDec = 0.4
-iSus = 0.6
-iRel = 0.7
-kEnv madsr iAtt, iDec, iSus, iRel 
-aOut vco2 iAmp, iFreq
-out aOut*kEnv
+  // get p4 from the score line as amplitude
+  iAmp = p4
+  // get p5 from the score line as frequency
+  iFreq = p5
+  // setings for madsr envelope
+  iAtt, iDec, iSus, iRel = 0.1, 0.4, 0.6, 0.7
+  // create envelope with madsr opcode
+  kEnv = madsr:k(iAtt,iDec,iSus,iRel)
+  // sawtooth tone 
+  aOut = vco2:a(iAmp,iFreq)
+  // apply envelope by multiplication and output to all channels
+  outall(aOut*kEnv)
 endin
 
 &lt;/CsInstruments&gt;
 &lt;CsScore&gt;
-i1 0 1 100 1
-i1 1 1 200 .2
-i1 2 1 300 .7
+// call instrument 1 in sequence
+i 1 0 2 0.1 440
+i 1 3 2 0.2 550
+// call instrument 1 simultaneously
+i 1 7 3 0.1 550
+i 1 7 3 0.1 660
 &lt;/CsScore&gt;
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
+
+Try out this code [here](https://ide.csound.com/editor/10Ska1IWvCgBrRyEPgJg) online.
+
+### Filter
 
 ADSR envelopes are often used to control the cut-off frequency of low-pass filters. A low-pass
 filter blocks high frequency components of a sound, while letting lower frequencies pass. A popular
@@ -486,40 +493,56 @@ found in Moog synthesisers. Its syntax is given as:
 asig moogladder ain, kcf, kres
 </code></pre>
 
-Its first input argument is an a-rate variable. The next two arguments set the filter cut-off
+Its first input argument is an a-rate variable: the signal to be fed into the filter. 
+The next two arguments set the filter's cut-off
 frequency and the amount of resonance to be added to the signal. Both of these can be k-rate
 variables, thus allowing them to be changed during the note. Using the output from the **madsr** to
 control the filter's cut-off frequency is trivial and can be seen in the next example.
 
 <pre><code data-language="csound">
 &lt;CsoundSynthesizer&gt;
+&lt;CsOptions&gt;
+-o dac // real-time output
+&lt;/CsOptions&gt;
 &lt;CsInstruments&gt;
-
-0dbfs = 1
+sr = 44100 // sample rate
+0dbfs = 1 // maximum amplitude (0 dB) is 1
+nchnls = 2 // number of channels is 2 (stereo)
+ksmps = 64 // number of samples in one control cycle (audio vector)
 
 instr 1
-iFreq = p4
-iAmp = p5
-iAtt = 0.1
-iDec = 0.4
-iSus = 0.6
-iRel = 0.7
-iCutoff = 5000
-iRes = .4
-kEnv madsr iAtt, iDec, iSus, iRel 
-aVco vco2 iAmp, iFreq
-aLp moogladder aVco, iCutoff*kEnv, iRes
-out aLp*kEnv
+  // get p4 from the score line as amplitude
+  iAmp = p4
+  // get p5 from the score line as frequency
+  iFreq = p5
+  // setings for madsr envelope
+  iAtt, iDec, iSus, iRel = 0.1, 0.4, 0.6, 0.7
+  // create envelope with madsr opcode
+  kEnv = madsr:k(iAtt,iDec,iSus,iRel)
+  // set the cutoff frequency and the resonance
+  iCutoff, iRes = 5000, 0.4
+  // sawtooth tone 
+  aVco = vco2:a(iAmp,iFreq)
+  // moogladder low pass filter with variable cutoff frequency
+  aLp = moogladder:a(aVco,iCutoff*kEnv,iRes)
+  // apply envelope by multiplication and output to all channels
+  outall(aLp*kEnv)
 endin
 
 &lt;/CsInstruments&gt;
 &lt;CsScore&gt;
-i1 0 1 100 1
-i1 1 1 200 .2
-i1 2 1 300 .7
+// call instrument 1 in sequence
+i 1 0 2 0.1 440
+i 1 3 2 0.2 550
+// call instrument 1 simultaneously
+i 1 7 3 0.1 550
+i 1 7 3 0.1 660
 &lt;/CsScore&gt;
 &lt;/CsoundSynthesizer&gt;
 </code></pre>
+
+Try out the code [here](https://ide.csound.com/editor/21gdbdb9mEeW1WB5z852) online.
+
 
 ### Controlling your instrument with MIDI
 
@@ -529,8 +552,8 @@ to use a MIDI keyboard to trigger notes. Csound offers a very simple way of acce
 the MIDI keyboard. But first Csound must be instructed to listen to messages from a MIDI keyboard.
 This can be done in the &lt;CsOptions&gt; section of the source code. The &lt;CsOptions&gt; section
 is populated with unique flags that tell Csound how to interact with different devices. A **-Ma**
-will tell Csound to listen for MIDI messages from all available devices. A **-odac** can also be
-added. This will instruct Csound to output audio to the computer's sound card. In order to pass MIDI
+will tell Csound to listen for MIDI messages from all available devices. The **-odac** we already
+added to pipe Csound's output to the computer's sound card. In order to pass MIDI
 note and amplitude data to an instrument, so-called MIDI-interop command line flags can be used.
 Consider the following example:
 
@@ -541,7 +564,7 @@ Consider the following example:
 </code></pre>
 
 Csound will open any available MIDI device. Every time a note is pressed, the note's frequency will
-be passed to p4, while the note's amplitude will be passed to p5. The previous i-statements used to
+be passed to p4, while the note's amplitude will be passed to p5. The previous score lines used to
 trigger the instrument can now be removed from the score section. Below is the code for a fully
 functioning MIDI synth. A second, slightly out of tune vco2 has been added to provide a little
 warmth to the overall sound.
@@ -552,27 +575,35 @@ warmth to the overall sound.
 -odac -Ma --midi-key-cps=4 --midi-velocity-amp=5
 &lt;/CsOptions&gt;
 &lt;CsInstruments&gt;
-
-0dbfs = 1
+sr = 44100 // sample rate
+0dbfs = 1 // maximum amplitude (0 dB) is 1
+nchnls = 2 // number of channels is 2 (stereo)
+ksmps = 64 // number of samples in one control cycle (audio vector)
 
 instr 1
-iFreq = p4
-iAmp = p5
-iAtt = 0.1
-iDec = 0.4
-iSus = 0.6
-iRel = 0.7
-iCutoff = 5000
-iRes = .4
-kEnv madsr iAtt, iDec, iSus, iRel 
-aVco1 vco2 iAmp, iFreq
-aVco2 vco2 iAmp, iFreq*.99
-aLp moogladder (aVco1+aVco2)/2, iCutoff*kEnv, iRes
-out aLp*kEnv
+  // get p4 from the score line as amplitude
+  iAmp = p4
+  // get p5 from the score line as frequency
+  iFreq = p5
+  // setings for madsr envelope
+  iAtt, iDec, iSus, iRel = 0.1, 0.4, 0.6, 0.7
+  // create envelope with madsr opcode
+  kEnv = madsr:k(iAtt,iDec,iSus,iRel)
+  // set the cutoff frequency and the resonance
+  iCutoff, iRes = 5000, 0.4
+  // sawtooth tone 
+  aVco1 = vco2:a(iAmp,iFreq)
+  // another one slightly out of tune
+  aVco2 = vco2:a(iAmp,iFreq*0.99)
+  // moogladder low pass filter with variable cutoff frequency
+  aLp = moogladder:a((aVco1+aVco2)/2,iCutoff*kEnv,iRes)
+  // apply envelope by multiplication and output to all channels
+  outall(aLp*kEnv)
 endin
 
 &lt;/CsInstruments&gt;
 &lt;CsScore&gt;
+// empty score as we expect midi to trigger the instrument
 
 &lt;/CsScore&gt;
 &lt;/CsoundSynthesizer&gt;
@@ -580,6 +611,9 @@ endin
 
 Note that most frontends offer their own MIDI handling. Once this is set up, the user can omit
 the *-Ma* option.
+
+The online code is [here](https://ide.csound.com/editor/Sitwl5x6xHEqYd84NX1K)
+but it requires WebMIDi.
 
 
 ## Your first effect
