@@ -618,19 +618,29 @@ but it requires WebMIDi.
 
 ## Your first effect
 
-Two things are required in order to create an audio effect in Csound. First, audio must be sent from
-the analogue digital converter to Csound, and second, that audio needs to be accessed within an
-instrument block. Csound can be instructed to open the ADC using the **-iadc** command line option
-in the &lt;CsOptions&gt; section of the source code.
+### Real-time audio input
+
+If we want to create an audio effect in Csound on real-time audio input, we need
+to feed the microphone signal into Csound. This is done by the **-i adc** command line option
+in the &lt;CsOptions&gt; section of the source code. It tells Csound to listen for 
+input ("-i") on the analog-to-digital converter ("adc").
+
+These two command line options give both, real-time output and real-time input:
 
 <pre><code data-language="csound">
 &lt;CsOptions&gt;
--odac -iadc
+-o dac -i adc
 &lt;/CsOptions&gt;
 </code></pre>
 
+As usual, most Csound frontends handle this for you, so you may not need to
+write these options explicitely.
+
+
+### Instrument code
+
 The **inch** opcode can be used to access audio from the computer's sound card. It takes a single
-input argument which specifies the audio channel. Once the audio signal has been accessed, it can be
+argument which specifies the channel number. Once the audio signal has been accessed, it can be
 passed through any number of opcodes that accept audio inputs. The **comb** filter opcode can be
 used to create a simple echo type effect. It takes 3 input arguments.
 
@@ -638,7 +648,7 @@ used to create a simple echo type effect. It takes 3 input arguments.
 ares comb asig, krvt, ilpt
 </code></pre>
 
-**asig** will be an audio signal, while **krvt** sets the reverberation time in seconds. **ilpt** sets
+**asig** will be our audio input signal, while **krvt** sets the reverberation time in seconds. **ilpt** sets
 the loop time of each echo. Note that the loop time should always be less than the reverberation
 time, otherwise you will not hear any effect. In the next code example a simple stereo echo effect
 is created by setting up two comb filters with different loop times and sending them to the left and
@@ -647,72 +657,105 @@ right output channels.
 <pre><code data-language="csound">
 &lt;CsoundSynthesizer&gt;
 &lt;CsOptions&gt;
--odac -iadc
+-o dac -i adc
 &lt;/CsOptions&gt;
 &lt;CsInstruments&gt;
-
+sr = 44100
+ksmps = 64
 0dbfs = 1
+nchnls = 2
 
-instr 1
-aInL inch 1
-aInR inch 2
-aCombL comb aInL, 3, .5
-aCombR comb aInR, 3, .7
-out aCombL, aCombR
+instr Effect
+  aInL = inch(1)
+  aInR = inch(2)
+  aCombL = comb(aInL,3,0.5)
+  aCombR = comb(aInR,3,0.7)
+  out(aCombL,aCombR)
 endin
 
 &lt;/CsInstruments&gt;
 &lt;CsScore&gt;
-i1 0 1000
+i "Effect" 0 100
 &lt;/CsScore&gt;
 &lt;/CsoundSynthesizer&gt; 
 </code></pre>
 
+You can access this instrument [here](https://ide.csound.com/editor/qT7qEkqOc723IyphTKLp) online.
+
+
 ## Writing sounds to disk
 
-There may be times when you will want to record the sounds your instrument's make in realtime. The
+### Record a live performance with fout
+
+There may be times when you will want to record the sounds your instruments produce in realtime. The
 easiest way to do this is using a combination of the **fout** and **monitor**. **fout** allows one
-to write an audio vector to file, while **monitor** grabs the contents of Csound's audio outut
+to write a number of audio signals to file, while **monitor** grabs the contents of Csound's audio outut
 buffer. Every sound that Csound produces is passed to its output buffer, so it's the go-to place
 when we need to record audio output. Presented below is a simple instrument that will record all
-sounds to a file called "fout_all.wav"
+sounds to a file called "fout_all.wav".
 
 <pre><code data-language="csound">
-instr 100;read the stereo csound output buffer and write to disk
-allL, allR monitor
-;write the output of csound to
-;to a wav file: 16 bits with header
-fout "fout_all.wav", 14, allL, allR
+instr Collect 
+  ;read the stereo csound output buffer
+  allL, allR monitor
+  ;write the output of csound to a 24 bit wav file
+  fout("fout_all.wav",18,allL,allR)
 endin
 </code></pre>
 
-Instruments responsible for recording output should be on for the duration of a performance. Also
-note that each time this instrument runs, it will overwrite the previous sound file. To avoid this,
-users should move the output soundfile between each run, rename the file in your Csound code before
-each run, or automatically construct a new file on each run using the system date and **sprintf**
-opcodes.
+In modern Csound, we can use an audio array rather than single audio signals for each channel.
+In this version, the *aChannels[]* array contains all audio signals in one container:
+
+<pre><code data-language="csound">
+instr Collect 
+  ;read the stereo csound output buffer
+  aChannels[] monitor
+  ;write the output of csound to a 24 bit wav file
+  fout("fout_all.wav",18,aChannels)
+endin
+</code></pre>
+
+Some frontends provide possibilities to record any live session just by pushing a button,
+but *fout* can be used in any situation. 
+
+
+### Render to file
+
+Csound can not only record real-time performances but also render any score directly
+to a sound file. This is done "as fast as possible", so usually much faster than in
+real-time. 
+
+To apply this, instead of writing **-o dac** we write any file name as output.
+This statement will render to a file called "csound_output.wav":
+
+<pre><code data-language="csound">
+&lt;CsOptions&gt;
+-o csound_output.wav
+&lt;/CsOptions&gt;
+</code></pre>
+
 
 ## Common Errors
 
-Csound will inform you of any errors contained in your source file. Understanding syntax errors is
+Csound will inform you of any errors contained in your code. Understanding syntax errors is
 key to making the most out of Csound. The most common error is the 'used before defined' error. This
 occurs whenever a variable is accessed before it has been defined. For instance, in the following
-code kAmp is passed as an input argument to **oscili** before it is declared.
+code *kAmp* is passed as an input argument to **oscili** before it is declared.
 
 <pre><code data-language="csound">
 &lt;CsInstruments&gt;
 
 instr 1
-a1 oscili kAmp, 440
-out a1
+  aSound = oscili:a(kAmp,440)
+  outall(aSound)
 endin
 
 &lt;/CsInstruments&gt; 
 </code></pre>
 
-When Csound reads through this code and gets to the line with **oscili** it gets confused because it
-can't find a value for kAmp because it has not been defined. In order to avoid this error we have to
-insure that all variables are defined before use.
+When Csound reads through this code and gets to the line with **oscili** it reports an error because it
+can't find a value for *kAmp* as it has not been defined. In order to avoid this error we have to
+ensure that all variables are defined before use.
 
 <pre><code data-language="csound">
 &lt;CsInstruments&gt;
@@ -720,9 +763,9 @@ insure that all variables are defined before use.
 0dbfs = 1
 
 instr 1
-kAmp = 1
-a1 oscili kAmp, 440
-out a1
+  kAmp = 1
+  aSound = oscili:a(kAmp,440)
+  outall(aSound)
 endin
 
 &lt;/CsInstruments&gt; 
@@ -730,7 +773,8 @@ endin
 
 Another common error is 'unexpected T_IDENT'. The most common reason for this error is a typo. The
 typo can be caused by calling an opcode by an incorrect name, or from spelling an opcode with
-capital letters. Remember that Csound is case sensitive; oscil is not the same as Oscil!
+capital letters. Remember that Csound is case sensitive; "oscil" is not the same as "Oscil"!
+
 
 ## Where to now?
 
@@ -739,6 +783,11 @@ FLOSS Manual](https://flossmanual.csound.com/) is a comprehensive online textboo
 learning and using Csound. It covers all aspects of the language and provides detailed code examples
 for you to follow. You also find another [Get Started](https://flossmanual.csound.com/get-started) there.
 It can be read and executed in any browser.
+
+Iain McCurdy's "realtime examples" are a wonderful source of inspiration and
+models for how to get high-quality sounds out of Csound. They are available on his
+[Website](http://iainmccurdy.org/csound.html) and also included in the [Cabbage](https://cabbageaudio.com)
+frontend (the older ones also in [CsoundQt](https://csoundqt.github.io)).
 
 The official [Csound Reference Manual](docs/manual/index.html) is available online as well as
 included with most Csound editors and frontends. It contains all information about the usage of the
