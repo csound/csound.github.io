@@ -260,7 +260,7 @@ endin
 </code></pre>
 
 The code line *iAmp = random:i(0,1)* means: "Variable *iAmp* equals a random value
-at i-rate with the arguments 0 (mininum) and 1 (maximum)."
+at i-rate with the arguments 0 (minimum) and 1 (maximum)."
 
 The code line *kLine = line:k(1,p3,0)* means: "Variable *kLine* equals the result
 of the line opcode at k-rate with the arguments 1 (start value), 2 (duration in
@@ -308,7 +308,7 @@ The first three "p-fields" carry these meanings:
 - **p2:** the starting time of the specified instrument in beats (default bpm is 60)  
 - **p3:** duration time in beats, usually a positive number. A negative value will initiate a held note (see also [ihold](https://csound.com/docs/manual/ihold.html)).  
 A negative value can also be used for 'always on' instruments like reverberation. 
-- **p4, p5, ... :** optiona parameters whose significance is determined by the instrument.
+- **p4, p5, ... :** optional parameters whose significance is determined by the instrument.
 
 
 
@@ -423,7 +423,7 @@ i 1 7 3 0.05 660
 
 Another issue in the instrument presented above is that the notes will click each time they sound.
 To avoid this, an amplitude envelope should be applied to the output signal. An envelope causes the 
-amplitude of a single to change over time to avoid instant jumps which produce undwanted clicking.
+amplitude of a single to change over time to avoid instant jumps which produce unwanted clicking.
 The most common envelope used in synthesisers is the ubiquitous ADSR envelope. ADSR stands for Attack, Decay,
 Sustain and Release. The attack, decay and release sections are given in seconds as they relate to
 time values. The sustain value describes the sustain level which kicks in after the attack and decay
@@ -458,7 +458,7 @@ instr 1
   iAmp = p4
   // get p5 from the score line as frequency
   iFreq = p5
-  // setings for madsr envelope
+  // settings for madsr envelope
   iAtt, iDec, iSus, iRel = 0.1, 0.4, 0.6, 0.7
   // create envelope with madsr opcode
   kEnv = madsr:k(iAtt,iDec,iSus,iRel)
@@ -515,7 +515,7 @@ instr 1
   iAmp = p4
   // get p5 from the score line as frequency
   iFreq = p5
-  // setings for madsr envelope
+  // settings for madsr envelope
   iAtt, iDec, iSus, iRel = 0.1, 0.4, 0.6, 0.7
   // create envelope with madsr opcode
   kEnv = madsr:k(iAtt,iDec,iSus,iRel)
@@ -585,7 +585,7 @@ instr 1
   iAmp = p4
   // get p5 from the score line as frequency
   iFreq = p5
-  // setings for madsr envelope
+  // settings for madsr envelope
   iAtt, iDec, iSus, iRel = 0.1, 0.4, 0.6, 0.7
   // create envelope with madsr opcode
   kEnv = madsr:k(iAtt,iDec,iSus,iRel)
@@ -634,7 +634,7 @@ These two command line options give both, real-time output and real-time input:
 </code></pre>
 
 As usual, most Csound frontends handle this for you, so you may not need to
-write these options explicitely.
+write these options explicitly.
 
 
 ### Instrument code
