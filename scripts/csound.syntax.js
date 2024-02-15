@@ -12,7 +12,7 @@ Rainbow.extend('csound', [
     },
     {
         'name': 'comment',
-        'pattern': /\/\*[\s\S]*?\*\/|;[\s\S]*?$/gm
+        'pattern': /\/\*[\s\S]*?\*\/|\/\/[\s\S]*?$|;[\s\S]*?$/gm
     },
     {
         'name': 'constant.numeric',
