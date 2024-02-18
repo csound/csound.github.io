@@ -65,7 +65,7 @@ The most popular are:
 Some general installation instructions can be found [here](https://flossmanual.csound.com/how-to/installation).
 
 Csound also runs out of the box on [Android](https://play.google.com/store/apps/details?id=com.csounds.Csound6&hl=en).
-  
+
 
 ## Csound syntax
 
@@ -76,22 +76,26 @@ Simply put, **CsInstruments** defines how our instruments will sound,
 while **CsScore** defines when and how long they will sound. 
 Presented below is the typical document structures for a single unified Csound file.
 
-<pre><code data-language="csound">
-&lt;CsoundSynthesizer&gt;
-;all code relating to Csound should be encapsulated between 
-;&lt;CsoundSynthesizer&gt; and &lt;/CsoundSynthesizer&gt;
-&lt;CsOptions&gt;
-;this section tells Csound how to interact with various devices and hardware
-&lt;/CsOptions&gt;
-&lt;CsInstruments&gt;
-;this section contains instrument definitions
-&lt;/CsInstruments&gt;  
-&lt;CsScore&gt;
-;this section tells Csound when and how to perform instruments defined
-;in the CsInstruments section above. 
-&lt;/CsScore&gt;
-&lt;/CsoundSynthesizer&gt;
-</code></pre>
+```csound
+// start of the csound code
+<CsoundSynthesizer>
+
+<CsOptions>
+// this section tells Csound how to interact with various devices and hardware
+</CsOptions>
+
+<CsInstruments>
+// this section contains instrument definitions
+</CsInstruments>  
+
+<CsScore>
+// this section tells Csound when and how to perform instruments defined
+// in the CsInstruments section above. 
+</CsScore>
+
+</CsoundSynthesizer>
+// end of the Csound code
+```
 
 The most important part of such a file is the *CsInstruments* section.
 Here we combine unit generators and encapsulate them in software instruments.
@@ -126,7 +130,7 @@ used keywords in the Csound language are **instr** and **endin**. These two keyw
 instrument block which contains instructions on how an instrument functions. Each instrument must be
 given a unique name or number which follows the **instr** keyword.
 
-<pre><code data-language="csound">
+```csound
 instr 1
 ;do stuff
 endin
@@ -134,7 +138,7 @@ endin
 instr DoStuff
 ;do stuff
 endin
-</code></pre>
+```
 
 
 #### Constants
@@ -148,7 +152,7 @@ before any instrument block and sets up vital information about:
 
 These are common settings:
 
-<pre><code data-language="csound">
+```csound
 sr = 44100
 ksmps = 64
 nchnls = 2
@@ -157,7 +161,7 @@ nchnls = 2
 instr 1
 ;to stuff
 endin
-</code></pre>
+```
 
 
 #### Variables
@@ -202,9 +206,9 @@ an opcode operates is determined by the output variable name. Outputs always app
 an opcode name, while inputs always appear to the right of the opcode name. The typical syntax for
 most opcodes in Csound is given as
 
-<pre><code data-language="csound">
+```csound
 aOutput opcode input1, input2, input3, ...
-</code></pre>
+```
 
 While most opcodes in Csound have outputs as well as inputs, some opcodes only have inputs, while
 others only have outputs. It should also be noted that not every opcode can operate at a, k and i
@@ -217,13 +221,13 @@ is being fed into the input of myOpcode2, which is in turn sent to the inputs of
 that the result of each opcode's calculations are passed to its output parameter, which is located
 to the left of the opcode. These variables can then be used anywhere else in the instrument block.
 
-<pre><code data-language="csound">
+```csound
 instr 1
 a1 myOpcode1 
 a2 myOpcode2 a1
 a3 myOpcode3 a2
 endin
-</code></pre>
+```
 
 Csound features more than 1500 opcodes, making it one of the world's most
 extensive audio programming languages.
@@ -242,22 +246,26 @@ Python or JavaScript.
 Here is an example of all three variable types, each of them defined in the
 traditional or the modern way of writing Csound code.
 
-<pre><code data-language="csound">
+```csound
 instr 1
+
   // define an i-rate variable in traditional Csound syntax
   iAmp random 0,1
   // define an i-rate variable in functional Csound syntax
   iAmp = random:i(0,1)
+  
   // define a k-rate variable in traditional Csound syntax
   kLine line 1,2,0
   // define a k-rate variable in functional Csound syntax
   kLine = line:k(1,2,0)
+  
   // define an a-rate variable in traditional Csound syntax
   aSignal poscil 0.2,440
   // define an a-rate variable in functional Csound syntax
   aSignal = poscil:a(0.2,440)
+  
 endin
-</code></pre>
+```
 
 The code line *iAmp = random:i(0,1)* means: "Variable *iAmp* equals a random value
 at i-rate with the arguments 0 (minimum) and 1 (maximum)."
@@ -280,10 +288,10 @@ Mathematical operators are essential to all programming languages. Csound is no 
 operators, *, /, +, -, etc. Note that multiplying a variable by 20 does not alter the variable's
 value. It simply returns a new value. This new value can then be assigned for use later.
 
-<pre><code data-language="csound">
+```csound
 kVal1 = 100
 kVal2 = kVal1*100
-</code></pre>
+```
 
 
 #### Comments
@@ -323,16 +331,16 @@ generating band-limited waveforms and can be the building blocks of many a synth
 it produces a particular sound with a determined timbre, amplitude and frequency.
 Its syntax, taken from the Csound reference manual, is given as:
 
-<pre><code data-language="csound">
+```csound
 ares vco2 kamp, kcps [, imode] [, kpw] [, kphs] [, inyx]
-</code></pre>
+```
 
 Square brackets around an input argument mean that argument is optional and can be left out. 
 This means that for learning purposes we can write this opcode in a simpler way:
 
-<pre><code data-language="csound">
+```csound
 ares vco2 kamp, kcps
-</code></pre>
+```
 
 It outputs an a-rate signal and accepts several different input arguments. **kamp** determines the amplitude of
 the signal, while **kcps** sets the frequency of the signal. The default type of waveform created by
@@ -340,25 +348,25 @@ a **vco2** is a sawtooth waveform. An x before an input argument indicates that 
 This is not the case in the vco2 opcode but in 
 [vco](docs/manual/vco.html) which has two x-input arguments:
 
-<pre><code data-language="csound">
+```csound
 ares vco xamp, xcps, iwave, kpw
-</code></pre>
+```
 
 The simplest instrument that can be written to use a **vco2** is
 given below. The **outall** opcode is used to output an a-rate signal as audio.
 
-<pre><code data-language="csound">
+```csound
 instr 1
   aOut = vco2:a(1,440)
   outall(aOut)
 endin
-</code></pre>
+```
 
 In order to start the above instrument, this line will need to be added to the Csound score section:
 
-<pre><code data-language="csound">
+```csound
 i 1 0 3
-</code></pre>
+```
 
 This will play for 3 seconds and then terminates.
 Try it [here](https://ide.csound.com/editor/ummJntzs5ciAX8wDTxJi) online.
@@ -371,10 +379,10 @@ and an amplitude of 0.1. The simplest way to address this problem is by adding
 two extra p-fields to the score line. *p4* is meant to be the amplitude, and *p5*
 is meant to be the frequency.
 
-<pre><code data-language="csound">
+```csound
 i 1 0 3 0.1 440
 i 1 3 3 0.2 550
-</code></pre>
+```
  
 With the new p-field in place, the instrument block can be modified to access that value using
 special i-rate variables named p4 and p5. Whenever Csound starts reading through the code,
@@ -384,12 +392,12 @@ We can use this feature to play notes in sequence, or simultaneously.
 Both is used in the next example. Try it online 
 [here](https://ide.csound.com/editor/KEJqT73vctEisvUdRcd7).
 
-<pre><code data-language="csound">
-&lt;CsOptions&gt;
+```csound
+<CsoundSynthesizer>
+<CsOptions>
 -o dac // real-time output
-&lt;/CsOptions&gt;
-&lt;CsoundSynthesizer&gt;
-&lt;CsInstruments&gt;
+</CsOptions>
+<CsInstruments>
 sr = 44100 // sample rate
 0dbfs = 1 // maximum amplitude (0 dB) is 1
 nchnls = 2 // number of channels is 2 (stereo)
@@ -406,17 +414,17 @@ instr 1
   outall(aOut)
 endin
 
-&lt;/CsInstruments&gt;
-&lt;CsScore&gt;
+</CsInstruments>
+<CsScore>
 // call instrument 1 in sequence
 i 1 0 3 0.1 440
 i 1 3 3 0.2 550
 // call instrument 1 simultaneously
 i 1 7 3 0.05 550
 i 1 7 3 0.05 660
-&lt;/CsScore&gt;
-&lt;/CsoundSynthesizer&gt;
-</code></pre>
+</CsScore>
+</CsoundSynthesizer>
+```
 
 
 ### Envelope
@@ -434,20 +442,20 @@ have passed. The note's amplitude will rest at this sustain level until it is re
 Csound offers several ADSR envelopes. The one used here is **madsr**, which is a MIDI ready ADSR.
 Its syntax is given as:
 
-<pre><code data-language="csound">
+```csound
 kres madsr iatt, idec, islev, irel
-</code></pre>
+```
 
 There are several places in the instrument code where the output of this opcode can be used. It
 could be applied directly to the first input argument of the **vco2** opcode, or it can be placed in
 the line with the **outall** opcode. Both are valid approaches.
 
-<pre><code data-language="csound">
-&lt;CsoundSynthesizer&gt;
-&lt;CsOptions&gt;
+```csound
+<CsoundSynthesizer>
+<CsOptions>
 -o dac // real-time output
-&lt;/CsOptions&gt;
-&lt;CsInstruments&gt;
+</CsOptions>
+<CsInstruments>
 sr = 44100 // sample rate
 0dbfs = 1 // maximum amplitude (0 dB) is 1
 nchnls = 2 // number of channels is 2 (stereo)
@@ -468,17 +476,17 @@ instr 1
   outall(aOut*kEnv)
 endin
 
-&lt;/CsInstruments&gt;
-&lt;CsScore&gt;
+</CsInstruments>
+<CsScore>
 // call instrument 1 in sequence
 i 1 0 2 0.1 440
 i 1 3 2 0.2 550
 // call instrument 1 simultaneously
 i 1 7 3 0.1 550
 i 1 7 3 0.1 660
-&lt;/CsScore&gt;
-&lt;/CsoundSynthesizer&gt;
-</code></pre>
+</CsScore>
+</CsoundSynthesizer>
+```
 
 Try out this code [here](https://ide.csound.com/editor/10Ska1IWvCgBrRyEPgJg) online.
 
@@ -489,9 +497,9 @@ filter blocks high frequency components of a sound, while letting lower frequenc
 low-pass filter found in Csound is the moogladder filter which is modeled on the famous filters
 found in Moog synthesisers. Its syntax is given as:
 
-<pre><code data-language="csound">
+```csound
 asig moogladder ain, kcf, kres
-</code></pre>
+```
 
 Its first input argument is an a-rate variable: the signal to be fed into the filter. 
 The next two arguments set the filter's cut-off
@@ -499,12 +507,12 @@ frequency and the amount of resonance to be added to the signal. Both of these c
 variables, thus allowing them to be changed during the note. Using the output from the **madsr** to
 control the filter's cut-off frequency is trivial and can be seen in the next example.
 
-<pre><code data-language="csound">
-&lt;CsoundSynthesizer&gt;
-&lt;CsOptions&gt;
+```csound
+<CsoundSynthesizer>
+<CsOptions>
 -o dac // real-time output
-&lt;/CsOptions&gt;
-&lt;CsInstruments&gt;
+</CsOptions>
+<CsInstruments>
 sr = 44100 // sample rate
 0dbfs = 1 // maximum amplitude (0 dB) is 1
 nchnls = 2 // number of channels is 2 (stereo)
@@ -529,17 +537,17 @@ instr 1
   outall(aLp*kEnv)
 endin
 
-&lt;/CsInstruments&gt;
-&lt;CsScore&gt;
+</CsInstruments>
+<CsScore>
 // call instrument 1 in sequence
 i 1 0 2 0.1 440
 i 1 3 2 0.2 550
 // call instrument 1 simultaneously
 i 1 7 3 0.1 550
 i 1 7 3 0.1 660
-&lt;/CsScore&gt;
-&lt;/CsoundSynthesizer&gt;
-</code></pre>
+</CsScore>
+</CsoundSynthesizer>
+```
 
 Try out the code [here](https://ide.csound.com/editor/21gdbdb9mEeW1WB5z852) online.
 
@@ -557,11 +565,11 @@ added to pipe Csound's output to the computer's sound card. In order to pass MID
 note and amplitude data to an instrument, so-called MIDI-interop command line flags can be used.
 Consider the following example:
 
-<pre><code data-language="csound">
-&lt;CsOptions&gt;
+```csound
+<CsOptions>
 -odac -Ma --midi-key-cps=4 --midi-velocity-amp=5
-&lt;/CsOptions&gt;
-</code></pre>
+</CsOptions>
+```
 
 Csound will open any available MIDI device. Every time a note is pressed, the note's frequency will
 be passed to p4, while the note's amplitude will be passed to p5. The previous score lines used to
@@ -569,12 +577,12 @@ trigger the instrument can now be removed from the score section. Below is the c
 functioning MIDI synth. A second, slightly out of tune vco2 has been added to provide a little
 warmth to the overall sound.
 
-<pre><code data-language="csound">
-&lt;CsoundSynthesizer&gt;
-&lt;CsOptions&gt;
+```csound
+<CsoundSynthesizer>
+<CsOptions>
 -odac -Ma --midi-key-cps=4 --midi-velocity-amp=5
-&lt;/CsOptions&gt;
-&lt;CsInstruments&gt;
+</CsOptions>
+<CsInstruments>
 sr = 44100 // sample rate
 0dbfs = 1 // maximum amplitude (0 dB) is 1
 nchnls = 2 // number of channels is 2 (stereo)
@@ -601,13 +609,13 @@ instr 1
   outall(aLp*kEnv)
 endin
 
-&lt;/CsInstruments&gt;
-&lt;CsScore&gt;
+</CsInstruments>
+<CsScore>
 // empty score as we expect midi to trigger the instrument
 
-&lt;/CsScore&gt;
-&lt;/CsoundSynthesizer&gt;
-</code></pre>
+</CsScore>
+</CsoundSynthesizer>
+```
 
 Note that most frontends offer their own MIDI handling. Once this is set up, the user can omit
 the *-Ma* option.
@@ -627,11 +635,11 @@ input ("-i") on the analog-to-digital converter ("adc").
 
 These two command line options give both, real-time output and real-time input:
 
-<pre><code data-language="csound">
-&lt;CsOptions&gt;
+```csound
+<CsOptions>
 -o dac -i adc
-&lt;/CsOptions&gt;
-</code></pre>
+</CsOptions>
+```
 
 As usual, most Csound frontends handle this for you, so you may not need to
 write these options explicitly.
@@ -644,9 +652,9 @@ argument which specifies the channel number. Once the audio signal has been acce
 passed through any number of opcodes that accept audio inputs. The **comb** filter opcode can be
 used to create a simple echo type effect. It takes 3 input arguments.
 
-<pre><code data-language="csound">
+```csound
 ares comb asig, krvt, ilpt
-</code></pre>
+```
 
 **asig** will be our audio input signal, while **krvt** sets the reverberation time in seconds. **ilpt** sets
 the loop time of each echo. Note that the loop time should always be less than the reverberation
@@ -654,12 +662,12 @@ time, otherwise you will not hear any effect. In the next code example a simple 
 is created by setting up two comb filters with different loop times and sending them to the left and
 right output channels.
 
-<pre><code data-language="csound">
-&lt;CsoundSynthesizer&gt;
-&lt;CsOptions&gt;
+```csound
+<CsoundSynthesizer>
+<CsOptions>
 -o dac -i adc
-&lt;/CsOptions&gt;
-&lt;CsInstruments&gt;
+</CsOptions>
+<CsInstruments>
 sr = 44100
 ksmps = 64
 0dbfs = 1
@@ -673,12 +681,12 @@ instr Effect
   out(aCombL,aCombR)
 endin
 
-&lt;/CsInstruments&gt;
-&lt;CsScore&gt;
+</CsInstruments>
+<CsScore>
 i "Effect" 0 100
-&lt;/CsScore&gt;
-&lt;/CsoundSynthesizer&gt; 
-</code></pre>
+</CsScore>
+</CsoundSynthesizer> 
+```
 
 You can access this instrument [here](https://ide.csound.com/editor/qT7qEkqOc723IyphTKLp) online.
 
@@ -694,26 +702,26 @@ buffer. Every sound that Csound produces is passed to its output buffer, so it's
 when we need to record audio output. Presented below is a simple instrument that will record all
 sounds to a file called "fout_all.wav".
 
-<pre><code data-language="csound">
+```csound
 instr Collect 
   ;read the stereo csound output buffer
   allL, allR monitor
   ;write the output of csound to a 24 bit wav file
   fout("fout_all.wav",18,allL,allR)
 endin
-</code></pre>
+```
 
 In modern Csound, we can use an audio array rather than single audio signals for each channel.
 In this version, the *aChannels[]* array contains all audio signals in one container:
 
-<pre><code data-language="csound">
+```csound
 instr Collect 
   ;read the stereo csound output buffer
   aChannels[] monitor
   ;write the output of csound to a 24 bit wav file
   fout("fout_all.wav",18,aChannels)
 endin
-</code></pre>
+```
 
 Some frontends provide possibilities to record any live session just by pushing a button,
 but *fout* can be used in any situation. 
@@ -728,11 +736,11 @@ real-time.
 To apply this, instead of writing **-o dac** we write any file name as output.
 This statement will render to a file called "csound_output.wav":
 
-<pre><code data-language="csound">
-&lt;CsOptions&gt;
+```csound
+<CsOptions>
 -o csound_output.wav
-&lt;/CsOptions&gt;
-</code></pre>
+</CsOptions>
+```
 
 
 ## Common Errors
@@ -742,23 +750,23 @@ key to making the most out of Csound. The most common error is the 'used before 
 occurs whenever a variable is accessed before it has been defined. For instance, in the following
 code *kAmp* is passed as an input argument to **oscili** before it is declared.
 
-<pre><code data-language="csound">
-&lt;CsInstruments&gt;
+```csound
+<CsInstruments>
 
 instr 1
   aSound = oscili:a(kAmp,440)
   outall(aSound)
 endin
 
-&lt;/CsInstruments&gt; 
-</code></pre>
+</CsInstruments> 
+```
 
 When Csound reads through this code and gets to the line with **oscili** it reports an error because it
 can't find a value for *kAmp* as it has not been defined. In order to avoid this error we have to
 ensure that all variables are defined before use.
 
-<pre><code data-language="csound">
-&lt;CsInstruments&gt;
+```csound
+<CsInstruments>
 
 0dbfs = 1
 
@@ -768,8 +776,8 @@ instr 1
   outall(aSound)
 endin
 
-&lt;/CsInstruments&gt; 
-</code></pre>
+</CsInstruments> 
+```
 
 Another common error is 'unexpected T_IDENT'. The most common reason for this error is a typo. The
 typo can be caused by calling an opcode by an incorrect name, or from spelling an opcode with
