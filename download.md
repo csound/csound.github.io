@@ -1,11 +1,7 @@
 ---
-layout: sidebar_links
+layout: no_sidebar
 title: Download
 ---
-
-This page provides download links to the current version of Csound compiled for
-different platforms. You can also find them on GitHub:
-[https://github.com/csound/csound/releases/latest/](https://github.com/csound/csound/releases/latest/)
 
 <!--
 If you want to update the links to Csound distributions on this page,
@@ -14,98 +10,144 @@ https://github.com/csound/csound.github.io/blob/master/_data/
 -->
 
 
-<!-- Desktop -->
+<!-- Binaries and installers -->
 
-<div class="nine columns">
-    <h2 class="align-center">Desktop</h2>
+<div class="sixteen columns">
+    <h1 class="align-center">Binaries and installers</h1>
 </div>
 
-<div style="line-height: 1.1em">
-    <div class="three columns align-center">
+<div style="line-height: 1.2em">
+  <div class="four columns align-center">
     <i class="fa fa-4x fa-windows"></i><br/>
-	<a href="{{ site.data.download.windows_64_full.link }}">64bit Full Installer v{{ site.data.download.windows_64_full.ver }}</a><br/>
-	<a href="{{ site.data.download.windows_64.link }}">64bit Binaries
-    v{{ site.data.download.windows_64.ver }}</a><br/>
-    <a href="{{ site.data.download.windows_64_beta.link }}">64bit 
-    Latest (beta) v{{ site.data.download.windows_64_beta.ver }}</a><br/>
-    <a href="{{ site.data.download.windows_XP64.link }}">WinXP 64bit binaries v{{ site.data.download.windows_XP64.ver }}</a><br/>
-	<a href="{{ site.data.download.windows_XP32.link }}">WinXP
-    32bit binaries v{{ site.data.download.windows_XP32.ver }}</a><br/>
-    </div>
-    <div class="three columns align-center">
+	<a href="{{ site.data.download.windows_64_full.link }}">64bit Full Installer {{ site.data.download.windows_64_full.ver }}</a><br/>
+	<a href="{{ site.data.download.windows_64.link }}">64bit Binaries 
+    {{ site.data.download.windows_64.ver }}</a><br/>
+  </div>
+    
+  <div class="three columns align-center">
         <i class="fa fa-4x fa-apple"></i><br/>
-	<a href="{{ site.data.download.osx.link }}">OS X (dmg archive) v{{site.data.download.osx.ver }}</a><br/>
-    </div>
-    <div class="three columns align-center">
+	<a href="{{ site.data.download.osx.link }}">MacOS  {{site.data.download.osx.ver }}</a><br/>
+  </div>
+    
+  <div class="three columns align-center">
         <i class="fa fa-4x fa-linux"></i><br/>
 	<a href="{{ site.data.download.linux.debian_link }}">Debian</a>,
 	<a href="{{ site.data.download.linux.ubuntu_link }}">Ubuntu</a>,
 	<a href="{{ site.data.download.linux.fedora_link }}">Fedora</a>,
-	<a href="{{ site.data.download.linux.arch_link }}">Arch</a>,
-	or <a href="#building-from-source">build</a> Csound from source
-    </div>
-</div>
+	<a href="{{ site.data.download.linux.arch_link }}">Arch</a>
+  </div>
 
-
-<!-- Mobile and Web -->
-<div class="nine columns"><br/></div>
-
-<div class="nine columns">
-    <h2 class="align-center">Mobile and web</h2>
-</div>
-
-<div style="line-height: 1.1em">
-    <div class="three columns align-center">
+  <div class="three columns align-center">
         <i class="fa fa-4x fa-android"></i><br/>
 	<a href="{{ site.data.download.android_app.link }}">Android App</a>
-	<br/>
-	<a href="{{ site.data.download.android_sdk.link }}">Android SDK v{{ site.data.download.android_sdk.ver }}</a>
-    </div>
-    <div class="three columns align-center">
-        <i class="fa fa-4x fa-apple"></i><br/>
-	<a href="{{ site.data.download.ios_sdk.link }}">iOS SDK v{{ site.data.download.ios_sdk.ver }}</a>
-    </div>
-    <div class="three columns align-center">
+  </div>
+
+  <div class="two columns align-center">
         <i class="fa fa-4x fa-html5"></i><br/>
-
-	<a href="{{ site.data.download.web.link }}">Web v{{ site.data.download.web.ver }}</a>
-    </div>
+	<a href="{{ site.data.download.web.link }}">WASM</a>
+  </div>
 </div>
 
 
-<!-- Other -->
-<div class="nine columns"><br/></div>
+<!-- Interfaces -->
+<div class="sixteen columns"><br/></div>
 
-<div class="nine columns">
-    <h2 class="align-center">Other</h2>
+<div class="sixteen columns">
+    <h1 class="align-center">Interfaces</h1>
 </div>
 
-<div style="line-height: 1.1em">
-    <div class="three columns align-center">
-        <i class="fa fa-4x fa-bicycle"></i><br/>
-	<a href="{{ site.data.download.max.win_link }}">csound~ (Win)</a>
-	<a href="{{ site.data.download.max.osx_link }}">csound~ (Mac)</a>
-    </div>
-    <div class="three columns align-center">
-        <i class="fa fa-4x fa-file-code-o"></i><br/>
-	<a href="{{ site.data.download.source.zip_link }}">Sources v{{ site.data.download.source.ver }} (.zip)</a>
-	<a href="{{ site.data.download.source.tgz_link }}">Sources v{{ site.data.download.source.ver }} (.tar.gz)</a>
-    </div>
-    <div class="three columns align-center">
-        <i class="fa fa-4x fa-archive"></i><br/>
-	<a href="olderversions.html">Older versions</a>
-    </div>
+<div style="line-height: 1.2em">
+  <div class="three columns align-center">
+        <i class="fa fa-4x fa-android"></i><br/>
+	<a href="{{ site.data.download.android_sdk.link }}">Android SDK</a>
+  </div>
+  
+  <div class="three columns align-center">
+        <i class="fa fa-4x fa-apple"></i><br/>
+	<a href="{{ site.data.download.ios_sdk.link }}">iOS SDK</a>
+  </div>
+  
+  <div class="three columns align-center">
+    <i>|</i><img src="/images/pd.png" style="display: block;margin-left: auto;  margin-right: auto;width: 30%;"><br/>
+	<a href="{{ site.data.download.pd.link }}">csound6~</a>
+  </div>
+
+  <div class="three columns align-center">
+    <img src="/images/max.jpg" style="display: block;margin-left: auto;  margin-right: auto;width: 30%;"><br/>
+	<a href="{{ site.data.download.max.link }}">csound~</a><br/>
+	<a href="{{ site.data.download.max_new.link }}">csound6~</a>
+  </div>
+
+  <div class="three columns align-center">
+    <img src="/images/python_bw.png" style="display: block;margin-left: auto;  margin-right: auto;width: 30%;"><br/>
+	<a href="{{ site.data.download.ctcsound.link }}">ctcsound</a><br/>
+	<a href="{{ site.data.download.csoundengine.link }}">csoundengine</a><br/>
+  </div>
+  
 </div>
 
 
-<div class="nine columns"><br/></div>
-<div class="eleven columns">
+<!-- Sources Reference Archive -->
+<div class="sixteen columns"><br/></div>
+
+<div class="sixteen columns">
+    <h1 class="align-center">Sources | Reference Manual | Archive</h1>
+</div>
+
+<div style="line-height: 1.2em">
+  <div class="five columns align-center">
+    <i class="fa fa-4x fa-file-code-o"></i><br/>
+	<a href="{{ site.data.download.source.zip_link }}">Sources.zip</a><br/>
+	<a href="{{ site.data.download.source.tgz_link }}">Sources.tar.gz</a>
+    </div>
+
+  <div class="five columns align-center">
+    <i class="fa fa-4x fa-book"></i><br/>
+	<a href="{{ site.data.download.manual.html_link }}">Manual HTML</a><br/>
+    <a href="{{ site.data.download.manual.others_link }}">Other formats</a>
+  </div>
+  
+  <div class="five columns align-center">
+    <i class="fa fa-4x fa-archive"></i><br/>
+	<a href="{{ site.data.download.older.link }}">Versions -> 6.06</a><br/>
+	<a href="{{ site.data.download.archives.link }}">Archive</a>
+  </div>  
+    
+</div>
+
+<!-- Frontends -->
+<div class="sixteen columns"><br/></div>
+
+<div class="sixteen columns">
+    <h1 class="align-center">Frontends</h1>
+</div>
+
+<div style="line-height: 1.2em">
+  <div class="five columns align-center">
+    <img src="/images/cabbage.svg" style="display: block;margin-left: auto;  margin-right: auto;width: 30%;"><br/>
+	<a href="{{ site.data.download.cabbage.link }}">Cabbage</a>
+  </div>
+
+  <div class="five columns align-center">
+    <img src="/images/csqt.svg" style="display: block;margin-left: auto;  margin-right: auto;width: 30%;"><br/>
+	<a href="{{ site.data.download.csqt.link }}">CsoundQt</a>
+  </div>
+  
+  <div class="five columns align-center">
+    <img src="/images/blue.png" style="display: block;margin-left: auto;  margin-right: auto;width: 30%;"><br/>
+	<a href="{{ site.data.download.cabbage.link }}">Blue</a>
+  </div>
+    
+</div>
+
+<div class="sixteen columns"><br/></div>
+<div class="sixteen columns">
     <h2 name="building-from-source">Building from source</h2>
     <p>
 	Building Csound from source or from the git develop branch is not very difficult on Linux,
 	and can also be done on Mac and Windows. How-to descriptions can be found in the BUILD.md
-	file included with the Csound sources, also available online:
-	<a href="https://github.com/csound/csound/blob/develop/BUILD.md">https://github.com/csound/csound/blob/develop/BUILD.md</a>.	
+	file included with the Csound sources, also available online
+	<a href="https://github.com/csound/csound/blob/develop/BUILD.md">here</a>.	
     </p>
 </div>
 
