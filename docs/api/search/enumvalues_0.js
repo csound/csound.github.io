@@ -28,6 +28,7 @@ var searchData=
   ['csftype_5fmat5',['CSFTYPE_MAT5',['../csound_8h.html#a725894dbbbad09d44070e6a0e76a1ea5a194ad88115faf3d820c440bb38f4ee7e',1,'csound.h']]],
   ['csftype_5fmidi_5fsysex',['CSFTYPE_MIDI_SYSEX',['../csound_8h.html#a725894dbbbad09d44070e6a0e76a1ea5a1525f8e0e58ad89601e75d826ef8507a',1,'csound.h']]],
   ['csftype_5fmpc2k',['CSFTYPE_MPC2K',['../csound_8h.html#a725894dbbbad09d44070e6a0e76a1ea5a424c7f166908ba7d63d9bdc133b9a3d0',1,'csound.h']]],
+  ['csftype_5fmpeg',['CSFTYPE_MPEG',['../csound_8h.html#a725894dbbbad09d44070e6a0e76a1ea5aa1e073c8cc2c3f4f87ebcf5ee2f3de11',1,'csound.h']]],
   ['csftype_5fnist',['CSFTYPE_NIST',['../csound_8h.html#a725894dbbbad09d44070e6a0e76a1ea5ab2cb3acc335141868da501e8b29839e9',1,'csound.h']]],
   ['csftype_5fogg',['CSFTYPE_OGG',['../csound_8h.html#a725894dbbbad09d44070e6a0e76a1ea5a7a39fa3a0f9575a745c93afc34acc347',1,'csound.h']]],
   ['csftype_5foptions',['CSFTYPE_OPTIONS',['../csound_8h.html#a725894dbbbad09d44070e6a0e76a1ea5a59b5e419b4c1ef617e06562a70e548c1',1,'csound.h']]],

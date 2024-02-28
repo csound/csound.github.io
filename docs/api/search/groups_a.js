@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['tables',['Tables',['../group__TABLE.html',1,'']]],
-  ['threading_20and_20concurrency',['Threading and concurrency',['../group__THREADING.html',1,'']]]
+  ['score_20handling',['Score Handling',['../group__SCOREHANDLING.html',1,'']]]
 ];

@@ -135,7 +135,7 @@ https://github.com/csound/csound.github.io/blob/master/_data/
   
   <div class="five columns align-center">
     <img src="/images/blue.png" style="display: block;margin-left: auto;  margin-right: auto;width: 30%;"><br/>
-	<a href="{{ site.data.download.cabbage.link }}">Blue</a>
+	<a href="{{ site.data.download.blue.link }}">Blue</a>
   </div>
     
 </div>

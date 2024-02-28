@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['channelcallback_5ft',['channelCallback_t',['../csound_8h.html#acf526b42796a4b703f2ec6e598d790b4',1,'csound.h']]],
-  ['controlchannelhints_5ft',['controlChannelHints_t',['../csound_8h.html#aba4fb7ce1d3255074e13775ab06e7f15',1,'csound.h']]],
-  ['controlchannelinfo_5ft',['controlChannelInfo_t',['../csound_8h.html#affd2f8788c7a8a4866cbe6bcb40aca1f',1,'csound.h']]],
-  ['csound',['CSOUND',['../csound_8h.html#ad0d6e686e265caf162b8a40b618a041f',1,'csound.h']]],
-  ['csoundrandmtstate',['CsoundRandMTState',['../csound_8h.html#a54689a45520948f0dd0e71ad3a72a2b4',1,'csound.h']]]
+  ['alloc_5fdata',['ALLOC_DATA',['../csoundCore_8h.html#a701a77ab095a8f8ed567205a57cee004',1,'csoundCore.h']]],
+  ['arg',['ARG',['../csoundCore_8h.html#ac5c530d47a51e7aaa234262c4b655d7e',1,'csoundCore.h']]],
+  ['arglst',['ARGLST',['../csoundCore_8h.html#aa3501fae4aa0b63046f76611f36deb17',1,'csoundCore.h']]],
+  ['aux_5fcb',['aux_cb',['../csoundCore_8h.html#a2fce9e43a3d5b745fd1b49e9e089ff43',1,'csoundCore.h']]],
+  ['auxch',['AUXCH',['../csoundCore_8h.html#aa357fb484deffc758147109520f3dd8f',1,'csoundCore.h']]]
 ];

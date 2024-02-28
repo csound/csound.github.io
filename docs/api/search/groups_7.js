@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['performance',['Performance',['../group__PERFORMANCE.html',1,'']]]
+  ['opcodes',['Opcodes',['../group__OPCODES.html',1,'']]]
 ];
