@@ -6,6 +6,11 @@ title: Conferences
 From time to time we gather the Csound community together to have some talks, performances, beers
 and things related.
 
+##### The 7th International Csound Conference
+
+2024, 17&ndash;20 September, Vienna, Austria<br>
+Link: [Website](https://mdw.ac.at/icsc2024/),
+
 ##### The 6th International Csound Conference
 
 2022, 4&ndash;6 November, Athlone, Ireland<br>
