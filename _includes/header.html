@@ -1,0 +1,36 @@
+<header>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="/">
+        <img src="/images/csoundlogo.jpg" height="50px" alt="Csound">
+        Csound
+      </a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          {% for nav in site.data.navigation %}
+            <li class="nav-item {% if page.url == nav.href %}active{% endif %}">
+              <a class="nav-link {% if nav.subcategories != null %}has-subcat{% endif %}" href="{{ nav.href }}">{{ nav.title }}</a>
+              {% if nav.subcategories != null %}
+                <span class="dropdown-chevron-mobile"></span>
+              {% endif %}
+              {% if nav.subcategories != null %}
+                <ul class="subcategory">
+                  {% for subcategory in nav.subcategories %}
+                    <li class="nav-subitem">
+                      <a class="nav-sublink" href="{{ subcategory.subhref }}">
+                        {{ subcategory.subtitle }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
