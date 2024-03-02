@@ -1,7 +1,7 @@
 ---
 layout: home
-title: Home
-permalink: /
+title: Csound
+permalink: /index.html
 ---
 
-Home page content
+Home page content, see _layouts/home.html
