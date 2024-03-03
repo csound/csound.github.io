@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Get started
-permalink: /get-started.html
+permalink: get-started.html
 ---
 
 ## What is Csound?
