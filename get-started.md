@@ -55,7 +55,7 @@ Simply put, **CsInstruments** defines how our instruments will sound,
 while **CsScore** defines when and how long they will sound. 
 Presented below is the typical document structures for a single unified Csound file.
 
-```Csound Document
+```csound-csd
 // start of the csound code
 <CsoundSynthesizer>
 
