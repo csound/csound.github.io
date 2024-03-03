@@ -110,7 +110,7 @@ https://rorywalsh.github.io/CsoundUnity/#/ under download > interfaces
 
 # Test for code blocks
 
-```csound-csd
+``` csound-csd
 // start of the csound code
 <CsoundSynthesizer>
 
