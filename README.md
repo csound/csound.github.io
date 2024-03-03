@@ -130,3 +130,9 @@ https://rorywalsh.github.io/CsoundUnity/#/ under download > interfaces
 </CsoundSynthesizer>
 // end of the Csound code
 ```
+
+```ruby
+require 'redcarpet'
+markdown = Redcarpet.new("Hello World!")
+puts markdown.to_html
+```
