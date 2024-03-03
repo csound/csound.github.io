@@ -120,6 +120,9 @@ https://rorywalsh.github.io/CsoundUnity/#/ under download > interfaces
 
 <CsInstruments>
 // this section contains instrument definitions
+instr Bla
+  aSig = poscil:a(0.2,440)
+endin
 </CsInstruments>  
 
 <CsScore>
