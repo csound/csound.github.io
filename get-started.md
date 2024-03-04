@@ -4,14 +4,6 @@ title: Get started
 permalink: get-started.html
 ---
 
-## What is Csound?
-
-Csound is a sound and music computing system that has its roots in the earliest of computer software,
-the MUSIC-N series by [Max Mathews](https://en.wikipedia.org/wiki/Max_Mathews). 
-Csound was originally released in 1986 by [Barry Vercoe](http://web.media.mit.edu/~bv/) 
-and it has been a part of the computer music world since. Today's Csound works on desktop, 
-mobile, embedded, server, and web platforms and powers music software and 
-music-making for musician's around the world.
 
 ## Try Csound Online!
 
@@ -138,7 +130,7 @@ nchnls = 2
 0dbfs = 1
 
 instr 1
-;to stuff
+;do stuff
 endin
 ```
 
