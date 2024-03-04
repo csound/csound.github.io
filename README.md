@@ -108,34 +108,12 @@ Also, with the -I flag, anytime you change a page, you can view the updates by r
 # To add
 https://rorywalsh.github.io/CsoundUnity/#/ under download > interfaces
 
-# Test for code blocks
 
-``` csound-csd
-// start of the csound code
-<CsoundSynthesizer>
+# Syntax highlighting
 
-<CsOptions>
-// this section tells Csound how to interact with various devices and hardware
-</CsOptions>
+To add Csound syntax highlighting to a code block, start with  
+\`\`\`csound  
+and end the block with three backticks  
+\`\`\`
 
-<CsInstruments>
-// this section contains instrument definitions
-instr Bla
-  aSig = poscil:a(0.2,440)
-endin
-</CsInstruments>  
-
-<CsScore>
-// this section tells Csound when and how to perform instruments defined
-// in the CsInstruments section above. 
-</CsScore>
-
-</CsoundSynthesizer>
-// end of the Csound code
-```
-
-```ruby
-require 'redcarpet'
-markdown = Redcarpet.new("Hello World!")
-puts markdown.to_html
-```
+We use [rainbow](https://github.com/ccampbell/rainbow). The files are in js/highlight and in css/pastie.css. They are included in _layouts/default.html.
