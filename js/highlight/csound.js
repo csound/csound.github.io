@@ -47,7 +47,7 @@ Rainbow.extend('csound', [
     },
     {
         'name': 'support.function',
-        'pattern': /\b(g?[akipSfwx]\w+)\b/g
+        'pattern': /\b(g?[akipSfx]\w+)\b/g
     },
     {
         'matches': {
