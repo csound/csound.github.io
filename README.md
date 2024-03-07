@@ -62,8 +62,7 @@ Cascading Style Sheets (CSS). Javascript is also used to help modify the feel
 and function of the site. The CSS and Javascript files used for the site are
 found in the css and scripts folders, respectively.  These files are included into the site through the template files.  
 
-The site currently uses [Bootstrap](http://www.getbootstrap.com) as the
-foundation for its theme. Site maintainers are free to continue using Bootstrap or replace it should they find a better solution.  
+The site uses [Saul Roll's Bootstrap 5](https://github.com/soulroll/jekyll-bootstrap-5) as the foundation for its theme, but simplified its dependecies (no gulp). 
 
 # Editing the Site Locally 
 

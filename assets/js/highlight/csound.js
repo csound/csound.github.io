@@ -2,8 +2,8 @@
  * Csound language patterns
  * Based on https://github.com/ccampbell/rainbow/blob/master/js/language/generic.js
  *
- * @author Eugene Cherny
- * @version 0.1
+ * @author Eugene Cherny, joachim heintz
+ * @version 0.2
  */
 Rainbow.extend('csound', [
     {
