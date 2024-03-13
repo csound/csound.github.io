@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>tablei</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="tablegpw.html" title="tablegpw" />
+    <link rel="next" href="tableicopy.html" title="tableicopy" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">tablei</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="tablegpw.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="tableicopy.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="tablei"></a>
+      <div class="titlepage"></div>
+      <a id="IndexTablei" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">tablei</span>
+        </h2>
+        <p>tablei — 
+      Accède aux valeurs d'une table par indexation directe avec interpolation
+      linéaire.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm340441"></a>
+        <h2>Description</h2>
+        <p>
+      Accède aux valeurs d'une table par indexation directe avec interpolation
+      linéaire.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm340444"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>tablei</strong></span> andx, ifn [, ixmode] [, ixoff] [, iwrap]</pre>
+        <pre class="synopsis">ires <span class="command"><strong>tablei</strong></span> indx, ifn [, ixmode] [, ixoff] [, iwrap]</pre>
+        <pre class="synopsis">kres <span class="command"><strong>tablei</strong></span> kndx, ifn [, ixmode] [, ixoff] [, iwrap]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm340452"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ifn</em></span> -- numéro de la table de fonction. <span class="emphasis"><em>tablei</em></span>
+      nécessite un point de garde.
+    </p>
+        <p>
+      <span class="emphasis"><em>ixmode</em></span> (facultatif) -- type de l'index. La valeur par
+      défaut est 0.
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>0 = index brut</p>
+            </li>
+            <li class="listitem">
+              <p>1 = normalisé (de 0 à 1)</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+        <p>
+      <span class="emphasis"><em>ixoff</em></span> (facultatif) -- décalage de l'index. Pour une table
+      dont l'origine est au centre, utiliser <span class="emphasis"><em>taille_table/2</em></span> (brut)
+      ou 0.5 (normalisé). La valeur par défaut est 0.
+    </p>
+        <p>
+      <span class="emphasis"><em>iwrap</em></span> (facultatif) -- indicateur d'indexation cyclique. La
+      valeur par défaut est 0.
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>0 = indexation normale (index &lt; 0 traité comme index=0 ; index
+          &gt; <span class="emphasis"><em>taille_table</em></span> ramené à
+          index=<span class="emphasis"><em>taille_table</em></span>)</p>
+            </li>
+            <li class="listitem">
+              <p>1 = indexation cyclique.</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm340476"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>tablei</em></span> est une unité avec interpolation dans laquelle la
+      partie fractionnaire de l'index est utilisée pour interpoler entre les entrées
+      adjacentes de la table. La régularité apportée par l'interpolation se paie par
+      une légère augmentation du temps d'exécution (voir aussi
+      <a class="link" href="oscili.html" title="oscili"><em class="citetitle">oscili</em></a>, etc.), mais sinon
+      les unités avec ou sans interpolation sont interchangeables. Noter que lorsque
+      <span class="emphasis"><em>tablei</em></span> utilise un index périodique dont la valeur modulo
+      <span class="emphasis"><em>n</em></span> est inférieure à la puissance de 2, longueur de la table,
+      l'interpolation nécessite qu'il existe une (<span class="emphasis"><em>n</em></span> + 1)ème
+      valeur dans la table qui est une copie de la première valeur (voir
+      l'<a class="link" href="f.html" title="Instruction f (ou instruction de table de fonction)"><em class="citetitle">instruction f</em></a> de la
+      partition).
+    </p>
+        <p>
+      </p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Avertissement]" src="images/warning.png" />
+              </td>
+              <th align="left">Avertissement</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+        La lecture de tables contenant une information stéréo ou multicanaux
+        causera probablement du bruit non désiré car l'opcode interpole entre
+        des positions successives de la table sans tenir compte de l'origine de
+        son contenu. Habituellement seul le contenu d'un canal est attendu. Il
+        faut plutôt considérer l'utilisation de <span class="emphasis"><em>loscilx</em></span>.
+      </td>
+            </tr>
+          </table>
+        </div>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm340490"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode tablei. Il utilise le fichier
+      <a class="ulink" href="examples/tablei.csd" target="_top"><em class="citetitle">tablei.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm340495"></a>
+          <p class="title">
+            <strong>Exemple 1067. Exemple de l'opcode tablei.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm340502"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o tablei.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">seed</span><span class="w"> </span><span class="mi">0</span><span class="w">	</span><span class="c1">;generate new values every time the instr is played</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>i<span class="n">fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+</span>i<span class="n">thresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="w">
+    
+</span>i<span class="n">temp</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span>i<span class="n">fn</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>i<span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">
+
+</span>i<span class="n">write_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>i<span class="n">_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    
+</span><span class="nl">loop_start</span><span class="p">:</span><span class="w">
+    </span>i<span class="n">read_value</span><span class="w"> </span><span class="nb">tablei</span><span class="w"> </span>i<span class="n">_index</span><span class="p">,</span><span class="w"> </span>i<span class="n">fn</span><span class="w">
+    
+    </span><span class="k">if</span><span class="w"> </span>i<span class="n">read_value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span>i<span class="n">thresh</span><span class="w"> </span><span class="k">then</span><span class="w">
+         </span>i<span class="n">write_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="k">else</span><span class="w">
+         </span>i<span class="n">write_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w">
+    </span><span class="k">endif</span><span class="w">
+</span><span class="nb">tableiw</span><span class="w"> </span>i<span class="n">write_value</span><span class="p">,</span><span class="w"> </span>i<span class="n">_index</span><span class="p">,</span><span class="w"> </span>i<span class="n">fn</span><span class="w">
+</span><span class="kp">loop_lt</span><span class="w"> </span>i<span class="n">_index</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="nl">loop_start</span><span class="w">        
+    </span><span class="nb">turnoff</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+
+</span>i<span class="n">fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ftlen</span><span class="p">(</span>i<span class="n">fn</span><span class="p">)</span><span class="w">    
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"Index</span><span class="se">\t</span><span class="s">Value</span><span class="se">\n</span><span class="s">"</span><span class="w">
+    
+</span>i<span class="n">_index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nl">loop_start</span><span class="p">:</span><span class="w">
+    </span>i<span class="n">value</span><span class="w"> </span><span class="nb">tablei</span><span class="w"> </span>i<span class="n">_index</span><span class="p">,</span><span class="w"> </span>i<span class="n">fn</span><span class="w">
+    </span><span class="nb">prints</span><span class="w"> </span><span class="s">"</span><span class="si">%d</span><span class="s">:</span><span class="se">\t</span><span class="si">%f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span>i<span class="n">_index</span><span class="p">,</span><span class="w"> </span>i<span class="n">value</span><span class="w">
+
+  </span><span class="kp">loop_lt</span><span class="w"> </span>i<span class="n">_index</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="nl">loop_start</span><span class="w">		</span><span class="c1">;read table 1 with our index</span><span class="w">
+
+</span>a<span class="n">out</span><span class="w"> </span><span class="nb">oscili</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span>i<span class="n">fn</span><span class="w">			</span><span class="c1">;use table to play the polypulse</span><span class="w">
+     </span><span class="nb">outs</span><span class="w">   </span>a<span class="n">out</span><span class="p">,</span><span class="w"> </span>a<span class="n">out</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="mi">16</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm340790"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="table.html" title="table"><em class="citetitle">table</em></a>,
+      <a class="link" href="table3.html" title="table3"><em class="citetitle">table3</em></a>,
+      <a class="link" href="oscil1.html" title="oscil1"><em class="citetitle">oscil1</em></a>,
+      <a class="link" href="oscil1i.html" title="oscil1i"><em class="citetitle">oscil1i</em></a>,
+      <a class="link" href="osciln.html" title="osciln"><em class="citetitle">osciln</em></a>
+    </p>
+        <p>Plus d'information sur cet opcode :
+    <a class="ulink" href="http://www.csoundjournal.com/issue12/genInstruments.html" target="_top">
+    <em class="citetitle">http://www.csoundjournal.com/issue12/genInstruments.html</em>
+    </a>, écrit par Jacob Joaquin.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="tablegpw.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="tableicopy.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">tablegpw </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> tableicopy</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

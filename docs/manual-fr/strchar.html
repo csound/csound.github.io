@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>strchar</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="STKWurley.html" title="STKWurley" />
+    <link rel="next" href="strchark.html" title="strchark" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">strchar</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="STKWurley.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="strchark.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="strchar"></a>
+      <div class="titlepage"></div>
+      <a id="Indexstrchar" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">strchar</span>
+        </h2>
+        <p>strchar — 
+      Retourne le code ASCII d'un charactère dans une chaîne.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm331399"></a>
+        <h2>Description</h2>
+        <p>
+      Retourne le code ASCII du caractère de <span class="emphasis"><em>Sstr</em></span> à la
+      position <span class="emphasis"><em>ipos</em></span> (qui vaut zéro par défaut, position du
+      premier caractère), ou zéro si <span class="emphasis"><em>ipos</em></span> est hors limites.
+      <span class="emphasis"><em>strchar</em></span> ne s'exécute que pendant l'initialisation.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm331406"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ichr <span class="command"><strong>strchar</strong></span> Sstr[, ipos]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm331410"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode strchar. Il utilise le fichier
+      <a class="ulink" href="examples/strchar.csd" target="_top"><em class="citetitle">strchar.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm331415"></a>
+          <p class="title">
+            <strong>Exemple 1035. Exemple de l'opcode strchar.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm331422"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+-ndm0
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+</span><span class="c1">;example by joachim heintz 2013</span><span class="w">
+
+  </span><span class="kd">opcode</span><span class="w"> </span><span class="nf">ToAscii</span><span class="p">,</span><span class="w"> </span><span class="kt">S</span><span class="p">,</span><span class="w"> </span><span class="kt">S</span><span class="w">				</span><span class="c1">;returns the ASCII numbers of the input string as string</span><span class="w">
+
+</span>S<span class="n">in</span><span class="w">        </span><span class="nb">xin</span><span class="w"> 					</span><span class="c1">;input string</span><span class="w">
+</span>i<span class="n">len</span><span class="w">       </span><span class="nb">strlen</span><span class="w">     </span>S<span class="n">in</span><span class="w"> 			</span><span class="c1">;its length</span><span class="w">
+</span>i<span class="n">pos</span><span class="w">       </span><span class="o">=</span><span class="w">          </span><span class="mi">0</span><span class="w"> 			</span><span class="c1">;set counter to zero</span><span class="w">
+</span>S<span class="n">res</span><span class="w">       </span><span class="o">=</span><span class="w">          </span><span class="s">""</span><span class="w"> 			</span><span class="c1">;initialize output string</span><span class="w">
+</span><span class="nl">loop</span><span class="p">:</span><span class="w">                 				</span><span class="c1">;for all characters in input string:</span><span class="w">
+</span>i<span class="n">chr</span><span class="w">       </span><span class="nb">strchar</span><span class="w">    </span>S<span class="n">in</span><span class="p">,</span><span class="w"> </span>i<span class="n">pos</span><span class="w"> 		</span><span class="c1">;get its ascii code number</span><span class="w">
+</span>S<span class="n">new</span><span class="w">       </span><span class="nb">sprintf</span><span class="w">    </span><span class="s">"</span><span class="si">%d</span><span class="s"> "</span><span class="p">,</span><span class="w"> </span>i<span class="n">chr</span><span class="w"> 		</span><span class="c1">;put this number into a new string</span><span class="w">
+</span>S<span class="n">res</span><span class="w">       </span><span class="nb">strcat</span><span class="w">     </span>S<span class="n">res</span><span class="p">,</span><span class="w"> </span>S<span class="n">new</span><span class="w"> 		</span><span class="c1">;append this to the output string</span><span class="w">
+           </span><span class="kp">loop_lt</span><span class="w">    </span>i<span class="n">pos</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="nl">loop</span><span class="w"> 	</span><span class="c1">;see comment for 'loop:'</span><span class="w">
+           </span><span class="nb">xout</span><span class="w">       </span>S<span class="n">res</span><span class="w"> 			</span><span class="c1">;return output string</span><span class="w">
+  </span><span class="kd">endop</span><span class="w">
+
+  </span><span class="kd">instr</span><span class="w"> </span><span class="nf">Characters</span><span class="w">
+
+</span><span class="nb">printf_i</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">Characters:</span><span class="se">\n</span><span class="s">  given as single strings: </span><span class="si">%s%s%s%s%s%s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"c"</span><span class="p">,</span><span class="w"> </span><span class="s">"s"</span><span class="p">,</span><span class="w"> </span><span class="s">"o"</span><span class="p">,</span><span class="w"> </span><span class="s">"u"</span><span class="p">,</span><span class="w"> </span><span class="s">"n"</span><span class="p">,</span><span class="w"> </span><span class="s">"d"</span><span class="w">
+</span><span class="nb">printf_i</span><span class="w"> </span><span class="s">"  but can also be given as numbers: </span><span class="si">%c%c%c%c%c%c</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">99</span><span class="p">,</span><span class="w"> </span><span class="mi">115</span><span class="p">,</span><span class="w"> </span><span class="mi">111</span><span class="p">,</span><span class="w"> </span><span class="mi">117</span><span class="p">,</span><span class="w"> </span><span class="mi">110</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="w"> 
+</span>S<span class="n">csound</span><span class="w"> </span><span class="nf">ToAscii</span><span class="w"> </span><span class="s">"csound"</span><span class="w">
+</span><span class="nb">printf_i</span><span class="w"> </span><span class="s">"  in csound, the ASCII code of a character can be accessed with the opcode strchar.</span><span class="si">%s</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="w">
+</span><span class="nb">printf_i</span><span class="w"> </span><span class="s">"  the name 'csound' returns the numbers </span><span class="si">%s</span><span class="se">\n\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>S<span class="n">csound</span><span class="w">
+  </span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="s">"Characters"</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm331650"></a>
+        <h2>Voir aussi</h2>
+        <p>
+          <a class="link" href="strchark.html" title="strchark">
+            <em class="citetitle">strchark</em>
+          </a>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm331655"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Istvan Varga</td>
+          </tr>
+          <tr>
+            <td>2006</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="STKWurley.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="strchark.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">STKWurley </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> strchark</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

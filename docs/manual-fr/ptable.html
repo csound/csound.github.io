@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ptable</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="DeprecatedTop.html" title="Opcodes de l'orchestre et routines GEN obsolètes" />
+    <link rel="prev" href="pop_f.html" title="pop_f" />
+    <link rel="next" href="ptablei.html" title="ptablei" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ptable</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="pop_f.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes de l'orchestre et routines GEN obsolètes</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ptablei.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="ptable"></a>
+      <div class="titlepage"></div>
+      <a id="IndexPtable" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">ptable</span>
+        </h2>
+        <p>ptable — 
+      Accède aux valeurs d'une table par indexation directe.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm431519"></a>
+        <h2>Description</h2>
+        <p>
+      Accède aux valeurs d'une table par indexation directe.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm431522"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>ptable</strong></span> andx, ifn [, ixmode] [, ixoff] [, iwrap]</pre>
+        <pre class="synopsis">ires <span class="command"><strong>ptable</strong></span> indx, ifn [, ixmode] [, ixoff] [, iwrap]</pre>
+        <pre class="synopsis">kres <span class="command"><strong>ptable</strong></span> kndx, ifn [, ixmode] [, ixoff] [, iwrap]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm431530"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ifn</em></span> -- numéro de la table de fonction.
+    </p>
+        <p>
+      <span class="emphasis"><em>ixmode</em></span> (facultatif) -- mode d'indexation. La valeur par
+      défaut est 0.
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>0 = indexation brute</p>
+            </li>
+            <li class="listitem">
+              <p>1 = indexation normalisée (0 à 1)</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+        <p>
+      <span class="emphasis"><em>ixoff</em></span> (facultatif) -- décalage de l'index. Pour une
+      table dont l'origine est centrée, on utilise taille-de-la-table/2 (indexation
+      brute) ou 0.5 (indexation normalisée). La valeur par défaut est 0.
+    </p>
+        <p>
+      <span class="emphasis"><em>iwrap</em></span> (facultatif) -- indicateur d'indexation cyclique.
+      La valeur par défaut est 0.
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>0 = pas d'enroulement (les index &lt; 0 sont considérés comme nuls ;
+          les index &gt; taille-de-la-table sont bloqués à index=taille-de-la-table)</p>
+            </li>
+            <li class="listitem">
+              <p>1 = indexation cyclique.</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm431550"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ptable</em></span> invoque une lecture de table avec des indices au
+      taux d'initialisation, au taux de contrôle ou au taux audio. Ces indices peuvent
+      être des entrées brutes (0, 1, 2, ..., taille-1) ou des valeurs normalisées
+      (0 à 1). Les indices sont d'abord modifiés par la valeur de décalage puis
+      leur appartenance à l'intervalle valide est testée avant la lecture dans
+      la table (voir <span class="emphasis"><em>iwrap</em></span>). Si l'indice varie sur toute
+      l'échelle, ou si on utilise l'interpolation, la table doit avoir un point
+      de garde. <span class="emphasis"><em>ptable</em></span> indexé par un phaseur périodique
+      (voir <a class="link" href="phasor.html" title="phasor"><em class="citetitle">phasor</em></a>) simulera
+      un oscillateur.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm431558"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode ptable. Il utilise le fichier
+      <a class="ulink" href="examples/ptable.csd" target="_top"><em class="citetitle">ptable.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm431563"></a>
+          <p class="title">
+            <strong>Exemple 1336. Exemple de l'opcode ptable.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm431570"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o table.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; Initialize the global variables.</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4410</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; Instrument #1.</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span><span class="c1">; Vary our index linearly from 0 to 1.</span><span class="w">
+  </span>k<span class="n">ndx</span><span class="w"> </span><span class="nb">line</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+  </span><span class="c1">; Read Table #1 with our index.</span><span class="w">
+  </span>i<span class="n">fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span>i<span class="n">xmode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span>k<span class="n">freq</span><span class="w"> </span><span class="nb">ptable</span><span class="w"> </span>k<span class="n">ndx</span><span class="p">,</span><span class="w"> </span>i<span class="n">fn</span><span class="p">,</span><span class="w"> </span>i<span class="n">xmode</span><span class="w">
+
+  </span><span class="c1">; Generate a sine waveform, use our table values </span><span class="w">
+  </span><span class="c1">; to vary its frequency.</span><span class="w">
+  </span>a<span class="n">1</span><span class="w"> </span><span class="nb">oscil</span><span class="w"> </span><span class="mi">20000</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span><span class="nb">out</span><span class="w"> </span>a<span class="n">1</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="c1">; Table #1, a line from 200 to 2,000.</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1025</span><span class="w"> </span><span class="o">-</span><span class="mi">7</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="mi">2000</span><span class="w">
+</span><span class="c1">; Table #2, a sine wave.</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; Play Instrument #1 for 2 seconds.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm431726"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="table.html" title="table"><em class="citetitle">table</em></a>, 
+      <a class="link" href="tablei.html" title="tablei"><em class="citetitle">tablei</em></a>, 
+      <a class="link" href="table3.html" title="table3"><em class="citetitle">table3</em></a>, 
+      <a class="link" href="ptable3.html" title="ptable3"><em class="citetitle">ptable3</em></a>,
+      <a class="link" href="ptablei.html" title="ptablei"><em class="citetitle">ptablei</em></a>,
+      <a class="link" href="oscil1.html" title="oscil1"><em class="citetitle">oscil1</em></a>, 
+      <a class="link" href="oscil1i.html" title="oscil1i"><em class="citetitle">oscil1i</em></a>, 
+      <a class="link" href="osciln.html" title="osciln"><em class="citetitle">osciln</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm431745"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : John ffitch</td>
+          </tr>
+          <tr>
+            <td>Janvier 2012</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 5.16 de Csound.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="pop_f.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="DeprecatedTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ptablei.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">pop_f </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> ptablei</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

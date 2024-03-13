@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>nlfilt</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="nestedap.html" title="nestedap" />
+    <link rel="next" href="nlfilt2.html" title="nlfilt2" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">nlfilt</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="nestedap.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="nlfilt2.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="nlfilt"></a>
+      <div class="titlepage"></div>
+      <a id="IndexNlfilt" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">nlfilt</span>
+        </h2>
+        <p>nlfilt — 
+      Un filtre avec un effet non-linéaire.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm219984"></a>
+        <h2>Description</h2>
+        <p>
+      Implémente le filtre :
+      </p>
+        <div class="literallayout">
+          <p><br />
+Y{n} =a Y{n-1} + b Y{n-2} + d Y^2{n-L} + X{n} - C</p>
+        </div>
+        <p>
+      décrit dans Dobson et Fitch (ICMC'96)
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm219988"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>nlfilt</strong></span> ain, ka, kb, kd, kC, kL</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm219992"></a>
+        <h2>Exécution</h2>
+        <p>
+      </p>
+        <div class="orderedlist">
+          <ol class="orderedlist" type="1">
+            <li class="listitem">
+              <p>
+            Effet non-linéaire. L'ensemble de définition des paramètres est :
+            </p>
+              <div class="literallayout">
+                <p><br />
+  a = b = 0<br />
+  d = 0.8, 0.9, 0.7<br />
+  C = 0.4, 0.5, 0.6<br />
+  L = 20</p>
+              </div>
+              <p>
+            Cela affecte surtout le registre grave mais il y a des effets audibles
+            sur tout le registre. Peut être utile pour colorer des sons de percussion
+            et pour renforcer arbitrairement des notes.
+          </p>
+            </li>
+            <li class="listitem">
+              <p>
+            Passe-bas non-linéaire.L'ensemble de définition des paramètres est :
+            </p>
+              <div class="literallayout">
+                <p><br />
+  a = 0.4<br />
+  b = 0.2<br />
+  d = 0.7<br />
+  C = 0.11<br />
+  L = 20, ... 200</p>
+              </div>
+              <p>
+            Cette variante présente des problèmes d'instabilité mais l'effet est
+            plus prononcé dans le registre grave, sinon elle ressemble beaucoup à
+            un filtre en peigne. De courtes valeurs de <span class="emphasis"><em>L</em></span>
+            peuvent renforcer l'attaque du son.
+          </p>
+            </li>
+            <li class="listitem">
+              <p>
+            Passe-haut non-linéaire. L'ensemble de définition des paramètres est :
+            </p>
+              <div class="literallayout">
+                <p><br />
+  a = 0.35<br />
+  b = -0.3<br />
+  d = 0.95<br />
+  C = 0,2, ... 0.4<br />
+  L = 200</p>
+              </div>
+              <p>
+          </p>
+            </li>
+            <li class="listitem">
+              <p>
+            Passe-haut non-linéaire. L'ensemble de définition des paramètres est :
+            </p>
+              <div class="literallayout">
+                <p><br />
+  a = 0.7<br />
+  b = -0.2, ... 0.5<br />
+  d = 0.9<br />
+  C = 0.12, ... 0.24<br />
+  L = 500, 10</p>
+              </div>
+              <p>
+            La version passe-haut est moins sujette aux oscillations. Elle ajoute
+            de la brillance dans le registre medium-aigu. Avec un long délai
+            <span class="emphasis"><em>L</em></span> cela ressemble un peu à de la réverbération,
+            tandis qu'avec de petites valeurs apparaissent des régions comme des
+            formants. Il y a des changements de couleur arbitraires et des résonances
+            lorsque la hauteur change. Fonctionne bien avec des notes seules.
+          </p>
+            </li>
+          </ol>
+        </div>
+        <p>
+    </p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning: Avertissement">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Avertissement]" src="images/warning.png" />
+              </td>
+              <th align="left">Avertissement</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Les ensembles des valeurs "utiles" des paramètres n'ont pas
+        encore été explorés.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm220013"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode nlfilt. Il utilise le fichier
+      <a class="ulink" href="examples/nlfilt.csd" target="_top"><em class="citetitle">nlfilt.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm220018"></a>
+          <p class="title">
+            <strong>Exemple 655. Exemple de l'opcode nlfilt.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm220025"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac  <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o nlfilt.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	</span><span class="c1">;unfiltered noise</span><span class="w">
+
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">rand</span><span class="w"> </span><span class="mf">.7</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">	</span><span class="c1">;filtered noise</span><span class="w">
+
+</span>k<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>k<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+</span>k<span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p6</span><span class="w">
+</span>k<span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p7</span><span class="w">
+</span>k<span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p8</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">rand</span><span class="w"> </span><span class="mf">.3</span><span class="w">
+</span>a<span class="n">filt</span><span class="w"> </span><span class="nb">nlfilt</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>k<span class="n">a</span><span class="p">,</span><span class="w"> </span>k<span class="n">b</span><span class="p">,</span><span class="w"> </span>k<span class="n">d</span><span class="p">,</span><span class="w"> </span>k<span class="n">C</span><span class="p">,</span><span class="w"> </span>k<span class="n">L</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">clip</span><span class="w"> </span>a<span class="n">filt</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mf">.9</span><span class="w">
+      </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w">				</span><span class="c1">; unfiltersd</span><span class="w">
+
+</span><span class="c1">;        a    b    d    C    L</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">2</span><span class="w">  </span><span class="mi">0</span><span class="w">    </span><span class="mi">0</span><span class="w">   </span><span class="mf">0.8</span><span class="w">  </span><span class="mf">0.5</span><span class="w">  </span><span class="mi">20</span><span class="w">	</span><span class="c1">; non-linear effect</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">.4</span><span class="w">   </span><span class="mf">0.2</span><span class="w">  </span><span class="mf">0.7</span><span class="w">  </span><span class="mf">0.11</span><span class="w"> </span><span class="mi">200</span><span class="w">	</span><span class="c1">; low=paas with non-linear</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">0.35</span><span class="w"> </span><span class="o">-</span><span class="mf">0.3</span><span class="w"> </span><span class="mf">0.95</span><span class="w"> </span><span class="mf">0.1</span><span class="w">  </span><span class="mi">200</span><span class="w">	</span><span class="c1">; high-pass with non-linear</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">0.7</span><span class="w"> </span><span class="o">-</span><span class="mf">0.2</span><span class="w">  </span><span class="mf">0.9</span><span class="w">  </span><span class="mf">0.2</span><span class="w">  </span><span class="mi">20</span><span class="w"> 	</span><span class="c1">; high-pass with non-linear</span><span class="w">
+
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm220267"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : John ffitch</td>
+          </tr>
+          <tr>
+            <td>Université de Bath/Codemist Ltd.</td>
+          </tr>
+          <tr>
+            <td>Bath, UK</td>
+          </tr>
+          <tr>
+            <td>1997</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 3.44</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="nestedap.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="nlfilt2.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">nestedap </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> nlfilt2</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

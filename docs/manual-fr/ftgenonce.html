@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ftgenonce</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="ftgen.html" title="ftgen" />
+    <link rel="next" href="ftgentmp.html" title="ftgentmp" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ftgenonce</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ftgen.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ftgentmp.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="ftgenonce"></a>
+      <div class="titlepage"></div>
+      <a id="IndexFtgenonce" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">ftgenonce</span>
+        </h2>
+        <p>ftgenonce — 
+      Génère une table de fonction depuis la définition d'un instrument, sans
+      duplication de données.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm137578"></a>
+        <h2>Description</h2>
+        <p>Opcode du greffon signalflowgraph.</p>
+        <p>
+      Permet la création de tables de fonction entièrement à l'intérieur des
+      définitions d'instrument, sans duplication de données.
+    </p>
+        <p>
+      L'opcode <span class="emphasis"><em>ftgenonce</em></span> est conçu pour simplifier l'écriture
+      des définitions d'instrument qui peuvent être réutilisées dans différents
+      orchestres par un simple <span class="emphasis"><em>#include</em></span> qui les insère dans
+      un instrument. Il n'est pas nécessaire de définir les tables de fonction dans
+      la partition ou dans l'en-tête de l'orchestre.
+    </p>
+        <p>
+      L'opcode <span class="emphasis"><em>ftgenonce</em></span> est semblable à <span class="emphasis"><em>ftgentmp</em></span>
+      et possède les mêmes arguments. Cependant, les tables de fonctions ne sont
+      ni dupliquées ni effacées. Au lieu de cela, tous les arguments de l'opcode
+      sont assemblés pour former une clé d'accès à une table qui
+      pointe vers le numéro de la table de fonction. Ainsi, chaque invocation de
+      <span class="emphasis"><em>ftgenonce</em></span> avec les mêmes arguments reçoit la même
+      instance des données de la table de fonction. Chaque changement de valeur
+      d'un des arguments de <span class="emphasis"><em>ftgenonce</em></span> provoque la création
+      d'une nouvelle table de fonction.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm137590"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ifno <span class="command"><strong>ftgenonce</strong></span> ip1dummy, ip2dummy, isize, igen, iarga, iargb, ...</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm137594"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ifno</em></span> -- un numéro de table automatiquement assigné.
+    </p>
+        <p>
+      <span class="emphasis"><em>ip1</em></span> -- le numéro de la table à générer ou 0 si le
+      numéro doit être assigné.
+    </p>
+        <p>  
+      <span class="emphasis"><em>ip2dummy</em></span> -- ignoré.
+    </p>
+        <p>
+      <span class="emphasis"><em>isize</em></span> -- taille de la table. Correspond au p3 de
+      l'<span class="emphasis"><em>instruction f</em></span> de partition.
+    </p>
+        <p>
+      <span class="emphasis"><em>igen</em></span> -- routine <span class="emphasis"><em>GEN</em></span> de la table
+      de fonction. Correspond au p4 de l'<span class="emphasis"><em>instruction f</em></span> de
+      partition.
+    </p>
+        <p>
+      <span class="emphasis"><em>iarga, iargb, ...</em></span> -- arguments de la table de fonction.
+      Correspondent de p5 à p<span class="emphasis"><em>n</em></span> de
+      l'<span class="emphasis"><em>instruction f</em></span> de partition.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>A l'origine, Csound était conçu pour ne supporter que les tables dont
+      la taille était une puissance de deux. Bien que ceci ait changé dans les
+      versions récentes (on peut utiliser n'importe quelle taille en donnant un
+      nombre négatif), de nombreux opcodes ne les accepteront pas.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm137615"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode ftgenonce. Il utilise le fichier
+      <a class="ulink" href="examples/ftgenonce.csd" target="_top"><em class="citetitle">ftgenonce.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm137620"></a>
+          <p class="title">
+            <strong>Exemple 391. Exemple de l'opcode ftgenonce.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm137622"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span> 
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o ftgenonce.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w"> 
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> 
+</span><span class="c1">; Use ftgenonce instead of ftgen, ftgentmp, or f statement</span><span class="w">
+</span>i<span class="n">Hz</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">sine</span><span class="w">	</span><span class="nb">ftgenonce</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+</span>a<span class="n">oscili</span><span class="w">	</span><span class="nb">pluck</span><span class="w"> </span><span class="mf">.7</span><span class="p">,</span><span class="w"> </span>i<span class="n">Hz</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span>i<span class="n">sine</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+</span>a<span class="n">adsr</span><span class="w"> 	</span><span class="nb">adsr</span><span class="w"> </span><span class="mf">0.015</span><span class="p">,</span><span class="w"> </span><span class="mf">0.07</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> 	</span><span class="o">=</span><span class="w"> </span>a<span class="n">oscili</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>a<span class="n">adsr</span><span class="w">
+        </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w"> 
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span> 
+<span class="nt">&lt;CsScore&gt;</span><span class="w"> 
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">220</span><span class="w"> 
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">261</span><span class="w"> 
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span> 
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span> 
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm137767"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Michael Gogins</td>
+          </tr>
+          <tr>
+            <td>2009</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ftgen.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ftgentmp.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ftgen </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> ftgentmp</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

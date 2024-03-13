@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>lorisplay</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="HistoricalTop.html" title="Opcodes historiques et abandonnés" />
+    <link rel="prev" href="lorismorph.html" title="lorismorph" />
+    <link rel="next" href="lorisread.html" title="lorisread" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">lorisplay</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="lorismorph.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes historiques et abandonnés</th>
+          <td width="20%" align="right"> <a accesskey="n" href="lorisread.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="lorisplay"></a>
+      <div class="titlepage"></div>
+      <a id="IndexLorisPlay" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">lorisplay</span>
+        </h2>
+        <p>lorisplay —  restitue un ensemble stocké de partiels à largeur de bande
+    améliorée en utilisant la méthode de synthèse additive à largeur de bande
+    améliorée implémentée dans le logiciel Loris, et en appliquant au taux de
+    contrôle des enveloppes de mise en forme de la fréquence, de l'amplitude
+    et de la largeur de bande.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm439490"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ar <span class="command"><strong>lorisplay</strong></span> ireadidx, kfreqenv, kampenv, kbwenv</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm439494"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>lorisplay</em></span> restitue un ensemble stocké de partiels à
+      largeur de bande améliorée en utilisant la méthode de synthèse additive à
+      largeur de bande améliorée implémentée dans le logiciel Loris, et en
+      appliquant au taux de contrôle des enveloppes de mise en forme de la
+      fréquence, de l'amplitude et de la largeur de bande.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm439498"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>istoreidx, ireadidx, isrcidx, itgtidx</em></span> sont des étiquettes
+      qui identifient un ensemble stocké de partiels à largeur de bande améliorée.
+      <span class="emphasis"><em>lorisread</em></span> importe les partiels depuis un fichier
+      SDIF et les stocke avec l'étiquette entière <span class="emphasis"><em>istoreidx</em></span>.
+      <span class="emphasis"><em>lorismorph</em></span> réalise un morphing des ensembles de partiels
+      étiquetés <span class="emphasis"><em>isrcidx</em></span> et <span class="emphasis"><em>itgtidx</em></span>, et
+      stocke les partiels résultants avec l'étiquette entière
+      <span class="emphasis"><em>istoreidx</em></span>. <span class="emphasis"><em>lorisplay</em></span> restitue
+      les partiels stockés avec l'étiquette <span class="emphasis"><em>ireadidx</em></span>. Les
+      étiquettes ne sont utilisées qu'à l'initialisation de la note, et l'on
+      peut les réutiliser sans coût supplémentaire ou bénéfice en efficacité,
+      et sans introduire d'interaction entre les instruments ou leurs instances.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm439510"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>lorisplay</em></span> implémente la reconstruction de signal au
+      moyen de la synthèse additive à largeur de bande améliorée. Les données de
+      contrôle sont obtenues à partir d'un ensemble stocké de partiels à largeur
+      de bande améliorée importé depuis un fichier SDIF en utilisant
+      <span class="emphasis"><em>lorisread</em></span> ou construit par un autre générateur
+      unitaire tel que <span class="emphasis"><em>lorismorph</em></span>. <span class="emphasis"><em>kfreqenv</em></span>
+      est un facteur de transposition au taux de contrôle : une valeur de 1
+      signifie pas de transposition, 1.5 transpose vers l'aigu d'une quinte juste,
+      et 0.5 transpose vers le grave d'une octave. <span class="emphasis"><em>kampenv</em></span>
+      est un facteur de mise à l'échelle au taux de contrôle qui est appliqué à
+      toutes les enveloppes d'amplitude des partiels. <span class="emphasis"><em>kbwenv</em></span>
+      est un facteur de mise à l'échelle au taux de contrôle qui est appliqué à
+      toutes les enveloppes de largeur de bande ou de caractère bruiteux des
+      partiels. Les données de partiel à largeur de bande améliorée sont
+      stockées en mémoire avec une étiquette spécifiée pour un accès ultérieur
+      par un autre générateur.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm439519"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode lorisplay. Il utilise le fichier
+      <a class="ulink" href="examples/lorisplay.csd" target="_top"><em class="citetitle">lorisplay.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm439524"></a>
+          <p class="title">
+            <strong>Exemple 1349. Exemple de l'opcode lorisplay.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm439531"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o lorisplay.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">; clarinet.sdif can be found in /manual/examples</span><span class="w">
+
+</span><span class="c1">; Play the partials in clarinet.sdif from 0 to 3 sec with 1 ms fadetime</span><span class="w">
+</span><span class="c1">; and no frequency , amplitude, or bandwidth modification.</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>k<span class="n">time</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	  </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="w">			</span><span class="c1">; linear time function from 0 to 3 seconds</span><span class="w">
+	</span><span class="n">lorisread</span><span class="w"> </span>k<span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="s">"clarinet.sdif"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.001</span><span class="w">
+</span>k<span class="n">frq</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">	</span><span class="c1">; pitch shifting</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="n">lorisplay</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>k<span class="n">frq</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+	</span><span class="nb">outs</span><span class="w"> 	  </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="c1">; Play the partials in clarinet.sdif from 0 to 3 sec with 1 ms fadetime</span><span class="w">
+</span><span class="c1">; adding tuning and vibrato, increasing the "breathiness" (noisiness) and overall</span><span class="w">
+</span><span class="c1">; amplitude, and adding a highpass filter.</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+
+</span>k<span class="n">time</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mf">3.0</span><span class="w">			</span><span class="c1">; linear time function from 0 to 3 seconds</span><span class="w">
+						</span><span class="c1">; compute frequency scale for tuning</span><span class="w">
+    
+</span>i<span class="n">fscale</span><span class="w">	</span><span class="o">=</span><span class="w">	</span><span class="nb">cpspch</span><span class="p">(</span><span class="vi">p4</span><span class="p">)</span><span class="o">/</span><span class="nb">cpspch</span><span class="p">(</span><span class="mf">8.08</span><span class="p">)</span><span class="w">		</span><span class="c1">; (original pitch was G#4)</span><span class="w">
+						</span><span class="c1">; make a vibrato envelope</span><span class="w">
+</span>k<span class="n">venv</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mf">.02</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">.02</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>k<span class="n">vib</span><span class="w">	</span><span class="nb">oscil</span><span class="w">	</span>k<span class="n">venv</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">			</span><span class="c1">; table 1, sinusoid</span><span class="w">
+</span>k<span class="n">bwenv</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="vi">p3</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="c1">;lots of noise</span><span class="w">
+	</span><span class="n">lorisread</span><span class="w"> </span>k<span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="s">"clarinet.sdif"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.001</span><span class="w">
+</span>a<span class="n">1</span><span class="w">	</span><span class="n">lorisplay</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">fscale</span><span class="o">+</span>k<span class="n">vib</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span>k<span class="n">bwenv</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="nb">atone</span><span class="w">	</span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="w">			</span><span class="c1">; highpass filter, cutoff 1000 Hz</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">; a sinusoid </span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4096</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="mi">3</span><span class="w">  </span><span class="mf">1.2</span><span class="w">	</span><span class="c1">; shifted up</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="o">+</span><span class="w">   </span><span class="mi">1</span><span class="w">  </span><span class="mf">1.5</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="o">+</span><span class="w">   </span><span class="mi">6</span><span class="w">  </span><span class="mf">.5</span><span class="w">	</span><span class="c1">; shifted down</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+
+</span><span class="c1">;     strt   dur   ptch</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w">      </span><span class="mi">1</span><span class="w">    </span><span class="mi">3</span><span class="w">    </span><span class="mf">8.08</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w">      </span><span class="mf">3.5</span><span class="w">  </span><span class="mi">1</span><span class="w">    </span><span class="mf">8.04</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w">      </span><span class="mi">4</span><span class="w">    </span><span class="mi">6</span><span class="w">    </span><span class="mf">8.00</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w">      </span><span class="mi">4</span><span class="w">    </span><span class="mi">6</span><span class="w">    </span><span class="mf">8.07</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm439941"></a>
+        <h2>Crédits</h2>
+        <p>
+      Cette implémentation des générateurs unitaires Loris a été écrite par
+      Kelly Fitz (<a class="ulink" href="mailto:loris@cerlsoundgroup.org" target="_top">loris@cerlsoundgroup.org</a>).
+      Elle est modèlisée sur un prototype d'implémentation du générateur
+      unitaire <span class="emphasis"><em>lorisplay</em></span> écrit par Corbin Champion, et
+      basé sur la méthode de synthèse additive à largeur de bande améliorée et
+      sur les algorithmes de métamorphose sonore implémentés dans la bibliothèque
+      Loris pour la modélisation et la manipulation du son. Les opcodes ont été
+      ensuite adaptés sous la forme d'un greffon de Csound 5 par Michael Gogins.
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="lorismorph.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="HistoricalTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="lorisread.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">lorismorph </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> lorisread</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

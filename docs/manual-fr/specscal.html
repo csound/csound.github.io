@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>specscal</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="DeprecatedTop.html" title="Opcodes de l'orchestre et routines GEN obsolètes" />
+    <link rel="prev" href="specptrk.html" title="specptrk" />
+    <link rel="next" href="specsum.html" title="specsum" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">specscal</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="specptrk.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes de l'orchestre et routines GEN obsolètes</th>
+          <td width="20%" align="right"> <a accesskey="n" href="specsum.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="specscal"></a>
+      <div class="titlepage"></div>
+      <a id="IndexSpecscal" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">specscal</span>
+        </h2>
+        <p>specscal — 
+      Pondère un bloc spectral en entrée avec des enveloppes spectrales.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm431005"></a>
+        <h2>Description</h2>
+        <p>
+      Pondère un bloc spectral en entrée avec des enveloppes spectrales.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm431008"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">wsig <span class="command"><strong>specscal</strong></span> wsigin, ifscale, ifthresh</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm431012"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ifscale</em></span> -- table de la fonction de pondération
+      contenant les valeurs par lesquelles une valeur de magnitude est pondérée.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifthresh</em></span> -- table de la fonction de seuil. Si
+      <span class="emphasis"><em>ifthresh</em></span> est différent de zéro, chaque magnitude est
+      réduite par sa valeur de table correspondante (on ne descend pas en-dessous
+      de zéro).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm431019"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>wsig</em></span> -- le spectre de sortie
+    </p>
+        <p>
+      <span class="emphasis"><em>wsigin</em></span> -- le spectre d'entrée
+    </p>
+        <p>
+      Pondère un bloc spectral en entrée avec des enveloppes spectrales. Les
+      tables de fonction <span class="emphasis"><em>ifthresh</em></span> et <span class="emphasis"><em>ifscale</em></span>
+      sont initialement échantillonnée dans l'espace de fréquence (logarithmique)
+      du spectre d'entrée ; puis, chaque fois qu'un nouveau spectre d'entrée est
+      détecté, les valeurs échantillonnées sont utilisées pour pondérer chacun
+      de ses canaux de magnitude de la manière suivante : si
+      <span class="emphasis"><em>ifthresh</em></span> est différent de zéro, chaque magnitude est
+      réduite par sa valeur de table correspondante (on ne descend pas en-dessous
+      de zéro) ; ensuite chaque magnitude est repondérée par la valeur de
+      <span class="emphasis"><em>ifscale</em></span> correspondante, et le spectre résultant est
+      écrit dans <span class="emphasis"><em>wsig</em></span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm431031"></a>
+        <h2>Exemples</h2>
+        <p>
+      </p>
+        <div class="informalexample">
+          <pre class="programlisting">
+  wsig2    <span class="opc">specdiff</span>    wsig1         <span class="comment">; sense onsets</span>
+  wsig3    <span class="opc">specfilt</span>    wsig2, 2      <span class="comment">; absorb slowly</span>
+           <span class="opc">specdisp</span>    wsig2, 0.1    <span class="comment">; &amp; display both spectra</span>
+           <span class="opc">specdisp</span>    wsig3, 0.1</pre>
+        </div>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm431043"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="specaddm.html" title="specaddm"><em class="citetitle">specaddm</em></a>,
+      <a class="link" href="specdiff.html" title="specdiff"><em class="citetitle">specdiff</em></a>,
+      <a class="link" href="specfilt.html" title="specfilt"><em class="citetitle">specfilt</em></a>,
+      <a class="link" href="spechist.html" title="spechist"><em class="citetitle">spechist</em></a>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="specptrk.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="DeprecatedTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="specsum.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">specptrk </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> specsum</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Les programmes utilitaires</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="PartReference.html" title="Partie III. Référence" />
+    <link rel="prev" href="loris.html" title="Opcodes Loris" />
+    <link rel="next" href="UtilitySoundfile.html" title="Formats des fichiers son." />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Les programmes utilitaires</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="loris.html">Précédent</a> </td>
+          <th width="60%" align="center">Partie III. Référence</th>
+          <td width="20%" align="right"> <a accesskey="n" href="UtilitySoundfile.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="chapter">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="UtilityTop"></a>Les programmes utilitaires</h2>
+          </div>
+          <div>
+            <div class="author">
+              <h3 class="author"><span class="firstname">Dan</span> <span class="surname">Ellis</span></h3>
+              <div class="affiliation">
+                <span class="orgname">MIT Media Lab<br /></span>
+                <div class="address">
+                  <p><br />
+          <span class="city">Cambridge</span><br />
+          <span class="state">Massachussetts</span><br />
+        </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p>
+    Les utilitaires de Csound sont des programmes de <span class="emphasis"><em>prétraitement de fichier son</em></span>
+    qui retournent de l'information sur un fichier son ou qui créent une version d'analyse de celui-ci
+    à utiliser par certains générateurs de Csound. Bien que destinés à différents usages, ils ont en
+    commun le mécanisme d'accès au fichier son et sont descriptibles comme un ensemble. Les programmes
+    Utilitaires de Fichiers Son peuvent être appelés de deux manières équivalentes :
+    </p>
+      <div class="cmdsynopsis">
+        <p><code class="command">csound</code>  [<em class="replaceable"><code>-U nomutilitaire</code></em>] [<code class="option">options</code>] [<em class="replaceable"><code>noms_fichier</code></em>]</p>
+      </div>
+      <p>
+
+    </p>
+      <div class="cmdsynopsis">
+        <p><code class="command">nomutilitaire</code>  [<code class="option">options</code>] [<em class="replaceable"><code>noms_fichier</code></em>]</p>
+      </div>
+      <p>
+  </p>
+      <p>
+    Dans le premier cas, l'utilitaire est appelé comme une partie de l'exécutable de Csound, tandis
+    que dans le second il est appelé comme un programme autonome. Le second est plus petit d'environ
+    200 K, mais les deux formes fonctionnent de manière identique. La première est pratique pour
+    éviter la maintenance et l'utilisation de plusieurs programmes indépendants - un programme fait
+    tout. Quand on utilise cette forme, un
+    <a class="link" href="CommandFlags.html#FlagsMinusUpperU"><em class="citetitle">drapeau -U</em></a> detecté dans la ligne
+    de commande provoquera l'interprétation des options et des noms suivants comme ceux de l'utilitaire
+    nommé ; cela signifie que le mécanisme de génération de Csound ne sera pas invoqué et que le
+    programme se terminera à la fin du traitement par l'utilitaire.
+  </p>
+      <div class="section">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="UtilityDir"></a>Répertoires.</h2>
+            </div>
+          </div>
+        </div>
+        <p>
+      Les noms de fichier sont de deux sortes, fichiers son sources et fichiers d'analyse résultants.
+      Chacun a une convention de nommage hiérarchique, influencée par le répertoire depuis lequel
+      l'utilitaire est appelé. Les fichiers son sources avec un nom de chemin complet (commençant
+      par un point (.), une barre oblique (/), ou pour ThinkC incluant un deux-points (:)), ne seront
+      cherchés que dans le répertoire nommé. Les fichiers son sans chemin seront recherchés d'abord
+      dans le répertoire courant, ensuite dans le répertoire nommé par la variable d'environnement
+      <a class="link" href="CommandEnvironment.html" title="Variables d'environnement de Csound"><em class="citetitle">SSDIR</em></a> (si elle est définie),
+      ensuite dans le répertoire nommé par <a class="link" href="CommandEnvironment.html" title="Variables d'environnement de Csound"><em class="citetitle">SFDIR</em></a>.
+      Une recherche infructueuse retournera une erreur "cannot open".
+    </p>
+        <p>
+      Les fichiers d'analyse résultants sont écrits dans le répertoire courant, ou le répertoire
+      nommé si un chemin est inclus. Pour être ordonné, il est bon de séparer les fichiers d'analyse des fichiers
+      son, habituellement dans un répertoire différent référencé par la variable d'environnement SADIR.
+      Il est commode de lancer l'analyse depuis le répertoire SADIR. Quand un fichier d'analyse est
+      invoqué ultérieurement par un générateur de Csound il est cherché en premier dans le répertoire
+      courant, puis dans le répertoire défini par SADIR.
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="loris.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="PartReference.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="UtilitySoundfile.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Opcodes Loris </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Formats des fichiers son.</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

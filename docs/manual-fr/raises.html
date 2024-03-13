@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>^</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="equals.html" title="==" />
+    <link rel="next" href="opor.html" title="||" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">^</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="equals.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="opor.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="raises"></a>
+      <div class="titlepage"></div>
+      <a id="IndexCirc" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">^</span>
+        </h2>
+        <p>^ — 
+      Opérateur d'élévation à une puissance.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm23234"></a>
+        <h2>Description</h2>
+        <p>
+      Les opérateurs arithmétiques réalisent les opérations de changement de signe (négation), de
+      conservation de signe, le ET et le OU logiques, l'addition, la soustraction, la multiplication
+      et la division. A noter qu'une valeur ou une expression peut se trouver entre deux de ces
+      opérateurs, pour lesquels elle sera l'argument de gauche ou l'argument de droite comme dans
+      </p>
+        <div class="literallayout">
+          <p>a + b * c.</p>
+        </div>
+        <p>
+    </p>
+        <p>
+      Dans de tels cas trois règles s'appliquent :
+    </p>
+        <p>
+      1. * et <span class="emphasis"><em>/</em></span> s'appliquent à leurs voisins plus fortement que +
+      et −. Ainsi l'expression ci-dessus est interprétée comme
+      </p>
+        <div class="literallayout">
+          <p>a + (b * c)</p>
+        </div>
+        <p>
+      avec * s'appliquant à b et à c et ensuite + s'appliquant à a et à b * c.
+    </p>
+        <p>
+      2. <span class="emphasis"><em>+</em></span> et <span class="emphasis"><em>−</em></span> sont prioritaires par rapport à
+      &amp;&amp;, qui est lui-même prioritaire par rapport à ||:
+      </p>
+        <div class="literallayout">
+          <p>a &amp;&amp; b - c || d</p>
+        </div>
+        <p>
+      est interprété comme
+      </p>
+        <div class="literallayout">
+          <p>(a &amp;&amp; (b - c)) || d</p>
+        </div>
+        <p>
+    </p>
+        <p>
+      3. Lorsque deux opérateurs ont le même rang de priorité, les opérations s'enchaînent de gauche à
+      droite :
+      </p>
+        <div class="literallayout">
+          <p>a - b - c</p>
+        </div>
+        <p>
+      est interprété comme
+      </p>
+        <div class="literallayout">
+          <p>(a - b) - c</p>
+        </div>
+        <p>
+    </p>
+        <p>
+      On peut utiliser des parenthèses comme ci-dessus pour forcer un groupement particulier.
+    </p>
+        <p>
+      L'opérateur <span class="emphasis"><em>^</em></span> élève <span class="emphasis"><em>a</em></span> à la puissance <span class="emphasis"><em>b</em></span>.
+      <span class="emphasis"><em>b</em></span> ne doit pas être de taux audio. A utiliser avec précaution car les règles de
+      précédence peuvent ne pas fonctionner correctement.
+      Voir <a class="link" href="pow.html" title="pow"><em class="citetitle">pow</em></a>. (Nouveau dans la version 3.493 de Csound.)
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm23258"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">a <span class="command"><strong>^</strong></span> b  (b pas de taux audio)</pre>
+        <p>
+      où les arguments <span class="emphasis"><em>a</em></span> et <span class="emphasis"><em>b</em></span> peuvent être des expressions.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm23265"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opérateur ^. Il utilise le fichier
+      <a class="ulink" href="examples/raises.csd" target="_top"><em class="citetitle">raises.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm23270"></a>
+          <p class="title">
+            <strong>Exemple 30. Exemple de l'opérateur ^.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm23277"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">;-o ^.wav        ; output to audio file</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	</span><span class="c1">; Lo-Fi sound</span><span class="w">
+
+</span>k<span class="n">pow</span><span class="w">	  </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">						</span><span class="c1">;exponent</span><span class="w">
+</span>k<span class="n">base</span><span class="w">	  </span><span class="nb">line</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mf">2.2</span><span class="w">				</span><span class="c1">;vary the base</span><span class="w">
+</span>k<span class="n">Quantize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>k<span class="n">base</span><span class="o">^</span>k<span class="n">pow</span><span class="w">
+</span>k<span class="n">Quantize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>k<span class="n">Quantize</span><span class="o">*</span><span class="mf">0.5</span><span class="w">				</span><span class="c1">;half the number of steps for each side of a bipolar signal</span><span class="w">
+</span><span class="nb">printk2</span><span class="w">	  </span>k<span class="n">Quantize</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	  </span><span class="nb">diskin2</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">			</span><span class="c1">;loop the fox</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	  </span><span class="o">=</span><span class="w"> </span><span class="nb">round</span><span class="p">(</span>a<span class="n">sig</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>k<span class="n">Quantize</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span>k<span class="n">Quantize</span><span class="w">		</span><span class="c1">;quantize and scale audio signal</span><span class="w">
+	  </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">  
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">19.2</span><span class="w">
+
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+
+      Sa sortie contiendra des lignes comme celles-ci :
+      </p>
+        <pre class="screen">
+ i1     0.50000
+ i1     0.50021
+ i1     0.50042
+......
+ i1  1327.49320
+ i1  1327.74465</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm23423"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="subtracts.html" title="-"><em class="citetitle">-</em></a>, 
+      <a class="link" href="adds.html" title="+"><em class="citetitle">+</em></a>, 
+      <a class="link" href="opand.html" title="&amp;&amp;"><em class="citetitle">&amp;&amp;</em></a>, 
+      <a class="link" href="opor.html" title="||"><em class="citetitle">||</em></a>, 
+      <a class="link" href="multiplies.html" title="*"><em class="citetitle">*</em></a>, 
+      <a class="link" href="divides.html" title="/"><em class="citetitle">/</em></a>, 
+      <a class="link" href="modulus.html" title="%"><em class="citetitle">%</em></a>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="equals.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="opor.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">== </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> ||</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

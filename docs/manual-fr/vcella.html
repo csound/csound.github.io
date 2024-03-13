@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>vcella</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="vbapzmove.html" title="vbapzmove" />
+    <link rel="next" href="vclpf.html" title="vclpf" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">vcella</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="vbapzmove.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="vclpf.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="vcella"></a>
+      <div class="titlepage"></div>
+      <a id="IndexVcella" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">vcella</span>
+        </h2>
+        <p>vcella — 
+    Automate Cellulaire
+      
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm368497"></a>
+        <h2>Description</h2>
+        <p>
+      Automate Cellulaire unidimensionnel appliqué à des vecteurs de Csound.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm368500"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>vcella</strong></span> ktrig, kreinit, ioutFunc, initStateFunc, \
+       iRuleFunc, ielements, irulelen [, iradius]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm368504"></a>
+        <h2>Initialisation</h2>
+        <p>
+       <span class="emphasis"><em>ioutFunc</em></span> - numéro de la table dans laquelle l'état de chaque cellule est stocké
+    </p>
+        <p>
+      <span class="emphasis"><em>initStateFunc</em></span>  - numéro de la table contenant l'état initial de chaque cellule
+    </p>
+        <p>
+      <span class="emphasis"><em>iRuleFunc</em></span> - numéro de la table de consultation contenant les règles
+      </p>
+        <p>
+      <span class="emphasis"><em>ielements</em></span> - nombre total de cellules
+    </p>
+        <p>
+      <span class="emphasis"><em>irulelen</em></span>  - nombre total de règles
+    </p>
+        <p>
+      <span class="emphasis"><em>iradius</em></span> (facultatif) - rayon de l'Automate Cellulaire. Actuellement, le rayon de
+      l'AC peut valoir 1 ou 2 (la valeur par défaut est 1)
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm368518"></a>
+        <h2>Exécution</h2>
+        <p>
+       <span class="emphasis"><em>ktrig</em></span> - signal de déclenchement. Chaque fois qu'il est non nul, une nouvelle
+       génération de cellules est évaluée.
+    </p>
+        <p>
+      <span class="emphasis"><em>kreinit</em></span> - signal de déclenchement. Chaque fois qu'il est non nul, l'état de
+      toutes les cellules est forcé à celui de <span class="emphasis"><em>initStateFunc</em></span>.
+    </p>
+        <p>
+      <span class="emphasis"><em>vcella</em></span> met en œuvre un automate cellulaire pour lequel l'état de chaque
+      cellule est stocké dans <span class="emphasis"><em>ioutFunc</em></span>. Ainsi <span class="emphasis"><em>ioutFunc</em></span> est un
+      vecteur contenant l'état courant de chaque cellule. Ce vecteur variable peut être utilisé avec
+      d'autres opcodes basés sur des vecteurs, tels que
+      <a class="link" href="adsynt.html" title="adsynt"><em class="citetitle">adsynt</em></a>,
+      <a class="link" href="vmap.html" title="vmap"><em class="citetitle">vmap</em></a>,
+      <a class="link" href="vpowv.html" title="vpowv"><em class="citetitle">vpowv</em></a> etc.
+	</p>
+        <p>
+    <span class="emphasis"><em>initStateFunc</em></span> est un vecteur d'entrée contenant la valeur initiale de la rangée de
+    cellules, tandis que <span class="emphasis"><em>iRuleFunc</em></span> est un vecteur d'entrée contenant les règles sous
+    la forme d'une table de consultation. Notez que <span class="emphasis"><em>initStateFunc</em></span> et
+    <span class="emphasis"><em>iRuleFunc</em></span> peuvent être modifiés pendant l'exécution au moyen d'autres opcodes
+    basés sur des vecteurs (par exemple <a class="link" href="vcopy.html" title="vcopy"><em class="citetitle">vcopy</em></a>) afin de
+    forcer un changement de règle et d'état pendant l'exécution.
+	</p>
+        <p>
+    Une nouvelle génération de cellules est évaluée chaque fois que <span class="emphasis"><em>ktrig</em></span> contient une
+    valeur non nulle. De plus, l'état de toutes les cellules peut être forcé à l'état correspondant dans
+    <span class="emphasis"><em>initStateFunc</em></span> chaque fois que <span class="emphasis"><em>kreinit</em></span> contient une valeur non
+    nulle.
+  </p>
+        <p>
+    Le rayon de l'algorithme d'AC peut valoir 1 ou 2 (argument facultatif <span class="emphasis"><em>iradius</em></span>). 
+  </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm368548"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode vcella. Il utilise le fichier
+      <a class="ulink" href="examples/vcella.csd" target="_top"><em class="citetitle">vcella.csd</em></a>.</p>
+        <p>
+      L'exemple suivant utilise l'opcode <span class="emphasis"><em>vcella</em></span>
+      </p>
+        <div class="example">
+          <a id="idm368555"></a>
+          <p class="title">
+            <strong>Exemple 1158. Exemple de l'opcode vcella.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm368562"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o vcella.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+</span><span class="c1">; vcella.csd</span><span class="w">
+</span><span class="c1">; by Anthony Kozar</span><span class="w">
+
+</span><span class="c1">; This file demonstrates some of the new opcodes available in</span><span class="w">
+</span><span class="c1">; Csound 5 that come from Gabriel Maldonado's CsoundAV.</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="mi">4410</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; Cellular automata-driven oscillator bank using vcella and adsynt</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span>i<span class="n">dur</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="vi">p3</span><span class="w">
+  </span>i<span class="n">CArate</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">                                </span><span class="c1">; number of times per second the CA calculates new values</span><span class="w">
+	
+  </span><span class="c1">; f-tables for CA parameters</span><span class="w">
+  </span>i<span class="n">CAinit</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">                                </span><span class="c1">; CA initial states					</span><span class="w">
+  </span>i<span class="n">CArule</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="vi">p6</span><span class="w">                                </span><span class="c1">; CA rule values</span><span class="w">
+  </span><span class="c1">; The rule is used as follows:</span><span class="w">
+  </span><span class="c1">; the states (values) of each cell are summed with their neighboring cells within</span><span class="w">
+  </span><span class="c1">; the specied radius (+/- 1 or 2 cells).  Each sum is used as an index to read a </span><span class="w">
+  </span><span class="c1">; value from the rule table which becomes the new state value for its cell.</span><span class="w">
+  </span><span class="c1">; All new states are calculated first, then the new values are all applied </span><span class="w">
+  </span><span class="c1">; simultaneously.</span><span class="w">
+
+  </span>i<span class="n">elements</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ftlen</span><span class="p">(</span>i<span class="n">CAinit</span><span class="p">)</span><span class="w">
+  </span>i<span class="n">numrules</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ftlen</span><span class="p">(</span>i<span class="n">CArule</span><span class="p">)</span><span class="w">
+  </span>i<span class="n">radius</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+  </span><span class="c1">; create some needed tables</span><span class="w">
+  </span>i<span class="n">CAstate</span><span class="w">  </span><span class="nb">ftgen</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>i<span class="n">elements</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">    </span><span class="c1">; will hold the current CA states</span><span class="w">
+  </span>i<span class="n">freqs</span><span class="w">    </span><span class="nb">ftgen</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>i<span class="n">elements</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">    </span><span class="c1">; will hold the oscillator frequency for each cell</span><span class="w">
+  </span>i<span class="n">amps</span><span class="w">     </span><span class="nb">ftgen</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>i<span class="n">elements</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">    </span><span class="c1">; will hold the amplitude for each cell</span><span class="w">
+
+  </span><span class="c1">; calculate cellular automata state</span><span class="w">
+  </span>k<span class="n">trig</span><span class="w">     </span><span class="nb">metro</span><span class="w">     </span>i<span class="n">CArate</span><span class="w">                   </span><span class="c1">; trigger the CA to update iCArate times per second</span><span class="w">
+            </span><span class="nb">vcella</span><span class="w">    </span>k<span class="n">trig</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>i<span class="n">CAstate</span><span class="p">,</span><span class="w"> </span>i<span class="n">CAinit</span><span class="p">,</span><span class="w"> </span>i<span class="n">CArule</span><span class="p">,</span><span class="w"> </span>i<span class="n">elements</span><span class="p">,</span><span class="w"> </span>i<span class="n">numrules</span><span class="p">,</span><span class="w"> </span>i<span class="n">radius</span><span class="w">
+
+  </span><span class="c1">; scale CA state for use as amplitudes of the oscillator bank</span><span class="w">
+            </span><span class="nb">vcopy</span><span class="w">     </span>i<span class="n">amps</span><span class="p">,</span><span class="w"> </span>i<span class="n">CAstate</span><span class="p">,</span><span class="w"> </span>i<span class="n">elements</span><span class="w">
+            </span><span class="nb">vmult</span><span class="w">     </span>i<span class="n">amps</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span>i<span class="n">elements</span><span class="w">   </span><span class="c1">; divide by 3 since state values are 0-3</span><span class="w">
+
+            </span><span class="nb">vport</span><span class="w">     </span>i<span class="n">amps</span><span class="p">,</span><span class="w"> </span><span class="mf">.01</span><span class="p">,</span><span class="w"> </span>i<span class="n">elements</span><span class="w">     </span><span class="c1">; need to smooth the amplitude changes for adsynt</span><span class="w">
+  </span><span class="c1">; we could use adsynt2 instead of adsynt, but it does not seem to be working</span><span class="w">
+
+  </span><span class="c1">; i-time loop for calculating frequencies</span><span class="w">
+  </span>i<span class="n">ndex</span><span class="w">     </span><span class="o">=</span><span class="w">         </span><span class="mi">0</span><span class="w">
+  </span>i<span class="n">new</span><span class="w">      </span><span class="o">=</span><span class="w">         </span><span class="mi">1</span><span class="w">
+  </span>i<span class="n">ratio</span><span class="w">    </span><span class="o">=</span><span class="w">         </span><span class="mf">1.125</span><span class="w">                     </span><span class="c1">; just major second (creating a whole tone scale)</span><span class="w">
+</span><span class="nl">loop1</span><span class="p">:</span><span class="w">
+            </span><span class="nb">tableiw</span><span class="w">   </span>i<span class="n">new</span><span class="p">,</span><span class="w"> </span>i<span class="n">ndex</span><span class="p">,</span><span class="w"> </span>i<span class="n">freqs</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">    </span><span class="c1">; 0 indicates integer indices</span><span class="w">
+  </span>i<span class="n">new</span><span class="w">      </span><span class="o">=</span><span class="w">         </span>i<span class="n">new</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>i<span class="n">ratio</span><span class="w">
+  </span>i<span class="n">ndex</span><span class="w">     </span><span class="o">=</span><span class="w">         </span>i<span class="n">ndex</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span>i<span class="n">ndex</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span>i<span class="n">elements</span><span class="p">)</span><span class="w"> </span><span class="k">igoto</span><span class="w"> </span><span class="nl">loop1</span><span class="w">
+
+  </span><span class="c1">; create sound with additive oscillator bank</span><span class="w">
+  </span>i<span class="n">freqbase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="w">
+  </span>i<span class="n">wavefn</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span>i<span class="n">phs</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">                                 </span><span class="c1">; random oscillator phases</span><span class="w">
+
+  </span>k<span class="n">env</span><span class="w">      </span><span class="nb">linseg</span><span class="w">    </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span>i<span class="n">dur</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="w">
+  </span>a<span class="n">osc</span><span class="w">      </span><span class="nb">adsynt</span><span class="w">    </span>k<span class="n">env</span><span class="p">,</span><span class="w"> </span>i<span class="n">freqbase</span><span class="p">,</span><span class="w"> </span>i<span class="n">wavefn</span><span class="p">,</span><span class="w"> </span>i<span class="n">freqs</span><span class="p">,</span><span class="w"> </span>i<span class="n">amps</span><span class="p">,</span><span class="w"> </span>i<span class="n">elements</span><span class="p">,</span><span class="w"> </span>i<span class="n">phs</span><span class="w">
+
+            </span><span class="nb">out</span><span class="w">       </span>a<span class="n">osc</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">ampdb</span><span class="p">(</span><span class="mi">68</span><span class="p">)</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; This example uses a 4-state cellular automata</span><span class="w">
+</span><span class="c1">; Possible state values are 0, 1, 2, and 3</span><span class="w">
+
+</span><span class="c1">; CA initial state</span><span class="w">
+</span><span class="c1">; We have 16 cells in our CA, so the initial state table is size 16</span><span class="w">
+</span><span class="nb">f</span><span class="mi">10</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w">  </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">
+
+</span><span class="c1">; CA rule</span><span class="w">
+</span><span class="c1">; The maximum sum with radius 1 (3 cells) is 9, so we need 10 values in the rule (0-9)</span><span class="w">
+</span><span class="nb">f</span><span class="mi">11</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">
+
+</span><span class="c1">; Here is our one and only note!</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="mi">20</span><span class="w">  </span><span class="mi">4</span><span class="w">  </span><span class="mi">10</span><span class="w">  </span><span class="mi">11</span><span class="w">
+
+</span><span class="nb">e</span><span class="w">
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm369099"></a>
+        <h2>Crédits</h2>
+        <p>Ecrit par : Gabriel Maldonado.</p>
+        <p>Nouveau dans Csound 5 (Disponible auparavant seulement dans CsoundAV)</p>
+        <p>Exemple par : Anthony Kozar</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="vbapzmove.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="vclpf.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">vbapzmove </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> vclpf</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

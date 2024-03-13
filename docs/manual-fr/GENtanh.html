@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>GENtanh</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="ScoregensTop.html" title="Instructions de partition et routines GEN" />
+    <link rel="prev" href="GEN53.html" title="GEN53" />
+    <link rel="next" href="GENexp.html" title="GENexp" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">GENtanh</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="GEN53.html">Précédent</a> </td>
+          <th width="60%" align="center">Instructions de partition et routines GEN</th>
+          <td width="20%" align="right"> <a accesskey="n" href="GENexp.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="GENtanh"></a>
+      <div class="titlepage"></div>
+      <a id="IndexGENtanh" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">GENtanh</span>
+        </h2>
+        <p>"tanh" — 
+      Génère une table avec les valeurs de la fonction tanh.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm422246"></a>
+        <h2>Description</h2>
+        <p>
+      Crée une table avec les valeurs de la fonction tanh.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm422249"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>f</strong></span> # time size "tanh" start end rescale</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm422253"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>size</em></span> -- nombre de points dans la table. Doit être une
+      puissance de 2 ou une puissance-de-2 plus 1 (voir
+      l'<a class="link" href="f.html" title="Instruction f (ou instruction de table de fonction)"><em class="citetitle">instruction f</em></a>).
+    </p>
+        <p>
+      <span class="emphasis"><em>start, end</em></span> -- la première et la dernière valeur à
+      mémoriser ; le GEN dessine une courbe qui va de <span class="emphasis"><em>start</em></span>
+      à <span class="emphasis"><em>end</em></span> : <span class="emphasis"><em>tanh(start)</em></span> ...
+      <span class="emphasis"><em>tanh(end)</em></span>.
+      Les points mis en mémoire sont répartis uniformément entre ces
+      deux valeurs sur la longueur de la table.
+    </p>
+        <p>
+      <span class="emphasis"><em>rescale</em></span> -- s'il est différent de zéro, la table n'est
+      pas normalisée.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm422267"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple simple de la routine GENtanh. Il utilise le fichier
+      <a class="ulink" href="examples/gentanh.csd" target="_top"><em class="citetitle">gentanh.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm422272"></a>
+          <p class="title">
+            <strong>Exemple 1315. Exemple de la routine GENtanh.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm422279"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac  <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o gentanh.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w"> 
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w"> 
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> 
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>a<span class="n">swp</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	</span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mf">.49</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="w">		</span><span class="c1">;index sweep function</span><span class="w">
+</span>a<span class="n">index</span><span class="w">	</span><span class="nb">poscil</span><span class="w">	</span>a<span class="n">swp</span><span class="p">,</span><span class="w"> </span><span class="mi">110</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">				</span><span class="c1">;sound to waveshape</span><span class="w">
+</span>a<span class="n">table</span><span class="w">	</span><span class="nb">tablei</span><span class="w">	</span>a<span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.5</span><span class="w">			</span><span class="c1">;waveshape index</span><span class="w">
+</span>a<span class="n">env</span><span class="w">	</span><span class="nb">linen</span><span class="w">	</span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="mf">.01</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mf">.02</span><span class="w">			</span><span class="c1">;amplitude envelope</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="p">(</span>a<span class="n">table</span><span class="o">*</span>a<span class="n">env</span><span class="p">)</span><span class="o">*</span><span class="vi">p5</span><span class="w">				</span><span class="c1">;impose envelope and scale</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">    </span><span class="nb">dcblock2</span><span class="w"> </span>a<span class="n">sig</span><span class="w">					</span><span class="c1">;get rid of DC</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">    </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">		
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8192</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">	</span><span class="c1">;sine wave</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8192</span><span class="w"> </span><span class="s">"tanh"</span><span class="w"> </span><span class="o">-</span><span class="mi">100</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="mi">0</span><span class="w">	</span><span class="c1">;symmetrical transfer fuction</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8192</span><span class="w"> </span><span class="s">"tanh"</span><span class="w"> </span><span class="o">-</span><span class="mi">10</span><span class="w">  </span><span class="mi">10</span><span class="w">  </span><span class="mi">0</span><span class="w">	</span><span class="c1">;symmetrical</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8192</span><span class="w"> </span><span class="s">"tanh"</span><span class="w">   </span><span class="mi">0</span><span class="w">  </span><span class="mi">10</span><span class="w">  </span><span class="mi">0</span><span class="w">	</span><span class="c1">;not symmetrical</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">2</span><span class="w">
+
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />  
+        <span class="phrase">Voici les diagrammes des formes d'onde des routines GENtanh
+          utilisées dans l'exemple :</span>
+
+      </p>
+        <div class="mediaobject">
+          <img src="images/gentanh_1.png" alt="f 2 0 8192 &quot;tanh&quot; -100 100 0 - beaucoup de distorsion" />
+          <div class="caption">
+            <p>  f 2 0 8192 "tanh" -100 100 0 - beaucoup de distorsion</p>
+          </div>
+        </div>
+        <p>
+
+      </p>
+        <div class="mediaobject">
+          <img src="images/gentanh_2.png" alt="f 3 0 8192 &quot;tanh&quot; -10 10 0 - moins de distorsion que f2" />
+          <div class="caption">
+            <p>  f 3 0 8192 "tanh" -10 10 0 - moins de distorsion que f2</p>
+          </div>
+        </div>
+        <p>
+
+      </p>
+        <div class="mediaobject">
+          <img src="images/gentanh_3.png" alt="f 4 0 8192 &quot;tanh&quot; -10 15 0" />
+          <div class="caption">
+            <p>  f 4 0 8192 "tanh" -10 15 0</p>
+          </div>
+        </div>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm422555"></a>
+        <h2>Voir aussi</h2>
+        <p>
+       <a class="link" href="GENexp.html" title="GENexp"><em class="citetitle">GENexp</em></a> and
+       <a class="link" href="GENsone.html" title="GENsone"><em class="citetitle">GENsone</em></a>.
+       </p>
+        <p>Plus d'information sur cette routine :
+       <a class="ulink" href="http://www.csoundjournal.com/issue11/distortionSynthesis.html" target="_top">
+       <em class="citetitle">http://www.csoundjournal.com/issue11/distortionSynthesis</em></a>, écrit par Victor Lazzarini</p>
+        <p>
+     </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm422565"></a>
+        <h2>Crédits</h2>
+        <p>Ecrit par John ffitch</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="GEN53.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="ScoregensTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="GENexp.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">GEN53 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> GENexp</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>rnd31</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="rndseed.html" title="rndseed" />
+    <link rel="next" href="round.html" title="round" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">rnd31</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="rndseed.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="round.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="rnd31"></a>
+      <div class="titlepage"></div>
+      <a id="IndexRnd31" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">rnd31</span>
+        </h2>
+        <p>rnd31 — 
+      Opcodes aléatoires bipolaires sur 31 bit avec une distribution contrôlée.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm293084"></a>
+        <h2>Description</h2>
+        <p>
+      Opcodes aléatoires bipolaires sur 31 bit avec une distribution contrôlée. Ces unités
+      sont portables, c-à-d qu'avec la même valeur de graine on obtiendra la même séquence
+      aléatoire sur tous les systèmes. La distribution des nombres aléatoires générés peut
+      être changée au taux-k.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm293087"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ax <span class="command"><strong>rnd31</strong></span> kscl, krpow [, iseed]</pre>
+        <pre class="synopsis">ix <span class="command"><strong>rnd31</strong></span> iscl, irpow [, iseed]</pre>
+        <pre class="synopsis">kx <span class="command"><strong>rnd31</strong></span> kscl, krpow [, iseed]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm293095"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ix</em></span> -- valeur de sortie au taux-i.
+    </p>
+        <p>
+      <span class="emphasis"><em>iscl</em></span> -- mise à l'échelle de la sortie. Les nombres aléatoires générés sont
+      compris entre -<span class="emphasis"><em>iscl</em></span> et <span class="emphasis"><em>iscl</em></span>.
+    </p>
+        <p>
+      <span class="emphasis"><em>irpow</em></span> -- contrôle la distribution des nombres aléatoires. Si
+      <span class="emphasis"><em>irpow</em></span> est positif, la distribution aléatoire (x compris entre -1 et 1)
+      est <span class="emphasis"><em>abs(x)<sup>((1 / irpow) - 1)</sup></em></span> ; pour
+      des valeurs négatives de <span class="emphasis"><em>irpow</em></span>, elle vaut
+      <span class="emphasis"><em>(1 - abs(x))<sup>((-1 / irpow) - 1)</sup></em></span>. En fixant
+      <span class="emphasis"><em>irpow</em></span> à -1, 0 ou 1 on obtiendra une distribution uniforme
+      (c'est aussi plus rapide à calculer).  
+    </p>
+        <p>
+      </p>
+        <div class="mediaobject">
+          <img src="images/rnd31_rand.png" alt="[Un graphique des distributions pour différentes valeurs de irpow.]" />
+          <div class="caption">
+            <p>Un graphique des distributions pour différentes valeurs de irpow.</p>
+          </div>
+        </div>
+        <p>
+    </p>
+        <p>
+      <span class="emphasis"><em>iseed</em></span> (facultatif, par défaut=0) -- valeur de la graine pour le
+      générateur de nombres aléatoires (nombre entier positif compris entre 1 et 2147483646
+      (2<sup>31</sup> - 2)). Avec une valeur nulle ou négative la graine
+      est prise à partir de l'horloge du système (c'est le comportement par défaut). Une graine
+      à partir de l'horloge du système nous garantit la génération de séquences aléatoires
+      différentes, même si plusieurs opcodes aléatoires sont appelés dans un temps très court.
+    </p>
+        <p>
+      Dans les versions de taux-a et de taux-k la graine est fixée à l'initialisation de l'opcode.
+      Avec une sortie de taux-i, si la graine est nulle ou négative, elle sera prise à partir
+      de l'horloge du système lors du premier appel, puis retournera la valeur suivante de la
+      séquence aléatoire lors des appels successifs ; les valeurs positives de la graine sont fixées
+      à tous les appels de taux-i. La graine est locale pour les unités de taux-a et -k, et globale
+      pour les unités de taux-i.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note: Notes">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Notes</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        </p>
+                <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                    <li class="listitem">
+                      <p>bien que des valeurs de graines allant jusqu'à 2147483646 soient
+          permises, il est recommandé d'utiliser des nombres plus petits (&lt; 1000000) pour des
+          raisons de portabilité, car les grands nombres peuvent être arrondis à une valeur
+          différente si l'on utilise des nombres flottants sur 32 bit.</p>
+                    </li>
+                    <li class="listitem">
+                      <p><span class="emphasis"><em>rnd31</em></span> au taux-i avec une graine positive
+          produira toujours la même valeur en sortie (ce n'est pas un bogue). Pour
+          obtenir des valeurs différentes, fixer la graine à 0 dans les appels successifs,
+          ce qui retournera la valeur suivante de la séquence aléatoire.</p>
+                    </li>
+                  </ul>
+                </div>
+                <p>
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm293133"></a>
+        <h2>Exéution</h2>
+        <p>
+      <span class="emphasis"><em>ax</em></span> -- valeur de sortie au taux-a.
+    </p>
+        <p>
+      <span class="emphasis"><em>kx</em></span> -- valeur de sortie au taux-k.
+    </p>
+        <p>
+      <span class="emphasis"><em>kscl</em></span> -- mise à l'échelle de la sortie. Les nombres aléatoires
+      générés sont compris entre -<span class="emphasis"><em>kscl</em></span> et <span class="emphasis"><em>kscl</em></span>.
+      Semblable à <span class="emphasis"><em>iscl</em></span>, mais il peut être modifié au taux-k.
+    </p>
+        <p>
+      <span class="emphasis"><em>krpow</em></span> -- contrôle la distribution des nombres aléatoires.
+      Semblable à <span class="emphasis"><em>irpow</em></span>, mais il peut être modifié au taux-k.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm293147"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode rnd31. Il utilise le fichier
+      <a class="ulink" href="examples/rnd31.csd" target="_top"><em class="citetitle">rnd31.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm293152"></a>
+          <p class="title">
+            <strong>Exemple 918. Exemple de l'opcode rnd31 au taux-a.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm293159"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac             <span class="c1">;;;RT audio out</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o rnd31.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+                            </span><span class="c1">; Create random numbers at a-rate in the range -2 to 2 with</span><span class="w">
+</span>a<span class="n">31</span><span class="w"> </span><span class="nb">rnd31</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">0.5</span><span class="w">           </span><span class="c1">; a triangular distribution, seed from the current time.</span><span class="w">
+</span>a<span class="n">freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">31</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">100</span><span class="w">     </span><span class="c1">; Use the random numbers to choose a frequency.</span><span class="w">
+</span>a<span class="n">1</span><span class="w"> </span><span class="nb">oscili</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span>a<span class="n">freq</span><span class="w">         </span><span class="c1">; uses sine</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+        <p>
+      Voici un exemple de l'opcode rnd31 au taux-k. Il utilise le fichier
+      <a class="ulink" href="examples/rnd31_krate.csd" target="_top"><em class="citetitle">rnd31_krate.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm293267"></a>
+          <p class="title">
+            <strong>Exemple 919. Exemple de l'opcode rnd31 au taux-k.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm293269"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-n      <span class="c1">; no sound   </span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o rnd31_krate.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> 
+  
+</span>k<span class="n">1</span><span class="w"> </span><span class="nb">rnd31</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w">           </span><span class="c1">; Create random numbers at k-rate in the range -1 to 1 </span><span class="w">
+</span><span class="nb">printks</span><span class="w"> </span><span class="s">"k1=</span><span class="si">%f</span><span class="se">\\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span>k<span class="n">1</span><span class="w"> </span><span class="c1">; with a uniform distribution, seed=10.</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.3</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+
+      Sa sortie contiendra des lignes comme celles-ci :
+      </p>
+        <pre class="screen">
+k1= 0.112106
+k1=-0.274665
+k1= 0.403933</pre>
+        <p>
+    </p>
+        <p>
+      Here is an example of the rnd31 opcode that uses the number 7 as a seed value. It uses the file <a class="ulink" href="examples/rnd31_seed7.csd" target="_top"><em class="citetitle">rnd31_seed7.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm293359"></a>
+          <p class="title">
+            <strong>Exemple 920. An example of the rnd31 opcode that uses the number 7 as a seed value.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm293361"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-n      <span class="c1">; no sound</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o rnd31_seed7.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+ 
+</span>i<span class="n">1</span><span class="w"> </span><span class="nb">rnd31</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="w">      </span><span class="c1">; i-rate random numbers with linear distribution, seed=7.</span><span class="w">
+</span>i<span class="n">2</span><span class="w"> </span><span class="nb">rnd31</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="w">         </span><span class="c1">; (Note that the seed was used only in the first call.)</span><span class="w">
+</span>i<span class="n">3</span><span class="w"> </span><span class="nb">rnd31</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="w">
+        
+</span><span class="nb">print</span><span class="w"> </span>i<span class="n">1</span><span class="w">
+</span><span class="nb">print</span><span class="w"> </span>i<span class="n">2</span><span class="w">
+</span><span class="nb">print</span><span class="w"> </span>i<span class="n">3</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+
+      Sa sortie contiendra des lignes comme celles-ci :
+      </p>
+        <pre class="screen">
+instr 1:  i1 = -0.649
+instr 1:  i2 = -0.761
+instr 1:  i3 =  0.677</pre>
+        <p>
+    </p>
+        <p>
+      Voici un exemple de l'opcode rnd31 qui utilise l'horloge du système comme graine.
+      Il utilise le fichier
+      <a class="ulink" href="examples/rnd31_time.csd" target="_top"><em class="citetitle">rnd31_time.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm293468"></a>
+          <p class="title">
+            <strong>Exemple 921. Eexemple de l'opcode rnd31 qui utilise l'horloge du système comme graine.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm293475"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-n      <span class="c1">; no sound</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o rnd31_time.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  
+</span>i<span class="n">1</span><span class="w"> </span><span class="nb">rnd31</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">      </span><span class="c1">; i-rate random numbers with linear distribution,</span><span class="w">
+</span>i<span class="n">2</span><span class="w"> </span><span class="nb">rnd31</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="w">         </span><span class="c1">; seeding from the current time. (Note that the seed</span><span class="w">
+</span>i<span class="n">3</span><span class="w"> </span><span class="nb">rnd31</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="w">         </span><span class="c1">; was used only in the first call.)</span><span class="w">
+
+</span><span class="nb">print</span><span class="w"> </span>i<span class="n">1</span><span class="w">
+</span><span class="nb">print</span><span class="w"> </span>i<span class="n">2</span><span class="w">
+</span><span class="nb">print</span><span class="w"> </span>i<span class="n">3</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+
+      Sa sortie contiendra des lignes comme celles-ci :
+      </p>
+        <pre class="screen">
+instr 1:  i1 = -0.691
+instr 1:  i2 = -0.686
+instr 1:  i3 = -0.358</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm293581"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Istvan Varga</p>
+        <p>Nouveau dans la version 4.16</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="rndseed.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="round.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">rndseed </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> round</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

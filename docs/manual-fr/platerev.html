@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>platerev</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="planet.html" title="planet" />
+    <link rel="next" href="plltrack.html" title="plltrack" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">platerev</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="planet.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="plltrack.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="platerev"></a>
+      <div class="titlepage"></div>
+      <a id="IndexPlaterev" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">platerev</span>
+        </h2>
+        <p>platerev — 
+      Modélise la réverbération d'une plaque métallique.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm255071"></a>
+        <h2>Description</h2>
+        <p>
+      Modélise la réverbération d'une plaque métallique rectangulaire avec des
+      caractéristiques physiques ajustables lorsqu'elle est excitée par des
+      signaux audios.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm255074"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">a1[, a2, ...] <span class="command"><strong>platerev</strong></span> itabexcite. itabouts, kbndry, iaspect, istiff, idecay, iloss, aexcite1[, aexcite2, ...]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm255078"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>itabexcite</em></span> -- numéro d'une table contenant un triplet
+      pour chaque signal d'excitation (fréquence, rayon, phase initiale en
+      radians). Le rayon doit être inférieur à 1. Ceux-ci contrôlent l'endroit où
+      l'excitation se produit. Les valeurs dans la table pour la fréquence et le
+      rayon peuvent être changée durant l'exécution avec le risque de clics si
+      les changements sont trop importants.
+    </p>
+        <p>
+      <span class="emphasis"><em>itabouts</em></span> -- numéro d'une table contenant un triplet
+      pour chaque signal de sortie (fréquence, rayon, phase initiale en radians).
+      Voir la description de <span class="emphasis"><em>itabexcite</em></span>.
+    </p>
+        <p>
+      <span class="emphasis"><em>kbndry</em></span> -- conditions aux limites de la plaque ;
+      0 = libre, 1 = fixée, 2 = pivotante. Les autres valeurs sont indéfinies.
+      Ce paramètre peut être changé au taux-k, au risque de l'apparition de
+      clics.
+    </p>
+        <p>
+      <span class="emphasis"><em>iaspect</em></span> -- rapport d'aspect de la plaque qui doit
+      être inférieur ou égal à 1.
+    </p>
+        <p>
+      <span class="emphasis"><em>istiff</em></span> -- paramètre de raideur de la plaque (fixé
+      autour de 1 ou à une valeur inférieure pour une réverbération de plaque).
+    </p>
+        <p>
+      <span class="emphasis"><em>idecay</em></span> -- temps de décroissance à 30 db. 
+    </p>
+        <p>
+      <span class="emphasis"><em>iloss</em></span> -- paramètre de perte des hautes fréquences
+      (une valeur d'environ 0.001 est recommandée).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm255095"></a>
+        <h2>Exécution</h2>
+        <p>
+      Une plaque métallique est excitée par un signal stéréo et la réverbération
+      résultante est prélevée.
+    </p>
+        <p>
+      <span class="emphasis"><em>aexcite</em></span>n -- signaux d'excitation à injecter dans la
+      plaque.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm255100"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode platerev. Il utilise le fichier
+      <a class="ulink" href="examples/plate.csd" target="_top"><em class="citetitle">plate.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm255105"></a>
+          <p class="title">
+            <strong>Exemple 765. Exemple de l'opcode platerev.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm255112"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">;-odac    ;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+ -o plate.wav -W <span class="c1">;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+</span><span class="c1">; Note: this example is heavy on CPU</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>a<span class="n">b</span><span class="w">    </span><span class="nb">diskin2</span><span class="w">  </span><span class="s">"beats.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>a<span class="n">l</span><span class="p">,</span>a<span class="n">r</span><span class="w"> </span><span class="nb">platerev</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="mf">0.73</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"> </span><span class="mf">5.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.001</span><span class="p">,</span><span class="w"> </span>a<span class="n">b</span><span class="p">,</span>a<span class="n">b</span><span class="w">
+      </span><span class="nb">outs</span><span class="w">      </span>a<span class="n">l</span><span class="o">*</span><span class="mf">.25</span><span class="p">,</span>a<span class="n">r</span><span class="o">*</span><span class="mf">.25</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="w">   </span><span class="mf">0.3</span><span class="w">   </span><span class="mf">0.3875</span><span class="w">    </span><span class="mf">0.39274</span><span class="w">  </span><span class="mf">0.32</span><span class="w">   </span><span class="mf">0.85714</span><span class="w"> </span><span class="mf">0.78548</span><span class="w">
+</span><span class="nb">f</span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="w">   </span><span class="mf">0.2</span><span class="w">   </span><span class="mf">0.666667</span><span class="w">  </span><span class="mf">1.57097</span><span class="w">  </span><span class="mf">0.24</span><span class="w">   </span><span class="mf">0.75</span><span class="w">    </span><span class="mf">0.78548</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm255275"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Stefan Bilbao </td>
+          </tr>
+          <tr>
+            <td>Université d'Edimbourg, UK</td>
+          </tr>
+          <tr>
+            <td>Auteur : John ffitch </td>
+          </tr>
+          <tr>
+            <td>Université de Bath, Codemist Ltd.</td>
+          </tr>
+          <tr>
+            <td>Bath, UK</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 5.17.12 de Csound.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="planet.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="plltrack.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">planet </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> plltrack</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

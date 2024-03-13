@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>fiopen</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="fink.html" title="fink" />
+    <link rel="next" href="flanger.html" title="flanger" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">fiopen</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="fink.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="flanger.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="fiopen"></a>
+      <div class="titlepage"></div>
+      <a id="IndexFiopen" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">fiopen</span>
+        </h2>
+        <p>fiopen — 
+      Ouvre un fichier dans un mode spécifique.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm100786"></a>
+        <h2>Description</h2>
+        <p>
+      On peut utiliser <span class="emphasis"><em>fiopen</em></span> pour ouvrir un fichier dans
+      un des modes spécifiés.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm100790"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ihandle <span class="command"><strong>fiopen</strong></span> ifilename, imode</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm100794"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ihandle</em></span> -- un nombre qui spécifie ce fichier.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifilename</em></span> -- le nom du fichier concerné (entre guillemets).
+    </p>
+        <p>
+      <span class="emphasis"><em>imode</em></span> -- choix du mode d'ouverture du fichier.
+      <span class="emphasis"><em>imode</em></span> peut prendre une des valeurs suivantes :
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>0 - ouvre un fichier texte en écriture</p>
+            </li>
+            <li class="listitem">
+              <p>1 - ouvre un fichier texte en lecture</p>
+            </li>
+            <li class="listitem">
+              <p>2 - ouvre un binaire texte en écriture</p>
+            </li>
+            <li class="listitem">
+              <p>3 - ouvre un fichier binaire en lecture</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm100812"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>fiopen</em></span> ouvre un fichier à utiliser par la famille
+      d'opcodes <a class="link" href="fout.html" title="fout"><em class="citetitle">fout</em></a>. Il est
+      plus sûr de l'utiliser dans la section d'en-tête, en dehors de tout
+      instrument. Il retourne un nombre, <span class="emphasis"><em>ihandle</em></span>, qui fait
+      référence de manière univoque au fichier ouvert.
+    </p>
+        <p>
+      Si <span class="emphasis"><em>fiopen</em></span> est appelé sur un fichier déjà ouvert, il
+      retourne simplement le même identificateur, et ne ferme pas le fichier.
+    </p>
+        <p>
+      Noter que <a class="link" href="fout.html" title="fout"><em class="citetitle">fout</em></a> et
+      <a class="link" href="foutk.html" title="foutk"><em class="citetitle">foutk</em></a> peuvent utiliser
+      soit un nom de chemin de fichier, soit un identificateur numérique
+      généré par <span class="emphasis"><em>fiopen</em></span>. Alors qu'avec
+      <a class="link" href="fouti.html" title="fouti"><em class="citetitle">fouti</em></a> et
+      <a class="link" href="foutir.html" title="foutir"><em class="citetitle">foutir</em></a>, le fichier
+      cible ne peut être spécifié que par un identificateur numérique.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm100831"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode fiopen. Il utilise le fichier
+      <a class="ulink" href="examples/fiopen.csd" target="_top"><em class="citetitle">fiopen.csd</em></a>.
+      Noter que l'exemple doit être exécuté depuis un répertoire dans lequel
+      l'écriture est autorisée.
+      </p>
+        <div class="example">
+          <a id="idm100836"></a>
+          <p class="title">
+            <strong>Exemple 307. Exemple de l'opcode fiopen.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm100843"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span> 
+<span class="nt">&lt;CsOptions&gt;</span> 
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o fiopen.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span> 
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w"> 
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w"> 
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w"> 
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> 
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+
+</span>gi<span class="n">hand</span><span class="w"> </span><span class="nb">fiopen</span><span class="w"> </span><span class="s">"test1.txt"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> 
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>i<span class="n">res</span><span class="w">  </span><span class="nb">random</span><span class="w">  </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="w">
+      </span><span class="nb">fouti</span><span class="w"> </span>gi<span class="n">hand</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">res</span><span class="w"> 
+      </span><span class="nb">ficlose</span><span class="w"> </span>gi<span class="n">hand</span><span class="w"> 
+
+</span><span class="kd">endin</span><span class="w"> 
+</span><span class="nt">&lt;/CsInstruments&gt;</span> 
+<span class="nt">&lt;CsScore&gt;</span><span class="w"> 
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span> 
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span> 
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm100935"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="ficlose.html" title="ficlose"><em class="citetitle">ficlose</em></a>
+      <a class="link" href="fout.html" title="fout"><em class="citetitle">fout</em></a>, 
+      <a class="link" href="fouti.html" title="fouti"><em class="citetitle">fouti</em></a>, 
+      <a class="link" href="foutir.html" title="foutir"><em class="citetitle">foutir</em></a>, 
+      <a class="link" href="foutk.html" title="foutk"><em class="citetitle">foutk</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm100948"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Gabriel Maldonado</td>
+          </tr>
+          <tr>
+            <td>Italie</td>
+          </tr>
+          <tr>
+            <td>1999</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 3.56 de Csound</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="fink.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="flanger.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">fink </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> flanger</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

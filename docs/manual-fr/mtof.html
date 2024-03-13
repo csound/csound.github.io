@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>mtof</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="ms2st.html" title="ms2st" />
+    <link rel="next" href="mton.html" title="mton" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">mtof</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ms2st.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="mton.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="mtof"></a>
+      <div class="titlepage"></div>
+      <a id="IndexMtof" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">mtof</span>
+        </h2>
+        <p>mtof — 
+      Conversion MIDI-fréquence.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm215524"></a>
+        <h2>Description</h2>
+        <p>Opcode du greffon emugens.</p>
+        <p>
+      Convertit un numéro de note MIDI en fréquence en tenant compte de la
+      valeur globale du la3 (A4).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm215528"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ifreq <span class="command"><strong>mtof</strong></span> imidi</pre>
+        <pre class="synopsis">kfreq <span class="command"><strong>mtof</strong></span> kmidi</pre>
+        <pre class="synopsis">ifreqs[] <span class="command"><strong>mtof</strong></span> imidis[]</pre>
+        <pre class="synopsis">kfreqs[] <span class="command"><strong>mtof</strong></span> kmidis[]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm215538"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kmidi</em></span> / <span class="emphasis"><em>imidi</em></span> -- Numéro de note
+      MIDI (également comme tableau).
+    </p>
+        <p>
+      <span class="emphasis"><em>kfreq</em></span> / <span class="emphasis"><em>ifreq</em></span> -- Fréquence
+      correspondant à la valeur de note MIDI. Un tableau est retourné si
+      l'entrée est un tableau.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm215546"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode mtof. Il utilise le fichier
+      <a class="ulink" href="examples/mtof-ftom.csd" target="_top"><em class="citetitle">mtof-ftom.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm215551"></a>
+          <p class="title">
+            <strong>Exemple 640. Exemple de l'opcode mtof.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm215553"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">128</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
+</span><span class="vg">A4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">440</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span>k<span class="n">freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">mtof</span><span class="p">(</span><span class="mi">69</span><span class="p">)</span><span class="w">
+  </span><span class="nb">printks2</span><span class="w"> </span><span class="s">"midi 69   -&gt; </span><span class="si">%f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="w">
+  
+  </span>k<span class="n">midi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ftom</span><span class="p">(</span><span class="mi">442</span><span class="p">)</span><span class="w">
+  </span><span class="nb">printks2</span><span class="w"> </span><span class="s">"freq 442  -&gt; </span><span class="si">%f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span>k<span class="n">midi</span><span class="w">
+  
+  </span>k<span class="n">midi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ftom</span><span class="p">(</span><span class="mi">442</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w">
+  </span><span class="nb">printks2</span><span class="w"> </span><span class="s">"freq 442  -&gt; </span><span class="si">%f</span><span class="s"> rounded</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span>k<span class="n">midi</span><span class="w">
+  
+  </span>k<span class="n">freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">mtof</span><span class="p">(</span>k<span class="n">midi</span><span class="p">)</span><span class="w">
+  </span><span class="nb">printks</span><span class="w"> </span><span class="s">"midi </span><span class="si">%f</span><span class="s"> -&gt; </span><span class="si">%f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>k<span class="n">midi</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="w">
+  
+  </span>i<span class="n">midi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ftom</span><span class="p">:</span><span class="kt">i</span><span class="p">(</span><span class="mi">440</span><span class="p">)</span><span class="w">
+  </span><span class="nb">print</span><span class="w"> </span>i<span class="n">midi</span><span class="w">
+  
+  </span>i<span class="n">freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">mtof</span><span class="p">:</span><span class="kt">i</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span><span class="w">
+  </span><span class="nb">print</span><span class="w"> </span>i<span class="n">freq</span><span class="w">
+  
+  </span><span class="nb">turnoff</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+  </span>i<span class="n">midis0</span><span class="p">[]</span><span class="w"> </span><span class="nb">fillarray</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">62</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="mi">69</span><span class="w">
+  </span>i<span class="n">freqs0</span><span class="p">[]</span><span class="w"> </span><span class="nb">mtof</span><span class="w"> </span>i<span class="n">midis0</span><span class="w">
+  </span><span class="nb">printarray</span><span class="w"> </span>i<span class="n">freqs0</span><span class="p">,</span><span class="w"> </span><span class="s">""</span><span class="p">,</span><span class="w"> </span><span class="s">"ifreqs0"</span><span class="w">
+  
+  </span>k<span class="n">freqs</span><span class="p">[]</span><span class="w"> </span><span class="nb">fillarray</span><span class="w"> </span><span class="mi">220</span><span class="p">,</span><span class="w"> </span><span class="mi">440</span><span class="p">,</span><span class="w"> </span><span class="mi">880</span><span class="w">
+  </span>k<span class="n">midis</span><span class="p">[]</span><span class="w"> </span><span class="nb">ftom</span><span class="w"> </span>k<span class="n">freqs</span><span class="w">
+  </span><span class="nb">puts</span><span class="w"> </span><span class="s">"kfreqs"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="nb">printarray</span><span class="w"> </span>k<span class="n">midis</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"</span><span class="si">%.2f</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="s">"kmidis"</span><span class="w">
+  </span><span class="nb">turnoff</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm215819"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="cpsmidinn.html" title="cpsmidinn"><em class="citetitle">cpsmidinn</em></a>, 
+      <a class="link" href="ftom.html" title="ftom"><em class="citetitle">ftom</em></a>,
+      <a class="link" href="mton.html" title="mton"><em class="citetitle">mton</em></a>,
+      <a class="link" href="ntom.html" title="ntom"><em class="citetitle">ntom</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm215830"></a>
+        <h2>Crédits</h2>
+        <p>Par : Eduardo Moguillansky 2017</p>
+        <p>Nouveau greffon dans la version 6.11</p>
+        <p>Version tableau ajoutée dans la 6.13</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ms2st.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="mton.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ms2st </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> mton</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

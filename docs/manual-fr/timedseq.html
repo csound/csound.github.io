@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>timedseq</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="tigoto.html" title="tigoto" />
+    <link rel="next" href="timeinstk.html" title="timeinstk" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">timedseq</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="tigoto.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="timeinstk.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="timedseq"></a>
+      <div class="titlepage"></div>
+      <a id="IndexTimedSeq" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">timedseq</span>
+        </h2>
+        <p>timedseq — 
+      Séquenceur à variation temporelle.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm349932"></a>
+        <h2>Description</h2>
+        <p>
+      Un séquenceur d'évènements dans lequel le temps peut être contrôlé par un
+      pointeur. Les données de la séquence sont stockées dans une table.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm349935"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ktrig  <span class="command"><strong>timedseq</strong></span>  ktimpnt, ifn, kp1 [,kp2, kp3, ...,kpN]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm349939"></a>
+        <h2>Initialisation</h2>
+        <p>
+    <span class="emphasis"><em>ifn</em></span> -- numéro de la table contenant les données de la
+      séquence.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm349943"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ktri</em></span> -- signal de déclenchement en sortie.
+    </p>
+        <p>
+      <span class="emphasis"><em>ktimpnt</em></span> -- pointeur de temps dans le fichier de la
+      séquence, en secondes.
+    </p>
+        <p>
+      <span class="emphasis"><em>kp1,...,kpN</em></span> -- p-champs des notes retournés en sortie.
+      <span class="emphasis"><em>kp2</em></span> est la date relative et <span class="emphasis"><em>kp3</em></span>
+      est la durée des notes en secondes.
+    </p>
+        <p>
+      <span class="emphasis"><em>timedseq</em></span> est un séquenceur qui permet de programmer
+      des notes venant d'une séquence de l'utilisateur et dépendant d'une base
+      de temps externe donnée par un pointeur de temps (l'argument
+      <span class="emphasis"><em>ktimpnt</em></span>). L'utilisateur doit remplir la table
+      <span class="emphasis"><em>ifn</em></span> avec une liste de notes, qui peuvent provenir
+      d'un fichier texte externe lu par <span class="emphasis"><em>GEN23</em></span>, ou en les
+      tapant directement dans le fichier d'orchestre (ou de partition) avec
+      <span class="emphasis"><em>GEN02</em></span>. Le format du fichier texte contenant la séquence
+      comprend simplement des lignes qui contiennent plusieurs nombres séparés
+      par des espaces (comme dans une partition normale de Csound). La première
+      valeur de chaque ligne doit être une valeur positive ou nulle, sauf dans
+      un cas spécial qui sera expliqué ci-dessous. Cette première valeur sert
+      normalement à définir le numéro d'instrument correspondant à cette note
+      particulière (comme dans une partition normale). La seconde valeur de
+      chaque ligne doit contenir la date de la note correspondante et la
+      troisième valeur sa durée. Voici un exemple :
+    </p>
+        <pre class="programlisting">
+0 0    0.25 1  93
+0 0.25 0.25 2  63
+0 0.5  0.25 3  91
+0 0.75 0.25 4  70
+0 1    0.25 5  83
+0 1.25 0.25 6  75
+0 1.5  0.25 7  78
+0 1.75 0.25 8  78
+0 2    0.25 9  83
+0 2.25 0.25 10 70
+0 2.5  0.25 11 54
+0 2.75 0.25 12 80
+-1 3   -1   -1 -1  ;; dernière ligne de la séquence</pre>
+        <p>
+      Dans cet exemple, la première valeur de chaque ligne est toujours zéro
+      (c'est une valeur sans signification, mais ce p-champ peut servir, par
+      exemple, pour donner un canal MIDI ou un numéro d'instrument), sauf dans
+      la dernière ligne qui commence par -1. Cette valeur (-1) est une valeur
+      spéciale qui indique la fin de la séquence. Elle a elle-même une date car
+      les séquences peuvent être lues en boucle. Ainsi la séquence précédente
+      a une durée par défaut de 3 secondes, 3 étant la dernière date de la
+      séquence.
+    </p>
+        <p>
+      Il est important que TOUTES les lignes contiennent le même nombre de
+      valeurs (dans l'exemple, toutes les lignes contiennent exactement 5 valeurs).
+      Le nombre de valeurs contenues dans chaque ligne DOIT être égal au nombre
+      d'arguments <span class="emphasis"><em>kpXX</em></span> de sortie (noter que même si
+      <span class="emphasis"><em>kp1</em></span>, <span class="emphasis"><em>kp2</em></span>, etc. sont placés à
+      la droite de l'opcode, ce sont des arguments de sortie, pas des arguments
+      d'entrée).
+    </p>
+        <p>
+      L'argument <span class="emphasis"><em>ktimpnt</em></span> fournit la temporisation réelle de
+      la séquence. Actuellement, le déroulement du temps dans la séquence est
+      spécifié par <span class="emphasis"><em>ktimpnt</em></span> lui-même, qui représente le temps
+      en secondes. <span class="emphasis"><em>ktimpnt</em></span> doit toujours être positif, mais
+      il ne peut pas avancer ou reculer dans le temps, être stationnaire ou
+      discontinu, comme un pointeur dans un fichier séquentiel à la manière de
+      <span class="emphasis"><em>pvoc</em></span> ou de <span class="emphasis"><em>lpread</em></span>. Lorsque
+      <span class="emphasis"><em>ktimpnt</em></span> atteint la date d'une note, un signal de
+      déclenchement est envoyé sur l'argument de sortie <span class="emphasis"><em>ktrig</em></span>,
+      et les arguments <span class="emphasis"><em>kp1</em></span>, <span class="emphasis"><em>kp2</em></span>, ...,
+      <span class="emphasis"><em>kpN</em></span> sont mis à jour avec les valeurs de chaque note.
+      Cette information peut ensuite être utilisée par
+      <span class="emphasis"><em>schedkwhen</em></span> pour activer des évènements de note.
+      Noter que les données <span class="emphasis"><em>kp1</em></span>, ..., <span class="emphasis"><em>kpn</em></span>
+      peuvent être traitées (par exemple retardées avec <span class="emphasis"><em>delayk</em></span>,
+      transposées, etc.) avant d'être passées à <span class="emphasis"><em>schedkwhen</em></span>.
+    </p>
+        <p>
+      <span class="emphasis"><em>ktimpnt</em></span> peut être contrôlé par un signal linéaire, par
+      exemple :
+    </p>
+        <pre class="programlisting">
+ktimpnt <span class="opc">line</span>        0, p3, 3  <span class="comment">; la durée originale de la séquence était de 3 sec</span>
+ktrig   <span class="opc">timedseq</span>    ktimpnt, 1, kp1, kp2, kp3, kp4, kp5
+        <span class="opc">schedkwhen</span>  ktrig, 105, 2, 0, kp3, kp4, kp5</pre>
+        <p>
+      Dans ce cas la séquence complète (avec sa durée originale de 3 secondes)
+      sera jouée en <span class="emphasis"><em>p3</em></span> secondes.
+    </p>
+        <p>
+      On peut faire boucler une séquence en la contrôlant avec un phaseur :
+</p>
+        <pre class="programlisting">
+kphs    <span class="opc">phasor</span>      1<span class="op">/</span>3
+ktimpnt <span class="op">=</span>           kphs <span class="op">*</span> 3
+ktrig   <span class="opc">timedseq</span>    ktimpnt ,1 ,kp1, kp2, kp3, kp4, kp5
+        <span class="opc">schedkwhen</span>  ktrig, 105, 2, 0, kp3, kp4, kp5</pre>
+        <p>
+    </p>
+        <p>
+      Il est évident que l'on peut ne jouer qu'un fragment de la séquence, la
+      lire à l'envers, et avoir un accès non-linéaire à ses données de la même
+      manière que les opcodes <span class="emphasis"><em>pvoc</em></span> et <span class="emphasis"><em>lpread</em></span>.
+    </p>
+        <p>
+      Avec l'opcode <span class="emphasis"><em>timedseq</em></span>, on peut faire presque tout ce
+      que l'on fait dans une partition normale, excepté les limitations suivantes :
+      </p>
+        <div class="orderedlist">
+          <ol class="orderedlist" type="1">
+            <li class="listitem">
+              <p>On ne peut pas avoir deux notes commençant exactement à la même
+          date ; actuellement deux notes doivent être séparées d'au moins un
+          k-cycle (sinon le mécanisme de <span class="emphasis"><em>schedkwhen</em></span> en escamote
+          une des deux).</p>
+            </li>
+            <li class="listitem">
+              <p>Toutes les notes de la séquence doivent avoir le même nombre de
+          p-champs (même si elles activent différents instruments).</p>
+            </li>
+          </ol>
+        </div>
+        <p>
+      On peut remédier à ces limitations en complétant avec des valeurs sans
+      signification les notes des instruments qui ont moins de p-champs que les
+      autres.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm350009"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple complet de l'opcode timedseq. Il utilise le fichier
+      <a class="ulink" href="examples/timedseq.csd" target="_top"><em class="citetitle">timedseq.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm350014"></a>
+          <p class="title">
+            <strong>Exemple 1097. Exemple de l'opcode timedseq.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm350021"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o timedseq.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span>gi<span class="n">seq</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">  </span><span class="mi">0</span><span class="p">,</span><span class="w">   </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">8.00</span><span class="p">,</span><span class="err">\</span><span class="w">		</span><span class="c1">;first note</span><span class="w">
+                        </span><span class="mi">2</span><span class="p">,</span><span class="w">  </span><span class="mi">1</span><span class="p">,</span><span class="w">   </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">8.02</span><span class="p">,</span><span class="err">\</span><span class="w">		</span><span class="c1">;second note</span><span class="w">
+                        </span><span class="mi">2</span><span class="p">,</span><span class="w">  </span><span class="mi">2</span><span class="p">,</span><span class="w">   </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">8.04</span><span class="p">,</span><span class="err">\</span><span class="w">		</span><span class="c1">;third</span><span class="w">
+                        </span><span class="mi">2</span><span class="p">,</span><span class="w">  </span><span class="mi">3</span><span class="p">,</span><span class="w">   </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">8.05</span><span class="p">,</span><span class="err">\</span><span class="w">		</span><span class="c1">;fourth</span><span class="w">
+                        </span><span class="mi">2</span><span class="p">,</span><span class="w">  </span><span class="mi">4</span><span class="p">,</span><span class="w">   </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">8.07</span><span class="p">,</span><span class="err">\</span><span class="w">		</span><span class="c1">;fifth</span><span class="w">
+                        </span><span class="mi">2</span><span class="p">,</span><span class="w">  </span><span class="mi">5</span><span class="p">,</span><span class="w">   </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">8.09</span><span class="p">,</span><span class="err">\</span><span class="w">		</span><span class="c1">;sixth</span><span class="w">
+                        </span><span class="mi">2</span><span class="p">,</span><span class="w">  </span><span class="mi">6</span><span class="p">,</span><span class="w">   </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">8.11</span><span class="p">,</span><span class="err">\</span><span class="w">		</span><span class="c1">;seventh</span><span class="w">
+                        </span><span class="mi">2</span><span class="p">,</span><span class="w">  </span><span class="mi">7</span><span class="p">,</span><span class="w">   </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">9.00</span><span class="p">,</span><span class="err">\</span><span class="w">		</span><span class="c1">;eight note</span><span class="w">
+                        </span><span class="mi">2</span><span class="p">,</span><span class="w">  </span><span class="mi">8</span><span class="p">,</span><span class="w">   </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">8.00</span><span class="p">,</span><span class="err">\</span><span class="w">		</span><span class="c1">;due to a quirk in the opcode, it needs an extra note - a copy of the first note</span><span class="w">
+                        </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">   </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="o">-</span><span class="mi">1</span><span class="w">		</span><span class="c1">;last line is a dummy event that indicates to timedseq when to loop back to the beginning</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w">	</span><span class="nf">1</span><span class="w">
+
+</span>i<span class="n">beats</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="w">						</span><span class="c1">;lengths of sequence in beats</span><span class="w">
+</span>i<span class="n">tempo</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">						</span><span class="c1">;tempo</span><span class="w">
+</span>i<span class="n">BPS</span><span class="w">	</span><span class="o">=</span><span class="w"> </span>i<span class="n">tempo</span><span class="o">/</span><span class="mi">60</span><span class="w">					</span><span class="c1">;beats per second	</span><span class="w">
+</span>k<span class="n">phase</span><span class="w">	</span><span class="nb">phasor</span><span class="w">	</span>i<span class="n">BPS</span><span class="o">/</span>i<span class="n">beats</span><span class="w">				</span><span class="c1">;phasor to move through table</span><span class="w">
+</span>k<span class="n">pointer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>k<span class="n">phase</span><span class="o">*</span>i<span class="n">beats</span><span class="w">				</span><span class="c1">;multiply phase (range 0 - 1) by the number of beats contained within the sequence</span><span class="w">
+</span>k<span class="n">p1</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>k<span class="n">p2</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>k<span class="n">p3</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">0</span><span class="w"> 
+</span>k<span class="n">p4</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">0</span><span class="w">       		
+</span>k<span class="n">trigger</span><span class="w">   </span><span class="nb">timedseq</span><span class="w"> </span>k<span class="n">pointer</span><span class="p">,</span><span class="w"> </span>gi<span class="n">seq</span><span class="p">,</span><span class="w"> </span>k<span class="n">p1</span><span class="p">,</span><span class="w"> </span>k<span class="n">p2</span><span class="p">,</span>k<span class="n">p3</span><span class="p">,</span><span class="w"> </span>k<span class="n">p4</span><span class="w">
+</span><span class="nb">schedkwhen</span><span class="w"> </span>k<span class="n">trigger</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>k<span class="n">p3</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span>i<span class="n">BPS</span><span class="p">),</span><span class="w"> </span>k<span class="n">p4</span><span class="w">	</span><span class="c1">;p3 values have been scaled according to tempo so that they maesure beats rather than seconds</span><span class="w">
+</span><span class="kd">endin</span><span class="w">							</span><span class="c1">;abs(iBPS)(absolute value) is used because the tempo provided by the fourth note of the score is negative.</span><span class="w">
+							</span><span class="c1">;Durations here should be positive, because negative values for duration would indicate a held note.</span><span class="w">
+</span><span class="kd">instr</span><span class="w">	</span><span class="nf">2</span><span class="w">
+
+</span>a<span class="n">env</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="vi">p3</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span><span class="mi">0</span><span class="w">			</span><span class="c1">;amplitude envelope</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="nb">vco2</span><span class="w">	</span><span class="mf">0.4</span><span class="p">,</span><span class="w"> </span><span class="nb">cpspch</span><span class="p">(</span><span class="vi">p4</span><span class="p">),</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">sig</span><span class="o">*</span>a<span class="n">env</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="o">*</span>a<span class="n">env</span><span class="w">			
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">120</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="mi">240</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="mi">480</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">-</span><span class="mi">480</span><span class="w">	</span><span class="c1">;when negative it plays backwards </span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm350452"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="GEN02.html" title="GEN02"><em class="citetitle">GEN02</em></a>,
+      <a class="link" href="GEN23.html" title="GEN23"><em class="citetitle">GEN23</em></a>,
+      <a class="link" href="seqtime.html" title="seqtime"><em class="citetitle">seqtime</em></a>,
+      <a class="link" href="seqtime.html" title="seqtime"><em class="citetitle">seqtime2</em></a>,
+      <a class="link" href="trigseq.html" title="trigseq"><em class="citetitle">trigseq</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm350465"></a>
+        <h2>Crédits</h2>
+        <p>
+      Auteur : Gabriel Maldonado
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="tigoto.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="timeinstk.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">tigoto </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> timeinstk</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

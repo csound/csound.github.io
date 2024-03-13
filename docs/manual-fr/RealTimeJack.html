@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Entrées/sorties en temps réel avec le kit de connexion de JACK</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="Using.html" title="Utiliser Csound" />
+    <link rel="prev" href="RealTimeWindows.html" title="Windows" />
+    <link rel="next" href="UsingOptimizing.html" title="Optimisation de la latence audio en E/S" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Entrées/sorties en temps réel avec le kit de connexion de JACK</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="RealTimeWindows.html">Précédent</a> </td>
+          <th width="60%" align="center">Utiliser Csound</th>
+          <td width="20%" align="right"> <a accesskey="n" href="UsingOptimizing.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="section">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="RealTimeJack"></a>Entrées/sorties en temps réel avec le kit de connexion de JACK</h2>
+          </div>
+        </div>
+      </div>
+      <p>
+    On peut utiliser sur plusieurs systèmes le kit de connexion de JACK pour
+    les entrées/sorties audio ainsi que MIDI. Pour plus de détails, voir
+  </p>
+      <p><a class="ulink" href="http://jackaudio.org/faq" target="_top">http://jackaudio.org/faq</a>
+  </p>
+      <h3><a id="idm8432"></a>Utilisation de JACK</h3>
+      <p>
+    La manière la plus simple d'utiliser le greffon JACK pour l'entrée et la
+    sortie est la suivante :
+    </p>
+      <pre class="screen">
+      -+rtaudio=jack -i adc -o dac</pre>
+      <p>
+    De plus, il y a certaines options de ligne de commande spécifiques à JACK :
+    </p>
+      <div class="variablelist">
+        <p class="title">
+          <strong>Options de ligne de commande pour JACK</strong>
+        </p>
+        <dl class="variablelist">
+          <dt>
+            <span class="term">-+jack_client=[nom_de_client]</span>
+          </dt>
+          <dd>
+            <p>
+            Le nom de client utilisé par Csound, par défaut "csound6".
+            Si plusieurs instances de Csound se connectent au serveur JACK,
+            il faut utiliser différents nom de client pour éviter les conflits
+            de nom.
+          </p>
+          </dd>
+          <dt>
+            <span class="term">-+jack_inportname=[préfixe de nom de port en entrée],
+              -+jack_outportname=[préfixe de nom de port en sortie]
+        </span>
+          </dt>
+          <dd>
+            <p>
+            Préfixe pour les noms des ports d'entrée/sortie JACK de Csound ; les
+            valeurs par défaut sont "input" et "output". Le nom de port courant
+            est constitué de numéro de canal ajouté au préfixe. Exemple : avec
+            les réglages par défaut ci-dessus, un orchestre stéréo créera ces
+            ports en opération full duplex :
+            </p>
+            <pre class="screen">
+csound6:input1              (record left)
+csound6:input2              (record right)
+csound6:output1             (playback left)
+csound6:output2             (playback right)</pre>
+            <p>
+          </p>
+          </dd>
+        </dl>
+      </div>
+      <p>
+  </p>
+      <h3><a id="idm8446"></a>Connexion de Csound à d'autres clients JACK</h3>
+      <p>
+    Par défaut, les connexions sont faites sur les premiers ports de la liste
+    de ports de JACK (généralement ceux-ci correspondent par défaut aux ports
+    physiques). Le greffon peut se connecter à des ports spécifiés par des noms
+    ou des numéros.
+  </p>
+      <p>
+    Par des noms : le préfixe du nom de port est utilisé, par exemple
+    "system:playback_", "system:capture_", "alsa_pcm:playback_" ou
+    "alsa_pcm:capture_" ce qui donne -odac:system:playback_ (pour la sortie audio),
+    -iadc:system:capture_ (pour l'entrée audio). Le préfixe du nom de port
+    exclut les noms de canal. 
+  </p>
+      <p>
+    Par des numéros : le numéro du port de base est donné, la connexion étant
+    faite vers ce port et les suivants en fonction du nombre de canaux. Pour
+    un numéro de port de base N nous aurons des connexions en N+0, N+1, ...,
+    N+nchnls-1. Par exemple -odac2 avec nchnls=2 connectera les sorties sur
+    les ports 2 et 3. Les ports sont listés comme dans les autres modules
+    d'entrée/sortie.
+  </p>
+      <p>
+    Noter qu'on peut empêcher la connexion automatique des ports en donnant
+    comme options de sortie et d'entrée -odac:null et -iadc:null. On peut aussi
+    réaliser les connexions manuellement avec les outils de connexion de JACK.
+  </p>
+      <h3><a id="idm8451"></a>Notes sur les tailles de tampon</h3>
+      <p>
+    Les données audio sont reçues de et envoyées vers le serveur JACK par Csound
+    en utilisant un tampon circulaire contrôlé par les options -b et -B. -B est
+    la taille totale du tampon alors que -b est la taille d'une seule période.
+    Ces valeurs sont arrondies afin que la taille totale soit un multiple entier
+    de la taille d'une période et lui soit supérieure. La différent entre la
+    taille du tampon de Csound et la taille d'une période doit être supérieure
+    ou égale à la taille d'une période de JACK.
+  </p>
+      <p>
+    Si on utilise à la fois -iadc et -odac, l'option -b doit être un multiple
+    entier de ksmps.
+  </p>
+      <p>
+    Exemple de réglages du tampon pour une faible latence sur un système linux
+    rapide :
+  </p>
+      <pre class="screen">
+          jackd -d alsa -P -r 48000 -p 64 -n 4 -zt &amp;
+          csound -+rtaudio=jack -b 64 -B 256 [...]</pre>
+      <p>
+    Pour améliorer l'exécution, utiliser des valeurs de ksmps comme 32 et 64.
+  </p>
+      <p>
+    Le taux d'échantillonnage de l'orchestre doit être le même que celui du
+    serveur JACK.
+  </p>
+      <p>
+    On peut aussi utiliser JACK pour les entrées/sorties MIDI. Pour cela, on
+    indique -+rtmidi=jack. On utilise pour l'entrée -M suivi du nom du port
+    MIDI de JACK requis pour se connecter directement à un flot d'entrée. Pour
+    la sortie on utilise -Q suivi du nom du port JACK. Les options
+    -+jack_midi_inportname= et -+jack_midi_outportname= peuvent être utilisées
+    pour renommer les ports d'E/S MIDI de Csound.
+  </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="RealTimeWindows.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="Using.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="UsingOptimizing.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Windows </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Optimisation de la latence audio en E/S</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Outils pour le traitement spectral en temps réel (opcodes pvs)</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="SpectralTop.html" title="Traitement spectral" />
+    <link rel="prev" href="SpectralNonstand.html" title="Traitement spectral non-standard" />
+    <link rel="next" href="SpectralATS.html" title="Traitement spectral avec ATS" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Outils pour le traitement spectral en temps réel (opcodes pvs)</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="SpectralNonstand.html">Précédent</a> </td>
+          <th width="60%" align="center">Traitement spectral</th>
+          <td width="20%" align="right"> <a accesskey="n" href="SpectralATS.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="section">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="SpectralRealTime"></a>Outils pour le traitement spectral en temps réel (opcodes pvs)</h2>
+          </div>
+        </div>
+      </div>
+      <p>
+    Avec ces opcodes, deux nouvelles facilités fondamentales sont ajoutées à Csound. Ils offrent une
+    qualité audio améliorée, et une exécution rapide, permettant une analyse et une resynthèse de grande
+    qualité (avec les transformations) à appliquer en temps réel aux signaux instantanés. Le vocodeur de
+    phase original de Csound n'est pas changé ; les nouveaux opcodes utilisent un ensemble de fonctions
+    complètement séparé basé sur <span class="quote">« <span class="quote">pvoc.c</span> »</span> dans la distribution CARL, écrite par Mark Dolson. 
+  </p>
+      <p>
+    Les utilitaires de Csound <a class="link" href="dnoise.html" title="dnoise"><em class="citetitle">dnoise</em></a> et
+    <a class="link" href="src_conv.html" title="src_conv"><em class="citetitle">src_conv</em></a> (également par Dolson, de CARL) utilisent
+    aussi ce moteur pvoc. pvoc de CARL est aussi la base pour le vocodeur de phase inclu dans le
+    Composer's Desktop Project. Quelques petites modifications, mais importantes, ont été apportées au code
+    CARL original pour supporter les flots de données en temp réel.
+  </p>
+      <p>
+    </p>
+      <div class="orderedlist">
+        <ol class="orderedlist" type="1">
+          <li class="listitem">
+            <p>Support du nouveau format de fichier d'analyse PVOC-EX. C'est un format totalement
+        portable et ouvert (multi plates-formes), supportant trois formats d'analyse, et les signaux
+        multi-canaux. Actuellement seul le format standard amplitude+fréquence a été implémenté dans les
+        opcodes, mais le format de fichier lui-même supporte les formats amplitude+phase et le format complexe
+        (réel-imaginaire). En plus des nouveaux opcodes, les opcodes pvoc originaux de Csound ont été
+        étendus (avec pour conséquence une qualité audio améliorée dans certains cas) pour lire les
+        fichiers PVOC-EX aussi bien que le format original (non portable).</p>
+            <p>Les détails complets de la structure d'un fichier PVOC-EX son disponibles sur le site web :
+          <a class="ulink" href="http://www.cs.bath.ac.uk/~jpff/NOS-DREAM/researchdev/pvocex/pvocex.html" target="_top"><em class="citetitle">http://www.cs.bath.ac.uk/~jpff/NOS-DREAM/researchdev/pvocex/pvocex.html</em></a>.
+          Ce site donne aussi les détails des programmes de console disponibles librement
+          <span class="emphasis"><em>pvocex</em></span> et <span class="emphasis"><em>pvocex2</em></span> qui peuvent être utilisés pour créer
+          des fichiers PVOC-EX dans tous les formats supportés.</p>
+          </li>
+          <li class="listitem">
+            <p>Un nouveau type de signal du domaine fréquentiel, totalement transportable par flot de données,
+       avec <span class="emphasis"><em>f</em></span> comme premier caractère. Dans ce document on y fait
+       référence par <span class="emphasis"><em>fsig</em></span>. Le support principal des fsigs est fourni par les opcodes
+       <span class="emphasis"><em>pvsanal</em></span> et <span class="emphasis"><em>pvsynth</em></span>, qui effectuent l'analyse et la
+       resynthèse traditionnelles par recouvrement-addition avec un vocodeur de phase, indépendamment du
+       taux de contrôle de l'orchestre. La seule obligation est que le taux de contrôle
+       <span class="emphasis"><em>kr</em></span> soit supérieur ou égal au taux d'analyse, ce qui peut s'exprimer par
+       <span class="emphasis"><em>ksmps</em></span> &lt;= <span class="emphasis"><em>overlap</em></span>, où <span class="emphasis"><em>overlap</em></span> est
+       la distance en échantillons entre deux trames d'analyse, comme spécifié pour
+       <span class="emphasis"><em>pvsanal</em></span>. Comme <span class="emphasis"><em>overlap</em></span> vaut typiquement au moins 128, et
+       le plus souvent 256, ce n'est pas une restriction coûteuse en pratique. L'opcode
+       <span class="emphasis"><em>pvsinfo</em></span> peut être utilisé au moment de l'initialisation pour acquérir les
+       propriétés d'un fsig.</p>
+            <p>Le fsig permet la séparation nominale entre les étapes d'analyse et de resynthèse du
+         vocodeur de phase pour une mise à disposition du programmeur Csound, ce qui permet non seulement
+         d'employer des alternatives pour l'une ou les deux de ces étapes (pas seulement la resynthèse par
+         banc d'oscillateur, mais aussi la génération synthétique de flots de données fsig), mais les opcodes
+         opérant sur le flot fsig peuvent être eux-mêmes plus élémentaires. Ainsi le fsig permet la
+         création d'un véritable environnement de greffon de flots de données pour les signaux du domaine fréquentiel.
+         Avec les vieux opcodes pvoc, chaque opcode doit pouvoir agir comme un resynthétiseur, si bien que
+         des facilités comme la transposition de hauteur sont dupliquées dans chaque opcode ; et dans
+         la plupart des cas les opcodes ont beaucoup de paramètres. La séparation des étapes d'analyse et
+         de synthèse au moyen du fsig encourage le développement d'une grande variété d'opcodes qui sont
+         des briques élémentaires implémentant une ou deux fonctions, et avec lesquelles on peut construire
+         des processus plus élaborés.</p>
+          </li>
+        </ol>
+      </div>
+      <p>
+  </p>
+      <p>
+    Cette réalisation en est encore à ses débuts et présente un caractère expérimental, et il est possible
+    que la définition précise des opcodes change en réponse aux avis des utilisateurs. De plus, de
+    nombreuses nouvelles possibilités d'opcode sont ouvertes ; ces facteurs peuvent aussi avoir une
+    influence rétrospective sur les opcodes présentés ici.
+  </p>
+      <p>
+    Noter que certains paramètres d'opcode ont actuellement une implémentation restreinte ou manquante.
+    Ceci, au moins en partie, afin de préserver la simplicité des opcodes à ce niveau, et aussi parce qu'ils
+    concernent d'importantes questions de conception pour lesquelles aucun décision n'a encore été prise,
+    et pour lesquelles l'opinion des utilisateurs est souhaitée.
+  </p>
+      <p>
+    Un point important au sujet de ce nouveau type de signal est que, parce que le taux d'analyse est
+    typiquement très inférieur à <span class="emphasis"><em>kr</em></span>, les nouvelles trames d'analyse ne sont pas
+    disponibles à chaque k-cycle. En interne, les opcodes tracent <span class="emphasis"><em>ksmps</em></span>, et
+    maintiennent également un compteur de trames, afin que les trames soient lues et écrites aux bons
+    moments ; ce processus est généralement transparent pour l'utilisateur. Cependant, cela signifie
+    que les signaux de taux-k n'agissent sur un fsig qu'au taux d'analyse, pas à chaque k-cycle. L'opcode
+    <span class="emphasis"><em>pvsftw</em></span> retourne un drapeau au taux-k qui est positionné lorque de nouvelles
+    données fsig sont disponibles.
+  </p>
+      <p>
+    A cause de la nature du système de recouvrement-addition, l'utilisation des ces opcodes infère un
+    délai, ou latence, petit mais significatif déterminé par la taille de la fenêtre (max(ifftsize,iwinsize)).
+    Il vaut typiquement 23ms. Dans cette première réalisation, le délai dépasse légèrement le minimum
+    théorique, et l'on espère qu'il pourra être réduit, lorsque les opcodes seront optimisés pour le
+    transport par flot de données en temps réel.
+  </p>
+      <p>
+    Les opcodes pour le traitement spectral en temps réel sont
+    <a class="link" href="pvsadsyn.html" title="pvsadsyn"><em class="citetitle">pvsadsyn</em></a>,
+    <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>,
+    <a class="link" href="pvscross.html" title="pvscross"><em class="citetitle">pvscross</em></a>,
+    <a class="link" href="pvsfread.html" title="pvsfread"><em class="citetitle">pvsfread</em></a>,
+    <a class="link" href="pvsftr.html" title="pvsftr"><em class="citetitle">pvsftr</em></a>,
+    <a class="link" href="pvsftw.html" title="pvsftw"><em class="citetitle">pvsftw</em></a>,
+    <a class="link" href="pvsinfo.html" title="pvsinfo"><em class="citetitle">pvsinfo</em></a>,
+    <a class="link" href="pvsmaska.html" title="pvsmaska"><em class="citetitle">pvsmaska</em></a> et
+    <a class="link" href="pvsynth.html" title="pvsynth"><em class="citetitle">pvsynth</em></a>.
+  </p>
+      <p>
+    De plus il y a un certain nombre d'opcodes disponibles sous forme de
+    greffons dans Csound 5, et dans le noyau de Csound6. Ce sont
+    <a class="link" href="pvstanal.html" title="pvstanal"><em class="citetitle">pvstanal</em></a>,
+    <a class="link" href="pvsdiskin.html" title="pvsdiskin"><em class="citetitle">pvsdiskin</em></a>,
+    <a class="link" href="pvscent.html" title="pvscent"><em class="citetitle">pvscent</em></a>,
+    <a class="link" href="pvsdemix.html" title="pvsdemix"><em class="citetitle">pvsdemix</em></a>,
+    <a class="link" href="pvsfreeze.html" title="pvsfreeze"><em class="citetitle">pvsfreeze</em></a>,
+    <a class="link" href="pvsbuffer.html" title="pvsbuffer"><em class="citetitle">pvsbuffer</em></a>,
+    <a class="link" href="pvsbufread.html" title="pvsbufread"><em class="citetitle">pvsbufread</em></a>,
+    <a class="link" href="pvsbufread2.html" title="pvsbufread2"><em class="citetitle">pvsbufread2</em></a>,
+    <a class="link" href="pvscale.html" title="pvscale"><em class="citetitle">pvscale</em></a>,
+    <a class="link" href="pvshift.html" title="pvshift"><em class="citetitle">pvshift</em></a>,
+    <a class="link" href="pvsifd.html" title="pvsifd"><em class="citetitle">pvsifd</em></a>,
+    <a class="link" href="pvsinit.html" title="pvsinit"><em class="citetitle">pvsinit</em></a>,
+    <a class="link" href="pvsin.html" title="pvsin"><em class="citetitle">pvsin</em></a>,
+    <a class="link" href="pvsout.html" title="pvsout"><em class="citetitle">pvsout</em></a>,
+    <a class="link" href="pvsosc.html" title="pvsosc"><em class="citetitle">pvsosc</em></a>,
+    <a class="link" href="pvsbin.html" title="pvsbin"><em class="citetitle">pvsbin</em></a>,
+    <a class="link" href="pvsdisp.html" title="pvsdisp"><em class="citetitle">pvsdisp</em></a>,
+    <a class="link" href="pvsfwrite.html" title="pvsfwrite"><em class="citetitle">pvsfwrite</em></a>,
+    <a class="link" href="pvsmix.html" title="pvsmix"><em class="citetitle">pvsmix</em></a>,
+    <a class="link" href="pvsmooth.html" title="pvsmooth"><em class="citetitle">pvsmooth</em></a>,
+    <a class="link" href="pvsfilter.html" title="pvsfilter"><em class="citetitle">pvsfilter</em></a>,
+    <a class="link" href="pvsblur.html" title="pvsblur"><em class="citetitle">pvsblur</em></a>,
+    <a class="link" href="pvstencil.html" title="pvstencil"><em class="citetitle">pvstencil</em></a>,
+    <a class="link" href="pvsarp.html" title="pvsarp"><em class="citetitle">pvsarp</em></a>,
+    <a class="link" href="pvsvoc.html" title="pvsvoc"><em class="citetitle">pvsvoc</em></a>,
+    <a class="link" href="pvsmorph.html" title="pvsmorph"><em class="citetitle">pvsmorph</em></a>,
+    <a class="link" href="pvsbandp.html" title="pvsbandp"><em class="citetitle">pvsbandp</em></a>,
+    <a class="link" href="pvsbandr.html" title="pvsbandr"><em class="citetitle">pvsbandr</em></a>,
+    <a class="link" href="pvswarp.html" title="pvswarp"><em class="citetitle">pvswarp</em></a>,
+    <a class="link" href="pvsgain.html" title="pvsgain"><em class="citetitle">pvsgain</em></a>,
+    <a class="link" href="pvs2tab.html" title="pvs2tab"><em class="citetitle">pvs2tab</em></a>,
+    <a class="link" href="tab2pvs.html" title="tab2pvs"><em class="citetitle">tab2pvs</em></a>.
+  </p>
+      <p>
+    Un certain nombre d'opcodes sont conçus pour générer et traiter des flots de données de pistes de
+    partiels. Ce sont
+    <a class="link" href="partials.html" title="partials"><em class="citetitle">partials</em></a>,
+    <a class="link" href="trcross.html" title="trcross"><em class="citetitle">trcross</em></a>,
+    <a class="link" href="trfilter.html" title="trfilter"><em class="citetitle">trfilter</em></a>,
+    <a class="link" href="trsplit.html" title="trsplit"><em class="citetitle">trsplit</em></a>,
+    <a class="link" href="trmix.html" title="trmix"><em class="citetitle">trmix</em></a>,
+    <a class="link" href="trscale.html" title="trscale"><em class="citetitle">trscale</em></a>,
+    <a class="link" href="trshift.html" title="trshift"><em class="citetitle">trshift</em></a>,
+    <a class="link" href="trlowest.html" title="trlowest"><em class="citetitle">trlowest</em></a>,
+    <a class="link" href="trhighest.html" title="trhighest"><em class="citetitle">trhighest</em></a>
+    <a class="link" href="tradsyn.html" title="tradsyn"><em class="citetitle">tradsyn</em></a>,
+    <a class="link" href="sinsyn.html" title="sinsyn"><em class="citetitle">sinsyn</em></a>,
+    <a class="link" href="resyn.html" title="resyn"><em class="citetitle">resyn</em></a>,
+    <a class="link" href="binit.html" title="binit"><em class="citetitle">binit</em></a>
+
+  </p>
+      <p>
+    Voir la section <a class="link" href="ControlStacks.html" title="Piles"><em class="citetitle">Piles</em></a> pour une information
+    sur les opcodes qui peuvent empiler les signaux de type f.
+  </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="SpectralNonstand.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="SpectralTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="SpectralATS.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Traitement spectral non-standard </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Traitement spectral avec ATS</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

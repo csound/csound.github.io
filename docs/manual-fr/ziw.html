@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ziw</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="zir.html" title="zir" />
+    <link rel="next" href="ziwm.html" title="ziwm" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ziw</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="zir.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ziwm.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="ziw"></a>
+      <div class="titlepage"></div>
+      <a id="IndexZiw" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">ziw</span>
+        </h2>
+        <p>ziw — 
+      Ecrit dans une variable zk au taux-i sans mixage.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm399090"></a>
+        <h2>Description</h2>
+        <p>
+      Ecrit dans une variable zk au taux-i sans mixage.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm399093"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>ziw</strong></span> isig, indx</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm399097"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>isig</em></span> -- Initialise la valeur de la position zk.
+    </p>
+        <p>
+      <span class="emphasis"><em>indx</em></span> -- Pointe sur la position za vers laquelle écrire.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm399103"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ziw</em></span> écrit <span class="emphasis"><em>isig</em></span> dans la variable zk spécifié par
+      <span class="emphasis"><em>indx</em></span>.
+    </p>
+        <p>
+      Ces opcodes sont rapides, et vérifient toujours que l'indexation est à l'intérieur des
+      limites des espaces zk ou za. Sinon, une erreur est rapportée, la valeur 0 est retournée,
+      et il n'y a aucune écriture.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm399110"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode ziw. Il utilise le fichier <a class="ulink" href="examples/ziw.csd" target="_top"><em class="citetitle">ziw.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm399115"></a>
+          <p class="title">
+            <strong>Exemple 1250. Exemple de l'opcode ziw.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm399122"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o ziw.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; Initialize the global variables.</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4410</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; Initialize the ZAK space.</span><span class="w">
+</span><span class="c1">; Create 1 a-rate variable and 1 k-rate variable.</span><span class="w">
+</span><span class="nb">zakinit</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; Instrument #1 -- a simple instrument.</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span><span class="c1">; Set zk variable #1 to 64.182.</span><span class="w">
+  </span><span class="nb">ziw</span><span class="w"> </span><span class="mf">64.182</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="c1">; Instrument #2 -- prints out zk variable #1.</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+  </span><span class="c1">; Read zk variable #1 at i-rate.</span><span class="w">
+  </span>i<span class="n">1</span><span class="w"> </span><span class="nb">zir</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+  </span><span class="c1">; Print out the value of zk variable #1.</span><span class="w">
+  </span><span class="nb">print</span><span class="w"> </span>i<span class="n">1</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="c1">; Play Instrument #1 for one second.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">; Play Instrument #2 for one second.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm399237"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="zaw.html" title="zaw"><em class="citetitle">zaw</em></a>,
+      <a class="link" href="zawm.html" title="zawm"><em class="citetitle">zawm</em></a>,
+      <a class="link" href="ziwm.html" title="ziwm"><em class="citetitle">ziwm</em></a>,
+      <a class="link" href="zkw.html" title="zkw"><em class="citetitle">zkw</em></a>,
+      <a class="link" href="zkwm.html" title="zkwm"><em class="citetitle">zkwm</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm399250"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Robin Whittle</td>
+          </tr>
+          <tr>
+            <td>Australie</td>
+          </tr>
+          <tr>
+            <td>Mai 1997</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 3.45</p>
+        <p>Exemple écrit par Kevin Conder.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="zir.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ziwm.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">zir </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> ziwm</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

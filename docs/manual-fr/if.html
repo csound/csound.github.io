@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>if</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="opi.html" title="i" />
+    <link rel="next" href="fftinv.html" title="fftinv" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">if</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="opi.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="fftinv.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="if"></a>
+      <div class="titlepage"></div>
+      <a id="IndexIf" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">if</span>
+        </h2>
+        <p>if — 
+      Branchement conditionnel à l'initialisation ou durant l'exécution.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm157225"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>if...igoto</em></span> -- branchement conditionnel à l'initialisation,
+      dépendant de la valeur de vérité de l'expression logique
+      <span class="emphasis"><em>ia</em></span> <span class="emphasis"><em>R</em></span> <span class="emphasis"><em>ib</em></span>. Le
+      branchement n'a lieu que si le résultat est vrai.
+    </p>
+        <p>
+      <span class="emphasis"><em>if...kgoto</em></span> -- branchement conditionnel durant l'exécution,
+      dépendant de la valeur de vérité de l'expression logique
+      <span class="emphasis"><em>ka</em></span> <span class="emphasis"><em>R</em></span> <span class="emphasis"><em>kb</em></span>. Le
+      branchement n'a lieu que si le résultat est vrai.
+    </p>
+        <p>
+      <span class="emphasis"><em>if...goto</em></span> -- combinaison des deux versions ci-dessus. La
+      condition est testée à chaque passage.
+    </p>
+        <p>
+      <span class="emphasis"><em>if...then</em></span> -- donne la possibilité de spécifier des blocs
+      conditionnels
+      <span class="emphasis"><em>if</em></span>/<span class="emphasis"><em>else</em></span>/<span class="emphasis"><em>endif</em></span>.
+      Tous les blocs <span class="emphasis"><em>if...then</em></span> doivent se terminer par une
+      instruction <span class="emphasis"><em>endif</em></span>. Les instructions
+      <span class="emphasis"><em>elseif</em></span> et <span class="emphasis"><em>else</em></span> sont facultatives.
+      On peut utiliser n'importe quel nombre d'instructions <span class="emphasis"><em>elseif</em></span>.
+      Il ne peut y avoir qu'une seule instruction <span class="emphasis"><em>else</em></span> et elle
+      doit être la dernière instruction conditionnelle avant l'instruction
+      <span class="emphasis"><em>endif</em></span>. Des blocs imbriqués de <span class="emphasis"><em>if...then</em></span>
+      sont permis.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note: Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Notez que si la condition utilise une variable de taux-k (par exemple,
+        <span class="quote">« <span class="quote">if kval &gt; 0</span> »</span>), l'instruction <span class="emphasis"><em>if...goto</em></span> ou
+        <span class="emphasis"><em>if...then</em></span> sera ignorée lors de la phase d'initialisation.
+        Cela permet une initialisation de l'opcode même si la variable de taux-k a déjà
+        reçu une valeur appropriée par une instruction init antérieure.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm157258"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>if</strong></span> ia R ib <span class="command"><strong>igoto</strong></span> label</pre>
+        <pre class="synopsis"><span class="command"><strong>if</strong></span> ka R kb <span class="command"><strong>kgoto</strong></span> label</pre>
+        <pre class="synopsis"><span class="command"><strong>if</strong></span> xa R xb <span class="command"><strong>goto</strong></span> label</pre>
+        <pre class="synopsis"><span class="command"><strong>if</strong></span> xa R xb <span class="command"><strong>then</strong></span></pre>
+        <p>
+      où <span class="emphasis"><em>label</em></span> est dans le même bloc d'instrument et n'est pas
+      une expression, et où <span class="emphasis"><em>R</em></span> est un des opérateurs relationnels
+      (<span class="emphasis"><em>&lt;</em></span>, <span class="emphasis"><em>=</em></span>, <span class="emphasis"><em>&lt;=</em></span>,
+      <span class="emphasis"><em>==</em></span>, <span class="emphasis"><em>!=</em></span>) (et <span class="emphasis"><em>=</em></span>
+      par commodité, voir aussi
+      <a class="link" href="ControlConditional.html" title="Valeurs conditionnelles"><em class="citetitle">Valeurs Conditionnelles</em></a>).
+    </p>
+        <p>
+      Si l'on utilise <span class="emphasis"><em>goto</em></span> ou <span class="emphasis"><em>then</em></span> à la
+      place de <span class="emphasis"><em>kgoto</em></span> ou <span class="emphasis"><em>igoto</em></span>, le comportement
+      est déterminé par le type étant comparé. Si la comparaison utilise des variables
+      de taux-k, kgoto est utilisé et vice-versa.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Les instructions <span class="emphasis"><em>If/then/goto</em></span> ne peuvent pas effectuer de
+        comparaisons de type audio. On ne peut pas mettre de variables de type-a dans
+        les expressions de comparaison pour ces opcodes. La raison en est que les
+        variables audio sont des vecteurs qui ne peuvent pas être comparés de la
+        même façon que des scalaires. Si l'on doit comparer des échantillons audio
+        individuellement il faut utiliser
+        <a class="link" href="kr.html" title="kr"><em class="citetitle">kr = 1</em></a> ou 
+        <a class="link" href="SigmodCompaccum.html" title="Comparateurs et accumulateurs"><em class="citetitle">Comparateurs et Accumulateurs</em></a>
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm157295"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici une exemple de la combinaison if ... igoto. Il utilise le fichier
+      <a class="ulink" href="examples/igoto.csd" target="_top"><em class="citetitle">igoto.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm157300"></a>
+          <p class="title">
+            <strong>Exemple 452. Exemple de la combinaison if ... igoto.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm157307"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o igoto.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; Initialize the global variables.</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4410</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; Instrument #1.</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span><span class="c1">; Get the value of the 4th p-field from the score.</span><span class="w">
+  </span>i<span class="n">param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+
+  </span><span class="c1">; If iparam is 1 then play the high note.</span><span class="w">
+  </span><span class="c1">; If not then play the low note.</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span>i<span class="n">param</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">igoto</span><span class="w"> </span><span class="nl">highnote</span><span class="w">
+    </span><span class="k">igoto</span><span class="w"> </span><span class="nl">lownote</span><span class="w">
+
+</span><span class="nl">highnote</span><span class="p">:</span><span class="w">
+  </span>i<span class="n">freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">880</span><span class="w">
+  </span><span class="k">goto</span><span class="w"> </span><span class="nl">playit</span><span class="w">
+
+</span><span class="nl">lownote</span><span class="p">:</span><span class="w">
+  </span>i<span class="n">freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">440</span><span class="w">
+  </span><span class="k">goto</span><span class="w"> </span><span class="nl">playit</span><span class="w">
+
+</span><span class="nl">playit</span><span class="p">:</span><span class="w">
+  </span><span class="c1">; Print the values of iparam and ifreq.</span><span class="w">
+  </span><span class="nb">print</span><span class="w"> </span>i<span class="n">param</span><span class="w">
+  </span><span class="nb">print</span><span class="w"> </span>i<span class="n">freq</span><span class="w">
+
+  </span>a<span class="n">1</span><span class="w"> </span><span class="nb">oscil</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w"> </span>i<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="nb">out</span><span class="w"> </span>a<span class="n">1</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="c1">; Table #1: a simple sine wave.</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">32768</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; p4: 1 = high note, anything else = low note</span><span class="w">
+</span><span class="c1">; Play Instrument #1 for one second, a low note.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="c1">; Play a Instrument #1 for one second, a high note.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+
+      Sa sortie contiendra des lignes comme celles-ci :
+      </p>
+        <pre class="screen">
+instr 1:  iparam = 0.000
+instr 1:  ifreq = 440.000
+instr 1:  iparam = 1.000
+instr 1:  ifreq = 880.000</pre>
+        <p>
+    </p>
+        <p>
+      Voici un exemple de la combinaison if ... kgoto. Il utilise le fichier
+      <a class="ulink" href="examples/kgoto.csd" target="_top"><em class="citetitle">kgoto.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm157489"></a>
+          <p class="title">
+            <strong>Exemple 453. Exemple de la combinaison if ... kgoto.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm157491"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o kgoto.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; Initialize the global variables.</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4410</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; Instrument #1.</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span><span class="c1">; Change kval linearly from 0 to 2 over</span><span class="w">
+  </span><span class="c1">; the period set by the third p-field.</span><span class="w">
+  </span>k<span class="n">val</span><span class="w"> </span><span class="nb">line</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">
+
+  </span><span class="c1">; If kval is greater than or equal to 1 then play the high note.</span><span class="w">
+  </span><span class="c1">; If not then play the low note.</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span>k<span class="n">val</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">kgoto</span><span class="w"> </span><span class="nl">highnote</span><span class="w">
+    </span><span class="k">kgoto</span><span class="w"> </span><span class="nl">lownote</span><span class="w">
+
+</span><span class="nl">highnote</span><span class="p">:</span><span class="w">
+  </span>k<span class="n">freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">880</span><span class="w">
+  </span><span class="k">goto</span><span class="w"> </span><span class="nl">playit</span><span class="w">
+
+</span><span class="nl">lownote</span><span class="p">:</span><span class="w">
+  </span>k<span class="n">freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">440</span><span class="w">
+  </span><span class="k">goto</span><span class="w"> </span><span class="nl">playit</span><span class="w">
+
+</span><span class="nl">playit</span><span class="p">:</span><span class="w">
+  </span><span class="c1">; Print the values of kval and kfreq.</span><span class="w">
+  </span><span class="nb">printks</span><span class="w"> </span><span class="s">"kval = </span><span class="si">%f</span><span class="s">, kfreq = </span><span class="si">%f</span><span class="se">\\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>k<span class="n">val</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="w">
+
+  </span>a<span class="n">1</span><span class="w"> </span><span class="nb">oscil</span><span class="w"> </span><span class="mi">10000</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="nb">out</span><span class="w"> </span>a<span class="n">1</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="c1">; Table #1: a simple sine wave.</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">32768</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; Play Instrument #1 for two seconds.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+
+      Sa sortie contiendra des lignes comme celles-ci :
+      </p>
+        <pre class="screen">
+kval = 0.000000, kfreq = 440.000000
+kval = 0.999732, kfreq = 440.000000
+kval = 1.999639, kfreq = 880.000000</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm157672"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de la combinaison if ... then. Il utilise le fichier
+      <a class="ulink" href="examples/ifthen.csd" target="_top"><em class="citetitle">ifthen.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm157677"></a>
+          <p class="title">
+            <strong>Exemple 454. Exemple de la combinaison if ... then.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm157679"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o ifthen.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4410</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; Instrument #1.</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span><span class="c1">; Get the note value from the fourth p-field.</span><span class="w">
+  </span>k<span class="n">note</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+
+  </span><span class="c1">; Does the user want a low note?</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span>k<span class="n">note</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+    </span>k<span class="n">cps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">220</span><span class="w">
+  </span><span class="c1">; Does the user want a middle note?</span><span class="w">
+  </span><span class="k">elseif</span><span class="w"> </span><span class="p">(</span>k<span class="n">note</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+    </span>k<span class="n">cps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">440</span><span class="w">
+  </span><span class="c1">; Does the user want a high note?</span><span class="w">
+  </span><span class="k">elseif</span><span class="w"> </span><span class="p">(</span>k<span class="n">note</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+    </span>k<span class="n">cps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">880</span><span class="w">
+  </span><span class="k">endif</span><span class="w">
+
+  </span><span class="c1">; Create the note.</span><span class="w">
+  </span>k<span class="n">amp</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">25000</span><span class="w">
+  </span>i<span class="n">fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span>a<span class="n">1</span><span class="w"> </span><span class="nb">oscili</span><span class="w"> </span>k<span class="n">amp</span><span class="p">,</span><span class="w"> </span>k<span class="n">cps</span><span class="p">,</span><span class="w"> </span>i<span class="n">fn</span><span class="w">
+
+  </span><span class="nb">out</span><span class="w"> </span>a<span class="n">1</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="c1">; Table #1, a sine wave.</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; p4: 0=low note, 1=middle note, 2=high note.</span><span class="w">
+</span><span class="c1">; Play Instrument #1 for one second, low note.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="c1">; Play Instrument #1 for one second, middle note.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">; Play Instrument #1 for one second, high note.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm157882"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="elseif.html" title="elseif"><em class="citetitle">elseif</em></a>,
+      <a class="link" href="else.html" title="else"><em class="citetitle">else</em></a>,
+      <a class="link" href="endif.html" title="endif"><em class="citetitle">endif</em></a>,
+      <a class="link" href="goto.html" title="goto"><em class="citetitle">goto</em></a>,
+      <a class="link" href="igoto.html" title="igoto"><em class="citetitle">igoto</em></a>,
+      <a class="link" href="kgoto.html" title="kgoto"><em class="citetitle">kgoto</em></a>,
+      <a class="link" href="tigoto.html" title="tigoto"><em class="citetitle">tigoto</em></a>,
+      <a class="link" href="timout.html" title="timout"><em class="citetitle">timout</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm157901"></a>
+        <h2>Crédits</h2>
+        <p>Exemples écrits par Kevin Conder.</p>
+        <p>Note ajoutée par Jim Aikin.</p>
+        <p>Février 2004. Note ajoutée par Matt Ingalls.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="opi.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="fftinv.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">i </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> fftinv</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

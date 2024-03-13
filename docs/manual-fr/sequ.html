@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>sequ</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="seed.html" title="seed" />
+    <link rel="next" href="sekere.html" title="sekere" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">sequ</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="seed.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="sekere.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="sequ"></a>
+      <div class="titlepage"></div>
+      <a id="IndexSequ" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">sequ</span>
+        </h2>
+        <p>sequ — 
+      Emulation d'un séquenceur.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm300612"></a>
+        <h2>Description</h2>
+        <p>
+      Utilise une collection de tableaux pour générer une séquence d'évènements
+      avec tempo variable, qui peuvent être joués en succession droite,
+      rétrograde, avant et arrière, et aléatoire. La longueur maximale des
+      tableaux est 128, et elle peut être pondérée dynamiquement. Les modes
+      d'exécution par permutation permettent un traitement stochastique et
+      autres algorithmes.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm300615"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">kres  <span class="command"><strong>sequ</strong></span>  irhythm[], iinstr[], idata[], kbpm, klen [, kmode] [, kstep] [, kreset] [, kverbose]
+    </pre>
+        <pre class="synopsis">kres  <span class="command"><strong>sequ</strong></span>  irhythm[], iinstr[],
+    idata[][], kbpm, klen [, kmode] [, kstep] [, kreset] [, kverbose]
+    </pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm300621"></a>
+        <h2>Initializstion</h2>
+        <p>
+      <span class="emphasis"><em>irhythm</em></span>  - tableau de durées en pulsations. La durée
+      effective est déterminée par la division de ces valeurs par le tempo.
+    </p>
+        <p>
+     <span class="emphasis"><em>iinstr</em></span>  - tableau des numéros d'instrument activés
+     à chaque pas. Un numéro d'instrument nul ne fait rien. Il ignore les notes
+     associées à ce pas et produit un silence de la durée de cette note.
+    </p>
+        <p>
+      <span class="emphasis"><em>idata</em></span>  -  soit un vecteur de valeurs p4 pour les pas
+      d'iinstr associés, soit un tableau à deux dimensions de valeurs p4, p5,
+      p6... Typiquement une information de hauteur en cps ou un numéro de
+      note MIDI ; mais cette liste arbitraire de valeurs p4 peut avoir une
+      autre signification dans l'iinstr appelé.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm300629"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kbpm</em></span> - vitesse de boucle en pulsations par minute.
+    </p>
+        <p>
+      <span class="emphasis"><em>klen</em></span> - longueur de la partie active de la séquence
+      (en partant du pas 0).
+    </p>
+        <p>
+      <span class="emphasis"><em>kmode</em></span> - contrôle l'exécution du séquenceur. Une
+      valeur nulle (par défaut) boucle la séquence en avant, appelant
+      l'instrument associé à chaque pas. D'autres modes sont supportés. (Voir
+      ci-dessous).
+    </p>
+        <p>
+      Les options d'exécution pour <span class="emphasis"><em>kmode</em></span> sont :
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>0 - boucle en avant</p>
+            </li>
+            <li class="listitem">
+              <p>n&gt;0 - boucle en avant avec une mutation tous les n
+          évènements</p>
+            </li>
+            <li class="listitem">
+              <p>-1 - boucle rétrograde</p>
+            </li>
+            <li class="listitem">
+              <p>-2 - en avant et en arrière</p>
+            </li>
+            <li class="listitem">
+              <p>-3 - évènements alatoires</p>
+            </li>
+            <li class="listitem">
+              <p>-4 - exécute la séquence entière une fois en avant puis
+          s'arrête</p>
+            </li>
+            <li class="listitem">
+              <p>-5 - exécute la séquence entière une fois en arrière
+          puis s'arrête</p>
+            </li>
+            <li class="listitem">
+              <p>-6 - mélange les évènements</p>
+            </li>
+            <li class="listitem">
+              <p>-7 - revient à l'état initial</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+        <p>
+      <span class="emphasis"><em>kstep</em></span> - s'il est non nul, le tableau irhythm est
+      remplacé par des déclencheurs de taux-k. Ceux-ci peuvent provenir d'un
+      clavier MIDI ou d'un autre contrôleur de taux-k. Un évènement est
+      déclenché si cet argument est positif, sinon rien ne se passe s'il est
+      négatif. La valeur par défaut est zéro.
+    </p>
+        <p>
+      <span class="emphasis"><em>reset</em></span> - s'il est non nul, réinitialise le séquenceur
+      (comme le mode -7). Zéro par défaut.
+    </p>
+        <p>
+      <span class="emphasis"><em>kverbose</em></span> - s'il est non nul, des messages sur les
+      changements d'état interne sont affichés. Zéro par défaut.
+    </p>
+        <p>
+      <span class="emphasis"><em>kres</em></span> - donne l'index de l'évènement créé pour le
+      k-cycle courant, ou -1 s'il n'y a aucun évènement.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Alors que les tableaux irhythm, iinstr et idata sont de taux-i, les
+        valeurs des entrées sont lues au taux-k. Cela signifie qu'en utilisant
+        des tableaux globaux de vecteurs de taux-i, il est possible (en
+        faisant attention) de changer des valeurs spécifiques et d'autres
+        détails durant l'exécution.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm300668"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode sequ. Il utilise le fichier
+      <a class="ulink" href="examples/sequ1.csd" target="_top"><em class="citetitle">sequ1.csd</em></a>
+      </p>
+        <div class="example">
+          <a id="idm300673"></a>
+          <p class="title">
+            <strong>Exemple 944. Exemple de l'opcode sequ.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm300675"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span><span class="c1">;; rhythm array - these steps values multiplied by tempo (ticks) in BPM</span><span class="w">
+</span>i<span class="n">rhythm</span><span class="p">[]</span><span class="w"> </span><span class="nb">fillarray</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">;; instrument array - instrument number to render for each step</span><span class="w">
+</span>i<span class="n">nst0</span><span class="p">[]</span><span class="w"> </span><span class="nb">fillarray</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="w">
+</span>i<span class="n">nst1</span><span class="p">[]</span><span class="w"> </span><span class="nb">fillarray</span><span class="w"> </span><span class="mi">19</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="p">,</span><span class="w"> </span><span class="mi">26</span><span class="w">
+
+</span><span class="c1">;; note array - here in cpsmidinn - esentially the 'p4' output from opcode</span><span class="w">
+</span><span class="c1">;;               can be any sequence of values</span><span class="w">
+</span>i<span class="n">notes</span><span class="p">[]</span><span class="w"> </span><span class="nb">fillarray</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w"> </span><span class="mi">62</span><span class="p">,</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w"> </span><span class="mi">66</span><span class="p">,</span><span class="w"> </span><span class="mi">67</span><span class="w">
+
+</span><span class="c1">;; variable tempo</span><span class="w">
+</span>k<span class="n">speed</span><span class="w"> </span><span class="nb">line</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">180</span><span class="w">
+
+</span><span class="c1">;; rhythm, inst, notes, bpm, length, mode, verbose</span><span class="w">
+</span>k<span class="n">Seq0</span><span class="w"> </span><span class="nb">sequ</span><span class="w"> </span>i<span class="n">rhythm</span><span class="p">,</span><span class="w"> </span>i<span class="n">nst0</span><span class="p">,</span><span class="w"> </span>i<span class="n">notes</span><span class="p">,</span><span class="w"> </span>k<span class="n">speed</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="w">
+</span>k<span class="n">Seq1</span><span class="w"> </span><span class="nb">sequ</span><span class="w"> </span>i<span class="n">rhythm</span><span class="p">,</span><span class="w"> </span>i<span class="n">nst1</span><span class="p">,</span><span class="w"> </span>i<span class="n">notes</span><span class="p">,</span><span class="w"> </span>k<span class="n">speed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1.2</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">11</span><span class="p">,</span><span class="w"> </span><span class="nf">12</span><span class="p">,</span><span class="w"> </span><span class="nf">13</span><span class="p">,</span><span class="w"> </span><span class="nf">14</span><span class="p">,</span><span class="w"> </span><span class="nf">15</span><span class="p">,</span><span class="w"> </span><span class="nf">16</span><span class="p">,</span><span class="w"> </span><span class="nf">17</span><span class="p">,</span><span class="w"> </span><span class="nf">18</span><span class="w">
+</span>k<span class="n">l</span><span class="w"> </span><span class="nb">linseg</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.99</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>a<span class="n">1</span><span class="w"> </span><span class="nb">oscil</span><span class="w"> </span><span class="mf">0.9</span><span class="p">,</span><span class="w"> </span><span class="nb">cpsmidinn</span><span class="p">(</span><span class="vi">p4</span><span class="p">)</span><span class="w">
+</span><span class="nb">outs1</span><span class="w"> </span>a<span class="n">1</span><span class="o">*</span>k<span class="n">l</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">19</span><span class="p">,</span><span class="w"> </span><span class="nf">20</span><span class="p">,</span><span class="w"> </span><span class="nf">21</span><span class="p">,</span><span class="w"> </span><span class="nf">22</span><span class="p">,</span><span class="w"> </span><span class="nf">23</span><span class="p">,</span><span class="w"> </span><span class="nf">24</span><span class="p">,</span><span class="w"> </span><span class="nf">25</span><span class="p">,</span><span class="w"> </span><span class="nf">26</span><span class="w">
+</span>k<span class="n">l</span><span class="w"> </span><span class="nb">linseg</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="vi">p3</span><span class="o">*</span><span class="mf">.99</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>a<span class="n">1</span><span class="w"> </span><span class="nb">oscil</span><span class="w"> </span><span class="mf">0.9</span><span class="p">,</span><span class="w"> </span><span class="nb">cpsmidinn</span><span class="p">(</span><span class="vi">p4</span><span class="p">)</span><span class="w">
+</span><span class="nb">outs2</span><span class="w"> </span>a<span class="n">1</span><span class="o">*</span>k<span class="n">l</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">60</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+      Voici un autre exemple de l'opcode sequ montrant les différents modes.
+      Il utilise le fichier <a class="ulink" href="examples/sequ2.csd" target="_top"><em class="citetitle">sequ2.csd</em></a>
+      </p>
+        <div class="example">
+          <a id="idm301029"></a>
+          <p class="title">
+            <strong>Exemple 945. Exemple de l'opcode sequ.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm301031"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span><span class="c1">;; rhythm array - these values are multiplied by tempo (ticks) in BPM</span><span class="w">
+</span>i<span class="n">rhythm0</span><span class="p">[]</span><span class="w"> </span><span class="nb">fillarray</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">;; instrument array - instrument number to render for each step</span><span class="w">
+</span>i<span class="n">insts0</span><span class="p">[]</span><span class="w"> </span><span class="nb">fillarray</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">17</span><span class="p">,</span><span class="w"> </span><span class="mi">18</span><span class="w">
+</span><span class="c1">;; note array - here cpsmidinn(p4), amps(p5), mod ratios(p6), mod indices(p7)</span><span class="w">
+</span><span class="c1">;; - esentially the 'p4', 'p5', 'p6' and 'p7' are output from sequ</span><span class="w">
+</span>i<span class="n">notes</span><span class="p">[][]</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="w"> </span><span class="c1">;initialize 4 rows with 8 columns - p4=pitch, p5=amp, p6=modratio, p7=modindex</span><span class="w">
+</span>i<span class="n">notes</span><span class="w"> </span><span class="nb">fillarray</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w"> </span><span class="mi">62</span><span class="p">,</span><span class="w"> </span><span class="mi">63</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w"> </span><span class="mi">66</span><span class="p">,</span><span class="w"> </span><span class="mi">67</span><span class="p">,</span><span class="w"> </span>\<span class="w">
+                 </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span>\<span class="w">
+                 </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span>\<span class="w">
+                 </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">22</span><span class="w">
+</span><span class="c1">;; NOTE: this can be any sequence of values</span><span class="w">
+</span><span class="c1">;; variable tempo</span><span class="w">
+</span>k<span class="n">speed</span><span class="w"> </span><span class="nb">linseg</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.7</span><span class="p">,</span><span class="w"> </span><span class="mi">85</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.3</span><span class="p">,</span><span class="w"> </span><span class="mi">240</span><span class="w">
+</span><span class="c1">;; rhythms, insts, notes, bpm, length, mode, step, reset, verbose</span><span class="w">
+</span>k<span class="n">Seq</span><span class="w"> </span><span class="nb">sequ</span><span class="w"> </span>i<span class="n">rhythm0</span><span class="p">,</span><span class="w"> </span>i<span class="n">insts0</span><span class="p">,</span><span class="w"> </span>i<span class="n">notes</span><span class="p">,</span><span class="w"> </span>k<span class="n">speed</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">11</span><span class="p">,</span><span class="w"> </span><span class="nf">12</span><span class="p">,</span><span class="w"> </span><span class="nf">13</span><span class="p">,</span><span class="w"> </span><span class="nf">14</span><span class="p">,</span><span class="w"> </span><span class="nf">15</span><span class="p">,</span><span class="w"> </span><span class="nf">16</span><span class="p">,</span><span class="w"> </span><span class="nf">17</span><span class="p">,</span><span class="w"> </span><span class="nf">18</span><span class="w">
+</span>k<span class="n">env</span><span class="w"> </span><span class="nb">linseg</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.99</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">foscil</span><span class="w"> </span><span class="vi">p5</span><span class="p">,</span><span class="w"> </span><span class="nb">cpsmidinn</span><span class="p">(</span><span class="vi">p4</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p6</span><span class="p">,</span><span class="w"> </span><span class="vi">p7</span><span class="w">
+</span><span class="nb">outall</span><span class="w"> </span>a<span class="n">sig</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>k<span class="n">env</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c1">;; forward mode</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">f</span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="c1">;; backward mode</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">f</span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="w"> </span><span class="c1">;; forward and backward mode</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">f</span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="o">-</span><span class="mi">3</span><span class="w"> </span><span class="c1">;; random</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">f</span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="o">-</span><span class="mi">4</span><span class="w"> </span><span class="c1">;; play forward once and stop</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">f</span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="o">-</span><span class="mi">5</span><span class="w"> </span><span class="c1">;; play backward once and stop</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">f</span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="o">-</span><span class="mi">6</span><span class="w"> </span><span class="c1">;; shuffle mode</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">f</span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">;; mutate after each step</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">f</span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="c1">;; mutate each second step</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">f</span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="c1">;; mutate every four steps</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm301567"></a>
+        <h2>Crédits</h2>
+        <p>Ecrit par John ffitch</p>
+        <p>Nouveau dans Csound 6.17</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="seed.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="sekere.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">seed </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> sekere</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

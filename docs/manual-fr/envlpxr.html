@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>envlpxr</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="envlpx.html" title="envlpx" />
+    <link rel="next" href="ephasor.html" title="ephasor" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">envlpxr</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="envlpx.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ephasor.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="envlpxr"></a>
+      <div class="titlepage"></div>
+      <a id="IndexEnvlpxr" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">envlpxr</span>
+        </h2>
+        <p>envlpxr — 
+      L'opcode <span class="emphasis"><em>envlpx</em></span> avec un segment final de relâchement.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm92505"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>envlpxr</em></span> est le même que
+      <a class="link" href="envlpx.html" title="envlpx"><em class="citetitle">envlpx</em></a> sauf que le segment final n'est
+      exécuté qu'après un évènement MIDI de relâchement de note. La note est ensuite allongée de
+      la durée de la chute.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm92511"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>envlpxr</strong></span> xamp, irise, idec, ifn, iatss, iatdec [, ixmod] [,irind]</pre>
+        <pre class="synopsis">kres <span class="command"><strong>envlpxr</strong></span> kamp, irise, idec, ifn, iatss, iatdec [, ixmod] [,irind]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm92517"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>irise</em></span> -- durée de l'attaque en secondes. Une valeur nulle ou négative signifie pas
+      d'attaque.
+    </p>
+        <p>
+      <span class="emphasis"><em>idec</em></span> -- durée de la chute en secondes. Zéro signifie pas de chute.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifn</em></span> -- numéro de la table de fonction avec point de garde 
+      dans laquelle la forme de l'attaque est stockée.
+    </p>
+        <p>
+      <span class="emphasis"><em>iatss</em></span> -- facteur d'atténuation déterminant le changement
+      exponentiel de la valeur durant la période de pseudo entretien entre la fin
+      de l'attaque et le début de la chute (au relachement de la note). Un facteur
+      supérieur à 1 provoque une montée exponentielle tandis qu'un facteur
+      inférieur à 1 crée une descente exponentielle. Un facteur égal à 1 maintient un véritable
+      entretien de la note sur la dernière valeur de l'attaque. 0 est interdit.
+      La valeur changera de <span class="emphasis"><em>abs</em></span>(<span class="emphasis"><em>iatss</em></span>)
+      par seconde.
+    </p>
+        <p>
+      <span class="emphasis"><em>iatdec</em></span> -- le rapport entre la dernière valeur de la chute
+      et sa première valeur (au relachement de la note). Cette valeur doit être positive
+      et elle est normalement de l'ordre de 0,01. Une valeur trop longue ou excessivement courte
+      peut produire une coupure audible. Les valeurs nulles ou négatives sont interdites.
+    </p>
+        <p>
+      <span class="emphasis"><em>ixmod</em></span> (facultatif, entre +- 0,9 environ) -- facteur de modification
+      de courbe exponentielle, qui influe sur la raideur de la trajectoire exponentielle pendant
+      l'entretien. Les valeurs négatives provoqueront une montée ou une descente accélérée
+      (par exemple <span class="emphasis"><em>subito piano</em></span>). Les valeurs positives provoqueront une
+      montée ou une descente ralentie. La valeur par défaut est zéro (exponentielle non
+      modifiée).
+    </p>
+        <p>
+      <span class="emphasis"><em>irind </em></span> (facultatif) -- indicateur d'indépendance. S'il est nul, la durée de
+      relâchement (<span class="emphasis"><em>idec</em></span>) aura une influence sur l'allongement de la note après un
+      note-off. S'il est non nul, la durée <span class="emphasis"><em>idec</em></span> sera relativement indépendante de
+      l'allongement de la note (voir ci-dessous). La valeur par défaut est 0.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm92538"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kamp, xamp</em></span> -- amplitude du signal d'entrée.
+    </p>
+        <p>
+      <span class="emphasis"><em>envlpxr</em></span> fait partie des unités <span class="quote">« <span class="quote">r</span> »</span> de Csound qui
+      contiennent un détecteur de fin de note et une extension de durée pour le relâchement. Quand
+      la fin d'un évènement ou MIDI note-off est détectée, la durée d'exécution de l'instrument
+      courant est immédiatement allongée de <span class="emphasis"><em>idec</em></span> secondes à moins qu'il ne soit
+      rendu indépendant par <span class="emphasis"><em>irind</em></span>. Dans ce cas, la chute démarrera de
+      l'endroit, quelqu'il soit, où l'on se trouvait à ce moment précis.
+    </p>
+        <p>
+      On peut utiliser d'autres enveloppes préfabriquées pour lancer un segment de relâchement à
+      la réception d'un message note-off, comme
+      <a class="link" href="linsegr.html" title="linsegr"><em class="citetitle">linsegr</em></a> et
+      <a class="link" href="expsegr.html" title="expsegr"><em class="citetitle">expsegr</em></a>, ou bien l'on peut construire des
+      enveloppes plus complexes au moyen de
+      <a class="link" href="xtratim.html" title="xtratim"><em class="citetitle">xtratim</em></a> et de
+      <a class="link" href="release.html" title="release"><em class="citetitle">release</em></a>. Noter qu'il n'est pas
+      nécessaire d'utiliser <a class="link" href="xtratim.html" title="xtratim"><em class="citetitle">xtratim</em></a> avec
+      <span class="emphasis"><em>envlpxr</em></span>, car la durée est allongée automatiquement.
+    </p>
+        <p><strong> Unités <span class="quote">« <span class="quote">r</span> »</span> multiples. </strong>
+        Quand plusieurs unités <span class="quote">« <span class="quote">r</span> »</span> sont présentes dans le même instrument, il
+        est habituel qu'une seule d'entre elle influence la durée totale de la note. C'est
+        normalement l'unité contrôlant l'amplitude principale de la note. D'autres unités
+        contrôlant par exemple l'évolution d'un filtre, peuvent toujours être sensibles aux
+        commandes note-off tout en n'affectant pas la durée grâce à leur indépendance
+        (<span class="emphasis"><em>irind</em></span> non nul). En fonction de leur propre valeur
+        <span class="emphasis"><em>idec</em></span> (durée de relâchement), les unités <span class="quote">« <span class="quote">r</span> »</span>
+        indépendantes pourront ou ne pourront pas atteindre leur destination finale
+        avant que la note ne se termine. Si elles y arrivent, elles tiendront
+        simplement leur dernière valeur jusqu'à la fin. Si plusieurs unités
+        <span class="quote">« <span class="quote">r</span> »</span> sont principales, l'extension de la note sera celle de la plus
+        grande valeur <span class="emphasis"><em>idec</em></span>.
+      </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm92569"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode envlpxr. Il utilise le fichier
+      <a class="ulink" href="examples/envlpxr.csd" target="_top"><em class="citetitle">envlpxr.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm92574"></a>
+          <p class="title">
+            <strong>Exemple 267. Exemple de l'opcode envlpxr.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm92576"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac  -+rtmidi=virtual -M0   <span class="c1">;;;realtime audio out and realtime midi in</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o envlpxr.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+ 	 
+</span>i<span class="n">cps</span><span class="w">	</span><span class="nb">cpsmidi</span><span class="w">	 	 
+</span>i<span class="n">amp</span><span class="w">	</span><span class="nb">ampmidi</span><span class="w">	</span><span class="mf">.5</span><span class="w">	 
+ 	 	 	 
+</span>k<span class="n">env</span><span class="w">	</span><span class="nb">envlpxr</span><span class="w">	</span>i<span class="n">amp</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="nb">pluck</span><span class="w">	</span>k<span class="n">env</span><span class="p">,</span><span class="w"> </span>i<span class="n">cps</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">	 
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+	 
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">129</span><span class="w"> </span><span class="o">-</span><span class="mi">7</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">128</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4096</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">	
+
+</span><span class="nb">f</span><span class="mi">0</span><span class="w"> </span><span class="mi">30</span><span class="w">	</span><span class="c1">;runs 30 seconds</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm92717"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="envlpx.html" title="envlpx"><em class="citetitle">envlpx</em></a>,
+      <a class="link" href="linen.html" title="linen"><em class="citetitle">linen</em></a>,
+      <a class="link" href="linenr.html" title="linenr"><em class="citetitle">linenr</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm92726"></a>
+        <h2>Crédits</h2>
+        <p>Merci à Luis Jure pour avoir signalé une erreur avec <span class="emphasis"><em>iatss</em></span>.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="envlpx.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ephasor.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">envlpx </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> ephasor</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

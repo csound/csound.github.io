@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Instruction t (instruction de tempo)</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="ScoregensTop.html" title="Instructions de partition et routines GEN" />
+    <link rel="prev" href="s.html" title="Instruction s" />
+    <link rel="next" href="v.html" title="Instruction v" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Instruction t (instruction de tempo)</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="s.html">Précédent</a> </td>
+          <th width="60%" align="center">Instructions de partition et routines GEN</th>
+          <td width="20%" align="right"> <a accesskey="n" href="v.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="t"></a>
+      <div class="titlepage"></div>
+      <a id="IndexTStatement" class="indexterm"></a>
+      <a id="IndexTempoStatement" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">Instruction t (instruction de tempo)</span>
+        </h2>
+        <p>t — 
+      Fixe le tempo.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm403637"></a>
+        <h2>Description</h2>
+        <p>
+      Cette instruction fixe le tempo et spécifie les accelerando et les ritardando de la section
+      courante. Ceci est réalisé en convertissant les pulsations en secondes.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm403640"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>t</strong></span>  p1  p2  p3  p4 ... (illimité)</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm403644"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>p1</em></span> -- Doit être zéro.
+    </p>
+        <p>
+      <span class="emphasis"><em>p2</em></span> -- Tempo initial en pulsations par minute.
+    </p>
+        <p>
+      <span class="emphasis"><em>p3, p5, p7,...</em></span> -- Dates en pulsations (en ordre non décroissant).
+    </p>
+        <p>
+      <span class="emphasis"><em>p4, p6, p8,...</em></span> -- Tempi pour les dates en pulsations référencées.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm403654"></a>
+        <h2>Exécution</h2>
+        <p>
+      Les dates et le Tempo pour chaque date sont donnés en couples ordonnés qui définissent des points
+      sur un graphe <span class="quote">« <span class="quote">date, tempo</span> »</span>. (L'axe du temps est ici en pulsations et n'est donc pas
+      nécessairement linéaire). Le taux de pulsations d'une section peut être pensé comme un mouvement
+      d'un point à un autre de ce graphe : un mouvement entre deux points à la même hauteur signifie un
+      tempo constant, tandis qu'un mouvement entre deux points de hauteurs différentes traduit un
+      accelerando ou un ritardando selon le cas. Le graphe peut contenir des discontinuités : deux points
+      ayant la même date mais des tempi différents provoqueront un changement de tempo instantané.
+    </p>
+        <p>
+      Le mouvement entre différents tempi sur des durées non nulles est inversement linéaire. Cela veut
+      dire qu'un accelerando entre deux tempi M1 et M2 procède par interpolation linéaire des durées de
+      chaque pulsation entre 60/M1 et 60/M2.
+    </p>
+        <p>
+      Le premier tempo doit être donné pour la pulsation 0.
+    </p>
+        <p>
+      Une fois assigné, un tempo sera effectif à partir de cette date à moins d'être influencé par un
+      tempo suivant, ainsi, le dernier tempo spécifié sera actif jausqu'à la fin de la section.
+    </p>
+        <p>
+      Une <span class="emphasis"><em>instruction t</em></span> ne s'applique que dans la section dans laquelle elle
+      apparaît. Une seule <span class="emphasis"><em>instruction t</em></span> est pertinente dans une section ; elle
+      peut être placée n'importe où dans la section. Si une section de partition ne contient pas
+      d'<span class="emphasis"><em>instruction t</em></span>, les pulsations sont alors interprétées comme des secondes
+      (c'est-à-dire avec une instruction <span class="emphasis"><em>t 0 60</em></span> implicite).
+    </p>
+        <p>
+      Nota Bene. Si la commande de Csound comprend une
+      <a class="link" href="CommandFlags.html#FlagsMinusLowerT"><em class="citetitle">option -t</em></a>, le tempo interprété de
+      toutes les <span class="emphasis"><em>instruction t</em></span> de la partition sera remplaçé par le tempo de la ligne
+      de commande.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm403670"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'instruction t. Il utilise le fichier
+      <a class="ulink" href="examples/t.csd" target="_top"><em class="citetitle">t.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm403675"></a>
+          <p class="title">
+            <strong>Exemple 1267. Exemple de l'instruction t.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm403677"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o t.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>a<span class="n">env</span><span class="w"> </span><span class="nb">expseg</span><span class="w"> </span><span class="mf">.01</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">poscil3</span><span class="w"> </span><span class="mf">.8</span><span class="o">*</span>a<span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">	</span><span class="c1">;sine wave</span><span class="w">
+
+</span><span class="nb">t</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">240</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="mi">240</span><span class="w">	</span><span class="c1">;start tempo = 240 </span><span class="w">
+		
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">110</span><span class="w">		</span><span class="c1">;tempo = 240</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">220</span><span class="w">		</span><span class="c1">;slow down &amp;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">440</span><span class="w">		</span><span class="c1">;slow down &amp;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">880</span><span class="w">		</span><span class="c1">;slow down &amp;		</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">110</span><span class="w">		</span><span class="c1">;slow down to 30 at 12 seconds</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">220</span><span class="w">		</span><span class="c1">;speed up to 240 again</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">440</span><span class="w">		</span><span class="c1">;stay at tempo 240</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">21</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">880</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="s.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="ScoregensTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="v.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Instruction s </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Instruction v</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

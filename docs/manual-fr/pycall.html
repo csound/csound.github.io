@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>pycall Opcodes</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="pyassign.html" title="pyassign Opcodes" />
+    <link rel="next" href="pyeval.html" title="pyeval Opcodes" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">pycall Opcodes</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="pyassign.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="pyeval.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="pycall"></a>
+      <div class="titlepage"></div>
+      <a id="IndexPyCall" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">pycall Opcodes</span>
+        </h2>
+        <p>pycall — 
+      Invoque l'objet Python appelable spécifié au taux-k ou au taux-i (suffixe i),
+      en lui passant les arguments donnés. L'appel est exécuté dans l'environnement
+      global et le résultat (la valeur retournée) est copié dans les variables
+      de Csound spécifiées en sortie.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm279607"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">                                        <span class="command"><strong>pycall</strong></span>   "callable", karg1, ...</pre>
+        <pre class="synopsis">kresult                                 <span class="command"><strong>pycall1</strong></span>  "callable", karg1, ...</pre>
+        <pre class="synopsis">kresult1, kresult2                      <span class="command"><strong>pycall2</strong></span>  "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3                           <span class="command"><strong>pycall3</strong></span>  "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4                      <span class="command"><strong>pycall4</strong></span>  "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5                 <span class="command"><strong>pycall5</strong></span>  "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5, kr6            <span class="command"><strong>pycall6</strong></span>  "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5, kr6, kr7       <span class="command"><strong>pycall7</strong></span>  "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5, kr6, kr7, kr8  <span class="command"><strong>pycall8</strong></span>  "callable", karg1, ...</pre>
+        <pre class="synopsis">                                        <span class="command"><strong>pycallt</strong></span>   ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kresult                                 <span class="command"><strong>pycall1t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kresult1, kresult2                      <span class="command"><strong>pycall2t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3                           <span class="command"><strong>pycall3t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4                      <span class="command"><strong>pycall4t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5                 <span class="command"><strong>pycall5t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5, kr6            <span class="command"><strong>pycall6t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5, kr6, kr7       <span class="command"><strong>pycall7t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5, kr6, kr7, kr8  <span class="command"><strong>pycall8t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">                                        <span class="command"><strong>pycalli</strong></span>   "callable", karg1, ...</pre>
+        <pre class="synopsis">iresult                                 <span class="command"><strong>pycall1i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis">iresult1, iresult2                      <span class="command"><strong>pycall2i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis">ir1, ir2, ir3                           <span class="command"><strong>pycall3i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis">ir1, ir2, ir3, ir4                      <span class="command"><strong>pycall4i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis">ir1, ir2, ir3, ir4, ir5                 <span class="command"><strong>pycall5i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis">ir1, ir2, ir3, ir4, ir5, ir6            <span class="command"><strong>pycall6i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis">ir1, ir2, ir3, ir4, ir5, ir6, ir7       <span class="command"><strong>pycall7i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis">ir1, ir2, ir3, ir4, ir5, ir6, ir7, ir8  <span class="command"><strong>pycall8i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis"><span class="command"><strong>pycalln</strong></span>   "callable", nresults, kresult1, ..., kresultn, karg1, ...</pre>
+        <pre class="synopsis"><span class="command"><strong>pycallni</strong></span>  "callable", nresults, iresult1, ..., iresultn, iarg1,  ...</pre>
+        <pre class="synopsis">                                        <span class="command"><strong>pylcall</strong></span>   "callable", karg1, ...</pre>
+        <pre class="synopsis">kresult                                 <span class="command"><strong>pylcall1</strong></span>  "callable", karg1, ...</pre>
+        <pre class="synopsis">kresult1, kresult2                      <span class="command"><strong>pylcall2</strong></span>  "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3                           <span class="command"><strong>pylcall3</strong></span>  "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4                      <span class="command"><strong>pylcall4</strong></span>  "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5                 <span class="command"><strong>pylcall5</strong></span>  "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5, kr6            <span class="command"><strong>pylcall6</strong></span>  "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5, kr6, kr7       <span class="command"><strong>pylcall7</strong></span>  "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5, kr6, kr7, kr8  <span class="command"><strong>pylcall8</strong></span>   "callable", karg1, ...</pre>
+        <pre class="synopsis">                                        <span class="command"><strong>pylcallt</strong></span>   ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kresult                                 <span class="command"><strong>pylcall1t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kresult1, kresult2                      <span class="command"><strong>pylcall2t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3                           <span class="command"><strong>pylcall3t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4                      <span class="command"><strong>pylcall4t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5                 <span class="command"><strong>pylcall5t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5, kr6            <span class="command"><strong>pylcall6t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5, kr6, kr7       <span class="command"><strong>pylcall7t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">kr1, kr2, kr3, kr4, kr5, kr6, kr7, kr8  <span class="command"><strong>pylcall8t</strong></span>  ktrigger, "callable", karg1, ...</pre>
+        <pre class="synopsis">                                        <span class="command"><strong>pylcalli</strong></span>   "callable", karg1, ...</pre>
+        <pre class="synopsis">iresult                                 <span class="command"><strong>pylcall1i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis">iresult1, iresult2                      <span class="command"><strong>pylcall2i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis">ir1, ir2, ir3                           <span class="command"><strong>pylcall3i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis">ir1, ir2, ir3, ir4                      <span class="command"><strong>pylcall4i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis">ir1, ir2, ir3, ir4, ir5                 <span class="command"><strong>pylcall5i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis">ir1, ir2, ir3, ir4, ir5, ir6            <span class="command"><strong>pylcall6i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis">ir1, ir2, ir3, ir4, ir5, ir6, ir7       <span class="command"><strong>pylcall7i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis">ir1, ir2, ir3, ir4, ir5, ir6, ir7, ir8  <span class="command"><strong>pylcall8i</strong></span>  "callable", iarg1, ...</pre>
+        <pre class="synopsis"><span class="command"><strong>pylcalln</strong></span>   "callable", nresults, kresult1, ..., kresultn, karg1, ...</pre>
+        <pre class="synopsis"><span class="command"><strong>pylcallni</strong></span>  "callable", nresults, iresult1, ..., iresultn, iarg1, ...</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm279725"></a>
+        <h2>Description</h2>
+        <p>
+      Opcode du greffon py. Ce greffon se trouve dans le
+      répertoire des greffons et il doit être installé séparément.
+      Le répertoire des greffons est ici :
+      <a class="ulink" href="https://github.com/csound/plugins" target="_top">
+      <em class="citetitle">https://github.com/csound/plugins</em></a>
+    </p>
+        <p>
+      Cette famille d'opcodes appelle l'objet Python appelable spécifié au
+      taux-k ou au taux-i (suffixe i), en lui passant les arguments donnés.
+      L'appel est exécuté dans l'environnement global et le résultat (la valeur
+      retournée) est copié dans les variables de Csound spécifiées en sortie.
+    </p>
+        <p>
+      Ils passent n'importe quel nombre de paramètres qui sont transformés en
+      nombres en virgule flottante dans l'interpréteur Python.
+    </p>
+        <p>
+      Les opcodes <span class="emphasis"><em>pycall</em></span>/<span class="emphasis"><em>pycalli</em></span>,
+      <span class="emphasis"><em>pycall1</em></span>/<span class="emphasis"><em>pycall1i</em></span> ...
+      <span class="emphasis"><em>pycall8</em></span>/<span class="emphasis"><em>pycall8i</em></span> permettent
+      d'avoir de 0 à 8 résultats en fonction de leur préfixe numérique (0 est
+      omis).
+    </p>
+        <p>
+      Les opcodes <span class="emphasis"><em>pycalln</em></span>/<span class="emphasis"><em>pycallni</em></span>
+      peuvent avoir n'importe quel nombre de résultats : le nom de l'objet
+      appelable est suivi du nombre d'arguments en sortie, puis viennent la liste
+      des variables de sortie de Csound et la liste des paramètres à transmettre.
+    </p>
+        <p>
+      La valeur retournée par l'objet appelable doit être <code class="literal">None</code>
+      pour <span class="emphasis"><em>pycall</em></span> ou <span class="emphasis"><em>pycalli</em></span>, un nombre
+      en virgule flottante pour <span class="emphasis"><em>pycall1i</em></span> ou
+      <span class="emphasis"><em>pycall1i</em></span> et un tuple (de taille appropriée) de nombres
+      en virgule flottante pour les opcodes
+      <span class="emphasis"><em>pycall2</em></span>/<span class="emphasis"><em>pycall2i</em></span> ...
+      <span class="emphasis"><em>pycall8</em></span>/<span class="emphasis"><em>pycall8i</em></span> et
+      <span class="emphasis"><em>pycalln</em></span>/<span class="emphasis"><em>pycallni</em></span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm279754"></a>
+        <h2>Exemples</h2>
+        <div class="example">
+          <a id="idm279756"></a>
+          <p class="title">
+            <strong>Exemple 860. Appel d'une fonction C ou Python</strong>
+          </p>
+          <div class="example-contents">
+            <p>
+        En supposant qu'au préalable nous avons défini ou importé une fonction
+        nommée <code class="literal">get_number_from_pool</code> comme ceci :
+      </p>
+            <pre class="programlisting">
+from random import random, choice
+
+# un ensemble de 100 nombres
+pool = [i ** 1.3 for i in range(100)]
+
+def get_number_from_pool(n, p):
+    # substituer un nouveau nombre à un ancien nombre ?
+    if random() &lt; p:
+        i = choice(range(len(pool)))
+        pool[i] = n
+
+    # retourner un nombre pris aléatoirement dans l'ensemble
+    return choice(pool)</pre>
+            <p>le code d'orchestre suivant</p>
+            <pre class="programlisting">
+k2   <span class="opc">pycall1</span> "get_number_from_pool", k1, p6</pre>
+            <p>
+    donnera à <span class="emphasis"><em>k2</em></span> une valeur extraite aléatoirement d'un
+    ensemble de nombres évoluant dans le temps. On peut passer de nouveaux
+    éléments à l'ensemble et contrôler le taux de changement depuis l'orchestre.
+  </p>
+          </div>
+        </div>
+        <br class="example-break" />
+        <div class="example">
+          <a id="idm279766"></a>
+          <p class="title">
+            <strong>Exemple 861. Appel d'un objet fonctionnel</strong>
+          </p>
+          <div class="example-contents">
+            <p>
+    Une implémentation plus générique de l'exemple précédent utilise un objet
+    fonctionnel simple :
+  </p>
+            <pre class="programlisting">
+from random import random, choice
+
+class GetNumberFromPool:
+    def __init__(self, e, begin=0, end=100, step=1):
+        self.pool = [i ** e for i in range(begin, end, step)]
+
+    def __call__(self, n, p):
+        # substituer un nouveau nombre à un ancien nombre ?
+        if random() &lt; p:
+            i = choice(range(len(pool)))
+            pool[i] = n
+
+        # retourner un nombre pris aléatoirement dans l'ensemble
+        return choice(pool)
+
+get_number_from_pool1 = GetNumberFromPool(1.3)
+get_number_from_pool2 = GetNumberFromPool(1.5, 50, 250, 2)</pre>
+            <p>Alors, le code d'orchestre suivant :</p>
+            <pre class="programlisting">
+k2   <span class="opc">pycall1</span> "get_number_from_pool1", k1, p6
+k4   <span class="opc">pycall1</span> "get_number_from_pool2", k3, p7</pre>
+            <p>
+    donnera à <span class="emphasis"><em>k2</em></span> et à <span class="emphasis"><em>k4</em></span> des valeurs prises
+    aléatoirement dans l'ensemble de nombres évoluant dans le temps. On peut
+    passer de nouveaux éléments à l'ensemble (ici <span class="emphasis"><em>k1</em></span> et
+    <span class="emphasis"><em>k3</em></span> et contrôler le taux de changement (ici
+    <span class="emphasis"><em>p6</em></span> et <span class="emphasis"><em>p7</em></span>) depuis l'orchestre.
+  </p>
+            <p>
+    Comme on peut le voir, il est possible de particulariser l'initialisation
+    de l'ensemble ou de créer plusieurs ensembles.
+  </p>
+          </div>
+        </div>
+        <br class="example-break" />
+      </div>
+      <div class="refsect1">
+        <a id="idm279782"></a>
+        <h2>Crédits</h2>
+        <p>
+      Copyright (c) 2002 Maurizio Umberto Puxeddu. Tous droits réservés.
+      Certaines parties, copyright (c) 2004 et 2005 Michael Gogins.
+      Ce document a été mis à jour le 25 juillet 2004 et le 1er février
+      2005 par Michael Gogins.
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="pyassign.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="pyeval.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">pyassign Opcodes </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> pyeval Opcodes</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

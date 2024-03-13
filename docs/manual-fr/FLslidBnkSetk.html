@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>FLslidBnkSetk</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="FLslidBnkSet.html" title="FLslidBnkSet" />
+    <link rel="next" href="FLslidBnk2Set.html" title="FLslidBnk2Set" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">FLslidBnkSetk</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="FLslidBnkSet.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="FLslidBnk2Set.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="FLslidBnkSetk"></a>
+      <div class="titlepage"></div>
+      <a id="IndexFLslidBnkSetk" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">FLslidBnkSetk</span>
+        </h2>
+        <p>FLslidBnkSetk — 
+      mofidie les valeurs d'un banc de réglettes.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm114086"></a>
+        <h2>Description</h2>
+        <p>
+      Opcode du greffon widgets. Ce greffon se trouve dans le
+      répertoire des greffons et il doit être installé séparément. Les widgets
+      FLTK ne fonctionnent pas sur Mac. Le répertoire des greffons est ici :
+      <a class="ulink" href="https://github.com/csound/plugins" target="_top">
+      <em class="citetitle">https://github.com/csound/plugins</em></a>
+    </p>
+        <p>
+      <span class="emphasis"><em>FLslidBnkSetk</em></span> mofidie les valeurs d'un banc de
+      réglettes selon un ensemble de valeurs stockées dans une table.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm114093"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>FLslidBnkSetk</strong></span> ktrig, ihandle, ifn [, istartIndex, istartSlid, inumSlid]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm114097"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ihandle</em></span> - identifiant du sliderBnk (à utiliser pour
+      fixer ses valeurs).
+    </p>
+        <p>
+      <span class="emphasis"><em>ifn</em></span> - numéro d'une table contenant un ensemble de
+      valeurs à affecter à chaque réglette.
+    </p>
+        <p>
+      <span class="emphasis"><em>istartIndex</em></span> - (facultatif) indice dans la table du
+      premier élément à être évalué. La valeur par défaut est zéro.
+    </p>
+        <p>
+      <span class="emphasis"><em>istartSlid</em></span> - (facultatif) première réglette à
+      évaluer. 0 par défaut, indiquant la première réglette.
+    </p>
+        <p>
+      <span class="emphasis"><em>inumSlid</em></span> - (facultatif) nombre de réglettes à mettre
+      à jour. 0 par défaut, indiquant toutes les réglettes.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm114109"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ktrig</em></span> – la sortie de <span class="emphasis"><em>FLslidBnkSetk</em></span>
+      est un déclencheur qui indique si les réglettes doivent être mises à jour ou
+      pas. Une valeur non nulle force la mise à jour des réglettes.
+    </p>
+        <p>
+      <span class="emphasis"><em>FLslidBnkSetk</em></span> est semblable à
+      <a class="link" href="FLslidBnkSet.html" title="FLslidBnkSet"><em class="citetitle">FLslidBnkSet</em></a>
+      mais il permet de modifier les valeurs de
+      <a class="link" href="FLslidBnk.html" title="FLslidBnk"><em class="citetitle">FLslidBnk</em></a> au taux-k
+      (on peut aussi utiliser <span class="emphasis"><em>FLslidBnkSetk</em></span> avec
+      <a class="link" href="FLvslidBnk.html" title="FLvslidBnk"><em class="citetitle">FLvslidBnk</em></a>,
+      obtenant un résultat identique). Il permet aussi de relier le banc de
+      réglettes au MIDI. Si l'on utilise le MIDI (par exemple au moyen de
+      l'opcode <a class="link" href="slider8table.html" title="slider8table"><em class="citetitle">slider8table</em></a>),
+      <span class="emphasis"><em>FLslidBnkSetk</em></span> change les valeurs du banc de réglettes
+      <a class="link" href="FLslidBnk.html" title="FLslidBnk"><em class="citetitle">FLslidBnk</em></a> avec un
+      ensemble de valeurs situées dans une table. Cet opcode est ainsi capable
+      de servir de pont MIDI vers le widget
+      <a class="link" href="FLslidBnk.html" title="FLslidBnk"><em class="citetitle">FLslidBnk</em></a> lorsqu'il
+      est utilisé avec la famille d'opcodes <span class="emphasis"><em>sliderXXtable</em></span>
+      (voir l'entrée <a class="link" href="slider8table.html" title="slider8table"><em class="citetitle">slider8table</em></a>
+      pour plus d'information). Noter que, si l'on veut utiliser l'indexation
+      de table comme une courbe de réponse, il est impossible de le faire directement
+      dans la configuration <span class="emphasis"><em>iconfigtable</em></span> de
+      <a class="link" href="FLslidBnk2.html" title="FLslidBnk2"><em class="citetitle">FLslidBnk2</em></a>, lorsque
+      l'on a l'intention d'utiliser l'opcode <span class="emphasis"><em>FLslidBnkSetk</em></span>.
+      En fait, l'élément correspondant de l'élément <span class="emphasis"><em>inputTable</em></span>
+      de <span class="emphasis"><em>FLslidBnkSetk</em></span> doit être positionné en mode linéaire
+      et respecter l'intervalle de 0 à 1. Même les éléments correspondants de
+      <span class="emphasis"><em>sliderXXtable</em></span> doivent être positionnés en mode linéaire
+      dans l'intervalle normalisé. On peut indexer la table plus tard au moyen des
+      opcodes <a class="link" href="tab.html" title="tab"><em class="citetitle">tab</em></a> et
+      <a class="link" href="tb.html" title="tb"><em class="citetitle">tb</em></a>, et recadrer la sortie
+      en fonction des valeurs max et min. D'un autre côté, il est possible d'utiliser
+      une courbe de réponse linéaire ou exponentielle directement, en fixant
+      l'intervalle min-max courant ainsi que l'indicateur à la fois dans
+      l'<span class="emphasis"><em>iconfigtable</em></span> du
+      <a class="link" href="FLslidBnk2.html" title="FLslidBnk2"><em class="citetitle">FLslidBnk2</em></a>
+      correspondant et dans <span class="emphasis"><em>sliderXXtable</em></span>.
+    </p>
+        <p>
+      <span class="emphasis"><em>FLslidBnkSetk</em></span> est la version de taux-k de
+      <a class="link" href="FLslidBnk2Set.html" title="FLslidBnk2Set"><em class="citetitle">FLslidBnk2Set</em></a>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm114152"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="FLslider.html" title="FLslider"><em class="citetitle">FLslider</em></a>,
+      <a class="link" href="FLslidBnkGetHandle.html" title="FLslidBnkGetHandle"><em class="citetitle">FLslidBnkGetHandle</em></a>,
+      <a class="link" href="FLslidBnk.html" title="FLslidBnk"><em class="citetitle">FLslidBnk</em></a>,
+      <a class="link" href="FLslidBnk2.html" title="FLslidBnk2"><em class="citetitle">FLslidBnk2</em></a>,
+      <a class="link" href="FLvslidBnk.html" title="FLvslidBnk"><em class="citetitle">FLvslidBnk</em></a>,
+      <a class="link" href="FLvslidBnk2.html" title="FLvslidBnk2"><em class="citetitle">FLvslidBnk2</em></a>
+      <a class="link" href="FLslidBnkSet.html" title="FLslidBnkSet"><em class="citetitle">FLslidBnkSet</em></a>,
+      <a class="link" href="FLslidBnk2Set.html" title="FLslidBnk2Set"><em class="citetitle">FLslidBnk2Set</em></a>,
+      <a class="link" href="slider8table.html" title="slider8table"><em class="citetitle">slider8table</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm114173"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Gabriel Maldonado</p>
+        <p>Nouveau dans la version 5.06</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="FLslidBnkSet.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="FLslidBnk2Set.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">FLslidBnkSet </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> FLslidBnk2Set</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

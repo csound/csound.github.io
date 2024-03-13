@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ATSinfo</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="ATScross.html" title="ATScross" />
+    <link rel="next" href="ATSinterpread.html" title="ATSinterpread" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ATSinfo</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ATScross.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ATSinterpread.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="ATSinfo"></a>
+      <div class="titlepage"></div>
+      <a id="IndexATSinfo" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">ATSinfo</span>
+        </h2>
+        <p>ATSinfo — Lit des données de l'en-tête d'un fichier ATS.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm37220"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>atsinfo</em></span> lit des données de l'en-tête d'un fichier ATS.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm37224"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">idata <span class="command"><strong>ATSinfo</strong></span> iatsfile, ilocation</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm37228"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>iatsfile</em></span> – le numéro ATS (n dans ats.n) ou le nom
+      entre guillemets du fichier d'analyse créé avec
+      <a class="link" href="UtilityAtsa.html" title="atsa"><em class="citetitle">ATSA</em></a>.
+    </p>
+        <p>
+      <span class="emphasis"><em>ilocation</em></span> – indique quel champ de l'en-tête du fichier
+      retourner. Les données de l'en-tête donnent de l'information sur les données
+      contenues dans le reste du fichier ATS. Les valeurs possibles pour
+      <span class="emphasis"><em>ilocation</em></span> sont données dans la liste suivante :
+    </p>
+        <p>  0 - Taux d'échantillonnage (Hz)</p>
+        <p>  1 - Taille de trame (en échantillons)</p>
+        <p>  2 - Taille de fenêtre (en échantillons)</p>
+        <p>  3 - Nombre de partiels</p>
+        <p>  4 - Nombre de trames</p>
+        <p>  5 - Amplitude maximale</p>
+        <p>  6 - Fréquence maximale (Hz)</p>
+        <p>  7 - Durée (secondes)</p>
+        <p>  8 - Type du fichier ATS</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm37246"></a>
+        <h2>Exécution</h2>
+        <p>
+      Des macros peuvent améliorer la lisibilité de votre code Csound, je donne
+      mes définitions de macro ci-dessous :
+    </p>
+        <pre class="programlisting">
+            #define ATS_SAMP_RATE #0#
+            #define ATS_FRAME_SZ #1#
+            #define ATS_WIN_SZ #2#
+            #define ATS_N_PARTIALS #3#
+            #define ATS_N_FRAMES #4#
+            #define ATS_AMP_MAX #5#
+            #define ATS_FREQ_MAX #6#
+            #define ATS_DUR #7#
+            #define ATS_TYPE #8#</pre>
+        <p>
+      <span class="emphasis"><em>ATSinfo</em></span> peut être utile pour écrire des instruments
+      génériques qui fonctionneront avec plusieurs fichiers ATS, même s'ils ont
+      différentes longueurs, différents nombres de partiels, etc. L'exemple 2
+      est une simple application de cela.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm37252"></a>
+        <h2>Exemples</h2>
+        <p>
+      voici un exemple de l'opcode ATSinfo. Il utilise le fichier
+      <a class="ulink" href="examples/ATSinfo.csd" target="_top"><em class="citetitle">ATSinfo.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm37257"></a>
+          <p class="title">
+            <strong>Exemple 76. Exemple de l'opcode ATSinfo.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm37259"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-n     <span class="c1">;;;no audio out</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">;example by joachim heintz (&amp; Menno Knevel)</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="mi">1</span><span class="w">
+</span><span class="c1">;ATSA wants a mono file!</span><span class="w">
+</span>i<span class="n">res</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ atsa fox.wav fox.ats }}</span><span class="w"> </span><span class="c1">; default settings</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	
+</span>S<span class="n">file</span><span class="w">   </span><span class="o">=</span><span class="w">       </span><span class="s">"fox.ats"</span><span class="w">
+</span>i<span class="n">sr</span><span class="w">     </span><span class="nb">ATSinfo</span><span class="w"> </span>S<span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>i<span class="n">fs</span><span class="w">     </span><span class="nb">ATSinfo</span><span class="w"> </span>S<span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>i<span class="n">ws</span><span class="w">     </span><span class="nb">ATSinfo</span><span class="w"> </span>S<span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span>i<span class="n">np</span><span class="w">     </span><span class="nb">ATSinfo</span><span class="w"> </span>S<span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span>i<span class="n">nf</span><span class="w">     </span><span class="nb">ATSinfo</span><span class="w"> </span>S<span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w">
+</span>i<span class="n">ma</span><span class="w">     </span><span class="nb">ATSinfo</span><span class="w"> </span>S<span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span>i<span class="n">mf</span><span class="w">     </span><span class="nb">ATSinfo</span><span class="w"> </span>S<span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="w">
+</span>i<span class="n">d</span><span class="w">      </span><span class="nb">ATSinfo</span><span class="w"> </span>S<span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="w">
+</span>i<span class="n">ft</span><span class="w">     </span><span class="nb">ATSinfo</span><span class="w"> </span>S<span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="w">
+        </span><span class="nb">prints</span><span class="w">  </span><span class="s">{{
+*****fox.ats*********************
+0. Sample rate = </span><span class="si">%d</span><span class="s"> Hz
+1. Frame Size  = </span><span class="si">%d</span><span class="s"> samples
+2. Window Size = </span><span class="si">%d</span><span class="s"> samples
+3. contains      </span><span class="si">%d</span><span class="s"> partials
+4. contains      </span><span class="si">%d</span><span class="s"> frames
+5. Max. Ampl.  = </span><span class="si">%f</span><span class="s">
+6. Max. Freq.  = </span><span class="si">%f</span><span class="s"> Hz
+7. Duration    = </span><span class="si">%f</span><span class="s"> seconds
+8. File Type   = </span><span class="si">%d</span><span class="s">
+*********************************</span><span class="se">\\</span><span class="s">n
+}}</span><span class="p">,</span><span class="w"> </span>i<span class="n">sr</span><span class="p">,</span><span class="w"> </span>i<span class="n">fs</span><span class="p">,</span><span class="w"> </span>i<span class="n">ws</span><span class="p">,</span><span class="w"> </span>i<span class="n">np</span><span class="p">,</span><span class="w"> </span>i<span class="n">nf</span><span class="p">,</span><span class="w"> </span>i<span class="n">ma</span><span class="p">,</span><span class="w"> </span>i<span class="n">mf</span><span class="p">,</span><span class="w"> </span>i<span class="n">d</span><span class="p">,</span><span class="w"> </span>i<span class="n">ft</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> 
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm37465"></a>
+        <h2>Autres exemples</h2>
+        <div class="orderedlist">
+          <ol class="orderedlist" type="1">
+            <li class="listitem">
+              <pre class="programlisting">
+  imax_freq     <span class="opc">ATSinfo</span> "cl.ats", $ATS_FREQ_MAX</pre>
+              <p>
+          Dans l'exemple ci-dessus nous obtenons la valeur de la fréquence maximale
+          du fichier ATS "cl.ats" et nous la stockons dans imax_freq. Nous utilisons
+          la macro Csound $ATS_FREQ_MAX (définie ci-dessus), qui est équivalente au
+          nombre 6.
+        </p>
+            </li>
+            <li class="listitem">
+              <pre class="programlisting">
+  i_npartials   <span class="opc">ATSinfo</span> p4, $ATS_N_PARTIALS
+  i_dur         <span class="opc">ATSinfo</span> p4, $ATS_DUR
+  ktimepnt      <span class="opc">line</span>    0, p3, i_dur
+  aout          <span class="opc">ATSadd</span>  ktimepnt, 1, p4, 1, i_npartials</pre>
+              <p>
+          Dans l'exemple ci-dessus nous utilisons <span class="emphasis"><em>ATSinfo</em></span>
+          pour retrouver la durée et le nombre de partiels dans le fichier ATS
+          indiqué par p4. Avec cette information nous synthétisons les partiels
+          au moyen d'<span class="emphasis"><em>ATSadd</em></span>. Comme la durée et le nombre de
+          partiels ne sont pas codés en dur, nous pouvons utiliser ce code avec
+          n'importe quel fichier ATS.
+        </p>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm37481"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="ATSread.html" title="ATSread"><em class="citetitle">ATSread</em></a>, 
+      <a class="link" href="ATSreadnz.html" title="ATSreadnz"><em class="citetitle">ATSreadnz</em></a>, 
+      <a class="link" href="ATSbufread.html" title="ATSbufread"><em class="citetitle">ATSbufread</em></a>, 
+      <a class="link" href="ATScross.html" title="ATScross"><em class="citetitle">ATScross</em></a>, 
+      <a class="link" href="ATSinterpread.html" title="ATSinterpread"><em class="citetitle">ATSinterpread</em></a>, 
+      <a class="link" href="ATSpartialtap.html" title="ATSpartialtap"><em class="citetitle">ATSpartialtap</em></a>, 
+      <a class="link" href="ATSadd.html" title="ATSadd"><em class="citetitle">ATSadd</em></a>, 
+      <a class="link" href="ATSaddnz.html" title="ATSaddnz"><em class="citetitle">ATSaddnz</em></a>, 
+      <a class="link" href="ATSsinnoi.html" title="ATSsinnoi"><em class="citetitle">ATSsinnoi</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm37502"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Alex Norman</td>
+          </tr>
+          <tr>
+            <td>Seattle,Washington</td>
+          </tr>
+          <tr>
+            <td>2004</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ATScross.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ATSinterpread.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ATScross </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> ATSinterpread</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

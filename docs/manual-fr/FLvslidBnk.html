@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>FLvslidBnk</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="FLvkeybd.html" title="FLvkeybd" />
+    <link rel="next" href="FLvslidBnk2.html" title="FLvslidBnk2" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">FLvslidBnk</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="FLvkeybd.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="FLvslidBnk2.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="FLvslidBnk"></a>
+      <div class="titlepage"></div>
+      <a id="IndexFLvslidBnk" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">FLvslidBnk</span>
+        </h2>
+        <p>FLvslidBnk — 
+      Un widget FLTK contenant un banc de réglettes verticales.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm122373"></a>
+        <h2>Description</h2>
+        <p>
+      Opcode du greffon widgets. Ce greffon se trouve dans le
+      répertoire des greffons et il doit être installé séparément. Les widgets
+      FLTK ne fonctionnent pas sur Mac. Le répertoire des greffons est ici :
+      <a class="ulink" href="https://github.com/csound/plugins" target="_top">
+      <em class="citetitle">https://github.com/csound/plugins</em></a>
+    </p>
+        <p>
+      <span class="emphasis"><em>FLvslidBnk</em></span> est un widget contenant un banc de
+      réglettes verticales.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm122380"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>FLvslidBnk</strong></span> "names", inumsliders [, ioutable] [, iwidth] [, iheight] [, ix] \
+      [, iy] [, itypetable] [, iexptable] [, istart_index] [, iminmaxtable]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm122384"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em><span class="quote">« <span class="quote">names</span> »</span></em></span> -- une chaîne de caractères
+      entre guillemets contenant le nom de chaque réglette. Chaque réglette
+      peut avoir un nom différent. Chaque nom est séparé par un caractère
+      <span class="quote">« <span class="quote">@</span> »</span>, par exemple : <span class="quote">« <span class="quote">fréquence@amplitude@coupure</span> »</span>.
+      Il est possible de ne fournir aucun nom en donnant un seul espace
+      <span class="quote">« <span class="quote"> </span> »</span>. Dans ce cas, l'opcode affectera automatiquement un
+      numéro en progression ascendante comme étiquette pour chaque réglette.
+    </p>
+        <p>
+      <span class="emphasis"><em>inumsliders</em></span> -- le nombre de réglettes.
+    </p>
+        <p>
+      <span class="emphasis"><em>ioutable</em></span> (facultatif, 0 par défaut) -- numéro d'une
+      table allouée préalablement dans laquelle seront stockée les valeurs de
+      sortie de chaque réglette. Il faut s'assurer que la taille de la table
+      est suffisante pour contenir toutes les cellules de sortie, sinon Csound
+      plantera avec une erreur de segmentation. En affectant zéro à cet
+      argument, la sortie sera dirigée vers l'espace zak dans la zone de taux-k.
+      Dans ce cas, l'espace zak doit avoir été alloué au préalable avec
+      l'opcode <a class="link" href="zakinit.html" title="zakinit"><em class="citetitle">zakinit</em></a>
+      et il faut s'assurer que la taille d'allocation est suffisante pour
+      couvrir toutes les réglettes. La valeur par défaut est zéro (c'est-à-dire
+      stockage de la sortie dans l'espace zak).
+    </p>
+        <p>
+      <span class="emphasis"><em>istart_index</em></span> (facultatif, 0 par défaut) -- un
+      nombre entier indiquant un décalage des positions des cellules de sortie.
+      Il peut être positif pour permettre l'allocation en sortie de plusieurs
+      bancs de réglettes dans la même table ou dans l'espace zak. La valeur par
+      défaut est zéro (pas de décalage).
+    </p>
+        <p>
+      <span class="emphasis"><em>iminmaxtable</em></span> (facultatif, 0 par défaut) -- numéro
+      d'une table définie au préalable contenant une liste de couples min-max
+      pour chaque réglette. Une valeur de zéro signifie l'intervalle allant de
+      0 à 1 pour toutes les réglettes, sans fournir de table. La valeur par
+      défaut est zéro.
+    </p>
+        <p>
+      <span class="emphasis"><em>iexptable</em></span> (facultatif, 0 par défaut) -- numéro
+      d'une table définie au préalable contenant une liste d'identifiants (des
+      nombres entiers) fournis pour modifier le comportement de chaque réglette
+      de manière indépendante. Les identifiants peuvent avoir les valeurs
+      suivantes :
+
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>-1 -- courbe de réponse exponentielle</p>
+            </li>
+            <li class="listitem">
+              <p>0 -- réponse linéaire</p>
+            </li>
+            <li class="listitem">
+              <p>nombre &gt; 0 -- suit la courbe d'une table définie au
+        préalable pour mettre en forme la réponse de la réglette correspondante.
+        Dans ce cas, ce nombre correspond au numéro de la table.</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+
+      On peut souhaiter que toutes les réglettes du banc aient la même courbe de
+      réponse (exponentielle ou linéaire). Dans ce cas, on peut affecter -1 ou
+      0 à <span class="emphasis"><em>iexptable</em></span> sans se préocupper de définir auparavant
+      une table. La valeur par défaut est zéro (toutes les réglettes ont une
+      réponse linéaire sans avoir à fournir de table).
+    </p>
+        <p>
+      <span class="emphasis"><em>itypetable</em></span> (facultatif, 0 par défaut) -- numéro
+      d'une table définie au préalable contenant une liste d'identifiants (des
+      nombres entiers) fournis pour modifier l'aspect de chaque réglette de
+      manière indépendante. Les identifiants peuvent avoir les valeurs
+      suivantes :
+
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>0 = Réglette stylée</p>
+            </li>
+            <li class="listitem">
+              <p>1 = Réglette pleine</p>
+            </li>
+            <li class="listitem">
+              <p>3 = Réglette normale</p>
+            </li>
+            <li class="listitem">
+              <p>5 = Réglette stylée</p>
+            </li>
+            <li class="listitem">
+              <p>7 = Réglette stylée en creux</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+
+      On peut souhaiter que toutes les réglettes du banc aient le même aspect.
+      Dans ce cas, on peut affecter un nombre négatif à
+      <span class="emphasis"><em>itypetable</em></span> sans se préocupper de définir auparavant
+      une table. Les nombres négatifs ont la même signification que les
+      identifiants positifs correspondants sauf que le même aspect est affecté
+      à toutes les réglettes. On peut aussi donner un aspect aléatoire à
+      chaque réglette en affectant à <span class="emphasis"><em>itypetable</em></span> un nombre
+      négatif inférieur à -7. La valeur par défaut est 0 (toutes les réglettes
+      sont stylées, sans avoir à fournir de table).
+    </p>
+        <p>
+      On peut ajouter 20 à une valeur dans la table pour donner l'aspect
+      "plastique" à la réglette, ou soustraire 20 si l'on veut affecter la valeur
+      à tous les widgets sans définir une table (par exemple -21 pour donner
+      à toutes les réglettes le type Plastique Plein).
+    </p>
+        <p>
+      <span class="emphasis"><em>iwidth</em></span> (facultatif) -- largeur de la zone
+      rectangulaire contenant toutes les réglettes du banc, à l'exclusion des
+      étiquettes qui sont placées sous cette zone.
+    </p>
+        <p>
+      <span class="emphasis"><em>iheight</em></span> (facultatif) -- hauteur de la zone
+      rectangulaire contenant toutes les réglettes du banc, à l'exclusion des
+      étiquettes qui sont placées sous cette zone.
+    </p>
+        <p>
+      <span class="emphasis"><em>ix</em></span> (facultatif) -- position horizontale du coin
+      supérieur gauche de la zone rectangulaire contenant toutes les réglettes
+      appartenant au banc. Il faut laisser suffisamment d'espace en-dessous de
+      ce rectangle afin que les étiquettes des réglettes soient visibles.
+      En effet, les étiquettes elles-mêmes sont situées à l'extérieur de la
+      zone rectangulaire.
+    </p>
+        <p>
+      <span class="emphasis"><em>iy</em></span> (facultatif) -- position verticale du coin
+      supérieur gauche de la zone rectangulaire contenant toutes les réglettes
+      appartenant au banc. Il faut laisser suffisamment d'espace en-dessous de
+      ce rectangle afin que les étiquettes des réglettes soient visibles.
+      En effet, les étiquettes elles-mêmes sont situées à l'extérieur de la
+      zone rectangulaire.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm122436"></a>
+        <h2>Exécution</h2>
+        <p>
+      Il n'y a pas d'argument de taux-k, même si les cellules de la table en
+      sortie (ou l'espace zak) sont mis à jour au taux-k.
+    </p>
+        <p>
+      <span class="emphasis"><em>FLvslidBnk</em></span> est un widget contenant un banc de
+      réglettes verticales. On peut y mettre n'importe quel nombre de
+      réglettes (argument <span class="emphasis"><em>inumsliders</em></span>). La sortie de
+      toutes les réglettes est stockée dans une table allouée au préalable ou
+      dans l'espace zak (argument <span class="emphasis"><em>ioutable</em></span>). Il est
+      possible de déterminer la première position de la table (ou de l'espace
+      zak) dans lequel stocker la sortie de la première réglette au moyen de
+      l'argument <span class="emphasis"><em>istart_index</em></span>.
+    </p>
+        <p>
+      Chaque réglette peut avoir une étiquette individuelle placée sous elle.
+      Les étiquette sont définies par l'argument
+      <span class="emphasis"><em><span class="quote">« <span class="quote">names</span> »</span></em></span>. L'intervalle de sortie de
+      chaque réglette peut être fixé individuellement au moyen d'une table
+      externe (argument <span class="emphasis"><em>iminmaxtable</em></span>). La courbe de
+      réponse de chaque réglette peut être fixée individuellement, au moyen
+      d'une liste d'identifiants placés dans une table (argument
+      <span class="emphasis"><em>iexptable</em></span>). Il est possible de définir l'aspect de
+      chaque réglette indépendamment ou de donner le même aspect à toutes les
+      réglettes (argument <span class="emphasis"><em>itypetable</em></span>).
+    </p>
+        <p>
+      Les arguments <span class="emphasis"><em>iwidth</em></span>, <span class="emphasis"><em>iheight</em></span>,
+      <span class="emphasis"><em>ix</em></span> et <span class="emphasis"><em>iy</em></span> déterminent la largeur,
+      la hauteur, les positions horizontale et verticale de la zone rectangulaire
+      contenant les réglettes. Noter que l'étiquette de chaque réglette est
+      placée en-dessous et n'est pas inclue dans la zone rectangulaire contenant
+      les réglettes. Ainsi l'utilisateur doit laisser assez d'espace sous le
+      banc en affectant une valeur suffisante à <span class="emphasis"><em>iy</em></span> afin
+      que les étiquettes soient visibles.
+    </p>
+        <p>
+      <span class="emphasis"><em>FLvslidBnk</em></span> est identique à
+      <a class="link" href="FLslidBnk.html" title="FLslidBnk"><em class="citetitle">FLslidBnk</em></a> sauf qu'il
+      contient des réglettes verticales plutôt qu'horizontales. Comme la largeur
+      de chaque réglette est souvent petite, il est recommandé de ne laisser qu'un
+      seul espace dans la chaîne de noms (" "), ce qui fait que chaque réglette
+      sera numérotée automatiquement.
+    </p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning: IMPORTANT !">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Avertissement]" src="images/warning.png" />
+              </td>
+              <th align="left">IMPORTANT !</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Noter que les tables utilisée par <span class="emphasis"><em>FLvslidBnk</em></span> doivent
+        être crées avec l'opcode <a class="link" href="ftgen.html" title="ftgen"><em class="citetitle">ftgen</em></a>
+        et placées dans l'orchestre avant le valuateur correspondant. On ne peut
+        pas les placer dans la partition. En effet, les tables placées dans la
+        partition sont créées après l'initialisation des opcodes placés dans la
+        section d'en-tête de l'orchestre. 
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm122466"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opode FLvslidBnk. Il utilise le fichier
+      <a class="ulink" href="examples/FLvslidBnk.csd" target="_top"><em class="citetitle">FLvslidBnk.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm122471"></a>
+          <p class="title">
+            <strong>Exemple 346. Exemple de l'opode FLvslidBnk.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm122478"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">441</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span>gi<span class="n">typetable</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="w"> 
+</span>gi<span class="n">outtable</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">FLpanel</span><span class="w"> </span><span class="s">"Slider Bank"</span><span class="p">,</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="w">
+    </span><span class="c1">;Number of sliders</span><span class="w">
+    </span>i<span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="w">
+    </span><span class="c1">; Table to store output</span><span class="w">
+    </span>i<span class="n">outtable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gi<span class="n">outtable</span><span class="w">
+    </span><span class="c1">; Width of the slider bank in pixels</span><span class="w">
+    </span>i<span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">350</span><span class="w">
+    </span><span class="c1">; Height of the slider in pixels</span><span class="w">
+    </span>i<span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">160</span><span class="w">
+    </span><span class="c1">; Distance of the left edge of the slider</span><span class="w">
+    </span><span class="c1">; from the left edge of the panel</span><span class="w">
+    </span>i<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="w">
+    </span><span class="c1">; Distance of the top edge of the slider </span><span class="w">
+    </span><span class="c1">; from the top edge of the panel</span><span class="w">
+    </span>i<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="c1">; Table containing fader types</span><span class="w">
+    </span>i<span class="n">typetable</span><span class="w">  </span><span class="o">=</span><span class="w"> </span>gi<span class="n">typetable</span><span class="w">
+    </span><span class="nb">FLvslidBnk</span><span class="w"> </span><span class="s">"1@2@3@4@5@6@7@8@9@10@11@12@13@14@15@16"</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>i<span class="n">outtable</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>i<span class="n">width</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>i<span class="n">height</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>i<span class="n">x</span><span class="w"> </span>\<span class="w">
+      </span><span class="p">,</span><span class="w"> </span>i<span class="n">y</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>i<span class="n">typetable</span><span class="w">
+    </span><span class="nb">FLvslidBnk</span><span class="w"> </span><span class="s">" "</span><span class="p">,</span><span class="w"> </span>i<span class="n">num</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>i<span class="n">outtable</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>i<span class="n">width</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>i<span class="n">height</span><span class="w"> </span><span class="p">,</span><span class="w"> </span>i<span class="n">x</span><span class="w"> </span>\<span class="w">
+      </span><span class="p">,</span><span class="w"> </span>i<span class="n">y</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">23</span><span class="w">
+</span><span class="c1">; End of panel contents</span><span class="w">
+</span><span class="nb">FLpanelEnd</span><span class="w">
+</span><span class="c1">; Run the widget thread!</span><span class="w">
+</span><span class="nb">FLrun</span><span class="w">
+
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span><span class="c1">;Dummy instrument</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="c1">; Instrument 1 will play a note for 1 hour.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3600</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm122770"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="FLslider.html" title="FLslider"><em class="citetitle">FLslider</em></a>,
+      <a class="link" href="FLslidBnk.html" title="FLslidBnk"><em class="citetitle">FLslidBnk</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm122777"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Gabriel Maldonado</p>
+        <p>Nouveau dans la version 5.06</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="FLvkeybd.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="FLvslidBnk2.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">FLvkeybd </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> FLvslidBnk2</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

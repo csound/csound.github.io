@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Support MIDI en temps réel</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="PartOpcodesOverview.html" title="Partie II. Vue d'ensemble des opcodes" />
+    <link rel="prev" href="PitchTuning.html" title="Opcodes de hauteurs" />
+    <link rel="next" href="MidiInput.html" title="Entrée MIDI" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Support MIDI en temps réel</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="PitchTuning.html">Précédent</a> </td>
+          <th width="60%" align="center">Partie II. Vue d'ensemble des opcodes</th>
+          <td width="20%" align="right"> <a accesskey="n" href="MidiInput.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="chapter">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="MidiTop"></a>Support MIDI en temps réel</h2>
+          </div>
+        </div>
+      </div>
+      <p>
+    Csound supporte les entrées et les sorties MIDI en temps réel, ainsi que les entrées depuis les fichiers
+    MIDI. L'entrée MIDI en temps réel est activée au moyen de l'option de ligne de commande
+    <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusUpperM"><em class="citetitle">-M</em></a>
+    (ou <span class="emphasis"><em>--midi-device</em></span>=PERIPHERIQUE). Pour une entrée sur un seul port,
+    il faut spécifier le numéro ou le nom de périphérique après le <span class="emphasis"><em>-M</em></span>.
+    Pour une entrée sur plusieurs ports (actuellement seulement avec le module PortMidi),
+    il faut utiliser 'a' ou 'm'. Par exemple, pour utiliser le périphérique numéro 2,
+    on utilisera quelque chose comme :
+  </p>
+      <div class="literallayout">
+        <p>csound -M2 monmiditr.csd</p>
+      </div>
+      <p>
+    On peut trouver les périphériques disponibles en lançant Csound avec l'option --midi-devices :
+  </p>
+      <div class="literallayout">
+        <p>csound --midi-devices</p>
+      </div>
+      <p>
+    A partir de la version 6.14, le module PortMidi (voir ci-dessous pour une
+    liste de tous les modules) permet d'associer des ports multiples à des
+    canaux d'ordre plus élevé. En utilisant le nom de périphérique 'm', Csound
+    prend ses entrées des périphériques MIDI existants dans le système et les
+    associera à (N+1)*canal, où N est le numéro de périphérique dans la liste de
+    PortMidi et canal est le canal d'entrée d'origine du périphérique.
+    Alternativement, le nom de périphérique 'a' écoute sur toutes les entrées
+    mais ne fait pas d'association avec des canaux d'ordre plus élevé.
+  </p>
+      <p>
+    La sortie MIDI en temps réel est activée au moyen de
+    <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusUpperQ"><em class="citetitle">-Q</em></a>, avec un numéro ou un nom de
+    périphérique comme c'est montré ci-dessus.
+  </p>
+      <p>
+    Vous pouvez aussi charger un fichier MIDI en utilisant l'option de ligne de commande
+    <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusUpperF"><em class="citetitle">-F</em></a> ou
+    <span class="emphasis"><em>--midifile</em></span>=FICHIER. Le fichier MIDI est lu en temps réel, et se comporte comme
+    s'il était joué ou reçu en temps réel. Ainsi Csound ne sait pas si l'entrée MIDI vient
+    d'un fichier MIDI ou directement d'une interface MIDI.
+  </p>
+      <p>
+    Une fois l'entrée et/ou la sortie MIDI activée(s), les opcodes comme
+    <a class="link" href="MidiInput.html" title="Entrée MIDI"><em class="citetitle">MIDI Input</em></a> et
+    <a class="link" href="MidiOutput.html" title="Sortie de message MIDI"><em class="citetitle">MIDI Output</em></a> seront effectifs.
+  </p>
+      <p>
+    Quand l'entrée MIDI est activée (avec -M ou -F), chaque message de <span class="emphasis"><em>noteon</em></span> entrant
+    génèrera un évènement de note pour un instrument qui a le même numéro que le canal de l'évènement
+    (cela signifie que les instruments contrôlés par le MIDI sont polyphoniques
+    par défaut, car chaque note génèrera une nouvelle instance de l'instrument).
+    Si l'on a qu'un seul instrument, Csound travaille en mode omni, c'est-à-dire qu'il
+    répond à tous les canaux au sein de cet instrument unique. Si l'on a plusieurs
+    instruments numérotés de 1 à 16, alors par défaut instr 1 -&gt; canal 1, instr 2
+    -&gt; canal 2, à moins que l'on change la répartition (voir <a class="link" href="massign.html" title="massign"><em class="citetitle">massign</em></a> et
+    <a class="link" href="pgmassign.html" title="pgmassign"><em class="citetitle">pgmassign</em></a> pour changer
+    ce comportement). Pour un sel port en entrée, si l'on a plusieurs instruments, mais que instr N manque
+    entre 1 et 16, canal N sera dirigé par défaut sur l'instrument ayant le numéro
+    le plus bas.
+  </p>
+      <p>
+    Voir les opcodes pour
+    l'<a class="link" href="MidiInterop.html" title="Opcodes pour l'interopérabilité MIDI/partition"><em class="citetitle">Interopérabilité MIDI/Partition</em></a> pour savoir
+    comment concevoir des instruments utilisables depuis une partition ou pilotés par le MIDI.
+  </p>
+      <p>
+    Plusieurs modules MIDI en temps réel sont disponibles, et il faut utiliser l'option
+    <span class="emphasis"><em>-+rtmidi</em></span> (voir
+    <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusPlusRtmidi"><em class="citetitle">-+rtmidi</em></a>), pour spécifier le
+    module. Le module par défaut est portmidi qui fournit des E/S MIDI adéquates sur toutes les plates-formes,
+    cependant, pour des performances améliorées et plus fiables, des modules spécifiques à certaines
+    plates-formes sont également fournis.
+  </p>
+      <p>
+    Actuellement les modules midi disponibles sont :
+  </p>
+      <div class="itemizedlist">
+        <ul class="itemizedlist" style="list-style-type: disc; ">
+          <li class="listitem">
+            <p><span class="emphasis"><em>portmidi</em></span> - Pour utiliser le système portmidi (sur toutes les
+      plates-formes). C'est le réglage par défaut et il permet les entrées multi-ports
+      (avec 'm' ou 'a' comme nom de périphérique.</p>
+          </li>
+          <li class="listitem">
+            <p><span class="emphasis"><em>alsa</em></span> - Pour utiliser le système midi ALSA (seulement sur
+      Linux).</p>
+          </li>
+          <li class="listitem">
+            <p><span class="emphasis"><em>jack</em></span> - Pour utiliser le système midi Jack.</p>
+          </li>
+          <li class="listitem">
+            <p><span class="emphasis"><em>winmme</em></span> - Pour utiliser le système windows MME (seulement sur
+      Windows).</p>
+          </li>
+          <li class="listitem">
+            <p><span class="emphasis"><em>virtual</em></span> - Pour utiliser un clavier virtuel graphique (voir ci-dessous)
+      comme entrée MIDI (sur toutes les plates-formes)</p>
+          </li>
+        </ul>
+      </div>
+      <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Tip">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Astuce]" src="images/tip.png" />
+            </td>
+            <th align="left">Astuce</th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>Lors de son exécution, Csound traite la partition puis se termine. S'il n'y a pas
+      d'évènements dans la partition, Csound s'exécute indéfiniment. Si l'on désire n'utiliser
+      que des évèments MIDI au lieu des évènements de partition et que l'on connaît la durée
+      d'exécution désirée, il faut demander à Csound
+      de s'exécuter pendant cette durée au moyen d'une
+      <a class="link" href="f.html" title="Instruction f (ou instruction de table de fonction)"><em class="citetitle">instruction f</em></a> comme "f 0 360".
+    </p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="section">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="MidiVirtual"></a>Clavier virtuel MIDI</h2>
+            </div>
+          </div>
+        </div>
+        <p>
+    </p>
+        <div class="mediaobject">
+          <img src="images/virtualkeyboard.png" alt="[Clavier virtuel MIDI]" />
+          <div class="caption">
+            <p>Clavier virtuel MIDI.</p>
+          </div>
+        </div>
+        <p>
+  </p>
+        <p>
+    Le clavier virtuel est dans le greffon des widgets. Ce code fait partie du
+    répertoire des greffons et doit être installé séparément. Ce widget FLTK ne
+    fonctionne pas sur Mac. Le répertoire des greffons est ici :
+    <a class="ulink" href="https://github.com/csound/plugins" target="_top">
+    <em class="citetitle">https://github.com/csound/plugins</em></a>
+  </p>
+        <p>
+    Le module du clavier virtuel MIDI (activé par l'option -+rtmidi=virtual sur la ligne de commande)
+    fournit un moyen d'envoyer des informations MIDI en temps réel à Csound sans avoir besoin d'un
+    périphérique MIDI. Il peut envoyer des informations de note, des changements de contrôle, des
+    changements de banque et de programme sur un canal spécifié. L'information MIDI en provenance du
+    clavier virtuel est traitée par Csound exactement de la même manière que si elle venait d'autres
+    pilotes MIDI, si bien que si votre orchestre Csound est conçu pour travailler avec des périphériques
+    matériels MIDI, cela marchera aussi.
+  </p>
+        <p>
+    Le clavier virtuel utilise l'option de périphérique (-M) pour récupérer le nom d'un fichier de
+    mappage du clavier. Comme tous les pilotes MIDI, celui-ci  nécessite un périphérique pour être activé.
+    Si l'on désire seulement utiliser les réglages par défaut du clavier, il suffit de passer 0
+    (c'est-à-dire -M0). Si au lieu de 0 un nom de fichier est donné, le clavier essaiera de charger le
+    fichier pour le mappage du clavier. Si le fichier n'a pas pu être ouvert ou lu correctement, les
+    réglages par défaut seront utilisés.
+  </p>
+        <p>
+    Les fichiers de mappage du clavier permettent à l'utilisateur de personnaliser le nom et le numéro des
+    banques ainsi que le nom et le numéro des programmes d'une banque. L'exemple suivant de mappage de
+    clavier (nommé keyboard.map) a des commentaires intégrés sur le format de fichier. Ce fichier est
+    aussi disponible dans la distribution des sources de Csound dans le répertoire InOut/virtual_keyboard.
+  </p>
+        <pre class="programlisting">
+# Carte de Personnalisation du clavier pour le clavier virtuel
+# Steven Yi
+#
+# USAGE
+#
+# Lors de l'utilisation du clavier virtuel, vous pouvez fournir un nom de fichier
+# pour un mappage des banques et des programmes via l'option -M, par exemple :
+#
+# csound -+rtmidi=virtual -Mkeyboard.map mon_projet.csd
+#
+# INFORMATION SUR LE FORMAT
+#
+# -les lignes commençant par '#' sont des commentaires
+# -les lignes avec [] commencent les définitions d'une nouvelle banque,
+#  les contenus sont numBanque=nomBanque, avec numBanque=[1,16384]
+# -les lignes suivant les instructions de banque sont des définitions de programme
+#  dans le format numProgramme=nomProgramme, avec numProgramme=[1,128]
+# -les numéros de banque et de programme sont définis dans ce fichier
+#  en commençant à 1, mais ils sont convertis en valeurs midi (commençant
+#  à 0) lorsqu'ils sont lus
+#
+# NOTES
+#
+# -si une définition de banque invalide est trouvée, toutes les
+#  définitions de programme qui suivent seront ignorées jusqu'à ce
+#  qu'une nouvelle définition de banque valide soit trouvée
+# -si une définition valide de banque sans programmes valides est
+#  trouvée, elle prendra par défaut les définitions de programme
+#  General MIDI
+# -si une définition de programme invalide est trouvée, elle sera
+#  ignorée
+
+[1=Ma Banque]
+1=Mon Patch de Test 1
+2=Mon Patch de Test 2
+30=Mon Patch de Test 30
+
+[2=Ma Banque2]
+1=Mon Patch de Test 1(banque2)
+2=Mon Patch de Test 2(banque2)
+30=Mon Patch de Test 30(banque2)
+</pre>
+        <p>
+    Les dix réglettes du haut sont affectées par défaut aux contrôleurs MIDI numéro 1-10, mais on peut
+    les changer à volonté. Les numéros de contrôleur et les valeurs de chaque réglette sont fixés par
+    canal, si bien que l'on peut utiliser différents réglages et valeurs pour chaque canal.
+  </p>
+        <p>
+    Par défaut il y a 128 banques et pour chaque banque 128 patches réglés par défaut sur les noms
+    General Midi. Le standard de banque MIDI utilise une résolution sur 14 bit pour supporter 16384
+    banques possibles, mais les numéros de banque par défaut sont 0-127. Pour utiliser des valeurs
+    supérieures à 127, il faut utiliser un mappage de clavier personnalisé et fixer la valeur du
+    numéro de banque désiré pour le nom de la banque. Le clavier virtuel transmettra correctement
+    le numéro de banque comme MSB et LSB avec les contrôleurs 0 et 32.
+  </p>
+        <p>
+    Outre l'entrée disponible par l'interaction avec la GUI via la souris, on peut aussi déclencher les
+    notes MIDI à partir du clavier ASCII quand la fenêtre du clavier virtuel a le focus. L'arrangement
+    est organisé à la manière d'un traceur et offre deux octaves et une tierce majeure, en partant du
+    do médiant (note MIDI 60). La correspondance entre le clavier ASCII et les valeurs de note MIDI
+    est donnée dans la table suivante.
+  </p>
+        <div class="table">
+          <a id="idm15605"></a>
+          <p class="title">
+            <strong>Tableau 5. Valeurs des notes MIDI du clavier ASCII</strong>
+          </p>
+          <div class="table-contents">
+            <table class="table" summary="Valeurs des notes MIDI du clavier ASCII" border="1">
+              <colgroup>
+                <col />
+                <col />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Touche</th>
+                  <th>Valeur MIDI</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>z</td>
+                  <td>60</td>
+                </tr>
+                <tr>
+                  <td>s</td>
+                  <td>61</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>62</td>
+                </tr>
+                <tr>
+                  <td>d</td>
+                  <td>63</td>
+                </tr>
+                <tr>
+                  <td>c</td>
+                  <td>64</td>
+                </tr>
+                <tr>
+                  <td>v</td>
+                  <td>65</td>
+                </tr>
+                <tr>
+                  <td>g</td>
+                  <td>66</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>67</td>
+                </tr>
+                <tr>
+                  <td>h</td>
+                  <td>68</td>
+                </tr>
+                <tr>
+                  <td>n</td>
+                  <td>69</td>
+                </tr>
+                <tr>
+                  <td>j</td>
+                  <td>70</td>
+                </tr>
+                <tr>
+                  <td>m</td>
+                  <td>71</td>
+                </tr>
+                <tr>
+                  <td>q</td>
+                  <td>72</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>73</td>
+                </tr>
+                <tr>
+                  <td>w</td>
+                  <td>74</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>75</td>
+                </tr>
+                <tr>
+                  <td>e</td>
+                  <td>76</td>
+                </tr>
+                <tr>
+                  <td>r</td>
+                  <td>77</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>78</td>
+                </tr>
+                <tr>
+                  <td>t</td>
+                  <td>79</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>80</td>
+                </tr>
+                <tr>
+                  <td>y</td>
+                  <td>81</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>82</td>
+                </tr>
+                <tr>
+                  <td>u</td>
+                  <td>83</td>
+                </tr>
+                <tr>
+                  <td>i</td>
+                  <td>84</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>85</td>
+                </tr>
+                <tr>
+                  <td>o</td>
+                  <td>86</td>
+                </tr>
+                <tr>
+                  <td>0</td>
+                  <td>87</td>
+                </tr>
+                <tr>
+                  <td>p</td>
+                  <td>88</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <br class="table-break" />
+        <p>
+      Voici un exemple de l'utilisation du clavier virtuel MIDI. Il utilise le fichier
+      <a class="ulink" href="examples/virtual.csd" target="_top"><em class="citetitle">virtual.csd</em></a>.
+ </p>
+        <div class="refsect1">
+          <a id="idm15703"></a>
+          <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span><span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in     Virtual MIDI    -M0 is needed anyway</span>
+-odac           -iadc    -+rtmidi=virtual -M0
+<span class="nt">&lt;/CsOptions&gt;</span>
+
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+</span><span class="c1">; By Mark Jamerson 2007</span><span class="w">
+
+</span><span class="vg">sr</span><span class="o">=</span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="o">=</span><span class="mi">10</span><span class="w">
+</span><span class="vg">nchnls</span><span class="o">=</span><span class="mi">2</span><span class="w">
+
+</span><span class="nb">massign</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="w">
+</span><span class="nb">prealloc</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">  </span><span class="c1">;Midi FM synth </span><span class="w">
+
+</span>i<span class="n">note</span><span class="w"> </span><span class="nb">cpsmidi</span><span class="w">
+</span>i<span class="n">veloc</span><span class="w"> </span><span class="nb">ampmidi</span><span class="w"> </span><span class="mi">10000</span><span class="w">
+</span>i<span class="n">dur</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+    </span><span class="nb">xtratim</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span>k<span class="n">gate</span><span class="w"> </span><span class="nb">oscil</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="w">
+</span>a<span class="n">noise</span><span class="w"> </span><span class="nb">noise</span><span class="w"> </span><span class="mi">100</span><span class="o">*</span>i<span class="n">note</span><span class="p">,</span><span class="mf">.99</span><span class="w">
+</span>a<span class="n">cps</span><span class="w">  </span><span class="nb">samphold</span><span class="w"> </span>a<span class="n">noise</span><span class="p">,</span>k<span class="n">gate</span><span class="w">
+</span>a<span class="n">osc</span><span class="w"> </span><span class="nb">oscili</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>a<span class="n">cps</span><span class="p">,</span><span class="mi">1</span><span class="w">
+</span>a<span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">osc</span><span class="w">
+
+</span><span class="c1">; Use controller 7 to control volume</span><span class="w">
+</span>k<span class="n">vol</span><span class="w"> </span><span class="nb">ctrl7</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">outs</span><span class="w"> </span>k<span class="n">vol</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>a<span class="n">out</span><span class="p">,</span><span class="w"> </span>k<span class="n">vol</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>a<span class="n">out</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="mi">0</span><span class="w"> </span><span class="mi">3600</span><span class="w">
+</span><span class="nb">f</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+</span><span class="nb">f</span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8</span><span class="w">
+</span><span class="nb">f</span><span class="mi">3</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="mf">.6</span><span class="w"> </span><span class="mf">.3</span><span class="w"> </span><span class="mf">.2</span><span class="w"> </span><span class="mf">.5</span><span class="w">
+
+</span><span class="nb">e</span><span class="w"> 
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+        </div>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="PitchTuning.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="PartOpcodesOverview.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="MidiInput.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Opcodes de hauteurs </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Entrée MIDI</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

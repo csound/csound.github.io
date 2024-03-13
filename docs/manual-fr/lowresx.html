@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>lowresx</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="lowres.html" title="lowres" />
+    <link rel="next" href="lpcanal.html" title="lpcanal" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">lowresx</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="lowres.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="lpcanal.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="lowresx"></a>
+      <div class="titlepage"></div>
+      <a id="IndexLowresx" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">lowresx</span>
+        </h2>
+        <p>lowresx — 
+      Simule des couches de filtres passe-bas à résonance connectés en série.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm187295"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>lowresx</em></span> est équivalent à plusieurs étages de
+      <a class="link" href="lowres.html" title="lowres"><em class="citetitle">lowres</em></a> connectés en
+      série, avec les mêmes arguments.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm187301"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>lowresx</strong></span> asig, xcutoff, xresonance [, inumlayer] [, iskip]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm187305"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>inumlayer</em></span> -- nombre d'éléments dans une aggrégation
+      <span class="emphasis"><em>lowresx</em></span>. La valeur par défaut est 4. Il n'y a pas de
+      maximum.
+    </p>
+        <p>
+      <span class="emphasis"><em>iskip</em></span> -- disposition initiale de la mémoire interne.
+      Une valeur de zéro efface la mémoire ; une valeur différente de zéro permet
+      de maintenir l'information précédente. La valeur par défaut est 0.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm187312"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>asig</em></span> -- signal d'entrée
+    </p>
+        <p>
+      <span class="emphasis"><em>xcutoff</em></span> -- fréquence de coupure du filtre
+    </p>
+        <p>
+      <span class="emphasis"><em>xresonance</em></span> -- quantité de résonance
+    </p>
+        <p>
+      <span class="emphasis"><em>lowresx</em></span> est équivalent à plusieurs étages de
+      <a class="link" href="lowres.html" title="lowres"><em class="citetitle">lowres</em></a> connectés en
+      série, avec les mêmes arguments. Plus il y a de filtres dans l'aggrégation
+      et plus la coupure est raide. C'est plus rapide que d'utiliser un plus
+      grand nombre d'instances de <span class="emphasis"><em>lowres</em></span> dans un orchestre
+      de Csound parce que ne sont nécessaires qu'une seule initialisation et qu'un
+      cycle k à la fois, et que la boucle audio est entièrement contenue dans la
+      mémoire cache du processeur. Basé sur un orchestre par Hans Mikelson.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm187325"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode lowresx. Il utilise le fichier
+      <a class="ulink" href="examples/lowresx.csd" target="_top"><em class="citetitle">lowresx.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm187330"></a>
+          <p class="title">
+            <strong>Exemple 542. Exemple de l'opcode lowresx.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm187337"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o lowresx.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>k<span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">numlayer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="w">
+
+</span>k<span class="n">env</span><span class="w"> </span><span class="nb">linseg</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.8</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> 	</span><span class="c1">;envelope</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">vco</span><span class="w"> </span><span class="mf">.3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>k<span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="mi">220</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">			</span><span class="c1">;sawtooth</span><span class="w">
+</span>k<span class="n">cut</span><span class="w"> </span><span class="nb">line</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="w">				</span><span class="c1">;note: kcut is not in Hz</span><span class="w">
+</span>a<span class="n">lx</span><span class="w">  </span><span class="nb">lowresx</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>k<span class="n">cut</span><span class="p">,</span><span class="w"> </span>k<span class="n">res</span><span class="p">,</span><span class="w"> </span>i<span class="n">numlayer</span><span class="w">	</span><span class="c1">;note: kres is not in dB</span><span class="w">
+</span>a<span class="n">out</span><span class="w"> </span><span class="nb">balance</span><span class="w"> </span>a<span class="n">lx</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">				</span><span class="c1">;avoid very loud sounds</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">out</span><span class="p">,</span><span class="w"> </span>a<span class="n">out</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">;sine wave</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">20</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm187541"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="lowres.html" title="lowres"><em class="citetitle">lowres</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm187546"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Gabriel Maldonado (adapté par John ffitch)</td>
+          </tr>
+          <tr>
+            <td>Italie</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 3.49 de Csound.</p>
+        <p>Paramètres de taux audio introduits dans la version 6.02</p>
+        <p>Octobre 2013.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="lowres.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="lpcanal.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">lowres </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> lpcanal</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

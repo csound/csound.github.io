@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>lpcfilter</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="lpcanal.html" title="lpcanal" />
+    <link rel="next" href="lpf18.html" title="lpf18" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">lpcfilter</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="lpcanal.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="lpf18.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="lpcfilter"></a>
+      <div class="titlepage"></div>
+      <a id="IndexLpcfilter" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">lpcfilter</span>
+        </h2>
+        <p>lpcfilter — 
+      Filtre tout-pôle par prédiction linéaire sur un flux.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm188047"></a>
+        <h2>Description</h2>
+        <p>
+      Cet opcode réalise un filtre tout-pôle dont les coefficients sont obtenus
+      à partir d'une analyse par prédiction linéaire sur un flux. Deux
+      versions existent, l'une prenant pour entrée un signal audio, et l'autre
+      prenant pour entrée une table de fonction.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm188050"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>lpcfilter</strong></span> asig, asrc, kflg,
+    kprd, isiz, iord[,iwin] </pre>
+        <pre class="synopsis">ares <span class="command"><strong>lpcfilter</strong></span> asig, koff, kflg,
+    ifn, isiz, iord[,iwin] </pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm188056"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>isiz</em></span> -- taille d'une trame d'entrée lpc en
+      échantillons.
+    </p>
+        <p>
+      <span class="emphasis"><em>iord</em></span> -- ordre du prédicteur linéaire.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifn</em></span> -- table de fonction de la source de l'analyse
+      LPC du flux.
+    </p>
+        <p>
+      <span class="emphasis"><em>iwin</em></span> -- numéro d'une table de fonction de fenêtrage
+      (facultatif).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm188066"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ares</em></span> -- sortie.
+    </p>
+        <p>
+      <span class="emphasis"><em>asig</em></span> - entré audio.
+    </p>
+        <p>
+      <span class="emphasis"><em>asrc</em></span> -- signal source de l'analyse LPC sur flux.
+    </p>
+        <p>
+      <span class="emphasis"><em>kflg</em></span> -- indicateur de calcul ; les valeurs non nulles
+      activent l'analyse par prédiction linéaire remplaçant les coefficients du
+      filtre, alors que zéro la désactive, gardant les coefficients courants du
+      filtre.
+    </p>
+        <p>
+      <span class="emphasis"><em>kprd</em></span> -- période de l'analyse en échantillons,
+      déterminant la fréquence de renouvellement des coefficients.
+     </p>
+        <p>
+       <span class="emphasis"><em>koff</em></span> -- décalage de la position dans la table de
+       fonction, déterminant la position du début de la trame d'analyse.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm188080"></a>
+        <p>
+      Cet opcode fait partie d'une suite d'opcodes de prédiction linéaire sur
+      un flux. Il analyse un signal d'entrée, soit une entrée audio, ou stocké
+      dans une table de fonction, et produit un ensemble de coefficients pour
+      un filtre tout-pôle qui modélise l'enveloppe spectrale du signal. Ce
+      filtre est ensuite appliqué à une entrée arbitraire, produisant comme
+      résultat une synthèse croisée.
+    </p>
+        <p>
+      Les paramètres d'analyse fondamentaux sont la taille de trame en entrée
+      et l'ordre du filtre. Des trames d'entrée plus longues produiront un
+      résultat plus précis en termes de résolution en fréquence, mais induiront
+      aussi plus de calculs. Ceci est dû au calcul de la fontion
+      d'autocorrélation, qui est utilisée ensuite dans le calcul des
+      coefficients. Cette partie est plus efficace et dépend seulement de
+      l'ordre de la prédiction linéaire. qui est aussi le nombre de coefficients
+      calculés. Les ordres typiques de lp peuvent aller de 30 à 100
+      coefficients, mais on peut utiliser de plus grandes valeurs.
+    </p>
+        <p>
+      Si le signal source LPC est dérivé d'une entrée audio, alors le calcul
+      des coefficients dépend de deux paramètres, <span class="emphasis"><em>kflg</em></span> et
+      <span class="emphasis"><em>kprd</em></span>. Le premier est un bouton on/off qui détermine
+      si les coefficients sont remplacés par de nouveaux coefficients calculés
+      ou s'ils gardent leur dernière valeur. L'autre détermine la fréquence des
+      analyses, en fixant un intervalle temporel (en échantillons) entre les
+      calculs de nouveaux coefficients. Cela va de coefficients étant remplacés
+      à chaque échantillon, à jamais remplacés (si la période est plus grande
+      que la durée de synthèse). Des analyses se chevauchant se produiront si
+      la valeur de <span class="emphasis"><em>kprd</em></span> est inférieure à la taille de
+      l'entrée. La diminution de l'espacement des analyses produira aussi une
+      augmentation des besoins de calcul.
+    </p>
+        <p>
+      Si le signal source LPC est dérivé d'une table de fonction, alors
+      <span class="emphasis"><em>kflg</em></span> détermine s'il faut effectuer une analyse ou
+      non (1 ou 0). La valeur de <span class="emphasis"><em>koff</em></span> est ensuite utilisée
+      comme décalage (en échantillons) dans la table de fonction déterminant la
+      position de la trame d'analyse. Par exemple, si <span class="emphasis"><em>kflg</em></span>
+      est fixé en permanence à 1 et <span class="emphasis"><em>koff</em></span> est fixé à
+      <span class="emphasis"><em>ksmps</em></span>, alors à chaque cycle-k une trame d'analyse
+      sera prise des positions successives dans la table de fonction. Le
+      changement de <span class="emphasis"><em>koff</em></span> à moins d'échantillons produira
+      un résultat étiré dans le temps alors qu'en l'augmentant on compressera le
+      temps.
+    </p>
+        <p>
+      Le signal une fois extrait, soit de l'entrée audio, soit d'une table de
+      fonction, il peut être facultativement fenêtré si une table de fonction
+      est fournie. Bien que ce soit facultatif, c'est une procédure recommandée
+      (GEN20 peut fournir les fenêtres les plus communes). Le signal est ensuite
+      analysé et les coefficients sont remplacés. Le filtre tout-pôle est
+      calculé comme une convolution directe dans le domaine temporel.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm188095"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode lpcfilter qui utilise un signal d'entrée audio
+      comme source lpc. Il utilise le fichier
+       <a class="ulink" href="examples/lpcfilter.csd" target="_top"><em class="citetitle">lpcfilter.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm188100"></a>
+          <p class="title">
+            <strong>Exemple 545. Exemple de l'opcode lpcfilter.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm188107"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+-odac -d
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span>gi<span class="n">fw</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span>a<span class="n">1</span><span class="w"> </span><span class="nb">diskin</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="w">
+</span>a<span class="n">2</span><span class="w"> </span><span class="nb">diskin</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="w">
+</span>a<span class="n">3</span><span class="w"> </span><span class="nb">lpcfilter</span><span class="w"> </span>a<span class="n">2</span><span class="p">,</span>a<span class="n">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span>gi<span class="n">fw</span><span class="w">
+</span>a<span class="n">3</span><span class="w"> </span><span class="nb">dcblock2</span><span class="w"> </span>a<span class="n">3</span><span class="w">
+</span><span class="nb">out</span><span class="w"> </span>a<span class="n">3</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">30</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+        <p>
+      Voici un autre exemple de l'opcode lpcfilter qui utilise une table de
+      fonction comme source lpc. Il utilise le fichier
+      <a class="ulink" href="examples/lpcfilter-2.csd" target="_top"><em class="citetitle">lpcfilter-2.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm188227"></a>
+          <p class="title">
+            <strong>Exemple 546. Un autre exemple de l'opcode lpcfilter.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm188234"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+-odac -d
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span>gi<span class="n">fn</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s">"fox.wav"</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="w">
+</span>gi<span class="n">fw</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span>k<span class="n">off</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>k<span class="n">ts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w"> </span><span class="c1">// timescale</span><span class="w">
+</span>a<span class="n">1</span><span class="w"> </span><span class="nb">diskin</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="w">
+</span>a<span class="n">3</span><span class="w"> </span><span class="nb">lpcfilter</span><span class="w"> </span>a<span class="n">1</span><span class="p">,</span>k<span class="n">off</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span>gi<span class="n">fn</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="vg">ksmps</span><span class="p">,</span>gi<span class="n">fw</span><span class="w">
+</span>k<span class="n">off</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="vg">ksmps</span><span class="o">*</span>k<span class="n">ts</span><span class="w">
+</span><span class="k">if</span><span class="w"> </span>k<span class="n">off</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="nb">ftlen</span><span class="p">(</span>gi<span class="n">fn</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">
+ </span>k<span class="n">off</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="k">endif</span><span class="w"> 
+</span>a<span class="n">3</span><span class="w"> </span><span class="nb">dcblock</span><span class="w"> </span>a<span class="n">3</span><span class="w">
+</span><span class="nb">out</span><span class="w"> </span>a<span class="n">3</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mf">.75</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mf">1.5</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm188422"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="lpcanal.html" title="lpcanal"><em class="citetitle">lpcanal</em></a>
+      <a class="link" href="allpole.html" title="allpole"><em class="citetitle">allpole</em></a>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="lpcanal.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="lpf18.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">lpcanal </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> lpf18</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>resony</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="resonxk.html" title="resonxk" />
+    <link rel="next" href="resonz.html" title="resonz" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">resony</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="resonxk.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="resonz.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="resony"></a>
+      <div class="titlepage"></div>
+      <a id="IndexResony" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">resony</span>
+        </h2>
+        <p>resony — 
+      Un banc de filtres passe-bande du second ordre, connectés en parallèle.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm288833"></a>
+        <h2>Description</h2>
+        <p>
+      Un banc de filtres passe-bande du second ordre, connectés en parallèle.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm288836"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>resony</strong></span> asig, kbf, kbw, inum, ksep [, isepmode] [, iscl] [, iskip]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm288840"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>inum</em></span> -- nombre de filtres
+    </p>
+        <p>
+      <span class="emphasis"><em>isepmode</em></span> (facultatif, 0 par défaut) -- si
+      <span class="emphasis"><em>isepmode</em></span> = 0, la séparation des fréquences centrales
+      de chaque filtre est générée logarithmiquement (en utilisant l'octave
+      comme unité de mesure). Si <span class="emphasis"><em>isepmode</em></span> est différent de
+      0, la séparation des fréquences centrales de chaque filtre est généralement
+      linéaire (en Hz). La valeur par défaut est 0.
+    </p>
+        <p>
+      <span class="emphasis"><em>iscl</em></span> (facultatif, 0 par défaut) -- facteur de pondération codé pour les
+      résonateurs. Une valeur de 1 signifie que la crête du facteur de réponse est 1, c-à-d. toutes les
+      fréquences autres que <span class="emphasis"><em>kcf</em></span> sont atténuées selon la courbe de réponse
+      (normalisée). Une valeur de 2 élève le facteur de réponse de façon à ce que sa valeur efficace
+      globale soit égale à 1. Cette égalisation intentionnelle des puissances d'entrée et de sortie
+      suppose que toutes les fréquences sont présentes ; elle est ainsi plus appropriée au bruit blanc.
+      Une valeur de 0 signifie aucune pondération du signal, laissant cette tâche à un ajustement
+      ultérieur (voir <a class="link" href="balance.html" title="balance"><em class="citetitle">balance</em></a>). La valeur par
+      défaut est 0.
+    </p>
+        <p>
+      <span class="emphasis"><em>iskip</em></span> (facultatif, 0 par défaut) -- état initial de l'espace de données interne.
+      Comme le filtrage comprend une boucle de rétroaction sur la sortie précédente, l'état initial de
+      l'espace de stockage utilisé est significatif. Une valeur nulle provoquera l'effacement de cet
+      espace ; une valeur non nulle autorisera la persistance de l'information précédente. La valeur par
+      défaut est 0.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm288855"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>asig</em></span> -- signal d'entrée audio
+    </p>
+        <p>
+      <span class="emphasis"><em>kbf</em></span> -- fréquence de base, c-à-d fréquence centrale en
+      Hz du filtre le plus bas
+    </p>
+        <p>
+      <span class="emphasis"><em>kbw</em></span> -- largeur de bande en Hz
+    </p>
+        <p>
+      <span class="emphasis"><em>ksep</em></span> -- séparation de la fréquence centrale des filtres
+      en octaves
+    </p>
+        <p>
+      <span class="emphasis"><em>resony</em></span> est un banc de filtres passe-bande du second
+      ordre, avec séparation des fréquences, fréquence de base et largeur de bande
+      variables au taux-k, connectés en parallèle (le signal résultant est un
+      mélange de la sortie de chaque filtre). La fréquence centrale de chaque
+      filtre dépend des variables <span class="emphasis"><em>kbf</em></span> et
+      <span class="emphasis"><em>ksep</em></span>. Le nombre maximum de filtres est limité à 100.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm288869"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode resony. Il utilise le fichier
+      <a class="ulink" href="examples/resony.csd" target="_top"><em class="citetitle">resony.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm288874"></a>
+          <p class="title">
+            <strong>Exemple 902. Exemple de l'opcode resony.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm288881"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac   <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o resonx.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	</span><span class="c1">; unfiltered noise</span><span class="w">
+
+</span>k<span class="n">env</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">	</span><span class="c1">;envelope</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="nb">rand</span><span class="w">	</span><span class="mf">0.7</span><span class="w">			</span><span class="c1">;white noise</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">sig</span><span class="o">*</span>k<span class="n">env</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="o">*</span>k<span class="n">env</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">	</span><span class="c1">; filtered noise</span><span class="w">
+
+</span>k<span class="n">sep</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">				</span><span class="c1">;vary seperation of center frequency of filters in octaves</span><span class="w">
+</span>k<span class="n">env</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">	</span><span class="c1">;envelope</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="nb">rand</span><span class="w">	</span><span class="mf">0.7</span><span class="w">
+</span>k<span class="n">bf</span><span class="w">	</span><span class="nb">line</span><span class="w">	</span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="w">		</span><span class="c1">;vary base frequency</span><span class="w">
+</span>a<span class="n">filt</span><span class="w">	</span><span class="nb">resony</span><span class="w">	</span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>k<span class="n">bf</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span>k<span class="n">sep</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="nb">balance</span><span class="w"> </span>a<span class="n">filt</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">sig</span><span class="o">*</span>k<span class="n">env</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="o">*</span>k<span class="n">env</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w">
+
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm289101"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Gabriel Maldonado</td>
+          </tr>
+          <tr>
+            <td>Italie</td>
+          </tr>
+          <tr>
+            <td>1999</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 3.56 de Csound.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="resonxk.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="resonz.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">resonxk </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> resonz</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>expsega</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="expseg.html" title="expseg" />
+    <link rel="next" href="expsegb.html" title="expsegb" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">expsega</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="expseg.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="expsegb.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="expsega"></a>
+      <div class="titlepage"></div>
+      <a id="IndexExpsega" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">expsega</span>
+        </h2>
+        <p>expsega — 
+      Un générateur de segments exponentiels opérant au taux-a.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm95894"></a>
+        <h2>Description</h2>
+        <p>
+      Un générateur de segments exponentiels opérant au taux-a. Cette unité est pratiquement
+      identique à <a class="link" href="expseg.html" title="expseg"><em class="citetitle">expseg</em></a>, mais elle est plus
+      précise lorsque l'on définit des segments de courte durée (c-à-d., dans une phase d'attaque
+      percussive) au taux audio.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm95899"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>expsega</strong></span> ia, idur1, ib [, idur2] [, ic] [...]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm95903"></a>
+        <h2>Initialiation</h2>
+        <p>
+      <span class="emphasis"><em>ia</em></span> -- valeur initiale. Zéro est interdit.
+    </p>
+        <p>
+      <span class="emphasis"><em>ib</em></span>, <span class="emphasis"><em>ic</em></span>, etc. -- valeur après
+      <span class="emphasis"><em>idur1</em></span> secondes, etc. Doivent être non nulles et de même signe que
+      <span class="emphasis"><em>ia</em></span>.
+    </p>
+        <p>
+      <span class="emphasis"><em>idur1</em></span> -- durée en secondes du premier segment. Avec une valeur nulle ou 
+      négative l'initialisation sera ignorée.
+    </p>
+        <p>
+      <span class="emphasis"><em>idur2, idur3</em></span>, etc. -- durée en secondes des segments suivants. Une valeur
+      nulle ou négative terminera la phase d'initialisation avec le point précédent, permettant
+      au dernier segment défini de continuer durant toute l'exécution. La valeur par défaut est zéro.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm95916"></a>
+        <h2>Exécution</h2>
+        <p>
+      Cette unité génère des signaux audio dont les valeurs passent par 2 ou plus
+      points spécifiés. La somme des valeurs <span class="emphasis"><em>dur</em></span> peut égaler ou non la durée
+      d'exécution de l'instrument : avec une exécution plus courte, la courbe sera tronquée alors
+      qu'avec une exécution plus longue, le dernier segment défini continuera dans la même direction.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm95920"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici une exemple de l'opcode expsega. Il utilise le fichier
+      <a class="ulink" href="examples/expsega.csd" target="_top"><em class="citetitle">expsega.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm95925"></a>
+          <p class="title">
+            <strong>Exemple 283. Exemple de l'opcode expsega.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm95932"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac             <span class="c1">;;;RT audio out</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o expsega.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; by Kevin Conder, Menno Knevel 2021</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>a<span class="n">env</span><span class="w"> </span><span class="nb">expsega</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="w">    </span><span class="c1">; Define a short percussive amplitude envelope</span><span class="w">
+</span>a<span class="n">1</span><span class="w"> </span><span class="nb">oscili</span><span class="w"> </span>a<span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="mi">440</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm96051"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="expseg.html" title="expseg"><em class="citetitle">expseg</em></a>, 
+      <a class="link" href="triglinseg.html" title="triglinseg"><em class="citetitle">triglinseg</em></a>,
+      <a class="link" href="trigexpseg.html" title="trigexpseg"><em class="citetitle">trigexpseg</em></a>,
+      <a class="link" href="expsegr.html" title="expsegr"><em class="citetitle">expsegr</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm96062"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Gabriel Maldonado</p>
+        <p>Nouveau dans Csound 3.57</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="expseg.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="expsegb.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">expseg </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> expsegb</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

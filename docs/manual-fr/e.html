@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Instruction e</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="ScoregensTop.html" title="Instructions de partition et routines GEN" />
+    <link rel="prev" href="d.html" title="Instruction d (instruction de note)" />
+    <link rel="next" href="f.html" title="Instruction f (ou instruction de table de fonction)" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Instruction e</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="d.html">Précédent</a> </td>
+          <th width="60%" align="center">Instructions de partition et routines GEN</th>
+          <td width="20%" align="right"> <a accesskey="n" href="f.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="e"></a>
+      <div class="titlepage"></div>
+      <a id="IndexEStatement" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">Instruction e</span>
+        </h2>
+        <p>e — 
+      On peut utiliser cette instruction pour marquer la fin de la dernière section de la partition.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm401764"></a>
+        <h2>Description</h2>
+        <p>
+      On peut utiliser cette instruction pour marquer la fin de la dernière section de la partition.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm401767"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>e</strong></span> [0 temps]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm401771"></a>
+        <h2>Exécution</h2>
+        <p>
+      Le second p-champ <span class="emphasis"><em>temps</em></span> est facultatif et s'il est présent, il
+      détermine la date de fin (en pulsations) de la dernière section de la partition. Cette date
+      doit être après le dernier évènement sinon elle n'aura pas d'effet. Les instruments "actifs
+      en permanence" se termineront à cette date. Cette manière d'allonger la section est utile
+      pour éviter les coupures prématurées de chute de réverbération ou d'autres effets.
+    </p>
+        <div class="refsect2">
+          <a id="idm401775"></a>
+          <h3>Considérations Spéciales</h3>
+          <p>
+        L'<span class="emphasis"><em>instruction e</em></span> est contextuellement identique à une
+        <a class="link" href="s.html" title="Instruction s"><em class="citetitle">instruction s</em></a>. De plus,
+        l'<span class="emphasis"><em>instruction e</em></span> termine toute génération de signal (y compris une exécution
+        indéfinie) et ferme tous les fichiers d'entrée et de sortie.
+      </p>
+          <p>
+        Si une <span class="emphasis"><em>instruction e</em></span> intervient avant la fin de la partition, toutes les
+        lignes suivantes de la partition seront ignorées.
+      </p>
+          <p>
+        Dans un fichier de partition pas encore trié, l'<span class="emphasis"><em>instruction e</em></span> est facultative.
+        Si un fichier de partition n'a pas d'<span class="emphasis"><em>instruction e</em></span>, alors la fonction Sort
+        en fournira une.
+      </p>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm401787"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'instruction e. Il utilise le fichier
+      <a class="ulink" href="examples/e.csd" target="_top"><em class="citetitle">e.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm401792"></a>
+          <p class="title">
+            <strong>Exemple 1261. Exemple de l'instruction e.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm401794"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o e.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span>ga<span class="n">1</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">0</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>a<span class="n">env</span><span class="w"> </span><span class="nb">expseg</span><span class="w"> </span><span class="mf">.01</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">0.9</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="w">
+</span>ga<span class="n">1</span><span class="w">  </span><span class="nb">poscil3</span><span class="w"> </span><span class="mf">.5</span><span class="o">*</span>a<span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="nb">cpspch</span><span class="p">(</span><span class="vi">p4</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>ga<span class="n">1</span><span class="p">,</span>ga<span class="n">1</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">99</span><span class="w">
+ 
+</span>a<span class="n">L</span><span class="p">,</span><span class="w"> </span>a<span class="n">R</span><span class="w">  </span><span class="nb">reverbsc</span><span class="w"> </span>ga<span class="n">1</span><span class="p">,</span><span class="w"> </span>ga<span class="n">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.85</span><span class="p">,</span><span class="w"> </span><span class="mi">12000</span><span class="p">,</span><span class="w"> </span><span class="vg">sr</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">L</span><span class="p">,</span>a<span class="n">R</span><span class="w">
+
+</span>ga<span class="n">1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">128</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">		</span><span class="c1">;sine wave</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="mf">8.00</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="mf">8.02</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="mf">8.04</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="mf">9.06</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">99</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">6</span><span class="w">		</span><span class="c1">;remains active for 6 seconds</span><span class="w">
+
+</span><span class="nb">e</span><span class="mi">10</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="d.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="ScoregensTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="f.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Instruction d (instruction de note) </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Instruction f (ou instruction de table de fonction)</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

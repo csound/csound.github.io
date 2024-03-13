@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>pvsmix</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="pvsmaska.html" title="pvsmaska" />
+    <link rel="next" href="pvsmorph.html" title="pvsmorph" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">pvsmix</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="pvsmaska.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="pvsmorph.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="pvsmix"></a>
+      <div class="titlepage"></div>
+      <a id="IndexPvsmix" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">pvsmix</span>
+        </h2>
+        <p>pvsmix — 
+      Mélange "sans accroc" deux signaux pv.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm275859"></a>
+        <h2>Description</h2>
+        <p>
+      Mélange "sans accroc" deux signaux pv. Cet opcode combine les composantes
+      les plus proéminentes de deux flots pvoc en un seul flot mélangé.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm275862"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">fsig <span class="command"><strong>pvsmix</strong></span> fsigin1, fsigin2</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm275866"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>fsig</em></span> -- flot pv de sortie
+    </p>
+        <p>
+      <span class="emphasis"><em>fsigin1</em></span> -- flot pv d'entrée
+    </p>
+        <p>
+      <span class="emphasis"><em>fsigin2</em></span> -- flot pv d'entrée, qui doit avoir le même
+      format que <span class="emphasis"><em>fsigin1</em></span>.
+    </p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Avertissement]" src="images/warning.png" />
+              </td>
+              <th align="left">Avertissement</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Il est dangereux d'utiliser la même variable-f à la fois comme entrée et
+        comme sortie des opcodes pvs. Ceci peut produire un comportement indéfini
+        de certains de ces opcodes. Utilisez une variable différente à gauche et
+        à droite de l'opcode.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm275877"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode pvsmix. Il utilise le fichier
+      <a class="ulink" href="examples/pvsmix.csd" target="_top"><em class="citetitle">pvsmix.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm275882"></a>
+          <p class="title">
+            <strong>Exemple 845. Exemple de l'opcode pvsmix.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm275889"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac  <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o pvsmix.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; by Menno Knevel 2021</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>a<span class="n">sig1</span><span class="w"> </span><span class="nb">diskin2</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="p">,</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="w">		</span><span class="c1">;signal in 1 at half speed</span><span class="w">
+</span>a<span class="n">sig2</span><span class="w"> </span><span class="nb">diskin2</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="w">		</span><span class="c1">;signal in 2</span><span class="w">
+</span>f<span class="n">sig1</span><span class="w"> </span><span class="nb">pvsanal</span><span class="w"> </span>a<span class="n">sig1</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">0</span><span class="w">	      </span><span class="c1">;pvoc analysis </span><span class="w">
+</span>f<span class="n">sig2</span><span class="w"> </span><span class="nb">pvsanal</span><span class="w"> </span>a<span class="n">sig2</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">0</span><span class="w">	      </span><span class="c1">;of both signals</span><span class="w">
+</span>f<span class="n">sall</span><span class="w"> </span><span class="nb">pvsmix</span><span class="w">  </span>f<span class="n">sig1</span><span class="p">,</span><span class="w"> </span>f<span class="n">sig2</span><span class="w"> 
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">pvsynth</span><span class="w"> </span>f<span class="n">sall</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w"> 
+
+</span><span class="kd">endin</span><span class="w"> 
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm276032"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Victor Lazzarini</td>
+          </tr>
+          <tr>
+            <td>Novembre 2004 </td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau greffon dans la version 5</p>
+        <p>Novembre 2004.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="pvsmaska.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="pvsmorph.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">pvsmaska </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> pvsmorph</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>pvspitch</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="pvsosc.html" title="pvsosc" />
+    <link rel="next" href="pvstanal.html" title="pvstanal" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">pvspitch</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="pvsosc.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="pvstanal.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="pvspitch"></a>
+      <div class="titlepage"></div>
+      <a id="Indexpvspitch" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">pvspitch</span>
+        </h2>
+        <p>pvspitch — 
+      Suit la hauteur et l'amplitude d'un signal PVS.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm277679"></a>
+        <h2>Description</h2>
+        <p>
+      Suit la hauteur et l'amplitude d'un signal PVS et les restitue dans des
+      variables de taux-k.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm277682"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">kfr, kamp <span class="command"><strong>pvspitch</strong></span> fsig, kthresh</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm277686"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kamp</em></span> -- amplitude de la fréquence fondamentale
+    </p>
+        <p>
+      <span class="emphasis"><em>kfr</em></span> -- fréquence fondamentale
+    </p>
+        <p>
+      <span class="emphasis"><em>fsig</em></span> -- flot pv en entrée
+    </p>
+        <p>
+      <span class="emphasis"><em>kthresh</em></span> -- seuil d'analyse (compris entre 0 et 1).
+      Les valeurs élevées éliminent les composantes de faible amplitude de
+      l'analyse.
+    </p>
+        <p>
+      L'algorithme de détection de hauteur implémenté dans <span class="emphasis"><em>pvspitch</em></span>
+      est basé sur l'hypothèse de J. F. Schouten du processus neuronal du cerveau
+      utilisé pour déterminer la hauteur d'un son d'après l'analyse de fréquence
+      de la membrane basilaire. Sauf pour certaines considérations plus loin,
+      <span class="emphasis"><em>pvspitch</em></span> cherche essentiellement le plus grand facteur
+      commun des crêtes spectrales du son analysé pour trouver la hauteur qui peut
+      lui être attribuée.
+    </p>
+        <p>
+      En général, les sons analysés présentant une caractéristique de hauteur auront
+      des crêtes dans leur spectre suivant la position de leurs harmoniques. Il
+      y a cependant quelques exceptions. Certains sons dont la représentation
+      spectrale est continue peuvent provoquer une sensation de hauteur. De tels
+      sons sont expliqués par le centroïde ou centre de gravité du spectre et
+      dépassent le cadre de la méthode de détection de hauteur implémentée par
+      <span class="emphasis"><em>pvspitch</em></span>. (L'utilisation d'opcodes tels que
+      <a class="link" href="pvscent.html" title="pvscent"><em class="citetitle">pvscent</em></a> peut être
+      plus appropriée dans ce cas).
+    </p>
+        <p>
+      <span class="emphasis"><em>pvspitch</em></span> est capable (en utilisant un fsig d'analyse
+      généré par <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>)
+      de localiser les crêtes spectrales d'un signal. Le paramètre de seuil
+      (<span class="emphasis"><em>kthresh</em></span>) est de la plus grande importance, car son
+      ajustement peut introduire des harmoniques faibles mais significatifs pour
+      le calcul du fondamental. Cependant, si l'on donne une valeur trop faible
+      à <span class="emphasis"><em>kthresh</em></span>, cela peut amener des partiels sans relation
+      dans l'algorithme d'analyse ce qui compromettra la précision de la méthode.
+      Ces étapes initiales simulent la réponse de la membrane basilaire en
+      identifiant les caractéristiques physiques du son analysé. Le choix de
+      <span class="emphasis"><em>kthresh</em></span> dépend du niveau actuel du signal analysé, car
+      ses valeurs (comprises entre 0 et 1) couvrent tout l'intervalle dynamique
+      d'un bin d'analyse (de -inf à 0dBFS).
+    </p>
+        <p>
+      Il est important de se souvenir que l'entrée de l'opcode
+      <span class="emphasis"><em>pvspitch</em></span> est supposée se caractériser par des partiels
+      importants dans le spectre. Si ce n'est pas le cas, le résultat retourné
+      par l'opcode peut n'avoir aucune relation avec la hauteur du signal entrant.
+      Si une trame contenant plusieurs partiels sans rapport a été analysée, le
+      plus grand facteur commun de ces valeurs de fréquence autorisant des
+      "harmoniques" adjacents sera choisi. Ainsi, des trames bruiteuses peuvent
+      être caractérisées par une sortie basse fréquence de <span class="emphasis"><em>pvspitch</em></span>.
+      Ce fait permet un type primitif de détection de transitoire instrumental,
+      car la portion d'attaque de certains sons instrumentaux contient des
+      composants inharmoniques. Si l'on connaît la fréquence la plus basse de la
+      mélodie analysée, alors toutes les fréquences détectées sous ce seuil
+      représentent une lecture erronée due à la présence de partiels sans rapport.
+    </p>
+        <p>
+      Afin de faciliter un test efficace de l'algorithme de <span class="emphasis"><em>pvspitch</em></span>,
+      une valeur d'amplitude proportionnelle à celle qui est observée dans la
+      trame de signal est également retournée (<span class="emphasis"><em>kamp</em></span>). On peut
+      ainsi utiliser les résultats de <span class="emphasis"><em>pvspitch</em></span> pour piloter
+      un oscillateur dont on peut comparer à l'écoute la hauteur avec celle du
+      signal original (dans l'exemple ci-dessous, un oscillateur génère un signal
+      qui se trouve une quinte au-dessus de la hauteur détectée).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm277717"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode pvspitch. Il utilise le fichier
+      <a class="ulink" href="examples/pvspitch.csd" target="_top"><em class="citetitle">pvspitch.csd</em></a>.
+      Cette exemple utilise l'entrée audio en temps réel mais on peut tout aussi
+      bien utiliser un fichier son en entrée.
+      </p>
+        <div class="example">
+          <a id="idm277722"></a>
+          <p class="title">
+            <strong>Exemple 851. Exemple de l'opcode pvspitch</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm277729"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac    <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">;-o pvspitch.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; by Richard Boulanger &amp; Menno Knevel 2021</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span>gi<span class="n">wave</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">4096</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mf">0.333</span><span class="p">,</span><span class="w"> </span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1666</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>i<span class="n">fftsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1024</span><span class="w">
+</span>i<span class="n">wtype</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">                                              </span><span class="c1">; hanning window</span><span class="w">
+</span>a<span class="n">1</span><span class="w"> </span><span class="nb">soundin</span><span class="w"> </span><span class="s">"flute.aiff"</span><span class="w">
+</span>f<span class="n">sig</span><span class="w"> </span><span class="nb">pvsanal</span><span class="w"> </span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">fftsize</span><span class="p">,</span><span class="w"> </span>i<span class="n">fftsize</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span>i<span class="n">fftsize</span><span class="p">,</span><span class="w"> </span>i<span class="n">wtype</span><span class="w">
+</span>k<span class="n">fr</span><span class="p">,</span><span class="w"> </span>k<span class="n">amp</span><span class="w"> </span><span class="nb">pvspitch</span><span class="w"> </span>f<span class="n">sig</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="w">                             </span><span class="c1">; estimate pitch, use treshold settings</span><span class="w">
+</span>a<span class="n">dm</span><span class="w"> </span><span class="nb">poscil</span><span class="w"> </span>k<span class="n">amp</span><span class="p">,</span><span class="w"> </span>k<span class="n">fr</span><span class="p">,</span><span class="w"> </span>gi<span class="n">wave</span><span class="w">                            </span><span class="c1">; sawtooth gets pitch from the flute</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">dm</span><span class="p">,</span><span class="w"> </span>a<span class="n">dm</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">;       treshold</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w">    </span><span class="mf">.1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">3</span><span class="w">    </span><span class="mf">.01</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">3</span><span class="w">    </span><span class="mf">.001</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm277920"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>,
+      <a class="link" href="pvsynth.html" title="pvsynth"><em class="citetitle">pvsynth</em></a>,
+      <a class="link" href="pvsadsyn.html" title="pvsadsyn"><em class="citetitle">pvsadsyn</em></a>,
+      <a class="link" href="pvscent.html" title="pvscent"><em class="citetitle">pvscent</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm277931"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Alan OCinneide</td>
+          </tr>
+          <tr>
+            <td>Août 2005, ajouté par Victor Lazzarini, Août 2006</td>
+          </tr>
+          <tr>
+            <td>Une partie du texte a été adaptée de l'article de Alan Ocinneide
+        "Introducing PVSPITCH: A pitch tracking opcode for Csound" dans la parution
+        du Csound Journal de l'hiver 2006. L'article est disponible ici :
+        <a class="ulink" href="http://www.csoundjournal.com/2006winter/pvspitch.html" target="_top"><em class="citetitle">www.csoundjournal.com/2006winter/pvspitch.html</em></a></td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="pvsosc.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="pvstanal.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">pvsosc </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> pvstanal</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

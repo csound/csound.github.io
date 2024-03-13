@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>scanu2</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="scanu.html" title="scanu" />
+    <link rel="next" href="schedkwhen.html" title="schedkwhen" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">scanu2</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="scanu.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="schedkwhen.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="scanu2"></a>
+      <div class="titlepage"></div>
+      <a id="IndexScanu2" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">scanu2</span>
+        </h2>
+        <p>scanu2 — 
+      Calcule la forme d'onde et la table d'onde à utiliser dans la synthèse par
+      balayage.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm298801"></a>
+        <h2>Description</h2>
+        <p>Opcode du greffon scansyn.</p>
+        <p>
+      Calcule la forme d'onde et la table d'onde à utiliser dans la synthèse par
+      balayage.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm298805"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>scanu2</strong></span> init, irate, ifnvel, ifnmass, ifnstif, ifncentr, ifndamp, kmass, \
+      kstif, kcentr, kdamp, ileft, iright, kpos, kstrngth, ain, idisp, id</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm298809"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>init</em></span> -- La position initiale des masses. Si c'est un
+      nombre négatif, alors la valeur absolue de <span class="emphasis"><em>init</em></span>
+      indique la table à utiliser pour la forme du marteau. Si
+      <span class="emphasis"><em>init</em></span> &gt; 0, sa longueur doit être la même que le
+      nombre de masses attendu, sinon il peut avoir n'importe quelle valeur. Si
+      <span class="emphasis"><em>init</em></span> n'est pas un entier, l'état initial est du bruit
+      blanc, la partie fractionnaire étant une pondération...
+    </p>
+        <p>
+      <span class="emphasis"><em>irate</em></span> -- L'intervalle de temps entre les mises à
+      jour successives de l'état des masses. Du même ordre de grandeur que la
+      période d'échantillonnage du système. Si ce nombre est grand, la chaîne
+      sera mise à jour lentement montrant une faible variation du timbre ;
+      sinon elle changera rapidement donnant un son plus dynamique.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifnvel</em></span> -- ftable contenant la vitesse initiale de
+      chaque masse. Sa taille est le nombre de masses attendu.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifnmass</em></span> -- ftable contenant la valeur de chaque masse.
+      Sa taille est le nombre de masses attendu.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifnstif</em></span> -- ftable contenant la raideur du ressort de
+      chaque connexion. Sa taille est le carré du nombre de masses attendu. Ses
+      données sont ordonnées selon la succession des lignes de la matrice de
+      connexion du système. 
+    </p>
+        <p>
+      <span class="emphasis"><em>ifncentr</em></span> -- ftable contenant la force de centrage de
+      chaque masse. Sa taille est le nombre de masses attendu.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifndamp</em></span> -- ftable contenant le facteur
+      d'amortissement de chaque masse. Sa taille est le nombre de masses attendu.
+    </p>
+        <p>
+      <span class="emphasis"><em>ileft</em></span> -- Si <span class="emphasis"><em>init</em></span> &lt; 0, 
+      position du pincement positif entre 0 et 1.
+    </p>
+        <p>
+      <span class="emphasis"><em>iright</em></span> -- Si <span class="emphasis"><em>init</em></span> &lt; 0,
+      position du pincement négatif entre 0 et 1.
+    </p>
+        <p>Si <span class="emphasis"><em>ileft</em></span> le même que <span class="emphasis"><em>iright</em></span>
+      un seul pincement positif est utilisé comme état initial.
+    </p>
+        <p>
+      <span class="emphasis"><em>idisp</em></span> -- S'il vaut 0, il n'y a pas d'affichage des
+      masses.
+    </p>
+        <p>
+      <span class="emphasis"><em>id</em></span> -- S'il est positif, c'est l'ID de l'opcode. Il est
+      utilisé pour relier l'opcode de balayage au bon générateur de forme d'onde.
+      S'il est négatif, sa valeur absolue indique la table d'onde dans laquelle
+      sera écrite la forme d'onde. Cette forme d'onde peut être utilisée par la
+      suite par un autre opcode pour générer du son. Le contenu initial de cette
+      table sera écrasé.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm298841"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kmass</em></span> -- pondère les masses
+    </p>
+        <p>
+      <span class="emphasis"><em>kstif</em></span> -- pondère la raideur des ressorts.
+      Noter que de grandes valeurs ralentissent l'évolution de la vibration,
+      à l'inverse du paramètre correspondant dans scanu.
+    </p>
+        <p>
+      <span class="emphasis"><em>kcentr</em></span> -- pondère la force de centrage
+    </p>
+        <p>
+      <span class="emphasis"><em>kdamp</em></span> -- pondère l'amortissement
+    </p>
+        <p>
+      <span class="emphasis"><em>kpos</em></span> -- position d'un marteau actif le long de la
+      corde (<span class="emphasis"><em>kpos</em></span> = 0 est complètement à gauche,
+      <span class="emphasis"><em>kpos</em></span> = 1 est complètement à droite). La forme du
+      marteau est déterminée par <span class="emphasis"><em>init</em></span> et sa puissance de
+      percussion est <span class="emphasis"><em>kstrngth</em></span>.
+    </p>
+        <p>
+      <span class="emphasis"><em>kstrngth</em></span> -- puissance utilisée par le marteau actif
+    </p>
+        <p>
+      <span class="emphasis"><em>ain</em></span> -- entrée audio qui s'ajoute à la vélocité des
+      masses. L'amplitude ne doit pas être trop grande.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm298861"></a>
+        <h2>Format de la matrice</h2>
+        <p>
+      Le format de la matrice de scanu est une liste binaire de connexions.
+      le poids du lien est supposé être unitaire.
+    </p>
+        <p>
+      Par exemple, une chaîne circulaire de quatre éléments serait codée de
+      cette manière :
+      </p>
+        <div class="informalexample">
+          <pre class="programlisting">
+0
+1
+0
+0
+1
+0
+1
+0
+0
+1
+0
+1
+0
+0
+1
+0
+        </pre>
+        </div>
+        <p>
+      Note : pour éviter la confusion avec d'autres formats de matrice, il
+      vaut mieux sauvegarder ce format de matrice avec l'extension de fichier
+      <em class="citetitle">.matrxB</em>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm298868"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode scanu2. Il utilise les fichiers
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm298871"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="scanu.html" title="scanu"><em class="citetitle">scanu</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm298876"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : John ffitch d'après Paris Smaragdis</td>
+          </tr>
+          <tr>
+            <td>Mai 2021</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la 6.16 de Csound</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="scanu.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="schedkwhen.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">scanu </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> schedkwhen</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>rbjeq</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="randomi.html" title="randomi" />
+    <link rel="next" href="readclock.html" title="readclock" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">rbjeq</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="randomi.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="readclock.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="rbjeq"></a>
+      <div class="titlepage"></div>
+      <a id="IndexRbjeq" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">rbjeq</span>
+        </h2>
+        <p>rbjeq — 
+      Opcode de filtrage et d'égalisation paramétrique avec 7 types de filtre,
+      basé sur un algorithme de Robert Bristow-Johnson.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm282561"></a>
+        <h2>Description</h2>
+        <p>
+      Opcode de filtrage et d'égalisation paramétrique avec 7 types de filtre,
+      basé sur un algorithme de Robert Bristow-Johnson.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm282564"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ar <span class="command"><strong>rbjeq</strong></span> asig, kfco, klvl, kQ, kS[, imode]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm282568"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>imode (</em></span> (facultatif, 0 par défaut) - somme de :
+
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>
+      			1 : l'initialisation est ignorée (à n'utiliser qu'avec des notes liées
+      			ou réinitialisées)
+      		</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+
+      et exactement une seule des valeurs suivantes pour sélectionner le type de
+      filtre :
+
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>
+            0 : filtre passe-bas résonant. <span class="emphasis"><em>kQ</em></span> contrôle la
+            résonance : à la fréquence de coupure (<span class="emphasis"><em>kfco</em></span>),
+            le gain en amplitude est <span class="emphasis"><em>kQ</em></span> (par exemple 20 dB
+            pour <span class="emphasis"><em>kQ</em></span> = 10), les valeurs supérieures de
+            <span class="emphasis"><em>kQ</em></span> produisant un pic de résonance plus étroit.
+            Si <span class="emphasis"><em>kQ</em></span> vaut racine carrée de 0.5 (environ 0.7071),
+            il n'y a pas de résonance et le filtre a une réponse ressemblant
+            beaucoup à celle de <span class="emphasis"><em>butterlp</em></span>. Si
+            <span class="emphasis"><em>kQ</em></span> est inférieur à racine carrée de 0.5, il
+            n'y a pas de résonance et le filtre a une réponse de -6 dB / octave
+            approximativement de <span class="emphasis"><em>kfco</em></span> * <span class="emphasis"><em>kQ</em></span>
+            à <span class="emphasis"><em>kfco</em></span>. Au-delà de <span class="emphasis"><em>kfco</em></span>,
+      		  l'atténuation est toujours de -12 dB / octave.
+
+          </p>
+              <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+                <table border="0" summary="Note: NOTE">
+                  <tr>
+                    <td rowspan="2" align="center" valign="top" width="25">
+                      <img alt="[Note]" src="images/note.png" />
+                    </td>
+                    <th align="left">NOTE</th>
+                  </tr>
+                  <tr>
+                    <td align="left" valign="top">
+                      <p>
+              Le filtre passe-bas <span class="emphasis"><em>rbjeq</em></span> se comporte
+              sensiblement comme "ar <span class="command"><strong>pareq</strong></span> asig, kfco, 0, kQ, 2"
+              mais il est calculé plus rapidement.
+            </p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <p>
+
+      		</p>
+            </li>
+            <li class="listitem">
+              <p>
+      			2 : filtre passe-haut résonant. Les paramètres sont les mêmes que
+      			pour le filtre passe-bas, mais le filtre équivalent est
+      			<span class="emphasis"><em>butterhp</em></span> si <span class="emphasis"><em>kQ</em></span> vaut 0.7071,
+      			et "ar <span class="command"><strong>pareq</strong></span> asig, kfco, 0, kQ, 1" dans les autres
+      			cas.
+      		</p>
+            </li>
+            <li class="listitem">
+              <p>
+      			4 : filtre passe-bande. <span class="emphasis"><em>kQ</em></span> contrôle la largeur
+      			de bande qui vaut <span class="emphasis"><em>kfco</em></span> / <span class="emphasis"><em>kQ</em></span>,
+      			et doit toujours être inférieur à <span class="emphasis"><em>sr</em></span> / 2. La
+      			largeur de bande est mesurée entre les points à -3 dB (gain en
+      			amplitude  = 0.7071), au-delà desquels la pente est de +/- 6 dB / octave.
+      			Ce type de filtre ressemble beaucoup à
+      			"ar <span class="command"><strong>butterbp</strong></span> asig, kfco, kfco / kQ".
+      		</p>
+            </li>
+            <li class="listitem">
+              <p>
+      			6 : filtre réjecteur de bande avec les mêmes paramètres que le filtre
+      			passe-bande et une réponse semblable à celle de
+      			<span class="emphasis"><em>butterbr</em></span>.
+      		</p>
+            </li>
+            <li class="listitem">
+              <p>
+      			8 : EQ peak. Le gain en amplitude vaut 1 (0 dB) à 0 Hz et à
+      			<span class="emphasis"><em>sr</em></span> / 2, et <span class="emphasis"><em>klvl</em></span> à la
+      			fréquence centrale (<span class="emphasis"><em>kfco</em></span>). Ainsi,
+      			<span class="emphasis"><em>klvl</em></span> contrôle le renforcement (s'il est
+      			supérieur à 1) ou l'atténuation (s'il est inférieur à 1).
+      			<span class="emphasis"><em>klvl</em></span> à 1 produit une réponse plate. Comme pour
+      			les filtres passe-bande et réjecteur de bande, la largeur de bande
+      			est déterminées par <span class="emphasis"><em>kfco</em></span> / <span class="emphasis"><em>kQ</em></span>
+      			(qui doit être encore inférieur à <span class="emphasis"><em>sr</em></span> / 2) ;
+      			cependant, elle se trouve cette fois-ci entre les points situés à
+      			racine carrée de <span class="emphasis"><em>klvl</em></span> (autrement dit à
+      			mi-renforcement ou mi-atténuation en décibels). NOTE : il faut
+      			éviter les valeurs de <span class="emphasis"><em>klvl</em></span> excessivement faibles
+      			ou élévées, encore que l'opcode ait été testé avec
+      			<span class="emphasis"><em>klvl</em></span> = 0.01 et <span class="emphasis"><em>klvl</em></span> = 100.
+      			<span class="emphasis"><em>klvl</em></span> = 0 est toujours une erreur, contrairement
+      			au cas de <span class="emphasis"><em>pareq</em></span> qui accepte un niveau de zéro.
+      		</p>
+            </li>
+            <li class="listitem">
+              <p>
+      			10 : EQ low shelf, contrôlé par <span class="emphasis"><em>klvl</em></span> et
+      			<span class="emphasis"><em>kS</em></span> (<span class="emphasis"><em>kQ</em></span> est ignoré par ce
+      			type de filtre). Le gain en amplitude est de <span class="emphasis"><em>klvl</em></span>
+      			à la fréquence zéro tandis que le niveau des hautes fréquences
+      			(proches de <span class="emphasis"><em>sr</em></span> / 2) n'est pas changé. A la
+      			fréquence de coupure (<span class="emphasis"><em>kfco</em></span>), le gain est de
+      			racine carrée de <span class="emphasis"><em>klvl</em></span> (mi-renforecemnt ou
+      			mi-atténuation en décibels). Le paramètre <span class="emphasis"><em>kS</em></span>
+      			contrôle la raideur de la pente de la réponse en fréquence (voir
+      			ci-dessous).
+      		</p>
+            </li>
+            <li class="listitem">
+              <p>
+      			12 : EQ high shelf. Très semblable à l'EQ low shelf, mais il affecte
+      			la région des hautes fréquendes.
+      		</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+
+      La valeur par défaut de <span class="emphasis"><em>imode</em></span> est zéro (filtre
+      passe-bas, initialisation réalisée).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm282639"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ar</em></span> -- le signal de sortie.
+    </p>
+        <p>
+      <span class="emphasis"><em>asig</em></span> -- le signal d'entrée.
+
+      </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note: NOTE">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">NOTE</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Si l'entrée contient des sections silencieuses, il peut y avoir un
+        ralentissement significatif sur les processeurs Intel du aux nombres
+        dénormalisés. Dans de tels cas, il est recommandé de traiter le signal
+        d'entrée avec l'opcode <span class="emphasis"><em>denorm</em></span> avant le filtrage
+        par <span class="emphasis"><em>rbjeq</em></span> (et actuellement avec plusieurs autres
+        filtres).
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <p>
+    </p>
+        <p>
+      <span class="emphasis"><em>kfco</em></span> -- fréquence de coupure ou fréquence centrale,
+      selon le type de filtre, en Hz. Doit être supérieure à zéro et inférieure
+      à <span class="emphasis"><em>sr</em></span> / 2 (l'intervalle compris entre
+      <span class="emphasis"><em>sr</em></span> * 0.0002 et <span class="emphasis"><em>sr</em></span> * 0.49 devrait
+      être sûr).
+    </p>
+        <p>
+      <span class="emphasis"><em>klvl</em></span> -- niveau de renforcement ou d'atténuation,
+      exprimé comme gain d'amplitude (par exemple, 1 : réponse plate, 4 :
+      renforcement de 12 dB, 0.1 : atténuation de 20 dB) ; les valeurs nulle ou
+      négatives sont interdites. Il est reconnu seulement par les types peak et
+      shelf EQ (8, 10, 12) et ignoré par les autres filtres.
+    </p>
+        <p>
+      <span class="emphasis"><em>kQ</em></span> -- résonance (également <span class="emphasis"><em>kfco</em></span>
+      / (largeur de bande) dans plusieurs types de filtre). N'est pas utilisé
+      par les shelf EQs (<span class="emphasis"><em>imode</em></span> = 10 et 12). La signification
+      exacte de ce paramètre dépend du type de filtre (voir ci-dessus), mais il
+      doit toujours être supérieur à zéro, et habituellement
+      (<span class="emphasis"><em>kfco</em></span> / <span class="emphasis"><em>kQ</em></span>) doit être inférieur
+      à <span class="emphasis"><em>sr</em></span> / 2.
+    </p>
+        <p>
+      <span class="emphasis"><em>kS</em></span> -- paramètre de pente pour les filtres shelf. Doit
+      être supérieur à zéro ; plus la valeur est grande et plus la pente est
+      raide, avec résonance si <span class="emphasis"><em>kS</em></span> &gt; 1 (cependant, une
+      valeur trop grande de <span class="emphasis"><em>kS</em></span> peut rendre le filtre
+      instable). Si <span class="emphasis"><em>kS</em></span> vaut exactement 1, la pente est aussi
+      raide que possible sans résonance. Noter que l'effet de <span class="emphasis"><em>kS</em></span> -
+      spécialement s'il est supérieur à 1 - dépend aussi de <span class="emphasis"><em>klvl</em></span>
+      et qu'il n'a pas d'unité bien définie.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm282671"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode rbjeq. Il utilise le fichier
+      <a class="ulink" href="examples/rbjeq.csd" target="_top"><em class="citetitle">rbjeq.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm282676"></a>
+          <p class="title">
+            <strong>Exemple 880. Exemple de l'opcode rbjeq.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm282683"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o rbjeq.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>i<span class="n">mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>a<span class="n">1</span><span class="w">    </span><span class="nb">vco2</span><span class="w">    </span><span class="mf">.3</span><span class="p">,</span><span class="w"> </span><span class="mf">155.6</span><span class="w">			</span><span class="c1">; sawtooth wave</span><span class="w">
+</span>k<span class="n">fco</span><span class="w">  </span><span class="nb">expon</span><span class="w">   </span><span class="mi">8000</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="w">		</span><span class="c1">; filter frequency</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">rbjeq</span><span class="w">   </span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>k<span class="n">fco</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>k<span class="n">fco</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.005</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">mode</span><span class="w">
+      </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="mi">5</span><span class="w"> </span><span class="mi">0</span><span class="w">	</span><span class="c1">;lowpass</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span><span class="w">  </span><span class="mi">5</span><span class="w"> </span><span class="mi">2</span><span class="w">	</span><span class="c1">;highpass</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">4</span><span class="w">	</span><span class="c1">;bandpass</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">8</span><span class="w">	</span><span class="c1">;equalizer</span><span class="w">
+
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm282843"></a>
+        <h2>Crédits</h2>
+        <p>
+	  </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Algorithme original de Robert Bristow-Johnson.</td>
+          </tr>
+          <tr>
+            <td>
+          Version orchestre de Csound par Josep M Comajuncosas, août 1999.
+        </td>
+          </tr>
+          <tr>
+            <td>
+          Converti en C (avec optimisations et correction des bogues) par
+        	Istvan Varga, Décembre 2002.
+        </td>
+          </tr>
+        </table>
+        <p>
+   </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="randomi.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="readclock.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">randomi </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> readclock</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>chnmix</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="chnget.html" title="chnget" />
+    <link rel="next" href="chnparams.html" title="chnparams" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">chnmix</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="chnget.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="chnparams.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="chnmix"></a>
+      <div class="titlepage"></div>
+      <a id="Indexchnmix" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">chnmix</span>
+        </h2>
+        <p>chnmix — 
+      Ecrit des données audio vers le bus logiciel nommé, en les mélangeant à la
+      sortie précédente.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm55251"></a>
+        <h2>Description</h2>
+        <p>
+      Ajoute un signal audio à un canal du bus logiciel nommé. Cela implique la
+      déclaration du canal avec <span class="emphasis"><em>imode</em></span>=2 (voir aussi
+      <a class="link" href="chn.html" title="chn"><em class="citetitle">chn_a</em></a>).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm55257"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>chnmix</strong></span> aval, Sname</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm55261"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>Sname</em></span> -- une chaîne de caractères indiquant le canal
+      nommé du bus logiciel sur lequel écrire.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm55265"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>aval</em></span> -- le signal audio à écrire pendant l'exécution.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm55269"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode chnmix. Il utilise le fichier
+      <a class="ulink" href="examples/chnmix.csd" target="_top"><em class="citetitle">chnmix.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm55274"></a>
+          <p class="title">
+            <strong>Exemple 138. Exemple de l'opcode chnmix.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm55276"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o chnmix.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+</span><span class="c1">;Example by Joachim Heintz</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+  </span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="c1">; send i-values</span><span class="w">
+          </span><span class="nb">chnset</span><span class="w">    </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"sio"</span><span class="w">
+          </span><span class="nb">chnset</span><span class="w">    </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"non"</span><span class="w">
+  </span><span class="kd">endin</span><span class="w">
+
+  </span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="c1">; send k-values</span><span class="w">
+</span>k<span class="n">freq</span><span class="w">     </span><span class="nb">randomi</span><span class="w">   </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+          </span><span class="nb">chnset</span><span class="w">    </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="s">"cntrfreq"</span><span class="w">
+</span>k<span class="n">bw</span><span class="w">       </span><span class="o">=</span><span class="w">         </span>k<span class="n">freq</span><span class="o">/</span><span class="mi">10</span><span class="w">
+          </span><span class="nb">chnset</span><span class="w">    </span>k<span class="n">bw</span><span class="p">,</span><span class="w"> </span><span class="s">"bandw"</span><span class="w">
+  </span><span class="kd">endin</span><span class="w">
+
+  </span><span class="kd">instr</span><span class="w"> </span><span class="nf">3</span><span class="c1">; send a-values</span><span class="w">
+</span>a<span class="n">nois</span><span class="w">     </span><span class="nb">rand</span><span class="w">      </span><span class="mf">.1</span><span class="w">
+          </span><span class="nb">chnset</span><span class="w">    </span>a<span class="n">nois</span><span class="p">,</span><span class="w"> </span><span class="s">"noise"</span><span class="w">
+ </span><span class="nl">loop</span><span class="p">:</span><span class="w">
+</span>i<span class="n">dur</span><span class="w">      </span><span class="nb">random</span><span class="w">    </span><span class="mf">.3</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="w">
+          </span><span class="kp">timout</span><span class="w">    </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>i<span class="n">dur</span><span class="p">,</span><span class="w"> </span><span class="nl">do</span><span class="w">
+          </span><span class="kp">reinit</span><span class="w">    </span><span class="nl">loop</span><span class="w">
+ </span><span class="nl">do</span><span class="p">:</span><span class="w">
+</span>i<span class="n">freq</span><span class="w">     </span><span class="nb">random</span><span class="w">    </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="mi">1200</span><span class="w">
+</span>i<span class="n">amp</span><span class="w">      </span><span class="nb">random</span><span class="w">    </span><span class="mf">.1</span><span class="p">,</span><span class="w"> </span><span class="mf">.3</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">      </span><span class="nb">oscils</span><span class="w">    </span>i<span class="n">amp</span><span class="p">,</span><span class="w"> </span>i<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>a<span class="n">env</span><span class="w">      </span><span class="nb">transeg</span><span class="w">   </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">dur</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>a<span class="n">sine</span><span class="w">     </span><span class="o">=</span><span class="w">         </span>a<span class="n">sig</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>a<span class="n">env</span><span class="w">
+          </span><span class="nb">chnset</span><span class="w">    </span>a<span class="n">sine</span><span class="p">,</span><span class="w"> </span><span class="s">"sine"</span><span class="w">
+  </span><span class="kd">endin</span><span class="w">
+
+  </span><span class="kd">instr</span><span class="w"> </span><span class="nf">11</span><span class="c1">; receive some chn values and send again</span><span class="w">
+</span>i<span class="n">val1</span><span class="w">     </span><span class="nb">chnget</span><span class="w">    </span><span class="s">"sio"</span><span class="w">
+</span>i<span class="n">val2</span><span class="w">     </span><span class="nb">chnget</span><span class="w">    </span><span class="s">"non"</span><span class="w">
+          </span><span class="nb">print</span><span class="w">     </span>i<span class="n">val1</span><span class="p">,</span><span class="w"> </span>i<span class="n">val2</span><span class="w">
+</span>k<span class="n">cntfreq</span><span class="w">  </span><span class="nb">chnget</span><span class="w">    </span><span class="s">"cntrfreq"</span><span class="w">
+</span>k<span class="n">bandw</span><span class="w">    </span><span class="nb">chnget</span><span class="w">    </span><span class="s">"bandw"</span><span class="w">
+</span>a<span class="n">noise</span><span class="w">    </span><span class="nb">chnget</span><span class="w">    </span><span class="s">"noise"</span><span class="w">
+</span>a<span class="n">filt</span><span class="w">     </span><span class="nb">reson</span><span class="w">     </span>a<span class="n">noise</span><span class="p">,</span><span class="w"> </span>k<span class="n">cntfreq</span><span class="p">,</span><span class="w"> </span>k<span class="n">bandw</span><span class="w">
+</span>a<span class="n">filt</span><span class="w">     </span><span class="nb">balance</span><span class="w">   </span>a<span class="n">filt</span><span class="p">,</span><span class="w"> </span>a<span class="n">noise</span><span class="w">
+          </span><span class="nb">chnset</span><span class="w">    </span>a<span class="n">filt</span><span class="p">,</span><span class="w"> </span><span class="s">"filtered"</span><span class="w">
+  </span><span class="kd">endin</span><span class="w">
+
+  </span><span class="kd">instr</span><span class="w"> </span><span class="nf">12</span><span class="c1">; mix the two audio signals</span><span class="w">
+</span>a<span class="n">mix1</span><span class="w">     </span><span class="nb">chnget</span><span class="w">     </span><span class="s">"sine"</span><span class="w">
+</span>a<span class="n">mix2</span><span class="w">     </span><span class="nb">chnget</span><span class="w">     </span><span class="s">"filtered"</span><span class="w">
+          </span><span class="nb">chnmix</span><span class="w">     </span>a<span class="n">mix1</span><span class="p">,</span><span class="w"> </span><span class="s">"mix"</span><span class="w">
+          </span><span class="nb">chnmix</span><span class="w">     </span>a<span class="n">mix2</span><span class="p">,</span><span class="w"> </span><span class="s">"mix"</span><span class="w">
+  </span><span class="kd">endin</span><span class="w">
+
+  </span><span class="kd">instr</span><span class="w"> </span><span class="nf">20</span><span class="c1">; receive and reverb</span><span class="w">
+</span>a<span class="n">mix</span><span class="w">      </span><span class="nb">chnget</span><span class="w">     </span><span class="s">"mix"</span><span class="w">
+</span>a<span class="n">L</span><span class="p">,</span><span class="w"> </span>a<span class="n">R</span><span class="w">    </span><span class="nb">freeverb</span><span class="w">   </span>a<span class="n">mix</span><span class="p">,</span><span class="w"> </span>a<span class="n">mix</span><span class="p">,</span><span class="w"> </span><span class="mf">.8</span><span class="p">,</span><span class="w"> </span><span class="mf">.5</span><span class="w">
+          </span><span class="nb">outs</span><span class="w">       </span>a<span class="n">L</span><span class="p">,</span><span class="w"> </span>a<span class="n">R</span><span class="w">
+  </span><span class="kd">endin</span><span class="w">
+
+  </span><span class="kd">instr</span><span class="w"> </span><span class="nf">100</span><span class="c1">; clear</span><span class="w">
+          </span><span class="nb">chnclear</span><span class="w">   </span><span class="s">"mix"</span><span class="w">
+  </span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">20</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">20</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">20</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">20</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">20</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">20</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">20</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm55704"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Istvan Varga</td>
+          </tr>
+          <tr>
+            <td>2006</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="chnget.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="chnparams.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">chnget </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> chnparams</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

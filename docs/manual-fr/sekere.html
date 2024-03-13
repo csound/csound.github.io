@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>sekere</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="sequ.html" title="sequ" />
+    <link rel="next" href="select.html" title="select" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">sekere</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="sequ.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="select.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="sekere"></a>
+      <div class="titlepage"></div>
+      <a id="IndexSekere" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">sekere</span>
+        </h2>
+        <p>sekere — 
+      Modèle semi-physique d'un son de chekeré.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm301581"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>sekere</em></span> est un modèle semi-physique d'un son de chekeré.
+      Il fait partie des opcodes de percussion de PhISEM. PhISEM (Physically
+      Informed Stochastic Event Modeling) est une approche algorithmique pour simuler
+      les collisions de multiples objets indépendants produisant des sons.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm301585"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>sekere</strong></span> iamp, idettack [, inum] [, idamp] [, imaxshake]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm301589"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>iamp</em></span> -- Amplitude de la sortie. Note : comme ces instruments sont
+      stochastiques, ce n'est qu'une approximation.
+    </p>
+        <p>
+      <span class="emphasis"><em>idettack</em></span> -- période de temps durant laquelle tous les sons sont stoppés.
+    </p>
+        <p>
+      <span class="emphasis"><em>inum</em></span> (facultatif) -- le nombre de perles, de dents, de cloches, de
+      tambourins, etc. S'il vaut zéro, il prend la valeur par défaut de 64.
+    </p>
+        <p>
+      <span class="emphasis"><em>idamp</em></span> (facultatif) -- le facteur d'amortissement, intervenant dans
+      l'équation :
+      </p>
+        <div class="literallayout">
+          <p>damping_amount = 0,998 + (idamp * 0,002)</p>
+        </div>
+        <p>
+    </p>
+        <p>
+      La valeur par défaut de <span class="emphasis"><em>damping_amount</em></span> est 0,999 ce qui signifie que
+      la valeur par défaut de <span class="emphasis"><em>idamp</em></span> est 0,5. Le maximum de
+      <span class="emphasis"><em>damping_amount</em></span> est 1,0 (pas d'amortissement). La valeur maximale de
+      <span class="emphasis"><em>idamp</em></span> est donc 1,0.
+    </p>
+        <p>
+      L'intervalle recommandé pour <span class="emphasis"><em>idamp</em></span> se situe d'habitude sous les 75% de
+      la valeur maximale.
+    </p>
+        <p>
+      <span class="emphasis"><em>imaxshake</em></span> (facultatif) -- quantité d'énergie à réinjecter
+      dans le système. La valeur doit être comprise entre 0 et 1.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm301609"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode sekere. Il utilise le fichier
+      <a class="ulink" href="examples/sekere.csd" target="_top"><em class="citetitle">sekere.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm301614"></a>
+          <p class="title">
+            <strong>Exemple 946. Exemple de l'opcode sekere.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm301621"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o sekere.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>i<span class="n">damp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">			</span><span class="c1">;vary damping amount</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">sekere</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w"> </span>i<span class="n">damp</span><span class="w">
+      </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">.1</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">.9</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm301718"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="cabasa.html" title="cabasa"><em class="citetitle">cabasa</em></a>,
+      <a class="link" href="crunch.html" title="crunch"><em class="citetitle">crunch</em></a>,
+      <a class="link" href="sandpaper.html" title="sandpaper"><em class="citetitle">sandpaper</em></a>,
+      <a class="link" href="stix.html" title="stix"><em class="citetitle">stix</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm301729"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Perry Cook, fait partie de PhISEM (Physically Informed Stochastic Event Modeling)</td>
+          </tr>
+          <tr>
+            <td>Adapté par John ffitch</td>
+          </tr>
+          <tr>
+            <td>Université de Bath, Codemist Ltd.</td>
+          </tr>
+          <tr>
+            <td>Bath, UK</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 4.07 de Csound</p>
+        <p>Notes ajoutées par Rasmus Ekman en mai 2002.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="sequ.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="select.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">sequ </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> select</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

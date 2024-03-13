@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>shaker</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="sfpreset.html" title="sfpreset" />
+    <link rel="next" href="shiftin.html" title="shiftin" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">shaker</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="sfpreset.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="shiftin.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="shaker"></a>
+      <div class="titlepage"></div>
+      <a id="IndexShaker" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">shaker</span>
+        </h2>
+        <p>shaker — 
+      Produit un son comme si l'on secouait des maracas ou un instrument
+      similaire de type calebasse.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm310210"></a>
+        <h2>Description</h2>
+        <p>
+      La sortie audio produit un son comme si l'on secouait des maracas ou un instrument
+      similaire de type calebasse. La méthode est inspirée d'un modèle physique développé
+      d'après Perry Cook, mais recodé pour Csound.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm310213"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>shaker</strong></span> kamp, kfreq, kbeans, kdamp, ktimes [, idecay]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm310217"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>idecay</em></span> -- S'il est présent, indique la durée d'amortissement du
+      shaker à la fin de la note. La valeur par défaut est zéro.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm310221"></a>
+        <h2>Exécution</h2>
+        <p>
+      Une note jouée sur un instrument de type maracas, avec les arguments suivants.
+    </p>
+        <p>
+      <span class="emphasis"><em>kamp</em></span> -- Amplitude de la note.
+    </p>
+        <p>
+      <span class="emphasis"><em>kfreq</em></span> -- Fréquence de la note.
+    </p>
+        <p>
+      <span class="emphasis"><em>kbeans</em></span> -- Le nombre de graines dans la calebasse. Une valeur de
+      8 est convenable.
+    </p>
+        <p>
+      <span class="emphasis"><em>kdamp</em></span> -- La valeur d'amortissement du shaker. Des valeurs comprises
+      entre 0,98 et 1 conviennent, avec une valeur raisonnable par défaut de 0,99.
+    </p>
+        <p>
+      <span class="emphasis"><em>ktimes</em></span> -- Nombre de secousses.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note: Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        L'argument <span class="emphasis"><em>knum</em></span> était redondant et a donc été supprimé dans la version 3.49.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm310238"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode shaker. Il utilise le fichier
+      <a class="ulink" href="examples/shaker.csd" target="_top"><em class="citetitle">shaker.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm310243"></a>
+          <p class="title">
+            <strong>Exemple 971. Exemple de l'opcode shaker.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm310250"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac             <span class="c1">;;;RT audio out</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o shaker.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; by Menno Knevel</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>k<span class="n">num</span><span class="w">  </span><span class="o">=</span><span class="w">   </span><span class="vi">p5</span><span class="w">
+</span>k<span class="n">freq</span><span class="w">	</span><span class="nb">line</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">440</span><span class="w">
+</span>a<span class="n">1</span><span class="w"> </span><span class="nb">shaker</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mf">0.999</span><span class="p">,</span><span class="w"> </span>k<span class="n">num</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">;       frq     #</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">440</span><span class="w">     </span><span class="mi">3</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">440</span><span class="w">    </span><span class="mi">300</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">440</span><span class="w">    </span><span class="mi">3000</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">4000</span><span class="w">    </span><span class="mi">100</span><span class="w">
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm310392"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : John ffitch (d'après Perry Cook)</td>
+          </tr>
+          <tr>
+            <td>Université de Bath, Codemist Ltd.</td>
+          </tr>
+          <tr>
+            <td>Bath, UK</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 3.47 de Csound</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="sfpreset.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="shiftin.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">sfpreset </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> shiftin</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

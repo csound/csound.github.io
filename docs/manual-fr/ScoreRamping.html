@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Ramping</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="ScoreTop.html" title="La partition numérique standard" />
+    <link rel="prev" href="ScoreNextp.html" title="Symboles next-P et previous-P" />
+    <link rel="next" href="ScoreMacros.html" title="Macros de partition" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Ramping</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ScoreNextp.html">Précédent</a> </td>
+          <th width="60%" align="center">La partition numérique standard</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ScoreMacros.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="section">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="ScoreRamping"></a>Ramping</h2>
+          </div>
+        </div>
+      </div>
+      <p>
+    Les p-champs d'une <span class="emphasis"><em>instruction i</em></span> contenant le symbole <span class="emphasis"><em>&lt;</em></span>
+    seront remplacés par des valeurs issues de l'interpolation linéaire d'une pente temporelle. Les pentes
+    sont attachées à chaque extrémité au premier nombre réel trouvé dans le même p-champ de notes
+    précédentes et suivantes jouées par le même instrument. Par exemple : les instructions
+
+    <a id="IndexRamping" class="indexterm"></a>
+
+    </p>
+      <div class="informalexample">
+        <pre class="programlisting">
+<span class="stamnt">i</span>1   0    1    100
+<span class="stamnt">i</span>1   1    1    &lt;
+<span class="stamnt">i</span>1   2    1    &lt;
+<span class="stamnt">i</span>1   3    1    400
+<span class="stamnt">i</span>1   4    1    &lt;
+<span class="stamnt">i</span>1   5    1    0</pre>
+      </div>
+      <p>
+
+    se transformeront en
+
+    </p>
+      <div class="informalexample">
+        <pre class="programlisting">
+<span class="stamnt">i</span>1   0    1    100 
+<span class="stamnt">i</span>1   1    1    200
+<span class="stamnt">i</span>1   2    1    300
+<span class="stamnt">i</span>1   3    1    400
+<span class="stamnt">i</span>1   4    1    200
+<span class="stamnt">i</span>1   5    1    0</pre>
+      </div>
+      <p>
+  </p>
+      <p>
+    Les pentes ne peuvent pas traverser une limite de Section. Les pentes ne peuvent pas être attachées
+    à un symbole <span class="emphasis"><em>np</em></span> ou <span class="emphasis"><em>pp</em></span> (mais elles peuvent être référencées
+    par ceux-ci). Les symboles de pente sont interdits en p1, p2 et p3. Les symboles de pente peuvent
+    être reportés. A noter cependant que, bien que la fonction
+    <a class="link" href="ScoreTop.html#ScoreCarry" title="Carry"><em class="citetitle">Carry</em></a> propage les symboles de pente
+    vers des instructions non triées, l'opération d'interprétation de ces
+    symboles se fait sur une version de la partition résolue temporellement et complètement triée. En
+    fait, l'interpolation linéaire temporelle est basé sur le temps de partition résolu, de façon à
+    ce qu'une pente couvrant un groupe de notes accelerando reste linéaire par rapport au temps
+    strictement chronologique.
+  </p>
+      <p>
+    A partir de la version 3.52 de Csound, l'utilisation des symboles ( ou ) donne une pente
+    d'interpolation exponentielle, comme <span class="emphasis"><em>expon</em></span>. L'utilisation du symbole
+    ˜ donnera une distribution aléatoire uniforme entre la première et la dernière valeur de
+    la pente. L'utilisation de ces fontions suit les mêmes règles que la fonction de pente linéaire.
+
+    <a id="IndexLeftParen" class="indexterm"></a>
+    <a id="IndexRightParen" class="indexterm"></a>
+    <a id="IndexTilde" class="indexterm"></a>
+  </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ScoreNextp.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="ScoreTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ScoreMacros.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Symboles next-P et previous-P </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Macros de partition</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

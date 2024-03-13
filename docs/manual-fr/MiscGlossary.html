@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Glossaire</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="prev" href="MiscWindows.html" title="Annexe F. Fonctions fenêtres" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Glossaire</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="MiscWindows.html">Précédent</a> </td>
+          <th width="60%" align="center"> </th>
+          <td width="20%" align="right"> </td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="glossary">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h1 class="title"><a id="MiscGlossary"></a>Glossaire</h1>
+          </div>
+        </div>
+      </div>
+      <div class="glossdiv">
+        <h3 class="title">G</h3>
+        <dl>
+          <dt>
+            <a id="glossaryGuardPoint"></a>
+            <span class="glossterm">Point de garde</span>
+          </dt>
+          <dd class="glossdef">
+            <p>
+    Un point de garde est la dernière position d'une table de fonction. Si la longueur est, disons 1024,
+    la table aura 1024+1 (1025) points : le point supplémentaire est le point de garde.
+	</p>
+            <p>
+    Dans tous les cas, pour une table de 1024 points, le premier point aura l'index 0 et le dernier l'index
+    1023 (l'index 1024 n'est pas réellement utilisé).
+	</p>
+            <p>
+    Il y a un point de garde car certains opcodes lisent les valeurs de la table par interpolation ; dans
+    ce cas, si l'index de lecture est par exemple 1023,5, nous aurons besoin de la position 1024 pour
+    l'interpolation.
+	</p>
+            <p>
+    Il y a deux manières de remplir ce point (écrire sa valeur) :
+
+	</p>
+            <div class="orderedlist">
+              <ol class="orderedlist" type="1">
+                <li class="listitem">
+                  <p>
+		  La manière par défaut : en copiant la valeur du 1er point de la table
+	  </p>
+                </li>
+                <li class="listitem">
+                  <p>
+      Le point de garde étendu : en prolongeant le contour de la table (en continuant le calcul pour un
+      point supplémentaire)
+	  </p>
+                </li>
+              </ol>
+            </div>
+            <p>
+
+    En général le premier mode est utilisé pour les applications cycliques, comme un oscillateur (qui lit
+    la table en boucle continue). Le second usage est pour les lectures à passage unique, comme les
+    enveloppes, où il faut interpoler le dernier point correctement en suivant le contour de la table
+    (on ne boucle pas sur le début de la table).
+  </p>
+          </dd>
+        </dl>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="MiscWindows.html">Précédent</a> </td>
+          <td width="20%" align="center"> </td>
+          <td width="40%" align="right"> </td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Annexe F. Fonctions fenêtres </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> </td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

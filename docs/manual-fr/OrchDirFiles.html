@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Répertoires et fichiers</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OrchTop.html" title="Syntaxe de l'orchestre" />
+    <link rel="prev" href="OrchExpress.html" title="Expressions" />
+    <link rel="next" href="OrchNomen.html" title="Nomenclature" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Répertoires et fichiers</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="OrchExpress.html">Précédent</a> </td>
+          <th width="60%" align="center">Syntaxe de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="OrchNomen.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="section">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="OrchDirFiles"></a>Répertoires et fichiers</h2>
+          </div>
+        </div>
+      </div>
+      <p>
+    Plusieurs générateurs et la commande Csound elle-même spécifient des noms de fichier pour
+    l'écriture ou la lecture. Ceux-ci peuvent parfois être des chemins complets, dont le répertoire
+    cible est complètement spécifié. Lorsque le chemin n'est pas complet, les noms de fichiers sont
+    recherchés dans plusieurs répertoires dans un ordre dépendant de leur type et de la valeur de
+    certaines variables d'environnement. Ces dernières sont facultatives, mais elles peuvent servir
+    à partitionner et à organiser les répertoires de façon à partager les fichiers plutôt que de les
+    dupliquer dans plusieurs répertoires de l'utilisateur. Les variables d'environnement peuvent
+    définir des répertoires pour les fichiers son 
+    (<a class="link" href="CommandEnvironment.html" title="Variables d'environnement de Csound"><em class="citetitle">SFDIR</em></a>),
+    les sons échantillonés
+    (<a class="link" href="CommandEnvironment.html" title="Variables d'environnement de Csound"><em class="citetitle">SSDIR</em></a>), les
+    analyses de son (SADIR), et les fichiers à inclure pour l'orchestre et la
+    partition (INCDIR).
+
+    <a id="IndexSFDIR" class="indexterm"></a>
+    <a id="IndexSSDIR" class="indexterm"></a>
+    <a id="IndexSADIR" class="indexterm"></a>
+    <a id="IndexINCDIR" class="indexterm"></a>
+    <a id="IndexMFDIR" class="indexterm"></a>
+  </p>
+      <p>
+    A partir de la version 5.00 de Csound, ces variables d'environnement peuvent spécifier plusieurs
+    répertoires dans une liste dont le séparateur est le point-virgule (;). Si un fichier est trouvé
+    à plusieurs endroits, c'est le premier de ceux-ci qui à la priorité.
+  </p>
+      <p>
+    L'ordre de recherche est :
+    </p>
+      <div class="orderedlist">
+        <ol class="orderedlist" type="1">
+          <li class="listitem">
+            <p>Les fichiers son en écriture sont placés dans
+        <a class="link" href="CommandEnvironment.html" title="Variables d'environnement de Csound"><em class="citetitle">SFDIR</em></a>
+        (s'il existe), sinon dans le répertoire courant.</p>
+          </li>
+          <li class="listitem">
+            <p>
+          Les fichiers son en lecture sont recherchés dans le répertoire courant. Si les chemins
+          par défaut ne sont pas désactivés, les fichiers sont ensuite recherchés relativement
+          au fichier CSD/ORC/SCO. Enfin, ils sont recherchés dans
+          <a class="link" href="CommandEnvironment.html" title="Variables d'environnement de Csound"><em class="citetitle">SSDIR</em></a>
+          puis dans
+          <a class="link" href="CommandEnvironment.html" title="Variables d'environnement de Csound"><em class="citetitle">SFDIR</em></a>.
+        </p>
+          </li>
+          <li class="listitem">
+            <p>
+          Les fichiers de contrôle d'analyse en lecture sont recherchés dans le répertoire courant.
+          Si les chemins par défaut ne sont pas désactivés, les fichiers sont ensuite recherchés
+          relativement au fichier CSD/ORC/SCO. Enfin, ils sont recherchés dans SADIR.
+        </p>
+          </li>
+          <li class="listitem">
+            <p>
+          Les fichiers MIDI en lecture sont recherchés dans le répertoire courant. Si les chemins
+          par défaut ne sont pas désactivés, les fichiers sont ensuite recherchés relativement
+          au fichier CSD/ORC/SCO. Enfin, ils sont recherchés dans MFDIR,
+          <a class="link" href="CommandEnvironment.html" title="Variables d'environnement de Csound"><em class="citetitle">SSDIR</em></a> et
+          <a class="link" href="CommandEnvironment.html" title="Variables d'environnement de Csound"><em class="citetitle">SFDIR</em></a>.
+        </p>
+          </li>
+          <li class="listitem">
+            <p>
+          Les fichiers de code à inclure dans les fichiers d'orchestre et de partition (avec
+          <a class="link" href="include.html" title="#include"><em class="citetitle">#include</em></a>) sont recherchés d'abord
+          dans le répertoire courant, ensuite dans le même répertoire que le fichier d'orchestre ou
+          de partition (respectivement), enfin dans INCDIR.
+        </p>
+          </li>
+        </ol>
+      </div>
+      <p>
+  </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="OrchExpress.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OrchTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="OrchNomen.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Expressions </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Nomenclature</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

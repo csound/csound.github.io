@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>mode</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="MixerClear.html" title="MixerClear" />
+    <link rel="next" href="modmatrix.html" title="modmatrix" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">mode</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="MixerClear.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="modmatrix.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="mode"></a>
+      <div class="titlepage"></div>
+      <a id="IndexMode" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">mode</span>
+        </h2>
+        <p>mode — 
+      Un filtre simulant un système masse-ressort-amortisseur.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm211412"></a>
+        <h2>Description</h2>
+        <p>
+      Filtre le signal entrant avec la fréquence de résonance et le facteur de
+      qualité donnés. On peut aussi le voir comme un générateur de signal pour
+      un grand facteur de qualité, avec une impulsion pour l'excitation. On peut
+      combiner plusieurs modes pour construire des instruments complexes tels
+      que des cloches ou des tables d'harmonie de guitare.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm211415"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">aout <span class="command"><strong>mode</strong></span> ain, xfreq, xQ [, iskip]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm211419"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>iskip</em></span> (facultatif, 0 par défaut) -- s'il est non nul,
+      l'initialisation du filtre est ignorée.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm211423"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>aout</em></span> -- signal filtré
+    </p>
+        <p>
+      <span class="emphasis"><em>ain</em></span> -- signal à filtrer
+    </p>
+        <p>
+      <span class="emphasis"><em>xfreq</em></span> -- fréquence de résonance du filtre
+      </p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning: Avertissement">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Avertissement]" src="images/warning.png" />
+              </td>
+              <th align="left">Avertissement</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+          Comme ce filtre devient instable si <span class="emphasis"><em>sr</em></span>/<span class="emphasis"><em>xfreq</em></span>
+          &lt; pi, la valeur de <span class="emphasis"><em>xfreq</em></span> est limitée en interne à
+          <span class="emphasis"><em>sr</em></span>/<span class="emphasis"><em>pi</em></span>-<span class="emphasis"><em>sr</em></span>/100
+          &gt; (par exemple <span class="emphasis"><em>xfreq</em></span> &gt; 13595 Hz à 44.1 kHz).
+          Le terme <span class="emphasis"><em>sr</em></span>/100 est dû au fait que le filtre, bien
+          que mathématiquemet stable, a une très forte amplification lorsque l'on
+          s'approche de la région instable.
+        </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <p>
+    </p>
+        <p>
+      <span class="emphasis"><em>xQ</em></span> -- facteur de qualité du filtre
+    </p>
+        <p>
+      La durée de résonance est approximativement proportionnelle à
+      <span class="emphasis"><em>xQ</em></span>/<span class="emphasis"><em>xfreq</em></span>.
+    </p>
+        <p>
+      Voir <a class="link" href="MiscModalFreq.html" title="Annexe E. Rapports de fréquence modale"><em class="citetitle">Rapports de Fréquence Modale</em></a>
+      pour des rapports de fréquence d'instruments réels que l'on peut utiliser
+      pour déterminer les valeurs de <span class="emphasis"><em>xfreq</em></span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm211451"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode mode. Il utilise le fichier
+      <a class="ulink" href="examples/mode.csd" target="_top"><em class="citetitle">mode.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm211456"></a>
+          <p class="title">
+            <strong>Exemple 626. Exemple de l'opcode mode.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm211463"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o moogvcf.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; Initialize the global variables.</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4410</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="c1">; 2 modes excitator</span><span class="w">
+
+</span>i<span class="n">dur</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="vi">p3</span><span class="w">
+</span>i<span class="n">freq11</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">freq12</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+</span>i<span class="n">Q11</span><span class="w">    </span><span class="nb">init</span><span class="w"> </span><span class="vi">p6</span><span class="w">
+</span>i<span class="n">Q12</span><span class="w">    </span><span class="nb">init</span><span class="w"> </span><span class="vi">p7</span><span class="w">
+</span>i<span class="n">amp</span><span class="w">    </span><span class="nb">init</span><span class="w"> </span><span class="nb">ampdb</span><span class="p">(</span><span class="vi">p8</span><span class="p">)</span><span class="w">
+</span>i<span class="n">freq21</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="vi">p9</span><span class="w">
+</span>i<span class="n">freq22</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="vi">p10</span><span class="w">
+</span>i<span class="n">Q21</span><span class="w">    </span><span class="nb">init</span><span class="w"> </span><span class="vi">p11</span><span class="w">
+</span>i<span class="n">Q22</span><span class="w">    </span><span class="nb">init</span><span class="w"> </span><span class="vi">p12</span><span class="w">
+
+</span><span class="c1">; to simulate the shock between the excitator and the resonator</span><span class="w">
+</span>a<span class="n">shock</span><span class="w">  </span><span class="nb">mpulse</span><span class="w">  </span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="w"> 
+
+</span>a<span class="n">exc1</span><span class="w">  </span><span class="nb">mode</span><span class="w"> </span>a<span class="n">shock</span><span class="p">,</span>i<span class="n">freq11</span><span class="p">,</span>i<span class="n">Q11</span><span class="w">
+</span>a<span class="n">exc1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">exc1</span><span class="o">*</span>i<span class="n">amp</span><span class="w">
+</span>a<span class="n">exc2</span><span class="w">  </span><span class="nb">mode</span><span class="w"> </span>a<span class="n">shock</span><span class="p">,</span>i<span class="n">freq12</span><span class="p">,</span>i<span class="n">Q12</span><span class="w">
+</span>a<span class="n">exc2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">exc2</span><span class="o">*</span>i<span class="n">amp</span><span class="w">
+
+
+</span>a<span class="n">exc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>a<span class="n">exc1</span><span class="o">+</span>a<span class="n">exc2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="w">
+
+</span><span class="c1">;"Contact" condition : when aexc reaches 0, the excitator looses </span><span class="w">
+</span><span class="c1">;contact with the resonator, and stops "pushing it"</span><span class="w">
+</span>a<span class="n">exc</span><span class="w"> </span><span class="nb">limit</span><span class="w"> </span>a<span class="n">exc</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span>i<span class="n">amp</span><span class="w"> 
+
+</span><span class="c1">; 2modes resonator</span><span class="w">
+
+</span>a<span class="n">res1</span><span class="w">  </span><span class="nb">mode</span><span class="w"> </span>a<span class="n">exc</span><span class="p">,</span>i<span class="n">freq21</span><span class="p">,</span>i<span class="n">Q21</span><span class="w">
+</span>a<span class="n">res2</span><span class="w">  </span><span class="nb">mode</span><span class="w"> </span>a<span class="n">exc</span><span class="p">,</span>i<span class="n">freq22</span><span class="p">,</span>i<span class="n">Q22</span><span class="w">
+
+</span>a<span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>a<span class="n">res1</span><span class="o">+</span>a<span class="n">res2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="w">
+
+</span><span class="nb">display</span><span class="w"> </span>a<span class="n">exc</span><span class="o">+</span>a<span class="n">res</span><span class="p">,</span><span class="vi">p3</span><span class="w">
+</span><span class="nb">outs</span><span class="w">  </span>a<span class="n">exc</span><span class="o">+</span>a<span class="n">res</span><span class="p">,</span>a<span class="n">exc</span><span class="o">+</span>a<span class="n">res</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="c1">;wooden excitator against glass resonator</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8</span><span class="w">  </span><span class="mi">1000</span><span class="w">   </span><span class="mi">3000</span><span class="w">  </span><span class="mi">12</span><span class="w">  </span><span class="mi">8</span><span class="w">  </span><span class="mi">70</span><span class="w">  </span><span class="mi">440</span><span class="w">   </span><span class="mi">888</span><span class="w">   </span><span class="mi">500</span><span class="w">  </span><span class="mi">420</span><span class="w"> 
+
+</span><span class="c1">;felt against glass</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">8</span><span class="w">  </span><span class="mi">80</span><span class="w">   </span><span class="mi">188</span><span class="w">  </span><span class="mi">8</span><span class="w">  </span><span class="mi">3</span><span class="w">  </span><span class="mi">70</span><span class="w">  </span><span class="mi">440</span><span class="w">   </span><span class="mi">888</span><span class="w">   </span><span class="mi">500</span><span class="w">  </span><span class="mi">420</span><span class="w"> 
+
+</span><span class="c1">;wood against wood</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">8</span><span class="w">  </span><span class="mi">1000</span><span class="w">   </span><span class="mi">3000</span><span class="w">  </span><span class="mi">12</span><span class="w">  </span><span class="mi">8</span><span class="w">  </span><span class="mi">70</span><span class="w">  </span><span class="mi">440</span><span class="w">  </span><span class="mi">630</span><span class="w">   </span><span class="mi">60</span><span class="w">  </span><span class="mi">53</span><span class="w"> 
+
+</span><span class="c1">;felt against wood</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="mi">8</span><span class="w">  </span><span class="mi">80</span><span class="w">   </span><span class="mi">180</span><span class="w">  </span><span class="mi">8</span><span class="w">  </span><span class="mi">3</span><span class="w">  </span><span class="mi">70</span><span class="w">  </span><span class="mi">440</span><span class="w">  </span><span class="mi">630</span><span class="w">   </span><span class="mi">60</span><span class="w">  </span><span class="mi">53</span><span class="w"> 
+
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="mi">8</span><span class="w">  </span><span class="mi">1000</span><span class="w">   </span><span class="mi">3000</span><span class="w">  </span><span class="mi">12</span><span class="w">  </span><span class="mi">8</span><span class="w">  </span><span class="mi">70</span><span class="w">  </span><span class="mi">440</span><span class="w">  </span><span class="mi">888</span><span class="w">   </span><span class="mi">2000</span><span class="w">  </span><span class="mi">1630</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">23</span><span class="w"> </span><span class="mi">8</span><span class="w">  </span><span class="mi">80</span><span class="w">   </span><span class="mi">180</span><span class="w">  </span><span class="mi">8</span><span class="w">  </span><span class="mi">3</span><span class="w">  </span><span class="mi">70</span><span class="w">  </span><span class="mi">440</span><span class="w">  </span><span class="mi">888</span><span class="w">   </span><span class="mi">2000</span><span class="w">  </span><span class="mi">1630</span><span class="w">
+
+
+</span><span class="c1">;With a metallic excitator</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">33</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">1000</span><span class="w">  </span><span class="mi">1800</span><span class="w">  </span><span class="mi">1000</span><span class="w">  </span><span class="mi">720</span><span class="w">  </span><span class="mi">70</span><span class="w">   </span><span class="mi">440</span><span class="w">   </span><span class="mi">882</span><span class="w">  </span><span class="mi">500</span><span class="w">  </span><span class="mi">500</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">37</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">1000</span><span class="w">  </span><span class="mi">1800</span><span class="w">  </span><span class="mi">1000</span><span class="w">  </span><span class="mi">850</span><span class="w">  </span><span class="mi">70</span><span class="w">   </span><span class="mi">440</span><span class="w">   </span><span class="mi">630</span><span class="w">  </span><span class="mi">60</span><span class="w">  </span><span class="mi">53</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">1000</span><span class="w">  </span><span class="mi">1800</span><span class="w">  </span><span class="mi">2000</span><span class="w">  </span><span class="mi">1720</span><span class="w">  </span><span class="mi">70</span><span class="w">   </span><span class="mi">440</span><span class="w">   </span><span class="mi">442</span><span class="w">  </span><span class="mi">500</span><span class="w">  </span><span class="mi">500</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm211937"></a>
+        <h2>Crédits</h2>
+        <p>UDO original et documentation/exemple par François Blanc</p>
+        <p>Traduction de l'opcode en code-C par Steven Yi</p>
+        <p>Nouveau dans la version 5.04</p>
+        <p>Paramètres de taux audio introduits dans la version 6.02</p>
+        <p>Novembre 2013.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="MixerClear.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="modmatrix.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">MixerClear </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> modmatrix</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

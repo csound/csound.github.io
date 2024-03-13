@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>filelen</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="filebit.html" title="filebit" />
+    <link rel="next" href="filenchnls.html" title="filenchnls" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">filelen</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="filebit.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="filenchnls.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="filelen"></a>
+      <div class="titlepage"></div>
+      <a id="IndexFilelen" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">filelen</span>
+        </h2>
+        <p>filelen — 
+      Retourne la longueur d'un fichier son.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm98502"></a>
+        <h2>Description</h2>
+        <p>
+      Retourne la longueur d'un fichier son.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm98505"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ir <span class="command"><strong>filelen</strong></span> ifilcod, [iallowraw]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm98509"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ifilcod</em></span> -- fichier son à interroger
+    </p>
+        <p>
+      <span class="emphasis"><em>iallowraw</em></span> -- (facultatif) permet des fichiers son bruts
+      (vaut 1 par défaut)
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm98515"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>filelen</em></span> retourne la longueur du fichier son
+      <span class="emphasis"><em>ifilcod</em></span> en secondes. <span class="emphasis"><em>filelen</em></span> peut
+      retourner la longueur des fichiers de type convolve et PVOC si le paramètre
+      <span class="emphasis"><em>iallowraw</em></span> est différent de zéro (il est non nul par
+      défaut).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm98522"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode filelen. Il utilise les fichiers
+      <a class="ulink" href="examples/filelen.csd" target="_top"><em class="citetitle">filelen.csd</em></a>,
+      <a class="ulink" href="examples/fox.wav" target="_top"><em class="citetitle">fox.wav</em></a> et
+      <a class="ulink" href="examples/drumsSlp.wav" target="_top"><em class="citetitle">drumsSlp.wav</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm98531"></a>
+          <p class="title">
+            <strong>Exemple 296. Exemple de l'opcode filelen.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm98538"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">;-o filelen.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; by Menno Knevel 2022</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> </span><span class="c1">; choose between mono or stereo file</span><span class="w">
+
+</span>i<span class="n">len</span><span class="w">   </span><span class="nb">filelen</span><span class="w"> </span><span class="vi">p4</span><span class="w">	      </span><span class="c1">; calculate length of soundfile</span><span class="w">
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">lenght of sample = </span><span class="si">%2.3f</span><span class="s"> seconds</span><span class="se">\n\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span>i<span class="n">len</span><span class="w">
+</span>i<span class="n">chn</span><span class="w"> </span><span class="nb">filenchnls</span><span class="w">  </span><span class="vi">p4</span><span class="w">	      </span><span class="c1">; check number of channels</span><span class="w">
+
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span>i<span class="n">chn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">then</span><span class="w">           </span><span class="c1">; mono signal</span><span class="w">
+     </span>a<span class="n">sig</span><span class="w"> </span><span class="nb">diskin2</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">	
+     </span><span class="nb">outs</span><span class="w">    </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="k">else</span><span class="w">
+     </span>a<span class="n">L</span><span class="p">,</span><span class="w"> </span>a<span class="n">R</span><span class="w"> </span><span class="nb">diskin2</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">     </span><span class="c1">; stereo signal </span><span class="w">
+     </span><span class="nb">outs</span><span class="w">    </span>a<span class="n">L</span><span class="p">,</span><span class="w"> </span>a<span class="n">R</span><span class="w">
+</span><span class="k">endif</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w">	</span><span class="c1">; mono signal</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="s">"drumsSlp.wav"</span><span class="w">	</span><span class="c1">; stereo signal</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+
+      Le fichier audio mono <span class="quote">« <span class="quote">fox.wav</span> »</span> dure environ 2.8 secondes et
+      le fichier stéréo <span class="quote">« <span class="quote">drumsSlp.wav</span> »</span> dure 4 secondes. Ainsi la
+      sortie de <span class="emphasis"><em>filelen</em></span> contiendra une ligne pour le
+      fichier mono et pour le fichier stéréo comme ceci :
+      </p>
+        <pre class="screen">
+lenght of sample = 2.757 seconds
+lenght of sample = 4.000 seconds</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm98702"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="filebit.html" title="filebit"><em class="citetitle">filebit</em></a>,
+      <a class="link" href="filenchnls.html" title="filenchnls"><em class="citetitle">filenchnls</em></a>,
+      <a class="link" href="filepeak.html" title="filepeak"><em class="citetitle">filepeak</em></a>,
+      <a class="link" href="filesr.html" title="filesr"><em class="citetitle">filesr</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm98713"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Matt Ingalls</td>
+          </tr>
+          <tr>
+            <td>Juillet 1999</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 3.57 de Csound</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="filebit.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="filenchnls.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">filebit </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> filenchnls</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

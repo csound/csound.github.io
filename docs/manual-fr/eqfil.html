@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>eqfil</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="ephasor.html" title="ephasor" />
+    <link rel="next" href="evalstr.html" title="evalstr" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">eqfil</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ephasor.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="evalstr.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="eqfil"></a>
+      <div class="titlepage"></div>
+      <a id="Indexeqfil" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">eqfil</span>
+        </h2>
+        <p>eqfil — 
+      Filtre égaliseur.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm93004"></a>
+        <h2>Description</h2>
+        <p>
+      L'opcode <span class="emphasis"><em>eqfil</em></span> est un filtre d'égalisation du second
+      ordre accordable basé sur le modèle de Regalia et Mitra ("Tunable Digital
+      Frequency Response Equalization Filters", IEEE Trans. on Ac., Sp. and Sig
+      Proc., 35 (1), 1987). Il fournit un filtre à pics/creux pour construire des
+      égaliseurs paramétriques/graphiques.
+    </p>
+        <p>
+      L'amplitude de la réponse du filtre sera plate (=1) pour <span class="emphasis"><em>kgain</em></span>=1.
+      Si <span class="emphasis"><em>kgain</em></span> est supérieur à 1, il y aura un pic à la fréquence
+      centrale dont la largeur est donnée par le paramètre <span class="emphasis"><em>kbw</em></span>, et
+      en-dehors de cette bande, la réponse tendra vers 1. Inversement, si
+      <span class="emphasis"><em>kgain</em></span> est inférieur à 1, il y aura un creux autour
+      de la fréquence centrale.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm93013"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">asig <span class="command"><strong>eqfil</strong></span> ain, kcf, kbw, kgain[, istor]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm93017"></a>
+        <h2>Initialisation</h2>
+        <p>
+        <span class="emphasis"><em>istor</em></span> -- état initial de l'espace de données interne.
+      Comme le filtrage comprend une boucle de rétroaction sur la sortie précédente,
+      l'état initial de l'espace de stockage utilisé est significatif. Une valeur
+      nulle provoquera l'effacement de cet espace ; une valeur non nulle autorisera
+      la persistance de l'information précédente. La valeur par défaut est 0.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm93021"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>asig</em></span> -- signal de sortie filtré.
+    </p>
+        <p>
+      <span class="emphasis"><em>ain</em></span> -- signal d'entrée.
+    </p>
+        <p>
+      <span class="emphasis"><em>kcf</em></span> -- fréquence centrale du filtre.
+    </p>
+        <p>
+      <span class="emphasis"><em>kbw</em></span> -- largeur de bande du pic/creux (Hz). 
+    </p>
+        <p>
+      <span class="emphasis"><em>kgain</em></span> -- gain du pic/creux. 
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm93033"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode eqfil. Il utilise le fichier
+      <a class="ulink" href="examples/eqfil.csd" target="_top"><em class="citetitle">eqfil.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm93038"></a>
+          <p class="title">
+            <strong>Exemple 269. Exemple de l'opcode eqfil.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm93045"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o eqfil.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>k<span class="n">cf</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>k<span class="n">fe</span><span class="w">	</span><span class="nb">expseg</span><span class="w">	</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">0.9</span><span class="p">,</span><span class="w"> </span><span class="mi">1800</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mi">175</span><span class="w">
+</span>k<span class="n">env</span><span class="w">	</span><span class="nb">linen</span><span class="w">	</span><span class="mf">.03</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="w"> </span><span class="c1">;low amplitude is needed to avoid clipping</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="nb">buzz</span><span class="w">	</span>k<span class="n">env</span><span class="p">,</span><span class="w"> </span>k<span class="n">fe</span><span class="p">,</span><span class="w"> </span><span class="vg">sr</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span>k<span class="n">fe</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>a<span class="n">fil</span><span class="w">	</span><span class="nb">eqfil</span><span class="w">	</span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>k<span class="n">cf</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">fil</span><span class="o">*</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span>a<span class="n">fil</span><span class="o">*</span><span class="mi">20</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">; a sine wave.</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">200</span><span class="w">	</span><span class="c1">;filter centre freq=200</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1500</span><span class="w">	</span><span class="c1">;filter centre freq=1500</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm93223"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Victor Lazzarini</td>
+          </tr>
+          <tr>
+            <td>Avril 2007</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 5.06</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ephasor.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="evalstr.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ephasor </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> evalstr</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

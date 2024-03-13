@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>setksmps</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="setctrl.html" title="setctrl" />
+    <link rel="next" href="setrow.html" title="setrow" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">setksmps</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="setctrl.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="setrow.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="setksmps"></a>
+      <div class="titlepage"></div>
+      <a id="IndexSetksmps" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">setksmps</span>
+        </h2>
+        <p>setksmps — 
+      Fixe la valeur locale de ksmps dans un bloc d'opcode défini par l'utilisateur.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm304535"></a>
+        <h2>Description</h2>
+        <p>
+      Fixe la valeur locale de <span class="emphasis"><em>ksmps</em></span> dans un bloc d'opcode défini
+      par l'utilisateur.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm304539"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>setksmps</strong></span> iksmps</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm304543"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>iksmps</em></span> -- fixe la valeur locale de <span class="emphasis"><em>ksmps</em></span>.
+    </p>
+        <p>
+      Si <span class="emphasis"><em>iksmps</em></span> vaut zéro, le <span class="emphasis"><em>ksmps</em></span> de
+      l'instrument ou de l'opcode appelant est utilisé (c'est le comportement par
+      défaut).
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note: Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Le <span class="emphasis"><em>ksmps</em></span> local est implémenté en divisant une période de
+        contrôle en sous-périodes-k plus petites et en modifiant temporairement les
+        variables globales internes de Csound. Ceci nécessite également de convertir
+        le taux des entrées de taux-k et des arguments de sortie (les variables d'entrée
+        reçoivent la même valeur durant toutes les sous-périodes-k, tandis que les
+        sorties ne sont écrites que dans la dernière). Cela signifie aussi que l'on ne
+        peut pas utiliser un <span class="emphasis"><em>ksmps</em></span> local supérieur au
+        <a class="link" href="ksmps.html" title="ksmps"><em class="citetitle">ksmps</em></a> global.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning: Avertissement au sujet du ksmps local">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Avertissement]" src="images/warning.png" />
+              </td>
+              <th align="left">Avertissement au sujet du <span class="emphasis"><em>ksmps</em></span> local</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Lorsque le <span class="emphasis"><em>ksmps</em></span> local est différent de celui de
+        l'orchestre (défini dans l'en-tête de l'orchestre), il ne faut pas utiliser
+        d'opérations globales de taux-a dans le bloc d'opcode défini par l'utilisateur.
+      </p>
+                <p>
+        Ça comprend :
+
+        </p>
+                <div class="itemizedlist">
+                  <ul class="itemizedlist" style="list-style-type: disc; ">
+                    <li class="listitem">
+                      <p>tout accès aux variables <span class="quote">« <span class="quote">ga</span> »</span></p>
+                    </li>
+                    <li class="listitem">
+                      <p>les opcodes zak de taux-a
+          (<a class="link" href="zar.html" title="zar"><em class="citetitle">zar</em></a>,
+          <a class="link" href="zaw.html" title="zaw"><em class="citetitle">zaw</em></a>, etc.)</p>
+                    </li>
+                    <li class="listitem">
+                      <p><a class="link" href="tablera.html" title="tablera"><em class="citetitle">tablera</em></a> et
+          <a class="link" href="tablewa.html" title="tablewa"><em class="citetitle">tablewa</em></a> (en fait, ces deux
+          opcodes peuvent fonctionner, mais il faut prendre des précautions)</p>
+                    </li>
+                    <li class="listitem">
+                      <p>La famille d'opcodes <span class="emphasis"><em>in</em></span> et <span class="emphasis"><em>out</em></span>
+          (ceux-ci lisent et écrivent dans des tampons globaux de taux-a)</p>
+                    </li>
+                  </ul>
+                </div>
+                <p>
+      </p>
+                <p>
+        En général, le <span class="emphasis"><em>ksmps</em></span> local doit être utiliser avec
+        précaution car c'est un dispositif expérimental. Bien qu'il fonctionne dans
+        la plupart des cas.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <p>
+      On peut utiliser l'instruction <span class="emphasis"><em>setksmps</em></span> pour fixer la
+      valeur locale de <a class="link" href="ksmps.html" title="ksmps"><em class="citetitle">ksmps</em></a> 
+      dans un bloc d'opcode défini par l'utilisateur. Il a un paramètre de taux-i
+      définissant la nouvelle valeur de <span class="emphasis"><em>ksmps</em></span> (qui reste
+      inchangée si l'on utilise zéro). <span class="emphasis"><em>setksmps</em></span> doit être
+      utilisé avant tout autre opcode (mais on peut le mettre après
+      <a class="link" href="xin.html" title="xin"><em class="citetitle">xin</em></a>), sinon il y aura des
+      résultats imprévisibles.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm304594"></a>
+        <h2>Exécution</h2>
+        <p>
+      La syntaxe d'un bloc d'opcode défini par l'utilisateur est la suivante :
+
+      </p>
+        <pre class="programlisting">
+<span class="oblock">opcode</span>  name, outtypes, intypes
+xinarg1 [, xinarg2] [, xinarg3] ... [xinargN]  <span class="opc">xin</span>
+[<span class="opc">setksmps</span>  iksmps]
+... the rest of the instrument's code.
+<span class="opc">xout</span>  xoutarg1 [, xoutarg2] [, xoutarg3] ... [xoutargN]
+<span class="oblock">endop</span>
+      </pre>
+        <p>
+    </p>
+        <p>
+      On peut alors utiliser le nouvel opcode avec la syntaxe usuelle :
+
+      </p>
+        <div class="literallayout">
+          <p><br />
+[xinarg1] [, xinarg2] ... [xinargN]  name  [xoutarg1] [, xoutarg2] ... [xoutargN] [, iksmps]<br />
+      </p>
+        </div>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm304605"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voir l'exemple de l'opcode <a class="link" href="opcode.html" title="opcode"><em class="citetitle">opcode</em></a>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm304610"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="endop.html" title="endop"><em class="citetitle">endop</em></a>, 
+      <a class="link" href="opcode.html" title="opcode"><em class="citetitle">opcode</em></a>, 
+      <a class="link" href="xin.html" title="xin"><em class="citetitle">xin</em></a>, 
+      <a class="link" href="xout.html" title="xout"><em class="citetitle">xout</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm304621"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Istvan Varga, 2002 ; basé sur du code par Matt J. Ingalls</p>
+        <p>Nouveau dans la version 4.22</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="setctrl.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="setrow.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">setctrl </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> setrow</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

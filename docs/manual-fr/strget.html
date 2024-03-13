@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>strget</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="strfromurl.html" title="strfromurl" />
+    <link rel="next" href="strindex.html" title="strindex" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">strget</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="strfromurl.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="strindex.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="strget"></a>
+      <div class="titlepage"></div>
+      <a id="Indexstrget" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">strget</span>
+        </h2>
+        <p>strget — 
+      Donne à une variable chaîne de caractères une valeur venant de la table
+      de strset ou d'un p-champ chaîne de caractères.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm333140"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>strget</em></span> donne à une variable chaîne de caractères
+      pendant l'initialisation une valeur mémorisée de la table de
+      <a class="link" href="strset.html" title="strset"><em class="citetitle">strset</em></a> à l'indice
+      spécifié ou dans un p-champ chaîne de caractères de la partition. S'il
+      n'y a pas de chaîne définie pour cet indice, la variable reçoit une
+      chaîne vide.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm333146"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">Sdst <span class="command"><strong>strget</strong></span> indx</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm333150"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>indx</em></span> -- indice de <span class="emphasis"><em>strset</em></span> ou
+      p-champ de la partition.
+    </p>
+        <p>
+      <span class="emphasis"><em>Sdst</em></span> -- variable chaîne de caractères de destination.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm333157"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode strget. Il utilise le fichier
+      <a class="ulink" href="examples/strget.csd" target="_top"><em class="citetitle">strget.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm333162"></a>
+          <p class="title">
+            <strong>Exemple 1042. Exemple de l'opcode strget.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm333169"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o strget.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">strset</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w">
+</span><span class="nb">strset</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>S<span class="n">file</span><span class="w"> </span><span class="nb">strget</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">soundin</span><span class="w"> </span>S<span class="n">file</span><span class="w">
+      </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">2.7</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w">   </span><span class="mi">2</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm333271"></a>
+        <h2>Voir aussi</h2>
+        <p><a class="link" href="strset.html" title="strset"><em class="citetitle">strset</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm333276"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Istvan Varga</p>
+        <p>2005</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="strfromurl.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="strindex.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">strfromurl </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> strindex</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

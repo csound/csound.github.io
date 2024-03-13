@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>phaser2</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="phaser1.html" title="phaser1" />
+    <link rel="next" href="phasor.html" title="phasor" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">phaser2</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="phaser1.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="phasor.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="phaser2"></a>
+      <div class="titlepage"></div>
+      <a id="IndexPhaser2" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">phaser2</span>
+        </h2>
+        <p>phaser2 — 
+      Filtres passe-tout du second ordre arrangés en série.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm251174"></a>
+        <h2>Description</h2>
+        <p>
+      Une implémentation de <span class="emphasis"><em>iord</em></span> filtres passe-tout du
+      second ordre en série.
+   </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm251178"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>phaser2</strong></span> asig, kfreq, kq, kord, kmode, ksep, kfeedback</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm251182"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kfreq</em></span> -- fréquence (en Hz) du(des) filtre(s). C'est
+      la fréquence centrale de l'encoche du premier filtre passe-tout de la
+      série. Cette fréquence est utilisée comme fréquence de base à partir de
+      laquelle les fréquences des autres encoches sont dérivées.
+    </p>
+        <p>
+      <span class="emphasis"><em>kq</em></span> -- Q de chaque encoche. Des valeurs élevées de Q
+      donnent des encoches étroites. Un Q compris entre 0.5 et 1 donne l'effet
+      de "phasing" le plus fort, mais des valeurs de Q plus grandes
+      peuvent être utilisées pour des effets spéciaux.
+    </p>
+        <p>
+      <span class="emphasis"><em>kord</em></span> -- le nombre d'étages passe-tout en série. Ce sont
+      des filtres du second ordre et il peut y en avoir de 1 à 2499. Avec des
+      ordres plus élevés, le temps de calcul augmente.
+    </p>
+        <p>
+      <span class="emphasis"><em>kfeedback</em></span> -- quantité du signal de sortie qui est
+      réinjectée dans l'entrée de la chaîne passe-tout. Plus la rétroaction
+      est importante et plus il y aura d'encoches proéminentes dans le spectre de
+      la sortie. <span class="emphasis"><em>kfeedback</em></span> doit être compris entre -1 et
+      +1 pour la stabilité.
+    </p>
+        <p>
+      <span class="emphasis"><em>kmode</em></span> -- utilisé pour le calcul des fréquence des
+      encoches.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note: Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Bien que <span class="emphasis"><em>kord</em></span> et <span class="emphasis"><em>kmode</em></span> soient
+        présentés au taux-k, ils ne sont en fait lus qu'à l'initialisation. Ainsi,
+        si l'on utilise des arguments de taux-k, il faut leur affecter une valeur
+        avec <a class="link" href="init.html" title="init"><em class="citetitle">init</em></a>.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <p>
+      <span class="emphasis"><em>ksep</em></span> -- facteur de mise à l'échelle utilisé en conjonction
+      avec <span class="emphasis"><em>imode</em></span> pour déterminer les fréquences des encoches
+      ajoutées dans le spectre de sortie.
+    </p>
+        <p>
+      <span class="emphasis"><em>phaser2</em></span> implémente <span class="emphasis"><em>iord</em></span> sections
+      passe-tout du second ordre, connectées en série. L'utilisation de sections
+      passe-tout du second ordre permet un placement précis de la fréquence, de
+      la largeur et de la profondeur des encoches dans le spectre de fréquence.
+      <span class="emphasis"><em>iord</em></span> est utilisé pour déterminer directement le
+      nombre d'encoches dans le spectre ; par exemple pour
+      <span class="emphasis"><em>iord</em></span> = 6, il y aura 6 encoches dans le spectre de
+      sortie.
+    </p>
+        <p>
+      Il y a deux modes possibles de détermination des fréquences d'encoche.
+      Lorsque <span class="emphasis"><em>imode</em></span> = 1, les fréquences d'encoche sont
+      déterminées par la fonction suivante :
+      </p>
+        <div class="literallayout">
+          <p><br />
+fréquence de l'encoche N = kbf + (ksep * kbf * N-1)</p>
+        </div>
+        <p>
+    </p>
+        <p>
+      Par exemple, avec <span class="emphasis"><em>imode</em></span> = 1 et <span class="emphasis"><em>ksep</em></span> = 1,
+      les encoches seront en relation harmonique avec la fréquence d'encoche
+      déterminée par <span class="emphasis"><em>kfreq</em></span> (ainsi, s'il y a 8 encoches, la
+      première étant à 100 Hz, les suivantes seront à 200, 300, 400, 500, 600,
+      700 et 800 Hz). C'est utile pour générer un effet de "filtre en peigne",
+      dont le nombre d'encoches est déterminé par <span class="emphasis"><em>iord</em></span>.
+      Différentes valeurs de <span class="emphasis"><em>ksep</em></span> donnent des fréquences
+      d'encoche inharmoniques et d'autres effets spéciaux. <span class="emphasis"><em>ksep</em></span>
+      peut être balayé pour créer un mouvement d'expension ou de contraction des
+      fréquences d'encoche. Les soufflets d'un accordéon en mouvement donnent
+      une bonne analogie visuelle de l'effet du balayage de <span class="emphasis"><em>ksep</em></span> -
+      les encoches sont séparées, puis compressées ensemble, lorsque
+      <span class="emphasis"><em>ksep</em></span> change.
+    </p>
+        <p>
+      Losrque <span class="emphasis"><em>imode</em></span> = 2, les encoches successives sont des
+      puissances du paramètre d'entrée <span class="emphasis"><em>ksep</em></span> multipliées par
+      la fréquence d'encoche initiale donnée par <span class="emphasis"><em>kfreq</em></span>. On
+      peut ainsi régler les fréquences d'encoche en octaves ou sur d'autres
+      intervalles musicaux. Par exemple, les lignes suivantes généreront 8
+      encoches dans le spectre de sortie, les encoches étant réparties sur les
+      octaves supérieures de <span class="emphasis"><em>kfreq</em></span>:
+      </p>
+        <div class="literallayout">
+          <p><br />
+aphs    <span class="emphasis"><em>phaser2</em></span>    ain, kfreq, 0.5, 8, 2, 2, 0<br />
+aout    <span class="emphasis"><em>=</em></span>          ain + aphs</p>
+        </div>
+        <p>
+    </p>
+        <p>
+      Lorsque <span class="emphasis"><em>imode</em></span> = 2, la valeur de <span class="emphasis"><em>ksep</em></span>
+      doit être supérieure à 0. <span class="emphasis"><em>ksep</em></span> peut être balayé pour
+      créer une compression et une expension des fréquences d'encoche (avec des
+      effets plus dramatiques que lorsque <span class="emphasis"><em>imode</em></span> = 1).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm251235"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode phaser2. Il utilise le fichier
+      <a class="ulink" href="examples/phaser2.csd" target="_top"><em class="citetitle">phaser2.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm251240"></a>
+          <p class="title">
+            <strong>Exemple 754. Exemple de l'opcode phaser2.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm251247"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac           -iadc     -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o phaser2.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4410</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">              </span><span class="c1">; demonstration of phase shifting abilities of phaser2. </span><span class="w">
+  </span><span class="c1">; Input mixed with output of phaser2 to generate notches. </span><span class="w">
+  </span><span class="c1">; Demonstrates the interaction of imode and ksep.</span><span class="w">
+  </span>i<span class="n">dur</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="vi">p3</span><span class="w"> 
+  </span>i<span class="n">amp</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">.04</span><span class="w">
+  </span>i<span class="n">order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">        </span><span class="c1">; number of 2nd-order stages in phaser2 network</span><span class="w">
+  </span>i<span class="n">freq</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="vi">p6</span><span class="w">        </span><span class="c1">; not used</span><span class="w">
+  </span>i<span class="n">feed</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="vi">p7</span><span class="w">        </span><span class="c1">; amount of feedback for phaser2</span><span class="w">
+  </span>i<span class="n">mode</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="vi">p8</span><span class="w">        </span><span class="c1">; mode for frequency scaling</span><span class="w">
+  </span>i<span class="n">sep</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="vi">p9</span><span class="w">        </span><span class="c1">; used with imode to determine notch frequencies</span><span class="w">
+  </span>k<span class="n">amp</span><span class="w">   </span><span class="nb">linseg</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span>i<span class="n">amp</span><span class="p">,</span><span class="w"> </span>i<span class="n">dur</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span>i<span class="n">amp</span><span class="p">,</span><span class="w"> </span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span>i<span class="n">harms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="vg">sr</span><span class="o">*</span><span class="mf">.4</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">100</span><span class="w">
+
+  </span><span class="c1">; "Sawtooth" waveform exponentially decaying function, to control notch frequencies</span><span class="w">
+  </span>a<span class="n">sig</span><span class="w">   </span><span class="nb">gbuzz</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span>i<span class="n">harms</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.95</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">  
+  </span>k<span class="n">line</span><span class="w">  </span><span class="nb">expseg</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">dur</span><span class="p">,</span><span class="w"> </span><span class="mf">.005</span><span class="w">
+  </span>a<span class="n">phs</span><span class="w">   </span><span class="nb">phaser2</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>k<span class="n">line</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span>i<span class="n">order</span><span class="p">,</span><span class="w"> </span>i<span class="n">mode</span><span class="p">,</span><span class="w"> </span>i<span class="n">sep</span><span class="p">,</span><span class="w"> </span>i<span class="n">feed</span><span class="w">
+
+  </span><span class="nb">out</span><span class="w"> </span><span class="p">(</span>a<span class="n">sig</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>a<span class="n">phs</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>i<span class="n">amp</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="c1">; cosine wave for gbuzz</span><span class="w">
+</span><span class="nb">f</span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="mi">8192</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">.25</span><span class="w">     
+
+</span><span class="c1">; phaser2, imode=1</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">00</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">7000</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mf">.2</span><span class="w"> </span><span class="mf">.9</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">.33</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">7000</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mf">.2</span><span class="w"> </span><span class="mf">.9</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> 
+
+</span><span class="c1">; phaser2, imode=2</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">22</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">7000</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mf">.2</span><span class="w"> </span><span class="mf">.9</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">.33</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w"> </span><span class="mi">33</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">7000</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mf">.2</span><span class="w"> </span><span class="mf">.9</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm251574"></a>
+        <h2>Historique Technique</h2>
+        <p>
+      On trouve dans Hartmann [1] une description générale des différences entre
+      flanging et phasing. On peut trouver une implémentation ancienne de filtres
+      passe-tout du premier ordre connectés en série dans Beigel [2], dans laquelle
+      la transormation en z bilinéaire est utilisée pour déterminer la fréquence
+      du déphasage de chaque étage. Cronin [3] présente une implémentation
+      similaire pour un réseau déphaseur à quatre étages. Chamberlin [4] et
+      Smith [5] discutent tous deux de l'utilisation de sections passe-tout du
+      deuxième ordre pour un meilleur contrôle de la profondeur, de la largeur
+      et de la fréquence des encoches.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm251577"></a>
+        <h2>Références</h2>
+        <p>
+      </p>
+        <div class="orderedlist">
+          <ol class="orderedlist" type="1">
+            <li class="listitem">
+              <p>
+            Hartmann, W.M. "Flanging and Phasers." Journal of the Audio Engineering Society, Vol. 26, No. 6, pp. 439-443, Juin 1978. 
+          </p>
+            </li>
+            <li class="listitem">
+              <p>
+            Beigel, Michael I. "A Digital 'Phase Shifter' for Musical Applications, Using the Bell Labs (Alles-Fischer) Digital Filter Module." Journal of the Audio Engineering Society, Vol. 27, No. 9, pp. 673-676,Septembre 1979. 
+          </p>
+            </li>
+            <li class="listitem">
+              <p>
+            Cronin, Dennis. "Examining Audio DSP Algorithms." Dr. Dobb's Journal, Juillet 1994, p. 78-83.
+          </p>
+            </li>
+            <li class="listitem">
+              <p>
+            Chamberlin, Hal. Musical Applications of Microprocessors. Second edition. Indianapolis, Indiana: Hayden Books, 1985.
+          </p>
+            </li>
+            <li class="listitem">
+              <p>
+            Smith, Julius O. "An Allpass Approach to Digital Phasing and Flanging." Proceedings of the 1984 ICMC, p. 103-108.
+          </p>
+            </li>
+          </ol>
+        </div>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm251591"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="phaser1.html" title="phaser1"><em class="citetitle">phaser1</em></a>
+      </p>
+        <p>D'autres informations au sujet des phaseurs sur Wikipedia :
+      <a class="ulink" href="http://en.wikipedia.org/wiki/Phaser_(effect)" target="_top">
+      <em class="citetitle">http://en.wikipedia.org/wiki/Phaser_(effect)</em>
+      </a></p>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm251599"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Sean Costello</td>
+          </tr>
+          <tr>
+            <td>Seattle, Washington</td>
+          </tr>
+          <tr>
+            <td>1999</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Novembre 2002. Ajout d'une note sur les paramètres <span class="emphasis"><em>kord</em></span>
+    et <span class="emphasis"><em>kmode</em></span> grâce à Rasmus Ekman.</p>
+        <p>Nouveau dans la version 4.0 de Csound.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="phaser1.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="phasor.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">phaser1 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> phasor</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

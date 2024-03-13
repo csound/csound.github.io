@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>active</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="abs.html" title="abs" />
+    <link rel="next" href="adsr.html" title="adsr" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">active</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="abs.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="adsr.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="active"></a>
+      <div class="titlepage"></div>
+      <a id="IndexActive" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">active</span>
+        </h2>
+        <p>active — 
+      Retourne le nombre d'instances actives d'un instrument.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm27383"></a>
+        <h2>Description</h2>
+        <p>
+      Retourne le nombre d'instances actives d'un instrument, avec une option
+      pour ignorer les instances en phase de relâchement.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm27386"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ir <span class="command"><strong>active</strong></span> insnum [,iopt [,inorel]]</pre>
+        <pre class="synopsis">ir <span class="command"><strong>active</strong></span> Sinsname [,iopt [,inorel]]</pre>
+        <pre class="synopsis">kres <span class="command"><strong>active</strong></span> kinsnum [,iopt [,inorel]]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm27394"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>insnum</em></span> -- numéro ou nom de l'instrument concerné
+    </p>
+        <p>
+      <span class="emphasis"><em>Sinsname</em></span> -- nom de l'instrument
+    </p>
+        <p>
+      <span class="emphasis"><em>iopt</em></span> (facultatif, 0 par défaut) -- par défaut,
+      l'opcode retourne le nombre d'instances couramment actives. Si ce paramètre
+      est différent de zéro, l'opcode retourne le nombre d'instances activées
+      depuis le début de l'exécution.
+    </p>
+        <p>
+      <span class="emphasis"><em>inorel</em></span> -- s'il est différent de zéro, les instruments
+      en phase de relâchement son ignorés (vaut zéro par défaut). N'est valide
+      que si <span class="emphasis"><em>iopts</em></span> vaut zéro.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm27405"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kinsnum</em></span> -- numéro ou nom de l'instrument concerné
+    </p>
+        <p>
+      <span class="emphasis"><em>active</em></span> retourne le nombre d'instances actives de l'instrument numéro
+      <span class="emphasis"><em>insnum</em></span>/<span class="emphasis"><em>kinsnum</em></span> (ou de l'instrument nommé
+      <span class="emphasis"><em>Sinsname</em></span>). A partir de Csound 4.17 la sortie
+      est mise à jour au taux-k (si l'argument d'entrée est de taux-k), pour permettre un comptage
+      dynamique des instances de l'instrument.
+    </p>
+        <p>
+      A partir de Csound 5.17 si le numéro de l'instrument passé vaut zéro, tous
+      les instruments sont comptés.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm27415"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple simple de l'opcode active. Il utilise le fichier
+      <a class="ulink" href="examples/active.csd" target="_top"><em class="citetitle">active.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm27420"></a>
+          <p class="title">
+            <strong>Exemple 44. Exemple simple de l'opcode active.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm27427"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o active.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; Initialize the global variables.</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4410</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; Instrument #1 - a noisy waveform.</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span><span class="c1">; Generate a really noisy waveform.</span><span class="w">
+  </span>a<span class="n">noisy</span><span class="w"> </span><span class="nb">rand</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+  </span><span class="c1">; Turn down its amplitude.</span><span class="w">
+  </span>a<span class="n">output</span><span class="w"> </span><span class="nb">gain</span><span class="w"> </span>a<span class="n">noisy</span><span class="p">,</span><span class="w"> </span><span class="mi">2500</span><span class="w">
+  </span><span class="c1">; Send it to the output.</span><span class="w">
+  </span><span class="nb">out</span><span class="w"> </span>a<span class="n">output</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="c1">; Instrument #2 - counts active instruments.</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+  </span><span class="c1">; Count the active instances of Instrument #1.</span><span class="w">
+  </span>i<span class="n">count</span><span class="w"> </span><span class="nb">active</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="c1">; Print the number of active instances.</span><span class="w">
+  </span><span class="nb">print</span><span class="w"> </span>i<span class="n">count</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="c1">; Start the first instance of Instrument #1 at 0:00 seconds.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">3.0</span><span class="w">
+
+</span><span class="c1">; Start the second instance of Instrument #1 at 0:015 seconds.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">1.5</span><span class="w"> </span><span class="mf">1.5</span><span class="w">
+
+</span><span class="c1">; Play Instrument #2 at 0:01 seconds, when we have only </span><span class="w">
+</span><span class="c1">; one active instance of Instrument #1.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+
+</span><span class="c1">; Play Instrument #2 at 0:02 seconds, when we have </span><span class="w">
+</span><span class="c1">; two active instances of Instrument #1.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+
+      Sa sortie contiendra des lignes comme :
+      </p>
+        <pre class="screen">
+instr 2:  icount = 1.000
+instr 2:  icount = 2.000</pre>
+        <p>
+    </p>
+        <p>
+      Voici un exemple plus avancé de l'opcode active. Il affiche le résultat de l'opcode active au
+      taux-k. Il utilise le fichier
+      <a class="ulink" href="examples/active_k.csd" target="_top"><em class="citetitle">active_k.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm27575"></a>
+          <p class="title">
+            <strong>Exemple 45. Exemple de l'opcode active au taux-k.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm27577"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o active_k.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; Initialize the global variables.</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4410</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; Instrument #1 - a noisy waveform.</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span><span class="c1">; Generate a really noisy waveform.</span><span class="w">
+  </span>a<span class="n">noisy</span><span class="w"> </span><span class="nb">rand</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+  </span><span class="c1">; Turn down its amplitude.</span><span class="w">
+  </span>a<span class="n">output</span><span class="w"> </span><span class="nb">gain</span><span class="w"> </span>a<span class="n">noisy</span><span class="p">,</span><span class="w"> </span><span class="mi">2500</span><span class="w">
+  </span><span class="c1">; Send it to the output.</span><span class="w">
+  </span><span class="nb">out</span><span class="w"> </span>a<span class="n">output</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="c1">; Instrument #2 - counts active instruments at k-rate.</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+  </span><span class="c1">; Count the active instances of Instrument #1.</span><span class="w">
+  </span>k<span class="n">count</span><span class="w"> </span><span class="nb">active</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="c1">; Print the number of active instances.</span><span class="w">
+  </span><span class="nb">printk2</span><span class="w"> </span>k<span class="n">count</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="c1">; Start the first instance of Instrument #1 at 0:00 seconds.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="mf">3.0</span><span class="w">
+
+</span><span class="c1">; Start the second instance of Instrument #1 at 0:015 seconds.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">1.5</span><span class="w"> </span><span class="mf">1.5</span><span class="w">
+
+</span><span class="c1">; Play Instrument #2 at 0:01 seconds, when we have only </span><span class="w">
+</span><span class="c1">; one active instance of Instrument #1.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+
+</span><span class="c1">; Play Instrument #2 at 0:02 seconds, when we have </span><span class="w">
+</span><span class="c1">; two active instances of Instrument #1.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+
+      Sa sortie contiendra des lignes comme :
+      </p>
+        <pre class="screen">
+ i2     1.00000
+ i2     2.00000</pre>
+        <p>
+    </p>
+        <p>
+      Voici un autre exemple de l'opcode active, qui utilise le nombre d'instances
+      pour calculer le gain. Il utilise le fichier
+      <a class="ulink" href="examples/active_scale.csd" target="_top"><em class="citetitle">active_scale.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm27725"></a>
+          <p class="title">
+            <strong>Exemple 46. Exemple de l'opcode active au taux-k.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm27727"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in    No messages</span>
+-odac             -d     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o atone.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">;by Victor Lazzarini 2008</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span>k<span class="n">scal</span><span class="w"> </span><span class="nb">active</span><span class="w">  </span><span class="mi">1</span><span class="w">
+</span>k<span class="n">amp</span><span class="w"> </span><span class="nb">port</span><span class="w">   </span><span class="mi">1</span><span class="o">/</span>k<span class="n">scal</span><span class="p">,</span><span class="w"> </span><span class="mf">0.01</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">oscili</span><span class="w">  </span>k<span class="n">amp</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>k<span class="n">env</span><span class="w"> </span><span class="nb">linseg</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="vi">p3</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+
+        </span><span class="nb">out</span><span class="w"> </span>a<span class="n">sig</span><span class="o">*</span>k<span class="n">env</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">440</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w">  </span><span class="mi">220</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">5</span><span class="w">  </span><span class="mi">350</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">3</span><span class="w">  </span><span class="mi">700</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm27881"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : John ffitch</td>
+          </tr>
+          <tr>
+            <td>University of Bath/Codemist Ltd.</td>
+          </tr>
+          <tr>
+            <td>Bath, UK</td>
+          </tr>
+          <tr>
+            <td>Juillet 1999</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Exemples écrits par Kevin Conder.</p>
+        <p>Nouveau dans la version 3.57 de Csound ; instruments nommés ajoutés dans
+    la version 5.13</p>
+        <p>Nouvelle option pour toutes les instances activées dans la version 5.13</p>
+        <p>Le compte de tous les instruments est nouveau dans la version 5.17</p>
+        <p>Option <span class="emphasis"><em>no release</em></span> ajoutée dans la version 5.19</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="abs.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="adsr.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">abs </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> adsr</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

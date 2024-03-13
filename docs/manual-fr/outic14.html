@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>outic14</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="outiat.html" title="outiat" />
+    <link rel="next" href="outic.html" title="outic" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">outic14</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="outiat.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="outic.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="outic14"></a>
+      <div class="titlepage"></div>
+      <a id="IndexOutic14" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">outic14</span>
+        </h2>
+        <p>outic14 — 
+      Envoie une sortie de contrôleur MIDI sur 14 bit au taux-i.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm233620"></a>
+        <h2>Description</h2>
+        <p>
+      Envoie une sortie de contrôleur MIDI sur 14 bit au taux-i.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm233623"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>outic14</strong></span> ichn, imsb, ilsb, ivalue, imin, imax</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm233627"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ichn</em></span> -- numéro de canal MIDI (1-16)
+    </p>
+        <p>
+      <span class="emphasis"><em>imsb</em></span> -- octet de poids fort du numéro de contrôleur
+      lorsque l'on utilise des paramètres sur 14 bit ((0-127)
+    </p>
+        <p>
+      <span class="emphasis"><em>ilsb</em></span> -- octet de poids faible du numéro de contrôleur
+      lorsque l'on utilise des paramètres sur 14 bit ((0-127)
+    </p>
+        <p>
+      <span class="emphasis"><em>ivalue</em></span> -- valeur en virgule flottante
+    </p>
+        <p>
+      <span class="emphasis"><em>imin</em></span> -- valeur minimale en virgule flottante (convertie
+      en valeur entière MIDI 0)
+    </p>
+        <p>
+      <span class="emphasis"><em>imax</em></span> -- valeur maximale en virgule flottante (convertie
+      en valeur entière MIDI 16383 (14-bit))
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm233641"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>outic14</em></span> envoie au taux-i une paire de messages de
+      contrôleur. Cet opcode peut envoyer des paramètres sur 14 bit vers les
+      instruments MIDI qui les reconnaissent. Le premier message de contrôle
+      contient l'octet de poids fort de l'argument <span class="emphasis"><em>ivalue</em></span>
+      tandis que le second message contient l'octet de poids faible.
+      <span class="emphasis"><em>imsb</em></span> et <span class="emphasis"><em>ilsb</em></span> sont respectivement
+      les octets de poids fort et de poids faible du numéro de contrôleur.
+   </p>
+        <p>
+      Cet opcode peut piloter une valeur différente de paramètre pour chaque note active.
+    </p>
+        <p>
+      Il peut échelonner un argument de taux-i en virgule flottante selon les
+      valeurs <span class="emphasis"><em>imin</em></span> et <span class="emphasis"><em>imax</em></span>. Par exemple
+      avec <span class="emphasis"><em>imin</em></span> = 1.0 et <span class="emphasis"><em>imax</em></span> = 2.0,
+      lorque l'argument <span class="emphasis"><em>ivalue</em></span> reçoit la valeur 2.0,
+      l'opcode envoie la valeur 16383 sur le périphérique MIDI OUT. Lorsque
+      l'argument <span class="emphasis"><em>ivalue</em></span> reçoit la valeur 1.0, il envoie la
+      valeur 0. Les opcodes de taux-i n'envoient leur message que pendant
+      l'initialisation de l'instrument.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm233656"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="outiat.html" title="outiat"><em class="citetitle">outiat</em></a>,
+      <a class="link" href="outic.html" title="outic"><em class="citetitle">outic</em></a>,
+      <a class="link" href="outipat.html" title="outipat"><em class="citetitle">outipat</em></a>,
+      <a class="link" href="outipb.html" title="outipb"><em class="citetitle">outipb</em></a>,
+      <a class="link" href="outipc.html" title="outipc"><em class="citetitle">outipc</em></a>,
+      <a class="link" href="outkat.html" title="outkat"><em class="citetitle">outkat</em></a>,
+      <a class="link" href="outkc14.html" title="outkc14"><em class="citetitle">outkc14</em></a>,
+      <a class="link" href="outkc.html" title="outkc"><em class="citetitle">outkc</em></a>,
+      <a class="link" href="outkpat.html" title="outkpat"><em class="citetitle">outkpat</em></a>,
+      <a class="link" href="outkpb.html" title="outkpb"><em class="citetitle">outkpb</em></a>,
+      <a class="link" href="outkpc.html" title="outkpc"><em class="citetitle">outkpc</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm233681"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Gabriel Maldonado</td>
+          </tr>
+          <tr>
+            <td>Italie</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 3.47 de Csound.</p>
+        <p>Merci à Rasmus Ekman pour avoir indiqué les intervalles corrects pour
+    le canal MIDI et les numéros de contrôleur.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="outiat.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="outic.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">outiat </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> outic</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

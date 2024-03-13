@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>tableikt</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="tableigpw.html" title="tableigpw" />
+    <link rel="next" href="tableimix.html" title="tableimix" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">tableikt</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="tableigpw.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="tableimix.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="tableikt"></a>
+      <div class="titlepage"></div>
+      <a id="IndexTableikt" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">tableikt</span>
+        </h2>
+        <p>tableikt — 
+      Permet de contrôler au taux-k les numéros de table.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm340925"></a>
+        <h2>Description</h2>
+        <p>
+      Contrôle des numéros de table au taux-k. La lecture dans la table se fait
+      avec interpolation linéaire.
+    </p>
+        <p>
+      L'opcode standard <a class="link" href="tablei.html" title="tablei"><em class="citetitle">tablei</em></a>
+      de Csound, bien que produisant un résultat au taux-k ou au taux-a, ne peut
+      utiliser qu'une variable de taux-i pour choisir le numéro de la table.
+      <span class="emphasis"><em>tableikt</em></span> accepte un contrôle au taux-k aussi bien
+      qu'au taux-i. Pour le reste, il est semblable à l'opcode original.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm340932"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>tableikt</strong></span> xndx, kfn [, ixmode] [, ixoff] [, iwrap]</pre>
+        <pre class="synopsis">kres <span class="command"><strong>tableikt</strong></span> kndx, kfn [, ixmode] [, ixoff] [, iwrap]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm340938"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ixmode</em></span> -- s'il vaut 0, <span class="emphasis"><em>xndx</em></span> et
+      <span class="emphasis"><em>ixoff</em></span> couvrent toute la longueur de la table. S'il
+      est différent de zéro, <span class="emphasis"><em>xndx</em></span> et <span class="emphasis"><em>ixoff</em></span>
+      varient de 0 à 1. La valeur par défaut est 0.
+    </p>
+        <p>
+      <span class="emphasis"><em>ixoff</em></span> -- s'il vaut 0, l'indice résultant est directement
+      contrôlé par <span class="emphasis"><em>xndx,</em></span>, démarrant au début de la table.
+      S'il est différent de zéro, l'indexation démarre à l'intérieur de la table.
+      Sa valeur doit être positive et inférieure à la longueur de la table
+      (<span class="emphasis"><em>ixmode</em></span> = 0) ou inférieure à 1
+      (<span class="emphasis"><em>ixmode</em></span> différent de 0). La valeur par défaut est 0.
+    </p>
+        <p>
+      <span class="emphasis"><em>iwrap</em></span> -- si <span class="emphasis"><em>iwrap</em></span> = 0,
+      <span class="emphasis"><em>mode Limite</em></span> : lorsque l'indice résultant est inférieur
+      à 0, l'indice final vaut 0. Un indice résultant dépassant la longueur de
+      la table donne un indice final égal à la longueur de la table : les indices
+      résultants trop grands se limitent à l'index supérieur de la table. Si
+      <span class="emphasis"><em>iwrap</em></span> est différent de 0, <span class="emphasis"><em>mode Cyclique</em></span> :
+      l'indice résultant est replié modulo la longueur de la table de façon à ce
+      que tous les indices résultants tombent dans la table. Par exemple, dans
+      une table de longueur 8, <span class="emphasis"><em>xndx</em></span> = 5 et
+      <span class="emphasis"><em>ixoff</em></span> = 6 donnent un indice résultant de 11, qui se
+      replie en un indice final de 3. La valeur par défaut est 0.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm340959"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kndx</em></span> -- Indice dans la table, un nombre positif
+      compris entre 0 et la longueur de la table (<span class="emphasis"><em>ixmode</em></span> = 0)
+      ou entre 0 et 1 (<span class="emphasis"><em>ixmode</em></span> différent de 0).
+    </p>
+        <p>
+      <span class="emphasis"><em>xndx</em></span> -- varie sur la longueur de la table
+      (<span class="emphasis"><em>ixmode</em></span> = 0) ou dans l'intervalle allant de 0 à 1
+      (<span class="emphasis"><em>ixmode</em></span> différent de 0).
+    </p>
+        <p>
+      <span class="emphasis"><em>kfn</em></span> -- Numéro de table. Doit être &gt;= 1. Les valeurs
+      flottantes sont arrondies à un entier. Si un numéro de table n'indique pas
+      une table valide, ou si la table n'a pas encore été chargée
+      (<a class="link" href="GEN01.html" title="GEN01"><em class="citetitle">GEN01</em></a>) une erreur se
+      produit et l'instrument est désactivé.
+    </p>
+        <div class="caution" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Caution: Attention avec les numéros de table au taux-k">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Attention]" src="images/caution.png" />
+              </td>
+              <th align="left">Attention avec les numéros de table au taux-k</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Au taux-k, si un numéro de table &lt; 1 est donné, ou si le numéro de
+        table indique une table inexistante ou une table de longueur nulle
+        (devant être chargée à partie d'un fichier ultérieurement), une erreur
+        se produit et l'instrument est désactivé. <span class="emphasis"><em>kfn</em></span> doit
+        être initialisé au taux approprié en utilisant
+        <a class="link" href="init.html" title="init"><em class="citetitle">init</em></a>. Si l'on essaie
+        de charger un valeur de taux-i dans <span class="emphasis"><em>kfn</em></span>, il y aura
+        une erreur.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm340980"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode tableikt. Il utilise le fichier
+      <a class="ulink" href="examples/tableikt.csd" target="_top"><em class="citetitle">tableikt.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm340985"></a>
+          <p class="title">
+            <strong>Exemple 1068. Exemple de l'opcode tableikt.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm340992"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o tableikt.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>i<span class="n">lowfn</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">					</span><span class="c1">;lowest ftable wave</span><span class="w">
+</span>i<span class="n">highfn</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">					</span><span class="c1">;highest ftable wave</span><span class="w">
+
+</span>k<span class="n">swpenv</span><span class="w">	</span><span class="nb">line</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">				</span><span class="c1">;sweep envelope, calculate current table pair and interpolation amount</span><span class="w">
+</span>i<span class="n">numtables</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>i<span class="n">highfn</span><span class="w"> </span><span class="o">-</span><span class="w"> </span>i<span class="n">lowfn</span><span class="w">			</span><span class="c1">;1 less than number of tables</span><span class="w">
+</span>k<span class="n">fn1</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span>k<span class="n">swpenv</span><span class="o">*</span>i<span class="n">numtables</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>i<span class="n">lowfn</span><span class="w">
+        </span><span class="nb">printks</span><span class="w"> </span><span class="s">"play table no: </span><span class="si">%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>k<span class="n">fn1</span><span class="w">
+</span>k<span class="n">fn2</span><span class="w">	</span><span class="o">=</span><span class="w"> </span>k<span class="n">fn1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>k<span class="n">interp</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="nb">frac</span><span class="p">(</span>k<span class="n">swpenv</span><span class="o">*</span>i<span class="n">numtables</span><span class="p">)</span><span class="w">		
+</span>i<span class="n">xmode</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">					</span><span class="c1">;read tables with phasor</span><span class="w">
+</span>a<span class="n">phase</span><span class="w">	</span><span class="nb">phasor</span><span class="w">	</span><span class="mi">40</span><span class="w">	
+</span>a<span class="n">sig</span><span class="w">	</span><span class="nb">tableikt</span><span class="w"> </span>a<span class="n">phase</span><span class="p">,</span><span class="w"> </span>k<span class="n">fn1</span><span class="p">,</span><span class="w"> </span>i<span class="n">xmode</span><span class="w">		</span><span class="c1">;normalized index</span><span class="w">
+   </span><span class="k">if</span><span class="w"> </span>k<span class="n">swpenv</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="k">kgoto</span><span class="w"> </span><span class="nl">skipfn2</span><span class="w">		</span><span class="c1">;if kfn1 is last table, there is no kfn2</span><span class="w">
+	</span>a<span class="n">sig2</span><span class="w">	</span><span class="nb">tableikt</span><span class="w"> </span>a<span class="n">phase</span><span class="p">,</span><span class="w"> </span>k<span class="n">fn2</span><span class="p">,</span><span class="w"> </span>i<span class="n">xmode</span><span class="w">
+   </span><span class="nl">skipfn2</span><span class="p">:</span><span class="w">
+   </span>a<span class="n">mix</span><span class="w">	</span><span class="nb">ntrpol</span><span class="w">	</span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig2</span><span class="p">,</span><span class="w"> </span>k<span class="n">interp</span><span class="w">		</span><span class="c1">;interpolate between tables and output</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">mix</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span>a<span class="n">mix</span><span class="o">*</span><span class="mf">.5</span><span class="w">
+	
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">  
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">2</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">.5</span><span class="w">  
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">3</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w">				</span><span class="c1">;a sample</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">4</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="mf">.3</span><span class="w"> </span><span class="mf">.25</span><span class="w"> </span><span class="mf">.2</span><span class="w"> </span><span class="mf">.16</span><span class="w"> </span><span class="mf">.14</span><span class="w"> </span><span class="mf">.125</span><span class="w"> </span><span class="mf">.111</span><span class="w">	</span><span class="c1">;sawtooth </span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">5</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">.4</span><span class="w"> </span><span class="mf">.3</span><span class="w"> </span><span class="mf">.25</span><span class="w"> </span><span class="mf">.2</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">6</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">.3</span><span class="w"> </span><span class="mf">.3</span><span class="w"> </span><span class="mf">.25</span><span class="w"> </span><span class="mf">.2</span><span class="w"> </span><span class="mf">.16</span><span class="w"> 
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">7</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="mi">1</span><span class="w">  </span><span class="mi">1</span><span class="w">  </span><span class="mi">1</span><span class="w">  </span><span class="mf">.7</span><span class="w"> </span><span class="mf">.5</span><span class="w">  </span><span class="mf">.3</span><span class="w">  </span><span class="mf">.1</span><span class="w">		</span><span class="c1">;pulse</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">8</span><span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w">			</span><span class="c1">;a sample</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">8</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+      Sa sortie comprendra des lignes comme celles-ci :
+      </p>
+        <pre class="screen">
+play table no: 8
+play table no: 7
+play table no: 6
+.....
+play table no: 2
+play table no: 1</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm341393"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="tablekt.html" title="tablekt"><em class="citetitle">tablekt</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm341398"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur: Robin Whittle</td>
+          </tr>
+          <tr>
+            <td>Australie</td>
+          </tr>
+          <tr>
+            <td>Mai 1997</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 3.47</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="tableigpw.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="tableimix.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">tableigpw </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> tableimix</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

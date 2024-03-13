@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ftgen</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="ftfree.html" title="ftfree" />
+    <link rel="next" href="ftgenonce.html" title="ftgenonce" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ftgen</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ftfree.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ftgenonce.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="ftgen"></a>
+      <div class="titlepage"></div>
+      <a id="IndexFtgen" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">ftgen</span>
+        </h2>
+        <p>ftgen — 
+      Génère une table de fonction de partition depuis l'orchestre.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm137072"></a>
+        <h2>Description</h2>
+        <p>Génère une table de fonction de partition depuis l'orchestre.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm137075"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">gir <span class="command"><strong>ftgen</strong></span> ifn, itime, isize, igen, iarga [, iargb ] [...]</pre>
+        <pre class="synopsis">gir <span class="command"><strong>ftgen</strong></span> ifn, itime, isize, igen, iarray</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm137081"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>gir</em></span> -- un numéro de table soit demandé soir assigné
+      automatiquement supérieur à 100.
+    </p>
+        <p> 
+      <span class="emphasis"><em>ifn</em></span> -- numéro de table demandé. Si <span class="emphasis"><em>ifn</em></span>
+      vaut zéro, le numéro est assigné automatiquement et sa valeur est placée dans
+      <span class="emphasis"><em>gir</em></span>. Toute autre valeur est utilisée comme le numéro
+      de la table.
+    </p>
+        <p>
+      <span class="emphasis"><em>itime</em></span> -- est ignoré, mais il correspond cependant au p2
+      de l'<span class="emphasis"><em>instruction f</em></span> de partition.
+    </p>
+        <p>
+      <span class="emphasis"><em>isize</em></span> -- taille de la table. Correspond au p3 de
+      l'<span class="emphasis"><em>instruction f</em></span> de partition.
+    </p>
+        <p>
+      <span class="emphasis"><em>igen</em></span> -- routine <span class="emphasis"><em>GEN</em></span> de la table
+      de fonction. Correspond au p4 de l'<span class="emphasis"><em>instruction f</em></span> de
+      partition.
+    </p>
+        <p>
+      <span class="emphasis"><em>iarga, iargb, ...</em></span> -- arguments de la table de fonction.
+      Correspondent de p5 à p<span class="emphasis"><em>n</em></span> de
+      l'<span class="emphasis"><em>instruction f</em></span> de partition.
+    </p>
+        <p>
+      <span class="emphasis"><em>iarray</em></span> -- un tableau unidimensionnel contenant les
+      arguments de la table de fonction. Correspond de p5 à p<span class="emphasis"><em>n</em></span>
+      de l'<span class="emphasis"><em>instruction f</em></span> de la partition.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm137107"></a>
+        <h2>Exécution</h2>
+        <p>
+      Equivalent à la génération de table dans la partition au moyen de
+      l'<span class="emphasis"><em>instruction f</em></span>.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>A l'origine, Csound était conçu pour ne supporter que les tables dont
+      la taille était une puissance de deux. Bien que ceci ait changé dans les
+      versions récentes (on peut utiliser n'importe quelle taille en donnant un
+      nombre négatif), de nombreux opcodes ne les accepteront pas.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning: Avertissement">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Avertissement]" src="images/warning.png" />
+              </td>
+              <th align="left">Avertissement</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Bien que Csound ne proteste pas si <span class="emphasis"><em>ftgen</em></span> est utilisé
+        à l'intérieur d'une paire d'instructions <span class="emphasis"><em>instr</em></span>-<span class="emphasis"><em>endin</em></span>,
+        ce n'est pas une utilisation attendue ni supportée, et celle-ci doit être
+        traitée avec prudence car elle a des effets globaux. En particulier, une
+        taille différente conduit habituellement à une réallocation de la table,
+        ce qui peut causer un plantage ou un comportement erratique.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm137119"></a>
+        <h2>Exmples</h2>
+        <p>
+      Voici un exemple de l'opcode ftgen. Il utilise le fichier
+      <a class="ulink" href="examples/ftgen.csd" target="_top"><em class="citetitle">ftgen.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm137124"></a>
+          <p class="title">
+            <strong>Exemple 389. Exemple de l'opcode ftgen.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm137131"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o ftgen.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">   </span><span class="o">=</span><span class="mi">1</span><span class="w">
+
+</span>gi<span class="n">sine</span><span class="w">   </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">16384</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">	</span><span class="c1">;sine wave</span><span class="w">
+</span>gi<span class="n">square</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">16384</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mf">.33</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.2</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.14</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mf">.11</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.09</span><span class="w"> </span><span class="c1">;odd harmonics</span><span class="w">
+</span>gi<span class="n">saw</span><span class="w">    </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">16384</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.4</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.6</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.8</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.8</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.6</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.4</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mf">.2</span><span class="w"> </span><span class="c1">;even harmonics</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>i<span class="n">fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">poscil</span><span class="w"> </span><span class="mf">.6</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span>i<span class="n">fn</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">;sine wave</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="c1">;odd harmonics</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="c1">;even harmonics</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+        <p>
+      Voici un autre exemple de l'opcode ftgen. Il utilise le fichier
+      <a class="ulink" href="examples/ftgen-2.csd" target="_top"><em class="citetitle">ftgen-2.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm137386"></a>
+          <p class="title">
+            <strong>Exemple 390. Exemple de l'opcode ftgen.</strong>
+          </p>
+          <div class="example-contents">
+            <p>
+          Cet exemple interroge un fichier sur sa longueur afin de créer une
+          ftable de la taille appropriée.
+        </p>
+            <div class="refsect1">
+              <a id="idm137389"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o ftgen-2.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+  </span><span class="vg">sr</span><span class="w">	    </span><span class="o">=</span><span class="w">  </span><span class="mi">48000</span><span class="w">
+  </span><span class="vg">ksmps</span><span class="w">	    </span><span class="o">=</span><span class="w">  </span><span class="mi">16</span><span class="w">
+  </span><span class="vg">nchnls</span><span class="w">    </span><span class="o">=</span><span class="w">  </span><span class="mi">2</span><span class="w">
+
+</span><span class="c1">;Example by Jonathan Murphy 2007</span><span class="w">
+
+  </span><span class="vg">0dbfs</span><span class="w">	    </span><span class="o">=</span><span class="w">  </span><span class="mi">1</span><span class="w">
+
+    </span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+  </span>S<span class="n">file</span><span class="w">	    </span><span class="o">=</span><span class="w">    </span><span class="s">"beats.wav"</span><span class="w">
+
+  </span>i<span class="n">len</span><span class="w">	    </span><span class="nb">filelen</span><span class="w">   </span>S<span class="n">file</span><span class="w">  </span><span class="c1">; Find length</span><span class="w">
+  </span>i<span class="n">sr</span><span class="w">	    </span><span class="nb">filesr</span><span class="w">    </span>S<span class="n">file</span><span class="w">  </span><span class="c1">; Find sample rate</span><span class="w">
+
+  </span>i<span class="n">samps</span><span class="w">    </span><span class="o">=</span><span class="w">  </span>i<span class="n">len</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>i<span class="n">sr</span><span class="w">  </span><span class="c1">; Total number of samples</span><span class="w">
+  </span>i<span class="n">size</span><span class="w">	    </span><span class="nb">init</span><span class="w">      </span><span class="mi">1</span><span class="w">
+
+</span><span class="nl">loop</span><span class="p">:</span><span class="w">
+  </span>i<span class="n">size</span><span class="w">	    </span><span class="o">=</span><span class="w">  </span>i<span class="n">size</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="c1">; Loop until isize is greater than number of samples</span><span class="w">
+</span><span class="k">if</span><span class="w"> </span><span class="p">(</span>i<span class="n">size</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span>i<span class="n">samps</span><span class="p">)</span><span class="w"> </span><span class="k">igoto</span><span class="w"> </span><span class="nl">loop</span><span class="w">
+
+  </span>i<span class="n">tab</span><span class="w">	    </span><span class="nb">ftgen</span><span class="w">     </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>i<span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>S<span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+	    </span><span class="nb">print</span><span class="w">     </span>i<span class="n">size</span><span class="w">
+	    </span><span class="nb">print</span><span class="w">     </span>i<span class="n">samps</span><span class="w">
+
+  </span><span class="nb">turnoff</span><span class="w">
+    </span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm137553"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="ScoreGenRef.html" title="Routines GEN"><em class="citetitle">Routines GEN</em></a>,
+      <a class="link" href="ftgentmp.html" title="ftgentmp"><em class="citetitle">ftgentmp</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm137560"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Barry L. Vercoe</td>
+          </tr>
+          <tr>
+            <td>M.I.T., Cambridge, Mass</td>
+          </tr>
+          <tr>
+            <td>1997</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Avertissement ajouté en Avril 2002 par Rasmus Ekman</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ftfree.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ftgenonce.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ftfree </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> ftgenonce</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
