@@ -104,8 +104,8 @@ Also, with the -I flag, anytime you change a page, you can view the updates by r
 - index.html is filled directly?!?
 - things like (in downloa.md) class="fa fa-4x fa-android" point to font-awesome.css
 
-# To add
-https://rorywalsh.github.io/CsoundUnity/#/ under download > interfaces
+## Images for landing page (carousel)
+Must have 1140 width and 620 height as size.
 
 
 # Syntax highlighting
