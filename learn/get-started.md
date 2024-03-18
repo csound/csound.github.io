@@ -9,7 +9,7 @@ permalink: /get-started.html
 
 Csound code can run in any browser without installing Csound. The main site for it is:
   
-  * <a href="https://ide.csound.com/" target="_blank">Csound Web IDE</a>
+  * [Csound Web IDE](https://ide.csound.com)
 
 To try it out, you can open any project, for instance 
 [Getting Started 1](https://ide.csound.com/editor/21zOuoahdiJj8DnT7UN8). Push the Play button, 
@@ -29,9 +29,9 @@ the frontend, so usually you will have to install at first Csound via the
 [Download Page](https://csound.com/download.html), and then one of the Frontends.
 The most popular are:
 
-* <a href="https://cabbageaudio.com/" target="_blank">Cabbage</a>
-* <a href="https://csoundqt.github.io/" target="_blank">CsoundQt</a>
-* <a href="https://blue.kunstmusik.com" target="_blank">Blue</a>
+* [Cabbage](https://cabbageaudio.com/)
+* [CsoundQt](https://csoundqt.github.io/)
+* [Blue](https://blue.kunstmusik.com)
 
 Some general installation instructions can be found [here](https://flossmanual.csound.com/how-to/installation).
 
