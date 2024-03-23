@@ -57,12 +57,27 @@ files.
 
 ## Modifying the site theme 
 
-The theme of the site is controlled via the HTML structure of the content and
-Cascading Style Sheets (CSS). Javascript is also used to help modify the feel
-and function of the site. The CSS and Javascript files used for the site are
-found in the css and scripts folders, respectively.  These files are included into the site through the template files.  
+The site uses Bootstrap 5 and a modified template by [Saul Roll](https://github.com/soulroll/jekyll-bootstrap-5). The [Bootstrap CSS](assets/css/main/bootstrap.css) should not changed at all; it can be replaced by a more recent version if necessary.
 
-The site uses [Saul Roll's Bootstrap 5](https://github.com/soulroll/jekyll-bootstrap-5) as the foundation for its theme, but simplified its dependecies (no gulp). 
+Changes in styling must go to [csound.site.css](assets/css/main/csound-site.css). These two stylesheets are referenced in "default.html" in this order, so that Bootstrap settings are overwritten by our own styles.
+
+Syntax highlighting is done via [rainbow](https://github.com/ccampbell/rainbow).  The source files live in assets/css/highlight and assets/js/highlight.
+
+Font-Awesome is used for some icons, too.
+
+## Changing the landing page
+
+The code is in \_layouts/home-html. It is easy to change a carousel item.
+
+Images for the landing page (carousel) must have 1140 width and 620 height as size.
+
+## Syntax highlighing for code examples
+
+To add Csound syntax highlighting to a code block, start with  
+\`\`\`csound  
+and end the block with three backticks  
+\`\`\`
+
 
 # Editing the Site Locally 
 
@@ -87,32 +102,12 @@ This installed the github-pages gem.
 
 To view the site locally with `jekyll`, run:
 
-    bundle exec jekyll serve -I
+    bundle exec jekyll serve
 
 This will start up a jekyll server. You can view the pages as they are rendered by Jekyll in your browser at:
 
     http://localhost:4000
     
-Also, with the -I flag, anytime you change a page, you can view the updates by refreshing the browser.
+Anytime you change a page, you can view the updates by refreshing the browser.
 
 
-
-# Site internals
-
-- main menu and title page are in _data/cms.yaml
-- download page is in /download.md and _data/download.yaml
-- index.html is filled directly?!?
-- things like (in downloa.md) class="fa fa-4x fa-android" point to font-awesome.css
-
-## Images for landing page (carousel)
-Must have 1140 width and 620 height as size.
-
-
-# Syntax highlighting
-
-To add Csound syntax highlighting to a code block, start with  
-\`\`\`csound  
-and end the block with three backticks  
-\`\`\`
-
-We use [rainbow](https://github.com/ccampbell/rainbow). The files are in js/highlight and in css/pastie.css. They are included in _layouts/default.html.
