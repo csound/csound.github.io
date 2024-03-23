@@ -5,29 +5,31 @@
         <img src="assets/img/cs-icon.jpg" height="50px" alt="Csound">
         Csound
       </a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fa fa-bars" aria-hidden="true"></i>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul class="navbar-nav">
           {% for nav in site.data.navigation %}
-            <li class="nav-item {% if page.url == nav.href %}active{% endif %}">
-              <a class="nav-link {% if nav.subcategories != null %}has-subcat{% endif %}" href="{{ nav.href }}">{{ nav.title }}</a>
-              {% if nav.subcategories != null %}
-                <span class="dropdown-chevron-mobile"></span>
-              {% endif %}
-              {% if nav.subcategories != null %}
-                <ul class="subcategory">
-                  {% for subcategory in nav.subcategories %}
-                    <li class="nav-subitem">
-                      <a class="nav-sublink" href="{{ subcategory.subhref }}">
-                        {{ subcategory.subtitle }}
-                      </a>
-                    </li>
-                  {% endfor %}
-                </ul>
-              {% endif %}
+            {% if nav.subcategories != null %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ nav.title }}
+            </a>
+            <ul class="dropdown-menu">
+              {% for subcategory in nav.subcategories %}
+              <li>
+                <a class="dropdown-item" href="{{ subcategory.subhref }}">{{ subcategory.subtitle }}
+                </a>
+               </li>
+              {% endfor %}
+              </ul>
             </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ nav.href }}">{{ nav.title }}</a>
+            </li>
+            {% endif %}
           {% endfor %}
         </ul>
       </div>
