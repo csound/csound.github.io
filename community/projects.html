@@ -1,0 +1,48 @@
+---
+title: Projects Using Csound
+layout: default
+permalink: /projects.html
+---
+
+<div class="container-fluid page-banner-background">
+  <div class="container page-banner">
+    <h1 class="display-7">{{ page.title }}</h1>
+  </div>
+</div>
+
+<div class="container-fluid page-background">
+  <div class="container">
+    <div class="page">
+      <div class="row">
+        <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12">
+        <p>This is a list of all projects submitted to the website. If you want to spread the word about a project you made with Csound, please, <a href="/contribute.html">send us</a> some info about it, we will be glad to publish it here!</p><br/>
+        </div>
+      </div>
+      {% for post in site.posts %}
+        {% if post.categories contains 'showcase' %}
+        <div class="row row-projects">
+          <div class="col">
+            {% if post.tags %}
+            <span><i class="fa fa-tag"></i>
+              {% for tag in post.tags %}
+                {{ tag }}{% if forloop.last == false %}, {% endif %}
+              {% endfor %}
+            </span>
+            {% endif %}
+            <h4><a href="{{ post.url }}">{{ post.title }}</a></h4>
+            <br/>
+          </div>
+          <div class="col">
+            <i class="fa fa-calendar-o"></i> {{ post.date | date_to_string }}
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
