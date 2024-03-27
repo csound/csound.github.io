@@ -31,6 +31,17 @@ the post by using standard HTML content (i.e. for images, use the image tag).
 The actual image should be placed in the images folder. If you have a question,
 it may help to look at one of the existing posts to use as a reference. 
 
+## Including Images
+
+Add the image file (.png or .jpeg) in the /images folder.
+
+To show the image, you have two possibilities:
+
+1. You can use the markdown syntax for images:  
+	`![ADSR](images/ADSR.png)`  
+2. It might be better to use html and include Bootstrap's "img-fluid" class to make the image responsive and optionally scale it:  
+	`<img src="images/ADSR.png" class="img-fluid" alt="ADSR" width=75% />`
+
 ## Modifying and Creating Pages 
 
 Pages are also Markdown files. They require headers that specify the layout

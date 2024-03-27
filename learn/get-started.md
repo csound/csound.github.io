@@ -408,7 +408,7 @@ Sustain and Release. The attack, decay and release sections are given in seconds
 time values. The sustain value describes the sustain level which kicks in after the attack and decay
 have passed. The note's amplitude will rest at this sustain level until it is released.
 
-![ADSR](/images/ADSR.png)
+<img src="images/ADSR.png" class="img-fluid" alt="ADSR" width=75% />
 
 Csound offers several ADSR envelopes. The one used here is `madsr`, which is a MIDI ready ADSR.
 Its syntax is given as:
