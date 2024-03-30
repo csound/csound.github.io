@@ -4,6 +4,8 @@
  *
  * @author Eugene Cherny, joachim heintz
  * @version 0.2
+ * please do NOT remove opcode|myOpcode1|myOpcode2|myOpcode3
+ * from the pattern list as they are needed for get-started.md
  */
 Rainbow.extend('csound', [
     {
