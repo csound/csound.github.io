@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Website team
-permalink: /website-team.html
+title: Contact us
+permalink: /contact-us.html
 ---
 
 This website is maintained by a group of Csounders from all over the world.
