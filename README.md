@@ -95,3 +95,15 @@ This will start up a jekyll server. You can view the pages as they are rendered 
     http://localhost:4000
     
 Also, with the -I flag, anytime you change a page, you can view the updates by refreshing the browser.
+
+
+
+# Site internals
+
+- main menu and title page are in _data/cms.yaml
+- download page is in /download.md and _data/download.yaml
+- index.html is filled directly?!?
+- things like (in downloa.md) class="fa fa-4x fa-android" point to font-awesome.css
+
+# To add
+https://rorywalsh.github.io/CsoundUnity/#/ under download > interfaces
