@@ -4,8 +4,15 @@ title: Contact us
 permalink: /contact-us.html
 ---
 
-This website is maintained by a group of Csounders from all over the world.
+### This Website
 
-https://github.com/csound/csound.github.io/discussions
+You can contact the website team via email to *website* at *cs-conf.de*.
 
-website@cs-conf.de
+Discussions about the website content should go [->here](https://github.com/csound/csound.github.io/discussions). 
+
+For bugs or mistakes please use the [issue tracker](https://github.com/csound/csound.github.io/issues).
+
+
+### Csound
+
+
