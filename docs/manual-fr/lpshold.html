@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>lpshold</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="lpreson.html" title="lpreson" />
+    <link rel="next" href="lpsholdp.html" title="lpsholdp" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">lpshold</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="lpreson.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="lpsholdp.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="lpshold"></a>
+      <div class="titlepage"></div>
+      <a id="IndexLpshold" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">lpshold</span>
+        </h2>
+        <p>lpshold — 
+      Génère un signal de contrôle constitué de segments tenus.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm191368"></a>
+        <h2>Description</h2>
+        <p>
+      Génère un signal de contrôle constitué de segments tenus délimités par deux ou plus
+      points spécifiés. L'enveloppe entière est parcourue en boucle au taux
+      <span class="emphasis"><em>kfreq</em></span>. Chaque paramètre peut varier au taux-k.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm191372"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ksig <span class="command"><strong>lpshold</strong></span> kfreq, ktrig, iphase, kvalue0, ktime0  [, kvalue1] [, ktime1] [, kvalue2] [, ktime2] [...]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm191376"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ksig</em></span> -- Signal de sortie.
+    </p>
+        <p>
+      <span class="emphasis"><em>kfreq</em></span> -- Taux de répétition en Hz ou en fraction de Hz.
+    </p>
+        <p>
+      <span class="emphasis"><em>ktrig</em></span> -- S'il est non nul, redéclanche l'enveloppe depuis le début
+      (voir l'opcode <a class="link" href="trigger.html" title="trigger"><em class="citetitle">trigger</em></a>), avant que
+      le cycle de l'enveloppe ne soit complet.
+    </p>
+        <p>
+      <span class="emphasis"><em>kphase</em></span> -- point de la séquence lue, exprimé comme
+      une fraction d'un cycle (entre 0 et 1).
+    </p>
+        <p>
+      <span class="emphasis"><em>kvalue0...kvalueN</em></span> -- Valeurs des points.
+    </p>
+        <p>
+      <span class="emphasis"><em>ktime0...ktimeN</em></span> -- Durées entre les points ; exprimées
+      en fraction d'une période (voir ci-dessous). La dernière durée indique une
+      ligne entre la valeur finale et la première valeur.
+    </p>
+        <p>
+      <span class="emphasis"><em>lpshold</em></span> est semblable à
+      <a class="link" href="loopseg.html" title="loopseg"><em class="citetitle">loopseg</em></a>, mais il ne peut générer
+      que des segments horizontaux, car il maintient une valeur constante pendant chaque
+      intervalle de temps placé entre <span class="emphasis"><em>ktimeN</em></span> et
+      <span class="emphasis"><em>ktimeN+1</em></span>. Il est utile, entre autres, pour un contrôle mélodique
+      comme celui des vieux séquenceurs analogiques.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm191398"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode lpshold. Il utilise le fichier
+      <a class="ulink" href="examples/lpshold.csd" target="_top"><em class="citetitle">lpshold.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm191403"></a>
+          <p class="title">
+            <strong>Exemple 558. Exemple de l'opcode lpshold.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm191410"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o lpshold.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span>k<span class="n">frq</span><span class="w">  </span><span class="nb">init</span><span class="w">    </span><span class="vi">p4</span><span class="w">  </span><span class="c1">; frequency of the loop </span><span class="w">
+</span>i<span class="n">frac</span><span class="w"> </span><span class="o">=</span><span class="w">       </span><span class="vi">p5</span><span class="w">  </span><span class="c1">; fraction of frequency at which to force retrigger</span><span class="w">
+</span>i<span class="n">pan</span><span class="w">  </span><span class="o">=</span><span class="w">       </span><span class="vi">p6</span><span class="w">  </span><span class="c1">; pan position</span><span class="w">
+</span>k<span class="n">trig</span><span class="w"> </span><span class="nb">metro</span><span class="w">   </span>k<span class="n">frq</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>i<span class="n">frac</span><span class="w">  </span><span class="c1">; trigger to force restart the loop</span><span class="w">
+</span>i<span class="n">phs</span><span class="w">  </span><span class="o">=</span><span class="w">       </span><span class="mi">0</span><span class="w">   </span><span class="c1">; initial phase of the loop</span><span class="w">
+</span><span class="c1">; a loop of midi note numbers:   note duration etc...</span><span class="w">
+</span>k<span class="n">note</span><span class="w"> </span><span class="nb">lpshold</span><span class="w"> </span>k<span class="n">frq</span><span class="p">,</span><span class="w"> </span>k<span class="n">trig</span><span class="p">,</span><span class="w"> </span>i<span class="n">phs</span><span class="p">,</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w">  </span><span class="mf">0.0625</span><span class="p">,</span><span class="w">  </span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="mf">0.9375</span><span class="p">,</span><span class="w">   </span><span class="mi">61</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">58</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>\<span class="w">
+</span><span class="mi">63</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">65</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span>a<span class="n">env</span><span class="w">  </span><span class="nb">linseg</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="vi">p3</span><span class="o">-</span><span class="mf">0.11</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">0</span><span class="w">   </span><span class="c1">; amplitude envelope</span><span class="w">
+</span>k<span class="n">rnd</span><span class="w">  </span><span class="nb">rspline</span><span class="w"> </span><span class="o">-</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">0.5</span><span class="p">,</span><span class="mi">1</span><span class="w"> </span><span class="c1">; random detune</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">gbuzz</span><span class="w">   </span><span class="mf">0.2</span><span class="o">*</span>a<span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="nb">cpsmidinn</span><span class="p">(</span>k<span class="n">note</span><span class="o">+</span>k<span class="n">rnd</span><span class="p">),</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+      </span><span class="nb">outs</span><span class="w">    </span>a<span class="n">sig</span><span class="o">*</span>i<span class="n">pan</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span>i<span class="n">pan</span><span class="p">)</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">; cosine wave.</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">11</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; 3 layers of the loop are played, each at a different speed, </span><span class="w">
+</span><span class="c1">; - with different retriggering rate, and pan location.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="mf">0.5</span><span class="w">   </span><span class="p">[</span><span class="mi">8</span><span class="o">/</span><span class="mi">10</span><span class="p">]</span><span class="w"> </span><span class="mf">0.5</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="mf">0.375</span><span class="w"> </span><span class="p">[</span><span class="mi">8</span><span class="o">/</span><span class="mi">11</span><span class="p">]</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="mf">0.25</span><span class="w">  </span><span class="p">[</span><span class="mi">8</span><span class="o">/</span><span class="mi">13</span><span class="p">]</span><span class="w"> </span><span class="mf">0.9</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm191705"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="loopseg.html" title="loopseg"><em class="citetitle">loopseg</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm191710"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Gabriel Maldonado</p>
+        <p>Nouveau dans la Version 4.13</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="lpreson.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="lpsholdp.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">lpreson </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> lpsholdp</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

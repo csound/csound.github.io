@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>cudanal</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="ExperimentalTop.html" title="Opcodes de l'orchestre expérimentaux et routines GEN" />
+    <link rel="prev" href="ExperimentalTop.html" title="Opcodes de l'orchestre expérimentaux et routines GEN" />
+    <link rel="next" href="cudasynth.html" title="cudasynth" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">cudanal</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ExperimentalTop.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes de l'orchestre expérimentaux et routines GEN</th>
+          <td width="20%" align="right"> <a accesskey="n" href="cudasynth.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="cudanal"></a>
+      <div class="titlepage"></div>
+      <a id="IndexCudanal" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">cudanal</span>
+        </h2>
+        <p>cudanal — 
+       Génère un fsig à partir d'une source audio mono, en utilisant l'analyse
+       par recouvrement-addition d'un vocodeur de phase et un GPU. Expérimental
+       et seulement disponible dans le code source pour le moment.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm426377"></a>
+        <h2>Description</h2>
+        <p>
+      Opcode du greffon cuda. Ce greffon se trouve dans le
+      répertoire des greffons et il doit être installé séparément. Le répertoire
+      des greffons est ici : <a class="ulink" href="https://github.com/csound/plugins" target="_top">
+      <em class="citetitle">https://github.com/csound/plugins</em></a>
+    </p>
+        <p>
+       Génère un fsig à partir d'une source audio mono, en utilisant l'analyse
+       par recouvrement-addition d'un vocodeur de phase et un GPU.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm426383"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">fsig <span class="command"><strong>cudanal</strong></span> ain, ifftsize, ioverlap, iwinsize, iwintype [, iformat] [, iinit]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm426387"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ifftsize</em></span> -- La taille de la TFR en échantillons. Ne
+      doit pas forcément être une puissance de deux (bien que celles-ci sont
+      particulièrement efficaces), mais doit être paire. Les nombres impairs sont
+      arrondis en interne. <span class="emphasis"><em>ifftsize</em></span> détermine le nombre de
+      bins d'analyse dans <span class="emphasis"><em>fsig</em></span>, soit <span class="emphasis"><em>ifftsize/2 + 1</em></span>.
+      Par exemple, si <span class="emphasis"><em>ifftsize</em></span> = 1024, <span class="emphasis"><em>fsig</em></span>
+      contiendra 513 bins d'analyse, ordonnés linéairement de la fréquence fondamentale
+      à la fréquence de Nyquist. La fréquence fondamentale de l'analyse (qui donne
+      en principe la fréquence résoluble la plus basse) est déterminée par
+      <span class="emphasis"><em>sr/ifftsize</em></span>. Ainsi, pour l'exemple précédent en supposant
+      que <span class="emphasis"><em>sr</em></span> = 44100, la fréquence fondamentale de l'analyse
+      vaut 43.07Hz. En pratique, comme le vocodeur de phase préserve la phase, la
+      fréquence de chaque bin peut dévier de façon bilatérale, si bien que des
+      composantes continues sont enregistrées. Avec un signal fortement tonal, les
+      fréquences des bins adjacents peuvent s'aggréger très étroitement autour des
+      partiels de la source, et les bins inférieurs peuvent même avoir des
+      fréquences négatives.
+    </p>
+        <p>
+      En principe, la seule raison d'utiliser pour <span class="emphasis"><em>ifftsize</em></span>
+      une valeur qui n'est pas une puissance de deux est de s'adapter à la fréquence
+      fondamentale connue d'une source fortement tonale. Les valeurs décomposables
+      en plusieurs petits facteurs peuvent être presqu'aussi efficaces que les
+      tailles en puissance de deux ; par exemple : 384, pour une source dont la
+      hauteur est proche du la grave à 110 Hz.
+    </p>
+        <p>
+      <span class="emphasis"><em>ioverlap</em></span> -- La distance en échantillons (<span class="quote">« <span class="quote">taille
+      du saut</span> »</span>) entre les trames d'analyse se recouvrant. En principe, doit
+      valoir au moins <span class="emphasis"><em>ifftsize/4</em></span>, par exemple 256 dans l'exemple
+      ci-dessus. <span class="emphasis"><em>ioverlap</em></span> determine le taux d'analyse sous-jacent,
+      soit <span class="emphasis"><em>sr/ioverlap</em></span>. Il n'est pas nécessaire que
+      <span class="emphasis"><em>ioverlap</em></span> soit un facteur simple de <span class="emphasis"><em>ifftsize</em></span> ;
+      par exemple, une valeur de 160 sera légale. Le choix de <span class="emphasis"><em>ioverlap</em></span>
+      peut être dicté par l'importance de la modification de hauteur appliquée au
+      <span class="emphasis"><em>fsig</em></span>, s'il y en a une. En règle générale, plus la
+      transposition est importante et plus le taux d'analyse doit être élevé, ce
+      qui implique une plus petite valeur de <span class="emphasis"><em>ioverlap</em></span>. Un
+      taux d'analyse plus élevé peut aussi être plus avantageux avec des sons à
+      transitoires à large bande tels que des tambours (pour lesquels une petite
+      fenêtre d'analyse diminue l'étalement mais augmente le nombre d'erreurs
+      relatives à la fréquence).
+    </p>
+        <p>
+      Noter qu'il est possible, et raisonnable, d'avoir différents fsigs dans un
+      orchestre (même dans le même instrument), évoluant à différents taux d'analyse.
+      Les interactions entre de tels fsigs ne sont pas couramment supportées et
+      l'opcode d'affectation de fsig ne permet pas la copie entre fsigs ayant des
+      propriétés différentes, même si la seule différence est la valeur de
+      <span class="emphasis"><em>ioverlap</em></span>. Cependant, ceci ne conduit pas à une impasse,
+      car il est théoriquement possible d'effectuer une conversion grossière du taux
+      (en particulier par rapport aux fichiers d'analyse en mémoire) comme on le
+      fait dans les techniques du domaine temporel.
+    </p>
+        <p>
+      <span class="emphasis"><em>iwinsize</em></span> -- la taille en échantillons du filtre de la
+      fenêtre d'analyse (fixé par <span class="emphasis"><em>iwintype</em></span>). Doit valoir au
+      moins <span class="emphasis"><em>ifftsize</em></span>, et peut être utilement plus grande.
+      Bien que d'autres proportions soit permises, il est recommandé que
+      <span class="emphasis"><em>iwinsize</em></span> soit toujours un multiple entier de
+      <span class="emphasis"><em>ifftsize</em></span>, par exemple 2048 dans l'exemple ci-dessus.
+      En interne, la fenêtre d'analyse (Hamming, von Hann) est multipliée par
+      une fonction sinc afin que les amplitudes soient nulles aux frontières de
+      trame. La plus grande taille de fenêtre d'analyse s'est révélée particulièrement
+      importante pour la resynthèse par banc d'oscillateurs (par exemple en utilisant
+      <span class="emphasis"><em>pvsadsyn</em></span>), car elle a pour effet d'augmenter la résolution
+      en fréquence de l'analyse et ainsi, la précision de la resynthèse. Comme
+      noté ci-dessus, <span class="emphasis"><em>iwinsize</em></span> détermine la latence globale
+      du système d'analyse/resynthèse. Dans bien des cas, et particulièrement en
+      absence de transposition, on constate que l'égalité <span class="emphasis"><em>iwinsize=ifftsize</em></span>
+      fonctionne très bien et offre la latence la plus faible.
+    </p>
+        <p>
+      <span class="emphasis"><em>iwintype</em></span> -- La forme de la fenêtre d'analyse. Actuellement,
+      seulement deux choix sont implémentés :
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>0 = fenêtre de Hamming</p>
+            </li>
+            <li class="listitem">
+              <p>1 = fenêtre de von Hann</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+        <p>
+      Les deux sont aussi supportées par le format de fichier PVOC-EX. Le type de
+      fenêtre est stocké comme attribut interne du fsig, avec les autres paramètres
+      (voir <a class="link" href="pvsinfo.html" title="pvsinfo"><em class="citetitle">pvsinfo</em></a>). D'autres
+      types pourront être implémentés dans le futur (par exemple la fenêtre de
+      Kaiser, aussi supportée par PVOC-EX), bien qu'une alternative évidente soit
+      de permettre la définition des fenêtres via une table de fonction. Le problème
+      ici est la contrainte de taille en puissance de deux des tables de fonction, ce
+      qui en fait une solution incomplète. La plupart des utilisateurs jugeront que
+      la fenêtre de Hamming est suffisante pour les besoins courants et peut être
+      le choix par défaut.
+    </p>
+        <p>
+      <span class="emphasis"><em>iformat</em></span> -- (facultatif) Le format d'analyse. Pour le
+      moment un seul format est implémenté par cet opcode :
+
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>0 =  amplitude + fréquence</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+        <p>
+      C'est le format classique du vocodeur de phase ; facile à traiter, et
+      naturel pour la resynthèse par banc d'oscillateurs. Il serait très facile
+      (on pourrait dire tentant) de ne pas traiter une trame de fsig purement
+      comme une trame de vocodeur de phase mais comme une trame de
+      synthèse additive générique. Il est en fait possible d'utiliser un fsig de
+      cette manière, mais il est important de garder à l'esprit que les deux ne
+      sont pas, à strictement parler, directement équivalents.
+    </p>
+        <p>
+      D'autres formats importants (supportés par PVOC-EX) sont :  
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>1 =  amplitude + phase</p>
+            </li>
+            <li class="listitem">
+              <p>2 =  complexe (réel + imaginaire)</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+        <p>
+      <span class="emphasis"><em>iformat</em></span> est là au cas où il pourrait être utile par la
+      suite de supporter ces autres formats. Les formats 0 et 1 sont en relation
+      étroite (car la phase est <span class="quote">« <span class="quote">cyclique</span> »</span> dans les deux cas - il est
+      trivial de convertir de l'un à l'autre), alors que le format complexe pourrait
+      garantir un second type explicite de signal (un <span class="quote">« <span class="quote">csig</span> »</span>)
+      spécialement pour les traitements à base de convolution, et d'autres
+      traitements dans lesquels le complément des opérateurs arithmétiques peut
+      être utile.
+    </p>
+        <p>
+      <span class="emphasis"><em>iinit</em></span> -- (facultatif) Ignore la réinitialisation. N'est
+      actuellement implémenté dans aucun de ces opcodes, et il reste à décider
+      s'il serait de quelque utilité.
+    </p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Avertissement]" src="images/warning.png" />
+              </td>
+              <th align="left">Avertissement</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Il est dangereux d'utiliser la même variable-f à la fois comme entrée et
+        comme sortie des opcodes cuda. Ceci peut produire un comportement indéfini
+        de certains de ces opcodes. Utilisez une variable différente à gauche et
+        à droite de l'opcode.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm426452"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode cudanal. Il utilise le fichier
+      <a class="ulink" href="examples/cudanal.csd" target="_top"><em class="citetitle">cudanal.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm426457"></a>
+          <p class="title">
+            <strong>Exemple 1323. Exemple de l'opcode cudanal.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm426464"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o cudanal.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	</span><span class="c1">;cudanal has no influence when there is no transformation of original sound</span><span class="w">
+
+</span>i<span class="n">fftsize</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">overlap</span><span class="w">  </span><span class="o">=</span><span class="w"> </span>i<span class="n">fftsize</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">4</span><span class="w">
+</span>i<span class="n">winsize</span><span class="w">  </span><span class="o">=</span><span class="w"> </span>i<span class="n">fftsize</span><span class="w">
+</span>i<span class="n">winshape</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">							</span><span class="c1">;von-Hann window</span><span class="w">
+</span>S<span class="n">file</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w">
+</span>a<span class="n">in</span><span class="w">       </span><span class="nb">soundin</span><span class="w"> </span>S<span class="n">file</span><span class="w">
+</span>f<span class="n">ftin</span><span class="w">     </span><span class="n">cudanal</span><span class="w"> </span>a<span class="n">in</span><span class="p">,</span><span class="w"> </span>i<span class="n">fftsize</span><span class="p">,</span><span class="w"> </span>i<span class="n">overlap</span><span class="p">,</span><span class="w"> </span>i<span class="n">winsize</span><span class="p">,</span><span class="w"> </span>i<span class="n">winshape</span><span class="w">	</span><span class="c1">;fft-analysis of the audio-signal</span><span class="w">
+</span>f<span class="n">ftblur</span><span class="w">   </span><span class="nb">pvscale</span><span class="w"> </span>f<span class="n">ftin</span><span class="p">,</span><span class="w"> </span><span class="vi">p5</span><span class="w">					</span><span class="c1">;scale</span><span class="w">
+</span>a<span class="n">out</span><span class="w">      </span><span class="n">cudasynth</span><span class="w"> </span>f<span class="n">ftblur</span><span class="w">					</span><span class="c1">;resynthesis</span><span class="w">
+          </span><span class="nb">outs</span><span class="w">	  </span>a<span class="n">out</span><span class="p">,</span><span class="w"> </span>a<span class="n">out</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">512</span><span class="w"> </span><span class="mi">1</span><span class="w">		</span><span class="c1">;original sound - ifftsize of pvsanal does not have any influence</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="mi">1</span><span class="w">		</span><span class="c1">;even with different</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">2048</span><span class="w"> </span><span class="mi">1</span><span class="w">		</span><span class="c1">;settings</span><span class="w">
+
+</span><span class="nb">s</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">512</span><span class="w"> </span><span class="mf">1.5</span><span class="w">		</span><span class="c1">;but transformation - here a fifth higher</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="mf">1.5</span><span class="w">	</span><span class="c1">;but with different settings</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">2048</span><span class="w"> </span><span class="mf">1.5</span><span class="w">	</span><span class="c1">;for ifftsize of pvsanal</span><span class="w">
+
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm426691"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Victor Lazzarini</td>
+          </tr>
+          <tr>
+            <td>2013</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 6.02</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ExperimentalTop.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="ExperimentalTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="cudasynth.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Opcodes de l'orchestre expérimentaux et routines GEN </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> cudasynth</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>lpf18</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="lpcfilter.html" title="lpcfilter" />
+    <link rel="next" href="lpfreson.html" title="lpfreson" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">lpf18</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="lpcfilter.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="lpfreson.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="lpf18"></a>
+      <div class="titlepage"></div>
+      <a id="Indexlpf18" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">lpf18</span>
+        </h2>
+        <p>lpf18 — 
+      Un filtre passe-bas résonant glissant à 3 pôles.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm188439"></a>
+        <h2>Description</h2>
+        <p>
+      Implémentation d'un filtre passe-bas résonant glissant à 3 pôles.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm188442"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>lpf18</strong></span> asig, xfco, xres, xdist [, iskip]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm188446"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>iskip</em></span> (facultatif, à par défaut) -- S'il est présent
+      et différent de zéro, l'initialisation est ignorée.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm188450"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>xfco</em></span> -- fréquence de coupure du filtre en Hz. Doit
+      être comprise entre 0 et <span class="emphasis"><em>sr</em></span>/2.
+    </p>
+        <p>
+      <span class="emphasis"><em>xres</em></span> -- quantité de résonance. Il y a des
+      auto-oscillations lorsque <span class="emphasis"><em>kres</em></span> est proche de 1. Doit
+      être habituellement compris entre 0 et 1, mais des valeurs légèrement
+      supérieures à 1 sont possibles pour obtenir des oscillations plus
+      soutenues et un effet de <span class="quote">« <span class="quote">saturation</span> »</span>.
+    </p>
+        <p>
+      <span class="emphasis"><em>xdist</em></span> -- quantité de distortion. <span class="emphasis"><em>kdist</em></span> = 0
+      donne une sortie propre. <span class="emphasis"><em>kdist</em></span> &gt; 0 ajoute une
+      distorsion de type <span class="emphasis"><em>tanh</em></span>() contrôlée par les paramètres
+      du filtre, de façon à ce qu'une faible fréquence de coupure et qu'une résonance
+      importante augmentent le taux de distorsion. Il est conseillé d'expérimenter.
+    </p>
+        <p>
+      <span class="emphasis"><em>lpf18</em></span> est une simulation numérique d'un filtre passe-bas
+      à 3 pôles (18 dB/oct) capable d'auto-oscillations avec une unité de distorsion
+      intégrée. C'est vraiment une version 3 pôles de
+      <a class="link" href="moogvcf.html" title="moogvcf"><em class="citetitle">moogvcf</em></a>, révisée,
+      recalibrée et comportant quelques améliorations. Les tables de réglage et
+      de rétroaction n'utilisent pas plus de 6 additions et 6 multiplications
+      par cycle de contrôle. L'unité de distorsion est basée sur une fonction
+      <a class="link" href="tanh.html" title="tanh"><em class="citetitle">tanh</em></a> modifiée, pilotée
+      par les contôles du filtre.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note: Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Avant la version 6.04, ce filtre nécessitait un signal d'entrée
+        normalisé à un.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm188473"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode lpf18. Il utilise le fichier
+      <a class="ulink" href="examples/lpf18.csd" target="_top"><em class="citetitle">lpf18.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm188478"></a>
+          <p class="title">
+            <strong>Exemple 547. Exemple de l'opcode lpf18.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm188485"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac             <span class="c1">;;;RT audio out</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">;-o lpf18.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; by Kevin Conder with help from Iain Duncan</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  
+</span>k<span class="n">amp</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">1</span><span class="w">                         </span><span class="c1">; Note that its amplitude (kamp) ranges from 0 to 1.</span><span class="w">
+</span>k<span class="n">cps</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">440</span><span class="w">
+</span>k<span class="n">nh</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">3</span><span class="w">
+</span>i<span class="n">fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>a<span class="n">sine</span><span class="w"> </span><span class="nb">buzz</span><span class="w"> </span>k<span class="n">amp</span><span class="p">,</span><span class="w"> </span>k<span class="n">cps</span><span class="p">,</span><span class="w"> </span>k<span class="n">nh</span><span class="p">,</span><span class="w"> </span>i<span class="n">fn</span><span class="w">     </span><span class="c1">; Generate a sine waveform.</span><span class="w">
+</span>k<span class="n">fco</span><span class="w"> </span><span class="nb">line</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">3000</span><span class="w">             </span><span class="c1">; Filter the sine waveform.</span><span class="w">
+</span>k<span class="n">res</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mf">0.8</span><span class="w">                       </span><span class="c1">; Vary the cutoff frequency (kfco) from 300 to 3,000 Hz.</span><span class="w">
+</span>k<span class="n">dist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">vol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+</span>a<span class="n">out</span><span class="w"> </span><span class="nb">lpf18</span><span class="w"> </span>a<span class="n">sine</span><span class="p">,</span><span class="w"> </span>k<span class="n">fco</span><span class="p">,</span><span class="w"> </span>k<span class="n">res</span><span class="p">,</span><span class="w"> </span>k<span class="n">dist</span><span class="w">
+</span><span class="nb">outs</span><span class="w"> </span>a<span class="n">out</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>i<span class="n">vol</span><span class="p">,</span><span class="w"> </span>a<span class="n">out</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>i<span class="n">vol</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">; sine wave.</span><span class="w">
+
+</span><span class="c1">; different distortion and volumes to compensate</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="w">     </span><span class="mf">0.2</span><span class="w">         </span><span class="mf">.8</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">4.5</span><span class="w"> </span><span class="mi">4</span><span class="w">   </span><span class="mf">0.9</span><span class="w">         </span><span class="mf">.7</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm188683"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Josep M Comajuncosas</td>
+          </tr>
+          <tr>
+            <td>Espagne</td>
+          </tr>
+          <tr>
+            <td>Décembre 2000</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 4.10 de Csound.</p>
+        <p>Paramètres de taux audio introduits dans la version 6.02</p>
+        <p>Octobre 2013.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="lpcfilter.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="lpfreson.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">lpcfilter </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> lpfreson</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>getftargs</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="getcol.html" title="getcol" />
+    <link rel="next" href="getrow.html" title="getrow" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">getftargs</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="getcol.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="getrow.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="getftargs"></a>
+      <div class="titlepage"></div>
+      <a id="Indexgetftargs" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">getftargs</span>
+        </h2>
+        <p>getftargs — 
+      Remplit une variable chaîne de caractères avec les arguments donnés à
+      la création d'une table de fonction au taux-k.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm145168"></a>
+        <h2>Description</h2>
+        <p>Opcode du greffon getftargs.</p>
+        <p>
+      <span class="emphasis"><em>getftargs</em></span> écrit les arguments donnés à la création
+      d'une table de fonction dans une variable chaîne de caractères.
+      <span class="emphasis"><em>getftargs</em></span> fonctionne durant l'initialisation ainsi
+      que pendant l'exécution.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm145174"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">Sdst <span class="command"><strong>getftargs</strong></span> iftno, ktrig</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm145178"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ifno</em></span> -- Numéro de la table dont les arguments vont
+      être utilisés.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm145182"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>Sdst</em></span> -- variable chaîne de caractères en sortie.
+    </p>
+        <p>
+      <span class="emphasis"><em>ktrig</em></span> -- signal de déclenchement, doit être valide
+      au temps-i. La variable chaîne de caractères en sortie est remplie à
+      l'initialisation si <span class="emphasis"><em>ktrig</em></span> est positif, et pendant
+      l'exécution, chaque fois que <span class="emphasis"><em>ktrig</em></span> est positif et
+      différent de la valeur précédente. Utiliser la constante 1 pour n'imprimer
+      qu'une fois à l'initialisation de la note.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm145190"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode getftargs. Il utilise le fichier
+      <a class="ulink" href="examples/getftargs.csd" target="_top"><em class="citetitle">getftargs.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm145195"></a>
+          <p class="title">
+            <strong>Exemple 422. Exemple de l'opcode getftargs.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en temps réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la ligne de commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm145202"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o getftargs.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span>S<span class="n">args</span><span class="w"> </span><span class="nb">getftargs</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">puts</span><span class="w"> </span>S<span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="s">"quadbezier"</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="mf">0.8</span><span class="w"> </span><span class="mi">450</span><span class="w"> </span><span class="mf">0.33</span><span class="w"> </span><span class="mi">600</span><span class="w"> </span><span class="mf">0.1</span><span class="w"> </span><span class="mi">800</span><span class="w"> </span><span class="mf">0.4</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+      Sa sortie devrait contenir cette ligne :
+      </p>
+        <pre class="screen"> 0 0 0.5 200 0.8 450 0.33 600 0.1 800 0.4 1024 0</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm145312"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="ftgen.html" title="ftgen"><em class="citetitle">ftgen</em></a>,
+      <a class="link" href="ftlen.html" title="ftlen"><em class="citetitle">ftlen</em></a> et
+      <a class="link" href="sprintf.html" title="sprintf"><em class="citetitle">sprintf</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm145321"></a>
+        <h2>Crédits</h2>
+        <p>Ecrit par Guillermo Senna</p>
+        <p>2016</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="getcol.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="getrow.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">getcol </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> getrow</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

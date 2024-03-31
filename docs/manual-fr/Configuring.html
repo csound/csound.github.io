@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Configuration</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="PartOverview.html" title="Partie I. Vue d'ensemble" />
+    <link rel="prev" href="UsingOptimizing.html" title="Optimisation de la latence audio en E/S" />
+    <link rel="next" href="OrchTop.html" title="Syntaxe de l'orchestre" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Configuration</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="UsingOptimizing.html">Précédent</a> </td>
+          <th width="60%" align="center">Partie I. Vue d'ensemble</th>
+          <td width="20%" align="right"> <a accesskey="n" href="OrchTop.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="chapter">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="Configuring"></a>Configuration</h2>
+          </div>
+        </div>
+      </div>
+      <p>Après avoir installé une distribution binaire ou bien avoir construit Csound à partir des
+    sources, il faut configurer Csound afin de l'adapter à votre système. Les installeurs réalisent
+    habituellement ces étapes automatiquement pour vous.
+  </p>
+      <p>Sur toutes les plates-formes il faut s'assurer que le ou les répertoires contenant les
+    bibliothèques des greffons de Csound sont indiqués dans une variable d'environnement
+    <code class="literal">OPCODE6DIR</code> ou <code class="literal">OPCODE6DIR64</code> en fonction de la précision
+    utilisée par les binaires compilés.
+    (Noter que pour Csound5 ces variables d'environnement étaient
+    <code class="literal">OPCODEDIR</code> et <code class="literal">OPCODEDIR64</code>).
+  </p>
+      <p>Les opérateurs Python nécessitent actuellement au moins Python 2.4 que l'on peut télécharger à
+    <a class="ulink" href="http://www.python.org" target="_top">www.python.org</a> s'il n'est pas déjà installé sur votre
+    système. On peut tester s'il est installé en tapant 'python' depuis une invite de commande
+    ou une fenêtre DOS.
+  </p>
+      <h2><a id="idm8548"></a>Windows</h2>
+      <p>Sur Windows, assurez-vous que le ou les répertoires (normalement le répertoire
+    <code class="filename">C:\Program Files\Csound</code>) contenant le répertoire des exécutables de Csound est dans votre
+    variable <code class="literal">PATH</code>, ou bien copiez tous les fichiers exécutables dans le
+    répertoire <code class="literal">system32</code> de Windows. En fonction de votre méthode d'installation,
+    il peut être aussi nécessaire de fixer les variables d'environnement <code class="literal">OPCODE6DIR</code>
+    et <code class="literal">OPCODE6DIR64</code>. En supposant que Csound est installé dans le
+    répertoire par défaut <code class="filename">C:\Program Files\Csound</code> vous pouvez
+    utiliser (sinon fixez les chemins en conséquence) :
+    </p>
+      <pre class="screen">set OPCODE6DIR=C:\Program Files\Csound\greffons
+set OPCODE6DIR64=C:\Program Files\Csound\greffons64
+set PATH=%PATH%;C:\Program Files\Csound\bin</pre>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note: python24.dll ou python25.dll manquante">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.png" />
+            </td>
+            <th align="left">python24.dll ou python25.dll manquante</th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>S'il apparaît une fenêtre pop-up au sujet de la bibliothèque Python manquante (python24.dll
+      ou python25.dll) et que vous n'avez pas besoin des opérateurs python, effacez simplement
+      <code class="filename">C:\Program Files\Csound\greffons\py.dll</code> et
+      <code class="filename">C:\Program Files\Csound\greffons64\py.dll</code>, et la fenêtre pop-up au
+      sujet de la bibliothèque Python manquante ne devrait plus réapparaitre</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <h2><a id="idm8562"></a>Unix et Linux</h2>
+      <p>Sur Unix et Linux, installez le programme Csound dans l'un des répertoires <code class="filename">bin</code>
+    du système, normalement <code class="filename">/usr/local/bin</code>, et les bibliothèques partagées de Csound
+    et des greffons dans des endroits comme <code class="filename">/usr/local/lib/csound/greffons</code> ou
+    <code class="filename">/usr/local/lib/csound/greffons64</code> et assurez-vous que les variables d'environnement
+    <code class="literal">OPCODE6DIR</code> et <code class="literal">OPCODE6DIR64</code> sont remplies correctement.
+  </p>
+      <h2><a id="idm8570"></a>CsoundAC</h2>
+      <p>CSoundAC nécessite quelques configurations supplémentaires. Sur toutes les plates-formes,
+      CsoundAC nécessite que vous ayez installé Python sur votre ordinateur. Le répertoire
+      contenant la bibliothèque partagée <code class="filename">_CsoundAC</code> et le fichier
+      <code class="filename">CsoundAC.py</code> doit être dans votre variable d'environnement
+      <code class="literal">PYTHONPATH</code>, afin que le runtime Python sache comment charger ces fichiers.</p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="UsingOptimizing.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="PartOverview.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="OrchTop.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Optimisation de la latence audio en E/S </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Syntaxe de l'orchestre</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>pvsosc</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="pvsout.html" title="pvsout" />
+    <link rel="next" href="pvspitch.html" title="pvspitch" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">pvsosc</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="pvsout.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="pvspitch.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="pvsosc"></a>
+      <div class="titlepage"></div>
+      <a id="Indexpvsosc" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">pvsosc</span>
+        </h2>
+        <p>pvsosc — 
+      Simulateur d'oscillateur basé sur PVS.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm277248"></a>
+        <h2>Description</h2>
+        <p>
+      Génère des spectres de signal périodique au format AMP-FREQ, avec le choix
+      parmi quatre type de forme d'onde :
+      </p>
+        <div class="orderedlist">
+          <ol class="orderedlist" type="1">
+            <li class="listitem">pseudo dent de scie (harmoniques en 1/n, où n est le numéro
+          de l'harmonique)</li>
+            <li class="listitem">pseudo carrée (comme la précédente mais seulement avec les
+          harmoniques de rang impair)</li>
+            <li class="listitem">impulsion (tous les harmoniques avec le même poids)</li>
+            <li class="listitem">cosinus</li>
+          </ol>
+        </div>
+        <p>
+      Les formes d'onde complexes (c'est-à-dire tous les types sauf le cosinus)
+      contiennent tous les harmoniques jusqu'à la fréquence de Nyquist. Cela fait
+      de <span class="emphasis"><em>pvsosc</em></span> une option pour la génération de formes
+      d'onde périodiques à bande limitée. De plus, on peut changer de type en
+      utilisant une variable de taux-k.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm277261"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">fsig <span class="command"><strong>pvsosc</strong></span> kamp, kfreq, ktype, isize [,ioverlap] [, iwinsize] [, iwintype] [, iformat]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm277265"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>fsig</em></span> -- flot pv de sortie mis à zéro.
+    </p>
+        <p>  
+      <span class="emphasis"><em>isize</em></span> -- taille de la trame d'analyse.
+    </p>
+        <p>
+      <span class="emphasis"><em>ioverlap</em></span> -- (Facultatif) taille du saut, vaut
+      <span class="emphasis"><em>isize</em></span>/4 par défaut.
+    </p>
+        <p>
+      <span class="emphasis"><em>iwinsize</em></span> -- (Facultatif) taille de fenêtre, vaut
+      <span class="emphasis"><em>isize</em></span> par défaut.
+    </p>
+        <p>
+      <span class="emphasis"><em>iwintype</em></span> -- (Facultatif) type de fenêtre, Hanning
+      par défaut. On a actuellement le choix entre :
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>0 = fenêtre de Hamming</p>
+            </li>
+            <li class="listitem">
+              <p>1 = fenêtre de von Hann</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+        <p>
+      <span class="emphasis"><em>iformat</em></span> -- (Facultatif) format des données, 0 par
+      défaut ce qui produit des données AMP:FREQ. C'est actuellement la seule
+      option.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm277286"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kamp</em></span> -- amplitude du signal. Noter que l'amplitude
+      effective du signal peut varier légèrement autour de cette valeur en
+      fonction du type de forme d'onde et de la fréquence. Généralement,
+      l'amplitude a tendance à dépasser <span class="emphasis"><em>kamp</em></span> pour les
+      hautes fréquences (&gt; 1000 Hz) et à être inférieure pour les basses
+      fréquences. De plus, à cause du traitement par recouvrement-addition, lorsque
+      l'on fait la resynthèse avec <span class="emphasis"><em>pvsynth</em></span>, les glissements
+      de fréquence causeront une fluctuation de l'amplitude autour de
+      <span class="emphasis"><em>kamp</em></span>.
+    </p>
+        <p>  
+	    <span class="emphasis"><em>kfreq</em></span> -- fréquence fondamentale en Hz.
+    </p>
+        <p>
+      <span class="emphasis"><em>ktype</em></span> -- type d'onde : 1. pseudo dent de scie, 2.
+      pseudo carrée, 3. impulsion, et tout autre valeur pour cosine.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm277297"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode pvsosc. Il utilise le fichier
+      <a class="ulink" href="examples/pvsosc.csd" target="_top"><em class="citetitle">pvsosc.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm277302"></a>
+          <p class="title">
+            <strong>Exemple 850. Exemple de l'opcode pvsosc</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm277309"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out  </span>
+-odac  -m0 <span class="c1">;;;realtime audio out</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o pvsosc.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w"> 
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w"> 
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+
+</span><span class="c1">; example by Menno Knevel 2021</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> </span><span class="c1">; a band-limited sawtooth-wave oscillator</span><span class="w">
+
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">sawtooth-wave</span><span class="se">\n</span><span class="s">"</span><span class="w">		
+</span>f<span class="n">sig</span><span class="w"> </span><span class="nb">pvsosc</span><span class="w">   </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">440</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="w">          </span><span class="c1">; generate wave spectral signal</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">pvsynth</span><span class="w"> </span>f<span class="n">sig</span><span class="w">                       </span><span class="c1">; resynthesise it</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w"> </span><span class="c1">; a band-limited square-wave oscillator	</span><span class="w">
+
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">square-wave</span><span class="se">\n</span><span class="s">"</span><span class="w">	
+</span>f<span class="n">sig</span><span class="w"> </span><span class="nb">pvsosc</span><span class="w">   </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">440</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="w">          </span><span class="c1">; generate wave spectral signal</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">pvsynth</span><span class="w"> </span>f<span class="n">sig</span><span class="w">                       </span><span class="c1">; resynthesise it</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">3</span><span class="w"> </span><span class="c1">; a pulse oscillator</span><span class="w">
+
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">pulse-wave</span><span class="se">\n</span><span class="s">"</span><span class="w">		
+</span>f<span class="n">sig</span><span class="w"> </span><span class="nb">pvsosc</span><span class="w">   </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">440</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="w">          </span><span class="c1">; generate wave spectral signal</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">pvsynth</span><span class="w"> </span>f<span class="n">sig</span><span class="w">                       </span><span class="c1">; resynthesise it</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">4</span><span class="w"> </span><span class="c1">; a cosine-wave oscillator</span><span class="w">
+
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">cosine-wave</span><span class="se">\n\n</span><span class="s">"</span><span class="w">			
+</span>f<span class="n">sig</span><span class="w"> </span><span class="nb">pvsosc</span><span class="w">   </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">440</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="w">          </span><span class="c1">; generate wave spectral signal</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">pvsynth</span><span class="w"> </span>f<span class="n">sig</span><span class="w">                       </span><span class="c1">; resynthesise it</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">5</span><span class="w"> </span><span class="c1">;cycle</span><span class="w">
+
+</span>k<span class="n">typ</span><span class="w"> </span><span class="nb">randh</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span>f<span class="n">sig</span><span class="w"> </span><span class="nb">pvsosc</span><span class="w">   </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">440</span><span class="p">,</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span>k<span class="n">typ</span><span class="o">+</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="mi">1024</span><span class="w"> </span><span class="c1">; make it to go from 1-4</span><span class="w">
+</span><span class="nb">printks2</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">cycle through all waves...: </span><span class="si">%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="nb">int</span><span class="p">(</span>k<span class="n">typ</span><span class="o">+</span><span class="mi">3</span><span class="p">)</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">pvsynth</span><span class="w"> </span>f<span class="n">sig</span><span class="w">                    
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">4</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm277654"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="pvsanal.html" title="pvsanal"><em class="citetitle">pvsanal</em></a>,
+      <a class="link" href="pvsynth.html" title="pvsynth"><em class="citetitle">pvsynth</em></a>,
+      <a class="link" href="pvsadsyn.html" title="pvsadsyn"><em class="citetitle">pvsadsyn</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm277663"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Victor Lazzarini</td>
+          </tr>
+          <tr>
+            <td>Août 2006 </td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="pvsout.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="pvspitch.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">pvsout </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> pvspitch</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

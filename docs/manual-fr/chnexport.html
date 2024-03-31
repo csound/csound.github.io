@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>chnexport</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="chnclear.html" title="chnclear" />
+    <link rel="next" href="chnget.html" title="chnget" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">chnexport</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="chnclear.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="chnget.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="chnexport"></a>
+      <div class="titlepage"></div>
+      <a id="Indexchnexport" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">chnexport</span>
+        </h2>
+        <p>chnexport — 
+      Exporte une variable globale en tant que canal du bus.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm54631"></a>
+        <h2>Description</h2>
+        <p>
+      Exporte une variable globale en tant que canal du bus ; le canal ne doit
+      pas déjà exister sinon il y aura une erreur d'initialisation. On appelle
+      normalement cet opcode depuis l'en-tête de l'orchestre ; il permet à
+      l'application hôte de lire et d'écrire directement dans des variables de
+      l'orchestre, sans avoir à utiliser
+      <a class="link" href="chnget.html" title="chnget"><em class="citetitle">chnget</em></a> ou
+      <a class="link" href="chnset.html" title="chnset"><em class="citetitle">chnset</em></a> pour copier les
+      données.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm54638"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">gival <span class="command"><strong>chnexport</strong></span> Sname, imode[, itype, idflt, imin, imax]</pre>
+        <pre class="synopsis">gkval <span class="command"><strong>chnexport</strong></span> Sname, imode[, itype, idflt, imin, imax]</pre>
+        <pre class="synopsis">gaval <span class="command"><strong>chnexport</strong></span> Sname, imode</pre>
+        <pre class="synopsis">gSval <span class="command"><strong>chnexport</strong></span> Sname, imode</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm54648"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>imode</em></span> -- somme d'au moins un des nombres suivants : 1 pour
+      entrée et 2 pour sortie.
+    </p>
+        <p>
+      <span class="emphasis"><em>itype</em></span> (facultatif, 0 par défaut) -- sous-type du canal,
+      seulement pour les canaux de contrôle. Les valeurs possibles sont :
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>
+            0: par défault / indéfini (<span class="emphasis"><em>idflt</em></span>, <span class="emphasis"><em>imin</em></span>
+            et <span class="emphasis"><em>imax</em></span> sont ignorés)
+          </p>
+            </li>
+            <li class="listitem">
+              <p>
+            1: seulement des valeurs entières
+          </p>
+            </li>
+            <li class="listitem">
+              <p>
+            2: échelle linéaire
+          </p>
+            </li>
+            <li class="listitem">
+              <p>
+            3: échelle exponentielle
+          </p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+        <p>
+      <span class="emphasis"><em>idflt</em></span> (facultatif, 0 par défaut) -- valeur par défaut,
+      seulement pour les canaux de contrôle avec <span class="emphasis"><em>itype</em></span>
+      différent de zéro. Doit être supérieur ou égal à <span class="emphasis"><em>imin</em></span>
+      et inférieur ou égal à <span class="emphasis"><em>imax</em></span>.
+    </p>
+        <p>
+      <span class="emphasis"><em>imin</em></span> (facultatif, 0 par défaut) -- valeur minimale,
+      seulement pour les canaux de contrôle avec <span class="emphasis"><em>itype</em></span>
+      différent de zéro. Doit être différent de zéro pour l'échelle exponentielle
+      (<span class="emphasis"><em>itype</em></span> = 3).
+    </p>
+        <p>
+      <span class="emphasis"><em>imax</em></span> (facultatif, 0 par défaut) -- valeur maximale,
+      seulement pour les canaux de contrôle avec <span class="emphasis"><em>itype</em></span>
+      différent de zéro. Doit être supérieur à <span class="emphasis"><em>imin</em></span>. Dans le
+      cas d'une échelle exponentielle, il doit également avoir le même signe que
+      <span class="emphasis"><em>imin</em></span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm54680"></a>
+        <h2>Notes</h2>
+        <p>
+      Les paramètres du canal (<span class="emphasis"><em>imode</em></span>, <span class="emphasis"><em>itype</em></span>,
+      <span class="emphasis"><em>idflt</em></span>, <span class="emphasis"><em>imin</em></span> et <span class="emphasis"><em>imax</em></span>)
+      ne sont que des indications pour l'application hôte ou un logiciel externe
+      accédant au bus par l'API, et ils ne restreignent en rien la lecture ou
+      l'écriture sur le canal.
+    </p>
+        <p>
+      Bien que la variable globale soit utilisée comme argument de sortie,
+      <span class="emphasis"><em>chnexport</em></span> ne la change pas, et ne s'exécute seulement
+      qu'au taux-i. Si la variable n'a pas été préalablement déclarée, elle est
+      créée par Csound avec une valeur initiale de zéro ou une chaîne de caractères
+      nulle.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm54690"></a>
+        <h2>Exemples</h2>
+        <p>
+      L'exemple montre l'utilisation du bus logiciel comme signal de contrôle
+      asynchrone pour fixer la fréquence de coupure du filtre. On suppose qu'un
+      programme externe utilisant l'API fournit les valeurs.
+    </p>
+        <div class="informalexample">
+          <pre class="programlisting">
+        <span class="ohdr">sr</span> <span class="op">=</span> 44100
+        <span class="ohdr">kr</span> <span class="op">=</span> 100
+        <span class="ohdr">ksmps</span> <span class="op">=</span> 1
+
+        gkc <span class="opc">init</span> 1000   <span class="comment">; set default value</span>
+        gkc <span class="opc">chnexport</span> "cutoff", 1, 3, <span class="opc">i</span>(gkc), 500, 2000
+
+        <span class="oblock">instr</span>   1
+           a1   <span class="opc">oscil</span>     p4, p5, 100
+           a2   <span class="opc">lowpass2</span>  a1, gkc, 200
+                <span class="opc">out</span>       a2
+        <span class="oblock">endin</span>
+      </pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm54710"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Istvan Varga</td>
+          </tr>
+          <tr>
+            <td>2005</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="chnclear.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="chnget.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">chnclear </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> chnget</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

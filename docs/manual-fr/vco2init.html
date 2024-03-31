@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>vco2init</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="vco2ift.html" title="vco2ift" />
+    <link rel="next" href="vcomb.html" title="vcomb" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">vco2init</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="vco2ift.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="vcomb.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="vco2init"></a>
+      <div class="titlepage"></div>
+      <a id="IndexVco2init" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">vco2init</span>
+        </h2>
+        <p>vco2init — 
+      Calcul des tables à utiliser par l'opcode <span class="emphasis"><em>vco2</em></span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm370563"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>vco2init</em></span> calcule des tables à utiliser par l'opcode
+      <a class="link" href="vco2.html" title="vco2"><em class="citetitle">vco2</em></a>. En option, on peut accéder aussi
+      à ces tables comme si elles étaient des tables de fonction standard de Csound. Dans ce cas, on
+      peut utiliser <a class="link" href="vco2ft.html" title="vco2ft"><em class="citetitle">vco2ft</em></a> pour trouver le numéro
+      de table correct pour une fréquence d'oscillateur donnée.
+    </p>
+        <p>
+      Dans la plupart des cas, cet opcode est appelé depuis l'en-tête de l'orchestre. L'utilisation de
+      <span class="emphasis"><em>vco2init</em></span> dans des instruments est possible mais non recommandée. En effet,
+      le remplacement de tables durant l'exécution peut causer un plantage de Csound si d'autres opcodes
+      sont en train d'accéder à ces tables au même moment.
+    </p>
+        <p>
+      Notez que <span class="emphasis"><em>vco2init</em></span> n'est pas nécessaire au fonctionnement de
+      <span class="emphasis"><em>vco2</em></span> (les tables sont automatiquement allouées au premier appel de
+      <span class="emphasis"><em>vco2</em></span>, si ce n'est pas déjà fait), cependant il peut être utile dans certains
+      cas :
+
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>Pré-calcul des tables pendant le chargement de l'orchestre. C'est utile lorque l'on
+          ne veut pas générer les tables pendant l'exécution, afin de ne pas risquer une interruption
+          du traitement en temps réel.</p>
+            </li>
+            <li class="listitem">
+              <p>Partage des tables comme ftables Csound. Par défaut, ces tables ne sont accessibles
+          que par <a class="link" href="vco2.html" title="vco2"><em class="citetitle">vco2</em></a>.</p>
+            </li>
+            <li class="listitem">
+              <p>Modification des paramètres par défaut des tables (par exemple leur taille) ou
+          utilisation d'une forme d'onde définie par l'utilisateur spécifiée dans une table de
+          fonction.</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm370586"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ifn <span class="command"><strong>vco2init</strong></span> iwave [, ibasfn] [, ipmul] [, iminsiz] [, imaxsiz] [, isrcft]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm370590"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ifn</em></span> -- le premier numéro de table libre après les tables allouées. Si
+      <span class="emphasis"><em>ibasfn</em></span> n'a pas été spécifié, -1 est retourné.
+    </p>
+        <p>
+      <span class="emphasis"><em>iwave</em></span> -- somme des valeurs suivantes sélectionnant quelles tables
+      d'onde il faut calculer :
+        </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>16 : triangle</p>
+            </li>
+            <li class="listitem">
+              <p>8 : onde carrée</p>
+            </li>
+            <li class="listitem">
+              <p>4 : pulsation (non normalisée)</p>
+            </li>
+            <li class="listitem">
+              <p>2 : 4 * x * (1 - x)   (intégration d'une dent de scie)</p>
+            </li>
+            <li class="listitem">
+              <p>1 : dent de scie</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+        <p>
+      Alternativement, <span class="emphasis"><em>iwave</em></span> peut être fixé à un entier négatif qui sélectionne une
+      forme d'onde définie par l'utilisateur. Pour cela, le paramètre <span class="emphasis"><em>isrcft</em></span> doit
+      être aussi spécifié. <a class="link" href="vco2.html" title="vco2"><em class="citetitle">vco2</em></a> peut accéder à la
+      forme d'onde numéro -1. Cependant, les autres formes d'onde définies par l'utilisateur ne sont
+      utilisables qu'avec <a class="link" href="vco2ft.html" title="vco2ft"><em class="citetitle">vco2ft</em></a> ou
+      <a class="link" href="vco2ift.html" title="vco2ift"><em class="citetitle">vco2ift</em></a>.
+    </p>
+        <p>
+      <span class="emphasis"><em>ibasfn</em></span> (facultatif, par défaut -1) -- numéro de ftable à partir duquel les
+      opcodes autres que <span class="emphasis"><em>vco2</em></span> peuvent accéder à l'ensemble de tables. Il est
+      nécessaire pour les formes d'onde définies par l'utilisateur, à l'exception de -1. Si cette valeur
+      est inférieure à 1, il n'est pas possible d'accéder aux tables calculées par
+      <span class="emphasis"><em>vco2init</em></span> en tant que tables de fonction de Csound.
+    </p>
+        <p>
+      <span class="emphasis"><em>ipmul</em></span> (facultatif, par défaut 1,05) -- coefficient multiplicatif pour le
+      nombre d'harmoniques. Si une table a n harmoniques, la suivante en aura n * <span class="emphasis"><em>ipmul</em></span>
+      (au moins n + 1). L'intervalle autorisé pour <span class="emphasis"><em>ipmul</em></span> va de
+      1,01 à 2. Zéro et les valeurs négatives sélectionnent la valeur par défaut (1,05).
+    </p>
+        <p>
+      <span class="emphasis"><em>iminsiz</em></span> (facultatif, par défaut -1) -- taille de table minimale.
+    </p>
+        <p>
+      <span class="emphasis"><em>imaxsiz</em></span> (facultatif, par défaut -1) -- taille de table maximale.
+    </p>
+        <p>
+      La taille de table réelle est calculée en multipliant la racine carrée du nombre d'harmoniques par
+      <span class="emphasis"><em>iminsiz</em></span>, puis en arrondissant le résultat à la puissance de deux supérieure,
+      tout en l'obligeant à ne pas dépasser <span class="emphasis"><em>imaxsiz</em></span>.
+    </p>
+        <p>
+      Les deux paramètres, <span class="emphasis"><em>iminsiz</em></span> et <span class="emphasis"><em>imaxsiz</em></span>, doivent être
+      des puissances de deux, dans l'intervalle autorisé. L'intervalle autorisé va de 16 à 262144 pour
+      <span class="emphasis"><em>iminsiz</em></span> jusqu'à 16777216 pour <span class="emphasis"><em>imaxsiz</em></span>. Zéro ou des valeurs
+      négatives sélectionnent les réglages par défaut :
+
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>La taille minimale est 128 pour toutes les formes d'onde sauf pour la pulsation
+          (<span class="emphasis"><em>iwave</em></span> = 4). Sa taille minimale est de 256.</p>
+            </li>
+            <li class="listitem">
+              <p>La taille maximale par défaut vaut normalement la taille minimale multipliée par
+          64, mais pas plus de 16384 si possible. Elle vaut toujours au moins le taille
+          minimale.</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+        <p>
+      <span class="emphasis"><em>isrcft</em></span> (facultatif, par défaut -1) -- numéro de la ftable source pour les
+      formes d'onde définies par l'utilisateur (si <span class="emphasis"><em>iwave</em></span> &lt; 0).
+      <span class="emphasis"><em>isrcft</em></span> doit pointer sur une table de fonction contenant la forme d'onde
+      à utiliser pour générer le tableau de tables. Il est recommandé d'avoir une taille de table
+      d'au moins <span class="emphasis"><em>imaxsiz</em></span> points. Si <span class="emphasis"><em>iwave</em></span> n'est pas négatif
+      (les tables d'onde internes sont utilisées), <span class="emphasis"><em>isrcft</em></span> est ignoré.
+    </p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning: Avertissement">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Avertissement]" src="images/warning.png" />
+              </td>
+              <th align="left">Avertissement</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Le nombre et la taille des tables ne sont pas fixes. Les orchestres ne doivent pas dépendre de
+        ces paramètres, car ils peuvent changer d'une version à l'autre de Csound.
+      </p>
+                <p>
+        Si la table sélectionnée existe déjà, elle est remplacée. Si un opcode est en train d'accéder aux
+        tables au même moment, il est fort probable qu'un plantage se produise. C'est pourquoi il est
+        recommandé de n'utiliser <span class="emphasis"><em>vco2init</em></span> que dans l'en-tête de l'orchestre.
+      </p>
+                <p>Il ne faut pas remplacer/écraser ces tables par les routines GEN ou l'opcode
+        <span class="emphasis"><em>ftgen</em></span>. Sinon, un comportement imprévisible voire un plantage de Csound
+        peuvent se produire si <a class="link" href="vco2.html" title="vco2"><em class="citetitle">vco2</em></a> est utilisé.
+        Le premier numéro de ftable libre après le tableau de tables est retourné dans
+        <span class="emphasis"><em>ifn</em></span>.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm370660"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode vco2init. Il utilise le fichier
+      <a class="ulink" href="examples/vco2init.csd" target="_top"><em class="citetitle">vco2init.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm370665"></a>
+          <p class="title">
+            <strong>Exemple 1163. Exemple de l'opcode vco2init.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm370672"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac  <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o vco2init.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="o">=</span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="o">=</span><span class="mi">1</span><span class="w">
+</span><span class="vg">nchnls</span><span class="o">=</span><span class="mi">2</span><span class="w">
+
+</span><span class="c1">; create waveform with discontinuities, so it has a lot of high freq content</span><span class="w">
+</span>gi<span class="n">table</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">^</span><span class="mi">16</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">^</span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">^</span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">^</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">; make bandlimited tables of the waveform</span><span class="w">
+</span>gi<span class="n">_nextfree</span><span class="w"> </span><span class="nb">vco2init</span><span class="w"> </span><span class="o">-</span>gi<span class="n">table</span><span class="p">,</span><span class="w"> </span>gi<span class="n">table</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.05</span><span class="p">,</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">^</span><span class="mi">16</span><span class="p">,</span><span class="w"> </span>gi<span class="n">table</span><span class="w">
+</span>gi<span class="n">table_bl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span>gi<span class="n">table</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>k<span class="n">freq</span><span class="w">  </span><span class="nb">expon</span><span class="w"> </span><span class="mi">14000</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="w">
+</span>k<span class="n">fn</span><span class="w">    </span><span class="nb">vco2ft</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span>gi<span class="n">table_bl</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">   </span><span class="nb">oscilikt</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span>k<span class="n">fn</span><span class="w">
+</span><span class="nb">printk</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span>k<span class="n">fn</span><span class="w">
+
+</span><span class="c1">; remove semicolon on next line to hear original waveform, demonstrating the aliasing</span><span class="w">
+</span><span class="c1">;asig   oscili 5000, kfreq, gitable</span><span class="w">
+       </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+      Sa sortie contiendra des lignes comme celles-ci :
+      </p>
+        <pre class="screen">
+ i   1 time     0.00002:   103.00000
+ i   1 time     0.10000:   103.00000
+ i   1 time     0.20000:   103.00000
+ i   1 time     0.30002:   103.00000
+ i   1 time     0.40000:   104.00000
+ i   1 time     0.50000:   104.00000
+.......
+......
+ i   1 time     4.80002:   135.00000
+ i   1 time     4.90000:   136.00000
+ i   1 time     5.00000:   138.00000</pre>
+        <p>
+    </p>
+        <p>
+      Voir aussi l'exemple de l'opcode <a class="link" href="vco2.html" title="vco2"><em class="citetitle">vco2</em></a>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm370869"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="vco2ft.html" title="vco2ft"><em class="citetitle">vco2ft</em></a>,
+      <a class="link" href="vco2ift.html" title="vco2ift"><em class="citetitle">vco2ift</em></a> et
+      <a class="link" href="vco2.html" title="vco2"><em class="citetitle">vco2</em></a>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm370878"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Istvan Varga</p>
+        <p>Nouveau dans la version 4.22</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="vco2ift.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="vcomb.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">vco2ift </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> vcomb</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

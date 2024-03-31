@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>harmon</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="guiro.html" title="guiro" />
+    <link rel="next" href="harmon2.html" title="harmon2" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">harmon</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="guiro.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="harmon2.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="harmon"></a>
+      <div class="titlepage"></div>
+      <a id="IndexHarmon" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">harmon</span>
+        </h2>
+        <p>harmon — 
+      Analyse une entrée audio et génère des voix harmoniques synchrones.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm149814"></a>
+        <h2>Description</h2>
+        <p>
+      Analyse une entrée audio et génère des voix harmoniques synchrones.
+   </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm149817"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>harmon</strong></span> asig, kestfrq, kmaxvar, kgenfreq1, kgenfreq2, imode, \
+      iminfrq, iprd</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm149821"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>imode</em></span> -- mode d'interprétation des entrées de génération
+      de fréquence <span class="emphasis"><em>kgenfreq1</em></span>, <span class="emphasis"><em>kgenfreq2</em></span>.
+      0 : les valeurs entrées sont des rapports de la fréquence analysée du signal
+      audio. 1 : les valeurs entrées sont les fréquences demandées en Hz.
+    </p>
+        <p>
+      <span class="emphasis"><em>iminfrq</em></span> -- la fréquence la plus basse en Hz attendue dans
+      l'entrée audio. Ce paramètre détermine la quantité de signal en entrée qui
+      est enregistrée pour l'analyse courante et fixe une limite inférieure au
+      détecteur de hauteur interne.
+    </p>
+        <p>
+      <span class="emphasis"><em>iprd</em></span> -- période d'analyse (en secondes). Comme l'analyse
+      de hauteur interne peut prendre du temps, l'entrée est typiquement analysée
+      seulement toutes les 20 à 50 ms.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm149831"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kestfrq</em></span> -- fréquence estimée de l'entrée.
+    </p>
+        <p>
+      <span class="emphasis"><em>kmaxvar</em></span> -- variance maximale (valeur attendue entre 0 et 1).
+    </p>
+        <p>
+      <span class="emphasis"><em>kgenfreq1</em></span> -- la première fréquence générée.
+    </p>
+        <p>
+      <span class="emphasis"><em>kgenfreq2</em></span> -- la seconde fréquence générée.
+    </p>
+        <p>
+      Cette unité est un harmoniseur, capable d'ajouter jusqu'à deux voix
+      supplémentaires avec la même amplitude et le même spectre que l'entrée.
+      L'analyse de l'entrée est facilitée par deux éléments : une estimation de
+      la fréquence de l'entrée <span class="emphasis"><em>kestfrq</em></span> (en Hz) et une
+      variance fractionnaire maximale <span class="emphasis"><em>kmaxvar</em></span> autour de cette
+      estimation, qui sert à limiter la taille de la recherche. Une fois la
+      fréquence réelle de l'entrée déterminée, la forme de pulsation la plus
+      récente est utilisée pour générer les autres voix aux fréquences demandées.
+    </p>
+        <p>
+      Les trois entrées de fréquence peuvent être dérivées de diverses manières
+      depuis un fichier de partition ou depuis une source MIDI. La première est
+      la hauteur attendue, avec un paramètre de variance permettant les inflexions
+      ou les approximations ; si la hauteur attendue vaut zéro l'harmoniseur sera
+      silencieux. Les seconde et troisième hauteurs contrôlent les fréquences de
+      sortie ; si l'une d'elles vaut zéro, l'harmoniseur ne générera que la
+      fréquence demandée différente de zéro ; si les deux sont nulles, l'harmoniseur
+      sera silencieux. Lorsque la fréquence demandée est plus haute que l'entrée,
+      le procédé demande plus de calculs à cause de la superposition des pulsations
+      en sortie. Pour des raisons d'efficacité, ceci est actuellement limité, ce
+      qui a pour résultat de ne permettre à tout moment qu'une seule voix plus
+      haute que l'entrée.
+    </p>
+        <p>
+      Cette unité est utile pour fournir à la demande un effet de chorus en fond,
+      ou bien pour corriger la hauteur d'une voix un peu fausse en entrée. Il
+      n'y a pratiquement pas de délai entre l'entrée et la sortie. La sortie
+      ne comprend que les parties générées sans l'entrée.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm149846"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode harmon. Il utilise le fichier
+      <a class="ulink" href="examples/harmon.csd" target="_top"><em class="citetitle">harmon.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm149851"></a>
+          <p class="title">
+            <strong>Exemple 432. Exemple de l'opcode harmon.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm149858"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o harmon.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+ 
+</span>a<span class="n">out</span><span class="w"> </span><span class="nb">diskin2</span><span class="w"> </span><span class="s">"sing.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span>k<span class="n">estfrq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">	</span><span class="c1">;different estimated frequency</span><span class="w">
+</span>k<span class="n">maxvar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+</span>i<span class="n">mode</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>i<span class="n">minfrq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span>i<span class="n">prd</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">0.02</span><span class="w">
+  
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">harmon</span><span class="w"> </span>a<span class="n">out</span><span class="p">,</span><span class="w"> </span>k<span class="n">estfrq</span><span class="p">,</span><span class="w"> </span>k<span class="n">maxvar</span><span class="p">,</span><span class="w"> </span>k<span class="n">estfrq</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span>k<span class="n">estfrq</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span>\<span class="w">
+            </span>i<span class="n">mode</span><span class="p">,</span><span class="w"> </span>i<span class="n">minfrq</span><span class="p">,</span><span class="w"> </span>i<span class="n">prd</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span><span class="p">(</span>a<span class="n">sig</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>a<span class="n">out</span><span class="p">)</span><span class="o">*</span><span class="mf">.6</span><span class="p">,</span><span class="w"> </span><span class="p">(</span>a<span class="n">sig</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>a<span class="n">out</span><span class="p">)</span><span class="o">*</span><span class="mf">.6</span><span class="w">	</span><span class="c1">;mix dry&amp;wet signal</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">2.7</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w">   </span><span class="mi">200</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w">   </span><span class="mi">500</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm150035"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Barry L. Vercoe</td>
+          </tr>
+          <tr>
+            <td>M.I.T., Cambridge, Mass</td>
+          </tr>
+          <tr>
+            <td>1997</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 3.47</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="guiro.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="harmon2.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">guiro </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> harmon2</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

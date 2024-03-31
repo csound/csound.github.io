@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Macros de partition</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="ScoreTop.html" title="La partition numérique standard" />
+    <link rel="prev" href="ScoreRamping.html" title="Ramping" />
+    <link rel="next" href="ScoreMult.html" title="Partition dans plusieurs fichiers" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Macros de partition</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ScoreRamping.html">Précédent</a> </td>
+          <th width="60%" align="center">La partition numérique standard</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ScoreMult.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="section">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="ScoreMacros"></a>Macros de partition</h2>
+          </div>
+        </div>
+      </div>
+      <div class="simplesect">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="idm9541"></a>Description</h3>
+            </div>
+          </div>
+        </div>
+        <p>
+      Les macros sont des substitutions de texte qui sont réalisées dans la partition lors de sa
+      présentation au système. Le système de macro de Csound est très simple, et il utilise les
+      caractères # et $ pour définir et appeler des macros. C'est un moyen de simplifier
+      l'écriture d'une partition, et une alternative élémentaire aux systèmes de génération de partition
+      complète. Le système de macros de partition est similaire, mais de façon indépendante, au
+      système de macros du langage de l'orchestre.
+
+      <a id="IndexScoreMacros" class="indexterm"></a>
+      <a id="IndexMacrosScore" class="indexterm"></a>
+    </p>
+        <p>
+      <span class="emphasis"><em>#define</em></span> NOM -- définit une macro simple. Le nom de la macro doit
+      commencer par une lettre et peut être une combinaison de lettres et de nombres. La casse est
+      significative. Cette forme est restrictive dans le sens que les noms de variable sont fixes. On
+      peut obtenir plus de souplesse au moyen d'une macro avec arguments, décrite ci-dessous.
+
+    <a id="IndexDefineScore" class="indexterm"></a>
+    <a id="IndexNameScore" class="indexterm"></a>
+    <a id="IndexUndefScore" class="indexterm"></a>
+    </p>
+        <p>
+      <span class="emphasis"><em>#define</em></span> NOM(<span class="emphasis"><em>a' b' c'</em></span>) -- définit une
+      macro avec arguments. On peut l'utiliser dans des situations plus complexes. Le nom de la macro
+      doit commencer par une lettre et peut être suivi par une combinaison de lettres et de chiffres.
+      Dans le texte de substitution, les arguments sont remplacés par la forme : $A. En fait,
+      les arguments sont implémentés comme des macros simples. Il peut y avoir jusqu'à 5 arguments, et
+      leur nom peut être n'importe quel choix de lettres. Rappelez-vous que la casse est significative
+      dans les noms de macro.
+    </p>
+        <p>
+      <span class="emphasis"><em>$NOM.</em></span> --  appelle une macro définie. Pour
+      appeler une macro, on utilise son nom précédé d'un caractère $.
+      Le nom se termine par le premier caractère qui n'est ni une lettre ni un
+      chiffre. S'il est nécessaire que le nom soit suivi d'une lettre ou d'un
+      chiffre, un point, qui sera ignoré, peut être utilisé pour terminer le
+      nom. La chaîne, <span class="emphasis"><em>$NOM</em></span>., est remplacée
+      par le texte de substitution de la définition. Le texte de substitution
+      peut aussi contenir des appels de macro.
+    </p>
+        <p>
+      <span class="emphasis"><em>#undef</em></span> NOM -- rend un nom de macro indéfini. Si l'on a plus besoin d'une
+      macro, on peut la rendre indéfinie avec <span class="emphasis"><em>#undef</em></span> NOM.
+    </p>
+      </div>
+      <div class="simplesect">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="idm9570"></a>Syntaxe</h3>
+            </div>
+          </div>
+        </div>
+        <pre class="synopsis"><span class="command"><strong>#define</strong></span> NOM # texte de substitution #</pre>
+        <pre class="synopsis"><span class="command"><strong>#define</strong></span> NOM(a' b' c') # texte de substitution #</pre>
+        <pre class="synopsis">
+          <span class="command">
+            <strong>$NOM.</strong>
+          </span>
+        </pre>
+        <pre class="synopsis"><span class="command"><strong>#undef</strong></span>  NOM</pre>
+      </div>
+      <div class="simplesect">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="idm9580"></a>Initialisation</h3>
+            </div>
+          </div>
+        </div>
+        <p>
+      <span class="emphasis"><em># texte de substitution #</em></span> -- Le texte de substitution est une chaîne
+      de caractères (ne contenant pas de #) et peut s'étendre sur plusieurs lignes. Le texte de
+      substitution est délimité par des caractères #, ce qui permet d'éviter l'insertion de
+      caractères supplémentaires par inadvertance.
+    </p>
+      </div>
+      <div class="simplesect">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="idm9584"></a>Exécution</h3>
+            </div>
+          </div>
+        </div>
+        <p>
+      Il faut prendre quelques précautions avec les macros de substitution de texte, car elle peuvent
+      parfois produire d'étranges résultats. Elles ne tiennent compte d'aucune valeur sémantique, et ainsi
+      les espaces sont significatifs. C'est pourquoi, au contraire du langage C, la définition délimite
+      le texte de substitution par des caractères #. Utilisé avec discernement, ce système de macro
+      est un concept puissant, mais il peut aussi être mal employé.
+    </p>
+        <p><strong>Une autre utilisation des macros. </strong>
+        Lorsque l'on écrit une partition complexe, on oublie parfois trop facilement à quoi les 
+        différents numéros d'instruments font référence. On peut utiliser des macros pour nommer
+        ces nombres. Par exemple
+        </p>
+        <div class="informalexample">
+          <pre class="programlisting">
+<span class="emphasis"><em>#define</em></span> Flute  #i1#
+<span class="emphasis"><em>#define</em></span> Whoop  #i2#
+
+<span class="emphasis"><em>$Flute.</em></span>  0  10  4000  440
+<span class="emphasis"><em>$Whoop.</em></span>  5  1</pre>
+        </div>
+        <p>
+      </p>
+      </div>
+      <div class="simplesect">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="idm9596"></a>Exemples</h3>
+            </div>
+          </div>
+        </div>
+        <p>
+      </p>
+        <div class="example">
+          <a id="idm9599"></a>
+          <p class="title">
+            <strong>Exemple 1. Macro simple</strong>
+          </p>
+          <div class="example-contents">
+            <p>
+          Une note a un ensemble de p-champs qui sont répétés :
+          </p>
+            <pre class="programlisting">
+<span class="emphasis"><em>#define</em></span> ARGS # 1.01 2.33 138#
+<span class="stamnt">i</span>1 0 1 8.00  1000 $ARGS
+<span class="stamnt">i</span>1 0 1 8.01  1500 $ARGS
+<span class="stamnt">i</span>1 0 1 8.02  1200 $ARGS
+<span class="stamnt">i</span>1 0 1 8.03  1000 $ARGS</pre>
+            <p>
+
+          Ce sera développé avant le tri en :
+          </p>
+            <pre class="programlisting">
+<span class="stamnt">i</span>1 0 1 8.00  1000 1.01 2.33 138
+<span class="stamnt">i</span>1 0 1 8.01  1500 1.01 2.33 138
+<span class="stamnt">i</span>1 0 1 8.02  1200 1.01 2.33 138
+<span class="stamnt">i</span>1 0 1 8.03  1000 1.01 2.33 138</pre>
+            <p>
+        </p>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+        <p>
+      On économise ainsi de la frappe au clavier, et les révisions sont plus faciles. Avec deux
+      ensembles de p-champs on pourrait avoir une seconde macro (il n'y pas de réelle limite au
+      nombre de macros que l'on peut définir).
+      </p>
+        <div class="informalexample">
+          <pre class="programlisting">
+<span class="emphasis"><em>#define</em></span> ARGS1 # 1.01 2.33 138#
+<span class="emphasis"><em>#define</em></span> ARGS2 # 1.41 10.33 1.00#
+<span class="stamnt">i</span>1 0 1 8.00  1000 $ARGS1
+<span class="stamnt">i</span>1 0 1 8.01  1500 $ARGS2
+<span class="stamnt">i</span>1 0 1 8.02  1200 $ARGS1
+<span class="stamnt">i</span>1 0 1 8.03  1000 $ARGS2</pre>
+        </div>
+        <p>
+    </p>
+        <p>
+      </p>
+        <div class="example">
+          <a id="idm9623"></a>
+          <p class="title">
+            <strong>Exemple 2. Macros avec arguments</strong>
+          </p>
+          <div class="example-contents">
+            <p>
+          </p>
+            <div class="informalexample">
+              <pre class="programlisting">
+<span class="emphasis"><em>#define</em></span> ARG(A) # 2.345   1.03   $A   234.9#
+<span class="stamnt">i</span>1 0 1 8.00 1000 $ARG(2.0)
+<span class="stamnt">i</span>1 + 1 8.01 1200 $ARG(3.0)</pre>
+            </div>
+            <p>
+
+          qui se développe en
+
+          </p>
+            <div class="informalexample">
+              <pre class="programlisting">
+<span class="stamnt">i</span>1 0 1 8.00 1000 2.345   1.03   2.0   234.9
+<span class="stamnt">i</span>1 + 1 8.01 1200 2.345   1.03   3.0   234.9</pre>
+            </div>
+            <p>
+        </p>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="simplesect">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="idm9635"></a>Crédits</h3>
+            </div>
+          </div>
+        </div>
+        <p>Auteur : John ffitch</p>
+        <p>University of Bath/Codemist Ltd.</p>
+        <p>Bath, UK</p>
+        <p>Avril 1998 (Nouveau dans la version 3.48 de Csound)</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ScoreRamping.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="ScoreTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ScoreMult.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Ramping </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Partition dans plusieurs fichiers</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

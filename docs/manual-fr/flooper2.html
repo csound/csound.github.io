@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>flooper2</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="flooper.html" title="flooper" />
+    <link rel="next" href="floor.html" title="floor" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">flooper2</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="flooper.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="floor.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="flooper2"></a>
+      <div class="titlepage"></div>
+      <a id="Indexflooper2" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">flooper2</span>
+        </h2>
+        <p>flooper2 — 
+      Lecture en boucle basée sur une table de fonction avec fondu enchainé.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm106736"></a>
+        <h2>Description</h2>
+        <p>
+      Cet opcode implémente une lecture de boucle avec fondu enchainé, avec des
+      paramètres variables, trois modes de boucle, et une utilisation facultative
+      d'une table pour la forme du fondu enchainé. Il accepte comme source audio
+      des tables dont la longueur n'est pas une puissance de deux, telles que celles
+      de GEN01 à allocation différée, avec un ou deux canaux.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm106739"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">asig1[,asig2] <span class="command"><strong>flooper2</strong></span> kamp, kpitch, kloopstart, kloopend, kcrossfade, ifn \
+      [, istart, imode, ifenv, iskip]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm106743"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ifn </em></span> -- numéro de la table de fonction de la source audio,
+      généralement créée au moyen de GEN01
+    </p>
+        <p>
+      <span class="emphasis"><em>istart </em></span> -- début de la lecture en secondes
+    </p>
+        <p>
+      <span class="emphasis"><em>imode </em></span> -- modes de boucle : 0 à l'endroit, 1 à l'envers, 2
+      à l'endroit et à l'envers. (0 par défaut)
+    </p>
+        <p>
+      <span class="emphasis"><em>ifenv </em></span> -- s'il est non nul, numéro de la table de la forme
+      de l'enveloppe du fondu enchainé. La valeur par défaut, 0, donne un fondu enchainé
+      linéaire.
+    </p>
+        <p>
+      <span class="emphasis"><em>iskip </em></span> -- s'il vaut 1, l'initialisation de l'opcode est
+      ignorée, pour les notes liées, l'exécution continuant depuis la position dans
+      la boucle où la note précédente s'est terminée. Avec la valeur par défaut, 0,
+      l'initialisation a lieu.
+    </p>
+      </div>
+      <div class="refsect1"><a id="idm106755"></a><h2>Exécution</h2><p>
+      <span class="emphasis"><em>asig1[,asig2]</em></span> -- signal de sortie (mono ou stéréo).
+    </p><p>
+      <span class="emphasis"><em>kamp</em></span> -- contrôle de l'amplitude </p><p>
+      <span class="emphasis"><em>kpitch</em></span> -- contrôle de la hauteur (rapport de transposition) ;
+      les valeurs négatives sont interdites.
+    </p><p>
+      <span class="emphasis"><em>kloopstart</em></span> -- début de la boucle (en secondes). Noter que
+      bien qu'étant de taux-k, les paramètres de boucle comme celui-ci ne sont mis
+      à jour qu'une fois par itération de la boucle.
+    </p><p>
+      <span class="emphasis"><em>kloopend</em></span> -- fin de la boucle (en secondes), mis à jour une
+      seule fois par itération de la boucle.
+    </p><p>
+      <span class="emphasis"><em>kcrossfade </em></span> -- longueur du fondu enchainé (en secondes), mis
+      à jour une seule fois par itération de la boucle et limité par la longueur de
+      la boucle.
+    </p>
+      Avec le mode 1 de <span class="emphasis"><em>imode </em></span> la boucle ne se fait qu'à l'envers
+      depuis la fin jusqu'au début.
+    <p>
+    </p></div>
+      <div class="refsect1">
+        <a id="idm106771"></a>
+        <h2>Exemples</h2>
+        <p>
+      </p>
+        <div class="example">
+          <a id="idm106774"></a>
+          <p class="title">
+            <strong>Exemple 322. </strong>
+          </p>
+          <div class="example-contents">
+            <pre class="programlisting">
+aout <span class="opc">flooper2</span> 16000, 1, 1, 5, 0.05, 1  <span class="comment">; loop starts at 1 sec, for 4 secs, 0.05 crossfade</span>
+     <span class="opc">out</span>      aout</pre>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+        <p>
+      L'exemple ci-dessus montre l'opération de base de <span class="emphasis"><em>flooper2</em></span>.
+      La hauteur peut être contrôlée au taux-k ainsi que l'amplitude et les paramètres
+      de boucle. L'exemple suppose que la table 1 contient au moins 5.05 secondes de
+      données audio (boucle durant 4 secondes, commençant 1 seconde après le début de
+      la table, avec un fondu enchainé de 0.05 secondes après la fin de la boucle). La
+      boucle est en mode 0 (boucle normale à l'endroit).
+    </p>
+        <p>
+      Voici un autre exemple de l'opcode flooper2. Il utilise le fichier
+      <a class="ulink" href="examples/flooper2.csd" target="_top"><em class="citetitle">flooper2.csd</em></a>
+      et <a class="ulink" href="examples/fox.wav" target="_top"><em class="citetitle">fox.wav</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm106786"></a>
+          <p class="title">
+            <strong>Exemple 323. </strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm106792"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o flooper2.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span><span class="c1">; looping back and forth,  0.05 crossfade </span><span class="w">
+</span>k<span class="n">st</span><span class="w">  </span><span class="nb">line</span><span class="w">     </span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="c1">;vary loopstartpoint</span><span class="w">
+</span>a<span class="n">out</span><span class="w"> </span><span class="nb">flooper2</span><span class="w"> </span><span class="mf">.8</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>k<span class="n">st</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">  
+     </span><span class="nb">outs</span><span class="w">     </span>a<span class="n">out</span><span class="p">,</span><span class="w"> </span>a<span class="n">out</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">; Its table size is deferred,</span><span class="w">
+</span><span class="c1">; and format taken from the soundfile header</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">12</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm106921"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Victor Lazzarini</td>
+          </tr>
+          <tr>
+            <td>Juillet 2006 </td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau greffon dans la version 5</p>
+        <p>Juillet 2006.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="flooper.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="floor.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">flooper </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> floor</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

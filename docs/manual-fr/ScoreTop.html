@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>La partition numérique standard</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="PartOverview.html" title="Partie I. Vue d'ensemble" />
+    <link rel="prev" href="udpserver.html" title="Serveur UDP" />
+    <link rel="next" href="ScoreStatements.html" title="Instructions de partition" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">La partition numérique standard</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="udpserver.html">Précédent</a> </td>
+          <th width="60%" align="center">Partie I. Vue d'ensemble</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ScoreStatements.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="chapter">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="ScoreTop"></a>La partition numérique standard</h2>
+          </div>
+        </div>
+      </div>
+      <p>
+    La section de la partition contient des évènements qui démarrent des instances
+    d'instruments de l'orchestre. La partition propose diverses instructions qui
+    permettent l'élaboration de partitions complexes avec le langage de csound.
+  </p>
+      <p>
+    Actuellement, la longueur maximale de la partition dépend de l'architecture
+    de la plate-forme ; sur un système 32 bit elle est de 2<sup>31</sup>-1
+    périodes de contrôle. Par exemple, avec kr=1500, on peut exécuter une partition pendant
+    une durée maximale de 16,5 jours avant l'apparition de problèmes provoqués par un
+    dépassement des variables entières signées sur 32 bit. Sur une machine 64 bit
+    avec les mêmes conditions la durée serait d'environ neuf milliard d'années. 
+    L'entité 'z' est lue
+    comme une durée d'environ 25367 années.
+  </p>
+      <p>
+    Il faut noter également que lorsque l'on utilise des nombres flottants en simple
+    précision (c-à-d les installeurs 'f' plutôt que les 'd'), la précision temporelle
+    se détériore après une longue durée d'exécution.
+  </p>
+      <div class="section">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="ScorePreproc"></a>Prétraitement des partitions standard</h2>
+            </div>
+          </div>
+        </div>
+        <p>
+    Une <span class="emphasis"><em>Partition</em></span> (un ensemble d'instructions de partition) se divise en sections
+    ordonnées dans le temps par l'<a class="link" href="s.html" title="Instruction s"><em class="citetitle">instruction s</em></a>.
+    Avant sa lecture par l'orchestre, une partition est prétraitée section par section. Chaque section
+    est normalement traitée par trois routines :
+    <a class="link" href="ScoreTop.html#ScoreCarry" title="Carry"><em class="citetitle">Carry</em></a> (report de valeur),
+    <a class="link" href="ScoreTop.html#ScoreTempo" title="Tempo"><em class="citetitle">Tempo</em></a>, et
+    <a class="link" href="ScoreTop.html#ScoreSort" title="Sort"><em class="citetitle">Sort</em></a> (tri).
+  </p>
+        <div class="section">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="ScoreCarry"></a>Carry</h3>
+              </div>
+            </div>
+          </div>
+          <p>Dans un groupe d'<a class="link" href="i.html" title="Instruction i (instruction d'instrument ou de note)"><em class="citetitle">instructions i</em></a> consécutives
+      dont les nombres entiers p1 sont indentiques, tout p-champ non rempli prendra la même valeur que
+      celle du p-champ correspondant dans l'instruction précédente. Un p-champ vide peut-être marqué
+      par un point (.) entouré d'espaces. Il n'y a pas besoin de point après le dernier p-champ
+      non vide. La sortie du prétraitement Carry montre explicitement les valeurs reportées. La Fonction
+      Carry n'est pas affectée par les commentaires rencontrés ou les lignes blanches ; elle s'arrête
+      seulement lorsqu'elle rencontre une instruction autre que
+      l'<a class="link" href="i.html" title="Instruction i (instruction d'instrument ou de note)"><em class="citetitle">instruction i</em></a> ou une
+      <span class="emphasis"><em>instruction i</em></span> avec un nombre entier p1 différent.
+      <a id="IndexScoreCarry" class="indexterm"></a>
+    </p>
+          <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <table border="0" summary="Note">
+              <tr>
+                <td rowspan="2" align="center" valign="top" width="25">
+                  <img alt="[Note]" src="images/note.png" />
+                </td>
+                <th align="left">Note</th>
+              </tr>
+              <tr>
+                <td align="left" valign="top">
+                  <p>
+        Il est possible de désactiver automatiquement le Carry. On le fait avec
+        l'instruction de partition <span class="emphasis"><em>"C 0"</em></span>, et on peut le
+        réactiver avec <span class="emphasis"><em>"C 1"</em></span>. Le Carry reste toujours actif
+        pour les p-champs p1, p2 et p3.
+      </p>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <p>
+      Il y a trois fonctions supplémentaires, pour p2 seulement : +, ^+<span class="emphasis"><em>x</em></span>, et
+      ^-<span class="emphasis"><em>x</em></span>. Le symbole + en p2 recevra la valeur de p2 + p3 de l'instruction i
+      précédente. Cela permet de déterminer automatiquement l'instant du début d'une note à partir
+      de la somme des durées précédentes. Le symbole + peut lui-même être reporté. Il n'est autorisé
+      que dans p2. Par exemple : les instructions
+
+      </p>
+          <div class="informalexample">
+            <pre class="programlisting">
+<span class="stamnt">i</span>1   0    .5    100
+<span class="stamnt">i</span> .  +
+<span class="stamnt">i</span></pre>
+          </div>
+          <p>
+
+      se transformeront en
+
+      </p>
+          <div class="informalexample">
+            <pre class="programlisting">
+<span class="stamnt">i</span>1   0    .5    100
+<span class="stamnt">i</span>1   .5   .5    100
+<span class="stamnt">i</span>1   1    .5    100</pre>
+          </div>
+          <p>
+    </p>
+          <p>
+      Les symboles ^+<span class="emphasis"><em>x</em></span> et ^-<span class="emphasis"><em>x</em></span> determinent la valeur de p2
+      en additionnant ou en soustrayant respectivement la valeur <span class="emphasis"><em>x</em></span> du p2
+      précédent. Ils ne peuvent être utilisés qu'en p2 et ne sont <span class="emphasis"><em>pas</em></span>
+      reportés comme le symbole +. Noter aussi qu'il ne doit pas y avoir d'espaces après la partie
+      ^, + ou - de ces symboles -- le nombre doit suivre directement comme dans ^+2.3. Si l'exemple
+      ci-dessus avait été
+
+      </p>
+          <div class="informalexample">
+            <pre class="programlisting">
+<span class="stamnt">i</span>1   0    .5        100
+<span class="stamnt">i</span> .  ^+1
+<span class="stamnt">i</span> .  ^+1</pre>
+          </div>
+          <p>
+
+      le résultat aurait été
+
+      </p>
+          <div class="informalexample">
+            <pre class="programlisting">
+<span class="stamnt">i</span>1   0    .5        100
+<span class="stamnt">i</span>1   1    .5        100
+<span class="stamnt">i</span>1   2    .5        100</pre>
+          </div>
+          <p>
+    </p>
+          <p>
+      On peut se servir largement de la fonction Carry. Son utilisation, spécialement dans les grandes
+      partitions, peut réduire grandement la frappe au clavier et elle simplifiera les
+      modifications ultérieures.
+    </p>
+          <p>
+      Il y a des circonstances où l'on ne veut pas que les p-champs "manquants" après le dernier
+      qui a été entré soient implicitement reportés. Par exemple dans un instrument prévu pour
+      prendre un nombre variable de p-champs. A partir de Csound 5.08, on peut empêcher le report
+      implicite des p-champs à la fin d'une instruction i en utilisant le symbole ! (appelé le
+      "symbol de non-report"). Le ! doit apparaître à la fin d'une instruction i et il ne peut
+      pas être utilisé en p1, p2 ou p3, car ces p-champs sont obligatoires. Voici un exemple :
+
+      </p>
+          <div class="informalexample">
+            <pre class="programlisting">
+<span class="stamnt">i</span>1   0    .5        100
+<span class="stamnt">i</span> .  +
+<span class="stamnt">i</span> .  .    .         !
+<span class="stamnt">i</span></pre>
+          </div>
+          <p>
+
+      Cette partition sera interprétée comme ceci
+
+      </p>
+          <div class="informalexample">
+            <pre class="programlisting">
+<span class="stamnt">i</span>1   0    .5        100
+<span class="stamnt">i</span>1   .5   .5        100
+<span class="stamnt">i</span>1   1    .5               ; no p4
+<span class="stamnt">i</span>1   1.5  .5               ; only p1 to p3 are carried here</pre>
+          </div>
+          <p>
+    </p>
+          <p>
+      Alternativement à l'utilisation de !, on peut désactiver le report automatique
+      en dehors de p1, p2 et p3. Ceci est réalisé par l'instruction de partition
+      "C 0", et peut être réactivé avec "C 1".
+    </p>
+        </div>
+        <div class="section">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="ScoreTempo"></a>Tempo</h3>
+              </div>
+            </div>
+          </div>
+          <p>
+      Cette opération modifie l'information temporelle d'une section de partition selon les directives
+      de l'<a class="link" href="t.html" title="Instruction t (instruction de tempo)"><em class="citetitle">instruction t</em></a>. L'opération tempo convertit
+      p2 (et pour les <a class="link" href="i.html" title="Instruction i (instruction d'instrument ou de note)"><em class="citetitle">instructions i</em></a>, p3) de la valeur
+      originale en pulsations vers des secondes réelles, celles-ci étant les unités temporelles requises
+      par l'orchestre. Après la modification temporelle, les fichiers partitions apparaîtront dans un
+      format lisible par l'orchestre comme ceci : </p>
+          <div class="literallayout">
+            <p><span class="emphasis"><em>i</em></span> p1 p2pulsations p2secondes p3pulsations p3secondes p4 p5 ...</p>
+          </div>
+          <p>
+      <a id="IndexScoreTempo" class="indexterm"></a>
+    </p>
+        </div>
+        <div class="section">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h3 class="title"><a id="ScoreSort"></a>Sort</h3>
+              </div>
+            </div>
+          </div>
+          <p>
+      Cette routine trie toutes les instructions d'action temporelle chronologiquement selon
+      la valeur de p2. Elle place aussi les évènements simultanés par ordre de priorité. Chaque
+      fois qu'une <a class="link" href="f.html" title="Instruction f (ou instruction de table de fonction)"><em class="citetitle">instruction f</em></a> et une
+      <a class="link" href="i.html" title="Instruction i (instruction d'instrument ou de note)"><em class="citetitle">instruction i</em></a> ont la même valeur en p2,
+      l'<span class="emphasis"><em>instruction f</em></span> sera placée en premier. Chaque fois que plusieurs
+      <span class="emphasis"><em>instructions i</em></span> ont la même valeur en p2, elles seront triées par ordre
+      croissant de leur valeur en p1. Si elles ont aussi la même valeur en p1, elles seront triées
+      par ordre croissant de leur valeur en p3. Le tri de la partition est effectué par section (voir
+      l'<a class="link" href="s.html" title="Instruction s"><em class="citetitle">instruction s</em></a>). Ce tri automatique permet
+      d'écrire les instructions de partition dans n'importe quel ordre à l'intérieur d'une section.
+      <a id="IndexScoreSort" class="indexterm"></a>
+    </p>
+          <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <table border="0" summary="Note">
+              <tr>
+                <td rowspan="2" align="center" valign="top" width="25">
+                  <img alt="[Note]" src="images/note.png" />
+                </td>
+                <th align="left">Note</th>
+              </tr>
+              <tr>
+                <td align="left" valign="top">
+                  <p>
+      Les opérations Carry, Tempo et Sort sont combinées dans une seule passe en trois phases
+      sur le fichier de partition, pour produire un nouveau fichier dans un format lisible par
+      l'orchestre (voir l'exemple de Tempo). Ce traitement peut être invoqué explicitement par la
+      commande <span class="emphasis"><em>Scsort</em></span>, ou implicitement par Csound qui traite la partition
+      avant d'appeler l'orchestre. Les fichiers en format source et en format lisible par
+      l'orchestre sont encodés en caractères ASCII, et peuvent être consultés ou modifiés dans un
+      éditeur de texte standard. L'utilisateur peut écrire ses propres routines pour modifier les
+      fichiers de partition avant ou après le processus décrit ci-dessus, pourvu que le format final
+      lisible par l'orchestre soit respecté. Les sections de formats différents peuvent être traitées
+      séquentiellement par lots ; et les sections de même format peuvent être réunies pour le tri
+      automatique.
+    </p>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="udpserver.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="PartOverview.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ScoreStatements.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Serveur UDP </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Instructions de partition</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

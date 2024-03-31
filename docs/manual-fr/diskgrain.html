@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>diskgrain</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="directory.html" title="directory" />
+    <link rel="next" href="diskin.html" title="diskin" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">diskgrain</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="directory.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="diskin.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="diskgrain"></a>
+      <div class="titlepage"></div>
+      <a id="Indexdiskgrain" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">diskgrain</span>
+        </h2>
+        <p>diskgrain — 
+      Synthèse granulaire synchrone, utilisant un fichier son comme source.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm84133"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>diskgrain</em></span> implémente la synthèse granulaire synchrone. La source sonore
+      des grains est obtenue en lisant un fichier son contenant les échantillons de la forme d'onde
+      source.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm84137"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">asig <span class="command"><strong>diskgrain</strong></span> Sfname, kamp, kfreq, kpitch, kgrsize, kprate, \
+      ifun, iolaps [,imaxgrsize , ioffset]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm84141"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>Sfilename</em></span> -- fichier son source.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifun</em></span> -- table de fonction de l'enveloppe de grain.
+    </p>
+        <p>
+      <span class="emphasis"><em>iolaps</em></span> -- nombre maximum de chevauchements,
+      max(<span class="emphasis"><em>kfreq</em></span>)*max(<span class="emphasis"><em>kgrsize</em></span>). Une grande valeur d'estimation
+      ne devrait pas affecter l'exécution, mais le dépassement de cette valeur aura probablement des
+      conséquences désastreuses.
+    </p>
+        <p>
+      <span class="emphasis"><em>imaxgrsize</em></span> -- taille de grain maximale en secondes (par défaut 1.0).
+    </p>
+        <p>
+      <span class="emphasis"><em>ioffset</em></span> -- décalage initial en secondes à partir du début du fichier (par
+      défaut 0).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm84155"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kamp</em></span> -- pondération de l'amplitude
+    </p>
+        <p>
+      <span class="emphasis"><em>kfreq</em></span> -- fréquence de génération des grains, ou densité, en grains/sec.
+    </p>
+        <p>
+      <span class="emphasis"><em>kpitch</em></span> -- transposition de hauteur des grains (1 = hauteur normale,
+      &lt; 1 plus bas, &gt; 1 plus haut ; négatif, lecture à l'envers)
+    </p>
+        <p>
+      <span class="emphasis"><em>kgrsize</em></span> -- taille de grain en secondes.
+    </p>
+        <p>
+      <span class="emphasis"><em>kprate</em></span> -- vitesse du pointeur de lecture, en grains. Une valeur de 1
+      avancera le pointeur de lecture d'un grain dans la table source. Des valeurs supérieures
+      provoqueront une compression temporelle et des valeurs inférieures une expansion temporelle
+      du signal source. Avec des valeurs négatives, le pointeur progressera à l'envers et zéro
+      l'immobilisera.
+    </p>
+        <p>
+      Le générateur de grain contrôle complètement la fréquence (grains/sec), l'amplitude globale,
+      la hauteur de grain (un incrément de l'échantillonage) et la taille de grain (en secondes),
+      comme paramètres fixes ou variant dans le temps (signaux). La vitesse du pointeur de grain est
+      un paramètre supplémentaire qui contrôle la position à laquelle le générateur commencera à lire
+      les échantillons dans le fichier pour chaque grain successif. Elle est mesurée en fraction de
+      la taille de grain, si bien qu'une valeur de 1 (par défaut) provoquera la lecture de chaque
+      grain successif à partir de l'endroit où le grain précédent s'est terminé. Avec une valeur de
+      0.5 le grain suivant commencera à la position médiane entre le début et la fin du grain précédent,
+      etc... Avec une valeur de 0 le générateur lit toujours à partir d'une position fixe (quelque soit
+      l'endroit où il se trouvait précédemment). Une valeur négative décrémentera les positions du
+      pointeur. Ce contrôle donne plus de flexibilité pour créer des modifications de l'échelle
+      temporelle pendant la resynthèse.
+    </p>
+        <p>
+      <span class="emphasis"><em>Diskgrain</em></span> générera n'importe quel nombre de flux de grain parallèles (en
+      fonction de la densité/fréquence de grain) borné par la valeur de <span class="emphasis"><em>iolaps</em></span>
+      (par défaut 100). Le nombre de flux (grains se chevauchant) est déterminé par
+      <span class="emphasis"><em>kgrsize</em></span>*<span class="emphasis"><em>kfreq</em></span>. Plus il y aura de chevauchements, plus
+      il y aura de calculs ce qui pourra empêcher la synthèse en temps réel (selon la puissance
+      du processeur).
+    </p>
+        <p>
+      <span class="emphasis"><em>Diskgrain</em></span> peut simuler une synthèse formantique à la FOF, si on emploie
+      une forme adéquate comme enveloppe de grain et une forme d'onde sinus comme onde de grain.
+      Pour cette utilisation, on peut choisir des tailles de grain d'environ 0.04 secondes. La
+      fréquence centrale du formant est déterminée par la hauteur de grain. Comme celle-ci est
+      exprimée en incrément d'échantillonnage, il faut pondérer cette valeur par
+      <span class="emphasis"><em>tablesize</em></span>/<span class="emphasis"><em>sr</em></span> pour obtenir une fréquence en Hz. La
+      fréquence de grain déterminera le fondamental.
+    </p>
+        <p>
+      Cet opcode est une variation sur l'opcode
+      <a class="link" href="syncgrain.html" title="syncgrain"><em class="citetitle">syncgrain</em></a>.
+    </p>
+        <p>
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top"><span class="emphasis"><em>diskgrain</em></span> n'effectue aucun ré-échantillonage, ce
+    qui produira une transposition de hauteur si le taux d'échantillonage du
+    fichier source est différent de celui de Csound.
+    </td>
+            </tr>
+          </table>
+        </div>
+        <p>
+  </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm84183"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode diskgrain. Il utilise le fichier
+      <a class="ulink" href="examples/diskgrain.csd" target="_top"><em class="citetitle">diskgrain.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm84188"></a>
+          <p class="title">
+            <strong>Exemple 236. Exemple de l'opcode diskgrain.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm84195"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;RT audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o diskgrain.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; additions by Menno Knevel 2022</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>i<span class="n">olaps</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span>i<span class="n">grsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.04</span><span class="w">
+</span>i<span class="n">freq</span><span class="w">   </span><span class="o">=</span><span class="w"> </span>i<span class="n">olaps</span><span class="o">/</span>i<span class="n">grsize</span><span class="w">
+</span>i<span class="n">ps</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span>i<span class="n">olaps</span><span class="w">
+
+</span>i<span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">  </span><span class="cm">/* timescale */</span><span class="w">
+</span>i<span class="n">pitch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w"> </span><span class="cm">/* pitchscale */</span><span class="w">
+
+</span>a<span class="n">1</span><span class="w"> </span><span class="nb">diskgrain</span><span class="w"> </span><span class="s">"marimba.aif"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">freq</span><span class="p">,</span><span class="w"> </span>i<span class="n">pitch</span><span class="p">,</span><span class="w"> </span>i<span class="n">grsize</span><span class="p">,</span><span class="w"> </span>i<span class="n">ps</span><span class="o">*</span>i<span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">olaps</span><span class="w">
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">marimba is playing....</span><span class="se">\n\n</span><span class="s">"</span><span class="w">
+   </span><span class="nb">outs</span><span class="w">   </span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+
+</span>i<span class="n">olaps</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span>i<span class="n">grsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+</span>i<span class="n">freq</span><span class="w">   </span><span class="o">=</span><span class="w"> </span>i<span class="n">olaps</span><span class="o">/</span>i<span class="n">grsize</span><span class="w">
+</span>i<span class="n">ps</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span>i<span class="n">olaps</span><span class="w">
+
+</span>i<span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">  </span><span class="cm">/* timescale */</span><span class="w">
+</span>i<span class="n">pitch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w"> </span><span class="cm">/* pitchscale */</span><span class="w">
+
+</span>a<span class="n">1</span><span class="w"> </span><span class="nb">diskgrain</span><span class="w"> </span><span class="s">"singFemale.aif"</span><span class="p">,</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span>i<span class="n">freq</span><span class="p">,</span><span class="w"> </span>i<span class="n">pitch</span><span class="p">,</span><span class="w"> </span>i<span class="n">grsize</span><span class="p">,</span><span class="w"> </span>i<span class="n">ps</span><span class="o">*</span>i<span class="n">str</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">olaps</span><span class="w">
+</span><span class="nb">prints</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">Female is singing....</span><span class="se">\n\n</span><span class="s">"</span><span class="w">
+   </span><span class="nb">outs</span><span class="w">   </span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8192</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="c1">;Hanning function</span><span class="w">
+
+</span><span class="c1">;           timescale   pitchscale</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="mi">0</span><span class="w">   </span><span class="mi">6</span><span class="w">     </span><span class="mi">1</span><span class="w">           </span><span class="mi">1</span><span class="w">           
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="o">+</span><span class="w">   </span><span class="mi">6</span><span class="w">     </span><span class="mi">2</span><span class="w">           </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="o">+</span><span class="w">   </span><span class="mi">6</span><span class="w">     </span><span class="mi">1</span><span class="w">          </span><span class="mf">0.75</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="o">+</span><span class="w">   </span><span class="mi">6</span><span class="w">     </span><span class="mf">1.5</span><span class="w">        </span><span class="mf">1.5</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="o">+</span><span class="w">   </span><span class="mf">6.25</span><span class="w">  </span><span class="mf">0.5</span><span class="w">        </span><span class="mf">1.5</span><span class="w">
+
+</span><span class="c1">;           timescale   pitchscale</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w">   </span><span class="mi">31</span><span class="w">  </span><span class="mi">4</span><span class="w">     </span><span class="mi">1</span><span class="w">           </span><span class="mi">1</span><span class="w">           
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w">   </span><span class="o">+</span><span class="w">   </span><span class="mi">4</span><span class="w">     </span><span class="mi">2</span><span class="w">           </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w">   </span><span class="o">+</span><span class="w">   </span><span class="mi">4</span><span class="w">     </span><span class="mi">1</span><span class="w">          </span><span class="mf">0.75</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w">   </span><span class="o">+</span><span class="w">   </span><span class="mi">5</span><span class="w">     </span><span class="mf">1.5</span><span class="w">        </span><span class="mf">1.5</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w">   </span><span class="o">+</span><span class="w">   </span><span class="mf">7.9</span><span class="w">   </span><span class="mf">0.5</span><span class="w">        </span><span class="mf">1.5</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm84568"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Victor Lazzarini</td>
+          </tr>
+          <tr>
+            <td>Mai 2007</td>
+          </tr>
+        </table>
+        <p>
+      Nouveau dans Csound 5.06
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="directory.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="diskin.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">directory </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> diskin</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

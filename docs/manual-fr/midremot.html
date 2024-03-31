@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>midremot</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="miditempo.html" title="miditempo" />
+    <link rel="next" href="min.html" title="min" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">midremot</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="miditempo.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="min.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="midremot"></a>
+      <div class="titlepage"></div>
+      <a id="Indexmidremot" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">midremot</span>
+        </h2>
+        <p>midremot — 
+      Un opcode que l'on peut utiliser pour implémenter un orchestre midi distant.
+      Cet opcode envoie des évènements midi d'une machine source vers une machine
+      de destination.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm207233"></a>
+        <h2>Description</h2>
+        <p>
+      Avec les opcodes <span class="emphasis"><em>midremot</em></span> et
+      <a class="link" href="midglobal.html" title="midglobal"><em class="citetitle">midglobal</em></a> il est
+      possible d'exécuter des instruments sur des machines distantes et de
+      les contrôler depuis une machine maître. Les opcodes distants sont implémentés
+      suivant le modèle maître/client. Toutes les machines concernées contiennent
+      le même orchestre mais seule la machine maître possède l'information de la
+      partition midi. Durant l'exécution, la machine maître envoie les évènements
+      midi aux clients. L'opcode <span class="emphasis"><em>midremot</em></span> envoie des évènements
+      d'une machine source à une machine de destination. Pour envoyer des évènements
+      à plusieurs destinations (diffusion), on utilise l'opcode
+      <a class="link" href="midglobal.html" title="midglobal"><em class="citetitle">midglobal</em></a>. Ces deux
+      opcodes peuvent être utilisés en combinaison.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm207242"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>midremot</strong></span> idestination, isource, instrnum [,instrnum...] </pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm207246"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>idestination</em></span> -- une chaîne représentant l'ordinateur de
+      destination (par exemple 192.168.0.100). C'est l'hôte de destination qui
+      reçoit les évènements de l'instrument donné.
+    </p>
+        <p>
+      <span class="emphasis"><em>isource</em></span> -- une chaîne représentant l'ordinateur hôte
+      (par exemple 192.168.0.100). C'est l'hôte source qui génère les évènements
+      pour l'instruments donné et les envoie à l'adresse donnée par
+      <span class="emphasis"><em>idestination</em></span>.
+    </p>
+        <p>
+      <span class="emphasis"><em>instrnum</em></span> -- liste des numéros des intruments qui
+      seront joués sur la machines destinataire.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm207255"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode midremot. Il utilise le fichier
+      <a class="ulink" href="examples/midremot.csd" target="_top"><em class="citetitle">insremot.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm207260"></a>
+          <p class="title">
+            <strong>Exemple 613. Exemple de l'opcode midremot.</strong>
+          </p>
+          <div class="example-contents">
+            <p>
+          L'exemple montre une fugue de Bach jouée sur 4 ordinateurs distants. La
+          machine maître est nommée "192.168.1.100", le client1 "192.168.1.101"
+          et ainsi de suite. Démarrer le client sur chaque machine (ils attendront
+          de recevoir les évènements de la machine maître), puis démarrer le
+          maître. Sur un système linux, on démarre un client avec la commande
+          (csound -dm0 -odac -+rtaudio=alsa midremot.csd -+rtmidi=Null), tandis que
+          la commande sur la machine maître ressemble à ceci
+          (csound -dm0 -odac -+rtaudio=alsa midremot.csd -F midremot.mid).
+        </p>
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm207268"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o midremot.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+</span><span class="vg">sr</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="mi">441</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+
+</span><span class="nb">massign</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="w"> 
+</span><span class="nb">massign</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="w"> 
+</span><span class="nb">massign</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="w"> 
+</span><span class="nb">massign</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="w"> 
+</span><span class="nb">massign</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="w"> 
+
+</span>ga<span class="n">1</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>ga<span class="n">2</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">0</span><span class="w">
+
+</span>gi<span class="n">1</span><span class="w">	</span><span class="nb">sfload</span><span class="w">	   </span><span class="s">"19Trumpet.sf2"</span><span class="w"> 
+
+</span>gi<span class="n">2</span><span class="w">	</span><span class="nb">sfload</span><span class="w">	   </span><span class="s">"01hpschd.sf2"</span><span class="w"> 
+
+</span>gi<span class="n">3</span><span class="w">	</span><span class="nb">sfload</span><span class="w">	   </span><span class="s">"07AcousticGuitar.sf2"</span><span class="w"> 
+
+</span>gi<span class="n">4</span><span class="w">	</span><span class="nb">sfload</span><span class="w">	   </span><span class="s">"22Bassoon.sf2"</span><span class="w"> 
+
+</span>gi<span class="n">tab</span><span class="w">	</span><span class="nb">ftgen</span><span class="w">	</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">midremot</span><span class="w"> </span><span class="s">"192.168.1.100"</span><span class="p">,</span><span class="w"> </span><span class="s">"192.168.1.101"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">midremot</span><span class="w"> </span><span class="s">"192.168.1.100"</span><span class="p">,</span><span class="w"> </span><span class="s">"192.168.1.102"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="nb">midremot</span><span class="w"> </span><span class="s">"192.168.1.100"</span><span class="p">,</span><span class="w"> </span><span class="s">"192.168.1.103"</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w">
+
+</span><span class="nb">midglobal</span><span class="w"> </span><span class="s">"192.168.1.100"</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="w">
+
+
+	</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+	</span><span class="nb">sfpassign</span><span class="w">	   </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>gi<span class="n">1</span><span class="w">
+</span>i<span class="n">freq</span><span class="w">	</span><span class="nb">cpsmidi</span><span class="w">
+</span>i<span class="n">amp</span><span class="w">	</span><span class="nb">ampmidi</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span>i<span class="n">num</span><span class="w">	</span><span class="nb">notnum</span><span class="w">
+</span>i<span class="n">vel</span><span class="w">	</span><span class="nb">veloc</span><span class="w">
+</span>k<span class="n">amp</span><span class="w">	</span><span class="nb">linsegr</span><span class="w">	</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">.1</span><span class="p">,</span><span class="mi">0</span><span class="w">
+</span>k<span class="n">freq</span><span class="w">	</span><span class="nb">init</span><span class="w">	</span><span class="mi">1</span><span class="w">
+</span>a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span><span class="w">	</span><span class="nb">sfplay</span><span class="w">	</span>i<span class="n">vel</span><span class="p">,</span>i<span class="n">num</span><span class="p">,</span>k<span class="n">amp</span><span class="o">*</span>i<span class="n">amp</span><span class="p">,</span>k<span class="n">freq</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span><span class="w">
+</span><span class="nb">vincr</span><span class="w"> </span>ga<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="o">*</span><span class="mf">.5</span><span class="w">
+</span><span class="nb">vincr</span><span class="w"> </span>ga<span class="n">2</span><span class="p">,</span><span class="w"> </span>a<span class="n">2</span><span class="o">*</span><span class="mf">.5</span><span class="w">
+	</span><span class="kd">endin</span><span class="w">
+
+	</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+	</span><span class="nb">sfpassign</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w">    </span>gi<span class="n">2</span><span class="w">
+</span>i<span class="n">freq</span><span class="w">	</span><span class="nb">cpsmidi</span><span class="w">
+</span>i<span class="n">amp</span><span class="w">	</span><span class="nb">ampmidi</span><span class="w"> </span><span class="mi">15</span><span class="w">
+</span>i<span class="n">num</span><span class="w">	</span><span class="nb">notnum</span><span class="w">
+</span>i<span class="n">vel</span><span class="w">	</span><span class="nb">veloc</span><span class="w">
+</span>k<span class="n">amp</span><span class="w">	</span><span class="nb">linsegr</span><span class="w">	</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">.1</span><span class="p">,</span><span class="mi">0</span><span class="w">
+</span>k<span class="n">freq</span><span class="w">	</span><span class="nb">init</span><span class="w">	</span><span class="mi">1</span><span class="w">
+</span>a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span><span class="w">	</span><span class="nb">sfplay</span><span class="w">	</span>i<span class="n">vel</span><span class="p">,</span>i<span class="n">num</span><span class="p">,</span>k<span class="n">amp</span><span class="o">*</span>i<span class="n">amp</span><span class="p">,</span>k<span class="n">freq</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span><span class="w">
+</span><span class="nb">vincr</span><span class="w"> </span>ga<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="o">*</span><span class="mf">.4</span><span class="w">
+</span><span class="nb">vincr</span><span class="w"> </span>ga<span class="n">2</span><span class="p">,</span><span class="w"> </span>a<span class="n">2</span><span class="o">*</span><span class="mf">.4</span><span class="w">
+	</span><span class="kd">endin</span><span class="w">
+
+	</span><span class="kd">instr</span><span class="w"> </span><span class="nf">3</span><span class="w">
+	</span><span class="nb">sfpassign</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w">    </span>gi<span class="n">3</span><span class="w">
+</span>i<span class="n">freq</span><span class="w">	</span><span class="nb">cpsmidi</span><span class="w">
+</span>i<span class="n">amp</span><span class="w">	</span><span class="nb">ampmidi</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span>i<span class="n">num</span><span class="w">	</span><span class="nb">notnum</span><span class="w">
+</span>i<span class="n">vel</span><span class="w">	</span><span class="nb">veloc</span><span class="w">
+</span>k<span class="n">amp</span><span class="w">	</span><span class="nb">linsegr</span><span class="w">	</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">.1</span><span class="p">,</span><span class="mi">0</span><span class="w">
+</span>k<span class="n">freq</span><span class="w">	</span><span class="nb">init</span><span class="w">	</span><span class="mi">1</span><span class="w">
+</span>a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span><span class="w">	</span><span class="nb">sfplay</span><span class="w">	</span>i<span class="n">vel</span><span class="p">,</span>i<span class="n">num</span><span class="p">,</span>k<span class="n">amp</span><span class="o">*</span>i<span class="n">amp</span><span class="p">,</span>k<span class="n">freq</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span><span class="w">
+</span><span class="nb">vincr</span><span class="w"> </span>ga<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="o">*</span><span class="mf">.5</span><span class="w">
+</span><span class="nb">vincr</span><span class="w"> </span>ga<span class="n">2</span><span class="p">,</span><span class="w"> </span>a<span class="n">2</span><span class="o">*</span><span class="mf">.5</span><span class="w">
+	</span><span class="kd">endin</span><span class="w">
+
+	</span><span class="kd">instr</span><span class="w"> </span><span class="nf">4</span><span class="w">
+	</span><span class="nb">sfpassign</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w">    </span>gi<span class="n">4</span><span class="w">
+</span>i<span class="n">freq</span><span class="w">	</span><span class="nb">cpsmidi</span><span class="w">
+</span>i<span class="n">amp</span><span class="w">	</span><span class="nb">ampmidi</span><span class="w"> </span><span class="mi">15</span><span class="w">
+</span>i<span class="n">num</span><span class="w">	</span><span class="nb">notnum</span><span class="w">
+</span>i<span class="n">vel</span><span class="w">	</span><span class="nb">veloc</span><span class="w">
+</span>k<span class="n">amp</span><span class="w">	</span><span class="nb">linsegr</span><span class="w">	</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mf">.1</span><span class="p">,</span><span class="mi">0</span><span class="w">
+</span>k<span class="n">freq</span><span class="w">	</span><span class="nb">init</span><span class="w">	</span><span class="mi">1</span><span class="w">
+</span>a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span><span class="w">	</span><span class="nb">sfplay</span><span class="w">	</span>i<span class="n">vel</span><span class="p">,</span>i<span class="n">num</span><span class="p">,</span>k<span class="n">amp</span><span class="o">*</span>i<span class="n">amp</span><span class="p">,</span>k<span class="n">freq</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span><span class="w">
+</span><span class="nb">vincr</span><span class="w"> </span>ga<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">1</span><span class="o">*</span><span class="mf">.5</span><span class="w">
+</span><span class="nb">vincr</span><span class="w"> </span>ga<span class="n">2</span><span class="p">,</span><span class="w"> </span>a<span class="n">2</span><span class="o">*</span><span class="mf">.5</span><span class="w">
+	</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w">	</span><span class="nf">5</span><span class="w">
+      </span>k<span class="n">amp</span><span class="w"> </span><span class="nb">midic7</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="w">	
+      </span><span class="nb">denorm</span><span class="w"> </span>ga<span class="n">1</span><span class="w">
+      </span><span class="nb">denorm</span><span class="w"> </span>ga<span class="n">2</span><span class="w">
+</span>a<span class="n">L</span><span class="p">,</span><span class="w"> </span>a<span class="n">R</span><span class="w">  </span><span class="nb">reverbsc</span><span class="w"> </span>ga<span class="n">1</span><span class="p">,</span><span class="w"> </span>ga<span class="n">2</span><span class="p">,</span><span class="w"> </span><span class="mf">.9</span><span class="p">,</span><span class="w"> </span><span class="mi">16000</span><span class="p">,</span><span class="w"> </span><span class="vg">sr</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="w">
+        </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">L</span><span class="p">,</span><span class="w"> </span>a<span class="n">R</span><span class="w">
+	</span>ga<span class="n">1</span><span class="w">	</span><span class="o">=</span><span class="w">	</span><span class="mi">0</span><span class="w">
+     </span>ga<span class="n">2</span><span class="w">   </span><span class="o">=</span><span class="w">     </span><span class="mi">0</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">; Score</span><span class="w">
+</span><span class="nb">f</span><span class="mi">0</span><span class="w">  </span><span class="mi">160</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm207880"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="insglobal.html" title="insglobal"><em class="citetitle">insglobal</em></a>,
+      <a class="link" href="insremot.html" title="insremot"><em class="citetitle">insremot</em></a>,
+      <a class="link" href="midglobal.html" title="midglobal"><em class="citetitle">midglobal</em></a>,
+      <a class="link" href="remoteport.html" title="remoteport"><em class="citetitle">remoteport</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm207891"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Simon Schampijer</td>
+          </tr>
+          <tr>
+            <td>2006</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>
+      Nouveau dans la version 5.03
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="miditempo.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="min.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">miditempo </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> min</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

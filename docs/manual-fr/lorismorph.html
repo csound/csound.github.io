@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>lorismorph</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="HistoricalTop.html" title="Opcodes historiques et abandonnés" />
+    <link rel="prev" href="loris.html" title="Opcodes Loris" />
+    <link rel="next" href="lorisplay.html" title="lorisplay" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">lorismorph</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="loris.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes historiques et abandonnés</th>
+          <td width="20%" align="right"> <a accesskey="n" href="lorisplay.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="lorismorph"></a>
+      <div class="titlepage"></div>
+      <a id="IndexLorisMorph" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">lorismorph</span>
+        </h2>
+        <p>lorismorph — réalise un morphing de deux ensembles stockés de partiels à
+    largeur de bande améliorée et stocke un nouvel ensemble de partiels
+    représentant le son transformé. Le morphing est réalisé par interpolation
+    linéaire des enveloppes des paramètres (fréquence, amplitude et largeur de
+    bande ou caractère bruiteux) des partiels à largeur de bande améliorée selon
+    des fonctions de transformation de fréquence, d'amplitude et de largeur de
+    bande au taux de contrôle.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm438864"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>lorismorph</strong></span> isrcidx, itgtidx, istoreidx, kfreqmorphenv, kampmorphenv, kbwmorphenv</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm438868"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>lorismorph</em></span> réalise le morphing de deux ensembles
+      stockés de partiels à largeur de bande améliorée et stocke un nouvel
+      ensemble de partiels représentant le son transformé. Le morphing est
+      réalisé par interpolation linéaire des enveloppes des paramètres (fréquence,
+      amplitude et largeur de bande ou caractère bruiteux) des partiels à
+      largeur de bande améliorée selon des fonctions de transformation de fréquence,
+      d'amplitude et de largeur de bande au taux de contrôle.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm438872"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>istoreidx, ireadidx, isrcidx, itgtidx</em></span> sont des étiquettes
+      qui identifient un ensemble stocké de partiels à largeur de bande améliorée.
+      <span class="emphasis"><em>lorisread</em></span> importe les partiels depuis un fichier
+      SDIF et les stocke avec l'étiquette entière <span class="emphasis"><em>istoreidx</em></span>.
+      <span class="emphasis"><em>lorismorph</em></span> réalise un morphing des ensembles de partiels
+      étiquetés <span class="emphasis"><em>isrcidx</em></span> et <span class="emphasis"><em>itgtidx</em></span>, et
+      stocke les partiels résultants avec l'étiquette entière
+      <span class="emphasis"><em>istoreidx</em></span>. <span class="emphasis"><em>lorisplay</em></span> restitue
+      les partiels stockés avec l'étiquette <span class="emphasis"><em>ireadidx</em></span>. Les
+      étiquettes ne sont utilisées qu'à l'initialisation de la note, et l'on
+      peut les réutiliser sans coût supplémentaire ou bénéfice en efficacité,
+      et sans introduire d'interaction entre les instruments ou leurs instances.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm438884"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>lorismorph</em></span> génère un ensemble de partiels à largeur
+      de bande améliorée en effectuant le morphing de deux ensembles de partiels
+      stockés, les partiels sources et cibles, qui peuvent avoir été importés au
+      moyen de <span class="emphasis"><em>lorisread</em></span>, ou générés par un autre générateur
+      unitaire, y compris une autre instance de <span class="emphasis"><em>lorismorph</em></span>.
+      Le morphing est réalisé en interpolant les paramètres (étiquetés) des partiels
+      correspondants dans les deux sources sonores. Le morphing sonore est décrit
+      par trois enveloppes de morphing au taux de contrôle.
+      <span class="emphasis"><em>kfreqmorphenv</em></span> décrit l'interpolation des valeurs de
+      fréquence des partiels dans les deux sources sonores. Lorsque
+      <span class="emphasis"><em>kfreqmorphenv</em></span> vaut 0, les fréquences des partiels sont
+      obtenues à partir des partiels stockés à <span class="emphasis"><em>isrcidx</em></span>.
+      Lorsque <span class="emphasis"><em>kfreqmorphenv</em></span> vaut 1, les fréquences des
+      partiels sont obtenues à partir des partiels à <span class="emphasis"><em>itgtidx</em></span>.
+      Lorsque <span class="emphasis"><em>kfreqmorphenv</em></span> est compris entre 0 et 1, les
+      fréquences des partiels sont interpolées entre les partiels sources et
+      cibles correspondants. Les interpolations de l'amplitude et de la largeur
+      de bande (caractère bruiteux) des partiels sont décrites de manière
+      similaire par <span class="emphasis"><em>kampmorphenv</em></span> et par
+      <span class="emphasis"><em>kbwmorphenv</em></span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm438898"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode lorismorph. Il utilise le fichier
+      <a class="ulink" href="examples/lorismorph.csd" target="_top"><em class="citetitle">lorismorph.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm438903"></a>
+          <p class="title">
+            <strong>Exemple 1348. Exemple de l'opcode lorismorph.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm438910"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o lorismorph.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">; clarinet.sdif and meow.sdif can be found in /manual/examples</span><span class="w">
+
+</span><span class="c1">; Morph the partials in meow.sdif into the partials in clarinet.sdif over the duration of</span><span class="w">
+</span><span class="c1">; the sustained portion of the two tones (from .2 to 2.0 seconds in the meow, and from</span><span class="w">
+</span><span class="c1">; .5 to 2.1 seconds in the clarinet). The onset and decay portions in the morphed sound are</span><span class="w">
+</span><span class="c1">; specified by parameters p4 and p5, respectively. The morphing time is the time between the</span><span class="w">
+</span><span class="c1">; onset and the decay. The meow partials are shfited in pitch to match the pitch of the clarinet</span><span class="w">
+</span><span class="c1">; tone (D above middle C). </span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>i<span class="n">onset</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">decay</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+</span>i<span class="n">tmorph</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span>i<span class="n">onset</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>i<span class="n">decay</span><span class="p">)</span><span class="w">
+</span>i<span class="n">pshift</span><span class="w">	</span><span class="o">=</span><span class="w"> </span><span class="nb">cpspch</span><span class="p">(</span><span class="mf">8.02</span><span class="p">)</span><span class="o">/</span><span class="nb">cpspch</span><span class="p">(</span><span class="mf">8.08</span><span class="p">)</span><span class="w">
+    
+</span>k<span class="n">tme</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>i<span class="n">onset</span><span class="p">,</span><span class="w"> </span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span>i<span class="n">tmorph</span><span class="p">,</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span>i<span class="n">decay</span><span class="p">,</span><span class="w"> </span><span class="mf">2.1</span><span class="w">    </span><span class="c1">; meow time function, morph from .2 to 2.0 seconds</span><span class="w">
+</span>k<span class="n">tcl</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>i<span class="n">onset</span><span class="p">,</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span>i<span class="n">tmorph</span><span class="p">,</span><span class="w"> </span><span class="mf">2.1</span><span class="p">,</span><span class="w"> </span>i<span class="n">decay</span><span class="p">,</span><span class="w"> </span><span class="mf">2.3</span><span class="w">    </span><span class="c1">; clarinet time function, morph from .5 to 2.1 seconds</span><span class="w">
+</span>k<span class="n">murph</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>i<span class="n">onset</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>i<span class="n">tmorph</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">decay</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+	</span><span class="n">lorisread</span><span class="w">  </span>k<span class="n">tme</span><span class="p">,</span><span class="w"> </span><span class="s">"meow.sdif"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">pshift</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.001</span><span class="w">
+	</span><span class="n">lorisread</span><span class="w">  </span>k<span class="n">tcl</span><span class="p">,</span><span class="w"> </span><span class="s">"clarinet.sdif"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.001</span><span class="w">
+	</span><span class="n">lorismorph</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span>k<span class="n">murph</span><span class="p">,</span><span class="w"> </span>k<span class="n">murph</span><span class="p">,</span><span class="w"> </span>k<span class="n">murph</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="n">lorisplay</span><span class="w">  </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	   </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="c1">; Morph the partials in clarinet.sdif into the partials in meow.sdif. The start and end times</span><span class="w">
+</span><span class="c1">; for the morph are specified by parameters p4 and p5, respectively. The morph occurs over the</span><span class="w">
+</span><span class="c1">; second of four pitches in each of the sounds, from .75 to 1.2 seconds in the flutter-tongued</span><span class="w">
+</span><span class="c1">; clarinet tone, and from 1.7 to 2.2 seconds in the cat's meow. Different morphing functions are</span><span class="w">
+</span><span class="c1">; used for the frequency and amplitude envelopes, so that the partial amplitudes make a faster  </span><span class="w">
+</span><span class="c1">; transition from clarinet to cat than the frequencies. (The bandwidth envelopes use the same          </span><span class="w">
+</span><span class="c1">; morphing function as the amplitudes.) </span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+
+</span>i<span class="n">onset</span><span class="w">	 </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">morph</span><span class="w">	 </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">release</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+    
+</span>k<span class="n">tclar</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>i<span class="n">onset</span><span class="p">,</span><span class="w"> </span><span class="mf">.75</span><span class="p">,</span><span class="w"> </span>i<span class="n">morph</span><span class="p">,</span><span class="w"> </span><span class="mf">1.2</span><span class="p">,</span><span class="w"> </span>i<span class="n">release</span><span class="p">,</span><span class="w"> </span><span class="mf">2.4</span><span class="w">
+</span>k<span class="n">tmeow</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>i<span class="n">onset</span><span class="p">,</span><span class="w"> </span><span class="mf">1.7</span><span class="p">,</span><span class="w"> </span>i<span class="n">morph</span><span class="p">,</span><span class="w"> </span><span class="mf">2.2</span><span class="p">,</span><span class="w"> </span>i<span class="n">release</span><span class="p">,</span><span class="w"> </span><span class="mf">3.4</span><span class="w">
+    
+</span>k<span class="n">mfreq</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>i<span class="n">onset</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.75</span><span class="o">*</span>i<span class="n">morph</span><span class="p">,</span><span class="w"> </span><span class="mf">.25</span><span class="p">,</span><span class="w"> </span><span class="mf">.25</span><span class="o">*</span>i<span class="n">morph</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">release</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>k<span class="n">mamp</span><span class="w">	</span><span class="nb">linseg</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>i<span class="n">onset</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.75</span><span class="o">*</span>i<span class="n">morph</span><span class="p">,</span><span class="w"> </span><span class="mf">.9</span><span class="p">,</span><span class="w"> </span><span class="mf">.25</span><span class="o">*</span>i<span class="n">morph</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">release</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    
+	</span><span class="n">lorisread</span><span class="w">  </span>k<span class="n">tclar</span><span class="p">,</span><span class="w"> </span><span class="s">"clarinet.sdif"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.001</span><span class="w">
+	</span><span class="n">lorisread</span><span class="w">  </span>k<span class="n">tmeow</span><span class="p">,</span><span class="w"> </span><span class="s">"meow.sdif"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.001</span><span class="w">
+	</span><span class="n">lorismorph</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span>k<span class="n">mfreq</span><span class="p">,</span><span class="w"> </span>k<span class="n">mamp</span><span class="p">,</span><span class="w"> </span>k<span class="n">mamp</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="n">lorisplay</span><span class="w">  </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	   </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>   
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">;     strt   dur   onset   decay</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="mi">0</span><span class="w">      </span><span class="mi">3</span><span class="w">     </span><span class="mf">.25</span><span class="w">     </span><span class="mf">.15</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="o">+</span><span class="w">      </span><span class="mi">1</span><span class="w">     </span><span class="mf">.10</span><span class="w">     </span><span class="mf">.10</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="o">+</span><span class="w">      </span><span class="mi">6</span><span class="w">    </span><span class="mf">1.</span><span class="w">      </span><span class="mf">1.</span><span class="w">
+
+</span><span class="c1">;    strt   dur  morph_start   morph_end</span><span class="w">
+ </span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w">    </span><span class="mi">9</span><span class="w">    </span><span class="mi">4</span><span class="w">     </span><span class="mf">.75</span><span class="w">           </span><span class="mf">2.75</span><span class="w">
+
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>  
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm439475"></a>
+        <h2>Crédits</h2>
+        <p>
+      Cette implémentation des générateurs unitaires Loris a été écrite par
+      Kelly Fitz (<a class="ulink" href="mailto:loris@cerlsoundgroup.org" target="_top">loris@cerlsoundgroup.org</a>).
+      Elle est modèlisée sur un prototype d'implémentation du générateur
+      unitaire <span class="emphasis"><em>lorisplay</em></span> écrit par Corbin Champion, et
+      basé sur la méthode de synthèse additive à largeur de bande améliorée et
+      sur les algorithmes de métamorphose sonore implémentés dans la bibliothèque
+      Loris pour la modélisation et la manipulation du son. Les opcodes ont été
+      ensuite adaptés sous la forme d'un greffon de Csound 5 par Michael Gogins.
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="loris.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="HistoricalTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="lorisplay.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Opcodes Loris </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> lorisplay</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

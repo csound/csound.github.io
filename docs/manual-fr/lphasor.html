@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>lphasor</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="lpfreson.html" title="lpfreson" />
+    <link rel="next" href="lpinterp.html" title="lpinterp" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">lphasor</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="lpfreson.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="lpinterp.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="lphasor"></a>
+      <div class="titlepage"></div>
+      <a id="IndexLphasor" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">lphasor</span>
+        </h2>
+        <p>lphasor — 
+      Génère un indice de table pour la lecture d'échantillons.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm189027"></a>
+        <h2>Description</h2>
+        <p>
+      Cet opcode peut être utilisé pour générer un indice de table pour la lecture
+      d'échantillons (par exemple avec <a class="link" href="tablexkt.html" title="tablexkt">tablexkt</a>).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm189031"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>lphasor</strong></span> xtrns [, ilps] [, ilpe] [, imode] [, istrt] [, istor]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm189035"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ilps</em></span> -- début de la boucle.
+    </p>
+        <p>
+      <span class="emphasis"><em>ilpe</em></span> -- fin de la boucle (doit être supérieur à
+      <span class="emphasis"><em>ilps</em></span> pour que la boucle soit possible). La valeur par
+      défaut de <span class="emphasis"><em>ilps</em></span> et de <span class="emphasis"><em>ilpe</em></span> est zéro.
+    </p>
+        <p>
+      <span class="emphasis"><em>imode</em></span> (facultatif : 0 par défaut) -- mode de boucle. Les
+      valeurs permises sont :
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p><span class="emphasis"><em>0 :</em></span> pas de boucle</p>
+            </li>
+            <li class="listitem">
+              <p><span class="emphasis"><em>1 :</em></span> boucle à l'endroit</p>
+            </li>
+            <li class="listitem">
+              <p><span class="emphasis"><em>2 :</em></span> boucle à l'envers</p>
+            </li>
+            <li class="listitem">
+              <p><span class="emphasis"><em>3 :</em></span> boucle à l'endroit et à l'envers</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+        <p>
+      <span class="emphasis"><em>istrt</em></span> (facultatif : 0 par défaut) -- La valeur de sortie
+      initiale (phase). Elle doit être inférieure à <span class="emphasis"><em>ilpe</em></span> si la
+      boucle est active, mais elle peut être supérieure à <span class="emphasis"><em>ilps</em></span>
+      (c-à-d que l'on peut démarrer la lecture au milieu de la boucle).
+    </p>
+        <p>
+      <span class="emphasis"><em>istor</em></span> (facultatif : 0 par défaut) -- s'il a une valeur
+      différente de zéro l'initialisation est ignorée.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm189065"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ares</em></span> -- un indice brut de table en échantillons (même unité
+      pour les points de boucle). Peut être utilisé comme indice de table avec les
+      opcodes de table.
+    </p>
+        <p>
+      <span class="emphasis"><em>xtrns</em></span> -- facteur de transposition, exprimé comme un rapport
+      de pointeur de lecture. <span class="emphasis"><em>ares</em></span> est incrémenté de cette valeur,
+      et répète les valeurs comprises entre les points de boucle. Par exemple, 1.5
+      signifie une quinte ascendante, 0.75 signifie une quarte descendante. Il ne peut
+      pas être négatif.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm189072"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode lphasor. Il utilise le fichier
+      <a class="ulink" href="examples/lphasor.csd" target="_top"><em class="citetitle">lphasor.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm189077"></a>
+          <p class="title">
+            <strong>Exemple 549. Exemple de l'opcode lphasor.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm189084"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc     <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o lphashor.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+</span><span class="c1">; Example by Jonathan Murphy Dec 2006</span><span class="w">
+
+  </span><span class="vg">sr</span><span class="w">	    </span><span class="o">=</span><span class="w">  </span><span class="mi">44100</span><span class="w">
+  </span><span class="vg">ksmps</span><span class="w">	    </span><span class="o">=</span><span class="w">  </span><span class="mi">10</span><span class="w">
+  </span><span class="vg">nchnls</span><span class="w">    </span><span class="o">=</span><span class="w">  </span><span class="mi">1</span><span class="w">
+
+    </span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+  </span>i<span class="n">fn</span><span class="w">	    </span><span class="o">=</span><span class="w">  </span><span class="mi">1</span><span class="w">   </span><span class="c1">; table number</span><span class="w">
+  </span>i<span class="n">len</span><span class="w">	    </span><span class="o">=</span><span class="w">  </span><span class="nb">nsamp</span><span class="p">(</span>i<span class="n">fn</span><span class="p">)</span><span class="w">    </span><span class="c1">; return actual number of samples in table</span><span class="w">
+  </span>i<span class="n">trns</span><span class="w">	    </span><span class="o">=</span><span class="w">  </span><span class="mi">1</span><span class="w">   </span><span class="c1">; no transposition</span><span class="w">
+  </span>i<span class="n">lps</span><span class="w">	    </span><span class="o">=</span><span class="w">  </span><span class="mi">0</span><span class="w">   </span><span class="c1">; loop starts at index 0</span><span class="w">
+  </span>i<span class="n">lpe</span><span class="w">	    </span><span class="o">=</span><span class="w">  </span>i<span class="n">len</span><span class="w"> </span><span class="c1">; ends at value returned by nsamp above</span><span class="w">
+  </span>i<span class="n">mode</span><span class="w">	    </span><span class="o">=</span><span class="w">  </span><span class="mi">3</span><span class="w">    </span><span class="c1">; loop forwards &amp; backwards</span><span class="w">
+  </span>i<span class="n">strt</span><span class="w">	    </span><span class="o">=</span><span class="w">  </span><span class="mi">10000</span><span class="w">  </span><span class="c1">; commence playback at index 10000 samples</span><span class="w">
+  </span><span class="c1">; lphasor provides index into f1 </span><span class="w">
+  </span>a<span class="n">lphs</span><span class="w">	    </span><span class="nb">lphasor</span><span class="w">   </span>i<span class="n">trns</span><span class="p">,</span><span class="w"> </span>i<span class="n">lps</span><span class="p">,</span><span class="w"> </span>i<span class="n">lpe</span><span class="p">,</span><span class="w"> </span>i<span class="n">mode</span><span class="p">,</span><span class="w"> </span>i<span class="n">strt</span><span class="w">
+  </span>a<span class="n">tab</span><span class="w">	    </span><span class="nb">tablei</span><span class="w">    </span>a<span class="n">lphs</span><span class="p">,</span><span class="w"> </span>i<span class="n">fn</span><span class="w">
+	    </span><span class="c1">; amplify signal</span><span class="w">
+  </span>a<span class="n">tab</span><span class="w">	    </span><span class="o">=</span><span class="w">  </span>a<span class="n">tab</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">10000</span><span class="w">
+
+	    </span><span class="nb">out</span><span class="w">	      </span>a<span class="n">tab</span><span class="w">
+
+    </span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">262144</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">60</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm189258"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Istvan Varga</td>
+          </tr>
+          <tr>
+            <td>Janvier 2002</td>
+          </tr>
+          <tr>
+            <td>Exemple écrit par Jonathan Murphy</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 4.18</p>
+        <p>Mise à jour en avril 2002 et en novembre 2002 par Istvan Varga</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="lpfreson.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="lpinterp.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">lpfreson </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> lpinterp</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

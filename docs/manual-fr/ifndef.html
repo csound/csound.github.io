@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>#ifndef</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="ifdef.html" title="#ifdef" />
+    <link rel="next" href="dollar.html" title="$NOM" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">#ifndef</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ifdef.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="dollar.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="ifndef"></a>
+      <div class="titlepage"></div>
+      <a id="IndexIfndefOrch" class="indexterm"></a>
+      <a id="IndexIfndef" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">#ifndef</span>
+        </h2>
+        <p>#ifndef — 
+      Lecture de code conditionnelle.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm19771"></a>
+        <h2>Description</h2>
+        <p>
+      Les macros sont des substitutions de texte qui sont faites dans
+      l'orchestre lors de sa lecture. Le <a class="link" href="OrchMacros.html" title="Macros de l'orchestre"><em class="citetitle">système de macro de l'orchestre</em></a>
+      de Csound est très simple, et il utilise les caractères # et $ pour
+      définir et appeler les macros. Il permet d'économiser de la frappe et peut
+      conduire à une structure cohérente dans un style consistant. Il est similaire, tout en étant
+      indépendant, au <a class="link" href="ScoreMacros.html" title="Macros de partition"><em class="citetitle">système de macros du langage de
+      partition</em></a>.
+    </p>
+        <p>
+      Si la macro spécifiée n'est pas définie alors <span class="emphasis"><em>#ifndef</em></span> peut incorporer
+      du texte dans un orchestre jusqu'au prochain <span class="emphasis"><em>#end</em></span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm19781"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>#ifndef</strong></span> NOM</pre>
+        <pre class="synopsis">....</pre>
+        <pre class="synopsis"><span class="command"><strong>#else</strong></span> </pre>
+        <pre class="synopsis">....</pre>
+        <pre class="synopsis"><span class="command"><strong>#end</strong></span> </pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm19791"></a>
+        <h2>Exécution</h2>
+        <p>
+      Noter que l'on peut imbriquer les <span class="emphasis"><em>#ifndef</em></span>, comme dans le langage du
+      préprocesseur C.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm19795"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple simple de ce code conditionnel.
+      </p>
+        <div class="example">
+          <a id="idm19798"></a>
+          <p class="title">
+            <strong>Exemple 14. Exemple simple de la forme #ifndef.</strong>
+          </p>
+          <div class="example-contents">
+            <pre class="programlisting">
+          <span class="omacro">#define</span> final ##
+          <span class="oblock">instr</span> 1
+          <span class="omacro">#ifndef</span> final
+          <span class="opc">print</span> "calling oscil"
+          <span class="omacro">#end</span>
+          a1   <span class="opc">oscil</span> 32000,440,1
+          out  <span class="opc">a1</span>
+        <span class="oblock">endin</span></pre>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm19809"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="define.html" title="#define"><em class="citetitle">#define</em></a>,
+      <a class="link" href="dollar.html" title="$NOM"><em class="citetitle">$NAME</em></a>,
+      <a class="link" href="ifdef.html" title="#ifdef"><em class="citetitle">#ifdef</em></a>,
+      <a class="link" href="include.html" title="#include"><em class="citetitle">#include</em></a>,
+      <a class="link" href="undef.html" title="#undef"><em class="citetitle">#undef</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm19822"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : John ffitch</td>
+          </tr>
+          <tr>
+            <td>University of Bath/Codemist Ltd.</td>
+          </tr>
+          <tr>
+            <td>Bath, UK</td>
+          </tr>
+          <tr>
+            <td>Avril 2005</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans Csound5 (et 4.23f13)</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ifdef.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="dollar.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">#ifdef </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> $NOM</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

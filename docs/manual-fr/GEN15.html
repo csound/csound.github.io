@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>GEN15</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="ScoregensTop.html" title="Instructions de partition et routines GEN" />
+    <link rel="prev" href="GEN14.html" title="GEN14" />
+    <link rel="next" href="GEN16.html" title="GEN16" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">GEN15</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="GEN14.html">Précédent</a> </td>
+          <th width="60%" align="center">Instructions de partition et routines GEN</th>
+          <td width="20%" align="right"> <a accesskey="n" href="GEN16.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="GEN15"></a>
+      <div class="titlepage"></div>
+      <a id="IndexGEN15" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">GEN15</span>
+        </h2>
+        <p>GEN15 — 
+      Crée deux tables de fonctions polynomiales mémorisées.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm411748"></a>
+        <h2>Description</h2>
+        <p>
+      Ce sous-programme crée deux tables de fonctions polynomiales mémorisées, appropriées pour une
+      utilisation en quadrature de phase.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm411751"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>f</strong></span> # date taille 15 xint xamp h0 phs0 h1 phs1 h2 phs2 ...</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm411755"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>taille</em></span> -- nombre de points dans la table. Doit être une puissance de 2 ou une
+      puissance-de-2 plus 1 (voir l'<a class="link" href="f.html" title="Instruction f (ou instruction de table de fonction)"><em class="citetitle">instruction f</em></a>). La valeur
+      normale est une puissance-de-2 plus 1.
+    </p>
+        <p>
+      <span class="emphasis"><em>xint</em></span> -- fournit les valeurs gauches et droites [<span class="emphasis"><em>-xint, +xint</em></span>]
+      de l'intervalle des x sur lequel le polynôme doit être évalué. Ce sous-porgramme appellera éventuellement
+      <a class="link" href="GEN03.html" title="GEN03"><em class="citetitle">GEN03</em></a> pour évaluer les deux fonctions ; la valeur en
+      p5 est alors étendue en une paire négative-positive p5, p6 avant l'appel de <span class="emphasis"><em>GEN03</em></span>.
+      La valeur normale est 1.
+    </p>
+        <p>
+      <span class="emphasis"><em>xamp </em></span> -- facteur de pondération de l'amplitude de l'entrée sinusoïdale qui est
+      attendue pour produire le spectre suivant.
+    </p>
+        <p>
+      <span class="emphasis"><em>h0, h1, h2, ..., hn</em></span> -- importance relative des harmoniques 0 (CC), 1 (fondamental),
+      2 ... qui résulteront quand une sinus d'amplitude </p>
+        <div class="literallayout">
+          <p>xamp * int(taille/2)/xint</p>
+        </div>
+        <p>
+      est traitée en waveshaping avec cette table de fonction. Ces valeurs décrivent ainsi un spectre de
+      fréquences associé à un facteur particulier <span class="emphasis"><em>xamp</em></span> du signal d'entrée.
+    </p>
+        <p>
+      <span class="emphasis"><em>phs0, phs1, ... </em></span> -- phase en degrés des harmoniques désirés
+      <span class="emphasis"><em>h0, h1, ...</em></span> lorsque les deux fonctions de <span class="emphasis"><em>GEN15</em></span> sont utilisées
+      en quadrature de phase.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note: Notes">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Notes</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        <span class="emphasis"><em>GEN15</em></span> crée deux tables de même taille, étiquetées
+        <span class="emphasis"><em>f</em></span> # et <span class="emphasis"><em>f</em></span> # + 1. La table # contiendra une fonction de
+        Tchebychev de première espèce, évaluée par <a class="link" href="GEN13.html" title="GEN13"><em class="citetitle">GEN13</em></a>
+        avec des harmoniques d'amplitude <span class="emphasis"><em>h0cos(phs0), h1cos(phs1), ...</em></span>. Table # + 1
+        contiendra une fonction de Tchebychev de deuxième espèce, évaluée par
+        <a class="link" href="GEN14.html" title="GEN14"><em class="citetitle">GEN14</em></a> avec les harmoniques
+        <span class="emphasis"><em>h1sin(phs1), h2sin(phs2),...</em></span> (noter le déplacement harmonique). Les deux tables
+        peuvent être utilisées en conjonction dans un réseau de waveshaping qui exploite la quadrature de phase.
+      </p>
+                <p>
+        Avant la version 5.16 il y avait un bogue (signalé par Menno Knevel et
+        corrigé par François Pinot) sur le nombre de p-champs transmis à GEN13 et
+        à GEN14 par GEN15. En conséquence, tous les fichiers csd, ou orc et sco
+        qui utilisaient GEN15 avant la correction du bogue, donneront probablement
+        un résultat différent maintenant.
+       </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm411790"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de la routine GEN15. Il utilise le fichier
+      <a class="ulink" href="examples/gen15.csd" target="_top"><em class="citetitle">gen15.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm411795"></a>
+          <p class="title">
+            <strong>Exemple 1289. Exemple de la routine GEN15.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm411797"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac  <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o gen15.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+</span><span class="c1">;example from the Csound Book, page 85</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>i<span class="n">dur</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="vi">p3</span><span class="w">
+</span>i<span class="n">amp</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">frq</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nb">cpspch</span><span class="p">(</span><span class="vi">p5</span><span class="p">)</span><span class="w">        </span><span class="c1">;pitch</span><span class="w">
+</span>i<span class="n">swp1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p6</span><span class="w">
+</span>i<span class="n">swp2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p7</span><span class="w">
+</span>k<span class="n">swp</span><span class="w">  </span><span class="nb">line</span><span class="w">   </span>i<span class="n">swp1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span>i<span class="n">swp2</span><span class="w">      </span><span class="c1">;amplitude sweep values</span><span class="w">
+</span>a<span class="n">cosi</span><span class="w"> </span><span class="nb">oscili</span><span class="w"> </span>k<span class="n">swp</span><span class="o">*</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span>i<span class="n">frq</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">      </span><span class="c1">;f2=cosine wave</span><span class="w">
+</span>a<span class="n">sine</span><span class="w"> </span><span class="nb">oscili</span><span class="w"> </span>k<span class="n">swp</span><span class="p">,</span><span class="w"> </span>i<span class="n">frq</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">         </span><span class="c1">;f1=sine wave</span><span class="w">
+</span>a<span class="n">tab1</span><span class="w"> </span><span class="nb">tablei</span><span class="w"> </span>a<span class="n">cosi</span><span class="p">,</span><span class="w"> </span><span class="mi">33</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.5</span><span class="w">      </span><span class="c1">;tables a1 to GEN13</span><span class="w">
+</span>a<span class="n">tab2</span><span class="w"> </span><span class="nb">tablei</span><span class="w"> </span>a<span class="n">cosi</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.5</span><span class="w">      </span><span class="c1">;tables a1 to GEN14</span><span class="w">
+</span>k<span class="n">nrm1</span><span class="w"> </span><span class="nb">tablei</span><span class="w"> </span>k<span class="n">swp</span><span class="p">,</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">           </span><span class="c1">;normalizing f35</span><span class="w">
+</span>k<span class="n">nrm2</span><span class="w"> </span><span class="nb">tablei</span><span class="w"> </span>k<span class="n">swp</span><span class="p">,</span><span class="w"> </span><span class="mi">36</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">           </span><span class="c1">;normalizing f36</span><span class="w">
+</span>a<span class="n">nrm1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">tab1</span><span class="o">*</span>k<span class="n">nrm1</span><span class="w">                </span><span class="c1">;normalize GEN13 signal</span><span class="w">
+</span>a<span class="n">nrm2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">tab2</span><span class="o">*</span>k<span class="n">nrm2</span><span class="o">*</span>a<span class="n">sine</span><span class="w">          </span><span class="c1">;normalize GEN14 signal</span><span class="w">
+</span>a<span class="n">mix</span><span class="w">  </span><span class="o">=</span><span class="w"> </span>a<span class="n">nrm1</span><span class="o">+</span>a<span class="n">nrm2</span><span class="w">                </span><span class="c1">;mix GEN13 and GEN14</span><span class="w">
+</span>k<span class="n">env</span><span class="w">  </span><span class="nb">expseg</span><span class="w"> </span><span class="mf">.001</span><span class="p">,</span><span class="w"> </span>i<span class="n">dur</span><span class="o">*</span><span class="mf">.1</span><span class="p">,</span><span class="w"> </span>i<span class="n">amp</span><span class="p">,</span><span class="w"> </span>i<span class="n">dur</span><span class="o">*</span><span class="mf">.1</span><span class="p">,</span><span class="w"> </span>i<span class="n">amp</span><span class="o">*</span><span class="mf">.8</span><span class="p">,</span><span class="w"> </span>i<span class="n">dur</span><span class="o">*</span><span class="mf">.8</span><span class="p">,</span><span class="w"> </span><span class="mf">.001</span><span class="w">  
+</span>a<span class="n">sig</span><span class="w">  </span><span class="o">=</span><span class="w"> </span>a<span class="n">mix</span><span class="o">*</span>k<span class="n">env</span><span class="w">  
+      </span><span class="nb">outs</span><span class="w">   </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8193</span><span class="w"> </span><span class="mi">10</span><span class="w">  </span><span class="mi">1</span><span class="w">        </span><span class="c1">;sine wave</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8193</span><span class="w">  </span><span class="mi">9</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">90</span><span class="w">   </span><span class="c1">;cosine wave</span><span class="w">
+
+</span><span class="c1">; Note that all the f33 tables in the following sections are defined with p4=-15,</span><span class="w">
+</span><span class="c1">; which means that tables 33 and 34 will not be normalized. Thus if we display</span><span class="w">
+</span><span class="c1">; tables when running this example, we'll get correct diagrams even if one table</span><span class="w">
+</span><span class="c1">; has very small values instead of 0 values, due to cpu approximations in processing</span><span class="w">
+</span><span class="c1">; sin(180), as in sections 2, 4, and 5. This has no consequence on the audio result,</span><span class="w">
+</span><span class="c1">; because of the use of amp normalization (tables 35 and 36).</span><span class="w">
+
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">33</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8193</span><span class="w"> </span><span class="o">-</span><span class="mi">15</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mf">.8</span><span class="w"> </span><span class="mi">45</span><span class="w"> </span><span class="mf">.6</span><span class="w"> </span><span class="mi">270</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="mi">90</span><span class="w"> </span><span class="mf">.4</span><span class="w"> </span><span class="mi">225</span><span class="w"> </span><span class="mf">.2</span><span class="w"> </span><span class="mi">135</span><span class="w"> </span><span class="mf">.1</span><span class="w"> </span><span class="mi">315</span><span class="w">  </span><span class="c1">;makes function tables 33 and 34</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">35</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4097</span><span class="w">  </span><span class="mi">4</span><span class="w">  </span><span class="mi">33</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">;amp normalization for f33</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">36</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4097</span><span class="w">  </span><span class="mi">4</span><span class="w">  </span><span class="mi">34</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">;amp normalization for f34</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">5</span><span class="w">  </span><span class="mf">.6</span><span class="w">  </span><span class="mf">8.00</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w">  </span><span class="mf">.6</span><span class="w">  </span><span class="mf">8.00</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="mi">0</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="c1">;even harmonics with no phase shift, odd harmonics with phase shift</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">33</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8193</span><span class="w"> </span><span class="o">-</span><span class="mi">15</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">180</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">35</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4097</span><span class="w">  </span><span class="mi">4</span><span class="w">  </span><span class="mi">33</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">;amp normalization for f33</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">36</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4097</span><span class="w">  </span><span class="mi">4</span><span class="w">  </span><span class="mi">34</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">;amp normalization for f34</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="mi">5</span><span class="w"> </span><span class="mf">.6</span><span class="w">  </span><span class="mf">8.00</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w">  </span><span class="o">.</span><span class="w"> </span><span class="mf">.6</span><span class="w">  </span><span class="mf">8.00</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="mi">0</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="c1">;different harmonic strenghts and phases</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">33</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8193</span><span class="w"> </span><span class="o">-</span><span class="mi">15</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.9</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="mi">270</span><span class="w"> </span><span class="mf">.75</span><span class="w"> </span><span class="mi">90</span><span class="w"> </span><span class="mf">.4</span><span class="w"> </span><span class="mi">45</span><span class="w"> </span><span class="mf">.2</span><span class="w"> </span><span class="mi">225</span><span class="w"> </span><span class="mf">.1</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">35</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4097</span><span class="w">  </span><span class="mi">4</span><span class="w">  </span><span class="mi">33</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">;amp normalization for f33</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">36</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4097</span><span class="w">  </span><span class="mi">4</span><span class="w">  </span><span class="mi">34</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">;amp normalization for f34</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mf">.6</span><span class="w">  </span><span class="mf">8.00</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="mf">.6</span><span class="w">  </span><span class="mf">8.00</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="mi">0</span><span class="w">
+</span><span class="nb">s</span><span class="w">
+</span><span class="c1">;lower harmonics no phase shift, upper harmonics with phase shift</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">33</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8193</span><span class="w"> </span><span class="o">-</span><span class="mi">15</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="mi">1</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.9</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.3</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.75</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.2</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mf">.6</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mf">.15</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mf">.1</span><span class="w"> </span><span class="mi">180</span><span class="w">  
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">35</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4097</span><span class="w">  </span><span class="mi">4</span><span class="w">  </span><span class="mi">33</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">;amp normalization for f33</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">36</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4097</span><span class="w">  </span><span class="mi">4</span><span class="w">  </span><span class="mi">34</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">;amp normalization for f34</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mf">.6</span><span class="w">  </span><span class="mf">8.00</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="mf">.6</span><span class="w">  </span><span class="mf">8.00</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span><span class="mi">0</span><span class="w">
+
+</span><span class="nb">s</span><span class="w">
+</span><span class="c1">;lower harmonics with phase shift, upper harmonics no phase shift</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">33</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8193</span><span class="w"> </span><span class="o">-</span><span class="mi">15</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mf">.9</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mf">.3</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mf">.75</span><span class="w"> </span><span class="mi">180</span><span class="w"> </span><span class="mf">.2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.6</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.15</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.1</span><span class="w"> </span><span class="mi">0</span><span class="w">  
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">35</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4097</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">33</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">;amp normalization for f33</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">36</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4097</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">34</span><span class="w"> </span><span class="mi">1</span><span class="w">    </span><span class="c1">;amp normalization for f34</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mf">.6</span><span class="w">  </span><span class="mf">8.00</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="mi">1</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="mf">.6</span><span class="w">  </span><span class="mf">8.00</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="mi">0</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+
+      <span class="phrase">Voici les diagrammes des formes d'onde de la routine GEN15 utilisées
+        dans l'exemple (dans chaque diagramme, la courbe en bleu représente la
+        table 33 et la courbe en vert représente la table 34) :</span>
+
+      </p>
+        <div class="mediaobject">
+          <img src="images/gen15-1.png" alt="f 33 0 8193 -15 1 1 1 0 1 180 .8 45 .6 270 .5 90 .4 225 .2 135 .1 315" />
+          <div class="caption">
+            <p>f 33 0 8193 -15 1 1 1 0 1 180 .8 45 .6 270 .5 90 .4 225 .2 135 .1 315</p>
+          </div>
+        </div>
+        <p>
+
+      </p>
+        <div class="mediaobject">
+          <img src="images/gen15-2.png" alt="f 33 0 8193 -15 1 1 1 0 1 0 1 180 1 180 1 0 1 0 1 180 1 180 1 0 1 0 1 180 1 180" />
+          <div class="caption">
+            <p>f 33 0 8193 -15 1 1 1 0 1 0 1 180 1 180 1 0 1 0 1 180 1 180 1 0 1 0 1 180 1 180</p>
+          </div>
+        </div>
+        <p>
+
+      </p>
+        <div class="mediaobject">
+          <img src="images/gen15-3.png" alt="f 33 0 8193 -15 1 1 1 0 1 0 .9 180 .5 270 .75 90 .4 45 .2 225 .1 0" />
+          <div class="caption">
+            <p>f 33 0 8193 -15 1 1 1 0 1 0 .9 180 .5 270 .75 90 .4 45 .2 225 .1 0</p>
+          </div>
+        </div>
+        <p>
+
+      </p>
+        <div class="mediaobject">
+          <img src="images/gen15-4.png" alt="f 33 0 8193 -15 1 1 1 0 1 0 .5 0 .9 0 .3 0 .75 0 .2 180 .6 180 .15 180 .5 180 .1 180" />
+          <div class="caption">
+            <p>f 33 0 8193 -15 1  1  1 0 1 0 .5 0 .9 0 .3 0 .75 0 .2 180 .6 180 .15 180 .5 180 .1 180</p>
+          </div>
+        </div>
+        <p>
+
+      </p>
+        <div class="mediaobject">
+          <img src="images/gen15-5.png" alt="f 33 0 8193 -15 1 1 1 180 1 180 .5 180 .9 180 .3 180 .75 180 .2 0 .6 0 .15 0 .5 0 .1 0" />
+          <div class="caption">
+            <p>f 33 0 8193 -15 1 1 1 180 1 180 .5 180 .9 180 .3 180 .75 180 .2 0 .6 0 .15 0 .5 0 .1 0</p>
+          </div>
+        </div>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm412762"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="GEN13.html" title="GEN13"><em class="citetitle">GEN13</em></a> et
+      <a class="link" href="GEN14.html" title="GEN14"><em class="citetitle">GEN14</em></a>.
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="GEN14.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="ScoregensTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="GEN16.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">GEN14 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> GEN16</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

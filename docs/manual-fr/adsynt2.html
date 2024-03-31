@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>adsynt2</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="adsynt.html" title="adsynt" />
+    <link rel="next" href="aftouch.html" title="aftouch" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">adsynt2</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="adsynt.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="aftouch.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="adsynt2"></a>
+      <div class="titlepage"></div>
+      <a id="IndexAdsynt2" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">adsynt2</span>
+        </h2>
+        <p>adsynt2 — 
+      Réalise une synthèse additive avec un nombre arbitraire de partiels - pas nécessairement harmoniques -
+      avec interpolation.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm29442"></a>
+        <h2>Description</h2>
+        <p>
+      Réalise une synthèse additive avec un nombre arbitraire de partiels, pas nécessairement harmoniques.
+      (Voir <a class="link" href="adsynt.html" title="adsynt"><em class="citetitle">adsynt</em></a>)
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm29447"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ar <span class="command"><strong>adsynt2</strong></span> kamp, kcps, iwfn, ifreqfn, iampfn, icnt [, iphs]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm29451"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>iwfn</em></span> -- table contenant une forme d'onde, normalement une sinus. Les valeurs de
+      la table ne sont pas interpolées pour des raisons de performance, si bien que des tables plus grandes
+      apportent une meilleure qualité.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifreqfn</em></span> -- table contenant les valeurs de fréquence de chaque partiel.
+      <span class="emphasis"><em>ifreqfn</em></span> peut contenir les valeurs de fréquence initiales de chaque partiel,
+      mais elle est habituellement utilisée pour générer des paramètres pendant l'exécution avec
+      <span class="emphasis"><em>tablew</em></span>. Les fréquences doivent être relatives à <span class="emphasis"><em>kcps</em></span>.
+      La taille doit être au moins égale à <span class="emphasis"><em>icnt</em></span>.
+    </p>
+        <p>
+      <span class="emphasis"><em>iampfn</em></span> -- table contenant les valeurs d'amplitude de chaque partiel.
+      <span class="emphasis"><em>iampfn</em></span> peut contenir les valeurs d'amplitude initiales de chaque partiel,
+      mais elle est habituellement utilisée pour générer des paramètres pendant l'exécution avec
+      <span class="emphasis"><em>tablew</em></span>. Les amplitudes doivent être relatives à <span class="emphasis"><em>kamp</em></span>.
+      La taille doit être au moins égale à <span class="emphasis"><em>icnt</em></span>.
+    </p>
+        <p>
+      <span class="emphasis"><em>icnt</em></span> -- nombre de partiels à générer.
+    </p>
+        <p>
+      <span class="emphasis"><em>iphs</em></span> -- phase initiale de chaque oscillateur, si <span class="emphasis"><em>iphs</em></span> = -1,
+      l'initialisation est ignorée. Si <span class="emphasis"><em>iphs</em></span> &gt; 1, toutes les phases seront
+      initialisées avec une valeur aléatoire.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm29473"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kamp</em></span> -- amplitude de la note.
+    </p>
+        <p>
+      <span class="emphasis"><em>kcps</em></span> -- fréquence de base de la note. Les fréquences des partiels seront
+      relatives à <span class="emphasis"><em>kcps</em></span>.
+    </p>
+        <p>
+      La fréquence et l'amplitude de chaque partiel sont données dans les deux tables fournies. Le but de
+      cet opcode est de faire générer par un instrument les paramètres de synthèse au taux-k et de les
+      écrire dans des tables globales avec l'opcode <span class="emphasis"><em>tablew</em></span>.
+    </p>
+        <p>
+    <span class="emphasis"><em>adsynt2</em></span> est identique à <span class="emphasis"><em>adsynt</em></span> (by Peter Neubäcker), sauf
+    qu'il réalise une interpolation linéaire pour les enveloppes d'amplitude de chaque partiel. Il est un
+    peu plus lent que <span class="emphasis"><em>adsynt</em></span>, mais l'interpolation améliore grandement la qualité du
+    son dans les transitoires rapides des enveloppes d'amplitude lorsque <span class="emphasis"><em>kr</em></span> &lt;
+    <span class="emphasis"><em>sr</em></span> (c'est-à-dire quand <span class="emphasis"><em>ksmps</em></span> &gt; 1). Il n'y pas
+    d'interpolation pour les enveloppes de hauteur, car dans ce cas la dégradation de la qualité sonore
+    n'est pas aussi évidente même avec de grandes valeurs de <span class="emphasis"><em>ksmps</em></span>. Il n'est pas
+    recommandé quand <span class="emphasis"><em>kr</em></span> = <span class="emphasis"><em>sr</em></span> ; dans ce cas,
+    <span class="emphasis"><em>adsynt</em></span> est meilleur (car plus rapide).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm29493"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode adsynt2. Il utilise le fichier
+      <a class="ulink" href="examples/adsynt2.csd" target="_top"><em class="citetitle">adsynt2.csd</em></a>.
+      Ces deux instruments réalisent une synthèse additive. Leurs sorties respectives
+      sonnent comme un bol tibétain. La première est statique car les paramètres
+      ne sont fixés qu'à l'initialisation. Dans la seconde, les paramètres changent
+      de manière continue.
+
+      </p>
+        <div class="example">
+          <a id="idm29498"></a>
+          <p class="title">
+            <strong>Exemple 51. Exemple de l'opcode adsynt2.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm29505"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;RT audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o adsynt2.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">; Generate a sinewave table.</span><span class="w">
+</span>gi<span class="n">wave</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">; Generate two empty tables for adsynt2.</span><span class="w">
+</span>gi<span class="n">frqs</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="c1">; A table for freqency and amp parameters.</span><span class="w">
+</span>gi<span class="n">amps</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  
+</span><span class="c1">; Generates parameters at init time</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span><span class="c1">; Generate 10 voices.</span><span class="w">
+  </span>i<span class="n">cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> 
+  </span><span class="c1">; Init loop index.</span><span class="w">
+  </span>i<span class="n">ndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> 
+
+</span><span class="c1">; Loop only executed at init time.</span><span class="w">
+</span><span class="nl">loop</span><span class="p">:</span><span class="w"> 
+  </span><span class="c1">; Define non-harmonic partials.</span><span class="w">
+  </span>i<span class="n">freq</span><span class="w"> </span><span class="nb">pow</span><span class="w"> </span>i<span class="n">ndex</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="w"> 
+  </span><span class="c1">; Define amplitudes.</span><span class="w">
+  </span>i<span class="n">amp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span>i<span class="n">ndex</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> 
+  </span><span class="c1">; Write to tables.</span><span class="w">
+  </span><span class="nb">tableiw</span><span class="w"> </span>i<span class="n">freq</span><span class="p">,</span><span class="w"> </span>i<span class="n">ndex</span><span class="p">,</span><span class="w"> </span>gi<span class="n">frqs</span><span class="w"> 
+  </span><span class="c1">; Used by adsynt2.</span><span class="w">
+  </span><span class="nb">tableiw</span><span class="w"> </span>i<span class="n">amp</span><span class="p">,</span><span class="w"> </span>i<span class="n">ndex</span><span class="p">,</span><span class="w"> </span>gi<span class="n">amps</span><span class="w"> 
+  
+  </span>i<span class="n">ndex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>i<span class="n">ndex</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="c1">; Do loop/</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span>i<span class="n">ndex</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span>i<span class="n">cnt</span><span class="p">)</span><span class="w"> </span><span class="k">igoto</span><span class="w"> </span><span class="nl">loop</span><span class="w"> 
+  
+  </span>a<span class="n">sig</span><span class="w"> </span><span class="nb">adsynt2</span><span class="w"> </span><span class="mf">0.4</span><span class="p">,</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w"> </span>gi<span class="n">wave</span><span class="p">,</span><span class="w"> </span>gi<span class="n">frqs</span><span class="p">,</span><span class="w"> </span>gi<span class="n">amps</span><span class="p">,</span><span class="w"> </span>i<span class="n">cnt</span><span class="w">
+  </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="c1">; Generates parameters every k-cycle.</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w"> 
+  </span><span class="c1">; Generate 10 voices.</span><span class="w">
+  </span>i<span class="n">cnt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> 
+  </span><span class="c1">; Reset loop index.</span><span class="w">
+  </span>k<span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+
+</span><span class="c1">; Loop executed every k-cycle.</span><span class="w">
+</span><span class="nl">loop</span><span class="p">:</span><span class="w">
+  </span><span class="c1">; Generate lfo for frequencies.</span><span class="w">
+  </span>k<span class="n">speed</span><span class="w">  </span><span class="nb">pow</span><span class="w"> </span>k<span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.6</span><span class="w">
+  </span><span class="c1">; Individual phase for each voice.</span><span class="w">
+  </span>k<span class="n">phas</span><span class="w"> </span><span class="nb">phasorbnk</span><span class="w"> </span>k<span class="n">speed</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span><span class="w"> </span>k<span class="n">index</span><span class="p">,</span><span class="w"> </span>i<span class="n">cnt</span><span class="w">
+  </span>k<span class="n">lfo</span><span class="w"> </span><span class="nb">table</span><span class="w"> </span>k<span class="n">phas</span><span class="p">,</span><span class="w"> </span>gi<span class="n">wave</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="c1">; Arbitrary parameter twiddling...</span><span class="w">
+  </span>k<span class="n">depth</span><span class="w"> </span><span class="nb">pow</span><span class="w"> </span><span class="mf">1.4</span><span class="p">,</span><span class="w"> </span>k<span class="n">index</span><span class="w">
+  </span>k<span class="n">freq</span><span class="w"> </span><span class="nb">pow</span><span class="w"> </span>k<span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.5</span><span class="w">
+  </span>k<span class="n">freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>k<span class="n">freq</span><span class="w"> </span><span class="o">+</span><span class="w"> </span>k<span class="n">lfo</span><span class="o">*</span><span class="mf">0.006</span><span class="o">*</span>k<span class="n">depth</span><span class="w">
+
+  </span><span class="c1">; Write freqs to table for adsynt2.</span><span class="w">
+  </span><span class="nb">tablew</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span>k<span class="n">index</span><span class="p">,</span><span class="w"> </span>gi<span class="n">frqs</span><span class="w"> 
+  
+  </span><span class="c1">; Generate lfo for amplitudes.</span><span class="w">
+  </span>k<span class="n">speed</span><span class="w">  </span><span class="nb">pow</span><span class="w"> </span>k<span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.8</span><span class="w">
+  </span><span class="c1">; Individual phase for each voice.</span><span class="w">
+  </span>k<span class="n">phas</span><span class="w"> </span><span class="nb">phasorbnk</span><span class="w"> </span>k<span class="n">speed</span><span class="o">*</span><span class="mf">0.13</span><span class="p">,</span><span class="w"> </span>k<span class="n">index</span><span class="p">,</span><span class="w"> </span>i<span class="n">cnt</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span>k<span class="n">lfo</span><span class="w"> </span><span class="nb">table</span><span class="w"> </span>k<span class="n">phas</span><span class="p">,</span><span class="w"> </span>gi<span class="n">wave</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="c1">; Arbitrary parameter twiddling...</span><span class="w">
+  </span>k<span class="n">amp</span><span class="w"> </span><span class="nb">pow</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span>k<span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="mf">0.4</span><span class="w">
+  </span>k<span class="n">amp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>k<span class="n">amp</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mf">0.3</span><span class="o">+</span><span class="mf">0.35</span><span class="o">*</span><span class="p">(</span>k<span class="n">lfo</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="w">
+
+  </span><span class="c1">; Write amps to table for adsynt2.</span><span class="w">
+  </span><span class="nb">tablew</span><span class="w"> </span>k<span class="n">amp</span><span class="p">,</span><span class="w"> </span>k<span class="n">index</span><span class="p">,</span><span class="w"> </span>gi<span class="n">amps</span><span class="w">
+  
+  </span>k<span class="n">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>k<span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">
+  </span><span class="c1">; Do loop.</span><span class="w">
+  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span>k<span class="n">index</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span>i<span class="n">cnt</span><span class="p">)</span><span class="w"> </span><span class="k">kgoto</span><span class="w"> </span><span class="nl">loop</span><span class="w">
+
+  </span>a<span class="n">sig</span><span class="w"> </span><span class="nb">adsynt2</span><span class="w"> </span><span class="mf">0.25</span><span class="p">,</span><span class="w"> </span><span class="mi">150</span><span class="p">,</span><span class="w"> </span>gi<span class="n">wave</span><span class="p">,</span><span class="w"> </span>gi<span class="n">frqs</span><span class="p">,</span><span class="w"> </span>gi<span class="n">amps</span><span class="p">,</span><span class="w"> </span>i<span class="n">cnt</span><span class="w">
+  </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="c1">; Play Instrument #1 for 2.5 seconds.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">2.5</span><span class="w">
+</span><span class="c1">; Play Instrument #2 for 2.5 seconds.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mf">2.5</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm30053"></a>
+        <h2>Crédits</h2>
+        <p>Ecrit par Gabriel Maldonado.</p>
+        <p>Nouveau dans Csound 5 (Disponible auparavant seulement dans CsoundAV)</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="adsynt.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="aftouch.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">adsynt </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> aftouch</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

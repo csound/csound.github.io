@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>hrtfstat</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="hrtfreverb.html" title="hrtfreverb" />
+    <link rel="next" href="hsboscil.html" title="hsboscil" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">hrtfstat</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="hrtfreverb.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="hsboscil.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="hrtfstat"></a>
+      <div class="titlepage"></div>
+      <a id="IndexHrtfstat" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">hrtfstat</span>
+        </h2>
+        <p>hrtfstat — 
+      Génère un signal audio statique 3D binaural pour casque en utilisant un
+      modèle de Woodworth de tête sphérique avec précision améliorée de la phase
+      en basse fréquence.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm153247"></a>
+        <h2>Description</h2>
+        <p>
+      Cet opcode prend un signal source et le spatialise dans les trois dimensions
+      entourant l'auditeur en utilisant des filtres basés sur une fonction de
+      transfert en relation avec la tête (HRTF). Il produit une sortie statique
+      (les paramètres d'azimut et d'élévation sont de taux-i), car une source
+      statique permet un traitement bien plus efficace que
+      <a class="link" href="hrtfmove.html" title="hrtfmove"><em class="citetitle">hrtfmove</em></a> et
+      <a class="link" href="hrtfmove2.html" title="hrtfmove2"><em class="citetitle">hrtfmove2</em></a>. 
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm153254"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">
+      aleft, aright <span class="command"><strong>hrtfstat</strong></span> asrc, iAz, iElev, ifilel, ifiler [,iradius, isr]
+    </pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm153258"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>iAz</em></span> -- valeur d'azimut en degrés. Les valeurs positives
+      représentent les positions sur la droite, les valeurs négatives les positions
+      sur la gauche.
+    </p>
+        <p>
+      <span class="emphasis"><em>iElev</em></span> -- valeur d'élévation en degrés. Les valeurs
+      positives représentent les positions au-dessus de l'horizontale, les valeurs
+      négatives les positions sous l'horizontale (min -40).
+    </p>
+        <p>
+      <span class="emphasis"><em>ifilel </em></span> -- fichier des données spectrales HRTF de gauche.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifiler </em></span> -- fichier des données spectrales HRTF de droite.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Des fichiers de données spectrales (basés sur la base de donnée HTRF du MIT)
+        sont disponibles dans trois taux d'échantillonnage : 44.1, 48 et 96 kHz et
+        sont nommés en conséquense. Le <span class="emphasis"><em>sr</em></span> d'entrée et de
+        traitement doit concorder avec celui du fichier de données. Les fichiers
+        doivent se trouver dans le répertoire courant ou le SADIR (voir
+        <a class="link" href="CommandEnvironment.html" title="Variables d'environnement de Csound"><em class="citetitle">Variables d'Environnement</em></a>).
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Les fichiers de données HRTF à utiliser avec 
+        <a class="link" href="hrtfmove.html" title="hrtfmove"><em class="citetitle">hrtfmove</em></a>,
+        <a class="link" href="hrtfmove2.html" title="hrtfmove2"><em class="citetitle">hrtfmove2</em></a>,
+        <a class="link" href="hrtfstat.html" title="hrtfstat"><em class="citetitle">hrtfstat</em></a>,
+        <a class="link" href="hrtfearly.html" title="hrtfearly"><em class="citetitle">hrtfearly</em></a> et
+        <a class="link" href="hrtfreverb.html" title="hrtfreverb"><em class="citetitle">hrtfreverb</em></a>
+        ont été mis à jour pour les versions 5.15 et ultérieures de Csound (le
+        code a été mis à jour et il est plus efficace). Les anciens fichiers de
+        données sont maintenant obsolètes.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <p>
+      <span class="emphasis"><em>iradius</em></span> -- facultatif, rayon de la tête en centimètres
+      utilisé pour le calcul du spectre de phase (9.0 par défaut).
+    </p>
+        <p>
+      <span class="emphasis"><em>isr</em></span> - facultatif (44.1 kHz par défaut). Les valeurs
+      autorisées sont 44100, 48000 et 96000.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm153289"></a>
+        <h2>Exécution</h2>
+        <p>
+      Une spatialisation statique sans artefact définie par l'utilisateur est
+      rendue possible au moyen d'un algorithme basé sur l'interpolation de
+      magnitude spectrale et un spectre de phase dérivé basé sur le modèle de
+      tête sphérique de Woodworth. La précision de l'ensemble de données fourni
+      est augmentée en extrayant et en appliquant au spectre de phase un facteur
+      de pondération dépendant de la fréquence, ce qui conduit à un délai
+      interaural plus précis dans les basses fréquences. On peut contrôler le
+      rayon de la tête pour la dérivation de la phase ce qui donne un niveau
+      simple d'individualisation. La version à source statique de l'opcode
+      utilise la convolution par chevauchement et addition (le traitement par
+      TFCT n'est pas nécessaire, voir
+      <a class="link" href="hrtfmove2.html" title="hrtfmove2"><em class="citetitle">hrtfmove2</em></a>), et
+      elle est ainsi considérablement plus efficace que
+      <a class="link" href="hrtfmove2.html" title="hrtfmove2"><em class="citetitle">hrtfmove2</em></a> ou
+      <a class="link" href="hrtfmove.html" title="hrtfmove"><em class="citetitle">hrtfmove</em></a>, mais elle
+      ne peut pas générer de sources en mouvement.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm153298"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode hrtfstat. Il utilise le fichier
+      <a class="ulink" href="examples/hrtfstat.csd" target="_top"><em class="citetitle">hrtfstat.csd</em></a>. 
+    </p>
+        <div class="example">
+          <a id="idm153303"></a>
+          <p class="title">
+            <strong>Exemple 444. Exemple de l'opcode hrtfstat.
+      </strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm153310"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o hrtfstat.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    
+</span>ga<span class="n">src</span><span class="w"> </span><span class="nb">init</span><span class="w"> </span><span class="mi">0</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	</span><span class="c1">;a plucked string</span><span class="w">
+
+</span>k<span class="n">amp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>k<span class="n">cps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">cpspch</span><span class="p">(</span><span class="vi">p5</span><span class="p">)</span><span class="w">
+</span>i<span class="n">cps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">cpspch</span><span class="p">(</span><span class="vi">p5</span><span class="p">)</span><span class="w">
+</span>a<span class="n">1</span><span class="w"> </span><span class="nb">pluck</span><span class="w"> </span>k<span class="n">amp</span><span class="p">,</span><span class="w"> </span>k<span class="n">cps</span><span class="p">,</span><span class="w"> </span>i<span class="n">cps</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span>ga<span class="n">src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>a<span class="n">1</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">10</span><span class="c1">;uses output from instr1 as source</span><span class="w">
+
+</span>a<span class="n">left</span><span class="p">,</span>a<span class="n">right</span><span class="w"> </span><span class="nb">hrtfstat</span><span class="w"> </span>ga<span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="mi">90</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">"hrtf-44100-left.dat"</span><span class="p">,</span><span class="s">"hrtf-44100-right.dat"</span><span class="w">
+             </span><span class="nb">outs</span><span class="w">     </span>a<span class="n">left</span><span class="p">,</span><span class="w"> </span>a<span class="n">right</span><span class="w">
+
+</span><span class="nb">clear</span><span class="w"> </span>ga<span class="n">src</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">.7</span><span class="w"> </span><span class="mf">8.00</span><span class="w">	</span><span class="c1">; Play Instrument 1: a plucked string</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">.7</span><span class="w"> </span><span class="mf">8.00</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">.7</span><span class="w"> </span><span class="mf">8.00</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mf">.7</span><span class="w"> </span><span class="mf">7.00</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">10</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">12</span><span class="w">	</span><span class="c1">; Play Instrument 10 for 2 seconds.</span><span class="w">
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <br class="example-break" />
+        <p>
+      Voici un autre exemple de l'opcode hrtfstat. Il utilise les fichiers
+      <a class="ulink" href="examples/hrtfstat-2.csd" target="_top"><em class="citetitle">htrfstat-2.csd</em></a>
+      et <a class="ulink" href="examples/Church.wav" target="_top"><em class="citetitle">Church.wav</em></a>,
+      qui contient un son échantillonné avec boucle.
+
+      </p>
+        <div class="example">
+          <a id="idm153509"></a>
+          <p class="title">
+            <strong>Exemple 445. Deuxième exemple de l'opcode hrtfstat</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm153511"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o hrtfstat-2.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>i<span class="n">Az</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">Elev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="vi">p5</span><span class="w">
+
+</span>i<span class="n">tim</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">ftlptim</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">
+</span><span class="c1">;    transeg a   dur   ty  b  dur    ty  c    dur   ty  d</span><span class="w">
+</span>k<span class="n">amp</span><span class="w"> </span><span class="nb">transeg</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.9</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.3</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w">  </span><span class="vi">p3</span><span class="o">*</span><span class="mf">.3</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>a<span class="n">in</span><span class="w">  </span><span class="nb">loscil3</span><span class="w"> </span>k<span class="n">amp</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>a<span class="n">left</span><span class="p">,</span>a<span class="n">right</span><span class="w"> </span><span class="nb">hrtfstat</span><span class="w"> </span>a<span class="n">in</span><span class="p">,</span><span class="w"> </span>i<span class="n">Az</span><span class="p">,</span><span class="w"> </span>i<span class="n">Elev</span><span class="p">,</span><span class="w"> </span><span class="s">"hrtf-44100-left.dat"</span><span class="p">,</span><span class="s">"hrtf-44100-right.dat"</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">left</span><span class="p">,</span><span class="w"> </span>a<span class="n">right</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="s">"Church.wav"</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c1">;Csound computes tablesize</span><span class="w">
+
+</span><span class="c1">;      Azim Elev</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">7</span><span class="w">  </span><span class="mi">90</span><span class="w">   </span><span class="mi">0</span><span class="w">  </span><span class="c1">;to the right</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="o">-</span><span class="mi">90</span><span class="w">  </span><span class="o">-</span><span class="mi">40</span><span class="w"> </span><span class="c1">;to the left and below</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="mi">180</span><span class="w">   </span><span class="mi">90</span><span class="w"> </span><span class="c1">;behind and up</span><span class="w">
+</span><span class="nb">e</span><span class="w"> 
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm153725"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="hrtfmove.html" title="hrtfmove"><em class="citetitle">hrtfmove</em></a>,
+      <a class="link" href="hrtfmove2.html" title="hrtfmove2"><em class="citetitle">hrtfmove2</em></a>,
+      <a class="link" href="hrtfer.html" title="hrtfer"><em class="citetitle">hrtfer</em></a>.
+    </p>
+        <p>Plus d'information sur cet opcode :
+      <a class="ulink" href="http://www.csoundjournal.com/issue9/newHRTFOpcodes.html" target="_top"><em class="citetitle">http://www.csoundjournal.com/issue9/newHRTFOpcodes.html</em></a>,
+      écrit par Brian Carty.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm153737"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Brian Carty</td>
+          </tr>
+          <tr>
+            <td>Maynooth</td>
+          </tr>
+          <tr>
+            <td>2008</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="hrtfreverb.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="hsboscil.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">hrtfreverb </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> hsboscil</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

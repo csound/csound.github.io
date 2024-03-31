@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Description de la syntaxe de la commande</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="CommandTop.html" title="La commande Csound" />
+    <link rel="prev" href="CommandTop.html" title="La commande Csound" />
+    <link rel="next" href="CommandFlags.html" title="Ligne de commande de Csound" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Description de la syntaxe de la commande</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="CommandTop.html">Précédent</a> </td>
+          <th width="60%" align="center">La commande Csound</th>
+          <td width="20%" align="right"> <a accesskey="n" href="CommandFlags.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="section">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="CommandDesc"></a>Description de la syntaxe de la commande</h2>
+          </div>
+        </div>
+      </div>
+      <p>
+    La commande csound est suivie par un ensemble
+    d'<a class="link" href="CommandFlagsCategory.html" title="Options de ligne de commande (par catégorie)"><em class="citetitle">Options de Ligne de Commande</em></a>
+    et par les noms des fichiers de l'orchestre (<a class="link" href="OrchTop.html" title="Syntaxe de l'orchestre"><em class="citetitle">.orc</em></a>)
+    et de la partition (<a class="link" href="ScoreTop.html" title="La partition numérique standard"><em class="citetitle">.sco</em></a>) ou du
+    <a class="link" href="CommandUnifile.html" title="Format de fichier unifié pour les orchestres et les partitions"><em class="citetitle">Fichier Unifié csd</em></a> (contenant
+    à la fois l'orchestre et la partition) à traiter.
+    Les <a class="link" href="CommandFlagsCategory.html" title="Options de ligne de commande (par catégorie)"><em class="citetitle">Options de Ligne de Commande</em></a>
+    pour contrôler la configuration d'entrée et de sortie peuvent apparaître n'importe où dans la
+    ligne de commande, séparées ou collées ensemble. Un drapeau nécessitant un Nom ou un Nombre le
+    trouvera dans l'argument lui-même ou dans celui qui le suit immédiatement. Les commandes suivantes
+    sont donc équivalentes :
+    </p>
+      <div class="informalexample">
+        <pre class="programlisting">
+<span class="command"><strong>csound</strong></span> -nm3 nomorchestre -Sxxnomfichier nompartition
+<span class="command"><strong>csound</strong></span> -n -m 3 nomorchestre -x xnomfichier -S nompartition</pre>
+      </div>
+      <p>
+  </p>
+      <p>
+    Tous les drapeaux et les noms sont optionnels. Les valeurs par défaut sont :
+    </p>
+      <div class="informalexample">
+        <pre class="programlisting">
+<span class="command"><strong>csound</strong></span> -s -otest -b1024 -B1024 -m7 -P128 nomorchestre nompartition</pre>
+      </div>
+      <p>
+  </p>
+      <p>
+    où <span class="emphasis"><em>nomorchestre</em></span> est un fichier contenant le code de l'orchestre Csound, et
+    <span class="emphasis"><em>nompartition</em></span> est un fichier de données de partition en format de partition
+    numérique standard, facultativement pré-trié et réajusté en temps. Si <span class="emphasis"><em>nompartition</em></span>
+    est omis, il y a deux options par défaut :
+    </p>
+      <div class="orderedlist">
+        <ol class="orderedlist" type="1">
+          <li class="listitem">
+            <p> si l'on attend une entrée en temps réel (par exemple
+        <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusUpperL"><em class="citetitle">-L</em></a>,
+        <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusUpperM"><em class="citetitle">-M</em></a>,
+        <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusLowerIadc"><em class="citetitle">-iadc</em></a> ou
+        <a class="link" href="CommandFlagsCategory.html#FlagsCatMinusUpperF"><em class="citetitle">-F</em></a>), un fichier partition
+        factice est utilisé, constitué de la seule instruction 'f 0 3600'
+        (c'est-à-dire écouter sur l'entrée TR pendant une heure)</p>
+          </li>
+          <li class="listitem">
+            <p>sinon Csound utilise le dernier <span class="emphasis"><em>score.srt</em></span> produit dans le répertoire courant.</p>
+          </li>
+        </ol>
+      </div>
+      <p>
+  </p>
+      <p>
+    Csound rend compte des différentes étapes de traitement de la partition et de l'orchestre lors de
+    l'exécution, effectuant différents tests de syntaxe et d'erreurs. Une fois l'exécution
+    commencée, les messages d'erreur proviennent soit du chargeur d'instrument soit des générateurs unitaires
+    eux-mêmes. Une commande Csound peut inclure toute combinaison d'options bien formée.
+  </p>
+      <h3><a id="idm5567"></a>Exécuter les exemples du manuel à partir de la ligne de commande</h3>
+      <p>
+    La plupart des exemples du manuel sont prêts à l'emploi sans avoir besoin d'ajouter des options de
+    ligne de commande, car ces options sont fixées dans la balise &lt;CsOptions&gt; du fichier csd,
+    si bien qu'il suffit de taper une commande telle que :
+    </p>
+      <div class="informalexample">
+        <pre class="programlisting">
+<span class="command"><strong>csound</strong></span> oscil.csd</pre>
+      </div>
+      <p>
+    depuis le répertoire des exemples, et une sortie audio en temps réel sera générée.
+  </p>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="CommandTop.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="CommandTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="CommandFlags.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">La commande Csound </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Ligne de commande de Csound</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

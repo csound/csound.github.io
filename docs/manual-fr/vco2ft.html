@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>vco2ft</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="vco2.html" title="vco2" />
+    <link rel="next" href="vco2ift.html" title="vco2ift" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">vco2ft</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="vco2.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="vco2ift.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="vco2ft"></a>
+      <div class="titlepage"></div>
+      <a id="IndexVco2ft" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">vco2ft</span>
+        </h2>
+        <p>vco2ft — 
+      Retourne un numéro de table au taux-k pour une fréquence d'oscillateur donnée et une forme d'onde.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm370207"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>vco2ft</em></span> retourne le numéro d'une table de fonction pour générer la forme
+      d'onde spécifiée à une fréquence donnée. Ce numéro de table de fonction peut être utilisé par
+      n'importe quel opcode de Csound qui génère un signal en lisant une table de fonction (comme
+      <a class="link" href="oscilikt.html" title="oscilikt"><em class="citetitle">oscilikt</em></a>). Les tables doivent avoir été
+      calculées par <a class="link" href="vco2init.html" title="vco2init"><em class="citetitle">vco2init</em></a> avant l'appel de
+      <span class="emphasis"><em>vco2ft</em></span> et partagées comme ftables de Csound (<span class="emphasis"><em>ibasfn</em></span>).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm370217"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">kfn <span class="command"><strong>vco2ft</strong></span> kcps, iwave [, inyx]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm370221"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>iwave</em></span> -- la forme d'onde dont le numéro doit être choisi. Les valeurs permises
+      sont :
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>0 : dent de scie</p>
+            </li>
+            <li class="listitem">
+              <p>1 : 4 * x * (1 - x)   (intégration d'une dent de scie)</p>
+            </li>
+            <li class="listitem">
+              <p>2 : pulsation (non normalisée)</p>
+            </li>
+            <li class="listitem">
+              <p>3 : onde carrée</p>
+            </li>
+            <li class="listitem">
+              <p>4 : triangle</p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+        <p>
+      De plus, les valeurs négatives de <span class="emphasis"><em>iwave</em></span> sélectionnent des formes d'onde
+      définies par l'utilisateur (voir aussi
+      <a class="link" href="vco2init.html" title="vco2init"><em class="citetitle">vco2init</em></a>).
+    </p>
+        <p>
+      <span class="emphasis"><em>inyx</em></span> (facultatif, par défaut 0,5) -- largeur de bande de la forme d'onde
+      générée, exprimée en pourcentage (0 à 1) du taux d'échantillonnage. L'intervalle attendu va de
+      0 à 0,5 (c'est-à-dire jusqu'à <a class="link" href="sr.html" title="sr"><em class="citetitle">sr</em></a>/2), les autres
+      valeurs étant limitées à cet intervalle.
+    </p>
+        <p>
+      En fixant <span class="emphasis"><em>inyx</em></span> à 0,25 (<span class="emphasis"><em>sr</em></span>/4), ou à 0,3333
+      (<span class="emphasis"><em>sr</em></span>/3), on peut produire un son plus <span class="quote">« <span class="quote">gras</span> »</span> dans certains cas,
+      bien que la qualité sera probablement réduite.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm370249"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kfn</em></span> -- le numéro de la ftable , retourné au taux-k.
+    </p>
+        <p>
+      <span class="emphasis"><em>kcps</em></span> -- fréquence en Hz, retournée au taux-k. On peut utiliser zéro ou des
+      valeurs négatives. Cependant, si la valeur absolue dépasse <span class="emphasis"><em>sr</em></span>/2 (ou
+      <span class="emphasis"><em>sr</em></span> * <span class="emphasis"><em>inyx</em></span>), la table sélectionnée ne contiendra
+      que du silence.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm370258"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voir l'exemple de l'opcode <a class="link" href="vco2.html" title="vco2"><em class="citetitle">vco2</em></a>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm370263"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="vco2ift.html" title="vco2ift"><em class="citetitle">vco2ift</em></a>,
+      <a class="link" href="vco2init.html" title="vco2init"><em class="citetitle">vco2init</em></a> et
+      <a class="link" href="vco2.html" title="vco2"><em class="citetitle">vco2</em></a>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm370272"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Istvan Varga</p>
+        <p>Nouveau dans la version 4.22</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="vco2.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="vco2ift.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">vco2 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> vco2ift</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

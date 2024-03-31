@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ftsave</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="ftsamplebank.html" title="ftsamplebank" />
+    <link rel="next" href="ftsavek.html" title="ftsavek" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">ftsave</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ftsamplebank.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="ftsavek.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="ftsave"></a>
+      <div class="titlepage"></div>
+      <a id="IndexFtsave" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">ftsave</span>
+        </h2>
+        <p>ftsave — 
+      Sauvegarde dans un fichier un ensemble de tables préalablement allouées.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm139656"></a>
+        <h2>Description</h2>
+        <p>
+      Sauvegarde dans un fichier un ensemble de tables préalablement allouées.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm139659"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>ftsave</strong></span> "filename", iflag, ifn1 [, ifn2] [...]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm139663"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>"filename"</em></span> -- Une chaîne de caractères entre
+      guillemets contenant le nom du fichier à sauvegarder.
+    </p>
+        <p>
+      <span class="emphasis"><em>iflag</em></span> -- Type du fichier à sauvegarder (0 = binaire,
+      différent de 0 = fichier texte).
+    </p>
+        <p>
+      <span class="emphasis"><em>ifn1, ifn2, ...</em></span> -- Numéros des tables à sauvegarder.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm139671"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ftsave</em></span> sauvegarde une liste de tables dans un fichier.
+      Le format du fichier peut être binaire ou texte.
+    </p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning: Avertissement">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Avertissement]" src="images/warning.png" />
+              </td>
+              <th align="left">Avertissement</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Le format du fichier n'est pas compatible avec un fichier WAV et l'ordre
+        des octets (endianness) n'est pas sûr.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm139678"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode ftsave. Il utilise le fichier
+      <a class="ulink" href="examples/ftsave.csd" target="_top"><em class="citetitle">ftsave.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm139683"></a>
+          <p class="title">
+            <strong>Exemple 399. Exemple de l'opcode ftsave.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm139690"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   Audio in</span>
+-odac           -iadc    <span class="c1">;;;RT audio I/O</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o ftsave.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; Initialize the global variables.</span><span class="w">
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">kr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4410</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; Table #1, make a sine wave using the GEN10 routine.</span><span class="w">
+</span>gi<span class="n">tmp1</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">32768</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">; Table #2, create an empty table.</span><span class="w">
+</span>gi<span class="n">tmp2</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">32768</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">32768</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+
+</span><span class="c1">; Instrument #1 - a basic oscillator.</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+  </span>k<span class="n">amp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20000</span><span class="w">
+  </span>k<span class="n">cps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">440</span><span class="w">
+  </span><span class="c1">; Use Table #1.</span><span class="w">
+  </span>i<span class="n">fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+  </span>a<span class="n">1</span><span class="w"> </span><span class="nb">oscil</span><span class="w"> </span>k<span class="n">amp</span><span class="p">,</span><span class="w"> </span>k<span class="n">cps</span><span class="p">,</span><span class="w"> </span>i<span class="n">fn</span><span class="w">
+  </span><span class="nb">out</span><span class="w"> </span>a<span class="n">1</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="c1">; Instrument #2 - Load Table #1 into Table #2.</span><span class="w">
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+  </span><span class="c1">; Save Table #1 to a file called "table1.ftsave".</span><span class="w">
+  </span><span class="nb">ftsave</span><span class="w"> </span><span class="s">"table1.ftsave"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+  </span><span class="c1">; Load the "table1.ftsave" file into Table #2.</span><span class="w">
+  </span><span class="nb">ftload</span><span class="w"> </span><span class="s">"table1.ftsave"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">
+
+  </span>k<span class="n">amp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20000</span><span class="w">
+  </span>k<span class="n">cps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">440</span><span class="w">
+  </span><span class="c1">; Use Table #2, it should contain Table #1's sine wave now.</span><span class="w">
+  </span>i<span class="n">fn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+
+  </span>a<span class="n">1</span><span class="w"> </span><span class="nb">oscil</span><span class="w"> </span>k<span class="n">amp</span><span class="p">,</span><span class="w"> </span>k<span class="n">cps</span><span class="p">,</span><span class="w"> </span>i<span class="n">fn</span><span class="w">
+  </span><span class="nb">out</span><span class="w"> </span>a<span class="n">1</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="c1">; Play Instrument #1 for 1 second.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="c1">; Play Instrument #2 for 1 second.</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm139913"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="ftloadk.html" title="ftloadk"><em class="citetitle">ftloadk</em></a>,
+      <a class="link" href="ftload.html" title="ftload"><em class="citetitle">ftload</em></a>,
+      <a class="link" href="ftsavek.html" title="ftsavek"><em class="citetitle">ftsavek</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm139922"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Gabriel Maldonado</p>
+        <p>Exemple écrit par Kevin Conder.</p>
+        <p>Nouveau dans la version 4.21</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ftsamplebank.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="ftsavek.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ftsamplebank </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> ftsavek</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

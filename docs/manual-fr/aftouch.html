@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>aftouch</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="adsynt2.html" title="adsynt2" />
+    <link rel="next" href="allpole.html" title="allpole" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">aftouch</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="adsynt2.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="allpole.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="aftouch"></a>
+      <div class="titlepage"></div>
+      <a id="IndexAftouch" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">aftouch</span>
+        </h2>
+        <p>aftouch — 
+      Reçoit la valeur d'after-touch actuelle de ce canal.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm30067"></a>
+        <h2>Description</h2>
+        <p>
+      Reçoit la valeur d'after-touch actuelle de ce canal.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm30070"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">kaft <span class="command"><strong>aftouch</strong></span> [imin] [, imax]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm30074"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>imin</em></span> (facultatif, par défault 0) -- limite minimale des valeurs obtenues.
+    </p>
+        <p>
+      <span class="emphasis"><em>imax</em></span> (facultatif, par défault 127) -- limite maximale des valeurs obtenues.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm30080"></a>
+        <h2>Exécution</h2>
+        <p>
+      Reçoit la valeur d'after-touch actuelle de ce canal.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm30083"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode aftouch. Il utilise le fichier
+      <a class="ulink" href="examples/aftouch.csd" target="_top"><em class="citetitle">aftouch.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm30088"></a>
+          <p class="title">
+            <strong>Exemple 52. Exemple de l'opcode aftouch.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm30095"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+<span class="c1">; Audio out   No messages  MIDI in</span>
+-odac           -d         -M0  <span class="c1">;;;RT audio out with MIDI in</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>k<span class="n">aft</span><span class="w"> </span><span class="nb">aftouch</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">printk2</span><span class="w"> </span>k<span class="n">aft</span><span class="w">
+
+</span><span class="c1">;aftertouch from music keyboard used for volume control</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="nb">oscil</span><span class="w"> </span><span class="mf">0.7</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>k<span class="n">aft</span><span class="p">,</span><span class="w"> </span><span class="mi">220</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">  </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">;sine wave.</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">30</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm30202"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="ampmidi.html" title="ampmidi"><em class="citetitle">ampmidi</em></a>,
+      <a class="link" href="cpsmidi.html" title="cpsmidi"><em class="citetitle">cpsmidi</em></a>,
+      <a class="link" href="cpsmidib.html" title="cpsmidib"><em class="citetitle">cpsmidib</em></a>,
+      <a class="link" href="midictrl.html" title="midictrl"><em class="citetitle">midictrl</em></a>,
+      <a class="link" href="notnum.html" title="notnum"><em class="citetitle">notnum</em></a>,
+      <a class="link" href="octmidi.html" title="octmidi"><em class="citetitle">octmidi</em></a>,
+      <a class="link" href="octmidib.html" title="octmidib"><em class="citetitle">octmidib</em></a>,
+      <a class="link" href="pchbend.html" title="pchbend"><em class="citetitle">pchbend</em></a>,
+      <a class="link" href="pchmidi.html" title="pchmidi"><em class="citetitle">pchmidi</em></a>,
+      <a class="link" href="pchmidib.html" title="pchmidib"><em class="citetitle">pchmidib</em></a>,
+      <a class="link" href="veloc.html" title="veloc"><em class="citetitle">veloc</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm30227"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteurs : Barry L. Vercoe - Mike Berry</td>
+          </tr>
+          <tr>
+            <td>MIT - Mills</td>
+          </tr>
+          <tr>
+            <td>Mai 1997</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="adsynt2.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="allpole.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">adsynt2 </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> allpole</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

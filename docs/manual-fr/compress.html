@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>compress</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="combinv.html" title="combinv" />
+    <link rel="next" href="compileorc.html" title="compileorc" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">compress</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="combinv.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="compileorc.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="compress"></a>
+      <div class="titlepage"></div>
+      <a id="IndexCompress" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">compress</span>
+        </h2>
+        <p>compress — 
+      Compresse, limite, dilate, atténue ou impose un seuil à un signal audio.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm60087"></a>
+        <h2>Description</h2>
+        <p> Cette unité fonctionne comme un compresseur audio, un limiteur, un
+    expander ou un noise gate, avec un coude arrondi ou non et des caractéristiques
+    d'exécution variant dynamiquement. Il prend deux signaux audio en entrée,
+    <span class="emphasis"><em>aasig</em></span> et <span class="emphasis"><em>acsig</em></span>, le premier étant
+    modifié par l'analyse courante du second. Les deux signaux peuvent être le
+    même signal, ou le premier peut être modifié par un signal de contrôle
+    différent.
+    </p>
+        <p>
+    <span class="command"><strong>compress</strong></span> examine d'abord le signal de contrôle
+    <span class="emphasis"><em>acsig</em></span> en faisant une détection d'enveloppe. Celle-ci
+    est déterminée par deux valeurs de contrôle <span class="emphasis"><em>katt</em></span> et
+    <span class="emphasis"><em>krel</em></span>, définissant les constantes d'attaque et de
+    relachement (en secondes) du détecteur. Le détecteur suit les crêtes (pas
+    la valeur efficace) du signal de contrôle. Les valeurs typiques sont 0.01
+    et 0.1, la dernière étant habituellement du même ordre que
+    <span class="emphasis"><em>ilook</em></span>.
+    </p>
+        <p>
+    L'enveloppe courante est alors convertie en décibels puis passe par une
+    fonction de sélection pour déterminer quelle action du compresseur (s'il y
+    en a une) doit être appliquée. La fonction de sélection est définie par
+    quatre valeurs de contrôle en décibels. Elles sont données sous forme de
+    valeurs positives, où 0 dB correspond à une amplitude de 0dbfs/32768, et 90 dB
+    correspond à une amplitude de 0dbfs. 
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm60099"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ar <span class="command"><strong>compress</strong></span> aasig, acsig, kthresh, kloknee, khiknee, kratio, katt, krel, ilook</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm60103"></a>
+        <h2>Initialisation</h2>
+        <p>
+    <span class="emphasis"><em>ilook</em></span> -- temps de prospection en secondes, pendant
+    lequel un déclenchement d'enveloppe interne peut détecter ce qui se passe.
+    Cela induit un délai entre l'entrée et la sortie, mais une petite durée
+    de prospection améliore les performances du détecteur d'enveloppe. 0.05
+    secondes est une valeur typique, suffisante pour détecter les crêtes
+    de la fréquence la plus basse dans <span class="emphasis"><em>acsig</em></span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm60108"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kthresh</em></span> -- fixe le niveau le plus bas en décibels qui
+      sera autorisé à traverser le module. Normalement 0 ou moins, mais si le
+      seuil est plus élevé, les signaux de basse énergie tel que le bruit de
+      fond commenceront à être enlevés.
+    </p>
+        <p>
+      <span class="emphasis"><em>kloknee</em></span>, <span class="emphasis"><em>khiknee</em></span> -- coude de la
+      courbe en décibels indiquant où commencent la compression ou l'expansion.
+      Cela fixe les limites d'un coude arrondi joignant la ligne 1:1 des basses
+      amplitudes et la ligne du rapport de compression des fortes amplitudes.
+      48 et 60 dB sont des valeurs typiques. Si les deux points sont égaux, le
+      coude est anguleux.
+    </p>
+        <p>
+      <span class="emphasis"><em>kratio</em></span> -- rapport de compression lorsque le signal
+      est au-delà du coude. La valeur 2 renforce la sortie d'un décibel pour
+      chaque doublement du gain en entrée ; 3 renforce de un pour trois ; 20
+      de un pour vingt, etc. Les rapports inverses provoquent une expansion du
+      signal : 0.5 donne deux pour un, 0.25 quatre pour un, etc. La valeur 1
+      ne provoque aucun changement.
+    </p>
+        <p>
+      Les actions de <span class="emphasis"><em>compress</em></span> dépendent du réglage des
+      paramètres. Un compresseur-limiteur à coude anguleux, par exemple, est
+      obtenu avec une attaque proche de zéro, des limites de coude égales, et
+      un rapport très élevé (disons 100). Un noise-gate plus expander est
+      obtenu avec un seuil positif et un rapport fractionnaire au-delà du coude.
+      Un compresseur de musique déclenché par la voix (ducker) est obtenu en
+      affectant la musique à <span class="emphasis"><em>aasig</em></span> et la voix à
+      <span class="emphasis"><em>acsig</em></span>. Un de-esser de voix est obtenu en affectant
+      la voix aux deux, avec un filtre passe-bande précédant l'entrée
+      <span class="emphasis"><em>acsig</em></span> pour renforcer les sifflantes. Il est
+      nécessaire d'expérimenter chaque application pour trouver les meilleurs
+      réglages des paramètres ; ceux-ci sont de taux-k pour faciliter cette
+      expérimentation.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm60122"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode compress. Il utilise le fichier
+      <a class="ulink" href="examples/compress.csd" target="_top"><em class="citetitle">compress.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm60127"></a>
+          <p class="title">
+            <strong>Exemple 154. Exemple de l'opcode compress.</strong>
+          </p>
+          <div class="example-contents">
+            <div class="refsect1">
+              <a id="idm60129"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac  -iadc    <span class="c1">;;;RT audio out and in</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o compress.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	</span><span class="c1">; uncompressed signal</span><span class="w">
+
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">diskin2</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">	</span><span class="c1">; compressed signal.</span><span class="w">
+</span><span class="c1">; Use the "beats.wav" audio file and a mic</span><span class="w">
+</span>a<span class="n">voice</span><span class="w"> </span><span class="nb">in</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">   </span><span class="nb">diskin2</span><span class="w"> </span><span class="s">"beats.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; duck the audio signal "beats.wav" with your voice.</span><span class="w">
+  </span>k<span class="n">thresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+  </span>k<span class="n">loknee</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="w">
+  </span>k<span class="n">hiknee</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="w">
+  </span>k<span class="n">ratio</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w">
+  </span>k<span class="n">att</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+  </span>k<span class="n">rel</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mf">.5</span><span class="w">
+  </span>i<span class="n">look</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mf">.02</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">compress</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">voice</span><span class="p">,</span><span class="w"> </span>k<span class="n">thresh</span><span class="p">,</span><span class="w"> </span>k<span class="n">loknee</span><span class="p">,</span><span class="w"> </span>k<span class="n">hiknee</span><span class="p">,</span><span class="w"> </span>k<span class="n">ratio</span><span class="p">,</span><span class="w"> </span>k<span class="n">att</span><span class="p">,</span><span class="w"> </span>k<span class="n">rel</span><span class="p">,</span><span class="w"> </span>i<span class="n">look</span><span class="w">	</span><span class="c1">; voice-activated compressor</span><span class="w">
+      </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">5</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">21</span><span class="w">
+
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm60323"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="dam.html" title="dam"><em class="citetitle">dam</em></a>
+    </p>
+        <p>
+      <a class="link" href="compress2.html" title="compress2"><em class="citetitle">compress2</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm60331"></a>
+        <h2>Crédits</h2>
+        <p>Ecrit par Barry L. Vercoe pour Extended Csound et introduit dans
+    Csound 5.02.
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="combinv.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="compileorc.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">combinv </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> compileorc</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

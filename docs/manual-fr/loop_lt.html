@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>loop_lt</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="loop_le.html" title="loop_le" />
+    <link rel="next" href="loopseg.html" title="loopseg" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">loop_lt</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="loop_le.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="loopseg.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="loop_lt"></a>
+      <div class="titlepage"></div>
+      <a id="IndexLoop" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">loop_lt</span>
+        </h2>
+        <p>loop_lt — 
+      Constructions de boucle.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm183425"></a>
+        <h2>Description</h2>
+        <p>
+      Construction d'opérations de boucle.
+   </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm183428"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>loop_lt </strong></span>  indx, incr, imax, label</pre>
+        <pre class="synopsis"><span class="command"><strong>loop_lt </strong></span>  kndx, kncr, kmax, label</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm183434"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>indx</em></span> -- variable de taux-i, compteur de la boucle.
+    </p>
+        <p>
+      <span class="emphasis"><em>incr</em></span> -- valeur d'incrément de la boucle.
+    </p>
+        <p>
+      <span class="emphasis"><em>imax</em></span> -- valeur maximale de l'index de la boucle.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm183442"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>kndx</em></span> -- variable de taux-k, compteur de la boucle.
+    </p>
+        <p>
+      <span class="emphasis"><em>kncr</em></span> -- valeur d'incrément de la boucle.
+    </p>
+        <p>
+      <span class="emphasis"><em>kmax</em></span> -- valeur maximale de l'index de la boucle.
+    </p>
+        <p>
+      L'action de <span class="command"><strong>loop_lt</strong></span> est équivalente à
+       </p>
+        <pre class="programlisting">
+         indx  <span class="op">=</span>  indx <span class="op">+</span> incr
+         <span class="opc">if</span> (indx <span class="op">&lt;</span> imax) <span class="opc">igoto</span> label</pre>
+        <p>
+  ou à
+       </p>
+        <pre class="programlisting">
+         kndx  <span class="op">=</span>  kndx <span class="op">+</span> kncr
+         <span class="opc">if</span> (kndx <span class="op">&lt;</span> kmax) <span class="opc">kgoto</span> label</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm183464"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode loop_lt. Il utilise le fichier
+      <a class="ulink" href="examples/loop_lt.csd" target="_top"><em class="citetitle">loop_lt.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm183469"></a>
+          <p class="title">
+            <strong>Exemple 531. Exemple de l'opcode loop_lt.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm183476"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o loop_lt.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">seed</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>gi<span class="n">sine</span><span class="w"> </span><span class="nb">ftgen</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="o">^</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> </span><span class="c1">;master instrument</span><span class="w">
+
+</span>i<span class="n">ninstr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="c1">;number of called instances</span><span class="w">
+</span>i<span class="n">ndx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nl">loop</span><span class="p">:</span><span class="w">
+      </span><span class="nb">prints</span><span class="w"> </span><span class="s">"play instance </span><span class="si">%d</span><span class="se">\\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span>i<span class="n">ndx</span><span class="w">
+</span>i<span class="n">pan</span><span class="w">  </span><span class="nb">random</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>i<span class="n">freq</span><span class="w"> </span><span class="nb">random</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="w">
+</span>i<span class="n">amp</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span>i<span class="n">ninstr</span><span class="w">
+</span><span class="nb">event_i</span><span class="w"> </span><span class="s">"i"</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span>i<span class="n">amp</span><span class="p">,</span><span class="w"> </span>i<span class="n">freq</span><span class="p">,</span><span class="w"> </span>i<span class="n">pan</span><span class="w">
+</span><span class="kp">loop_lt</span><span class="w"> </span>i<span class="n">ndx</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>i<span class="n">ninstr</span><span class="p">,</span><span class="w"> </span><span class="nl">loop</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">10</span><span class="w">
+
+</span>i<span class="n">peak</span><span class="w"> </span><span class="nb">random</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">;where is the envelope peak</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">poscil3</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="vi">p5</span><span class="p">,</span><span class="w"> </span>gi<span class="n">sine</span><span class="w">
+</span>a<span class="n">env</span><span class="w">  </span><span class="nb">transeg</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">*</span>i<span class="n">peak</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">-</span><span class="vi">p3</span><span class="o">*</span>i<span class="n">peak</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>a<span class="n">L</span><span class="p">,</span>a<span class="n">R</span><span class="w"> </span><span class="nb">pan2</span><span class="w"> </span>a<span class="n">sig</span><span class="o">*</span>a<span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="vi">p6</span><span class="w">
+      </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">L</span><span class="p">,</span><span class="w"> </span>a<span class="n">R</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+      Sa sortie contiendra des lignes comme celles-ci :
+      </p>
+        <pre class="screen">
+play instance 0
+play instance 1
+play instance 2
+play instance 3
+play instance 4</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm183727"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="loop_ge.html" title="loop_ge"><em class="citetitle">loop_ge</em></a>,
+      <a class="link" href="loop_gt.html" title="loop_gt"><em class="citetitle">loop_gt</em></a> et
+      <a class="link" href="loop_le.html" title="loop_le"><em class="citetitle">loop_le</em></a>.
+    </p>
+        <p>Plus d'information sur cet opcode :
+    <a class="ulink" href="http://www.csoundjournal.com/2006summer/controlFlow_part2.html" target="_top"><em class="citetitle">http://www.csoundjournal.com/2006summer/controlFlow_part2.html</em></a>,
+    écrit par Steven Yi. Et dans les Floss Manuals :
+    <a class="ulink" href="https://flossmanual.csound.com/csound-language/control-structures" target="_top">
+    <em class="citetitle">https://flossmanual.csound.com/csound-language/control-structures</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm183741"></a>
+        <h2>Crédits</h2>
+        <p>Istvan Varga.</p>
+        <p>Nouveau dans la version 5.01 de Csound</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="loop_le.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="loopseg.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">loop_le </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> loopseg</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>looptseg</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="loopsegp.html" title="loopsegp" />
+    <link rel="next" href="loopxseg.html" title="loopxseg" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">looptseg</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="loopsegp.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="loopxseg.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="looptseg"></a>
+      <div class="titlepage"></div>
+      <a id="IndexLooptseg" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">looptseg</span>
+        </h2>
+        <p>looptseg — 
+      Génère un signal de contrôle constitué de segments linéaires ou exponentiels
+      délimités par deux ou plus points spécifiés.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm184662"></a>
+        <h2>Description</h2>
+        <p>
+      Génère un signal de contrôle constitué de segments linéaires ou exponentiels
+      contrôlables délimités par deux ou plus points spécifiés. L'enveloppe entière
+      est parcourue en boucle au taux <span class="emphasis"><em>kfreq</em></span>. Chaque paramètre
+      peut varier au taux-k.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm184666"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ksig <span class="command"><strong>looptseg</strong></span> kfreq, ktrig, iphase, kvalue0, ktype0, ktime0, [, kvalue1] [,ktype1] [, ktime1] \
+      [, kvalue2] [,ktype2] [, ktime2] [...] [, kvalueN] [,ktypeN] [, ktimeN]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm184670"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>iphase</em></span> -- Une valeur comprise entre 0 et 1 pour indiquer
+      où commence la boucle. Zéro, la valeur la plus usuelle, indique le début du
+      signal.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm184674"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ksig</em></span> -- Signal de sortie.
+    </p>
+        <p>
+      <span class="emphasis"><em>kfreq</em></span> -- Taux de répétition en Hz ou en fraction de Hz.
+    </p>
+        <p>
+      <span class="emphasis"><em>ktrig</em></span> -- S'il est non nul, redéclanche l'enveloppe
+      depuis le début (voir l'opcode
+      <a class="link" href="trigger.html" title="trigger"><em class="citetitle">trigger</em></a>), avant que
+      le cycle de l'enveloppe ne soit complet.
+    </p>
+        <p>
+      <span class="emphasis"><em>kvalue0...kvalueN</em></span> -- Valeurs des points.
+    </p>
+        <p>
+      <span class="emphasis"><em>ktime0...ktimeN</em></span> -- Durées entre les points ; exprimées
+      en fraction d'une période (voir ci-dessous). La dernière durée indique une
+      ligne entre la valeur finale et la première valeur.
+    </p>
+        <p>
+      <span class="emphasis"><em>ktype0...ktypeN</em></span> -- forme de l'enveloppe. Si la valeur
+      est 0, la forme est linéaire ; sinon c'est une exponentielle concave (type
+      positif) ou une exponentielle convexe (type négatif).
+    </p>
+        <p>
+      L'opcode <span class="emphasis"><em>looptseg</em></span> est semblable à
+      <a class="link" href="transeg.html" title="transeg"><em class="citetitle">transeg</em></a>, mais
+      l'enveloppe entière est parcourue en boucle au taux <span class="emphasis"><em>kfreq</em></span>.
+      Noter que les valeurs temporelles ne sont pas exprimées en secondes mais en
+      fractions d'une période. Concrètement chaque durée est proportionnelle aux
+      autres, et la durée du cycle complet est proportionnelle à la somme de
+      toutes les valeurs de durée.
+    </p>
+        <p>
+      La somme de toutes les durées est ensuite pondérée en fonction de l'argument
+      <span class="emphasis"><em>kfreq</em></span>. Par exemple, considérant une enveloppe faite de 3 segments,
+      chaque segment ayant une valeur de durée de 100, leur somme sera 300. Cette valeur
+      représente la durée totale de l'enveloppe, et elle est divisée en 3 parties égales, une
+      partie pour chaque segment.
+    </p>
+        <p>
+      Concrètement, la durée réelle de l'enveloppe en secondes est déterminée par
+      <span class="emphasis"><em>kfreq</em></span>. Si l'enveloppe est à nouveau constituée de 3 segments, mais cette
+      fois-ci le premier et le dernier segments ayant une durée de 50, tandis que le segment
+      central a une durée de 100, leur somme sera 200. Ici 200 représente la durée totale des 3
+      segments, et ainsi le segment central sera deux fois plus long que les autres segments.
+    </p>
+        <p>
+      Tous les paramètres peuvent varier au taux-k. Si les valeurs de fréquence sont négatives,
+      l'enveloppe est lue à l'envers. <span class="emphasis"><em>ktime0</em></span> doit toujours valoir 0, sauf si
+      l'on désire un effet spécial.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm184701"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode looptseg. Il utilise le fichier
+      <a class="ulink" href="examples/looptseg.csd" target="_top"><em class="citetitle">looptseg.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm184706"></a>
+          <p class="title">
+            <strong>Exemple 534. Exemple de l'opcode looptseg.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm184713"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o looptseg.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+</span>k<span class="n">freq</span><span class="w">   </span><span class="o">=</span><span class="w">        </span><span class="mi">1</span><span class="w">         </span><span class="c1">; frequency of loop repetition</span><span class="w">
+</span>k<span class="n">trig</span><span class="w">   </span><span class="nb">init</span><span class="w">     </span><span class="mi">0</span><span class="w">         </span><span class="c1">; loop restart trigger (not used)</span><span class="w">
+</span>i<span class="n">phase</span><span class="w">  </span><span class="o">=</span><span class="w">        </span><span class="mi">0</span><span class="w">         </span><span class="c1">; initial phase</span><span class="w">
+</span>k<span class="n">typ</span><span class="w">    </span><span class="nb">line</span><span class="w">     </span><span class="mi">6</span><span class="p">,</span><span class="vi">p3</span><span class="p">,</span><span class="o">-</span><span class="mi">6</span><span class="w">   </span><span class="c1">; explore the useful range of curve types</span><span class="w">
+</span><span class="c1">; loop of filter cutoff values (oct format)</span><span class="w">
+</span><span class="c1">;                                     value curve dur.</span><span class="w">
+</span>k<span class="n">cfoct</span><span class="w"> </span><span class="nb">looptseg</span><span class="w">  </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span>k<span class="n">trig</span><span class="p">,</span><span class="w"> </span>i<span class="n">phase</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="w">   </span>k<span class="n">typ</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>\<span class="w">
+                                      </span><span class="mi">4</span><span class="p">,</span><span class="w">    </span>k<span class="n">typ</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>\<span class="w">
+                                      </span><span class="mi">11</span><span class="p">,</span><span class="w">   </span>k<span class="n">typ</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span>\<span class="w">
+                                      </span><span class="mi">4</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">vco2</span><span class="w">     </span><span class="mf">0.2</span><span class="p">,</span><span class="nb">cpsmidinn</span><span class="p">(</span><span class="mi">48</span><span class="p">),</span><span class="mi">0</span><span class="w">             </span><span class="c1">; a sawtooth</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">moogladder</span><span class="w">  </span>a<span class="n">sig</span><span class="p">,</span><span class="nb">cpsoct</span><span class="p">(</span>k<span class="n">cfoct</span><span class="p">),</span><span class="nb">rnd</span><span class="p">(</span><span class="mf">0.6</span><span class="p">)</span><span class="w"> </span><span class="c1">; filter sawtooth</span><span class="w">
+      </span><span class="nb">outs</span><span class="w">     </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">12</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm184893"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="lpshold.html" title="lpshold"><em class="citetitle">lpshold</em></a>
+      <a class="link" href="loopseg.html" title="loopseg"><em class="citetitle">loopseg</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm184900"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : John ffitch</p>
+        <p>Nouveau dans la version 5.12</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="loopsegp.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="loopxseg.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">loopsegp </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> loopxseg</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

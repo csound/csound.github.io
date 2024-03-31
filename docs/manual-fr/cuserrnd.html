@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>cuserrnd</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="ctrlselect.html" title="ctrlselect" />
+    <link rel="next" href="dam.html" title="dam" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">cuserrnd</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="ctrlselect.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="dam.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="cuserrnd"></a>
+      <div class="titlepage"></div>
+      <a id="IndexCuserrnd" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">cuserrnd</span>
+        </h2>
+        <p>cuserrnd — 
+      Générateur de nombres aléatoires de distribution continue définie par l'utilisateur.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm76312"></a>
+        <h2>Description</h2>
+        <p>
+      Générateur de nombres aléatoires de distribution continue définie par l'utilisateur.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm76315"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">aout <span class="command"><strong>cuserrnd</strong></span> kmin, kmax, ktableNum</pre>
+        <pre class="synopsis">iout <span class="command"><strong>cuserrnd</strong></span> imin, imax, itableNum</pre>
+        <pre class="synopsis">kout <span class="command"><strong>cuserrnd</strong></span> kmin, kmax, ktableNum</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm76323"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>imin</em></span> -- limite inférieure de l'intervalle
+    </p>
+        <p>
+      <span class="emphasis"><em>imax</em></span> -- limite supérieure de l'intervalle
+    </p>
+        <p>
+      <span class="emphasis"><em>itableNum</em></span> -- numéro d'une table contenant la fonction
+      de la distribution aléatoire. Cette table est générée par l'utilisateur.
+      Voir <a class="link" href="GEN40.html" title="GEN40">GEN40</a>, <a class="link" href="GEN41.html" title="GEN41">GEN41</a>
+      et <a class="link" href="GEN42.html" title="GEN42">GEN42</a>. La longueur de la table peut être
+      différente d'une puissance de 2.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm76334"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ktableNum</em></span> -- numéro d'une table contenant la fonction
+      de la distribution aléatoire. Cette table est générée par l'utilisateur.
+      Voir <a class="link" href="GEN40.html" title="GEN40">GEN40</a>, <a class="link" href="GEN41.html" title="GEN41">GEN41</a>
+      et <a class="link" href="GEN42.html" title="GEN42">GEN42</a>. La longueur de la table peut être
+      différente d'une puissance de 2.
+    </p>
+        <p>
+      <span class="emphasis"><em>kmin</em></span> -- limite inférieure de l'intervalle
+    </p>
+        <p>
+      <span class="emphasis"><em>kmax</em></span> -- limite supérieure de l'intervalle
+    </p>
+        <p>
+      <span class="emphasis"><em>cuserrnd</em></span> (Continuous USER-defined-distribution RaNDom generator)
+      génère des nombres aléatoires selon une distribution aléatoire continue créée par l'utilisateur.
+      Dans ce cas la forme de l'histogramme de la distribution peut être dessinée ou
+      générée par n'importe quelle routine GEN. La table contenant la forme d'un tel
+      histogramme doit être transformée ensuite en une fonction de distribution au
+      moyen de GEN40 (voir <a class="link" href="GEN40.html" title="GEN40">GEN40</a> pour plus de détails).
+      Cette fonction doit ensuite être allouée à l'argument <span class="emphasis"><em>XtableNum</em></span>
+      de <span class="emphasis"><em>cuserrnd</em></span>. L'intervalle de sortie sera ensuite mis à l'échelle
+      selon les arguments <span class="emphasis"><em>Xmin</em></span> et <span class="emphasis"><em>Xmax</em></span>.
+      <span class="emphasis"><em>cuserrnd</em></span> faisant une interpolation linéaire entre les éléments
+      de la table, il n'est pas recommandé pour les distributions discrètes
+      (<a class="link" href="GEN41.html" title="GEN41">GEN41</a> et <a class="link" href="GEN42.html" title="GEN42">GEN42</a>).
+    </p>
+        <p>
+      Pour un tutoriel sur les histogrammes et les fonctions de distribution aléatoires
+      consulter :
+      </p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>
+            D. Lorrain. "A panoply of stochastic cannons". In C. Roads, ed. 1989. Music machine. Cambridge, Massachusetts: MIT press, pp. 351 - 379.
+          </p>
+            </li>
+          </ul>
+        </div>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm76359"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode cuserrnd. Il utilise le fichier
+      <a class="ulink" href="examples/cuserrnd.csd" target="_top"><em class="citetitle">cuserrnd.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm76364"></a>
+          <p class="title">
+            <strong>Exemple 201. Exemple de l'opcode cuserrnd.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm76371"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o cuserrnd.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	</span><span class="c1">; every run time same values</span><span class="w">
+
+</span>k<span class="n">user</span><span class="w"> </span><span class="nb">cuserrnd</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="nb">printk</span><span class="w"> </span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span>k<span class="n">user</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">poscil</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">220</span><span class="o">+</span>k<span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w">
+      </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">	</span><span class="c1">; every run time different values</span><span class="w">
+
+      </span><span class="nb">seed</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>k<span class="n">user</span><span class="w"> </span><span class="nb">cuserrnd</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+      </span><span class="nb">printk</span><span class="w"> </span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span>k<span class="n">user</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">poscil</span><span class="w"> </span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="mi">220</span><span class="o">+</span>k<span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="w">
+      </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">-</span><span class="mi">7</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">1</span><span class="w">	</span><span class="c1">;distrubution using GEN07</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">40</span><span class="w"> </span><span class="mi">1</span><span class="w">		</span><span class="c1">;GEN40 is to be used with cuserrnd</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">8192</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">			</span><span class="c1">;sine</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+      Sa sortie contiendra des lignes comme celles-ci :
+      </p>
+        <pre class="screen">
+ i   1 time     0.00067:    53.14918
+ i   1 time     0.20067:     0.00000
+ i   1 time     0.40067:     0.00000
+ i   1 time     0.60067:    96.80406
+ i   1 time     0.80067:    94.20729
+ i   1 time     1.00000:     0.00000
+ i   1 time     1.20067:    86.13032
+ i   1 time     1.40067:    31.37096
+ i   1 time     1.60067:    70.35889
+ i   1 time     1.80000:     0.00000
+ i   1 time     2.00000:    49.18914
+
+WARNING: Seeding from current time 2006647442
+
+ i   2 time     3.00067:    21.45002
+ i   2 time     3.20067:    44.32333
+ i   2 time     3.40067:    46.05420
+ i   2 time     3.60000:     0.00000
+ i   2 time     3.80067:    41.32175
+ i   2 time     4.00000:     0.00000
+ i   2 time     4.20000:    63.72019
+ i   2 time     4.40067:     0.00000
+ i   2 time     4.60067:     0.00000
+ i   2 time     4.80067:     0.00000
+ i   2 time     5.00000:    74.49330</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm76586"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="duserrnd.html" title="duserrnd"><em class="citetitle">duserrnd</em></a>,
+      <a class="link" href="urd.html" title="urd"><em class="citetitle">urd</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm76593"></a>
+        <h2>Crédits</h2>
+        <p>Auteur : Gabriel Maldonado</p>
+        <p>Nouveau dans la version 4.16</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="ctrlselect.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="dam.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">ctrlselect </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> dam</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

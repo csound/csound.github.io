@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>vpvoc</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="vps.html" title="vps" />
+    <link rel="next" href="vrandh.html" title="vrandh" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">vpvoc</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="vps.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="vrandh.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="vpvoc"></a>
+      <div class="titlepage"></div>
+      <a id="IndexVpvoc" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">vpvoc</span>
+        </h2>
+        <p>vpvoc — 
+      Implémente une reconstruction de signal au moyen d'un vocoder de phase
+      basé sur la TFR et une enveloppe supplémentaire.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm383358"></a>
+        <h2>Description</h2>
+        <p>
+      Implémente une reconstruction de signal au moyen d'un vocoder de phase
+      basé sur la TFR et une enveloppe supplémentaire.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm383361"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ares <span class="command"><strong>vpvoc</strong></span> ktimpnt, kfmod, ifile [, ispecwp] [, ifn]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm383365"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>ifile</em></span> -- le numéro pvoc (n dans pvoc.n) ou le nom
+      entre guillements du fichier d'analyse obtenu au moyen de
+      <a class="link" href="pvanal.html" title="pvanal"><em class="citetitle">pvanal</em></a>.
+      (Voir <a class="link" href="pvoc.html" title="pvoc"><em class="citetitle">pvoc</em></a>.)
+    </p>
+        <p>
+      <span class="emphasis"><em>ispecwp</em></span> (facultatif, 0 par défaut) -- s'il est différent
+      de zéro, l'opcode tente de préserver l'enveloppe spectrale tandis que le
+      contenu fréquentiel est varié par <span class="emphasis"><em>kfmod</em></span>. Vaut zéro par
+      défaut.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifn</em></span> (facultatif, 0 par défaut) -- table de fonction
+      facultative contenant l'information de contrôle pour <span class="emphasis"><em>vpvoc</em></span>.
+      Si <span class="emphasis"><em>ifn</em></span> = 0, le contrôle est dérivé en interne d'une
+      unité <span class="emphasis"><em>tableseg</em></span> ou <span class="emphasis"><em>tablexseg</em></span> 
+      précédente. Vaut 0 par défaut. (Nouveau dans la version 3.59 de Csound.)
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm383382"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ktimpnt</em></span> -- l'écoulement du temps en secondes dans le
+      fichier d'analyse. <span class="emphasis"><em>ktimpnt</em></span> doit toujours être positif,
+      mais il peut avancer ou reculer, rester stationnaire ou être discontinu,
+      comme pointeur dans le fichier d'analyse.
+    </p>
+        <p>
+      <span class="emphasis"><em>kfmod</em></span> -- un facteur de transposition au taux-k : une
+      valeur de 1 signifie pas de transposition, 1.5 transpose vers le haut d'une
+      quinte parfaite et 0.5 transpose vers le bas d'une octave.
+    </p>
+        <p>
+      Cette implémentation de <span class="emphasis"><em>pvoc</em></span> a été écrite à l'origine
+      par Dan Ellis. Elle est basée en partie sur le système de Mark Dolson, mais
+      le concept de pré-analyse est nouveau. L'extraction spectrale et le mappage
+      d'amplitude (nouveau dans la version 3.56 de Csound) ont été ajoutés par
+      Richard Karpen en se basant sur les fonctions dans SoundHack par Tom Erbe.
+    </p>
+        <p>
+      <span class="emphasis"><em>vpvoc</em></span> est identique à
+      <a class="link" href="pvoc.html" title="pvoc"><em class="citetitle">pvoc</em></a> mais il utilise
+      la table de fonction d'un
+      <a class="link" href="tableseg.html" title="tableseg"><em class="citetitle">tableseg</em></a> ou d'un
+      <a class="link" href="tablexseg.html" title="tablexseg"><em class="citetitle">tablexseg</em></a> précédent
+      (passée en interne à <span class="emphasis"><em>vpvoc</em></span>) comme enveloppe pour
+      les amplitudes des canaux de données analysées. Une table spécifiée par
+      <span class="emphasis"><em>ifn</em></span> peut être utilisée de manière optionnelle. 
+    </p>
+        <p>
+      Il en résulte une enveloppe spectrale. La taille de la fonction utilisée
+      dans <span class="emphasis"><em>tableseg</em></span> doit être <span class="emphasis"><em>tailletrame/2,</em></span>
+      où <span class="emphasis"><em>tailletrame</em></span> est le nombre de bins dans le fichier
+      d'analyse du vocoder de phase utilisé par <span class="emphasis"><em>vpvoc</em></span>. Chaque
+      position dans la table est utilisée pour échelonner un seul bin d'analyse.
+      En utilisant différentes fonctions pour <span class="emphasis"><em>ifn1</em></span>,
+      <span class="emphasis"><em>ifn2</em></span>, etc.. dans le <span class="emphasis"><em>tableseg</em></span>,
+      l'enveloppe spectrale devient dynamique. Voir aussi
+      <a class="link" href="tableseg.html" title="tableseg"><em class="citetitle">tableseg</em></a> et
+      <a class="link" href="tablexseg.html" title="tablexseg"><em class="citetitle">tablexseg</em></a>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm383413"></a>
+        <h2>Exemples</h2>
+        <p>
+      L'exemple suivant avec <span class="emphasis"><em>vpvoc</em></span>, montre l'utilisation
+      de fonctions telles que
+
+      </p>
+        <div class="informalexample">
+          <pre class="programlisting">
+<span class="stamnt">f</span> 1 0 256 5 .001 128 1 128 .001
+<span class="stamnt">f</span> 2 0 256 5 1 128 .001 128 1
+<span class="stamnt">f</span> 3 0 256 7 1 256 1</pre>
+        </div>
+        <p>
+
+      pour pondérer les amplitudes des bins d'analyse séparés.
+    </p>
+        <p>
+      </p>
+        <div class="informalexample">
+          <pre class="programlisting">
+ktime   <span class="opc">line</span>         0, p3, 3 <span class="comment">; pointeur de temps, en secondes, dans le fichier</span>
+        <span class="opc">tablexseg</span>    1, p3<span class="op">*</span>0.5, 2, p3<span class="op">*</span>0.5, 3
+apv     <span class="opc">vpvoc</span>        ktime, 1, "pvoc.file"</pre>
+        </div>
+        <p>
+    </p>
+        <p>
+      Le résultat sera une <span class="quote">« <span class="quote">enveloppe spectrale</span> »</span> variant dans le
+      temps, appliquée aux données d'analyse du vocoder de phase. Comme les
+      fréquences appariées avec les amplitudes qui sont pondérées par ces fonctions
+      sont amplifiées ou atténuées, cela a pour effet d'appliquer des filtres
+      très précis au signal. Dans cet exemple, la première table aura l'effet
+      d'un filtre passe-bande, se transformant graduellement en réjecteur de
+      bande sur la première moitié de la note, puis allant vers aucune modification
+      des amplitudes dans la seconde moitié.
+    </p>
+        <p>
+      Voici un exemple complet de l'opcode vpvoc. Il utilise le fichier
+      <a class="ulink" href="examples/vpvoc.csd" target="_top"><em class="citetitle">vpvoc.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm383436"></a>
+          <p class="title">
+            <strong>Exemple 1200. </strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm383442"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac   -m0   <span class="c1">;;;realtime audio out</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o vpvoc.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">; by Menno Knevel 2021</span><span class="w">
+
+</span>gi<span class="n">len</span><span class="w">  </span><span class="nb">filelen</span><span class="w"> </span><span class="s">"fox.wav"</span><span class="w">	    </span><span class="c1">; get length of impulse soundfile</span><span class="w">
+
+</span><span class="c1">; analyze sound file and output result to pvoc-ex file</span><span class="w">
+</span>i<span class="n">res</span><span class="w"> </span><span class="nb">system_i</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="s">{{ pvanal fox.wav fox1.pvx }}</span><span class="w">          </span><span class="c1">; default settings</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w"> </span><span class="c1">; untreated signal</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">    </span><span class="nb">diskin2</span><span class="w">   </span><span class="s">"fox.wav"</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">---***YOU NOW HEAR THE UNTREATED SOUND SAMPLE***---</span><span class="se">\n</span><span class="s">"</span><span class="w">
+</span><span class="nb">outs</span><span class="w">    </span>a<span class="n">sig</span><span class="o">*</span><span class="mf">.8</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="o">*</span><span class="mf">.8</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">2</span><span class="w">
+
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"</span><span class="se">\n</span><span class="s">---***YOU NOW HEAR THE RESULT OF THIS ANALYZED FILE:***---</span><span class="se">\n</span><span class="s">"</span><span class="w">
+</span>k<span class="n">time</span><span class="w"> </span><span class="nb">line</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span>gi<span class="n">len</span><span class="w">     </span><span class="c1">; timepointer over the entire sample</span><span class="w">
+      </span><span class="nb">tablexseg</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w">	</span><span class="c1">; morph from table 1 to table 2</span><span class="w">
+</span><span class="nb">prints</span><span class="w">  </span><span class="s">"2 tables are used as filter envelopes (tables 1 &amp; 2)</span><span class="se">\n</span><span class="s">"</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">  </span><span class="nb">vpvoc</span><span class="w"> </span>k<span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="vi">p4</span><span class="p">,</span><span class="w"> </span><span class="s">"fox1.pvx"</span><span class="w">
+      </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">512</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">512</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="mf">0.01</span><span class="w"> </span><span class="mi">390</span><span class="w"> </span><span class="mf">0.01</span><span class="w"> </span><span class="mi">62</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">2.76</span><span class="w">      </span><span class="c1">; original sample</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">2</span><span class="w">  </span><span class="mi">5</span><span class="w"> </span><span class="mf">2.76</span><span class="w">  </span><span class="mi">1</span><span class="w">  </span><span class="c1">; no change so original sample is played</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w">  </span><span class="mi">10</span><span class="w"> </span><span class="mi">2</span><span class="w">    </span><span class="mi">1</span><span class="w">  </span><span class="c1">; played faster</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">2</span><span class="w">  </span><span class="mi">15</span><span class="w"> </span><span class="mi">10</span><span class="w">   </span><span class="mi">1</span><span class="w">  </span><span class="c1">; slowed down, same pitch &amp;</span><span class="w">
+</span><span class="nb">i</span><span class="mi">2</span><span class="w">  </span><span class="mi">15</span><span class="w"> </span><span class="mi">10</span><span class="w">   </span><span class="mf">1.2</span><span class="c1">; higher pitch, forming a chord</span><span class="w">
+
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm383699"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="pvoc.html" title="pvoc"><em class="citetitle">pvoc</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm383704"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteurs : Dan Ellis et Richard Karpen</td>
+          </tr>
+          <tr>
+            <td>Seattle, WA USA</td>
+          </tr>
+          <tr>
+            <td>1997</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 3.44</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="vps.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="vrandh.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">vps </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> vrandh</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

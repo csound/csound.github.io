@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>cpspch</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="cpsoct.html" title="cpsoct" />
+    <link rel="next" href="cpstmid.html" title="cpstmid" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">cpspch</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="cpsoct.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="cpstmid.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="cpspch"></a>
+      <div class="titlepage"></div>
+      <a id="IndexCpspch" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">cpspch</span>
+        </h2>
+        <p>cpspch — 
+      Convertit une valeur de classe de hauteur en cycles par seconde.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm66715"></a>
+        <h2>Description</h2>
+        <p>
+      Convertit une valeur de classe de hauteur en cycles par seconde.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm66718"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>cpspch</strong></span> (pch)  (arguments de taux-i ou -k seulement)</pre>
+        <p>
+      où l'argument entre parenthèses peut être une expression.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm66723"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>cpsoct</em></span> et ses opcodes associés sont réellement des
+      <span class="emphasis"><em> convertisseurs de valeur</em></span> spécialisés dans la manipulation des données
+      de hauteur.
+    </p>
+        <p>
+      Les données concernant la hauteur et la fréquence peuvent exister dans un des formats
+      suivants :
+    </p>
+        <div class="table">
+          <a id="idm66729"></a>
+          <p class="title">
+            <strong>Tableau 8. Valeurs de Hauteur et de Fréquence</strong>
+          </p>
+          <div class="table-contents">
+            <table class="table" summary="Valeurs de Hauteur et de Fréquence" border="0">
+              <colgroup>
+                <col />
+                <col />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Abréviation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>octave point classe de hauteur (8ve.pc)</td>
+                  <td>pch</td>
+                </tr>
+                <tr>
+                  <td>octave point partie décimale</td>
+                  <td>oct</td>
+                </tr>
+                <tr>
+                  <td>cycles par seconde</td>
+                  <td>cps</td>
+                </tr>
+                <tr>
+                  <td>Numéro de note Midi (0-127)</td>
+                  <td>midinn</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <br class="table-break" />
+        <p>
+      Les deux premières formes sont constituées d'un nombre entier, représentant le registre
+      d'octave, suivi d'une partie décimale dont la signification est particulière. Pour
+      <span class="emphasis"><em>pch</em></span>, la partie fractionnaire est lue comme deux chiffres décimaux
+      représentant les douze classes de hauteur du tempérament égal de .00 pour do jusqu'à .11 pour
+      si. Pour <span class="emphasis"><em>oct</em></span>, la partie fractionnaire est interprétée comme une véritable
+      partie fractionnaire décimale d'une octave. Les deux formes fractionnaires sont ainsi dans
+      un rapport de 100/12. Dans les deux formes, la fraction est précédée par un nombre entier
+      indice de l'octave, tel que 8.00 représente le do médian, 9.00 le do au-dessus, etc. Les
+      numéros de note Midi sont compris entre 0 et 127 (inclus), avec 60 représentant le do médian,
+      et sont habituellement des nombres entiers. Ainsi, on peut représenter le la 440
+      alternativement par 440 (<span class="emphasis"><em>cps</em></span>), 69 (<span class="emphasis"><em>midinn</em></span>), 8.09
+      (<span class="emphasis"><em>pch</em></span>), ou 8.75 (<span class="emphasis"><em>oct</em></span>). On peut encoder des divisions
+      microtonales du demi-ton <span class="emphasis"><em>pch</em></span> en utilisant plus de deux positions
+      décimales.
+    </p>
+        <p>
+      Les noms mnémotechniques des unités de conversion de hauteur sont dérivés des morphèmes des
+      formes concernées, le second morphème décrivant la source et le premier morphème l'objet (le
+      résultat). Ainsi <span class="emphasis"><em>cpspch</em></span>(8.09) convertira l'argument de hauteur 8.09 en son
+      équivalent en <span class="emphasis"><em>cps</em></span> (ou Hertz), ce qui donne la valeur 440. Comme l'argument
+      est constant pendant toute la durée de la note, cette conversion aura lieu pendant
+      l'initialisation, avant qu'aucun échantillon de la note actuelle ne soit produit.
+    </p>
+        <p>
+      Par constraste, la conversion <span class="emphasis"><em>cpsoct</em></span>(8.75 + k1) donne la valeur du
+      la 440 transposée par l'intervalle octaviant <span class="emphasis"><em>k1</em></span>. Le calcul sera répété
+      à chaque k-période car c'est le taux de variation de <span class="emphasis"><em>k1</em></span>.
+    </p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note: Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png" />
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        La conversion de <span class="emphasis"><em>pch</em></span>, <span class="emphasis"><em>oct</em></span>, ou
+        <span class="emphasis"><em>midinn</em></span> vers <span class="emphasis"><em>cps</em></span> n'est pas une opération linéaire
+        mais elle implique un calcul d'exponentielle qui peut coûter cher en temps de traitement
+        s'il est exécuté de manière répétitive. Csound utilise dorénavant une consultation de table
+        interne pour faire cela efficacement, même aux taux audio. Comme l'indice dans la table est
+        tronqué sans interpolation, la résolution en hauteur avec un de ces opcodes est limitée à
+        8192 divisions discrètes et égales de l'octave, et quelques degrés de l'échelle tempérée
+        égale de 12 demi-tons sont très légèrement désaccordés (d'au plus 0,15 cent).
+      </p>
+                <p>
+        Si vous avez besoin de plus de précision de calcul, utilisez plutôt
+        <a class="link" href="cps2pch.html" title="cps2pch"><em class="citetitle">cps2pch</em></a> ou
+        <a class="link" href="cpsxpch.html" title="cpsxpch"><em class="citetitle">cpsxpch</em></a>.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm66776"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode cpspch. Il utilise le fichier
+      <a class="ulink" href="examples/cpspch.csd" target="_top"><em class="citetitle">cpspch.csd</em></a>.
+
+      </p>
+        <div class="example">
+          <a id="idm66781"></a>
+          <p class="title">
+            <strong>Exemple 180. Exemple de l'opcode cpspch.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a> et
+        <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour
+        plus d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm66788"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac     <span class="c1">;;;RT audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o cpspch.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	</span><span class="c1">; Convert pitch-class value into Hz </span><span class="w">
+  
+</span>i<span class="n">pch</span><span class="w"> </span><span class="o">=</span><span class="w">	</span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">cps</span><span class="w"> </span><span class="o">=</span><span class="w">	</span><span class="nb">cpspch</span><span class="p">(</span>i<span class="n">pch</span><span class="p">)</span><span class="w">
+	</span><span class="nb">print</span><span class="w"> </span>i<span class="n">cps</span><span class="w">
+</span>a<span class="n">sig</span><span class="w">	</span><span class="nb">oscil</span><span class="w"> </span><span class="mf">0.7</span><span class="p">,</span><span class="w"> </span>i<span class="n">cps</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">  </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>a<span class="n">sig</span><span class="w">
+
+</span><span class="kd">endin</span><span class="w">
+
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="c1">;sine wave.</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">8.01</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">8.02</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mf">8.03</span><span class="w">
+</span><span class="nb">i</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="mf">5.09</span><span class="w">
+
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+
+      Sa sortie contiendra ces lignes :
+      </p>
+        <pre class="screen">
+instr 1:  icps = 277.167
+instr 1:  icps = 293.656
+instr 1:  icps = 311.101
+instr 1:  icps = 54.995</pre>
+        <p>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm66932"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="cps2pch.html" title="cps2pch"><em class="citetitle">cps2pch</em></a>,
+      <a class="link" href="cpsoct.html" title="cpsoct"><em class="citetitle">cpsoct</em></a>,
+      <a class="link" href="cpsxpch.html" title="cpsxpch"><em class="citetitle">cpsxpch</em></a>,
+      <a class="link" href="octcps.html" title="octcps"><em class="citetitle">octcps</em></a>,
+      <a class="link" href="octpch.html" title="octpch"><em class="citetitle">octpch</em></a>,
+      <a class="link" href="pchoct.html" title="pchoct"><em class="citetitle">pchoct</em></a>,
+      <a class="link" href="cpsmidinn.html" title="cpsmidinn"><em class="citetitle">cpsmidinn</em></a>,
+      <a class="link" href="octmidinn.html" title="octmidinn"><em class="citetitle">octmidinn</em></a>,
+      <a class="link" href="pchmidinn.html" title="pchmidinn"><em class="citetitle">pchmidinn</em></a>
+    </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="cpsoct.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="cpstmid.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">cpsoct </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> cpstmid</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

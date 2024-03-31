@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>statevar</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="st2ms.html" title="st2ms" />
+    <link rel="next" href="sterrain.html" title="sterrain" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">statevar</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="st2ms.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="sterrain.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="statevar"></a>
+      <div class="titlepage"></div>
+      <a id="IndexStatevar" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">statevar</span>
+        </h2>
+        <p>statevar — 
+      Un filtre à variable d'état.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm324124"></a>
+        <h2>Description</h2>
+        <p>
+      <span class="emphasis"><em>statevar</em></span> est une nouvelle implémentation numérique
+      du filtre analogique à variable d'état. Ce filtre a quatre sorties
+      simultanées : passe-haut, passe-bas, passe-bande et réjecteur de bande.
+      Ce filtre utilise le sur-échantillonnage pour obtenir une résonance plus
+      raide (sur-échantillonné 3 fois par défaut). Il comprend un limiteur de
+      résonance qui empêche le filtre de devenir instable.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm324128"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ahp,alp,abp,abr <span class="command"><strong>statevar</strong></span> ain, xcf, xq [, iosamps, istor]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm324132"></a>
+        <h2>Initialisation</h2>
+        <p>
+        <span class="emphasis"><em>iosamps</em></span> -- nom de fois que le sur-échantillonnage
+        est utilisé dans le processus de filtrage. Cela détermine la raideur
+        maximale de la résonance du filtre (Q). Plus de sur-échantillonnage
+        permet des valeurs de Q plus élevées, moins de sur-échantillonnage
+        limite la résonance. La valeur par défaut est 3 fois
+        (<span class="emphasis"><em>iosamps</em></span>=0).
+	</p>
+        <p>
+      <span class="emphasis"><em>istor</em></span> -- état initial de l'espace de données interne.
+      Comme le filtrage comprend une boucle de rétroaction sur la sortie précédente, l'état initial de
+      l'espace de stockage utilisé est significatif. Une valeur nulle provoquera l'effacement de cet
+      espace ; une valeur non nulle autorisera la persistance de l'information précédente. La valeur par
+      défaut est 0.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm324139"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>ahp</em></span> -- signal de sortie du passe-haut.
+    </p>
+        <p>
+      <span class="emphasis"><em>alp</em></span> -- signal de sortie du passe-bas.
+    </p>
+        <p>
+      <span class="emphasis"><em>abp</em></span> -- signal de sortie du passe-bande.
+    </p>
+        <p>
+      <span class="emphasis"><em>abr</em></span> -- signal de sortie du réjecteur de bande.
+    </p>
+        <p>
+      <span class="emphasis"><em>asig</em></span> -- signal d'entrée.
+    </p>
+        <p>
+      <span class="emphasis"><em>xcf</em></span> -- fréquence de coupure du filtre (taux-k ou taux-a).
+    </p>
+        <p>
+      <span class="emphasis"><em>xq</em></span> -- Q du filtre (taux-k ou taux-a). Cette valeur est
+      limitée en interne
+      en fonction de la fréquence et du nombre de fois que le sur-échantillonnage
+      est utilisé durant le processus (sur-échantillonnage de 3 fois par défaut).
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm324155"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode statevar. Il utilise le fichier
+      <a class="ulink" href="examples/statevar.csd" target="_top"><em class="citetitle">statevar.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm324160"></a>
+          <p class="title">
+            <strong>Exemple 1004. Exemple de l'opcode statevar.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm324167"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac      <span class="c1">;;;realtime audio out</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if realtime audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o statevar.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w"> 
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w"> 
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> 
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">
+
+</span>k<span class="n">env</span><span class="w"> </span><span class="nb">linseg</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">		</span><span class="c1">;declick envelope	</span><span class="w">
+</span>a<span class="n">sig</span><span class="w"> </span><span class="nb">buzz</span><span class="w"> </span><span class="mf">.6</span><span class="o">*</span>k<span class="n">env</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">
+</span>k<span class="n">f</span><span class="w">   </span><span class="nb">expseg</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">5000</span><span class="p">,</span><span class="w"> </span><span class="vi">p3</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="w">		</span><span class="c1">;envelope for filter cutoff</span><span class="w">
+</span>a<span class="n">hp</span><span class="p">,</span>a<span class="n">lp</span><span class="p">,</span>a<span class="n">bp</span><span class="p">,</span>a<span class="n">br</span><span class="w"> </span><span class="nb">statevar</span><span class="w"> </span>a<span class="n">sig</span><span class="p">,</span><span class="w"> </span>k<span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="w">
+     </span><span class="nb">outs</span><span class="w"> </span>a<span class="n">lp</span><span class="p">,</span>a<span class="n">hp</span><span class="w">				</span><span class="c1">; lowpass left, highpass right</span><span class="w">
+	
+</span><span class="kd">endin</span><span class="w">	
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+</span><span class="nb">f</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">16384</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w">	</span><span class="c1">;sine wave</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">5</span><span class="w"> 
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm324329"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Victor Lazzarini</td>
+          </tr>
+          <tr>
+            <td>Janvier 2005</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau greffon dans la version 5</p>
+        <p>Janvier 2005.</p>
+        <p>Paramètres de taux audio introduits dans la version 6.02</p>
+        <p>Octobre 2013.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="st2ms.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="sterrain.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">st2ms </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> sterrain</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

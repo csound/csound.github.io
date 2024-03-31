@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Chaînes de caractères</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="PartOpcodesOverview.html" title="Partie II. Vue d'ensemble des opcodes" />
+    <link rel="prev" href="arraysfft.html" title="Opcodes spectraux basés sur des tableaux" />
+    <link rel="next" href="stringconvert.html" title="Opcodes de conversion de chaîne" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">Chaînes de caractères</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="arraysfft.html">Précédent</a> </td>
+          <th width="60%" align="center">Partie II. Vue d'ensemble des opcodes</th>
+          <td width="20%" align="right"> <a accesskey="n" href="stringconvert.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="chapter">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title"><a id="StringsTop"></a>Chaînes de caractères</h2>
+          </div>
+        </div>
+      </div>
+      <p>
+    Les variables chaîne de caractères sont des variables dont le nom commence par S ou par
+    gS (pour les variables chaîne locales ou globales, respectivement). On
+    peut utiliser ces variables comme argument d'entrée de n'importe quel opcode qui
+    attend une chaîne constante entre apostrophes, et on peut les manipuler durant les
+    périodes d'initialisation ou d'exécution avec les opcodes dont la liste suit.
+  </p>
+      <p>
+    Il est également possible d'utiliser des chaînes dans les p-champs. Un p-champ chaîne
+    peut être utilisé directement par plusieurs opcodes de l'orchestre, ou il peut être
+    d'abord copié dans une variable chaîne :
+
+    </p>
+      <pre class="programlisting">
+a1    <span class="opc">diskin2</span> p5, 1</pre>
+      <p>
+
+    </p>
+      <pre class="programlisting">
+Snom  <span class="opc">strget</span>  p5
+a1    <span class="opc">diskin2</span> Snom, 1</pre>
+      <p>
+
+  </p>
+      <p>
+    Les chaînes dans Csound peuvent être exprimées par les doubles apostrophes traditionnelles ("  "),
+    mais aussi par {{ }}. La seconde méthode est utile si l'on veut utiliser les caractères ';' et '$'
+    dans la chaîne sans avoir recours aux codes ASCII.
+  </p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note: Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.png" />
+            </td>
+            <th align="left">Note</th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>Les variables chaînes et les opcodes correspondants ne sont pas disponibles dans
+       les versions de Csound antérieures à la 5.00.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>
+    On peut également lier une chaîne à un numéro au moyen de
+    <a class="link" href="strset.html" title="strset"><em class="citetitle">strset</em></a> et
+    <a class="link" href="strget.html" title="strget"><em class="citetitle">strget</em></a>.
+  </p>
+      <p>
+    Csound 5 a aussi amélioré l'analyse des constantes chaîne. Il est possible de spécifier
+    une chaîne multi-lignes en l'entourant avec {{ et }} à la place des habituelles doubles
+    apostrophes, et les séquences d'échappement
+    suivantes sont automatiquement converties :
+    </p>
+      <div class="itemizedlist">
+        <ul class="itemizedlist" style="list-style-type: disc; ">
+          <li class="listitem">
+            <p>\a : cloche d'alerte</p>
+          </li>
+          <li class="listitem">
+            <p>\b : retour arrière</p>
+          </li>
+          <li class="listitem">
+            <p>\n : nouvelle ligne</p>
+          </li>
+          <li class="listitem">
+            <p>\r : retour chariot</p>
+          </li>
+          <li class="listitem">
+            <p>\t : tabulation</p>
+          </li>
+          <li class="listitem">
+            <p>\\ : le caractère '\'</p>
+          </li>
+          <li class="listitem">
+            <p>\nnn : le caractère ayant le code ASCII (en octal) nnn</p>
+          </li>
+        </ul>
+      </div>
+      <p>
+    </p>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note: Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.png" />
+            </td>
+            <th align="left">Note</th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>
+        Si l'on veut éviter qu'une séquence d'échappement soit automatiquement
+        convertie, il faut l'échapper avec un caractère '\' supplémentaire afin
+        que Csound sache qu'il ne doit pas l'interpréter. Par exemple la chaîne
+        de caractères <code class="code">"Retour à la ligne\nnon échappé"</code> sera convertie en
+        </p>
+              <pre class="programlisting">
+        "Retour à la ligne
+         non échappé"
+        </pre>
+              <p>
+        avant d'être utilisée, tandis que le chaîne de caractères
+        <code class="code">"Retour à la ligne\\néchappé"</code> sera convertie en
+        </p>
+              <pre class="programlisting">
+        "Retour à la ligne\néchappé"
+        </pre>
+              <p>
+        avant d'être utilisée.
+      </p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>
+
+    Les chaînes peuvent être utilement employées avec l'opcode
+    <a class="link" href="system.html" title="system"><em class="citetitle">system</em></a> :
+    </p>
+      <pre class="programlisting">
+<span class="oblock">instr</span> 1
+ <span class="comment">; csound5 permet de placer une chaîne sur plusieurs lignes dans des accolades doubles</span>
+    <span class="opc">system</span> {{     ps
+            date
+            cd ~/Desktop
+            pwd
+            ls -l
+            whois csounds.com
+        }}
+<span class="oblock">endin</span></pre>
+      <p>
+    Et avec les <a class="link" href="py.html" title="Opcodes Python"><em class="citetitle">opcodes python</em></a>, entre autres :
+    </p>
+      <pre class="programlisting">
+<span class="opc">pyruni</span> {{
+import random
+
+pool = [(1 + i/10.0) ** 1.2 for i in range(100)]
+
+def get_number_from_pool(n, p):
+    if random.random() &lt; p:
+        i = int(random.random() * len(pool))
+        pool[i] = n
+    return random.choice(pool)
+}}</pre>
+      <p>
+
+  </p>
+      <div class="section">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h2 class="title" style="clear: both"><a id="stringmanipulate"></a>Opcodes de manipulation de chaîne</h2>
+            </div>
+          </div>
+        </div>
+        <p>Ces opcodes effectuent des opérations sur les variables chaîne (note : la plupart
+    des opcodes ne sont exécutés qu'au moment de l'initialisation, et ils ont une version
+    avec un suffixe "k" qui s'exécute au taux-i et au taux-k ;
+    les exceptions à cette règle comprennent <span class="emphasis"><em>puts</em></span> et
+    <span class="emphasis"><em>strget</em></span>) :</p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>
+        <a class="link" href="strcpy.html" title="strcpy"><em class="citetitle">strcpy</em></a> et
+        <a class="link" href="strcpyk.html" title="strcpyk"><em class="citetitle">strcpyk</em></a> -
+        Assignation à une variable chaîne.</p>
+            </li>
+            <li class="listitem">
+              <p>
+        <a class="link" href="strcat.html" title="strcat"><em class="citetitle">strcat</em></a> et
+        <a class="link" href="strcatk.html" title="strcatk"><em class="citetitle">strcatk</em></a> -
+        Concaténation de chaînes, avec mémorisation du résultat dans une variable.</p>
+            </li>
+            <li class="listitem">
+              <p>
+        <a class="link" href="strcmp.html" title="strcmp"><em class="citetitle">strcmp</em></a> et
+        <a class="link" href="strcmpk.html" title="strcmpk"><em class="citetitle">strcmpk</em></a> -
+        Comparaison de chaînes.</p>
+            </li>
+            <li class="listitem">
+              <p>
+        <a class="link" href="strget.html" title="strget"><em class="citetitle">strget</em></a> -
+        Assignation à une variable chaîne de la valeur trouvée dans la table strset à
+        l'index spécifié, ou d'un p-champ chaîne de la partition.</p>
+            </li>
+            <li class="listitem">
+              <p>
+        <a class="link" href="strlen.html" title="strlen"><em class="citetitle">strlen</em></a> et
+        <a class="link" href="strlenk.html" title="strlenk"><em class="citetitle">strlenk</em></a> -
+        Retourne la longueur d'une chaîne.</p>
+            </li>
+            <li class="listitem">
+              <p>
+      <a class="link" href="sprintf.html" title="sprintf"><em class="citetitle">sprintf</em></a> -
+      conversion de sortie formatée à la manière de printf, avec mémorisation du résultat
+      dans une variable chaîne.</p>
+            </li>
+            <li class="listitem">
+              <p>
+      <a class="link" href="sprintfk.html" title="sprintfk"><em class="citetitle">sprintfk</em></a> -
+      conversion de sortie formatée à la manière de printf, avec mémorisation du résultat
+      dans une variable chaîne au taux-k.</p>
+            </li>
+            <li class="listitem">
+              <p>
+      <a class="link" href="puts.html" title="puts"><em class="citetitle">puts</em></a> -
+      Impression d'une constante ou d'une variable chaîne.</p>
+            </li>
+            <li class="listitem">
+              <p>
+        <a class="link" href="strindex.html" title="strindex"><em class="citetitle">strindex</em></a> et
+        <a class="link" href="strindexk.html" title="strindexk"><em class="citetitle">strindexk</em></a> -
+        Retourne la première occurence d'une chaîne dans une autre chaîne.</p>
+            </li>
+            <li class="listitem">
+              <p>
+        <a class="link" href="strrindex.html" title="strrindex"><em class="citetitle">strrindex</em></a> et
+        <a class="link" href="strrindexk.html" title="strrindexk"><em class="citetitle">strrindexk</em></a> -
+        Retourne la dernière occurence d'une chaîne dans une autre chaîne.</p>
+            </li>
+            <li class="listitem">
+              <p>
+        <a class="link" href="strsub.html" title="strsub"><em class="citetitle">strsub</em></a> et
+        <a class="link" href="strsubk.html" title="strsubk"><em class="citetitle">strsubk</em></a> -
+        Retourne une sous-chaîne de la chaîne passée en paramètre.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="arraysfft.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="PartOpcodesOverview.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="stringconvert.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">Opcodes spectraux basés sur des tableaux </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> Opcodes de conversion de chaîne</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>vbap16</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="vbapgmove.html" title="vbapgmove" />
+    <link rel="next" href="vbap16move.html" title="vbap16move" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">vbap16</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="vbapgmove.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="vbap16move.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="vbap16"></a>
+      <div class="titlepage"></div>
+      <a id="IndexVbap16" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">vbap16</span>
+        </h2>
+        <p>vbap16 — 
+      Distribue un signal audio sur 16 canaux.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm366611"></a>
+        <h2>Description</h2>
+        <p>
+      Distribue un signal audio sur 16 canaux.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm366614"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis">ar1, ..., ar16 <span class="command"><strong>vbap16</strong></span> asig, kazim [, kelev] [, kspread]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm366618"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>asig</em></span> -- signal audio à traiter.
+    </p>
+        <p>
+      <span class="emphasis"><em>kazim</em></span> -- angle d'azimut de la source virtuelle.
+    </p>
+        <p>
+      <span class="emphasis"><em>kelev</em></span> (facultatif) -- angle d'élévation de la source
+      virtuelle.
+    </p>
+        <p>
+      <span class="emphasis"><em>kspread</em></span> (facultatif) -- diffusion de la source virtuelle
+      (de 0 à 100). S'il vaut 0, on a un panoramique d'amplitude conventionnel.
+      Plus <span class="emphasis"><em>kspread</em></span> augmente et plus le nombre de haut-parleurs
+      utilisés dans le panoramique augmente. S'il vaut 100, le son est appliqué à
+      tous les haut-parleurs.
+    </p>
+        <p>
+      <span class="emphasis"><em>vbap16</em></span> prend un signal en entrée, <span class="emphasis"><em>asig</em></span>,
+      et le distribue sur 16 sorties en fonction des contrôles <span class="emphasis"><em>kazim</em></span>
+      et <span class="emphasis"><em>kelev</em></span>, et de la disposition des haut-parleurs. Si
+      <span class="emphasis"><em>idim</em></span> = 2, <span class="emphasis"><em>kelev</em></span> est mis à zéro.
+      La distribution est réalisée par Panoramique d'Amplitude sur une Base de
+      Vecteurs (VBAP - voir référence). VBAP distribue le signal en tenant compte
+      des données de haut-parleurs configurées avec <span class="emphasis"><em>vbaplsinit</em></span>.
+      Le signal est appliqué au plus à deux haut-parleurs dans les configurations
+      2D et à trois haut-parleurs dans les configurations 3D. Si la source sonore
+      est distribuée en dehors de la région couverte par les haut-parleurs, les
+      haut-parleurs les plus proches sont utilisés dans le panoramique.
+    </p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Avertissement]" src="images/warning.png" />
+              </td>
+              <th align="left">Avertissement</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+        Prière de noter que tous les opcodes de panoramique <span class="emphasis"><em>vbap</em></span>
+        nécessitent une initialisation du système <span class="emphasis"><em>vbap</em></span> avec
+        <a class="link" href="vbaplsinit.html" title="vbaplsinit"><em class="citetitle">vbaplsinit</em></a>.
+      </p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm366643"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voir l'entrée sur <a class="link" href="vbap8.html" title="vbap8"><em class="citetitle">vbap8</em></a>
+      pour un exemple d'utilisation des opcodes <span class="emphasis"><em>vbap</em></span>.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm366649"></a>
+        <h2>Référence</h2>
+        <p>
+      Ville Pulkki : <span class="quote">« <span class="quote">Virtual Sound Source Positioning Using Vector Base
+      Amplitude Panning</span> »</span> <span class="emphasis"><em>Journal of the Audio Engineering Society</em></span>,
+      juin 1997, Vol. 45/6, p. 456.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm366654"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="vbap16move.html" title="vbap16move"><em class="citetitle">vbap16move</em></a>,
+      <a class="link" href="vbap4.html" title="vbap4"><em class="citetitle">vbap4</em></a>,
+      <a class="link" href="vbap4move.html" title="vbap4move"><em class="citetitle">vbap4move</em></a>,
+      <a class="link" href="vbap8.html" title="vbap8"><em class="citetitle">vbap8</em></a>,
+      <a class="link" href="vbap8move.html" title="vbap8move"><em class="citetitle">vbap8move</em></a>,
+      <a class="link" href="vbaplsinit.html" title="vbaplsinit"><em class="citetitle">vbaplsinit</em></a>,
+      <a class="link" href="vbapz.html" title="vbapz"><em class="citetitle">vbapz</em></a>,
+      <a class="link" href="vbapzmove.html" title="vbapzmove"><em class="citetitle">vbapzmove</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm366673"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Ville Pulkki</td>
+          </tr>
+          <tr>
+            <td>Sibelius Academy Computer Music Studio</td>
+          </tr>
+          <tr>
+            <td>Laboratoire d'Acoustique et de Traitement du Signal Audio</td>
+          </tr>
+          <tr>
+            <td>Helsinki, Université de Technologie</td>
+          </tr>
+          <tr>
+            <td>Helsinki, Finlande</td>
+          </tr>
+          <tr>
+            <td>Mai 2000</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la Version 4.07 de Csound. Les paramètres d'entrée
+      acceptent le taux-k depuis Csound 5.09.</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="vbapgmove.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="vbap16move.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">vbapgmove </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> vbap16move</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

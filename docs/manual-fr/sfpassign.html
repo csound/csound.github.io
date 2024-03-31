@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>sfpassign</title>
+    <link rel="stylesheet" type="text/css" href="csound.css" />
+    <link rel="stylesheet" type="text/css" href="syntax-highlighting.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets Vsnapshot" />
+    <link rel="home" href="index.html" title="Manuel de référence canonique de Csound" />
+    <link rel="up" href="OpcodesTop.html" title="Opcodes et opérateurs de l'orchestre" />
+    <link rel="prev" href="sflooper.html" title="sflooper" />
+    <link rel="next" href="sfplay3.html" title="sfplay3" />
+  </head>
+  <body>
+    <div class="navheader">
+      <table width="100%" summary="Navigation header">
+        <tr>
+          <th colspan="3" align="center">sfpassign</th>
+        </tr>
+        <tr>
+          <td width="20%" align="left"><a accesskey="p" href="sflooper.html">Précédent</a> </td>
+          <th width="60%" align="center">Opcodes et opérateurs de l'orchestre</th>
+          <td width="20%" align="right"> <a accesskey="n" href="sfplay3.html">Suivant</a></td>
+        </tr>
+      </table>
+      <hr />
+    </div>
+    <div class="refentry">
+      <a id="sfpassign"></a>
+      <div class="titlepage"></div>
+      <a id="IndexSfpassign" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>
+          <span class="refentrytitle">sfpassign</span>
+        </h2>
+        <p>sfpassign — 
+      Associe tous les presets d'un fichier d'échantillons SoundFont2 (SF2) à une
+      suite croissante d'indices numériques.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm307658"></a>
+        <h2>Description</h2>
+        <p>
+      Associe tous les presets d'un fichier d'échantillons SoundFont2 (SF2)
+      préalablement chargé en mémoire à une suite croissante d'indices numériques.
+      Ces opcodes permettent la gestion de la structure d'échantillon des fichiers
+      SF2. Afin de comprendre l'utilisation de ces opcodes, il faut connaître le
+      format SF2 dont on peut trouver une brève description dans la section
+      <a class="link" href="SiggenSample.html" title="Reproduction de sons échantillonnés"><em class="citetitle">format de fichier SoundFont2</em></a>.
+    </p>
+        <p>
+      <span class="emphasis"><em>sfpassign</em></span> doit être placé dans le section d'en-tête d'un
+      orchestre de Csound.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm307665"></a>
+        <h2>Syntaxe</h2>
+        <pre class="synopsis"><span class="command"><strong>sfpassign</strong></span> istartindex, ifilhandle[, imsgs]</pre>
+      </div>
+      <div class="refsect1">
+        <a id="idm307669"></a>
+        <h2>Initialisation</h2>
+        <p>
+      <span class="emphasis"><em>istartindex</em></span> -- indice de départ de la séquence à associer
+      à l'ensemble des presets.
+    </p>
+        <p>
+      <span class="emphasis"><em>ifilhandle</em></span> -- nombre unique généré par l'opcode
+      <span class="emphasis"><em>sfload</em></span> à utiliser comme identificateur pour un fichier
+      SF2. On peut charger et activer plusieurs fichiers SF2 en même temps.
+    </p>
+        <p>
+      <span class="emphasis"><em>imsgs</em></span> -- s'il est différent de zéro, les messages sont
+      supprimés.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm307678"></a>
+        <h2>Exécution</h2>
+        <p>
+      <span class="emphasis"><em>sfpassign</em></span> associe tous les presets d'un fichier
+      d'échantillons SoundFont2 (SF2) préalablement chargé en mémoire à une suite
+      croissante d'indices numériques, à utiliser ensuite avec les opcodes
+      <a class="link" href="sfplay.html" title="sfplay"><em class="citetitle">sfplay</em></a> et
+      <a class="link" href="sfplaym.html" title="sfplaym"><em class="citetitle">sfplaym</em></a>.
+      <span class="emphasis"><em>istartindex</em></span> indique la valeur du premier indice. On peut
+      placer plusieurs instances de <span class="emphasis"><em>sfpassign</em></span> dans la section
+      d'en-tête d'un orchestre, chacune associant une séquence d'indices aux presets
+      d'un fichier SF2 différent. L'utilisateur doit veiller à ce que les valeurs
+      d'indice des preset de fichiers SF2 différents soient disjointes.
+    </p>
+        <p>
+      Ces opcodes ne supportent que la structure d'échantillon des fichiers SF2. La
+      structure de modulateur du format SoundFormat2 n'est pas supportée dans Csound.
+      Tout traitement ou modulation des données échantillonnées est à la charge de
+      l'utilisateur de Csound, ce qui permet de s'affranchir de toutes les
+      restrictions imposées par le standard SF2.
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm307689"></a>
+        <h2>Exemples</h2>
+        <p>
+      Voici un exemple de l'opcode sfpassign. Il utilise le fichier
+      <a class="ulink" href="examples/sfpassign.csd" target="_top"><em class="citetitle">sfpassign.csd</em></a>.
+      </p>
+        <div class="example">
+          <a id="idm307694"></a>
+          <p class="title">
+            <strong>Exemple 965. Exemple de l'opcode sfpassign.</strong>
+          </p>
+          <div class="example-contents">
+            <p>Voir les sections <a class="link" href="UsingRealTime.html" title="Audio en temps réel"><em class="citetitle">Audio en Temps Réel</em></a>
+        et <a class="link" href="CommandFlags.html" title="Ligne de commande de Csound"><em class="citetitle">Options de la Ligne de Commande</em></a> pour plus
+        d'information sur l'utilisation des options de la ligne de commande.</p>
+            <div class="refsect1">
+              <a id="idm307701"></a>
+              <pre class="programlisting">
+<span class="nt">&lt;CsoundSynthesizer&gt;</span>
+<span class="nt">&lt;CsOptions&gt;</span>
+<span class="c1">; Select audio/midi flags here according to platform</span>
+-odac <span class="c1">;;;realtime audio out, virtual midi in</span>
+<span class="c1">;-iadc    ;;;uncomment -iadc if RT audio input is needed too</span>
+<span class="c1">; For Non-realtime ouput leave only the line below:</span>
+<span class="c1">; -o sfpassign.wav -W ;;; for file output any platform</span>
+<span class="nt">&lt;/CsOptions&gt;</span>
+<span class="nt">&lt;CsInstruments&gt;</span><span class="w">
+
+</span><span class="c1">; By  Menno Knevel - 2020</span><span class="w">
+
+</span><span class="vg">sr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">44100</span><span class="w">
+</span><span class="vg">ksmps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="w">
+</span><span class="vg">nchnls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">
+</span><span class="vg">0dbfs</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w">
+
+</span><span class="c1">;load three soundfonts</span><span class="w">
+</span>gi<span class="n">sf</span><span class="w">	</span><span class="nb">sfload</span><span class="w">	</span><span class="s">"sf_GMbank.sf2"</span><span class="w">
+</span>gi<span class="n">r</span><span class="w">	</span><span class="nb">sfload</span><span class="w">	</span><span class="s">"01hpschd.sf2"</span><span class="w">
+</span>gi<span class="n">v</span><span class="w">	</span><span class="nb">sfload</span><span class="w">	</span><span class="s">"07AcousticGuitar.sf2"</span><span class="w">
+	</span><span class="nb">sfplist</span><span class="w"> </span>gi<span class="n">sf</span><span class="w">
+	</span><span class="nb">sfplist</span><span class="w"> </span>gi<span class="n">r</span><span class="w">
+        </span><span class="nb">sfplist</span><span class="w"> </span>gi<span class="n">v</span><span class="w">
+
+</span><span class="c1">; first, sf_GMbank.sf2 is loaded and assigned to start at 0 and counting up to 328</span><span class="w">
+</span><span class="c1">; as there are 329 presets in sf_GMbank.sf2.</span><span class="w">
+</span><span class="c1">; then 01hpschd.sf2 is loaded and assigned to replace the 100th preset of sf_GMbank.sf2</span><span class="w">
+</span><span class="c1">; then 07AcousticGuitar.sf2 is loaded and assigned to replace the 20th preset of sf_GMbank.sf2</span><span class="w">
+
+	</span><span class="nb">sfpassign</span><span class="w">	</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span>gi<span class="n">sf</span><span class="w">	
+	</span><span class="nb">sfpassign</span><span class="w">	</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span>gi<span class="n">r</span><span class="w">
+        </span><span class="nb">sfpassign</span><span class="w">	</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span>gi<span class="n">v</span><span class="w">
+
+</span><span class="kd">instr</span><span class="w"> </span><span class="nf">1</span><span class="w">	
+
+</span>i<span class="n">num</span><span class="w">	</span><span class="o">=</span><span class="w">	</span><span class="vi">p4</span><span class="w">
+</span>i<span class="n">vel</span><span class="w">	</span><span class="o">=</span><span class="w">	</span><span class="vi">p5</span><span class="w">
+</span>k<span class="n">amp</span><span class="w">	</span><span class="nb">linsegr</span><span class="w">	</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mf">.1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w">
+</span>k<span class="n">amp</span><span class="w">	</span><span class="o">=</span><span class="w"> </span>k<span class="n">amp</span><span class="o">/</span><span class="mi">600000</span><span class="w"> </span><span class="o">*</span><span class="w"> </span>i<span class="n">vel</span><span class="w">					</span><span class="c1">;scale amplitude and velocity dependent</span><span class="w">
+</span>k<span class="n">freq</span><span class="w">	</span><span class="o">=</span><span class="w">	</span><span class="mi">1</span><span class="w">						</span><span class="c1">;do not change freq from sf</span><span class="w">
+</span>a<span class="n">1</span><span class="p">,</span>a<span class="n">2</span><span class="w">	</span><span class="nb">sfplay3</span><span class="w">	</span>i<span class="n">vel</span><span class="p">,</span><span class="w"> </span>i<span class="n">num</span><span class="p">,</span><span class="w"> </span>k<span class="n">amp</span><span class="p">,</span><span class="w"> </span>k<span class="n">freq</span><span class="p">,</span><span class="w"> </span><span class="vi">p6</span><span class="w">			</span><span class="c1">;preset index starts at 0, counting up</span><span class="w">
+	</span><span class="nb">outs</span><span class="w">	</span>a<span class="n">1</span><span class="p">,</span><span class="w"> </span>a<span class="n">2</span><span class="w">
+	
+	</span><span class="kd">endin</span><span class="w">
+	
+</span><span class="nt">&lt;/CsInstruments&gt;</span>
+<span class="nt">&lt;CsScore&gt;</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="mi">100</span><span class="w">   </span><span class="mi">0</span><span class="w">   </span><span class="c1">; Piano 1 from sf_GMbank.sf2</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">62</span><span class="w"> </span><span class="o">&lt;</span><span class="w">     </span><span class="o">.</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">65</span><span class="w"> </span><span class="o">&lt;</span><span class="w">     </span><span class="o">.</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">69</span><span class="w"> </span><span class="mi">10</span><span class="w">    </span><span class="o">.</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="mi">100</span><span class="w">   </span><span class="mi">100</span><span class="w"> </span><span class="c1">; harpsichord from 01hpschd.sf2</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">62</span><span class="w"> </span><span class="o">&lt;</span><span class="w">     </span><span class="o">.</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">65</span><span class="w"> </span><span class="o">&lt;</span><span class="w">     </span><span class="o">.</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">69</span><span class="w"> </span><span class="mi">10</span><span class="w">    </span><span class="o">.</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="mi">100</span><span class="w">   </span><span class="mi">20</span><span class="w"> </span><span class="c1">; guitar from 07AcousticGuitar.sf2</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">62</span><span class="w"> </span><span class="o">&lt;</span><span class="w">     </span><span class="o">.</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">65</span><span class="w"> </span><span class="o">&lt;</span><span class="w">     </span><span class="o">.</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">69</span><span class="w"> </span><span class="mi">10</span><span class="w">    </span><span class="o">.</span><span class="w">
+
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="mi">100</span><span class="w">   </span><span class="mi">101</span><span class="w"> </span><span class="c1">; Goblin from sf_GMbank.sf2</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">62</span><span class="w"> </span><span class="o">&lt;</span><span class="w">     </span><span class="o">.</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">65</span><span class="w"> </span><span class="o">&lt;</span><span class="w">     </span><span class="o">.</span><span class="w">
+</span><span class="nb">i</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="mi">69</span><span class="w"> </span><span class="mi">10</span><span class="w">    </span><span class="o">.</span><span class="w">
+</span><span class="nb">e</span><span class="w">
+</span><span class="nt">&lt;/CsScore&gt;</span>
+<span class="nt">&lt;/CsoundSynthesizer&gt;</span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <p><br class="example-break" />
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm308110"></a>
+        <h2>Voir aussi</h2>
+        <p>
+      <a class="link" href="sfilist.html" title="sfilist"><em class="citetitle">sfilist</em></a>,
+      <a class="link" href="sfinstr.html" title="sfinstr"><em class="citetitle">sfinstr</em></a>,
+      <a class="link" href="sfinstrm.html" title="sfinstrm"><em class="citetitle">sfinstrm</em></a>,
+      <a class="link" href="sfload.html" title="sfload"><em class="citetitle">sfload</em></a>,
+      <a class="link" href="sfplay.html" title="sfplay"><em class="citetitle">sfplay</em></a>,
+      <a class="link" href="sfplaym.html" title="sfplaym"><em class="citetitle">sfplaym</em></a>,
+      <a class="link" href="sfplist.html" title="sfplist"><em class="citetitle">sfplist</em></a>,
+      <a class="link" href="sfpreset.html" title="sfpreset"><em class="citetitle">sfpreset</em></a>
+    </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm308129"></a>
+        <h2>Crédits</h2>
+        <p>
+      </p>
+        <table border="0" summary="Simple list" class="simplelist">
+          <tr>
+            <td>Auteur : Gabriel Maldonado</td>
+          </tr>
+          <tr>
+            <td>Italie</td>
+          </tr>
+          <tr>
+            <td>Mai 2000</td>
+          </tr>
+        </table>
+        <p>
+    </p>
+        <p>Nouveau dans la version 4.07 de Csound</p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <hr />
+      <table width="100%" summary="Navigation footer">
+        <tr>
+          <td width="40%" align="left"><a accesskey="p" href="sflooper.html">Précédent</a> </td>
+          <td width="20%" align="center">
+            <a accesskey="u" href="OpcodesTop.html">Niveau supérieur</a>
+          </td>
+          <td width="40%" align="right"> <a accesskey="n" href="sfplay3.html">Suivant</a></td>
+        </tr>
+        <tr>
+          <td width="40%" align="left" valign="top">sflooper </td>
+          <td width="20%" align="center">
+            <a accesskey="h" href="index.html">Sommaire</a>
+          </td>
+          <td width="40%" align="right" valign="top"> sfplay3</td>
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>
