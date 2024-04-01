@@ -6,9 +6,9 @@ permalink: /contact-us.html
 
 ### This Website
 
-You can contact the **website team** via email to *website* at *cs-conf.de*.
+You can contact the website team via email to *website* at *cs-conf.de*.
 
-**Discussions** about the **website content** should go [->here](https://github.com/csound/csound.github.io/discussions). 
+Discussions about the website content should go [->here](https://github.com/csound/csound.github.io/discussions). 
 
 
 ### Csound
