@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Csound-expression 5.2 is out. Virtual pedalboards, arrays, new OSC, full support for mono synthesizers, patch skins, all GEN-routines are implemented"
+title:  "Csound-expression 5.2 is out"
 date:   2017-03-23 9:00:00
 categories: site news 
 ---

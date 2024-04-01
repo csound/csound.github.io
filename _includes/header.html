@@ -1,0 +1,38 @@
+<header>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="{{ 'index.html' | relative_url }}">
+        <img src="{{ '/assets/img/cs-icon.jpg' | relative_url }}" height="50px" alt="Csound">
+        Csound
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          {% for nav in site.data.navigation %}
+            {% if nav.subcategories != null %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ nav.title }}
+            </a>
+            <ul class="dropdown-menu">
+              {% for subcategory in nav.subcategories %}
+              <li>
+                <a class="dropdown-item" href="{{ subcategory.subhref | relative_url }}">{{ subcategory.subtitle }}
+                </a>
+               </li>
+              {% endfor %}
+              </ul>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ nav.href | relative_url }}">{{ nav.title }}</a>
+            </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>

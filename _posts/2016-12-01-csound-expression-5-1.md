@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Csound-expression 5.1 is out. Let's warm up our hearts with new bright ideas in this Cold winter!"
+title:  "Csound-expression 5.1 is out"
 date:   2016-12-01 9:00:00
 categories: site news 
 ---

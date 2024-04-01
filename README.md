@@ -6,7 +6,8 @@ up of Markdown (.md) files, which hold the content for pages and posts.  These
 files are further processed by Jekyll, together with template files, to
 generate the final HTML site.  
 
-# How to contribute 
+
+## How to contribute 
 
 This site is an open-source, collaborative project. The Csound community is
 encouraged to contribute to the maintenance of the site by adding news posts,
@@ -17,30 +18,57 @@ indirectly via pull request by third parties.
 
 Users who would like to contribute, but who are not comfortable with the
 technical details to make a direct contribution, are encouraged to either file
-an issue on the [issue tracker](http://github.com/csound/csound.github.io/issues) 
-describing the news entry or requested change, or contact one of the site
-maintainers who will work to evaluate and integrate any changes. 
+an issue on the [issue tracker](http://github.com/csound/csound.github.io/issues) describing the news entry or requested change, or contact one of the site maintainers who will work to evaluate and integrate any changes. 
 
-## Adding a News post 
 
-News posts are created using Markdown files placed in the \_posts folder. Each
-post must have a header that states the title, categories, layout, and date of
-the post.  (For news, the layout should be "post".) After the header, news is
-written using standard Markdown text.  Images and other content may be put into
-the post by using standard HTML content (i.e. for images, use the image tag).
-The actual image should be placed in the images folder. If you have a question,
-it may help to look at one of the existing posts to use as a reference. 
+### Updating Download Links
 
-## Modifying and Creating Pages 
+Edit \_data/download.yaml.
+
+In case you want to add a new download item, add it in \_data/download.yaml and edit \_layouts/download.html.
+
+
+### Adding a News or Projects post
+
+It is always most easy to use an existing post, save it with a new name and modify it.
+
+News are located in the \_posts folder.  
+Projects are located in the \posts/showcase folder.
+
+Each post must have a header that states the title, categories, layout, and date of the post. After the header, the post is written using [Github Flavored Markdown](https://github.github.com/gfm/) text.
+
+
+### Including Images
+
+Add the image file (*.png* or *.jpeg*) in the /images folder.
+
+To show the image, you have two possibilities:
+
+1. You can use the markdown syntax for images:  
+	`![ADSR](images/ADSR.png)`  
+2. It might be better to use html and include Bootstrap's "img-fluid" class to make the image responsive and optionally scale it:  
+	`<img src="images/ADSR.png" class="img-fluid" alt="ADSR" width=75% />`
+	
+
+### Syntax Highlighing for Code Examples
+
+To add Csound syntax highlighting to a code block, start with  
+\`\`\`csound  
+and end the block with three backticks  
+\`\`\`
+
+
+### Modifying and Creating Pages 
 
 Pages are also Markdown files. They require headers that specify the layout
-(most should use "default") and title.  Top-level pages are found in the root
-of the Git repository. Pages may also be placed in sub-folders.  The pages must
-be linked to in some way for users to access them.  This is generally done by
-modifying one of the templates in the \_templates or \_includes folder. 
+(most should use "page") and title.
+
+The pages markdown files follow the site structure:  
+- *get-started.md* and others are in the /learn folder
+- *conferences.md* and others are in the /community folder
 
 New pages can be made by copying one of the existing pages and updating it for
-the new content.  Add an item at \_data/cms.yaml.
+the new content.  Add an item at \_data/navigation.yaml.
 
 Existing pages may be modified locally and pushed to the
 repository, or submitted as a change via pull request.  Pages may also be
@@ -48,32 +76,52 @@ modified directly through the GitHub project site, which allows modifying the
 page within the browser. Users can navigate to the file in the project, select
 the edit button, then finish the edit. 
 
-## Modifying the site structure 
 
-The structure of the site is organized through the links of the navigation.
-The links are placed in the \_templates and \_includes so that they are shared
-by all pages and posts. To modify the structure, update one of the template
-files.  
+### Links on Internal HTML pages
 
-## Modifying the site theme 
+In general there are three options for links:
 
-The theme of the site is controlled via the HTML structure of the content and
-Cascading Style Sheets (CSS). Javascript is also used to help modify the feel
-and function of the site. The CSS and Javascript files used for the site are
-found in the css and scripts folders, respectively.  These files are included into the site through the template files.  
+1. Relative links, for instance in \_/layouts/home.html we can reference `href="get-started.html"` as relative link because whenever we are in home, we are on the same directory as the get-started.html which is generated by jekyll.  
+2. We avoid absolute URL because they will not work if we test on a github projects page. (myname.github.io/myproject as root will give an error for the link '/home.html' because the page cannot be found at myname.github.io/home.html but at myname.github.io/myproject/home.html.)  
+3. This is the reason we use the version href="{{ '/contact-us.html' | relative_url }}" instead, for instance in \_include/footer.html. No matter where the current site is, it will look for contact-us.html in the root directory of the relative URL.
 
-The site currently uses [Bootstrap](http://www.getbootstrap.com) as the
-foundation for its theme. Site maintainers are free to continue using Bootstrap or replace it should they find a better solution.  
 
-# Editing the Site Locally 
+### The docs Folder
 
-## Requirements
+This folder contains the most recent version of the manual and other references. **Never** change its name. (As well not for any existing page; otherwise you will create dead links.)
+
+
+
+## Modifying the Site Theme 
+
+The site uses Bootstrap 5 and a modified template by [Saul Roll](https://github.com/soulroll/jekyll-bootstrap-5). The [Bootstrap CSS](assets/css/main/bootstrap.css) should not changed at all; it can be replaced by a more recent version if necessary.
+
+Syntax highlighting is done via [rainbow](https://github.com/ccampbell/rainbow).  The source files live in assets/css/highlight and assets/js/highlight.
+
+Font-Awesome is used for some icons, too.
+
+
+### css
+
+Changes in styling must go to [csound.site.css](assets/css/main/csound-site.css). These two style sheets are referenced in "default.html" in this order, so that Bootstrap settings are overwritten by our own styles.
+
+
+### Changing the Landing Page
+
+The code is in \_layouts/home-html. It is easy to change a carousel item.
+
+Images for the landing page (carousel) must have 1140 width and 620 height as size.
+
+
+## Editing the Site Locally 
+
+### Requirements
 
 1. Ruby
 2. RubyGems - most ruby distributions should come with gem installed
 3. Bundler - install using `gem install bundler`
 
-## Instructions
+### Instructions
 
 First, make a clone of the project locally: 
 
@@ -88,22 +136,9 @@ This installed the github-pages gem.
 
 To view the site locally with `jekyll`, run:
 
-    bundle exec jekyll serve -I
+    bundle exec jekyll serve
 
 This will start up a jekyll server. You can view the pages as they are rendered by Jekyll in your browser at:
 
     http://localhost:4000
     
-Also, with the -I flag, anytime you change a page, you can view the updates by refreshing the browser.
-
-
-
-# Site internals
-
-- main menu and title page are in _data/cms.yaml
-- download page is in /download.md and _data/download.yaml
-- index.html is filled directly?!?
-- things like (in downloa.md) class="fa fa-4x fa-android" point to font-awesome.css
-
-# To add
-https://rorywalsh.github.io/CsoundUnity/#/ under download > interfaces

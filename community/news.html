@@ -1,0 +1,43 @@
+---
+title: News
+layout: default
+permalink: /news.html
+---
+
+<div class="container-fluid page-banner-background">
+  <div class="container page-banner">
+    <h1 class="display-7">{{ page.title }}</h1>
+  </div>
+</div>
+
+<div class="container-fluid page-background">
+  <div class="container">
+    <div class="page">
+      <div class="row">
+        <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12">
+        <p>This is a list of all news and projects submitted to the website. If you want to spread the word about a project you made with Csound, please, <a href="/contribute.html">send us</a> some info about it, we will be glad to publish it here!</p><br/>
+        </div>
+      </div>
+
+      {% for post in site.posts %}
+        {% if post.categories contains 'news' %}
+          {% assign category = 'News' %}
+        {% else if post.categories contains 'project' %}
+          {% assign category = 'Project' %}
+        {% endif %}
+      <div class="row row-news">
+        <div class="col">
+          <a href="{{ post.url | relative_url }}">{{ post.title }} </a>
+        </div>
+        <div class="col">
+          <i class="fa fa-calendar-o"></i> {{ post.date | date_to_string }}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+
+
