@@ -12,6 +12,10 @@ If you have any books to be added here, please [contact us](/website-team.html)!
 #### Csound: A Sound and Music Computing System (2017)
 [http://www.springer.com/gp/book/9783319453682](http://www.springer.com/gp/book/9783319453682)
 
+##### L. Bimbi
+#### Csound: Guida al sound design in 20 lezioni (2024)
+[https://www.edizionilswr.it/csound.html](https://www.edizionilswr.it/csound.html)
+
 ##### 杨万钧 (Wanjun Yang)
 #### CSOUND音乐编程入门 (Music Programming with Csound) (2015)
 [https://detail.tmall.com/item.htm?id=523778675175&ns=1&abbucket=5](https://detail.tmall.com/item.htm?id=523778675175&ns=1&abbucket=5)
