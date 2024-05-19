@@ -30,21 +30,15 @@ If you have any books to be added here, please [contact us](/website-team.html)!
 
 ##### J.Heintz, A. Hofmann, I. McCurdy
 #### Ways Ahead: Proceedings of the First International Csound Conference (2012)
-[http://www.cambridgescholars.com/ways-ahead-13](http://www.cambridgescholars.com/ways-ahead-13)
+[https://www.cambridgescholars.com/product/978-1-4438-4758-2](https://www.cambridgescholars.com/product/978-1-4438-4758-2)
 
 ##### Oscar Pablo Di Liscia
 #### Generación y procesamiento de sonido y música a través del programa Csound (2004)
-[http://www.unq.edu.ar/catalogo/103-generaci%C3%B3n-y-procesamiento-de-sonido-y-m%C3%BAsica-a-trav%C3%A9s-del-programa-csound.php](http://www.unq.edu.ar/catalogo/103-generaci%C3%B3n-y-procesamiento-de-sonido-y-m%C3%BAsica-a-trav%C3%A9s-del-programa-csound.php)
+[https://ediciones.unq.edu.ar/103-generacion-y-procesamiento-de-sonido-y-musica-a-traves-del-programa-csound.html](https://ediciones.unq.edu.ar/103-generacion-y-procesamiento-de-sonido-y-musica-a-traves-del-programa-csound.html)
 
 ##### Boulanger et.al.
 #### The Csound Book (2000)
-[https://mitpress.mit.edu/books/csound-book](https://mitpress.mit.edu/books/csound-book)
-
-_Download Csound Book CD-ROMS_
-
-* [2011 New DVD Master (2.68GB)](https://www.dropbox.com/s/b7p9d0med6w34ti/2011_Second_Printing_NEW_DVD_Master.zip?dl=0)
-* [2000 Original HTML and DATA CD-ROMS (1.08GB)](https://www.dropbox.com/s/k9a0fakgcghebk3/2000_First_Printing_HTML%2BDATA_CD_Masters.zip?dl=0)
-* [Csound Book Chapter 1 (806KB)](https://www.dropbox.com/s/r8giqor5v3b2z34/CsoundBookCh1.zip?dl=0)
+[https://mitpress.mit.edu/9780262522618/the-csound-book/](https://mitpress.mit.edu/9780262522618/the-csound-book/)
 
 <br>
 
@@ -68,7 +62,7 @@ _Download Csound Book CD-ROMS_
 
 ##### Lazzarini, Boulanger, et.al.
 #### The Audio Programming Book (2010)
-[https://mitpress.mit.edu/books/audio-programming-book](https://mitpress.mit.edu/books/audio-programming-book)
+[https://mitpress.mit.edu/9780262014465/the-audio-programming-book/](https://mitpress.mit.edu/9780262014465/the-audio-programming-book/)
 
 ##### Станислав Пучков (Stanislav Puchkov), Михаил Светлов (Mikhail Svetlov)
 ####  Музыкальные компьютерные технологии. Современный инструментарий творчества (2005)

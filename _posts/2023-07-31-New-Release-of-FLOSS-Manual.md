@@ -18,6 +18,6 @@ This release includes a new GETTING STARTED as an interactive introduction to Cs
 
 A new collection of HOW TO ... receipes is there to help for installing and using Csound as well:
 
-[https://flossmanual.csound.com/get-started](https://flossmanual.csound.com/get-started)
+[https://flossmanual.csound.com/get-started](https://flossmanual.csound.com/how-to)
 
 Sources with issue tracker and discussions are on [https://github.com/csound-flossmanual/csound-floss](https://github.com/csound-flossmanual/csound-floss)
