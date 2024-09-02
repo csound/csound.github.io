@@ -15,3 +15,6 @@ Dave Seidel
 [![Michael Gogins](https://img.youtube.com/vi/H-xWghoZqGw/default.jpg)](https://www.youtube.com/watch?v=H-xWghoZqGw)
 Michael Gogins
 
+[![John ffitch](https://img.youtube.com/vi/0m3WVzEnFIs/default.jpg)](https://www.youtube.com/watch?v=0m3WVzEnFIs)
+John ffitch
+
