@@ -11,5 +11,5 @@ To showcase this, look at an example project—a music synthesizer in Godot base
 	[Godot Synth](https://nonameentername.github.io/godot-synths/godot-synths.html)
 
 You can also check out the related projects here:  
-    [godot-csound](https://github.com/nonameentername/godot-csound)
+    [godot-csound](https://github.com/nonameentername/godot-csound)  
     [godot-synths](https://github.com/nonameentername/godot-synths)
