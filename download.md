@@ -8,6 +8,7 @@ permalink: /download.html
 
 - [Csound Plugins by Eduardo Moguillansky](https://github.com/csound-plugins/csound-plugins/releases)
 - [Official Csound Plugins](https://github.com/csound/plugins/releases)
+- [Csound Godot](https://github.com/nonameentername/godot-csound)
 - [WinXound — Another Csound Frontend](https://mnt.conts.it/winxound/)
 - [Richard Knight's builds for older systems, e.g. Windows XP](http://csound.1bpm.net/builds/)
 
