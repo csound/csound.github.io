@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: examples
 title: Examples
 permalink: /examples.html
 ---
