@@ -22,4 +22,7 @@ gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 
 gem "github-pages", "~> 231", group: :jekyll_plugins
 
+# see https://github.com/jekyll/jekyll/issues/8523
+gem "webrick"
+
 
