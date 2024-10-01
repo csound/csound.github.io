@@ -10,6 +10,10 @@ nchnls = 2
 
 // by victor lazzarini
 
+// umschalten zwischen
+// - midi oder ein button durch den ein pitch getriggert wird
+// - live oder sound file
+
 instr dispatch
   schedule("voc_bands", 0, -1, p4, p5, p6, p7)
   chnset(diskin:a("fox.wav",1,0,1), "input")
@@ -19,7 +23,6 @@ schedule("dispatch", 0, -1, 80, 8000, 8, 4)
 
 // recursive vocoder bands
 instr voc_bands
-  print(nstrnum("voc_bands"))
   out(butterbp(butterbp(chnget:a("excite"), p4, p4/p6), p4, p4/p6) *
     rms(butterbp(butterbp(chnget:a("input"), p4, p4/p6), p4, p4/p6)))
   nxt:i = p4*2^(p7/12)
@@ -30,6 +33,8 @@ endin
 
 </CsInstruments>
 </CsoundSynthesizer>
+
+
 <bsbPanel>
  <label>Widgets</label>
  <objectName/>
