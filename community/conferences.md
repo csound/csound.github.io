@@ -10,7 +10,7 @@ From time to time we gather the Csound community together to have some talks, pe
 ##### The 7th International Csound Conference
 
 2024, 17-20 September, Vienna, Austria  
-[-> Website](https://mdw.ac.at/icsc2024/)
+[-> Post with links and photos](https://csound.com/site/news/2024/12/24/icsc)
 
 ##### The 6th International Csound Conference
 
