@@ -24,5 +24,3 @@ gem "github-pages", "~> 231", group: :jekyll_plugins
 
 # see https://github.com/jekyll/jekyll/issues/8523
 gem "webrick"
-
-
