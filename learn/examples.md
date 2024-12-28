@@ -4,7 +4,8 @@ title: Examples
 permalink: /examples.html
 ---
 
-This is a small collection of modern coding practice in Csound.
+This is a small collection of modern coding practice in Csound.  
+All audio is generated in real time via [Javascript Csound](/csound-javascript.html).
 
 ## Pling
 
@@ -22,3 +23,9 @@ instr Pling
 endin
 schedule("Pling",0,3)
 ```
+
+<button id="play" onclick="start()"><i class="fa fa-play"></i></button>
+<button id="pause" onclick="pause()"><i class="fa fa-pause"></i></button>&nbsp;
+<button><a href="/learn/examples/pling.csd"><i class="fa fa-download"></i></a></button>
+<p><textarea class="console" cols="80" rows="5" id="console"></textarea></p>
+

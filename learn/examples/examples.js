@@ -27,9 +27,13 @@ await csound.on("message", handleMessage);
 // start the engine
 await csound.start();
 isOn = true;
+document.getElementById('console').innerHTML += "running" + '\n';
+document.getElementById('console').scrollTop = 99999;
 }
 // start performance if paused
 if(!isOn) {
+ document.getElementById('console').innerHTML += "running again" + '\n';
+ document.getElementById('console').scrollTop = 99999;
  await csound.resume();
  isOn = true;
 }
@@ -65,9 +69,13 @@ await csound.fs.writeFile(dest, new Uint8Array(dat));
 async function pause() {
 if(csound != null) {
 if(isOn) {
+ document.getElementById('console').innerHTML += "pausing" + '\n'; 
+ document.getElementById('console').scrollTop = 99999;
  await csound.pause();
  isOn = false;
 } else  {
+ document.getElementById('console').innerHTML += "running again" + '\n';
+ document.getElementById('console').scrollTop = 99999;
  await csound.resume();
  isOn = true;
 }
