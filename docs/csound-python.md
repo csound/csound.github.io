@@ -11,6 +11,8 @@ Each release of Csound has it's own version of ctcsound named *ctcsound.py*, whi
   <a href="https://csound.com/docs/ctcsound" class="btn btn-lg btn-secondary">ctcsound Docs for Csound 6.x</a>
 </div>
 
+<br>
+
 In Csound 7.0, the host API has been entirely refactored, breaking backward compatibility. To emphasize this, it has been decided to rewrite ctcsound for Csound 7.0 following the naming convention of the [PEP 8 – Style Guide for Python Code](https://peps.python.org/pep-0008/#naming-conventions).  
 So now, functions name are lowercase, with words separated by underscores (eg SetOption (ctcsound 6.x) becomes set_option (ctcsound 7.0)).  
 Examples for this new version of ctcsound can be seen [here](https://github.com/csound/csoundAPI_examples/tree/master/7.x/python).  
