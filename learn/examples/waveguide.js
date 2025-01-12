@@ -1,4 +1,4 @@
-// play "pling.csd"
+// play "waveguide.csd"
 
 // csound.js is the Csound WASM module
 const csoundjs = "https://www.unpkg.com/@csound/browser@6.18.7/dist/csound.js";
@@ -8,7 +8,7 @@ let csound = null;
 // instrument on/off state
 let isOn = false;
 // CSD file name
-const csd = '/learn/examples/pling.csd'
+const csd = '/learn/examples/waveguide.csd'
 // this is the JS function to start Csound
 // and resume performance if needed
 async function start() {
@@ -16,6 +16,8 @@ async function start() {
 if(csound == null) {
 // import the Csound method from csound.js
 const { Csound } = await import(csoundjs);
+document.getElementById('console').innerHTML += "loading ..." + '\n';
+document.getElementById('console').scrollTop = 99999;
 // create a Csound engine object inside the context actx
 csound = await Csound();
 // copy the CSD file to the Csound local filesystem
@@ -27,12 +29,12 @@ await csound.on("message", handleMessage);
 // start the engine
 await csound.start();
 isOn = true;
-document.getElementById('console').innerHTML += "running" + '\n';
+document.getElementById('console').innerHTML += "running ..." + '\n';
 document.getElementById('console').scrollTop = 99999;
 }
 // start performance if paused
 if(!isOn) {
- document.getElementById('console').innerHTML += "running again" + '\n';
+ document.getElementById('console').innerHTML += "running again ..." + '\n';
  document.getElementById('console').scrollTop = 99999;
  await csound.resume();
  isOn = true;
@@ -69,12 +71,12 @@ await csound.fs.writeFile(dest, new Uint8Array(dat));
 async function pause() {
 if(csound != null) {
 if(isOn) {
- document.getElementById('console').innerHTML += "pausing" + '\n'; 
+ document.getElementById('console').innerHTML += "pausing ..." + '\n'; 
  document.getElementById('console').scrollTop = 99999;
  await csound.pause();
  isOn = false;
 } else  {
- document.getElementById('console').innerHTML += "running again" + '\n';
+ document.getElementById('console').innerHTML += "running again ..." + '\n';
  document.getElementById('console').scrollTop = 99999;
  await csound.resume();
  isOn = true;
