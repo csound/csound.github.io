@@ -18,8 +18,14 @@ So now, functions name are lowercase, with words separated by underscores (e.g. 
 Examples for this new version of ctcsound can be seen [here](https://github.com/csound/csoundAPI_examples/tree/master/7.x/python).  
 Victor Lazzarini wrote a [document](https://github.com/csound/csound/blob/develop/doc/API_Migration_Guide_Csound_6_to_7.md) about the host API migration from 6.x to 7.0.
 
-
 <br>
+
+Eduardo Moguillansky has used ctcsound for an own wrapper called [`libcsound`](https://github.com/csound-plugins/libcsound) which attempts to work for both, Csound 6.18 and Csound 7, and is installable via [pip](https://pypi.org/project/libcsound/).
+
+<div>
+  <a href="https://libcsound.readthedocs.io/en/latest/index.html" class="btn btn-lg btn-secondary">libcsound Docs</a>
+</div>
+
 
 On top of ctcsound, Eduardo Moguillansky has written [csoundengine](https://pypi.org/project/csoundengine/).
 

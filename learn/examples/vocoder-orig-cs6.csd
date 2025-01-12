@@ -26,17 +26,17 @@ endin
 schedule(1, 0, -1, 80, 8000, 8, 4)
 
 instr 2 // MIDI synth
- fo:k cpsmidib 2
+ kfo cpsmidib 2
  chnmix(linenr:a(ampmidi(8), 0.01, 0.1, 0.01)*
-        (vco2(1, fo*0.99) + vco2(1, fo*1.01)), "excite")
+        (vco2(1, kfo*0.99) + vco2(1, kfo*1.01)), "excite")
 endin
 
 instr 3  // recursive vocoder bands
- out(butterbp(butterbp(chnget:a("excite"), p4, p4/p6), p4, p4/p6) *
+ outall(butterbp(butterbp(chnget:a("excite"), p4, p4/p6), p4, p4/p6) *
      rms(butterbp(butterbp(chnget:a("input"), p4, p4/p6), p4, p4/p6)))
- nxt:i = p4*2^(p7/12)
- if nxt < p5 then
-  schedule(p1+0.001, 0, -1, nxt, p5, p6, p7)
+ inxt = p4*2^(p7/12)
+ if inxt < p5 then
+  schedule(p1+0.001, 0, -1, inxt, p5, p6, p7)
  endif
 endin
 
@@ -44,3 +44,20 @@ endin
 <CsScore>
 </CsScore>
 </CsoundSynthesizer>
+<bsbPanel>
+ <label>Widgets</label>
+ <objectName/>
+ <x>100</x>
+ <y>100</y>
+ <width>320</width>
+ <height>240</height>
+ <visible>true</visible>
+ <uuid/>
+ <bgcolor mode="background">
+  <r>240</r>
+  <g>240</g>
+  <b>240</b>
+ </bgcolor>
+</bsbPanel>
+<bsbPresets>
+</bsbPresets>
