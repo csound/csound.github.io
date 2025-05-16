@@ -4,6 +4,8 @@ title: Download
 permalink: /download.html
 ---
 
+**NOTE** If you see a warning from Apple or Windows about "not trusted", this is because Csound is free software, and we cannot pay what these companies require for licencing us. But we are sure that our software is safe, as mentioned in the [Csound License](https://github.com/csound/csound/blob/develop/README.md).
+
 ## Other 
 
 - [Csound Plugins by Eduardo Moguillansky](https://github.com/csound-plugins/csound-plugins/releases)
