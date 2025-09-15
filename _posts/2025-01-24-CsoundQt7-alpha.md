@@ -1,18 +1,20 @@
 ---
 layout: post
-title:  "Csound 7 available on Web IDE"
-date:   2025-09-15 00:00:00
+title:  "CsoundQt7 alpha including Csound 7"
+date:   2025-01-24 00:00:00
 categories: site news
 ---
 
-Csound 7 is now available to use in any browser!
+Tarmo Johannes published a pre-release of CsoundQt 7.0.0 on Github, including Csound 7 in the packages for Mac, Windows and Linux AppImage:
+[https://github.com/CsoundQt/CsoundQt/releases/tag/v7.0.0-alpha](https://github.com/CsoundQt/CsoundQt/releases/tag/v7.0.0-alpha)
 
-Thanks to work of Hlodver Sigurdsson and Steven Yi you can try out the [numerous new features of Csound 7](https://csound.com/manual/intro/whats-new-in-csound-7/) in the Csound Web IDE.
+There has been a myriad of changes to the code to get it building with Qt 6 and Csound 7, so  there might be hidden issues. Yet, it might be the easiest way to try out Csound 7 at the moment.
 
-There is a [Csound 7 Playground](https://ide.csound.com/editor/ehqAG0RduZT91trCgl9A) in which you can type and run any code.
+From the users' point of view there has not been so many changes yet (some things like PythonQt and Live Event Sheets are dropped), internally much more. See a summary here: [https://github.com/CsoundQt/CsoundQt/blob/csoundqt7/Changes%20to%20CsoundQt7.md](https://github.com/CsoundQt/CsoundQt/blob/csoundqt7/Changes%20to%20CsoundQt7.md)
 
-In your own account, click the "run with csound7" checkbox in the project configuration:
+The Windows build was the most problematic and does not have Virtual MIDI keyboard nor recording support at the moment. 
+None of the packages contains html support yet.
 
-![activate csound 7](../images/ide-csound-select-cs7.png)
+Who builds CsoundQt from sources, the main development branch is csoundqt7 [https://github.com/CsoundQt/CsoundQt/tree/csoundqt7](https://github.com/CsoundQt/CsoundQt/tree/csoundqt7)
 
-You can also use Csound 7 now in the [Csound FLOSS Manual](https://flossmanual.csound.com/). Just type any code in the *TryMe* instrument at [https://flossmanual.csound.com/introduction/preface](https://flossmanual.csound.com/introduction/preface).
+Please try and report back!
