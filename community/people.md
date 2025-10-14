@@ -18,6 +18,6 @@ Michael Gogins
 [![John ffitch](https://img.youtube.com/vi/0m3WVzEnFIs/mqdefault.jpg)](https://www.youtube.com/watch?v=0m3WVzEnFIs)
 John ffitch
 
-[![First Encounters](https://img.youtube.com/vi//jfdTHMuNikY/mqdefault.jpg)](https://www.youtube.com/watch?v=jfdTHMuNikY)
+[![First Encounters](https://img.youtube.com/vi/jfdTHMuNikY/mqdefault.jpg)](https://www.youtube.com/watch?v=jfdTHMuNikY)
 First Encounters
 
