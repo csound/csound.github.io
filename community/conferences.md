@@ -7,6 +7,12 @@ permalink: /conferences.html
 
 From time to time we gather the Csound community together to have some talks, performances, beers and things related.
 
+##### The 8th International Csound Conference
+
+2026, 20-22 October, Trapani, Sicily, Italy  
+[-> Website](https://csound.com/icsc2026/)
+
+
 ##### The 7th International Csound Conference
 
 2024, 17-20 September, Vienna, Austria  
