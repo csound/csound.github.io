@@ -5,17 +5,38 @@ layout: default
 <div class="container-fluid page-banner-background">
   <div class="container page-banner">
     <h1 class="display-7">{{ page.title }}</h1>
+    {% if page.subtitle %}
+    <p class="page-banner-subtitle">{{ page.subtitle }}</p>
+    {% endif %}
   </div>
 </div>
 
 <div class="container-fluid page-background">
   <div class="container">
     <div class="page">
+      {% if page.toc %}
+      <div class="row gy-4">
+        <aside class="col-lg-3 order-lg-2" aria-label="On this page">
+          <div class="cs-toc-sidebar">
+            <h2 class="cs-toc-title">On This Page</h2>
+            <ul class="cs-toc-list">
+              {% for item in page.toc %}
+              <li><a href="{{ item.href }}">{{ item.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </aside>
+        <div class="col-lg-9 order-lg-1">
+          {{ content }}
+        </div>
+      </div>
+      {% else %}
       <div class="row">
         <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12">
           {{ content }}
         </div>
       </div>
+      {% endif %}
     </div>
   </div>
 </div>

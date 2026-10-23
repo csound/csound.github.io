@@ -1,21 +1,25 @@
 ---
 layout: download
-title: Download
+title: Download Csound
 permalink: /download.html
 ---
 
-**NOTE** If you see a warning from Apple or Windows about "not trusted", this is because Csound is free software, and we cannot pay what these companies require for licencing us. But we are sure that our software is safe, as mentioned in the [Csound License](https://github.com/csound/csound/blob/develop/README.md).
+## Installation Notes (macOS & Windows Gatekeeper)
 
-## Other 
+Because Csound is community-maintained free software ([LGPLv2.1+](https://github.com/csound/csound/blob/master/README.md)), some installers are not signed with commercial Apple or Microsoft developer certificates:
 
-- [Csound Plugins by Eduardo Moguillansky](https://github.com/csound-plugins/csound-plugins/releases)
-- [Official Csound Plugins](https://github.com/csound/plugins/releases)
-- [Csound Godot](https://github.com/nonameentername/godot-csound)
-- [WinXound — Another Csound Frontend](https://mnt.conts.it/winxound/)
-- [Richard Knight's builds for older systems, e.g. Windows XP](http://csound.1bpm.net/builds/)
+- **macOS**: If macOS Gatekeeper reports that the package is from an unidentified developer, Control-click (or right-click) the installer and select **Open**, or allow it under **System Settings → Privacy & Security**.
+- **Windows**: If Windows SmartScreen displays a prompt, click **More info → Run anyway**.
 
-## Csound 7
-The latest beta release installers for MacOS, iOS, and Windows can be downloaded from the relevant [github actions page](https://github.com/csound/csound/actions/workflows/csound_builds.yml). Look for the latest workflow run which has the "develop" label. Clicking on the title brings a page with the download artefacts at the bottom.
+## External Plugins & Additional Tools
 
-## Building from source
-Building Csound from source or from the git develop branch is not very difficult on Linux, and can also be done on Mac and Windows. How-to descriptions can be found in the BUILD.md file included with the Csound sources, also available online [here](https://github.com/csound/csound/blob/develop/BUILD.md).
+- [Official Csound Plugins Repository](https://github.com/csound/plugins/releases) — External opcodes (Python, Faust, FluidSynth, Jack, etc.)
+- [csound-plugins by Eduardo Moguillansky](https://github.com/csound-plugins/csound-plugins/releases) — Additional opcodes and the `risset` package manager
+- [Csound for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=kunstmusik.csound) — Syntax highlighting, documentation lookup, and live evaluation inside VS Code
+- [WinXound](https://mnt.conts.it/winxound/) — Lightweight Csound editor for Windows, macOS, and Linux
+- [Nightly / CI Builds](https://github.com/csound/csound/actions/workflows/csound_builds.yml) — Latest automated development builds from GitHub Actions
+- [Legacy Builds by Richard Knight](http://csound.1bpm.net/builds/) — Builds for older operating systems (including Windows XP)
+
+## Building from Source
+
+Building Csound from source is straightforward on Linux, macOS, and Windows using CMake. Full step-by-step instructions and dependency lists are maintained in [`BUILD.md`](https://github.com/csound/csound/blob/master/BUILD.md) in the Csound GitHub repository.

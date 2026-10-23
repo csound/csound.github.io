@@ -1,37 +1,52 @@
-<header>
+<header class="cs-header sticky-top">
   <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="{{ 'index.html' | relative_url }}">
-        <img src="{{ '/assets/img/cs-icon.jpg' | relative_url }}" height="50px" alt="Csound">
-        Csound
+    <nav class="navbar navbar-expand-lg navbar-light cs-navbar" aria-label="Main navigation">
+      <a class="navbar-brand cs-brand" href="{{ '/index.html' | relative_url }}">
+        <img src="{{ '/assets/img/cs-icon.jpg' | relative_url }}" width="42" height="42" class="cs-brand-logo" alt="">
+        <div class="cs-brand-text">
+          <span class="cs-brand-title">Csound</span>
+          <span class="cs-brand-subtitle d-none d-sm-inline">Sound &amp; Music Computing</span>
+        </div>
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-        <ul class="navbar-nav">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto me-lg-3 align-items-lg-center">
           {% for nav in site.data.navigation %}
             {% if nav.subcategories != null %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ nav.title }}
-            </a>
-            <ul class="dropdown-menu">
-              {% for subcategory in nav.subcategories %}
-              <li>
-                <a class="dropdown-item" href="{{ subcategory.subhref | relative_url }}">{{ subcategory.subtitle }}
-                </a>
-               </li>
-              {% endfor %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle cs-nav-link" href="#" id="navDropdown-{{ forloop.index }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ nav.title }} <i class="fa fa-angle-down cs-caret" aria-hidden="true"></i>
+              </a>
+              <ul class="dropdown-menu cs-dropdown-menu" aria-labelledby="navDropdown-{{ forloop.index }}">
+                {% for subcategory in nav.subcategories %}
+                <li>
+                  <a class="dropdown-item cs-dropdown-item" href="{% if subcategory.subhref contains 'http' %}{{ subcategory.subhref }}{% else %}{{ subcategory.subhref | relative_url }}{% endif %}" {% if subcategory.subhref contains 'http' %}target="_blank" rel="noopener"{% endif %}>
+                    <span class="cs-dropdown-title">{{ subcategory.subtitle }}</span>
+                    {% if subcategory.desc %}
+                    <small class="cs-dropdown-desc">{{ subcategory.desc }}</small>
+                    {% endif %}
+                  </a>
+                </li>
+                {% endfor %}
               </ul>
             </li>
             {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="{{ nav.href | relative_url }}">{{ nav.title }}</a>
+              <a class="nav-link cs-nav-link" href="{{ nav.href | relative_url }}">{{ nav.title }}</a>
             </li>
             {% endif %}
           {% endfor %}
         </ul>
+        <div class="cs-nav-actions d-flex flex-column flex-lg-row gap-2 mt-3 mt-lg-0">
+          <a href="https://ide.csound.com/" class="btn btn-cs-outline btn-sm" target="_blank" rel="noopener">
+            <i class="fa fa-play-circle" aria-hidden="true"></i> Try Online
+          </a>
+          <a href="{{ '/download.html' | relative_url }}" class="btn btn-cs-primary btn-sm">
+            <i class="fa fa-download" aria-hidden="true"></i> Download 7.0
+          </a>
+        </div>
       </div>
     </nav>
   </div>

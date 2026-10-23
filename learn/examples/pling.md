@@ -1,17 +1,27 @@
 ---
 layout: examples
 title: "Examples: Pling"
+subtitle: Three lines of DSP code generating a self-scheduling structure of modal percussion events (by Joachim Heintz).
 permalink: /examples/pling.html
 ---
 
-<script type="text/javascript" src="/learn/examples/pling.js"></script>
+<script type="text/javascript" src="{{ '/learn/examples/pling.js' | relative_url }}"></script>
 
-Three lines of code generating a structure of short events.
-
-<button id="play" onclick="start()"><i class="fa fa-play"></i></button>
-<button id="pause" onclick="pause()"><i class="fa fa-pause"></i></button>&nbsp;
-<button><a href="/learn/examples/pling.csd"><i class="fa fa-download"></i></a></button>
-<p><textarea class="console" cols="80" rows="5" id="console"></textarea></p>
+<div class="cs-example-player-box">
+  <div class="cs-example-toolbar">
+    <button id="play" type="button" class="cs-play-btn" onclick="start()">
+      <i class="fa fa-play" aria-hidden="true"></i> Play
+    </button>
+    <button id="pause" type="button" class="cs-stop-btn" onclick="pause()">
+      <i class="fa fa-pause" aria-hidden="true"></i> Pause / Resume
+    </button>
+    <a href="{{ '/learn/examples/pling.csd' | relative_url }}" class="btn btn-cs-outline btn-sm ms-auto" download>
+      <i class="fa fa-download" aria-hidden="true"></i> Download pling.csd
+    </a>
+  </div>
+  <label for="console" class="visually-hidden">Csound Console Output</label>
+  <textarea class="console" cols="80" rows="5" id="console" readonly placeholder="Click Play to start the Csound WebAssembly engine..."></textarea>
+</div>
 
 ```csound
 instr Pling
@@ -25,6 +35,3 @@ instr Pling
 endin
 schedule("Pling",0,3)
 ```
-
-
-

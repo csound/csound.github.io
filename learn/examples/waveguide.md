@@ -1,17 +1,27 @@
 ---
 layout: examples
 title: "Examples: Waveguide"
+subtitle: Iain McCurdy's Csound Haiku III — A generative play with timbral qualities based on impulses thrown into dual waveguides.
 permalink: /examples/waveguide.html
 ---
 
-<script type="text/javascript" src="/learn/examples/waveguide.js"></script>
+<script type="text/javascript" src="{{ '/learn/examples/waveguide.js' | relative_url }}"></script>
 
-Iain McCurdy's *Csound Haiku III* — A beautiful play with timbral qualities which are based on impulses thrown in a waveguide
-
-<button id="play" onclick="start()"><i class="fa fa-play"></i></button>
-<button id="pause" onclick="pause()"><i class="fa fa-pause"></i></button>&nbsp;
-<button><a href="/learn/examples/waveguide.csd"><i class="fa fa-download"></i></a></button>
-<p><textarea class="console" cols="80" rows="5" id="console"></textarea></p>
+<div class="cs-example-player-box">
+  <div class="cs-example-toolbar">
+    <button id="play" type="button" class="cs-play-btn" onclick="start()">
+      <i class="fa fa-play" aria-hidden="true"></i> Play
+    </button>
+    <button id="pause" type="button" class="cs-stop-btn" onclick="pause()">
+      <i class="fa fa-pause" aria-hidden="true"></i> Pause / Resume
+    </button>
+    <a href="{{ '/learn/examples/waveguide.csd' | relative_url }}" class="btn btn-cs-outline btn-sm ms-auto" download>
+      <i class="fa fa-download" aria-hidden="true"></i> Download waveguide.csd
+    </a>
+  </div>
+  <label for="console" class="visually-hidden">Csound Console Output</label>
+  <textarea class="console" cols="80" rows="5" id="console" readonly placeholder="Click Play to start the Csound WebAssembly engine..."></textarea>
+</div>
 
 ```csound
 giImpulseWave = ftgen(0,0,4097,10,1,1/2,1/4,1/8)
@@ -68,5 +78,3 @@ instr reverb
 endin
 schedule("reverb",0,-1)
 ```
-
-
