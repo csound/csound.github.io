@@ -31,7 +31,7 @@ instr Pling
   aL,aR pan2 aMode,random:i(0,1)
   out(aL,aR)
   // call the next instance of this instrument
-  schedule("Pling",rnd:i(1),random:i(1,4))
+  schedule(Pling,rnd:i(1),random:i(1,4))
 endin
-schedule("Pling",0,3)
+schedule(Pling,0,3)
 ```

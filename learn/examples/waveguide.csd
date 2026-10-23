@@ -22,9 +22,9 @@ instr start_sequences
   kpan = rspline:k(0.1,4,0.1,1)
   kwgoct1 = rspline:k(6,9,0.05,1)
   kwgoct2 = rspline:k(6,9,0.05,1)
-  schedkwhennamed(metro(krate),0,0,"wguide2_note",0,4,kcps,kwgoct1,kwgoct2,kpan)
+  schedkwhen(metro(krate),0,0,wguide2_note,0,4,kcps,kwgoct1,kwgoct2,kpan)
 endin
-schedule("start_sequences",0,-1)
+schedule(start_sequences,0,-1)
 
 instr wguide2_note
   idur,icps,iwgoct1,iwgoct2,ipan = p3,p4,p5,p6,p7
@@ -57,14 +57,14 @@ instr spatialise
   gasendR += aR*0.05
   clear(gamixL,gamixR)
 endin
-schedule("spatialise",0,-1)
+schedule(spatialise,0,-1)
 
-instr reverb
+instr Reverb
   aL,aR reverbsc gasendL,gasendR,0.95,10000
   out(aL,aR)
   clear(gasendL,gasendR)
 endin
-schedule("reverb",0,-1)
+schedule(Reverb,0,-1)
 
 </CsInstruments>
 <CsScore>
