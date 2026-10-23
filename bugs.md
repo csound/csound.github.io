@@ -1,62 +1,49 @@
 ---
 layout: page
-title: Report a bug
+title: Report a Bug
+subtitle: Help improve Csound by reporting issues to the right repository tracker.
 permalink: /bugs.html
 ---
 
-Csound consists of different parts. Depending on the subject, your bug report should go to one of these different addresses.
+Csound is an ecosystem of projects maintained by several teams. Routing your bug report to the specific tracker below ensures the maintainers see it quickly.
 
-### A bug on this site (csound.com)
+### A bug on this website (`csound.com`)
 
-*Example: You click on a link and get to a "page not found" error.*
+*Example: You click on a link and get a "page not found" error.*
 
-Please report the bug on [tis site's issue tracker](https://github.com/csound/csound.github.io/issues).
+Please report the issue on [this site's GitHub issue tracker](https://github.com/csound/csound.github.io/issues). If you are not on GitHub, you can also email *website* at *cs-conf.de*.
 
-In case you are not familiar with Github, you can also write an email to *website* at *cs-conf.de*.
+### A bug in the Csound core engine
 
+*Example: Opcode XYZ outputs 0 when the third input argument is set to 1, although the [Reference Manual](/docs/manual/index.html) states it should output -1.*
 
-### A bug in the Csound core
+Please file an issue on the [Csound Core Issue Tracker](https://github.com/csound/csound/issues). Please include:
+- A minimal `.csd` code example that reproduces the problem
+- Whether you ran Csound from the command line, a host API, or a frontend
+- Your Csound version (e.g., Csound 7.0.0 or 6.18.1) and operating system
 
-*Example: Opcode XYZ outputs 0 when I set the third input argument to 1 although the [Reference Manual](https://csound.com/docs/manual/index.html) states this should output -1.*
+### A bug in a Frontend or Host Interface
 
-Please file what you consider to be a bug to the [Csound issue tracker](https://github.com/csound/csound/issues). Please describe in the bug report:  
-- which Csound code do you run (include a code which is as minimal as possible)
-- whether you run Csound from command line or from any frontend
-- which version of Csound do you use
-- what is your operating system
+Please report frontend or binding issues directly to their respective trackers:
 
+- **Csound Web IDE**: [github.com/csound/web-ide/issues](https://github.com/csound/web-ide/issues)
+- **Cabbage**: [forum.cabbageaudio.com](https://forum.cabbageaudio.com/c/cabbage-slugs)
+- **CsoundQt**: [github.com/CsoundQt/CsoundQt/issues](https://github.com/CsoundQt/CsoundQt/issues)
+- **Blue**: [github.com/kunstmusik/blue/issues](https://github.com/kunstmusik/blue/issues)
+- **ctcsound (Python)**: [github.com/csound/ctcsound/issues](https://github.com/csound/ctcsound/issues)
+- **csound~ (Max/MSP)**: [github.com/csound/csound_tilde/issues](https://github.com/csound/csound_tilde/issues) / [github.com/iainctduncan/csound_max/issues](https://github.com/iainctduncan/csound_max/issues)
+- **csound6~ (PureData)**: [github.com/csound/csound_pd/issues](https://github.com/csound/csound_pd/issues)
+- **Android**: [github.com/gogins/csound-extended/issues](https://github.com/gogins/csound-extended/issues)
+- **API Examples**: [github.com/csound/csoundAPI_examples/issues](https://github.com/csound/csoundAPI_examples/issues)
 
-### A bug in one of the Frontends and Interfaces
+### A bug in the [Csound Reference Manual](/docs/manual/index.html)
 
-*Example: Edit > Copy in CsoundQt for Windows is not working.*  
-*Or: Cabbage always pops up with lettuces in the GUI panel.*
+*Example: A typo in an opcode description or a broken example.*
 
-Please file the bugs to the frontend or interface you are using. This list should help:
+Please report it on the [Reference Manual Issue Tracker](https://github.com/csound/manual/issues).
 
-- Cabbage: [https://forum.cabbageaudio.com/c/cabbage-slugs](https://forum.cabbageaudio.com/c/cabbage-slugs)
-- CsoundQt: [https://github.com/CsoundQt/CsoundQt/issues](https://github.com/CsoundQt/CsoundQt/issues)
-- Blue: [https://github.com/kunstmusik/blue/issues](https://github.com/kunstmusik/blue/issues)
-- Android: [https://github.com/gogins/csound-extended/issues](https://github.com/gogins/csound-extended/issues)
-- csound~ (Csound in Max): [https://github.com/csound/csound_tilde/issues](https://github.com/csound/csound_tilde/issues)
-- csound6~ (Csound in Max): [https://github.com/iainctduncan/csound_max/issues](https://github.com/iainctduncan/csound_max/issues)
-- csound6~ (Csound in PD) [https://github.com/csound/csound_pd/issues](https://github.com/csound/csound_pd/issues)
-- ctcsound (Csound in Python) [https://github.com/csound/ctcsound/issues](https://github.com/csound/ctcsound/issues)
-- Web-IDE [https://github.com/csound/web-ide/issues](https://github.com/csound/web-ide/issues)
-- API examples: [https://github.com/csound/csoundAPI_examples/issues](https://github.com/csound/csoundAPI_examples/issues)
+### A bug in the [Csound FLOSS Manual](https://flossmanual.csound.com/)
 
+*Example: An interactive browser example fails to play.*
 
-### A bug in the [Csound Reference Manual](docs/manual/index.html)
-
-*Example: A typo in an opcode description, or a dead link.*
-
-Please report it [in the manual's issue tracker](https://github.com/csound/manual/issues).
-
-
-### A bug in the [Csound FLOSS Manual](https://csound-floss.firebaseapp.com/)
-
-*Example: A built-in sound file cannot be played.*
-
-Please report it [in the issue tracker of the Csound FLOSS Manual](https://github.com/csound-flossmanual/csound-floss/issues).
-
-
-
+Please report it on the [FLOSS Manual Issue Tracker](https://github.com/csound-flossmanual/csound-floss/issues).

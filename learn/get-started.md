@@ -1,9 +1,52 @@
 ---
 layout: page
-title: Get started
+title: Get Started with Csound
+subtitle: Play your first sound in seconds in your browser, then learn how instruments, opcodes, envelopes, and scores work together.
 permalink: /get-started.html
+toc:
+  - title: "1. Try Csound Online"
+    href: "#try-csound-online"
+  - title: "2. Desktop Frontends"
+    href: "#csound-frontends"
+  - title: "3. Csound File & Syntax"
+    href: "#csound-syntax"
+  - title: "4. Rates & Variables (i, k, a)"
+    href: "#variables"
+  - title: "5. Opcodes & Functional Style"
+    href: "#opcodes"
+  - title: "6. Score Lines (p-fields)"
+    href: "#score-lines"
+  - title: "7. Your First Synthesizer"
+    href: "#your-first-synthesiser"
+  - title: "8. Envelopes & Filters"
+    href: "#envelope"
+  - title: "9. MIDI Control"
+    href: "#controlling-your-instrument-with-midi"
+  - title: "10. Your First Audio Effect"
+    href: "#your-first-effect"
+  - title: "11. Recording to Disk"
+    href: "#writing-sounds-to-disk"
+  - title: "12. Common Errors & Next Steps"
+    href: "#common-errors"
 ---
 
+<div class="cs-card cs-card-featured mb-4">
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+    <div>
+      <span class="cs-badge cs-badge-primary mb-2">Fastest Way to Begin</span>
+      <h3 class="mb-1">Make your first sound in 30 seconds — no installation needed</h3>
+      <p class="mb-0">Open the interactive starter project in the <strong>Csound Web IDE</strong>, press <strong>Play</strong> to hear a 550 Hz tone, then change <code>550</code> to <code>660</code> on line 11 and press Play again.</p>
+    </div>
+    <div class="d-flex flex-wrap gap-2">
+      <a href="https://ide.csound.com/editor/21zOuoahdiJj8DnT7UN8" class="btn btn-cs-primary" target="_blank" rel="noopener">
+        <i class="fa fa-play" aria-hidden="true"></i> Open Starter Project in Web IDE
+      </a>
+      <a href="{{ '/download.html' | relative_url }}" class="btn btn-cs-outline">
+        Install on Desktop
+      </a>
+    </div>
+  </div>
+</div>
 
 ## Try Csound Online!
 

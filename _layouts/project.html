@@ -2,18 +2,46 @@
 layout: default
 ---
 
+<div class="container-fluid page-banner-background">
+  <div class="container page-banner">
+    <div class="mb-2">
+      <a href="{{ '/projects.html' | relative_url }}" class="cs-badge cs-badge-primary text-decoration-none">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> All Showcase Projects
+      </a>
+    </div>
+    <h1 class="display-7">{{ page.title }}</h1>
+    {% if page.tags %}
+    <div class="d-flex flex-wrap gap-1 mt-2">
+      {% for tag in page.tags %}
+      <span class="cs-badge">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+
 <div class="container-fluid page-background">
   <div class="container">
     <div class="page">
-      <div class="row">
-        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12">
+      <div class="row gy-4">
+        <div class="col-xl-8 col-lg-8 col-md-12">
           {{ content }}
-          <br />
-          <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" />
-          <br />
+          {% if page.image %}
+          <div class="mt-4">
+            <img src="{{ page.image | relative_url }}" class="img-fluid rounded border shadow-sm" alt="{{ page.title }}" />
+          </div>
+          {% endif %}
         </div>
-        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 text-center">
-          <a class="btn btn-lg btn-secondary" href="{{ page.website }}" target="_blank">Project's website</a>
+        <div class="col-xl-4 col-lg-4 col-md-12">
+          <div class="cs-card">
+            <h3>Project Links</h3>
+            <p>Explore this Csound-powered project directly on the creator's site.</p>
+            {% if page.website %}
+            <a class="btn btn-cs-primary w-100" href="{{ page.website }}" target="_blank" rel="noopener">
+              Visit Project Website <i class="fa fa-external-link" aria-hidden="true"></i>
+            </a>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>

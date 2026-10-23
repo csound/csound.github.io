@@ -1,22 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
-    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    <title>{% if page.title and page.title != "Csound" %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}</title>
+    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description | strip_newlines }}{% endif %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ '/assets/css/main/bootstrap.css' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ '/assets/css/highlight/pastie.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/main/csound-site.css' | relative_url }}">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/highlight/pastie.css' | relative_url }}">
     <link rel="shortcut icon" href="{{ '/assets/img/favicon.png' | relative_url }}" type="image/x-icon">
   </head>
-  <body>
+  <body class="cs-body">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     {% include topbar.html %}
     {% include header.html %}
-    {{ content }}
+    <main id="main-content" tabindex="-1">
+      {{ content }}
+    </main>
+    {% include footer.html %}
     <script src="{{ '/assets/js/dist/bootstrap.bundle.min.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/highlight/rainbow.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/highlight/generic.js' | relative_url }}"></script>

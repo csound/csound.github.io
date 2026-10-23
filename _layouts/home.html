@@ -2,86 +2,456 @@
 layout: default
 ---
 
-<div class="container-full home-page-intro-container">
+<!-- Hero Section -->
+<section class="cs-hero">
   <div class="container">
-    <div class="row">
-    
-      <!-- left side --> 
-      <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
-        <div class="home-intro">
-          <p>Csound is a sound and music computing system that has its roots in the earliest of computer software, the MUSIC-N series by Max Mathews. Csound was originally released in 1985 by Barry Vercoe and it has been a part of the computer music world since. Today’s Csound works on desktop, mobile, embedded, server, and web platforms and powers music software and music-making for musicians around the world.</p>
-          <div class="row text-center">
-            <div class="col">
-              <a href="get-started.html" class="btn btn-lg btn-secondary btn-home" >GET STARTED</a>
+    <div class="row align-items-center gy-5">
+      <!-- Left Column: Value Proposition & Primary Actions -->
+      <div class="col-xl-6 col-lg-6">
+        <a href="{{ '/site/news/2026/10/21/Csound-7.0.0' | relative_url }}" class="cs-hero-eyebrow">
+          <span class="topbar-pill">7.0 RELEASE</span>
+          <span>Csound 7.0.0 is here — Modern syntax, structs, and new APIs</span>
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </a>
+        <h1 class="cs-hero-title">
+          Build your own <span>world of sound.</span>
+        </h1>
+        <p class="cs-hero-lead">
+          Create synthesizers, audio effects, interactive installations, and generative music with <strong>Csound</strong> — the free, open-source audio programming language with over 1,500 unit generators running on desktop, web, mobile, and embedded hardware.
+        </p>
+        <div class="cs-hero-actions">
+          <a href="{{ '/get-started.html' | relative_url }}" class="btn btn-cs-primary btn-lg">
+            <i class="fa fa-rocket" aria-hidden="true"></i> Get Started
+          </a>
+          <a href="{{ '/download.html' | relative_url }}" class="btn btn-cs-outline btn-lg">
+            <i class="fa fa-download" aria-hidden="true"></i> Download Csound 7.0
+          </a>
+          <a href="https://ide.csound.com/" class="btn btn-cs-outline btn-lg" target="_blank" rel="noopener">
+            <i class="fa fa-external-link" aria-hidden="true"></i> Open Web IDE
+          </a>
+        </div>
+        <div class="cs-hero-meta">
+          <span class="cs-hero-meta-item">
+            <i class="fa fa-sliders" aria-hidden="true"></i> 1,500+ Synthesis &amp; DSP Opcodes
+          </span>
+          <span class="cs-hero-meta-item">
+            <i class="fa fa-globe" aria-hidden="true"></i> Desktop, WebAssembly, Mobile &amp; Embedded
+          </span>
+          <span class="cs-hero-meta-item">
+            <i class="fa fa-code-fork" aria-hidden="true"></i> Free &amp; Open Source (LGPLv2.1+) since 1985
+          </span>
+        </div>
+      </div>
+
+      <!-- Right Column: Live Interactive In-Browser Csound Demo -->
+      <div class="col-xl-6 col-lg-6">
+        <div class="cs-synth-card" role="region" aria-label="Live Csound WebAssembly Synthesizer">
+          <div class="cs-synth-header">
+            <div class="cs-synth-badge">
+              <span id="hero-status-dot" class="cs-status-dot" aria-hidden="true"></span>
+              <span id="hero-status-text">Live Browser Engine (WASM)</span>
             </div>
-            <div class="col">
-              <a href="download.html" class="btn btn-lg btn-secondary btn-home">DOWNLOAD</a>
+            <div class="cs-preset-tabs" role="tablist" aria-label="Select Csound example preset">
+              <button type="button" class="cs-preset-btn active" role="tab" aria-selected="true" data-preset="pling" onclick="selectHeroPreset('pling')">
+                1. Pling
+              </button>
+              <button type="button" class="cs-preset-btn" role="tab" aria-selected="false" data-preset="waveguide" onclick="selectHeroPreset('waveguide')">
+                2. Waveguide
+              </button>
+              <button type="button" class="cs-preset-btn" role="tab" aria-selected="false" data-preset="vibes" onclick="selectHeroPreset('vibes')">
+                3. Vibes
+              </button>
+            </div>
+          </div>
+
+          <div class="cs-synth-controls">
+            <div class="cs-synth-play-group">
+              <button type="button" id="hero-play-btn" class="cs-play-btn" onclick="toggleHeroCsound()">
+                <i id="hero-play-icon" class="fa fa-play" aria-hidden="true"></i>
+                <span id="hero-play-label">Play Audio</span>
+              </button>
+              <button type="button" id="hero-stop-btn" class="cs-stop-btn" onclick="stopHeroCsound()" disabled>
+                <i class="fa fa-stop" aria-hidden="true"></i> Stop
+              </button>
+            </div>
+            <p id="hero-preset-desc" class="cs-synth-desc">
+              <strong>Pling</strong> — Self-scheduling modal resonator percussion in 8 lines of code.
+            </p>
+          </div>
+
+          <div class="cs-synth-code-wrap">
+            <pre id="hero-code-pling" class="hero-code-pane"><code data-language="csound">instr Pling
+  // Modal filter excited by an impulse with random pitch &amp; damping
+  aMode = mode(mpulse(ampdb(random:i(-22, 0)), p3),
+               mtof:i(random:i(80, 100)), 10^(p3 - 1))
+  aL, aR pan2 aMode, random:i(0, 1)
+  out(aL, aR)
+  // Recursively schedule the next event
+  schedule("Pling", rnd:i(1), random:i(1, 4))
+endin
+schedule("Pling", 0, 3)</code></pre>
+            <pre id="hero-code-waveguide" class="hero-code-pane d-none"><code data-language="csound">instr start_sequences
+  krate = scale(rspline:k(0, 1, 0.1, 2)^2, 10, 0.3)
+  kcps  = cpsoct(rspline:k(4.3, 9.5, 0.1, 1))
+  kpan  = rspline:k(0.1, 4, 0.1, 1)
+  kwg1  = rspline:k(6, 9, 0.05, 1)
+  kwg2  = rspline:k(6, 9, 0.05, 1)
+  schedkwhennamed(metro(krate), 0, 0, "wguide2_note", 0, 4, kcps, kwg1, kwg2, kpan)
+endin
+schedule("start_sequences", 0, -1)</code></pre>
+            <pre id="hero-code-vibes" class="hero-code-pane d-none"><code data-language="csound">instr Tone
+  iamp, ifreq = p4, p5
+  ihrd = random:i(0.1, 0.9)
+  ipos = random:i(0, 1)
+  ares = vibes(iamp, ifreq, ihrd, ipos, 1, 6, 0.05, 2, 0.1)
+  adryl, adryr pan2 linen:a(ares, 0, p3, p3/2), random:i(0, 1)
+  out(adryl, adryr)
+  garev1 += 0.3 * adryl
+  garev2 += 0.3 * adryr
+endin</code></pre>
+          </div>
+
+          <div class="cs-synth-footer">
+            <span>Real-time synthesis via <code>@csound/browser</code></span>
+            <div class="d-flex gap-3">
+              <a href="{{ '/examples.html' | relative_url }}">More Examples &rarr;</a>
+              <a href="https://ide.csound.com/" target="_blank" rel="noopener">Try in Web IDE &rarr;</a>
             </div>
           </div>
         </div>
       </div>
-      
-      <!-- right side --> 
-      <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12">
-        <div class="home-carousel">      
-          <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-            </div>
-    
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <a href="https://csound.com/icsc2026/">
-                  <img class="d-block img-fluid" src="images/icsc-2026-caroussel.png" alt="icsc 2026">
-                  <div class="carousel-caption d-none d-md-block">
-                  </div>
-                </a>
-              </div>
+    </div>
+  </div>
+</section>
 
-              <div class="carousel-item">
-                <a href="/site/news/2025/09/15/CS7-web-ide">
-                  <img class="d-block img-fluid" src="images/code-cs7.png" alt="csound 7 code on web ide">
-                  <div class="carousel-caption d-none d-md-block">                
-                    <h2>Try out Csound 7!</h2>
-                    <p>Available on Web IDE and in Csound FLOSS Manual</p>
-                  </div>
-                </a>
-              </div>
+<!-- What You Can Build Section -->
+<section class="cs-section">
+  <div class="container">
+    <div class="cs-section-header text-center mx-auto" style="max-width: 68ch;">
+      <span class="cs-section-kicker">Why Csound</span>
+      <h2 class="cs-section-title">One audio engine. Every sonic paradigm.</h2>
+      <p class="cs-section-subtitle mx-auto">
+        From classic additive and FM synthesis to spectral phase vocoders, granular clouds, and physical models—Csound gives you sample-accurate control and unmatched longevity.
+      </p>
+    </div>
 
-              <div class="carousel-item">
-                <a href="examples.html">
-                  <img class="d-block img-fluid" src="images/code.png" alt="Code">
-                  <div class="carousel-caption d-none d-md-block">
-                    <h2>Examples</h2>
-                    <p>View code and listen</p></a>
-                  </div>
-                </a>
-              </div>
-              
-              <div class="carousel-item">
-                <a href="contribute.html">
-                  <img class="d-block img-fluid" src="images/contribute.png" alt="Contribute">
-                  <div class="carousel-caption d-none d-md-block">
-                    <h2>Contribute</h2>
-                    <p>The Csound project</p></a>
-                  </div>
-                </a>
-              </div>      
-            </div>
-            
-          <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+    <div class="row g-4">
+      <div class="col-lg-3 col-md-6">
+        <div class="cs-card">
+          <div class="cs-card-icon"><i class="fa fa-sliders" aria-hidden="true"></i></div>
+          <h3>Deep Sound Design</h3>
+          <p>Combine over 1,500 built-in opcodes for subtractive, FM, granular, spectral (PVS), waveguide, and modal synthesis—or write custom DSP with User-Defined Opcodes.</p>
+          <div class="cs-card-footer">
+            <a href="{{ '/opcode-finder.html' | relative_url }}" class="fw-bold text-decoration-none">Explore Opcodes &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="cs-card">
+          <div class="cs-card-icon"><i class="fa fa-plug" aria-hidden="true"></i></div>
+          <h3>Plugins &amp; Standalone Apps</h3>
+          <p>Design custom graphical interfaces with <strong>Cabbage</strong> to export VST3/AU plugins for any DAW, build interactive instruments in <strong>CsoundQt</strong>, or score in <strong>Blue</strong>.</p>
+          <div class="cs-card-footer">
+            <a href="{{ '/frontends.html' | relative_url }}" class="fw-bold text-decoration-none">Compare Frontends &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="cs-card">
+          <div class="cs-card-icon"><i class="fa fa-code" aria-hidden="true"></i></div>
+          <h3>Host APIs &amp; Live Coding</h3>
+          <p>Drive Csound from <strong>Python</strong> (Jupyter notebooks, <code>ctcsound</code>, <code>csoundengine</code>), <strong>C/C++</strong>, <strong>JavaScript/WASM</strong>, Max/MSP, or PureData.</p>
+          <div class="cs-card-footer">
+            <a href="{{ '/api.html' | relative_url }}" class="fw-bold text-decoration-none">Read API Docs &rarr;</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="cs-card">
+          <div class="cs-card-icon"><i class="fa fa-microchip" aria-hidden="true"></i></div>
+          <h3>Run Anywhere</h3>
+          <p>Deploy the exact same <code>.csd</code> orchestra on macOS, Windows, Linux, iOS, Android, Unity, Godot, WebAssembly, Raspberry Pi, Bela, ESP32, and ARM Cortex-M7.</p>
+          <div class="cs-card-footer">
+            <a href="{{ '/download.html' | relative_url }}" class="fw-bold text-decoration-none">View Platforms &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+
+<!-- Csound 7 Spotlight & Getting Started Path -->
+<section class="cs-section cs-section-subtle">
+  <div class="container">
+    <div class="row align-items-center gy-4">
+      <div class="col-lg-6">
+        <span class="cs-section-kicker">What's New in Csound 7</span>
+        <h2 class="cs-section-title">Expressive modern syntax meets 40 years of stability.</h2>
+        <p class="text-muted">
+          <strong>Csound 7.0</strong> introduces explicit colon type annotations (<code>sig:a</code>, <code> cutoff:k</code>), user-defined <code>struct</code> types, function-style UDO definitions, and a modernized host API—while running classic Csound pieces from the 1980s without modification.
+        </p>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li class="mb-2"><i class="fa fa-check-circle text-success me-2" aria-hidden="true"></i> <strong>Explicit Types &amp; Structs:</strong> Descriptive variable names and custom data structures.</li>
+          <li class="mb-2"><i class="fa fa-check-circle text-success me-2" aria-hidden="true"></i> <strong>Functional &amp; Classic Styles:</strong> Write <code>outall(moogladder:a(vco2:a(0.2, 440), 2000, 0.4))</code> or classic orchestra lines.</li>
+          <li class="mb-2"><i class="fa fa-check-circle text-success me-2" aria-hidden="true"></i> <strong>Zero-Install Browser Workflow:</strong> Learn interactively in the Csound Web IDE and FLOSS Manual.</li>
+        </ul>
+        <div class="d-flex flex-wrap gap-2">
+          <a href="{{ '/get-started.html' | relative_url }}" class="btn btn-cs-primary">Start the Beginner Tutorial</a>
+          <a href="https://flossmanual.csound.com/" class="btn btn-cs-outline" target="_blank" rel="noopener">Read the FLOSS Manual</a>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="cs-card">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="cs-badge cs-badge-primary">Csound 7 Syntax Example</span>
+            <span class="text-muted small font-monospace">subtractive-synth.csd</span>
+          </div>
+          <pre class="mb-0"><code data-language="csound">instr SubSynth
+  // Explicit variable typing in Csound 7
+  amp:i    = p4
+  freq:i   = p5
+  env:k    = madsr:k(0.05, 0.3, 0.6, 0.4)
+  osc1:a   = vco2:a(amp, freq)
+  osc2:a   = vco2:a(amp, freq * 0.995)
+  filtered:a = moogladder:a((osc1 + osc2) * 0.5, 4500 * env, 0.35)
+  outall(filtered * env)
+endin
+
+schedule("SubSynth", 0, 2.5, 0.25, 220)
+schedule("SubSynth", 0, 2.5, 0.25, 330)</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- News, Conferences & Community Showcase -->
+<section class="cs-section">
+  <div class="container">
+    <div class="row gy-5">
+      <!-- Latest News Column -->
+      <div class="col-lg-7">
+        <div class="d-flex justify-content-between align-items-end mb-3">
+          <div>
+            <span class="cs-section-kicker">Community Updates</span>
+            <h2 class="cs-section-title mb-0">Latest News &amp; Releases</h2>
+          </div>
+          <a href="{{ '/news.html' | relative_url }}" class="fw-bold text-decoration-none">All News &rarr;</a>
+        </div>
+        <div class="cs-card p-3 p-md-4">
+          {% for post in site.posts limit:6 %}
+          <div class="cs-news-item">
+            <div>
+              {% if post.categories contains 'showcase' %}
+              <span class="cs-badge me-1">Showcase</span>
+              {% else %}
+              <span class="cs-badge cs-badge-primary me-1">News</span>
+              {% endif %}
+              <a href="{{ post.url | relative_url }}" class="cs-news-title">{{ post.title }}</a>
+            </div>
+            <span class="cs-news-date">{{ post.date | date_to_string }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Featured Event & Heritage Column -->
+      <div class="col-lg-5">
+        <span class="cs-section-kicker">Events &amp; Heritage</span>
+        <h2 class="cs-section-title mb-3">Join the Global Community</h2>
+
+        <div class="cs-card cs-card-featured mb-3">
+          <div class="d-flex justify-content-between align-items-start mb-2">
+            <span class="cs-badge cs-badge-primary"><i class="fa fa-calendar" aria-hidden="true"></i> October 20–22, 2026</span>
+            <span class="small text-muted fw-bold">Trapani, Sicily</span>
+          </div>
+          <h3>8th International Csound Conference (ICSC 2026)</h3>
+          <p>Join composers, researchers, and instrument builders at the Chiostro di San Domenico in Trapani, Italy for concerts, paper sessions, and workshops.</p>
+          <div class="cs-card-footer">
+            <a href="https://csound.com/icsc2026/" class="btn btn-cs-primary btn-sm" target="_blank" rel="noopener">
+              Conference Website <i class="fa fa-external-link" aria-hidden="true"></i>
+            </a>
+            <a href="{{ '/conferences.html' | relative_url }}" class="btn btn-cs-outline btn-sm ms-1">
+              Past Conferences
+            </a>
+          </div>
+        </div>
+
+        <div class="cs-card">
+          <h3>Four Decades of Sound Exploration</h3>
+          <p class="mb-2">
+            With roots in Max Mathews' pioneering MUSIC-N series and released by Barry Vercoe at MIT in 1985, Csound is one of the longest-running open-source audio systems in computing history.
+          </p>
+          <div class="d-flex flex-wrap gap-3 mt-1">
+            <a href="{{ '/projects.html' | relative_url }}" class="fw-bold text-decoration-none">Explore Showcase &rarr;</a>
+            <a href="{{ '/people.html' | relative_url }}" class="fw-bold text-decoration-none">Meet Csounders &rarr;</a>
+            <a href="{{ '/contribute.html' | relative_url }}" class="fw-bold text-decoration-none">Contribute &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const HERO_PRESETS = {
+  pling: {
+    csd: "{{ '/learn/examples/pling.csd' | relative_url }}",
+    files: [],
+    desc: "<strong>Pling</strong> — Self-scheduling modal resonator percussion in 8 lines of code (Joachim Heintz).",
+    code: `instr Pling
+  // Modal filter excited by an impulse with random pitch & damping
+  aMode = mode(mpulse(ampdb(random:i(-22, 0)), p3),
+               mtof:i(random:i(80, 100)), 10^(p3 - 1))
+  aL, aR pan2 aMode, random:i(0, 1)
+  out(aL, aR)
+  // Recursively schedule the next event
+  schedule("Pling", rnd:i(1), random:i(1, 4))
+endin
+schedule("Pling", 0, 3)`
+  },
+  waveguide: {
+    csd: "{{ '/learn/examples/waveguide.csd' | relative_url }}",
+    files: [],
+    desc: "<strong>Waveguide</strong> — Iain McCurdy's <em>Csound Haiku III</em>: generative impulses through dual waveguides and reverb.",
+    code: `instr start_sequences
+  krate = scale(rspline:k(0, 1, 0.1, 2)^2, 10, 0.3)
+  kcps  = cpsoct(rspline:k(4.3, 9.5, 0.1, 1))
+  kpan  = rspline:k(0.1, 4, 0.1, 1)
+  kwg1  = rspline:k(6, 9, 0.05, 1)
+  kwg2  = rspline:k(6, 9, 0.05, 1)
+  schedkwhennamed(metro(krate), 0, 0, "wguide2_note", 0, 4, kcps, kwg1, kwg2, kpan)
+endin
+schedule("start_sequences", 0, -1)`
+  },
+  vibes: {
+    csd: "{{ '/learn/examples/vibes.csd' | relative_url }}",
+    files: [
+      { url: "{{ '/learn/examples/marmstk1.wav' | relative_url }}", dest: "marmstk1.wav" }
+    ],
+    desc: "<strong>Vibes</strong> — Physical model vibraphone textures driven by 2D parameter arrays (Luís Antunes Pena).",
+    code: `instr Tone
+  iamp, ifreq = p4, p5
+  ihrd = random:i(0.1, 0.9)
+  ipos = random:i(0, 1)
+  ares = vibes(iamp, ifreq, ihrd, ipos, 1, 6, 0.05, 2, 0.1)
+  adryl, adryr pan2 linen:a(ares, 0, p3, p3/2), random:i(0, 1)
+  out(adryl, adryr)
+  garev1 += 0.3 * adryl
+  garev2 += 0.3 * adryr
+endin`
+  }
+};
+
+let heroCsound = null;
+let heroCurrentPreset = "pling";
+let heroLoadedPreset = null;
+let heroIsPlaying = false;
+const HERO_CSOUND_URL = "https://cdn.jsdelivr.net/npm/@csound/browser@7.0.0/dist/csound.js";
+
+function updateHeroUI(stateText, playing) {
+  const dot = document.getElementById("hero-status-dot");
+  const status = document.getElementById("hero-status-text");
+  const playIcon = document.getElementById("hero-play-icon");
+  const playLabel = document.getElementById("hero-play-label");
+  const stopBtn = document.getElementById("hero-stop-btn");
+
+  status.textContent = stateText;
+  if (playing) {
+    dot.classList.add("is-playing");
+    playIcon.className = "fa fa-pause";
+    playLabel.textContent = "Pause";
+    stopBtn.disabled = false;
+  } else {
+    dot.classList.remove("is-playing");
+    playIcon.className = "fa fa-play";
+    playLabel.textContent = heroLoadedPreset === heroCurrentPreset && heroCsound ? "Resume Audio" : "Play Audio";
+    stopBtn.disabled = !heroCsound || !heroLoadedPreset;
+  }
+}
+
+async function copyHeroUrlToLocal(src, dest) {
+  const resp = await fetch(src);
+  const buf = await resp.arrayBuffer();
+  await heroCsound.fs.writeFile(dest, new Uint8Array(buf));
+}
+
+async function startHeroPreset(presetKey) {
+  const preset = HERO_PRESETS[presetKey];
+  updateHeroUI("Loading Csound WASM...", false);
+  const { Csound } = await import(HERO_CSOUND_URL);
+  if (heroCsound) {
+    try { await heroCsound.stop(); } catch (e) {}
+    try { await heroCsound.cleanup(); } catch (e) {}
+    heroCsound = null;
+  }
+  heroCsound = await Csound();
+  await heroCsound.setOption("-odac");
+  for (const f of preset.files) {
+    await copyHeroUrlToLocal(f.url, f.dest);
+  }
+  const localCsd = presetKey + ".csd";
+  await copyHeroUrlToLocal(preset.csd, localCsd);
+  await heroCsound.compileCSD(localCsd, 0);
+  await heroCsound.start();
+  heroLoadedPreset = presetKey;
+  heroIsPlaying = true;
+  updateHeroUI("Playing: " + presetKey.toUpperCase(), true);
+}
+
+async function toggleHeroCsound() {
+  try {
+    if (!heroCsound || heroLoadedPreset !== heroCurrentPreset) {
+      await startHeroPreset(heroCurrentPreset);
+      return;
+    }
+    if (heroIsPlaying) {
+      await heroCsound.pause();
+      heroIsPlaying = false;
+      updateHeroUI("Paused", false);
+    } else {
+      await heroCsound.resume();
+      heroIsPlaying = true;
+      updateHeroUI("Playing: " + heroCurrentPreset.toUpperCase(), true);
+    }
+  } catch (err) {
+    console.error(err);
+    updateHeroUI("Ready (Click Play)", false);
+  }
+}
+
+async function stopHeroCsound() {
+  if (!heroCsound) return;
+  try {
+    await heroCsound.stop();
+    await heroCsound.cleanup();
+  } catch (e) {}
+  heroCsound = null;
+  heroLoadedPreset = null;
+  heroIsPlaying = false;
+  updateHeroUI("Stopped", false);
+}
+
+async function selectHeroPreset(presetKey) {
+  heroCurrentPreset = presetKey;
+  const preset = HERO_PRESETS[presetKey];
+  document.getElementById("hero-preset-desc").innerHTML = preset.desc;
+  document.querySelectorAll(".hero-code-pane").forEach((pane) => {
+    pane.classList.toggle("d-none", pane.id !== "hero-code-" + presetKey);
+  });
+  document.querySelectorAll(".cs-preset-btn").forEach((btn) => {
+    const active = btn.getAttribute("data-preset") === presetKey;
+    btn.classList.toggle("active", active);
+    btn.setAttribute("aria-selected", active ? "true" : "false");
+  });
+  if (heroIsPlaying) {
+    await startHeroPreset(presetKey);
+  } else {
+    updateHeroUI("Ready: " + presetKey.toUpperCase(), false);
+  }
+}
+</script>
