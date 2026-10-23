@@ -87,18 +87,18 @@ layout: default
   aL, aR pan2 aMode, random:i(0, 1)
   out(aL, aR)
   // Recursively schedule the next event
-  schedule("Pling", rnd:i(1), random:i(1, 4))
+  schedule(Pling, rnd:i(1), random:i(1, 4))
 endin
-schedule("Pling", 0, 3)</code></pre>
+schedule(Pling, 0, 3)</code></pre>
             <pre id="hero-code-waveguide" class="hero-code-pane d-none"><code data-language="csound">instr start_sequences
   krate = scale(rspline:k(0, 1, 0.1, 2)^2, 10, 0.3)
   kcps  = cpsoct(rspline:k(4.3, 9.5, 0.1, 1))
   kpan  = rspline:k(0.1, 4, 0.1, 1)
   kwg1  = rspline:k(6, 9, 0.05, 1)
   kwg2  = rspline:k(6, 9, 0.05, 1)
-  schedkwhennamed(metro(krate), 0, 0, "wguide2_note", 0, 4, kcps, kwg1, kwg2, kpan)
+  schedkwhen(metro(krate), 0, 0, wguide2_note, 0, 4, kcps, kwg1, kwg2, kpan)
 endin
-schedule("start_sequences", 0, -1)</code></pre>
+schedule(start_sequences, 0, -1)</code></pre>
             <pre id="hero-code-vibes" class="hero-code-pane d-none"><code data-language="csound">instr Tone
   iamp, ifreq = p4, p5
   ihrd = random:i(0.1, 0.9)
@@ -221,8 +221,8 @@ endin</code></pre>
   outall(filtered * env)
 endin
 
-schedule("SubSynth", 0, 2.5, 0.25, 220)
-schedule("SubSynth", 0, 2.5, 0.25, 330)</code></pre>
+schedule(SubSynth, 0, 2.5, 0.25, 220)
+schedule(SubSynth, 0, 2.5, 0.25, 330)</code></pre>
         </div>
       </div>
     </div>
@@ -310,9 +310,9 @@ const HERO_PRESETS = {
   aL, aR pan2 aMode, random:i(0, 1)
   out(aL, aR)
   // Recursively schedule the next event
-  schedule("Pling", rnd:i(1), random:i(1, 4))
+  schedule(Pling, rnd:i(1), random:i(1, 4))
 endin
-schedule("Pling", 0, 3)`
+schedule(Pling, 0, 3)`
   },
   waveguide: {
     csd: "{{ '/learn/examples/waveguide.csd' | relative_url }}",
@@ -324,9 +324,9 @@ schedule("Pling", 0, 3)`
   kpan  = rspline:k(0.1, 4, 0.1, 1)
   kwg1  = rspline:k(6, 9, 0.05, 1)
   kwg2  = rspline:k(6, 9, 0.05, 1)
-  schedkwhennamed(metro(krate), 0, 0, "wguide2_note", 0, 4, kcps, kwg1, kwg2, kpan)
+  schedkwhen(metro(krate), 0, 0, wguide2_note, 0, 4, kcps, kwg1, kwg2, kpan)
 endin
-schedule("start_sequences", 0, -1)`
+schedule(start_sequences, 0, -1)`
   },
   vibes: {
     csd: "{{ '/learn/examples/vibes.csd' | relative_url }}",

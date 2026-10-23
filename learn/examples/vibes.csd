@@ -48,7 +48,7 @@ instr Params
   turnoff
   
 endin
-schedule("Params",0,1)
+schedule(Params,0,1)
 
 // create one section
 instr MakeChord
@@ -74,13 +74,13 @@ instr MakeChord
   // frequency shift if ifreq1 != ifreq2
   kfreq = gkArr[3] + phasor:k(1/gkArr[2]) * (gkArr[4]-gkArr[3])
   // generate chord for each metro tick
-  schedkwhen(metro(kfm),0,0,"Chord",0,1/gkArr[1],kfreq)
+  schedkwhen(metro(kfm),0,0,Chord,0,1/gkArr[1],kfreq)
   
   // count time (decrease like in a sandglass)
   kTime -= 1/kr
   
 endin
-schedule("MakeChord",0,-1)
+schedule(MakeChord,0,-1)
 
 // create one chord
 instr Chord
@@ -103,7 +103,7 @@ instr Chord
     iffactor = semitone(iint)
     ifreq *= iffactor
     iamp = random:i(iamp,iamp*1.05)
-    schedule "Tone", 0, p3, iamp, ifreq*iffactor
+    schedule Tone, 0, p3, iamp, ifreq*iffactor
   
     indx += 1
   od
@@ -139,7 +139,7 @@ instr Reverb
   clear(garev1,garev2)
   
 endin
-schedule("Reverb",0,-1)
+schedule(Reverb,0,-1)
 
 </CsInstruments>
 <CsScore>

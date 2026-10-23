@@ -48,7 +48,7 @@ instr Params
                           -18,2,10, 30, 20,4,8,6)
   turnoff
 endin
-schedule("Params",0,1)
+schedule(Params,0,1)
 
 // create one tone with the vibes physical model
 instr Tone

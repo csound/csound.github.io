@@ -35,7 +35,7 @@ instr in_sel
   // clear the excitation signal
   chnclear("excite")
 endin
-schedule("in_sel", 0, gilong)
+schedule(in_sel, 0, gilong)
 
 // instrument triggered by a midi keyboard
 instr midi_synth
@@ -51,11 +51,11 @@ instr substitute_midi_control
   // trigger in a way that mostly there are two simultaneous layers
   trig_freq:k init 1
   if (metro(trig_freq) == 1) then
-    schedulek("substitute_midi_play",0,random:k(1,3),random:k(55,66))
+    schedulek(substitute_midi_play,0,random:k(1,3),random:k(55,66))
     trig_freq = random:k(2/3,4/3)
   endif
 endin
-;schedule("substitute_midi_control",0,-1)
+;schedule(substitute_midi_control,0,-1)
 
 instr substitute_midi_play
   // get midi note and convert to frequency
@@ -75,14 +75,14 @@ instr voc_bands
   oct_div:i = 4/12
   // call as many instances of this instrument as necessary
   if cf*2^oct_div < cf_max then
-    schedule("voc_bands", 0, gilong, cf*2^oct_div)
+    schedule(voc_bands, 0, gilong, cf*2^oct_div)
   endif
   // band width
   bw:i = cf/8 
   // create vocoder band depending on the input signal and output
   outall(but2(chnget:a("excite"),cf,bw) * rms(but2(chnget:a("input"),cf,bw)))
 endin
-schedule("voc_bands", 0, gilong, 80)
+schedule(voc_bands, 0, gilong, 80)
 
 
 </CsInstruments>
