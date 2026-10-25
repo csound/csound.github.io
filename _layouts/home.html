@@ -75,21 +75,20 @@ layout: default
               </button>
             </div>
             <p id="hero-preset-desc" class="cs-synth-desc">
-              <strong>Pling</strong> — Self-scheduling modal resonator percussion in 8 lines of code.
+              <strong>Pling</strong> — Self-scheduling modal resonator percussion in few lines of code.
             </p>
           </div>
 
           <div class="cs-synth-code-wrap">
             <pre id="hero-code-pling" class="hero-code-pane"><code data-language="csound">instr Pling
   // Modal filter excited by an impulse with random pitch &amp; damping
-  aMode = mode(mpulse(ampdb(random:i(-22, 0)), p3),
-               mtof:i(random:i(80, 100)), 10^(p3 - 1))
-  aL, aR pan2 aMode, random:i(0, 1)
-  out(aL, aR)
+  plg:a = mode(mpulse(ampdb(random(-22, 0)), p3),
+               mtof(random(80, 100)), 10^(p3 - 1))
+  out(pan2:a[](plg, random(0, 1)))
   // Recursively schedule the next event
-  schedule(Pling, rnd:i(1), random:i(1, 4))
+  schedule(Pling, rnd(1), random(1, 4))
 endin
-schedule(Pling, 0, 3)</code></pre>
+schedule(Pling, 0, 1)</code></pre>
             <pre id="hero-code-waveguide" class="hero-code-pane d-none"><code data-language="csound">instr start_sequences
   krate = scale(rspline:k(0, 1, 0.1, 2)^2, 10, 0.3)
   kcps  = cpsoct(rspline:k(4.3, 9.5, 0.1, 1))
