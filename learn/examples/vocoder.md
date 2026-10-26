@@ -20,7 +20,7 @@ permalink: /examples/vocoder.html
     </a>
   </div>
   <label for="console" class="visually-hidden">Csound Console Output</label>
-  <textarea class="console" cols="80" rows="5" id="console" readonly placeholder="Click Play to start the Csound WebAssembly engine..."></textarea>
+  <textarea class="console" cols="80" rows="5" id="console" readonly placeholder="Connect your MIDI keyboard and click Play to start the Csound WebAssembly engine..."></textarea>
 </div>
 
 ```csound
@@ -43,7 +43,7 @@ instr 3  // recursive vocoder bands
  out(butterbp(butterbp(chnget:a("excite"), p4, p4/p6), p4, p4/p6) *
      rms(butterbp(butterbp(chnget:a("input"), p4, p4/p6), p4, p4/p6)))
  nxt:i = p4*2^(p7/12)
- if nxt < p5 then
+ if nxt &lt; p5 then
   schedule(p1+0.001, 0, -1, nxt, p5, p6, p7)
  endif
 endin
