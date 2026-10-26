@@ -3,7 +3,7 @@
 const csoundjs = "https://cdn.jsdelivr.net/npm/@csound/browser@7.0.0/dist/csound.js";
 let csound = null;
 let isOn = false;
-const csd = "/learn/examples/vocoder-orig-cs6-no-midi.csd";
+const csd = "/learn/examples/vocoder.csd";
 const speechSample = "/learn/examples/fox.wav";
 
 async function start() {

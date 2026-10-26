@@ -90,23 +90,25 @@ layout: default
 endin
 schedule(Pling, 0, 1)</code></pre>
             <pre id="hero-code-waveguide" class="hero-code-pane d-none"><code data-language="csound">instr start_sequences
-  krate = scale(rspline:k(0, 1, 0.1, 2)^2, 10, 0.3)
-  kcps  = cpsoct(rspline:k(4.3, 9.5, 0.1, 1))
-  kpan  = rspline:k(0.1, 4, 0.1, 1)
-  kwg1  = rspline:k(6, 9, 0.05, 1)
-  kwg2  = rspline:k(6, 9, 0.05, 1)
-  schedkwhen(metro(krate), 0, 0, wguide2_note, 0, 4, kcps, kwg1, kwg2, kpan)
+  rate:k = scale(rspline:k(0,1,0.1,2)^2,10,0.3)
+  cps:k = cpsoct(rspline:k(4.3,9.5,0.1,1))
+  pan:k = rspline(0.1,4,0.1,1)
+  wgoct1:k = rspline(6,9,0.05,1)
+  wgoct2:k = rspline(6,9,0.05,1)
+  schedkwhen(metro(rate),0,0,wguide2_note,0,4,cps,wgoct1,wgoct2,pan)
 endin
 schedule(start_sequences, 0, -1)</code></pre>
             <pre id="hero-code-vibes" class="hero-code-pane d-none"><code data-language="csound">instr Tone
-  iamp, ifreq = p4, p5
-  ihrd = random:i(0.1, 0.9)
-  ipos = random:i(0, 1)
-  ares = vibes(iamp, ifreq, ihrd, ipos, 1, 6, 0.05, 2, 0.1)
-  adryl, adryr pan2 linen:a(ares, 0, p3, p3/2), random:i(0, 1)
-  out(adryl, adryr)
-  garev1 += 0.3 * adryl
-  garev2 += 0.3 * adryr
+  amp:i, freq:i = p4, p5
+  hrd:i, pos:i = random:i(0.1,0.9), random:i(0,1)
+  res:a = vibes(amp,freq,hrd,pos,1,6,0.05,2,0.1)
+  // panning and dry output
+  dryl:a,dryr:a = pan2(linen(res,0,p3,p3/2),random:i(0,1))
+  out(dryl,dryr)
+  // send part of it to reverb
+  rsend:i = random(0.2, 0.4)
+  Rev1 += rsend * dryl
+  Rev2 += rsend * dryr
 endin</code></pre>
           </div>
 
@@ -301,29 +303,28 @@ const HERO_PRESETS = {
   pling: {
     csd: "{{ '/learn/examples/pling.csd' | relative_url }}",
     files: [],
-    desc: "<strong>Pling</strong> — Self-scheduling modal resonator percussion in 8 lines of code (Joachim Heintz).",
+    desc: "<strong>Pling</strong> — Self-scheduling modal resonator percussion in few lines of code (Joachim Heintz).",
     code: `instr Pling
-  // Modal filter excited by an impulse with random pitch & damping
-  aMode = mode(mpulse(ampdb(random:i(-22, 0)), p3),
-               mtof:i(random:i(80, 100)), 10^(p3 - 1))
-  aL, aR pan2 aMode, random:i(0, 1)
-  out(aL, aR)
+  // Modal filter excited by an impulse with random pitch &amp; damping
+  plg:a = mode(mpulse(ampdb(random(-22, 0)), p3),
+               mtof(random(80, 100)), 10^(p3 - 1))
+  out(pan2:a[](plg, random(0, 1)))
   // Recursively schedule the next event
-  schedule(Pling, rnd:i(1), random:i(1, 4))
+  schedule(Pling, rnd(1), random(1, 4))
 endin
-schedule(Pling, 0, 3)`
+schedule(Pling, 0, 1)`
   },
   waveguide: {
     csd: "{{ '/learn/examples/waveguide.csd' | relative_url }}",
     files: [],
     desc: "<strong>Waveguide</strong> — Iain McCurdy's <em>Csound Haiku III</em>: generative impulses through dual waveguides and reverb.",
     code: `instr start_sequences
-  krate = scale(rspline:k(0, 1, 0.1, 2)^2, 10, 0.3)
-  kcps  = cpsoct(rspline:k(4.3, 9.5, 0.1, 1))
-  kpan  = rspline:k(0.1, 4, 0.1, 1)
-  kwg1  = rspline:k(6, 9, 0.05, 1)
-  kwg2  = rspline:k(6, 9, 0.05, 1)
-  schedkwhen(metro(krate), 0, 0, wguide2_note, 0, 4, kcps, kwg1, kwg2, kpan)
+  rate:k = scale(rspline:k(0,1,0.1,2)^2,10,0.3)
+  cps:k = cpsoct(rspline:k(4.3,9.5,0.1,1))
+  pan:k = rspline(0.1,4,0.1,1)
+  wgoct1:k = rspline(6,9,0.05,1)
+  wgoct2:k = rspline(6,9,0.05,1)
+  schedkwhen(metro(rate),0,0,wguide2_note,0,4,cps,wgoct1,wgoct2,pan)
 endin
 schedule(start_sequences, 0, -1)`
   },
@@ -334,14 +335,16 @@ schedule(start_sequences, 0, -1)`
     ],
     desc: "<strong>Vibes</strong> — Physical model vibraphone textures driven by 2D parameter arrays (Luís Antunes Pena).",
     code: `instr Tone
-  iamp, ifreq = p4, p5
-  ihrd = random:i(0.1, 0.9)
-  ipos = random:i(0, 1)
-  ares = vibes(iamp, ifreq, ihrd, ipos, 1, 6, 0.05, 2, 0.1)
-  adryl, adryr pan2 linen:a(ares, 0, p3, p3/2), random:i(0, 1)
-  out(adryl, adryr)
-  garev1 += 0.3 * adryl
-  garev2 += 0.3 * adryr
+  amp:i, freq:i = p4, p5
+  hrd:i, pos:i = random:i(0.1,0.9), random:i(0,1)
+  res:a = vibes(amp,freq,hrd,pos,1,6,0.05,2,0.1)
+  // panning and dry output
+  dryl:a,dryr:a = pan2(linen(res,0,p3,p3/2),random:i(0,1))
+  out(dryl,dryr)
+  // send part of it to reverb
+  rsend:i = random(0.2, 0.4)
+  Rev1 += rsend * dryl
+  Rev2 += rsend * dryr
 endin`
   }
 };
