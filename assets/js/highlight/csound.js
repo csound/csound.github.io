@@ -13,6 +13,10 @@ Rainbow.extend('csound', [
         'pattern': /&lt;\/?(CsoundSynthesizer|CsOptions|CsInstruments|CsScore)&gt;/gm
     },
     {
+        'name': 'keyword.operator',
+        'pattern': /&(gt|lt|amp);/g
+    },
+    {
         'name': 'comment',
         'pattern': /\/\*[\s\S]*?\*\/|\/\/[\s\S]*?$|;[\s\S]*?$/gm
     },
@@ -23,7 +27,7 @@ Rainbow.extend('csound', [
     },
     {
         'name': 'keyword.operator',
-        'pattern': /\!|&(gt|lt|amp);|\\|\\|\=|\=\=|\!\=|\*|\/|\+|\-|\+\=|\-\=|\*\=|\/\=/g
+        'pattern': /\!|\\|\\|\=|\=\=|\!\=|\*|\/|\+|\-|\+\=|\-\=|\*\=|\/\=/g
     },
     {
         'matches': {
