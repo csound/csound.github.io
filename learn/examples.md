@@ -72,12 +72,12 @@ All audio in these examples is synthesized live in your browser using [Csound Ja
         <span class="text-muted small">Victor Lazzarini</span>
       </div>
       <h3><a href="{{ '/examples/vocoder.html' | relative_url }}" class="text-decoration-none">Recursive Channel Vocoder</a></h3>
-      <p>Demonstrates recursive instrument instantiation in Csound: a single 8-line instrument spawns a full multi-band Butterworth channel vocoder analyzing speech (`fox.wav`) to modulate a detuned sawtooth synth.</p>
+      <p>Multi-band Butterworth channel vocoder analyzing speech (`fox.wav`) to modulate a detuned sawtooth synth is driven by MIDI keyboard realtime input.</p>
       <div class="cs-card-footer">
         <a href="{{ '/examples/vocoder.html' | relative_url }}" class="btn btn-cs-primary btn-sm">
           <i class="fa fa-play" aria-hidden="true"></i> Listen &amp; View Code
         </a>
-        <a href="{{ '/learn/examples/vocoder-orig-cs6-no-midi.csd' | relative_url }}" class="btn btn-cs-outline btn-sm ms-1" download>
+        <a href="{{ '/learn/examples/vocoder.csd' | relative_url }}" class="btn btn-cs-outline btn-sm ms-1" download>
           <i class="fa fa-download" aria-hidden="true"></i> .csd
         </a>
       </div>
