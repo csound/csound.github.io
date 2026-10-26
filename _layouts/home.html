@@ -298,6 +298,7 @@ schedule(SubSynth, 0, 2.5, 0.25, 330)</code></pre>
   </div>
 </section>
 
+<script src="{{ '/assets/js/csound-audio-session.js' | relative_url }}"></script>
 <script>
 const HERO_PRESETS = {
   pling: {
@@ -353,6 +354,8 @@ let heroCsound = null;
 let heroCurrentPreset = "pling";
 let heroLoadedPreset = null;
 let heroIsPlaying = false;
+let heroIsLoading = false;
+let heroAudioSession = null;
 const HERO_CSOUND_URL = "https://cdn.jsdelivr.net/npm/@csound/browser@7.0.0/dist/csound.js";
 
 function updateHeroUI(stateText, playing) {
@@ -383,29 +386,51 @@ async function copyHeroUrlToLocal(src, dest) {
 }
 
 async function startHeroPreset(presetKey) {
+  if (heroIsLoading) return;
+  heroIsLoading = true;
   const preset = HERO_PRESETS[presetKey];
-  updateHeroUI("Loading Csound WASM...", false);
-  const { Csound } = await import(HERO_CSOUND_URL);
-  if (heroCsound) {
-    try { await heroCsound.stop(); } catch (e) {}
-    try { await heroCsound.cleanup(); } catch (e) {}
+  let session;
+  try {
+    await stopHeroCsound();
+    updateHeroUI("Loading Csound WASM...", false);
+    session = beginPlaybackAudioSession();
+    heroAudioSession = session;
+    const { Csound } = await import(HERO_CSOUND_URL);
+    heroCsound = await Csound();
+    await heroCsound.on("realtimePerformanceEnded", () => session?.release());
+    await heroCsound.setOption("-odac");
+    for (const f of preset.files) {
+      await copyHeroUrlToLocal(f.url, f.dest);
+    }
+    const localCsd = presetKey + ".csd";
+    await copyHeroUrlToLocal(preset.csd, localCsd);
+    if (await heroCsound.compileCSD(localCsd, 0) !== 0) {
+      throw new Error("Csound could not compile this example.");
+    }
+    if (await heroCsound.start() !== 0) {
+      throw new Error("Csound could not start this example.");
+    }
+    heroLoadedPreset = presetKey;
+    heroIsPlaying = true;
+    updateHeroUI("Playing: " + presetKey.toUpperCase(), true);
+  } catch (error) {
+    session?.release();
+    if (heroCsound) {
+      try { await heroCsound.terminateInstance(); } catch (e) {}
+    }
     heroCsound = null;
+    heroAudioSession = null;
+    heroLoadedPreset = null;
+    heroIsPlaying = false;
+    console.error(error);
+    updateHeroUI("Ready (Click Play)", false);
+  } finally {
+    heroIsLoading = false;
   }
-  heroCsound = await Csound();
-  await heroCsound.setOption("-odac");
-  for (const f of preset.files) {
-    await copyHeroUrlToLocal(f.url, f.dest);
-  }
-  const localCsd = presetKey + ".csd";
-  await copyHeroUrlToLocal(preset.csd, localCsd);
-  await heroCsound.compileCSD(localCsd, 0);
-  await heroCsound.start();
-  heroLoadedPreset = presetKey;
-  heroIsPlaying = true;
-  updateHeroUI("Playing: " + presetKey.toUpperCase(), true);
 }
 
 async function toggleHeroCsound() {
+  if (heroIsLoading) return;
   try {
     if (!heroCsound || heroLoadedPreset !== heroCurrentPreset) {
       await startHeroPreset(heroCurrentPreset);
@@ -432,6 +457,8 @@ async function stopHeroCsound() {
     await heroCsound.stop();
     await heroCsound.cleanup();
   } catch (e) {}
+  heroAudioSession?.release();
+  heroAudioSession = null;
   heroCsound = null;
   heroLoadedPreset = null;
   heroIsPlaying = false;
@@ -439,6 +466,7 @@ async function stopHeroCsound() {
 }
 
 async function selectHeroPreset(presetKey) {
+  if (heroIsLoading) return;
   heroCurrentPreset = presetKey;
   const preset = HERO_PRESETS[presetKey];
   document.getElementById("hero-preset-desc").innerHTML = preset.desc;

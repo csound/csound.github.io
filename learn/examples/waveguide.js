@@ -3,23 +3,45 @@
 const csoundjs = "https://cdn.jsdelivr.net/npm/@csound/browser@7.0.0/dist/csound.js";
 let csound = null;
 let isOn = false;
+let isStarting = false;
 const csd = "/learn/examples/waveguide.csd";
 
 async function start() {
+  if (isStarting) return;
   const consoleEl = document.getElementById("console");
   if (csound == null) {
-    const { Csound } = await import(csoundjs);
-    consoleEl.value += "loading Csound 7.0.0 WASM...\n";
-    consoleEl.scrollTop = consoleEl.scrollHeight;
-    csound = await Csound();
-    await csound.on("message", handleMessage);
-    await csound.setOption("-odac");
-    await copyUrlToLocal(csd, "waveguide.csd");
-    await csound.compileCSD("waveguide.csd", 0);
-    await csound.start();
-    isOn = true;
-    consoleEl.value += "running...\n";
-    consoleEl.scrollTop = consoleEl.scrollHeight;
+    isStarting = true;
+    const session = beginPlaybackAudioSession();
+    try {
+      const { Csound } = await import(csoundjs);
+      consoleEl.value += "loading Csound 7.0.0 WASM...\n";
+      consoleEl.scrollTop = consoleEl.scrollHeight;
+      csound = await Csound();
+      await csound.on("message", handleMessage);
+      await csound.on("realtimePerformanceEnded", () => session?.release());
+      await csound.setOption("-odac");
+      await copyUrlToLocal(csd, "waveguide.csd");
+      if (await csound.compileCSD("waveguide.csd", 0) !== 0) {
+        throw new Error("Csound could not compile this example.");
+      }
+      if (await csound.start() !== 0) {
+        throw new Error("Csound could not start this example.");
+      }
+      isOn = true;
+      consoleEl.value += "running...\n";
+      consoleEl.scrollTop = consoleEl.scrollHeight;
+    } catch (error) {
+      session?.release();
+      if (csound) {
+        try { await csound.terminateInstance(); } catch (e) {}
+      }
+      csound = null;
+      isOn = false;
+      handleMessage(error.message);
+      console.error(error);
+    } finally {
+      isStarting = false;
+    }
     return;
   }
   if (!isOn) {
@@ -50,6 +72,7 @@ async function copyUrlToLocal(src, dest) {
 }
 
 async function pause() {
+  if (isStarting) return;
   const consoleEl = document.getElementById("console");
   if (csound != null) {
     if (isOn) {

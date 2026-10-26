@@ -142,3 +142,11 @@ This will start up a jekyll server. You can view the pages as they are rendered 
 
     http://localhost:4000
     
+
+### Testing browser playback
+
+With Node.js installed, run:
+
+    node --experimental-vm-modules --test _tests/audio-session.test.cjs
+
+These tests check the iOS audio-session helper and the home-page and example players.
