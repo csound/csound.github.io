@@ -5,7 +5,8 @@ subtitle: Three lines of DSP code generating a self-scheduling structure of moda
 permalink: /examples/pling.html
 ---
 
-<script type="text/javascript" src="{{ '/learn/examples/pling.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/csound-example-player.js' | relative_url }}"
+        data-csd="{{ '/learn/examples/pling.csd' | relative_url }}"></script>
 
 <div class="cs-example-player-box">
   <div class="cs-example-toolbar">

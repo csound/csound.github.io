@@ -5,7 +5,9 @@ subtitle: Connect MIDI keyboard to play multi-band Butterworth channel vocoder (
 permalink: /examples/vocoder.html
 ---
 
-<script type="text/javascript" src="{{ '/learn/examples/vocoder.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/csound-example-player.js' | relative_url }}"
+        data-csd="{{ '/learn/examples/vocoder.csd' | relative_url }}"
+        data-sample="{{ '/learn/examples/fox.wav' | relative_url }}"></script>
 
 <div class="cs-example-player-box">
   <div class="cs-example-toolbar">

@@ -5,7 +5,9 @@ subtitle: Algorithmic chord progressions using 2D parameter arrays and Csound's 
 permalink: /examples/vibes.html
 ---
 
-<script type="text/javascript" src="{{ '/learn/examples/vibes.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/csound-example-player.js' | relative_url }}"
+        data-csd="{{ '/learn/examples/vibes.csd' | relative_url }}"
+        data-sample="{{ '/learn/examples/marmstk1.wav' | relative_url }}"></script>
 
 <div class="cs-example-player-box">
   <div class="cs-example-toolbar">
