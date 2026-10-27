@@ -83,8 +83,21 @@ async function player(name, failure) {
   const instances = [];
   const errors = [];
   let imports = 0;
+  const fetched = [];
+  const written = [];
+  const compiled = [];
+  const page = name === "home" ? "" : readFileSync(join(root, `learn/examples/${name}.md`), "utf8");
+  const script = page.match(/<script src="\{\{ '\/assets\/js\/csound-example-player\.js' \| relative_url \}\}"[\s\S]*?<\/script>/)?.[0];
+  const pageAsset = (attribute) => {
+    const path = script?.match(new RegExp(`data-${attribute}="\\{\\{ '([^']+)' \\| relative_url \\}\\}"`))?.[1];
+    return path && `/preview${path}`;
+  };
   context.console = { error: (error) => errors.push(error) };
   context.document = {
+    currentScript: { dataset: {
+      csd: pageAsset("csd"),
+      sample: pageAsset("sample")
+    } },
     getElementById(id) {
       if (!elements.has(id)) elements.set(id, {
         value: "", textContent: "", classList: { add() {}, remove() {} }
@@ -93,7 +106,8 @@ async function player(name, failure) {
     },
     querySelectorAll: () => []
   };
-  context.fetch = async () => {
+  context.fetch = async (url) => {
+    fetched.push(url);
     if (failure === "fetch") throw new Error("fetch failed");
     return { arrayBuffer: async () => new ArrayBuffer(0) };
   };
@@ -107,8 +121,11 @@ async function player(name, failure) {
         terminated: false,
         on: (event, callback) => listeners.set(event, callback),
         setOption: async () => {},
-        fs: { writeFile: async () => {} },
-        compileCSD: async () => failure === "compile" ? -1 : 0,
+        fs: { writeFile: async (filename) => written.push(filename) },
+        compileCSD: async (filename) => {
+          compiled.push(filename);
+          return failure === "compile" ? -1 : 0;
+        },
         start: async () => failure === "start" ? -1 : 0,
         pause: async () => {},
         resume: async () => {},
@@ -127,7 +144,7 @@ async function player(name, failure) {
   await module.evaluate();
   const source = name === "home"
     ? home.match(/<script>([\s\S]*?)<\/script>/)[1]
-    : readFileSync(join(root, `learn/examples/${name}.js`), "utf8");
+    : readFileSync(join(root, "assets/js/csound-example-player.js"), "utf8");
   new vm.Script(source, {
     importModuleDynamically: async () => {
       imports++;
@@ -136,12 +153,24 @@ async function player(name, failure) {
     }
   }).runInContext(context);
   return {
-    context, instances, errors,
+    context, instances, errors, fetched, written, compiled,
     imports: () => imports,
     start: () => name === "home" ? context.toggleHeroCsound() : context.start(),
     pause: () => name === "home" ? context.toggleHeroCsound() : context.pause(),
     type: () => context.navigator.audioSession.type
   };
+}
+
+for (const [name, sample] of [["pling"], ["waveguide"], ["vibes", "marmstk1.wav"], ["vocoder", "fox.wav"]]) {
+  test(`${name}: page configuration loads the correct files under a base URL`, async () => {
+    const p = await player(name);
+    await p.start();
+    const files = [...(sample ? [sample] : []), `${name}.csd`];
+    assert.deepEqual(p.fetched, files.map((file) => `/preview/learn/examples/${file}`));
+    assert.deepEqual(p.written, files);
+    assert.deepEqual(p.compiled, [`${name}.csd`]);
+    assert.equal(p.errors.length, 0);
+  });
 }
 
 for (const name of ["home", "pling", "waveguide", "vibes", "vocoder"]) {

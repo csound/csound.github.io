@@ -1,10 +1,11 @@
-// play "pling.csd" with @csound/browser 7.0.0
+// Play a Csound example configured by the script tag.
 
 const csoundjs = "https://cdn.jsdelivr.net/npm/@csound/browser@7.0.0/dist/csound.js";
 let csound = null;
 let isOn = false;
 let isStarting = false;
-const csd = "/learn/examples/pling.csd";
+const { csd, sample } = document.currentScript.dataset;
+const csdFile = csd.split("/").pop();
 
 async function start() {
   if (isStarting) return;
@@ -20,8 +21,9 @@ async function start() {
       await csound.on("message", handleMessage);
       await csound.on("realtimePerformanceEnded", () => session?.release());
       await csound.setOption("-odac");
-      await copyUrlToLocal(csd, "pling.csd");
-      if (await csound.compileCSD("pling.csd", 0) !== 0) {
+      if (sample) await copyUrlToLocal(sample, sample.split("/").pop());
+      await copyUrlToLocal(csd, csdFile);
+      if (await csound.compileCSD(csdFile, 0) !== 0) {
         throw new Error("Csound could not compile this example.");
       }
       if (await csound.start() !== 0) {

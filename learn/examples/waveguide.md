@@ -5,7 +5,8 @@ subtitle: Iain McCurdy's Csound Haiku III — A generative play with timbral qua
 permalink: /examples/waveguide.html
 ---
 
-<script type="text/javascript" src="{{ '/learn/examples/waveguide.js' | relative_url }}"></script>
+<script src="{{ '/assets/js/csound-example-player.js' | relative_url }}"
+        data-csd="{{ '/learn/examples/waveguide.csd' | relative_url }}"></script>
 
 <div class="cs-example-player-box">
   <div class="cs-example-toolbar">
