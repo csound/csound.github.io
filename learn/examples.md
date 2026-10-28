@@ -23,6 +23,9 @@ All audio in these examples is synthesized live in your browser using [Csound Ja
         <a href="{{ '/learn/examples/pling.csd' | relative_url }}" class="btn btn-cs-outline btn-sm ms-1" download>
           <i class="fa fa-download" aria-hidden="true"></i> .csd
         </a>
+        <a href="https://ide.csound.com/editor/1cDgMwlXoVvB2aWnZgXr" class="btn btn-cs-outline btn-sm" target="_blank" rel="noopener">
+            <i class="fa fa-external-link" aria-hidden="true"></i> Open in Web IDE
+        </a>
       </div>
     </div>
   </div>
@@ -41,6 +44,9 @@ All audio in these examples is synthesized live in your browser using [Csound Ja
         </a>
         <a href="{{ '/learn/examples/waveguide.csd' | relative_url }}" class="btn btn-cs-outline btn-sm ms-1" download>
           <i class="fa fa-download" aria-hidden="true"></i> .csd
+        </a>
+        <a href="https://ide.csound.com/editor/AQQeAaA78Ce4ZwRodCRm" class="btn btn-cs-outline btn-sm" target="_blank" rel="noopener">
+            <i class="fa fa-external-link" aria-hidden="true"></i> Open in Web IDE
         </a>
       </div>
     </div>
@@ -61,6 +67,9 @@ All audio in these examples is synthesized live in your browser using [Csound Ja
         <a href="{{ '/learn/examples/vibes.csd' | relative_url }}" class="btn btn-cs-outline btn-sm ms-1" download>
           <i class="fa fa-download" aria-hidden="true"></i> .csd
         </a>
+        <a href="https://ide.csound.com/editor/JU6CkuidYq0wkULO63Zr" class="btn btn-cs-outline btn-sm" target="_blank" rel="noopener">
+            <i class="fa fa-external-link" aria-hidden="true"></i> Open in Web IDE
+        </a>
       </div>
     </div>
   </div>
@@ -79,6 +88,9 @@ All audio in these examples is synthesized live in your browser using [Csound Ja
         </a>
         <a href="{{ '/learn/examples/vocoder.csd' | relative_url }}" class="btn btn-cs-outline btn-sm ms-1" download>
           <i class="fa fa-download" aria-hidden="true"></i> .csd
+        </a>
+        <a href="https://ide.csound.com/editor/R3gmWcFzVE29nDSGoUeY" class="btn btn-cs-outline btn-sm" target="_blank" rel="noopener">
+            <i class="fa fa-external-link" aria-hidden="true"></i> Open in Web IDE
         </a>
       </div>
     </div>
