@@ -594,7 +594,7 @@ warmth to the overall sound.
 ```csound
 <CsoundSynthesizer>
 <CsOptions>
--odac -Ma --midi-key-cps=4 --midi-velocity-amp=5
+-odac -Ma --midi-velocity-amp=4 --midi-key-cps=5
 </CsOptions>
 <CsInstruments>
 sr = 44100 // sample rate
