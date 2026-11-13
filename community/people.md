@@ -25,5 +25,8 @@ Look at these videos where Csound People share their thoughts on these and other
 
 **John ffitch** -   John sees beauty in algebra. As a mathematician, John is interested in repeating score patterns as created by dynamic systems such as the Henon system. Such systems exhibit some chaotic behavior, and thus, when applied to musical patterns, result in interesting music. 
 
+[![The fathers of Csound](https://img.youtube.com/vi/nKZ_SObVbiw/mqdefault.jpg)](https://youtu.be/nKZ_SObVbiw?si=djzw-HR9f33oeH_q)
+
+**Remembering Barry Vercoe and John fiitch** -   A memorial film by Ningxin Zhang and Dr. Richard Boulanger about the Father of Csound, Barry Vercoe (1937-2025), and the main developer, debugger, maintainer, contributor, and sustainer of Csound, John ffitch (1945-2026), first shown at the Csound conference in Trapani 2026.
 
 
