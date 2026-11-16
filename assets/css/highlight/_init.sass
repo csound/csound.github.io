@@ -1,3 +1,6 @@
+@use "sass:list"
+@use "sass:math"
+
 $red: #f50419
 $orange: #f57900
 $yellow: #f5e600
@@ -10,7 +13,7 @@ $rainbow: $blue, $indigo, $violet, $red, $orange, $yellow, $green
 
 $name: ""
 @mixin language($names)
-    @if length($names) == 1
+    @if list.length($names) == 1
         [data-language="#{$names}"], .lang-#{$names}, .language-#{$names}
             @content
     @else
@@ -75,8 +78,8 @@ pre
             $num: 6
             @for $i from $start through $start + $num
                 &:nth-of-type(#{$i})
-                    background: nth($rainbow, $i)
-                    animation: fade 1.5s round(($i - $start) * $dur / $num + $delay) linear infinite
+                    background: list.nth($rainbow, $i)
+                    animation: fade 1.5s math.round(math.div(($i - $start) * $dur, $num) + $delay) linear infinite
 
     .preloader
         position: absolute
